@@ -1,0 +1,81 @@
+.projectWizardFirstButton {
+	height:64px; 
+	padding:8px; 
+	cursor:pointer;
+	margin:2px;
+}
+
+.projectWizardFirstButton .projectIcon {
+	width:64px;
+	height:64px;
+	vertical-align:middle;
+	margin-right:8px;
+}
+
+.projectWizardFirstButton .projectTypeIcon {
+	float:left;
+	width:64px;
+	height:64px;
+}
+
+.projectWizardFirstButton .projectTypeTitle {
+	float:left;
+	width:145px;
+	height:20px;
+	margin-top:7px;
+	font-weight:bold;
+}
+
+.projectWizardFirstButton .projectTypeDescription {
+	float:left;
+	width:145px;
+	margin-left:3px;
+	color:gray;
+	line-height:13px;
+}
+
+.projectWizardSecondButton {
+	float:left;
+	width:80px;
+	height:90px;
+	margin:5px;
+	padding:5px;
+	cursor:pointer;
+}
+
+.projectWizardSecondButton .projectItemIcon {
+	width:64px;
+	height:64px;
+	vertical-align:middle;
+	margin-bottom:3px;
+}
+
+.projectWizardSecondButton .selectedButton {
+	background-color: #b3d4ff;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;
+	border:1px dotted #999;
+	padding:4px;	
+}
+
+.projectWizardSecondButton:hover {
+	background-color: #FFFFDF;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;		
+	border:1px dotted #999;
+	padding:4px;
+}
+
+.projectWizardSecondButton:active {
+	background-color: #FFFFDF;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;		
+	border:1px dotted #999;
+	padding:4px;	
+}

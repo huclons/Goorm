@@ -1,0 +1,256 @@
+/*
+Copyright Sung-tae Ryu. All rights reserved.
+Code licensed under the GPL v2 License:
+http://www.goorm.org/License
+version: 3.0.0
+*/
+
+.windowContainer {
+	position: relative;
+}
+
+.canvasContainer {
+	position: relative;
+	overflow: auto;
+	background-color:#999;
+}
+
+.designPreviewContainer .bd {
+	padding: 10px !important;
+}
+
+.divDesignCollaborationUserContainer {
+	position:absolute;
+	left:70px;
+	top:55px;
+	width:200px;
+	height:90px;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	background-color:#EEE;
+	border-color: #CCC;
+	z-index: 2;	
+}
+
+.designPreviewContainer {
+	position:absolute;
+	left:70px;
+	top:120px;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	background-color:#EEE;
+	border-color: #CCC;
+	z-index: 2;	
+}
+
+.designPreviewContainer .windowContainer {
+	border:1px solid #CCC;
+}
+
+
+.designPreviewContainer .previewCanvasIndicator {
+	border:1px solid #999;
+	position:absolute;
+	z-index:100;
+	cursor: move;
+}
+
+.designPreviewContainer .previewEvent {
+	position:absolute;
+	z-index:110;
+	background:transparent;
+}
+
+.designPreviewContainer .previewCanvas canvas {
+	position: absolute;
+}
+
+.designToolbarContainer {
+	padding: 6px;
+	background-color:#EEE;
+	border-color: #AAA;
+	z-index: 2;
+	height: 23px;
+	overflow: hidden;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+.designToolbarContainer .toolbarButton {
+	font-size: 9pt;
+	text-decoration: none;
+	color: #565656;
+	cursor:pointer;
+	display: inline-block;
+	overflow: visible;
+	padding-left: 6px;
+	padding-top: 5px;
+	padding-right: 6px;
+	padding-bottom: 4px;
+	margin-right:3px;
+}	
+
+.designToolbarContainer .toolbarButton img {
+	
+}
+
+.designToolbarContainer .toolbarButton:hover {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-top: 1px solid #eee;
+	border-left: 1px solid #eee;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 4px;
+	margin-left: 0px;
+	padding-bottom: 4px;
+	margin-top: -1px;
+}
+
+.designToolbarContainer .toolbarButton:active {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-top: 1px solid #eee;
+	border-left: 1px solid #eee;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	margin-left: 0px;
+	margin-top: -1px;
+}
+
+.designToolbarContainer .toolbarButtonPressed {
+	background-color: #ccc;
+	border: 1px solid #fff;
+	border-top: 1px solid #999;
+	border-left: 1px solid #999;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	margin-left: 0px;
+	padding-bottom: 4px;
+	margin-top: -2px;
+}
+
+
+.designStatusContainer {
+	position: absolute;
+	left:70px;
+	top:30px;
+	width:22px;
+	padding: 6px;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	background-color:#EEE;
+	border-color: #CCC;
+	z-index: 2;
+}
+
+.designStatusContainer .toolbarButton {
+	font-size: 9pt;
+	text-decoration: none;
+	color: #565656;
+	cursor:pointer;
+	display: inline-block;
+	overflow: visible;
+	padding-left: 6px;
+	padding-top: 5px;
+	padding-right: 6px;
+	padding-bottom: 4px;
+	margin-left: -3px;
+}	
+
+.designStatusContainer .toolbarButtonPressed {
+	background-color: #ccc;
+	border: 1px solid #fff;
+	border-top: 1px solid #999;
+	border-left: 1px solid #999;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	marrin-left: 0px;
+	padding-bottom: 4px;
+	margin-top: -2px;
+}
+
+.windowContainer .ruler {
+	position: absolute;
+	left:0px;
+	top:37px;
+	width:14px;
+	height:14px;
+	z-index: 4;
+	background-image: url(images/org.goorm.core.design/ruler.png);	
+}
+
+.windowContainer .ruler_x {
+	position: absolute;
+	left:14px;
+	top:37px;
+	height:13px;
+	border-bottom:1px solid #333;
+	z-index: 3;
+	background-image: url(images/org.goorm.core.design/ruler_px_x.png);
+}
+
+.windowContainer .ruler_y {
+	position: absolute;
+	left:0px;
+	top:51px;
+	width:13px;	
+	border-right:1px solid #333;	
+	z-index: 3;	
+	background-image: url(images/org.goorm.core.design/ruler_px_y.png);
+}
+
+.canvasContainer {
+	z-index: 1;	
+}
+
+.canvasContainer .canvas {
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	background-color: #FFF;
+	border: 1px solid #333;	
+	z-index: 2;	
+}
+
+.canvasContainer .skin {
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	z-index: 0;	
+}
+
+.canvasContainer .dummyspace {
+	position: absolute;
+	z-index: 0;	
+}
+
+.canvasContainer .canvas .grid {
+	background-image:url(images/org.goorm.core.design/grid_10px.png);
+	-moz-opacity:.30; filter:alpha(opacity=30); opacity:.30;
+	width:100%;
+	height:100%;
+}
+
+.canvasContainer .canvas .shapes {
+	position: absoulte;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#workspace .yui-panel-container .yui-panel .ft .designerMessage {
+	font-size: 10px;
+	height:20px;
+	float:left;
+}
+
+#workspace .yui-panel-container .yui-panel .ft .mousePositionView {
+	font-size: 10px;
+	height:20px;
+	float:right;
+}

@@ -1,0 +1,58 @@
+<div style="font-size:11px; margin-top:10px;">
+    <fieldset style="padding:10px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;">
+        <legend> <b>Editor Configuration</b> </legend> 
+        <div style="width:100%; height:22px;">
+            <div style="float:left;">Indent Unit : <input name="preference.editor.indentUnit" validate="required,number"/></div>
+        </div>
+        <div style="width:100%; height:22px;">
+            <div style="float:left;" class="checkboxDiv"><label for="indentWithTabs"><input name="preference.editor.indentWithTabs" type="checkbox" id="indentWithTabs" class="checkboxMargin" /> Indent With Tabs</label></div>            
+        </div>
+        <div style="width:100%; height:22px;">
+            <div style="float:left;">
+            	Tab Mode : 
+            		<select name="preference.editor.tabMode">
+            			<option value="classic">classic</option>
+            			<option value="shift">shift</option>
+            			<option value="indent">indent</option>
+            			<option value="default">default</option>
+            		</select>
+            </div>
+        </div>
+        <div style="width:100%; height:22px;">
+            <div style="float:left;">Enter Mode : 
+            		<select name="preference.editor.enterMode">
+            			<option value="indent">indent</option>
+            			<option value="keep">keep</option>
+            			<option value="flat">flat</option>
+            		</select></div>            
+        </div>
+        <div style="width:100%; height:22px;">
+            <div style="float:left;" class="checkboxDiv"><label for="showLineNumbers"><input name="preference.editor.showLineNumbers" type="checkbox" id="showLineNumbers" class="checkboxMargin" /> Show Line Numbers</label></div>            
+        </div>
+        <div style="width:100%; height:22px;">
+            <div style="float:left;">First Line Number : <input name="preference.editor.firstLineNumber" /></div>
+        </div>
+        <div style="width:100%; height:22px;">
+            <div style="float:left;">Undo Depth : <input name="preference.editor.undoDepth" /></div>
+        </div>
+        <div style="width:100%; height:22px;">
+            <div style="float:left;" class="checkboxDiv"><label for="highlightCurrentCursorLine"><input name="preference.editor.highlightCurrentCursorLine" type="checkbox" id="highlightCurrentCursorLine" class="checkboxMargin" /> Highlight Current Cursor Line</label></div>            
+        </div>
+        <div style="width:100%; height:22px;">
+            <div style="float:left;"><label for="useClipboard"><input name="preference.editor.useClipboard" type="checkbox" id="useClipboard" class="checkboxMargin" /> Use Clipboard</label></div>            
+        </div>
+    </fieldset>
+    <fieldset style="padding:10px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;">
+        <legend> <b>Editor Configuration</b> </legend> 
+        <div style="width:100%; height:22px;">
+            <div style="float:left;">Font : [SelectBox]</div>
+        </div>
+        <div style="width:100%; height:22px;">
+            <div style="float:left;">Size : [SelectBox]</div>            
+        </div>
+    </fieldset>
+</div>
+<div style="position: absolute;bottom: 10px;right:10px;">
+	<input type="button" class="restoreDefault" value="Restore Default" />
+	<input type="button" class="apply" value="Apply" />
+</div>

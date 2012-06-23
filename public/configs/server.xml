@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xml>
+	<OS version="Darwin Kernel Version 11.2.0"></OS>
+	<Apache version="2.0.64"></Apache>
+	<PHP version="5.3.5"></PHP>
+	<Redis version="Not Found"></Redis>
+	<Node version="Not Found"></Node>
+	<Theme>default</Theme>
+	<Language>client</Language>
+</xml>

@@ -1,0 +1,274 @@
+/*
+Copyright Sung-tae Ryu. All rights reserved.
+Code licensed under the GPL v2 License:
+http://www.goorm.org/License
+version: 3.0.0
+*/
+
+#workspaceWindowList {
+	background-color: #999;
+	z-index:4;
+}
+
+#workspaceWindowList .yui-nav {
+	height: 20px;
+	border-bottom: 1px solid #777;
+	overflow: hidden;
+}
+
+#workspaceWindowList .yui-navset .yui-nav a em, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em {
+	border:0px solid #FFF;
+	padding-top:3px;
+	padding-bottom:2px;	
+	padding-left:6px;
+	padding-right:6px;
+	position:relative;
+}
+
+#workspace .titlebar {
+	overflow: hidden !important;
+}
+
+.windowButtons {
+	text-align:right; 
+	float:right;
+	margin-top:4px;
+	padding-right:5px;
+	padding-left:5px;
+	padding-top:2px;
+	background-color: #FFF;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+	height:14px;
+	line-height:11px;
+}
+
+.windowButton {
+	padding:2px;
+	cursor: pointer;
+}
+
+.windowButton:hover {
+	background-color: #B3D4FF;
+}
+
+.windowButton:active {
+	
+}
+
+.tapMaxButtons {
+	text-align:center; 
+	float:right;
+	margin-top:4px;
+	margin-right:8px;
+	padding-right:5px;
+	padding-left:5px;
+	background-color: #CCC;
+	padding-top:0px;
+	height:16px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.tabScroll {
+	text-align:center; 
+	float:right;
+	margin-top:4px;
+	margin-right:8px;
+	padding-right:5px;
+	padding-left:5px;
+	background-color: #CCC;
+	padding-top:0px;
+	height:16px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.tabCloseButton {
+	width: 8px;
+	height: 8px;
+	float:left;
+	margin-left:9px;
+	padding:2px;
+	cursor: pointer;
+	vertical-align:middle;
+	background-image:url(../images/icons/context/closebutton.png);
+	background-repeat: no-repeat;
+	background-position: 2px; 
+	
+}
+#goormInnerLayoutCenter #workspace{
+	background-color:#BBB;
+}
+
+.tabCloseButton:hover {
+	background-color: #B3D4FF;
+}
+
+.tabCloseButton:active {
+
+}
+
+
+#workspace .yui-panel .hd {
+	font-size: 11px;
+}
+
+#workspace .yui-panel .activated {
+	background:none;
+	background-color: #B3D4FF;	
+	background-image:url(../images/org.goorm.core.window/activeTitlebar.png);
+	background-repeat:repeat-x;
+	background-position:inherit;
+	color:white;
+}
+
+#workspace .yui-panel .bd {
+	background-color: #fafafa;
+	border-top: 1px solid #666;
+	padding: 0px;
+}
+
+#workspace .yui-panel .ft {
+	font-size: 11px;
+	background-color: #eee;
+	padding: 3px 6px;
+	height: 17px;
+}
+
+#workspace .yui-resize-handle-inner-t {
+	background-image: none;
+}
+
+#workspace .yui-resize-handle-inner-l {
+	background-image: none;
+}
+
+#workspace .yui-resize-handle-inner-r {
+	background-image: none;
+}
+
+#workspace .yui-resize-handle-inner-b {
+	background-image: none;
+}
+
+#workspace .yui-resize-handle-t {
+	top: 1px;
+}
+
+#workspace .yui-resize-handle-b {
+	bottom: 1px;
+}
+
+#workspace .yui-resize-handle-r {
+	right: 1px;
+}
+
+#workspace .yui-resize-handle-l {
+	left: 1px;
+}
+
+#workspace .yui-resize-handle-bl {
+	left: 1px;
+	bottom: 1px;	
+}
+
+#workspace .yui-resize-handle-br {
+	right: 1px;
+	bottom: 1px;
+}
+
+#workspace .yui-resize-handle-tl {
+	top: 1px;
+	left: 1px;
+}
+
+#workspace .yui-resize-handle-tr {
+	right: 1px;
+	top: 1px;
+}
+#workspace .tabScroll{
+	width: 36px;
+}
+#workspace .windowList.windowButton{
+	width: 16px;
+	height: 16px;	
+	margin-top:3px; 
+	margin-right:3px;	
+	background-image: url(../images/org.goorm.core.window/list.png);
+	background-repeat: no-repeat;
+	background-position: 2px;
+}
+
+#workspace .tabListRight.windowButton{
+	width: 12px; 
+	height: 12px;
+	float:right;
+	background-image: url(../images/icons/context/rightarr.gif);
+	background-position: 2px;
+	background-repeat: no-repeat;
+}
+
+#workspace .tabListLeft.windowButton{
+	width: 12px; 
+	height: 12px;
+	float:left;
+	background-image: url(../images/icons/context/leftarr.gif);
+	background-position: 2px;
+	background-repeat: no-repeat;
+}
+
+#workspace .close.windowButton{
+	width: 8px; 
+	height: 8px;
+	float:left;
+	background-image: url(../images/icons/context/closebutton.png);
+	background-position: 2px;
+	background-repeat: no-repeat;
+}
+
+
+#workspace .maximize.windowButton{
+	width: 8px; 
+	height: 8px;
+	float:left;
+	margin-right: 3px;
+	background-image: url(../images/icons/context/maximizebutton.png);
+	background-position: 2px;
+	background-repeat: no-repeat;
+}
+
+
+#workspace .minimize.windowButton{
+	width: 8px; 
+	height: 8px;
+	float:left;
+	margin-right: 3px;
+	background-image: url(../images/icons/context/minimizebutton.png);
+	background-position: 2px;
+	background-repeat: no-repeat;
+}
+
+#workspace .maxmaximize.windowButton{
+	width: 8px; 
+	height: 8px;
+	float:left;
+	margin-top:2px;
+	margin-right: 4px;
+	background-image: url(../images/icons/context/maximizebutton.png);
+	background-position: 2px;
+	background-repeat: no-repeat;
+}
+
+#workspace .maxclose.windowButton{
+	width: 8px; 
+	height: 8px;
+	float:right;
+	margin-top:2px;
+	background-image: url(../images/icons/context/closebutton.png);
+	background-position: 2px;
+	background-repeat: no-repeat;
+}

@@ -1,0 +1,55 @@
+<div id="yui-picker-panel" class="yui-picker-panel" style="position:absolute; top:0; left:0; width:390px; z-index:3; display:none; "> 
+	<div class="bd" style="border-top:1px solid #cccccc; border-left:1px solid #cccccc; border-right:1px solid #cccccc; "> 
+		<div class="yui-picker" id="yui-picker" ></div> 
+	</div> 
+	<div class="ft" style="border-bottom:1px solid #cccccc; border-left:1px solid #cccccc; border-right:1px solid #cccccc; overflow:auto">
+		<span id="buttonColorPickerCancel" class="yui-button yui-push-button" style="float:right">
+		    <span class="first-child">
+		        <input type="button" value="Cancel">
+		    </span>
+		</span>
+		<span id="buttonColorPickerOk" class="yui-button yui-push-button default" style="float:right">
+		    <span class="first-child">
+		        <input type="button" value="OK">
+		    </span>
+		</span>
+	</div>
+</div>
+
+
+
+<div id="selectedPreferenceTitle">Theme</div>
+<div class="selectThemeDiv">
+	<div style="float:left; font-size:11px; margin-top:4px">Select Theme: &nbsp;</div>
+
+	<div style="float:left; font-size:11px; margin-right:6px; position:relative;">
+		<input type="submit" id="buttonThemeSelector">
+	</div>
+	<select id="buttonThemeSelectorMenu">
+	    <option></option>
+	</select>
+	<input type="hidden" name="preference.theme.currentTheme" value="mac">
+	
+<!--
+	<span id="buttonNewTheme" class="yui-button yui-push-button">
+		<span class="first-child">
+	        <input type="button" value="New Theme…">
+	    </span>
+	</span>
+-->
+</div>
+
+
+
+<div class="themeContents" style="margin-left:4px; width:427px; height:249px">
+	<div style="height:17px"><dir class="areaColumn">Area</dir><div class="cssColumn">CSS</div></div>
+	<div class="areaBox"></div>
+</div>
+<div style="width:430px; height:20px; margin-top:10px">
+<span id="buttonApplyTheme" class="yui-button yui-push-button">
+	<span class="first-child">
+		<input type="button" value="Apply">
+	</span>
+</span>
+
+<div>

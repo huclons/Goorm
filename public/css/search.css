@@ -1,0 +1,11 @@
+#search .searchMessage {
+	cursor:pointer;
+	border-bottom:1px solid #eee;
+	padding:3px;
+	font-size:11px;
+}
+
+#search .searchMessage:hover {
+	background-color:#FFFFDF;
+	font-size:11px;
+}

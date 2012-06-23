@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xml>
+	<version>3.0.0</version>
+	<url>http://www.uizard.org</url>
+	<lib>
+		<YUI version="2"></YUI>
+		<jQuery version="1.5.2"></jQuery>
+		<CodeMirror version="2.13"></CodeMirror>
+	</lib>
+</xml>

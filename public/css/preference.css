@@ -1,0 +1,182 @@
+#preferenceTabview{
+	height: 410px;
+	background-color: #f2f2f2;
+}				
+
+#preferenceTabview .yui-content{
+	background-color: #f2f2f2;
+	
+	height:364px;	
+}
+
+#preferenceTabview .checkboxDiv {
+	cursor:pointer;
+}
+
+#preferenceTabview .checkboxMargin {
+	vertical-align:middle; 
+	margin-top:-2px; 
+	margin-right:3px; 
+	margin-left:1px;
+}
+
+.yui-skin-sam .yui-dialog .ft{
+	padding: 10px;
+	border-top: 1px solid #ccc;
+
+
+}
+
+#selectedPreferenceTitle{
+	padding: 0px 10px 10px 10px;
+	font-size: 15px;
+	font-weight: bold;
+	border-bottom: 1px solid #ccc;
+}
+
+#languageBody {
+	padding:5px;
+}
+
+#languageBody .button {
+	cursor: pointer;
+	margin: 5px 0;
+	padding: 5px;
+	width: 100px;
+	text-align: center;
+	border: 1px solid #999;
+}
+
+
+/* space */
+.dialogTreeview .ygtspacer { 
+	width:17px; 
+	height:22px; 
+}
+
+/* first or middle sibling, no children */
+.dialogTreeview .ygtvtn { 
+	width:17px; 
+	height:22px; 
+}
+
+/* first or middle sibling, collapsable */
+.dialogTreeview .ygtvtm { 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* first or middle sibling, collapsable, hover */
+.dialogTreeview .ygtvtmh { 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* first or middle sibling, expandable */
+.dialogTreeview .ygtvtp { 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* first or middle sibling, expandable, hover */
+.dialogTreeview .ygtvtph { 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* last sibling, no children */
+.dialogTreeview .ygtvln { 
+	width:17px; 
+	height:22px; 
+}
+
+/* Last sibling, collapsable */
+.dialogTreeview .ygtvlm { 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* Last sibling, collapsable, hover */
+.dialogTreeview .ygtvlmh { 
+	width:17px;
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* Last sibling, expandable */
+.dialogTreeview .ygtvlp { 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* Last sibling, expandable, hover */
+.dialogTreeview .ygtvlph { 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* Loading icon */
+.dialogTreeview .ygtvloading { 
+	width:17px; 
+	height:22px;
+}
+
+/* the style for the empty cells that are used for rendering the depth 
+ * of the node */
+.dialogTreeview .ygtvdepthcell { 
+	width:17px; 
+	height:22px; 
+}
+
+.dialogTreeview .ygtvblankdepthcell { 
+	width:17px; 
+	height:22px; 
+}
+
+/* the style of the div around each node */
+.dialogTreeview .ygtvitem { }  
+
+.dialogTreeview .ygtvitem  table{
+    margin-bottom:0;
+}
+.dialogTreeview .ygtvitem  td {
+    border:none;
+    padding:0;
+} 
+
+.dialogTreeview .ygtvfocus { 
+	background-color:#B3D4FF;
+}
+
+.dialogTreeview .ygtvfocus .ygtvlabel { 
+	background-color:#B3D4FF;
+}
+
+.dialogTreeview .ygtvcell span:hover {
+	background-color:transparent;
+}
+	
+
+/* the style of the div around each node's collection of children */
+.dialogTreeview .ygtvchildren { }  
+* html .ygtvchildren { 
+	height:1%;
+}  
+
+.dialogTreeview .ygtvlabel {
+	background-color:transparent;
+}
+
+/* the style of the text label in ygTextNode */
+.dialogTreeview .ygtvlabel, .ygtvlabel:link, .ygtvlabel:visited, .ygtvlabel:hover { 
+	background-color:transparent;
+	margin-left:2px;
+	text-decoration: none;
+}

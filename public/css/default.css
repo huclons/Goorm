@@ -1,0 +1,568 @@
+/*
+Copyright Sung-tae Ryu. All rights reserved.
+Code licensed under the GPL v2 License:
+http://www.goorm.org/License
+version: 3.0.0
+*/
+
+
+/**************************************************************************
+goorm
+**************************************************************************/
+A:link    {color:#333333;text-decoration:none;}
+A:visited {color:#333333;text-decoration:none;}
+A:active  {color:#333333;text-decoration:none;}
+A:hover   {color:#2d88dc;text-decoration:none;}
+
+body {
+	font-family: Tahoma, Arial, 굴림체, 굴림;
+	width:100%;
+	margin:0px;
+	overflow:hidden;
+	
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+input {
+	border:1px solid #ccc;
+	padding:1px;
+}
+
+.yui-skin-sam {
+	background-color: #F8F8F8;
+}
+
+#goormLeft {
+	border-right: 1px solid #999;
+	border-top: 1px solid #999;
+}
+
+#goormInnerLayoutRight {
+	border-left: 1px solid #999;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;	
+}
+
+#goormInnerLayoutCenter {
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;	
+}
+
+#goormInnerLayoutBottom {
+	border-left: 1px solid #999;
+	border-top: 1px solid #999;
+}
+
+#goormBottom {
+	border-top: 1px solid #999;
+}
+
+#goormBottom .deviceType {
+	margin-left:2px;
+	float:left;	
+}
+
+#goormBottom .goormVersion {
+	margin-left:2px;
+	float:left;	
+}
+
+#goormBottom .browserName {
+	margin-left:2px;
+	float:left;	
+}
+
+#goormBottom .isCollaborationOn {
+	margin-left:2px;	
+	float:left;	
+	color:#999;
+}
+
+#goormBottom .isChatOn {
+	margin-left:2px;	
+	float:left;
+	color:#999;	
+}
+
+#goormStatusbarDeviceType {
+	height:16px;	
+	padding-top:1px;
+	padding-left:7px;
+	padding-right:10px;	
+	margin-top:6px;
+	font-size:11px;
+	float:left;
+	text-align:left;
+	border-right:1px solid #999;
+}
+
+#goormStatusbargoormVersion {
+	height:16px;	
+	padding-top:1px;
+	padding-left:7px;
+	padding-right:10px;	
+	margin-top:6px;
+	font-size:11px;
+	float:left;
+	text-align:left;
+	border-right:1px solid #999;
+}
+
+#goormStatusbarBrowserVersion {
+	height:16px;	
+	padding-top:1px;
+	padding-left:7px;
+	padding-right:10px;	
+	margin-top:6px;
+	font-size:11px;
+	float:left;
+	text-align:left;
+	border-right:1px solid #999;
+}
+
+#goormStatusbarCollaboration {
+	height:16px;
+	padding-top:1px;
+	padding-left:7px;
+	padding-right:10px;	
+	margin-top:6px;
+	font-size:11px;
+	float:left;
+	text-align:left;
+	border-right:1px solid #999;
+}
+
+#goormStatusbarChat {
+	height:16px;	
+	padding-top:1px;
+	padding-left:7px;
+	padding-right:10px;	
+	margin-top:6px;
+	font-size:11px;
+	float:left;
+	text-align:left;
+}
+
+#goormStatusbarMessage {
+	padding: 7px;
+	font-size: 11px;
+	width:200px;
+	float:left;
+	text-align:right;
+}
+
+#goormLoadingIndicator {
+	padding-top: 7px;
+	width:30px;
+	float:left;
+	text-align:right;
+}
+
+#goormProgressBar {
+	padding: 7px;
+	font-size: 11px;
+	width:100px;
+	float:left;
+}
+
+#message {
+	margin:5px;
+	font-size:11px;
+	padding:2px;
+}
+
+#debug {
+	margin:5px;
+	font-size:11px;
+	padding:2px;
+}
+
+#debug .debugLine {
+	cursor: pointer;
+}
+
+#console {
+	font-size:11px;
+}
+
+#projectSelector {
+	overflow:hidden;
+}
+
+#startpageContainer {
+	position:absolute;
+	left:0px;
+	top:0px;
+	background-color: #fff;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+	z-index:10;
+}
+
+.button {
+	cursor:pointer;
+}
+
+
+.debugTabLineSelection {
+	cursor:pointer;
+	border-bottom:1px solid #eee;
+	padding:3px;
+}
+
+.debugTabLineSelection:hover {
+	background-color:#FFFFDF;
+}
+
+.selectDiv {
+	padding: 3px;
+	cursor: pointer;
+	line-height: 11px;
+}
+
+.selectDiv:hover {
+	background-color:#B3D4FF;
+	color:#FFF;
+}
+
+
+/**************************************************************************
+YUI BUTTON STYLE CUSTOMIZATION
+**************************************************************************/
+.yui-skin-sam .yui-button {
+	color: #000;
+	font-size: 11px !important;
+	-moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    border-radius: 8px;
+	padding-left:8px;
+	padding-right:8px;
+	background-image:url(../images/org.goorm.core/button_bg.png);
+	border-color: #666 !important;
+	border-width: 1px;
+	border-style: solid;
+	height:20px;
+}
+
+.yui-skin-sam .yui-button span {
+	border:0px !important;
+}
+
+.yui-skin-sam .default {
+	background-image:url(../images/org.goorm.core/default_button_bg.png);
+	background-position:0px 0px !important;
+	border-color: #666 !important;
+}
+
+.yui-skin-sam .default button {
+	color: #000 !important;
+	border-color: #666 !important;
+}
+
+.yui-skin-sam .yui-button-hover {
+	border-color: #aaa !important;	
+	background-position:0px 0px !important;
+}
+
+.yui-skin-sam .yui-button-active {
+	border-color: #aaa !important;	
+	background-position:0px 0px !important;
+}
+
+/**************************************************************************
+YUI MENU STYLE CUSTOMIZATION
+**************************************************************************/
+.yui-skin-sam .yuimenu {
+	font-size: 11px;
+	font-family: Tahoma, Arial, 굴림체, 굴림;
+}
+
+.yui-skin-sam .yui-menu-button button {
+	text-align: left;
+}
+
+.yui-skin-sam .yuimenu .bd {
+	background-color: #f6f6f6;
+	padding:3px;
+}
+
+.yui-skin-sam .yuimenu li {
+	background-repeat: no-repeat;
+}
+
+.yui-skin-sam .yuimenubar {
+	background: none;
+	border: none;
+}
+
+.yui-skin-sam .yuimenubaritem .yuimenubaritemlabel {
+	font-size: 11px;
+	font-family: Tahoma, Arial, 굴림체, 굴림;
+}
+
+.yui-skin-sam .yuimenubaritemlabel {
+	border:none;
+}
+
+.yui-skin-sam .yuimenuitem .yuimenuitemlabel {
+	font-size: 11px;
+	font-family: Tahoma, Arial, 굴림체, 굴림;
+}
+
+#goormTop .yuimenuitem .yuimenuitemlabel {
+	width:200px;
+	height:18px;
+	padding-left:26px;
+	padding-top:2px;
+	background-position: 5px;
+	background-repeat: no-repeat;
+}
+
+.yui-skin-sam .yuimenuitem .helptext {
+	color:#AAA;
+	text-align:right;
+}
+
+.yui-skin-sam .yuimenu h6 {
+	font-weight:normal;
+	font-size:11px;
+	padding:3px 10px 0;
+	text-align:left;
+}
+
+
+/**************************************************************************
+YUI LAYOUT STYLE CUSTOMIZATION
+**************************************************************************/
+
+.yui-skin-sam .yui-layout .yui-layout-unit div.yui-layout-bd {
+	background-color:transparent;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd {
+	border: none;
+	
+}
+
+.yui-skin-sam .yui-layout .yui-layout-unit-left div.yui-layout-bd {
+	border: none;
+	/*
+	border-top:#666 1px solid;
+	border-right:#666 1px solid;
+	border-bottom:#666 1px solid;
+	*/
+}
+
+.yui-skin-sam .yui-layout .yui-layout-unit-center div.yui-layout-bd {
+	border: none;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-unit-right div.yui-layout-bd {
+	border: none;
+	/*
+	border-top:#666 1px solid;
+	border-left:#666 1px solid;
+	border-bottom:#666 1px solid;
+	*/
+}
+
+.yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-bd {
+	border: none;
+	/*
+	border-top:#666 1px solid;
+	*/
+}
+
+.yui-skin-sam .yui-layout .yui-layout-unit div.yui-layout-hd h2 {
+    font-weight: bold;
+    color: #fff;
+    padding: 3px;
+	font-size:12px;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-hd {  
+     border: 1px solid #808080;   
+}  
+
+.yui-skin-sam .yui-layout {
+    background-color: transparent;
+}
+
+.yui-skin-sam .yui-layout-unit .yui-resize-handle-t .yui-layout-resize-knob, .yui-skin-sam .yui-layout-unit .yui-resize-handle-b .yui-layout-resize-knob {
+	background: none;
+}
+
+.yui-skin-sam .yui-layout-unit .yui-resize-handle-r .yui-layout-resize-knob, .yui-skin-sam .yui-layout-unit .yui-resize-handle-l .yui-layout-resize-knob {
+	background: none;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-clip {
+	background-color: #f8f8f8;
+	border: 0px;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-clip-left {
+	border-top: 1px dashed #ccc;
+	border-right: 1px dashed #ccc;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-clip-bottom {
+	border-top: 1px dashed #ccc;
+	border-left: 1px dashed #ccc;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-clip-right {
+	border-top: 1px dashed #ccc;
+	border-left: 1px dashed #ccc;
+	border-bottom: 1px dashed #ccc;	
+}
+
+.yui-skin-sam .yui-layout .yui-layout-hd {
+	background-color:transparent;
+	height: 0px;
+	border: white;
+}
+
+.yui-layout .yui-layout-unit div.yui-layout-hd .collapse {
+	z-index: 10;
+	top: 5px;
+	right: 5px;	
+	width:16px;
+	height:16px;	
+}
+
+.yui-skin-sam .yui-layout .yui-layout-unit-left div.yui-layout-hd .collapse {
+	background: transparent url(../images/org.goorm.core.layout/collapse_left.png) no-repeat 0px 0px;
+	border: 1px dotted #CCC;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-unit-right div.yui-layout-hd .collapse {
+	background: transparent url(../images/org.goorm.core.layout/collapse_right.png) no-repeat 0px 0px;
+	border: 1px dotted #CCC;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-hd .collapse {
+	background: transparent url(../images/org.goorm.core.layout/collapse_down.png) no-repeat 0px 0px;
+	border: 1px dotted #CCC;
+}
+
+.yui-layout .yui-layout-clip .collapse {
+	z-index: 10;
+	top: 3px;
+	right: 3px;	
+	width:16px;
+	height:16px;	
+}
+
+.yui-skin-sam .yui-layout .yui-layout-clip-left .collapse {
+	background: transparent url(../images/org.goorm.core.layout/uncollapse_right.png) no-repeat 0px 0px;
+	border: 1px dotted #CCC;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-clip-right .collapse {
+	background: transparent url(../images/org.goorm.core.layout/uncollapse_left.png) no-repeat 0px 0px;
+	border: 1px dotted #CCC;
+}
+
+.yui-skin-sam .yui-layout .yui-layout-clip-bottom .collapse {
+	background: transparent url(../images/org.goorm.core.layout/uncollapse_up.png) no-repeat 0px 0px;
+	border: 1px dotted #CCC;
+}
+
+/**************************************************************************
+YUI TAB STYLE CUSTOMIZATION
+**************************************************************************/
+.yui-skin-sam .yui-navset .yui-nav,  
+.yui-skin-sam .yui-navset .yui-navset-top .yui-nav { /* protect nested tabviews from other orientations */  
+    border:solid #ccc; /* color between tab list and content */  
+    border-width:0 0 1px;   
+    Xposition:relative;   
+    zoom:1;
+	font-size:11px;   
+	padding-left:2px;
+	padding-right:2px;
+	padding-top:3px;
+}
+.yui-skin-sam .yui-navset .yui-content {  
+	background: #ffffff;
+}
+.yui-skin-sam .yui-navset .yui-content,
+.yui-skin-sam .yui-navset .yui-navset-top .yui-content {
+    padding:0px; /* content padding */
+}
+
+.yui-skin-sam  .yui-content {
+	overflow: auto;
+	border:none;
+}
+
+.yui-skin-sam .yui-navset .yui-content, .yui-skin-sam .yui-navset .yui-navset-top .yui-content {
+	border:none;
+}
+
+.yui-skin-sam .yui-navset .yui-nav li,
+.yui-skin-sam .yui-navset .yui-navset-top .yui-nav li {
+    margin:0; /* space between tabs */
+    padding:0; /* gecko: make room for overflow */
+    zoom:1;
+	font-size:10px;
+	font-family: Tahoma, Arial, 굴림체, 굴림;
+}
+
+.yui-skin-sam .yui-navset .yui-nav a,
+.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
+    color:#222;
+	background:none;
+	background-color:#ddd;
+}
+.yui-skin-sam .yui-navset .yui-nav .selected a,   
+.yui-skin-sam .yui-navset .yui-nav .selected a:focus, /* no focus effect for selected */ 
+.yui-skin-sam .yui-navset .yui-nav .selected a:hover { /* no hover effect for selected */  
+	margin: 0; /* space between tabs */
+	background:none;
+	background-color:#fff; /* selected tab background */
+    color:#666;
+	font-size:10px; 
+	font-weight:bold;
+	font-family: Tahoma, Arial, 굴림체, 굴림;
+}
+
+
+.yui-skin-sam .yui-navset .yui-nav .selected a,  
+.yui-skin-sam .yui-navset .yui-nav .selected a em {  
+    border-color:#ccc; /* selected tab border color */  
+}
+
+.yui-skin-sam .yui-navset .yui-nav .selected,
+.yui-skin-sam .yui-navset .yui-navset-top .yui-nav .selected {
+	margin: 0px;;
+}
+
+
+/**************************************************************************
+YUI PANEL STYLE CUSTOMIZATION
+**************************************************************************/
+.yui-skin-sam .container-close {
+	top:5px;
+	width: 12px;
+	height: 12px;
+	border: 1px solid #AAA;
+	background: url(../images/icons/context/closebutton.png) no-repeat 0 0px;
+	background-position: 2px 2px;
+	background-color: #FFF;
+}
+
+.yui-skin-sam .container-close:hover {
+	top:5px;
+	width: 12px;
+	height: 12px;
+	border: 1px solid #CCC;
+	background-color: #FFF;
+}

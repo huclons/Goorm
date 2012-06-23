@@ -1,0 +1,169 @@
+/*
+Copyright Sung-tae Ryu. All rights reserved.
+Code licensed under the GPL v2 License:
+http://www.goorm.org/License
+version: 3.0.0
+*/
+
+#fileOpenTreeview {
+	overflow-x:hidden; 
+	padding:5px;
+}
+
+
+#goormDialogContainer .fileitem {
+	float: left;
+	width:70px;
+	height:100px;	
+	margin:10px;
+	text-align:center;
+	cursor:pointer;
+}
+
+#goormDialogContainer .folderitem {
+	float: left;
+	width:70px;
+	height:100px;	
+	margin:10px;
+	text-align:center;
+	cursor:pointer;
+}
+
+#goormDialogContainer .folderitem img {
+	width: 48px;
+	height: 48px;
+	vertical-align: middle;
+	margin-bottom: 3px;
+	margin-top:5px;
+}
+
+#goormDialogContainer .fileitem img {
+	width: 48px;
+	height: 48px;
+	vertical-align: middle;
+	margin-bottom: 3px;
+	margin-top:5px;
+}
+
+#goormDialogContainer .fileitem:hover {
+	background-color: #FFFFDF;
+	border:1px dotted #999;
+	margin:9px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;
+}
+
+#goormDialogContainer .folderitem:hover {
+	background-color: #FFFFDF;
+	border:1px dotted #999;
+	margin:9px;	
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;
+}
+
+#goormDialogContainer .fileitem:active {
+	background-color: #B3D4FF;
+	border:1px dotted #999;
+	margin:9px;	
+}
+
+#goormDialogContainer .folderitem:active {
+	background-color: #B3D4FF;
+	border:1px dotted #999;
+	margin:9px;	
+}
+
+#goormDialogContainer .fileitem:focus {
+	background-color: #B3D4FF;
+	border:1px dotted #999;
+	margin:9px;	
+}
+
+#goormDialogContainer .folderitem:focus {
+	background-color: #B3D4FF;
+	border:1px dotted #999;
+	margin:9px;	
+}
+
+#goormDialogContainer .selectedItem {
+	font-weight:normal;
+	background-color: #B3D4FF;
+	border:1px dotted #999;
+	margin:9px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;
+	background-color: #b3d4ff;
+}
+
+/*
+ 아래부분 삭제 바람~ ㅋ
+*/
+
+#goormDialogContainer .moveDialogCenter_item {
+	float: left;
+	width:70px;
+	height:80px;	
+	margin:10px;
+	text-align:center;
+	cursor:pointer;
+}
+
+#goormDialogContainer .saveAsDialogCenter_item {
+	float: left;
+	width:70px;
+	height:80px;	
+	margin:10px;
+	text-align:center;
+	cursor:pointer;
+}
+
+#goormDialogContainer .fileNewDialogCenter_item {
+	float: left;
+	width:70px;
+	height:80px;	
+	margin:10px;
+	text-align:center;
+	cursor:pointer;
+}
+
+#goormDialogContainer .fileImportDialogCenter_item {
+	float: left;
+	width:70px;
+	height:80px;	
+	margin:10px;
+	text-align:center;
+	cursor:pointer;
+}
+
+#goormDialogContainer .importDialogCenter_item {
+	float: left;
+	width:70px;
+	height:80px;	
+	margin:10px;
+	text-align:center;
+	cursor:pointer;
+}
+
+#goormDialogContainer .fileExportDialogCenter_item {
+	float: left;
+	width:70px;
+	height:80px;	
+	margin:10px;
+	text-align:center;
+	cursor:pointer;
+}
+
+#goormDialogContainer .projectImportDialogCenter_item {
+	float: left;
+	width:70px;
+	height:80px;	
+	margin:10px;
+	text-align:center;
+	cursor:pointer;
+}

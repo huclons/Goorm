@@ -1,0 +1,28 @@
+/*
+Copyright Sung-tae Ryu. All rights reserved.
+Code licensed under the GPL v2 License:
+http://www.goorm.org/License
+version: 3.0.0
+*/
+
+.windowContainer .completions {
+	position: absolute;
+	
+}
+
+.windowContainer .descText {
+	position: absolute;
+	
+}
+
+.windowContainer .searched {
+	background: yellow;
+}
+
+.windowContainer .activeline {
+	background: #FFC !important;
+}
+
+.CodeMirror, .CodeMirror-gutter {
+	height:100%;
+}
