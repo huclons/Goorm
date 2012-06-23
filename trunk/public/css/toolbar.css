@@ -1,0 +1,82 @@
+/*
+Copyright Sung-tae Ryu. All rights reserved.
+Code licensed under the GPL v2 License:
+http://www.goorm.org/License
+version: 3.0.0
+*/
+
+.mainToolbar {
+	
+}
+
+.mainToolbar .toolbarButton {
+	font-size: 9pt;
+	text-decoration: none;
+	color: #565656;
+	cursor:pointer;
+	display: inline-block;
+	overflow: visible;
+	padding-left: 6px;
+	padding-top: 5px;
+	padding-right: 6px;
+	padding-bottom: 4px;
+	margin-left: -3px;
+}	
+
+.mainToolbar .toolbarButton img {
+	
+}
+
+.mainToolbar .toolbarButton:hover {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-top: 1px solid #eee;
+	border-left: 1px solid #eee;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	margin-top: -1px;
+}
+
+.mainToolbar .toolbarButton:active {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-top: 1px solid #eee;
+	border-left: 1px solid #eee;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	margin-top: -1px;
+}
+
+.mainToolbar .toolbarButtonPressed {
+	background-color: #ccc;
+	border: 1px solid #fff;
+	border-top: 1px solid #999;
+	border-left: 1px solid #999;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	margin-top: -2px;
+}
+
+.mainToolbar .toolbarPart {
+	margin-top: 7px;
+	height: 25px;
+	float: left;
+}
+
+.mainToolbar .toolbarHandle {
+	margin-left: 9px;
+	border-left: 3px double #ddd;
+	padding-right:6px;
+	height:25px;
+}
+
+.mainToolbar .toolbarMovingHandle {
+	cursor:move;
+	float:left;
+}

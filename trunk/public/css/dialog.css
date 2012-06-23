@@ -1,0 +1,149 @@
+#goormDialogContainer .hd {
+	text-align:left;
+	font-size:11px;
+}
+
+#goormDialogContainer .yui-navset .yui-nav a em, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em {
+	border-top: 1px solid #ccc;
+	padding-top: 3px;
+	padding-bottom: 1px;
+	padding-left: 6px;
+	padding-right: 6px;
+	position: relative;
+	font-size:9px;
+}
+
+#goormDialogContainer .selected a em {
+	padding-top: 4px !important;
+	padding-bottom: 3px !important;
+	padding-left: 7px !important;
+	padding-right: 7px !important;
+	font-size:11px;
+}
+
+#goormDialogContainer .selector_project {
+	margin: 2px;
+	padding: 8px;
+	text-align:left;
+	cursor:pointer;
+	background-image:url(../images/org.goorm.core.project/project.png);
+	background-position:5px 5px;
+	background-repeat:no-repeat;
+	height:64px;
+}
+
+#goormDialogContainer .selectedButton {
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	border-radius: 8px;
+	background-color: #b3d4ff;
+}
+
+#goormDialogContainer .yui-content {
+	border-bottom:1px solid #ccc;
+	border-left:1px solid #ccc;
+	border-right:1px solid #ccc;
+	padding:10px;
+}
+
+#projectExportDialogMiddle .selector_project {
+	background-position:5px 8px;
+}
+
+#projectOpenDialogMiddle .selector_project {
+	background-position:5px 8px;
+}
+
+
+.dialogsLeft {
+	float:left;
+	width: 200px;
+}
+
+.dialogsLeft .yui-resize-handle-r {
+	right: -6px;
+}
+
+.dialogsLeftInner {
+	overflow-x:hidden;
+	border:1px solid #CCC;
+	background-color: #FFF;
+	height: 263px;
+	padding: 5px;
+}
+
+.dialogsCenter {
+	float:right;
+	width: 571px;
+	overflow:auto;
+	border:1px solid #CCC;
+	background-color: #FFF;	
+	height: 273px;
+}
+
+
+#openDialogMiddle .yui-layout-wrap {
+	border:1px solid #999;
+	background-color: #fff;
+}
+
+#moveDialogMiddle .yui-layout-wrap {
+	border:1px solid #999;
+	background-color: #fff;
+}
+
+#fileNewDialogMiddle .yui-layout-wrap {
+	border:1px solid #999;
+	background-color: #fff;
+}
+
+#folderNewDialogMiddle {
+	border:1px solid #999;
+	background-color: #fff;
+}
+
+#textNewDialogMiddle {
+	border:1px solid #999;
+	background-color: #fff;
+}
+
+#saveAsDialogMiddle .yui-layout-wrap {
+	border:1px solid #999;
+	background-color: #fff;
+}
+
+#goormDialogContainer .contentHeader {
+	border-bottom:1px solid #666;
+	font-size:16px;
+	height:25px;
+	text-align:right;
+	font-weight:bold;
+	margin-bottom:10px;
+	padding-right:10px;
+}
+
+#goormDialogContainer .contentGuideMessage {
+	color:#666;
+	font-size:11px;
+	height:18px;
+	padding-left:5px;
+	margin-bottom:5px;
+	text-align:left;
+}
+
+#goormDialogContainer .alertImageDIV {
+	float: left;
+	width : 48px;
+	height : 48px;
+	margin-right: 10px;
+	padding: 6px;
+}
+
+#goormDialogContainer .noticeImageDIV {
+	float: left;
+	width : 48px;
+	height : 48px;
+	margin-right: 10px;
+	padding: 6px;
+}

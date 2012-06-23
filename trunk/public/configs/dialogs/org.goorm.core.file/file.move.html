@@ -1,0 +1,59 @@
+<div class="contentHeader" localizationKey='dialog_file_moveFile'>Move File</div>
+
+<div class="contentGuideMessage" localizationKey='dialog_file_moveFile_guide'>Select a path to Move</div>
+
+<div style="text-align:left;">
+	<div style="width:100%; height:20px; overflow:auto; font-size:11px;">
+    	<div style="float:left;">
+        	<span localizationKey='common_location'>Location : </span>
+            <input type="text" id="fileMoveinputLocationPath" style="width:600px; height:15px;" readonly="readonly" />
+        </div>
+        <div style="float:right;">
+        	<span localizationKey='common_type'>Type : </span> 
+            <select name='selectbox'>
+                <option value='2'>Remote</option>
+            </select>
+        </div>
+    </div>
+	<div id="moveDialogMiddle" style="width:780px; height:275px; margin-top:8px; font-size:11px;">
+		<div id="moveDialogLeft" class="dialogsLeft">
+			<div id="fileMoveTreeview" class='directoryTreeview dialogsLeftInner'></div>
+		</div>
+		<div id="moveDialogCenter" class="dialogsCenter"></div>
+    </div>
+	<div style="width:100%; height:50px; margin-top:8px; font-size:11px;">
+		<div style="width:780px; height:70px; margin-left:4px; margin-top:2px;">
+			<table>
+                <tr style="line-height:1.8em;">
+                    <td style="width:70px"><span localizationKey='common_filename'>File Name</span></td>
+                    <td style="text-align:right;">
+							<input type="hidden" id="inputMoveOldFilePath" style="width:350px; height:20px"/>
+							<input type="hidden" id="inputMoveOldFileName" style="width:350px; height:20px"/>
+	                    	<input type"text" id="fileMoveInputFileName" style="width:700px; height:15px"/>
+                    </td>
+                </tr>	
+                <tr style="line-height:1.8em;">
+                    <td style="width:70px; padding-top:5px;"><span localizationKey='common_filetype'>File Type</span></td>
+                    <td style="padding-top:5px; text-align:right;">
+                        <select id='fileMoveProjectType' style="width:705px; height:20px;">
+                            <option value='0' selected>All Files (*.*)</option>
+                        	<option value='c'>C (*.c)</option>
+                        	<option value='cpp'>C++ (*.cpp)</option>
+                        	<option value='css'>CSS (*.css)</option>
+                        	<option value='html'>Html (*.html)</option>
+                        	<option value='java'>Java (*.java)</option>
+                        	<option value='js'>JavaScript (*.js)</option>
+                        	<option value='jsp'>JSP (*.jsp)</option>
+                        	<option value='h'>Objective-C (*.h)</option>
+                            <option value='m'>Objective-C (*.m)</option>
+                        	<option value='php'>PHP (*.php)</option>
+                        	<option value='txt'>Text (*.txt)</option>
+                        	<option value='uml'>UML (*.uml)</option>
+                        	<option value='ui'>UI (*.ui)</option>
+                        </select>
+                    </td>
+                </tr>
+			</table>
+		</div>
+    </div>    
+</div>

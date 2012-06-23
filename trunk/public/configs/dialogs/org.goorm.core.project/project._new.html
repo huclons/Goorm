@@ -1,0 +1,85 @@
+<div class="contentHeader" localizationKey='dialog_project_new'>New Project</div>
+
+<div id="projectNew" style="text-align:left; font-size:11px;">
+	
+	<form id="projectNewImportForm" action="project/import" method="post" enctype="multipart/form-data">     
+    <div class="wizardStep" step="1">
+	    <div class="contentGuideMessage" localizationKey='dialog_project_new_guide1'>Select Project Type</div>
+        
+		<div class="projectTypes" style="float:left; width:250px; height:350px; border:1px solid #999; background-color:#fff; overflow:auto;"></div>
+        <div style="float:right; width:520px; height:350px; border:1px solid #999;">
+            <div class="projectItems" style="width:100%; height:270px; border-bottom:1px solid #999; background-color:#fff; text-align:center; overflow:auto; line-height:12px;"></div>
+            <div class="projectDescription" style="width:100%; height:79px; background-color:#FFF; overflow:auto;">
+            	<div style="padding:10px;">
+                    <b localizationKey='dialog_project_new_description'>Project Description</b><br/>
+                    <div id="textProjectDescription" style="width:100%; padding:5px;"></div>
+                    <input type="hidden" id="inputProjectType" checkField="yes">
+                    <input type="hidden" id="inputProjectDetailedType" checkField="yes">
+                </div>
+            </div>
+        </div>    
+    </div>
+	<div class="wizardStep" step="2" style="display:none;">
+	    <div class="contentGuideMessage" localizationKey='dialog_project_new_guide2'>Input Information for New Project</div>
+        <div style="float:left; width:770px; height:340px; overflow:auto; padding:5px;">
+        	<div style="width:100%; text-align:right;">
+                <a localizationKey='dialog_project_new_taget'>Target :</a>
+                <select id="projectLocation" style="float:right;">
+                    <option value='Remote' selected="selected">Remote</option>
+                </select>
+            </div>
+            <div style="float:left; width:770px; height:200px;">
+                <fieldset style="padding:10px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;">
+                    <legend> <b localizationKey='dialog_project_new_information'>Project Information</b> </legend> 
+                    <div class="projectAuthor" style="height:25px;">
+                        <div style="width:70px; float:left; height:25px;" localizationKey='dialog_project_new_author'>Project Author</div>
+                        <div style="width:615px; float:right; height:25px;">
+                            <input type="text" id="inputProjectAuthor" name="inputProjectAuthor" style="width:610px;">
+                        </div>
+                    </div>
+                    <div class="projectName" style="height:25px;">
+                        <div style="width:70px; float:left; height:25px;" localizationKey='dialog_project_new_name'>Project Name</div>
+                        <div style="width:615px; float:right; height:25px;">
+                            <input type="text" id="inputProjectName" name="inputProjectName" style="width:610px;">
+                        </div>
+                    </div>
+                    <div class="projectAbout" style="height:45px;">
+                        <div style="width:70px; float:left; height:45px;" localizationKey='dialog_project_new_about'>Project About</div>
+                        <div style="width:615px; float:right; height:45px;">
+                            <textarea id='inputProjectAbout' style='width:612px; height:40px;' draggable='false'></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+    		    <fieldset style="padding:10px; border:1px solid #ccc;background-color:#FBFBFB; width:200px; float:left;">
+                    <legend> <b localizationKey='dialog_project_new_callaboration'>Collaboration Setting</b> </legend> 
+                    <div style="width:100%; height:22px;">
+                        <label for="checkUseCollaboration"><div style="float:left; width:20px; height:20px;"><input type="checkbox" id="checkUseCollaboration" /></div>
+                        <div style="float:left; width:130px; height:16px; margin-top:-2px;" localizationKey='dialog_project_new_collaboration_use'>Use collaboration</div></label>
+                    </div>
+                </fieldset>
+                <fieldset style="padding:10px; border:1px solid #ccc;background-color:#FBFBFB; width:520px; float:right;">
+                    <legend> <b localizationKey='dialog_project_new_import'>Project Import</b> </legend> 
+                    <div style="width:100px; height:22px; float:left;">
+                        <label for="checkProjectNewImport"><div style="float:left; width:20px; height:20px;"><input type="checkbox" id="checkProjectNewImport" /></div>
+                        <div style="float:left; width:80px; height:16px; margin-top:-2px;" localizationKey='dialog_project_new_import_use'>Import project</div></label>
+                    </div>
+                    <div id="projectNewImportDiv" style="display:none; padding:4px; background:#fff; border:1px solid #CCC; width:380px; margin-top:-8px; float:right;">
+                        <div style="width:150px; float:left; padding:2px; font-size:11px;" localizationKey='dialog_project_new_import_message'>
+                            Select a zip file to import
+                        </div>
+                        <div style="width:220px; float:left; font-size:11px; text-align:right;">
+                            <div style="float:left;">
+                                <div id="projectNewImportUploadOutput"></div><input type="file" name="file" id="projectNewImportFile">
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <input type="hidden" id="newProjectUsingPlugin" value="no" />
+            <div id="newProjectExpansionContainer" style="width:770px;">
+                 
+            </div>
+        </div>
+    </div>
+    </form>
+</div>

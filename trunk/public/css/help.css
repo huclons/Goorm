@@ -1,0 +1,67 @@
+.helpContentsTitle{
+	margin-top: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.helpContentsSubtitle{
+	margin-left: 10px;
+	margin-right: 10px;
+	color: rgb(180,180,180);
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.helpContentsDescription{
+	margin-left: 10px;
+	margin-right: 10px;
+	color: black;
+}
+
+.tipsAndTricksStep {
+	padding:10px;
+}
+
+.tipsAndTricksStep .subject {
+	width:100%;
+	height:30px;
+	font-size:16px;
+	font-weight:bold;
+}
+
+.tipsAndTricksStep .media {
+	width:340px;
+	height:210px;
+	margin-right:10px;
+	margin-bottom:10px;
+	float:left;
+}
+
+.tipsAndTricksStep .description {
+	width:310px;
+	height:210px;
+	float:left;	
+	margin-bottom:10px;
+	font-size:11px;
+	line-height:22px;
+}
+
+.tipsAndTricksStep .description .title {
+	font-size:14px;
+	font-weight:bold;
+}
+
+.tipsAndTricksStep .additional {
+	width:100%;
+	height:30px;
+	font-size:11px;
+	color:#999;
+}
+
+#bugReportIframe {
+	width: 100%;
+	height: 100%;
+}

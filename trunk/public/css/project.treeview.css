@@ -1,0 +1,192 @@
+/*
+Copyright Sung-tae Ryu. All rights reserved.
+Code licensed under the GPL v2 License:
+http://www.goorm.org/License
+version: 3.0.0
+*/
+
+/**************************************************************************
+PROJECT TREE STYLE CUSTOMIZATION
+**************************************************************************/
+
+.directoryTreeview .projectName {
+	font-size: 11px; 
+	margin:3px;
+}
+
+.directoryIcon {
+	margin-top:-5px;
+	margin-left:-1px;
+}
+
+.directoryTreeview .directoryIcon {
+	margin-right:5px;
+	margin-top: 1px;
+	vertical-align:middle;
+	float:left;
+}
+
+.ygtvhtml {
+	font-size:11px;
+}
+
+/* space */
+.directoryTreeview .ygtspacer { 
+	width:17px; 
+	height:22px; 
+}
+
+/* first or middle sibling, no children */
+.directoryTreeview .ygtvtn { 
+	background: url(../images/org.goorm.core.layout/fileButton.gif) 0 0 no-repeat; 
+	width:17px; 
+	height:22px; 
+}
+
+/* first or middle sibling, collapsable */
+.directoryTreeview .ygtvtm { 
+	background: url(../images/org.goorm.core.layout/openFolder.png) 0 0 no-repeat; 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* first or middle sibling, collapsable, hover */
+.directoryTreeview .ygtvtmh { 
+	background: url(../images/org.goorm.core.layout/openFolder.png) 0 0 no-repeat; 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* first or middle sibling, expandable */
+.directoryTreeview .ygtvtp { 
+	background: url(../images/org.goorm.core.layout/closedFolder.png) 0 0 no-repeat; 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* first or middle sibling, expandable, hover */
+.directoryTreeview .ygtvtph { 
+	background: url(../images/org.goorm.core.layout/closedFolder.png) 0 0 no-repeat; 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* last sibling, no children */
+.directoryTreeview .ygtvln { 
+	background: url(../images/org.goorm.core.layout/fileButtonLast.gif) 0 0 no-repeat; 
+	width:17px; 
+	height:22px; 
+}
+
+/* Last sibling, collapsable */
+.directoryTreeview .ygtvlm { 
+	background: url(../images/org.goorm.core.layout/openFolderLast.png) 0 0 no-repeat; 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* Last sibling, collapsable, hover */
+.directoryTreeview .ygtvlmh { 
+	background: url(../images/org.goorm.core.layout/openFolderLast.png) 0 0 no-repeat; 
+	width:17px;
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* Last sibling, expandable */
+.directoryTreeview .ygtvlp { 
+	background: url(../images/org.goorm.core.layout/closedFolderLast.png) 0 0 no-repeat; 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* Last sibling, expandable, hover */
+.directoryTreeview .ygtvlph { 
+	background: url(../images/org.goorm.core.layout/closedFolderLast.png) 0 0 no-repeat; 
+	width:17px; 
+	height:22px; 
+	cursor:pointer; 
+}
+
+/* Loading icon */
+.directoryTreeview .ygtvloading { 
+	background:  url(http://developer.yahoo.com/yui/examples/treeview/assets/img/folders/loading.gif) 0 0 no-repeat; 
+	width:17px; 
+	height:22px;
+}
+
+/* the style for the empty cells that are used for rendering the depth 
+ * of the node */
+.directoryTreeview .ygtvdepthcell { 
+	background: url(http://developer.yahoo.com/yui/examples/treeview/assets/img/folders/vline.gif) 0 0 no-repeat; 
+	width:17px; 
+	height:22px; 
+}
+
+.directoryTreeview .ygtvblankdepthcell { 
+	width:17px; 
+	height:22px; 
+}
+
+/* the style of the div around each node */
+.directoryTreeview .ygtvitem { }  
+
+.directoryTreeview .ygtvitem  table{
+    margin-bottom:0;
+}
+.directoryTreeview .ygtvitem  td {
+    border:none;
+    padding:0;
+} 
+
+.directoryTreeview .ygtvfocus { 
+	background-color:#B3D4FF;
+}
+
+/* the style of the div around each node's collection of children */
+.directoryTreeview .ygtvchildren { }  
+* html .ygtvchildren { 
+	height:1%;
+}  
+
+/* the style of the text label in ygTextNode */
+.directoryTreeview .ygtvlabel, .ygtvlabel:link, .ygtvlabel:visited, .ygtvlabel:hover { 
+	margin-left:2px;
+	text-decoration: none;
+}
+
+#buildProjectButton {
+/*
+	background: url('../../toolbar/org.goorm.core.project/image/build.png');
+*/
+	float:right;
+	padding:2px 2px 0 2px;
+	border:1px solid #AAA;
+}
+
+#projectSelectBox-button {
+	width: 98px;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+/*original
+#projectSelectBox{
+	margin-top:3px;
+	padding: 5px;
+}
+*/
+
+#projectSelectBox{
+	border-color: gray;
+	margin-top: 0px;
+	padding: 3px;
+	background-color: transparent;
+}

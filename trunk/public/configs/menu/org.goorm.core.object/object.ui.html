@@ -1,0 +1,54 @@
+<!--
+Copyright Sung-tae Ryu. All rights reserved.
+Code licensed under the GPL v2 License:
+http://www.uizard.org/License
+version: 3.0.0
+-->
+<div id="object.ui_[{@FINGERPRINT}]">
+    <div class="bd">
+        <ul class="first-of-type">
+            <li class="yuimenuitem first-of-type">
+                <a class="yuimenuitemlabel" action="cutObject" localizationKey='object_cut'>Cut</a>
+            </li>
+            <li class="yuimenuitem">
+                <a class="yuimenuitemlabel" action="copyObject" localizationKey='object_copy'>Copy</a>
+            </li>
+            <li class="yuimenuitem">
+                <a class="yuimenuitemlabel" action="pasteObject" localizationKey='object_paste'>Paste</a>
+            </li> 
+			<li class="yuimenuitem">
+                <a class="yuimenuitemlabel" action="deleteObject" localizationKey='object_delete'>Delete</a>
+            </li>                       
+        </ul>
+		<ul>
+            <li class="yuimenuitem">
+                <a class="yuimenuitemlabel" href="#Order_[{@FINGERPRINT}]" localizationKey='object_order'>Order</a>
+                <div id="Order_[{@FINGERPRINT}]" class="yuimenu"> 
+                    <div class="bd"> 
+                        <ul class="first-of-type"> 
+                            <li class="yuimenuitem">
+                                <a class="yuimenuitemlabel" action="bringToFront" localizationKey='object_order_bring_to_front'>Bring to Front</a>
+                            </li>
+                            <li class="yuimenuitem">
+                                <a class="yuimenuitemlabel" action="sendToBack" localizationKey='object_order_send_to_back'>Send to Back</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="yuimenuitem">
+                                <a class="yuimenuitemlabel" action="bringForward" localizationKey='object_order_bring_forward'>Bring Forward</a> 
+                            </li>
+                            <li class="yuimenuitem">
+                                <a class="yuimenuitemlabel" action="sendBackward" localizationKey='object_order_send_backward'>Send Backward</a> 
+                            </li>
+                        </ul>
+                    </div> 
+                </div>
+            </li>
+        </ul>        
+        <ul>
+            <li class="yuimenuitem">
+                <a class="yuimenuitemlabel" action="propertiesObject" localizationKey='object_properties'>Properties</a>
+            </li>
+        </ul>
+    </div>
+</div>
