@@ -119,6 +119,7 @@ org.goorm.core.toolbar.prototype = {
 			if(localStorage['preference.editor.useClipboard'] == "true") {
 				$("a[action=useClipboard]").find("img").addClass("toolbarButtonPressed");
 			}
+			
 			$(document).bind("onPreferenceConfirm",function(){
 				if(localStorage['preference.editor.useClipboard'] == "true") {
 					$("a[action=useClipboard]").find("img").addClass("toolbarButtonPressed");
@@ -135,22 +136,23 @@ org.goorm.core.toolbar.prototype = {
 		var index = this.index++;
 		
 		$.ajax({
-			url: url,			
+			url: url,
 			type: "GET",
 			data: "path="+path,
 			success: function(data) {
-				$("#toolbar_"+index).replaceWith(data);
+				//$("#toolbar_"+index).replaceWith(data);
+				
+				$("#"+container).append(data);
 				
 				var div_name = name.split(".").pop(); 
-				$("#"+div_name+".toolbar").prepend("<div id='toolbarHandle_"+name+"' class='toolbarMovingHandle'><div class='toolbarHandle'></div></div>");
-				console.log($("#"+div_name+".toolbar").html());
+				$("div[id='"+div_name+".toolbar']").prepend("<div id='toolbarHandle_"+name+"' class='toolbarMovingHandle'><div class='toolbarHandle'></div></div>");
 				
 				self.index_check++;
 				if(self.index_check == self.order.length){
 					$(self).trigger("toolbarLoaded");
 				}
 				
-				$("#"+container).append(data);
+				//$("#"+container).append(data);
 				//self.context_menu = 
 				//self.context_menu = new org.goorm.core.menu.context();
 				//self.context_menu.init("../../config/menu/org.goorm.core.window/window.panel.titlebar.html", "window.panel.titlebar", $("#"+container).find(".titlebar"), this.title);
