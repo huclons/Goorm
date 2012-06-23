@@ -1,5 +1,7 @@
 var fs = require("fs");
 
+var g_env = require("../configs/env.js");
+
 var g_file = require("../modules/org.goorm.core.file/file");
 var g_preference = require("../modules/org.goorm.core.preference/preference");
 var g_project = require("../modules/org.goorm.core.project/project");
@@ -7,12 +9,14 @@ var g_shell = require("../modules/org.goorm.core.shell/shell");
 var g_theme = require("../modules/org.goorm.core.theme/theme");
 var g_plugin = require("../modules/org.goorm.plugin/plugin");
 
+var EventEmitter = require("events").EventEmitter;
+
 /*
  * GET home page.
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'goormIDE' })
+	res.render('index', { title: 'goormIDE' })
 };
 
 
@@ -21,43 +25,43 @@ exports.index = function(req, res){
  */
 
 exports.project = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.project.do_new = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.project.do_load = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.project.do_save = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.project.do_delete = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.project.get_list = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.project.do_import = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.project.do_export = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.project.do_clean = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.project.get_property = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 
@@ -66,11 +70,11 @@ exports.project.get_property = function(req, res){
  */
 
 exports.plugin = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.plugin.get_list = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 /*
@@ -78,68 +82,100 @@ exports.plugin.get_list = function(req, res){
  */
 
 exports.file = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.file.do_new = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.file.do_load = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.file.do_save = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.file.do_delete = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 
 exports.file.get_contents = function(req, res){
-  var path = req.query.path;
+	var path = req.query.path;
 
-  fs.readFile("/home/xenoz0718/workspace/goorm/public/" + path, "utf8", function(err, data) {
-  	res.send(data);
-  });
+	fs.readFile(g_env.path + 'public/' + path, "utf8", function(err, data) {
+		res.json(data);
+	});
 };
 
 exports.file.get_url_contents = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.file.put_contents = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.file.get_nodes = function(req, res){
-  res.send(null);
+	var evt = new EventEmitter();
+	var path = req.query.path;
+	
+	console.log(path);
+	res.setHeader("Content-Type", "application/json");
+	
+	evt.on("got_nodes", function (data) {
+		try {
+			res.send(JSON.stringify(data));
+			res.end();
+		}
+		catch (exception) {
+			throw exception;
+		}
+	});
+	
+	g_file.get_nodes(g_env.path + 'workspace/' + path, evt);
 };
 
 exports.file.get_dir_nodes = function(req, res){
-  res.send(null);
+	var evt = new EventEmitter();
+	var path = req.query.path;
+	
+	console.log(path);
+	res.setHeader("Content-Type", "application/json");
+	
+	evt.on("got_dir_nodes", function (data) {
+		try {
+			res.send(JSON.stringify(data));
+			res.end();
+		}
+		catch (exception) {
+			throw exception;
+		}
+	});
+	
+	g_file.get_dir_nodes(g_env.path + 'workspace/' + path, evt);
 };
 
 exports.file.do_import = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.file.do_exort = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.file.do_move = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.file.do_rename = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.file.get_property = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 
@@ -148,11 +184,11 @@ exports.file.get_property = function(req, res){
  */
 
 exports.shell = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.shell.do_execute = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 /*
@@ -160,19 +196,19 @@ exports.shell.do_execute = function(req, res){
  */
 
 exports.preference = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.preference.save = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.preference.ini_parser = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.preference.ini_maker = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 /*
@@ -180,13 +216,13 @@ exports.preference.ini_maker = function(req, res){
  */
 
 exports.theme = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.theme.save = function(req, res){
-  res.send(null);
+	res.send(null);
 };
 
 exports.theme.get_list = function(req, res){
-  res.send(null);
+	res.send(null);
 };

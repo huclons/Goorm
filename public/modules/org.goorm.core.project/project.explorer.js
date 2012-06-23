@@ -43,11 +43,14 @@ org.goorm.core.project.explorer.prototype = {
 		
 		var postdata = {
 			kind: "project",
-			projectName: "",
-			folderOnly: "explorer"
+			//projectName: "",
+			//folderOnly: "explorer",
+			path: ""
 		};
 		
-		$.get("file/get_dir_nodes", postdata, function (data) {
+		$.get("file/get_nodes", postdata, function (data) {
+			
+			console.log(data);
 			
 			if (data != null) {
 			
