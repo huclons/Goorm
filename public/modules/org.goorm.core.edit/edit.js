@@ -192,7 +192,6 @@ org.goorm.core.edit.prototype = {
 	 * @param {Object} target The target.
 	 **/
 	init: function (target, title) {
-		
 		var self = this;
 		var dontUpdateFirst = 0;
 		
@@ -203,7 +202,7 @@ org.goorm.core.edit.prototype = {
 		this.target = target;
 		this.title = title;
 		
-		this.preference = core.dialogPreference.preference;
+		//this.preference = core.dialog.preference.preference;
 				
 		this.timestamp = new Date().getTime();
 				
@@ -363,8 +362,10 @@ org.goorm.core.edit.prototype = {
 		
 		this.contextMenu = new org.goorm.core.menu.context();
 		this.contextMenu.init("configs/menu/org.goorm.core.edit/edit.context.html", "edit.context", this.target, this.timestamp, null, function () {
-			core.action.init();
+			core.module.action.init();
 		});
+		
+		
 	},
 	
 	resizeAll: function () {

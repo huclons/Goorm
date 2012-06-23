@@ -9,6 +9,24 @@ Array.prototype.remove = function(from, to) {
 	return this.push.apply(this, rest);
 };
 
+Array.prototype.hasObject = (
+  !Array.indexOf ? function (o)
+  {
+    var l = this.length + 1;
+    while (l -= 1)
+    {
+        if (this[l - 1] === o)
+        {
+            return true;
+        }
+    }
+    return false;
+  } : function (o)
+  {
+    return (this.indexOf(o) !== -1);
+  }
+);
+
 module.exports = {
 	init: function () {
 	
@@ -43,6 +61,7 @@ module.exports = {
 								+ node.filename
 								+ "<div class=\"fullpath\" style=\"display:none;\">" + node.root + node.filename + "</div>"
 							  + "</div>";
+					node.children = [];
 					nodes.push(node);
 				}
 				
@@ -52,10 +71,7 @@ module.exports = {
 			walker.on("end", function () {
 				tree = self.make_dir_tree('/', dirs);
 				tree = self.make_file_tree(tree, nodes);
-				
-				console.log(tree);
-				//console.log(nodes);
-				
+
 				evt.emit("got_nodes", tree);
 			});
 		
@@ -126,17 +142,36 @@ module.exports = {
 	},
 	
 	make_file_tree: function (tree, files) {
-		var marked = [];
-		
-		for (var i=0; i<tree.length; i++) {
-			for (var j=0; j<files.length; j++) {
-				if (tree[i].root + tree[i].name + '/' == files[j].root) {
-					marked.push(j);
-					tree[i].children.push(files[j]);
+		if (tree != undefined) {
+			var marked = [];
+			
+			for (var i=0; i<tree.length; i++) {
+				for (var j=0; j<files.length; j++) {
+					if (tree[i].root + tree[i].name + '/' == files[j].root) {
+						marked.push(j);
+						tree[i].children.push(files[j]);
+					}
 				}
 			}
+			
+			var rest_files = [];
+			
+			for (var j=0; j<files.length; j++) {
+				if (!marked.hasObject(j)) {
+					rest_files.push(files[j]);
+				}
+			}
+			
+			for (var i=0; i<tree.length; i++) {
+				if (tree[i].children.length > 0) {
+					tree[i].children.join(this.make_file_tree(tree[i].children, rest_files));
+				}
+			}
+			
+			return tree;
 		}
-		
-		return tree;
+		else {
+			return null;
+		}
 	},
 };

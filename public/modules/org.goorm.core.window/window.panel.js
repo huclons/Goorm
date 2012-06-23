@@ -303,11 +303,12 @@ org.goorm.core.window.panel.prototype = {
 			}
 		}
 		else {
+			console.log("Editor!");
 			this.type = "Editor";
 			
 			this.editor = new org.goorm.core.edit();
 			this.editor.init($("#"+container).find(".windowContainer"));
-			this.editor.load(this.filepath, this.filename, this.filetype);
+			//this.editor.load(this.filepath, this.filename, this.filetype);
 			this.editor.setMode("text\/html");
 		}
 		

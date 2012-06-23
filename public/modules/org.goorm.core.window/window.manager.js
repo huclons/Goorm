@@ -258,7 +258,6 @@ org.goorm.core.window.manager.prototype = {
 	 * @param {String} filetype The type of the file.
 	 **/
 	open: function(filepath, filename, filetype, editor) {
-
 		var i = this.isOpened(filepath, filename);
 		
 		if(i >= 0) {
@@ -266,6 +265,8 @@ org.goorm.core.window.manager.prototype = {
 			this.window[i].activate();
 		}
 		else {
+			console.log(editor);
+			
 			this.add(filepath, filename, filetype, editor);
 			var fileID = filepath+filename;
 			this.windowList.windows[fileID] = new Object();
