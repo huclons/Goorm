@@ -33,11 +33,16 @@ module.exports = {
 					var node = {};
 					node.root = root.replace(g_env.path + "workspace/", "") + "/";
 					node.filename = fileStats[i].name;
-					node.parentLabel = "";
+					node.parent_label = node.root;
 					node.cls = "file";
 					node.expanded = false;
+					node.sortkey = 1 + node.filename;
 					node.type = "html";
-					node.html = "<div style=\'line-height:9px; white-space: nowrap;\'><img src=images/icons/filetype/" + node.filename.split('.').pop() + ".filetype.png class=directoryIcon /><span style=\'margin-top:7px;\'>" + node.filename + "</span></div>";
+					node.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
+								+ "<img src=images/icons/filetype/" + node.filename.split('.').pop() + ".filetype.png class=\"directoryIcon file\" />"
+								+ node.filename
+								+ "<div class=\"fullpath\" style=\"display:none;\">" + node.root + node.filename + "</div>"
+							  + "</div>";
 					nodes.push(node);
 				}
 				
@@ -75,11 +80,16 @@ module.exports = {
 				var dir = {};
 				dir.root = root.replace(g_env.path + "workspace/", "") + "/";
 				dir.name = dirStatsArray[i].name;
-				dir.parentLabel = "";
+				dir.parent_label = dir.root;
 				dir.cls = "dir";
 				dir.expanded = true;
+				dir.sortkey = 0 + dir.name;
 				dir.type = "html";
-				dir.html = dir.name;
+				dir.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
+							+ "<img src=images/icons/filetype/folder.filetype.png class=\"directoryIcon file\" />"
+							+ dir.name
+							+ "<div class=\"fullpath\" style=\"display:none;\">" + dir.root + dir.name + "</div>"
+						 + "</div>";
 				dir.children = [];
 				dirs.push(dir);
 			}
