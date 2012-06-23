@@ -65,8 +65,7 @@ org.goorm.core = function() {
 		
 	this.container = "";
 	this.skinName = "";
-		
-	this.selectedFile = null;
+
 	this.xml = null;
 	this.loadingPanel = null;
 		
@@ -116,16 +115,17 @@ org.goorm.core = function() {
 		keydown: false,
 		focus_on_editor: false,
 		focus_on_inputbox: false,
+		selected_file: "",
 		current_project_path: "",
 		current_project_name: "",
 		current_project_type: ""
 	};
 	
-	this.dialogLoadingCount = 0;	
-	this.dialogCount = 27;	
+	this.dialogLoadingCount = 0;
+	this.dialogCount = 27;
 
-	this.loadingCount = 0;	
-	this.fileTypes = null;	
+	this.loadingCount = 0;
+	this.fileTypes = null;
 	
 	this.dictionary = null;
 	this.serverTheme = null;
