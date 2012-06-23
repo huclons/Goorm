@@ -1,75 +1,49 @@
 body.yui-skin-sam
-	
-	//layout	include	phase	(main	div's	id	must	be	"goorm")	
-	#goorm(style='display:	none;')
-					
-	//Top	
+	#goorm(style='display:none;')
+
 	#goormTop.yui-navset
-		include	goorm/mainmenu
-		#goormMainToolbar.mainToolbar(style='float:	left;')
-					
-	//Left	
+		include goorm/mainmenu
+		#goormMainToolbar.mainToolbar(style='float:left;')
+
 	#goormLeft.yui-navset
-				
-	//Center	:	inner	layout	
+
 	#goormCenterInnerLayout.yui-navset
-						
-		//Inner	layout	:	Right	
 		#goormInnerLayoutRight.yui-navset
-						
-		//Inner	layout	:	Center	
 		#goormInnerLayoutCenter.yui-navset
-						
-		//Inner	layout	:	Bottom	
 		#goormInnerLayoutBottom.yui-navset
-				
-	//Bottom	
+
 	#goormBottom.yui-navset
-		div(style='float:	left;	width:100%')
-		
-			//Statusbar	message	
+		div(style='float:left; width:100%')
 			#goormStatusbarDeviceType
-				div(style='float:	left;	margin-right:	4px;')
+				div(style='float:left; margin-right:4px;')
 					img(src='images/org.goorm.core.layout/device.png')
 				.deviceType 
-			
-			//Statusbar	message	
+
 			#goormStatusbargoormVersion
-				div(style='float:	left;	margin-right:	4px;')
+				div(style='float:left; margin-right:4px;')
 					img(src='images/org.goorm.core.layout/version.png')
 				.goormVersion
-								
-			//Statusbar	message	
+
 			#goormStatusbarBrowserVersion
-				div(style='float:	left;	margin-right:	4px;')
+				div(style='float:left; margin-right:4px;')
 					img(src='images/org.goorm.core.layout/browser.png')
 				.browserName
-								
-			//Statusbar	progressbar	
+
 			#goormStatusbarCollaboration
-				div(style='float:	left;	margin-right:	4px;')
+				div(style='float:left; margin-right:4px;')
 					img(src='images/org.goorm.core.layout/share.png')
-				.isCollaborationOn	Collaboration	Off
-								
-			//Statusbar	progressbar	
+				.isCollaborationOn Collaboration Off
+
 			#goormStatusbarChat
-				div(style='float:	left;	margin-right:	4px;')
+				div(style='float:left; margin-right:4px;')
 					img(src='images/org.goorm.core.layout/chat.png')
-				.isChatOn	Chat	Off
-				
-			div(style='float:	right;')
-				//Statusbar	message	
+				.isChatOn Chat Off
+
+			div(style='float:right;')
 				#goormStatusbarMessage
-							
-				//Statusbar	progressbar	
 				#goormLoadingIndicator
 					img(src='')
-								
-				//Statusbar	progressbar	
 				#goormProgressBar
-	
-	//Menu
+
 	#goormMenuContainer
-	
-		//Dialogs
-		#goormDialogContainer
+	#goormDialogContainer
