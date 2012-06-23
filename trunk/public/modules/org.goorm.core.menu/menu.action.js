@@ -30,44 +30,44 @@ org.goorm.core.menu.action.prototype = {
 		//////////////////////////////////////////////////
 		$("a[action=newProject]").unbind("click");
 		$("a[action=newProject]").click(function() {
-			core.dialogNewProject.show();
-			$(".projectWizardFirstButton[project-type=all]").trigger("click");
+			core.dialog.new_project.show();
+			$(".projectWizardFirstButton[project-type=all]").trigger("click"); 
 		});
 
 		$("a[action=newFile_goormProject]").unbind("click");
 		$("a[action=newFile_goormProject]").click(function() {
-			core.dialogNewProject.show();
+			core.dialog.new_project.show();
 			$(".projectWizardFirstButton[project-type=goormp]").trigger("click");
 		});
 
 		$("a[action=newFile_file]").unbind("click");
 		$("a[action=newFile_file]").click(function() {
-			core.dialogNewFile.show("");
+			core.dialog.new_file.show("");
 		});
 
 		$("a[action=newFile_folder]").unbind("click");
 		$("a[action=newFile_folder]").click(function() {
-			core.dialogNewFolder.show("");
+			core.dialog.new_folder.show("");
 		});
 
 		$("a[action=newFile_textFile]").unbind("click");
 		$("a[action=newFile_textFile]").click(function() {
-			core.dialogNewUntitledTextFile.show("");
+			core.dialog.new_untitled_textfile.show("");
 		});
 
 		$("a[action=newFile_other]").unbind("click");
 		$("a[action=newFile_other]").click(function() {
-			core.dialogNewOtherFile.show("");
+			core.dialog.new_other_file.show("");
 		});
 
 		$("a[action=openProject]").unbind("click");
 		$("a[action=openProject]").click(function() {
-			core.dialogOpenProject.show();
+			core.dialog.open_project.show();
 		});
 
 		$("a[action=openFile]").unbind("click");
 		$("a[action=openFile]").click(function() {
-			core.dialogOpenFile.show();
+			core.dialog.open_file.show();
 		});
 
 		$("a[action=exit]").unbind("click");
@@ -91,7 +91,7 @@ org.goorm.core.menu.action.prototype = {
 
 		$("a[action=openURL]").unbind("click");
 		$("a[action=openURL]").click(function() {
-			core.dialogOpenURL.show();
+			core.dialog.open_url.show();
 		});
 
 		$("a[action=closeFile]").unbind("click");
@@ -131,17 +131,17 @@ org.goorm.core.menu.action.prototype = {
 
 		$("a[action=saveAsFile]").unbind("click");
 		$("a[action=saveAsFile]").click(function() {
-			core.dialogSaveAsFile.show();
+			core.dialog.save_as_file.show();
 		});
 
 		$("a[action=moveFile]").unbind("click");
 		$("a[action=moveFile]").click(function() {
-			core.dialogMoveFile.show("");
+			core.dialog.move_file.show("");
 		});
 
 		$("a[action=renameFile]").unbind("click");
 		$("a[action=renameFile]").click(function() {
-			core.dialogRenameFile.show();
+			core.dialog.rename_file.show();
 		});
 
 		$("a[action=deleteFile]").unbind("click");
@@ -180,29 +180,29 @@ org.goorm.core.menu.action.prototype = {
 		$("a[action=print]").unbind("click");
 		$("a[action=print]").click(function() {
 
-			core.dialogPrint.show();
+			core.dialog.print.show();
 
 			//window.open("./module/org.goorm.core.printer/print.html", "", "width=500, height=300, scrollbars=yes");
 		});
 
 		$("a[action=switchWorkspace]").unbind("click");
 		$("a[action=switchWorkspace]").click(function() {
-			core.dialogSwitchWorkspace.show();
+			core.dialog.switch_workspace.show();
 		});
 
 		$("a[action=importFile]").unbind("click");
 		$("a[action=importFile]").click(function() {
-			core.dialogImportFile.show();
+			core.dialog.import_file.show();
 		});
 
 		$("a[action=exportFile]").unbind("click");
 		$("a[action=exportFile]").click(function() {
-			core.dialogExportFile.show();
+			core.dialog.export_file.show();
 		});
 
 		$("a[action=property]").unbind("click");
 		$("a[action=property]").click(function() {
-			core.dialogProperty.show();
+			core.dialog.property.show();
 		});
 		//////////////////////////////////////////////////
 		//Main Menu : Edit
@@ -231,7 +231,7 @@ org.goorm.core.menu.action.prototype = {
 
 		$("a[action=doCut]").unbind("click");
 		$("a[action=doCut]").click(function() {
-			//core.dialogPreference.preference['preference.editor.useClipboard'];
+			//core.dialog.Preference.preference['preference.editor.useClipboard'];
 			var windowManager = core.module.layout.workSpace.windowManager;
 
 			if(windowManager.window[windowManager.activeWindow].designer) {
@@ -280,12 +280,12 @@ org.goorm.core.menu.action.prototype = {
 
 		$("a[action=preference]").unbind("click");
 		$("a[action=preference]").click(function() {
-			core.dialogPreference.show();
+			core.dialog.preference.show();
 		});
 
 		$("a[action=doFind]").unbind("click");
 		$("a[action=doFind]").click(function() {
-			core.dialogFindReplace.show();
+			core.dialog.find_and_replace.show();
 		});
 
 		$("a[action=doFindNext]").unbind("click");
@@ -296,7 +296,7 @@ org.goorm.core.menu.action.prototype = {
 			if(windowManager.window[windowManager.activeWindow].designer) {
 				windowManager.window[windowManager.activeWindow].designer.canvas.doDelete();
 			} else if(windowManager.window[windowManager.activeWindow].editor) {
-				core.dialogFindReplace.find("next");
+				core.dialog.find_and_replace.find("next");
 			}
 		});
 
@@ -307,7 +307,7 @@ org.goorm.core.menu.action.prototype = {
 			if(windowManager.window[windowManager.activeWindow].designer) {
 				//windowManager.window[windowManager.activeWindow].designer.canvas.doDelete();
 			} else if(windowManager.window[windowManager.activeWindow].editor) {
-				core.dialogFindReplace.find("previous");
+				core.dialog.find_and_replace.find("previous");
 			}
 		});
 
@@ -325,14 +325,14 @@ org.goorm.core.menu.action.prototype = {
 		$("a[action=useClipboard]").unbind("click");
 		$("a[action=useClipboard]").click(function() {
 			
-			if(core.dialogPreference.preference['preference.editor.useClipboard'] == "true") {
+			if(core.dialog.Preference.preference['preference.editor.useClipboard'] == "true") {
 				$(this).find("img").removeClass("toolbarButtonPressed");
-				core.dialogPreference.preference['preference.editor.useClipboard'] = "false";
+				core.dialog.preference.preference['preference.editor.useClipboard'] = "false";
 				localStorage['preference.editor.useClipboard'] = "false";
 				console.log("1");
 			} else {
 				$(this).find("img").addClass("toolbarButtonPressed");
-				core.dialogPreference.preference['preference.editor.useClipboard'] = "true";
+				core.dialog.preference.preference['preference.editor.useClipboard'] = "true";
 				localStorage['preference.editor.useClipboard'] = "true";
 				console.log("2");
 			}
@@ -488,7 +488,7 @@ org.goorm.core.menu.action.prototype = {
 		$("a[action=buildProject]").unbind("click");
 		$("a[action=buildProject]").click(function() {
 			if(!$(this).hasClass('yuimenuitemlabel-disabled')) {
-				core.dialogBuildProject.show();
+				core.dialog.build_project.show();
 			}
 			// if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.currentProjectType]!=undefined) {
 			//
@@ -501,52 +501,52 @@ org.goorm.core.menu.action.prototype = {
 		$("a[action=buildAll]").unbind("click");
 		$("a[action=buildAll]").click(function() {
 			if(!$(this).hasClass('yuimenuitemlabel-disabled')) {
-				core.dialogBuildAll.show();
+				core.dialog.build_all.show();
 			}
 		});
 
 		$("a[action=buildClean]").unbind("click");
 		$("a[action=buildClean]").click(function() {
 			if(!$(this).hasClass('yuimenuitemlabel-disabled')) {
-				core.dialogBuildClean.show();
+				core.dialog.build_clean.show();
 			}
 		});
 
 		$("a[action=buildConfiguration]").unbind("click");
 		$("a[action=buildConfiguration]").click(function() {
-			core.dialogBuildConfiguration.show();
+			core.dialog.build_configuration.show();
 		});
 
 		$("a[action=importProject]").unbind("click");
 		$("a[action=importProject]").click(function() {
-			core.dialogImportProject.show();
+			core.dialog.import_project.show();
 		});
 
 		$("a[action=exportProject]").unbind("click");
 		$("a[action=exportProject]").click(function() {
-			core.dialogExportProject.show();
+			core.dialog.export_project.show();
 		});
 
 		$("a[action=deleteProject]").unbind("click");
 		$("a[action=deleteProject]").click(function() {
-			core.dialogDeleteProject.show();
+			core.dialog.delete_project.show();
 		});
 
 		$("a[action=showProperties]").unbind("click");
 		$("a[action=showProperties]").click(function() {
-			core.dialogProjectProperty.show();
+			core.dialog.project_property.show();
 		});
 		//////////////////////////////////////////////////
 		//Main Menu : Collaboration
 		//////////////////////////////////////////////////
 		$("a[action=joinProject]").unbind("click");
 		$("a[action=joinProject]").click(function() {
-			core.dialogJoinProject.show();
+			core.dialog.join_project.show();
 		});
 
 		$("a[action=collaboration_settings]").unbind("click");
 		$("a[action=collaboration_settings]").click(function() {
-			core.dialogCollaborationSettings.show();
+			core.dialog.collaboration_settings.show();
 		});
 
 		$("a[action=chatOnOff]").unbind("click");
@@ -681,7 +681,7 @@ org.goorm.core.menu.action.prototype = {
 
 		$("a[action=collaborationSettings]").unbind("click");
 		$("a[action=collaborationSettings]").click(function() {
-			core.dialogCollaborationSettings.show();
+			core.dialog.CollaborationSettings.show();
 		});
 		//////////////////////////////////////////////////
 		//Main Menu : Window
@@ -815,44 +815,44 @@ org.goorm.core.menu.action.prototype = {
 		//////////////////////////////////////////////////
 		$("a[action=helpContents]").unbind("click");
 		$("a[action=helpContents]").click(function() {
-			core.dialogHelpContents.show();
+			core.dialog.help_contents.show();
 		});
 
 		$("a[action=helpSearch]").unbind("click");
 		$("a[action=helpSearch]").click(function() {
-			core.dialogHelpSearch.show();
+			core.dialog.help_search.show();
 		});
 
 		$("a[action=helpTipsAndTricks]").unbind("click");
 		$("a[action=helpTipsAndTricks]").click(function() {
-			core.dialogHelpTipsAndTricks.show();
+			core.dialog.help_tips_and_tricks.show();
 		});
 
 		$("a[action=helpCheckForUpdates]").unbind("click");
 		$("a[action=helpCheckForUpdates]").click(function() {
-			core.dialogHelpCheckForUpdates.show();
+			core.dialog.help_check_for_updates.show();
 		});
 
 		$("a[action=helpInstallNewPlugin]").unbind("click");
 		$("a[action=helpInstallNewPlugin]").click(function() {
-			core.dialogHelpInstallNewPlugin.show();
+			core.dialog.help_install_new_plugin.show();
 		});
 
 		$("a[action=helpAbout]").unbind("click");
 		$("a[action=helpAbout]").click(function() {
-			core.dialogHelpAbout.show();
+			core.dialog.help_about.show();
 		});
 
 		$("a[action=helpBugReport]").unbind("click");
 		$("a[action=helpBugReport]").click(function() {
-			core.dialogHelpBugReport.show();
+			core.dialog.help_bug_report.show();
 		});
 		//////////////////////////////////////////////////
 		//Context Menu : File
 		//////////////////////////////////////////////////
 		$("a[action=newFile_file_context]").unbind("click");
 		$("a[action=newFile_file_context]").click(function() {
-			core.dialogNewFile.show("context");
+			core.dialog.new_file.show("context");
 		});
 
 		$("a[action=open_context]").unbind("click");
@@ -911,12 +911,12 @@ org.goorm.core.menu.action.prototype = {
 
 		$("a[action=move_context]").unbind("click");
 		$("a[action=move_context]").click(function() {
-			core.dialogMoveFile.show("context");
+			core.dialog.move_file.show("context");
 		});
 
 		$("a[action=rename_context]").unbind("click");
 		$("a[action=rename_context]").click(function() {
-			core.dialogRenameFile.show("context");
+			core.dialog.rename_file.show("context");
 		});
 
 		$("a[action=delete_context]").unbind("click");
@@ -947,12 +947,12 @@ org.goorm.core.menu.action.prototype = {
 		//////////////////////////////////////////////////
 		$("a[action=newFile_folder_context]").unbind("click");
 		$("a[action=newFile_folder_context]").click(function(e) {
-			core.dialogNewFolder.show("context");
+			core.dialog.new_folder.show("context");
 		});
 
 		$("a[action=newFile_textFile_context]").unbind("click");
 		$("a[action=newFile_textFile_context]").click(function(e) {
-			core.dialogNewUntitledTextFile.show("context");
+			core.dialog.new_untitled_textfile.show("context");
 		});
 
 		$("a[action=folder_open_context]").unbind("click");
