@@ -1,5 +1,5 @@
 CodeMirror.defineMode("xml", function(config, parserConfig) {
-  var indentUnit = config.indentUnit;
+  var indent_unit = config.indent_unit;
   var Kludges = parserConfig.htmlMode ? {
     autoSelfClosers: {"br": true, "img": true, "hr": true, "link": true, "input": true,
                       "meta": true, "col": true, "frame": true, "base": true, "area": true},
@@ -212,7 +212,7 @@ CodeMirror.defineMode("xml", function(config, parserConfig) {
         context = context.prev;
       while (context && !context.startOfLine)
         context = context.prev;
-      if (context) return context.indent + indentUnit;
+      if (context) return context.indent + indent_unit;
       else return 0;
     },
 

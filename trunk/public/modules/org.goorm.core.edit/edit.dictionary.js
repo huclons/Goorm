@@ -2,72 +2,56 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module edit
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class findReplace
- * @extends edit
- **/
 org.goorm.core.edit.dictionary = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dictionary
-	 **/
-	this.dictionaryList = null;	
+	this.dictionary_list = null;	
 
 };
 
 org.goorm.core.edit.dictionary.prototype = {
-		
+	
 	init: function(){
-
-		this.dictionaryList = new Array();
+		this.dictionary_list = new Array();
 		var self = this;
-
 	},
 	
-	showDescription: function(keyword, fileType, divDescText){
-		for(var v=0;v<this.dictionaryList.length;v++){
+	show_description: function(keyword, filetype, div_desc_text){
+		for(var v=0;v<this.dictionary_list.length;v++){
 			//keyword check
-			if(this.dictionaryList[v][0]!=keyword)
+			if(this.dictionary_list[v][0]!=keyword)
 				continue;
-			var saveFileType = this.dictionaryList[v][2].split(';');
-			for(var i=0;i<saveFileType.length;i++){
+			var save_filetype = this.dictionary_list[v][2].split(';');
+			for(var i=0;i<save_filetype.length;i++){
 				//filetype check
-				if(saveFileType[i]==fileType) {
-					divDescText.html(this.dictionaryList[v][1]);				
+				if(save_filetype[i]==filetype) {
+					div_desc_text.html(this.dictionary_list[v][1]);				
 				}
 /*
-				if(saveFileType[i]!=fileType)
+				if(save_filetype[i]!=filetype)
 					continue;
-				divDescText.html(this.dictionaryList[v][1]);
+				div_desc_text.html(this.dictionary_list[v][1]);
 				break;
 */
 			}							
 		}
 	},
 	
-	showDictionary: function(fileType, projectType){
+	show_dictionary: function(filetype, project_type){
 		var found = [];				
-		for(var v=0;v<this.dictionaryList.length;v++){
-			var saveFileType = this.dictionaryList[v][2].split(';');
-			for(var i=0;i<saveFileType.length;i++){
+		for(var v=0;v<this.dictionary_list.length;v++){
+			var save_filetype = this.dictionary_list[v][2].split(';');
+			for(var i=0;i<save_filetype.length;i++){
 				//filetype check
-				if(saveFileType[i]==fileType) {
-					found.push(this.dictionaryList[v][0]);				
+				if(save_filetype[i]==filetype) {
+					found.push(this.dictionary_list[v][0]);				
 /*
-					console.log(this.dictionaryList[v][0]);
 */
 				}
 /*
-				if(saveFileType[i]!=fileType)
+				if(save_filetype[i]!=filetype)
 					continue;
-				found.push(this.dictionaryList[v][0]);
+				found.push(this.dictionary_list[v][0]);
 				break;
 */
 			}
@@ -75,24 +59,24 @@ org.goorm.core.edit.dictionary.prototype = {
 		return found;
 	},
 	
-	pushDictionary:function(word, desc, type, projectType) {
-		var top=this.dictionaryList.length;		
-		this.dictionaryList[top]=new Array();
-		this.dictionaryList[top][0]=word;
-		this.dictionaryList[top][1]=desc;
-		this.dictionaryList[top][2]=type;
-		this.dictionaryList[top][3]=projectType;
+	push_dictionary: function(word, desc, type, project_type) {
+		var top=this.dictionary_list.length;		
+		this.dictionary_list[top]=new Array();
+		this.dictionary_list[top][0]=word;
+		this.dictionary_list[top][1]=desc;
+		this.dictionary_list[top][2]=type;
+		this.dictionary_list[top][3]=project_type;
 	},
 	
-	loadDictionary:function(url) {
+	load_dictionary:function(url) {
 		var self = this;
 			
 		$.getJSON(url, function(data) {
 			// file type
-			var fileType="";
-			var projectType=data.project[0].projectType;
+			var filetype="";
+			var project_type=data.project[0].project_type;
 			for(var i=0;i<data.option.length;i++){
-				fileType += data.option[i].fileType+";";
+				filetype += data.option[i].filetype+";";
 			}			
 			// keyword, description
 			for(var i=0;i<data.keyword.length;i++){
@@ -101,12 +85,12 @@ org.goorm.core.edit.dictionary.prototype = {
 				word = word.replace(/\>/g, "&#62;");
 				word = word.replace(/\//g, "&#47;");
 
-				self.pushDictionary(word,data.keyword[i].desc,fileType,projectType);
+				self.push_dictionary(word,data.keyword[i].desc,filetype,project_type);
 			}
 		});	
 	},
 	
-	getHints: function (editor, fileType) {
+	getHints: function (editor, filetype) {
 		var self = this;
 		
 		// Find the token at the cursor
@@ -127,23 +111,19 @@ org.goorm.core.edit.dictionary.prototype = {
 		  context.push(tprop);
 		}
 
-		return {list: self.getCompletions(token, context, fileType),
+		return {list: self.get_completions(token, context, filetype),
 		        from: {line: cur.line, ch: token.start},
 		        to: {line: cur.line, ch: token.end}};
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method startComplete 
-	 **/
-	startComplete: function (editor, target, fileType) {
+	startComplete: function (editor, target, filetype) {
 		var self = this;
 
 		// We want a single cursor position.
 		if (editor.somethingSelected()) return;
 
-	    var result = self.getHints(editor, fileType);
-	    console.log(result);
+	    var result = self.getHints(editor, filetype);
+
 	    if (!result || !result.list.length) return;
 	    var completions = result.list;
 
@@ -152,44 +132,44 @@ org.goorm.core.edit.dictionary.prototype = {
 		}
 
 	    if (completions.length == 1) {
-	    	var tempWord = completions[0];
+	    	var temp_word = completions[0];
 	    	
-			tempWord = tempWord.replace(/\&\#60;/g, "<");
-			tempWord = tempWord.replace(/\&\#62;/g, ">");
-			tempWord = tempWord.replace(/\&\#47;/g, "/");
+			temp_word = temp_word.replace(/\&\#60;/g, "<");
+			temp_word = temp_word.replace(/\&\#62;/g, ">");
+			temp_word = temp_word.replace(/\&\#47;/g, "/");
 	    	
-	    	insert(tempWord);
+	    	insert(temp_word);
 	    	return true;
 	    }
 		$(target).append("<div class='completions'><select></select></div>")
 				
-		var divCompletion = $(target).find(".completions");				
-		var selCompletion = divCompletion.find("select");		
-		selCompletion.attr("multiple", true);
+		var div_completion = $(target).find(".completions");				
+		var sel_completion = div_completion.find("select");		
+		sel_completion.attr("multiple", true);
 			
 		for (var i = 0; i < completions.length; ++i) {
 			if(i==0) {
-				selCompletion.append("<option selected='selected'>" + completions[i] + "</option>");
+				sel_completion.append("<option selected='selected'>" + completions[i] + "</option>");
 			}
 			else {
-				selCompletion.append("<option>" + completions[i] + "</option>");
+				sel_completion.append("<option>" + completions[i] + "</option>");
 			}			
 		}		
 
-		selCompletion.attr("size", Math.min(10, completions.length));	
+		sel_completion.attr("size", Math.min(10, completions.length));	
 		var pos = editor.cursorCoords();					
-		divCompletion.css("left", pos.x - $(target).offset().left);
-		divCompletion.css("top", pos.yBot - $(target).offset().top);				
+		div_completion.css("left", pos.x - $(target).offset().left);
+		div_completion.css("top", pos.yBot - $(target).offset().top);				
 				
 		// description text 
-		$(target).append("<div style='width:200px; border:1px solid #000; background-color:#fff;'  class='descText'></div>")
-		var divDescText = $(target).find(".descText");
+		$(target).append("<div style='width:200px; border:1px solid #000; background-color:#fff;'  class='description_text'></div>")
+		var div_desc_text = $(target).find(".description_text");
 		
-		var kw = divCompletion.find("select option:selected").attr("value");
-		core.dictionary.showDescription(kw,self.filetype,divDescText,core.currentProjectType);
+		var kw = div_completion.find("select option:selected").attr("value");
+		core.module.dictionary.show_description(kw,self.filetype,div_desc_text,core.currentproject_type);
 		
-		divDescText.css("left", pos.x - $(target).offset().left +divCompletion.width());		
-		divDescText.css("top", pos.yBot - $(target).offset().top );
+		div_desc_text.css("left", pos.x - $(target).offset().left +div_completion.width());		
+		div_desc_text.css("top", pos.yBot - $(target).offset().top );
 		
 		var done = false;
 		
@@ -198,26 +178,26 @@ org.goorm.core.edit.dictionary.prototype = {
 
 			done = true;
 
-			divCompletion.remove();
-			divDescText.remove();
+			div_completion.remove();
+			div_desc_text.remove();
 		}
 		
 		function pick() {
-			insert(divCompletion.find("select option:selected").attr("value"));
+			insert(div_completion.find("select option:selected").attr("value"));
 			close();
 			setTimeout(function() {
 				editor.focus();
 			}, 50);
 		}
 		
-		selCompletion.bind("blur", close);
+		sel_completion.bind("blur", close);
 		
-		selCompletion.bind("change",function(event){
-			var kw = divCompletion.find("select option:selected").attr("value");
-			core.dictionary.showDescription(kw, self.filetype, divDescText);
+		sel_completion.bind("change",function(event){
+			var kw = div_completion.find("select option:selected").attr("value");
+			core.module.dictionary.show_description(kw, self.filetype, div_desc_text);
 		});
 		
-		selCompletion.bind("keydown", function(event) {
+		sel_completion.bind("keydown", function(event) {
 			
 			var code = event.keyCode;
 			if (code == 16) {
@@ -237,50 +217,40 @@ org.goorm.core.edit.dictionary.prototype = {
 			else if (code != 38 && code != 40) {
 				close(); 
 				editor.focus();
-				
-				console.log(code);
 
 				setTimeout(function() {
-					self.startComplete(editor, target, fileType);
+					self.startComplete(editor, target, filetype);
 					}, 50
 				);
 
 			}
 		});
-		selCompletion.dblclick(pick);
+		sel_completion.dblclick(pick);
 	
-		selCompletion.focus();
+		sel_completion.focus();
 		
 		// Opera sometimes ignores focusing a freshly created node
 		if (window.opera) {
 			setTimeout(function() {
-				if (!done) selCompletion.focus();
+				if (!done) sel_completion.focus();
 			}, 100);
 		}
 		
 		return true;
 	},
 
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method getCompletions 
-	 * @param {String} token The token.
-	 * @param {String} context The context.
-	 **/
-	getCompletions: function (token, context, fileType) {
+	get_completions: function (token, context, filetype) {
 		var self = this;
 		
 		var found = [];
 		var start = token.string;
 		
-		console.log(start);
+
 				
 		start = start.replace(/\</g, "&#60;");
 		start = start.replace(/\>/g, "&#62;");
 		start = start.replace(/\//g, "&#47;");
 		
-		console.log(start);
 		
 		function arrayContains(arr, item) {
 			if (!Array.prototype.indexOf) {
@@ -338,10 +308,10 @@ org.goorm.core.edit.dictionary.prototype = {
 				maybeAdd(v.name);
 			}
 			
-			var selectedKeywordList=core.dictionary.showDictionary(fileType, core.currentProjectType);
+			var selected_keyword_list=core.module.dictionary.show_dictionary(filetype, core.currentproject_type);
 						
-			for(var v=0;v<selectedKeywordList.length;v++){				
-				maybeAdd(selectedKeywordList[v]);				
+			for(var v=0;v<selected_keyword_list.length;v++){				
+				maybeAdd(selected_keyword_list[v]);				
 			}
 			
 			// delete by pch

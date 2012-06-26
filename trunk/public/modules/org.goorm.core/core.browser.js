@@ -1,53 +1,44 @@
 org.goorm.core.browser = function() {
-	
+	this.name = "";
+	this.version = 0;
 };
 
 org.goorm.core.browser.prototype = {
-	/**
-	 * This function is an goorm core initializating function.  
-	 * This operates the initialization tasks for layout, actions, plugins...
-	 * @constructor
-	 * @param {String} container The container
-	 **/
-	get: function() {
-		var result = {};
-		
+	init: function() {
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Get the Browser Information
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		var userAgent = navigator.userAgent.toLowerCase();
+		var user_agent = navigator.userAgent.toLowerCase();
  
 		// Figure out what browser is being used
 		$.browser = {
-			version: (userAgent.match( /.+(?:rv|it|ra|ie|me)[\/: ]([\d.]+)/ ) || [])[1],
-			chrome: /chrome/.test( userAgent ),
-			safari: /webkit/.test( userAgent ) && !/chrome/.test( userAgent ),
-			opera: /opera/.test( userAgent ),
-			msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ),
-			mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
+			version: (user_agent.match( /.+(?:rv|it|ra|ie|me)[\/: ]([\d.]+)/ ) || [])[1],
+			chrome: /chrome/.test( user_agent ),
+			safari: /webkit/.test( user_agent ) && !/chrome/.test( user_agent ),
+			opera: /opera/.test( user_agent ),
+			msie: /msie/.test( user_agent ) && !/opera/.test( user_agent ),
+			mozilla: /mozilla/.test( user_agent ) && !/(compatible|webkit)/.test( user_agent )
 		};
 		
 		
 		if($.browser.mozilla)
-			result.browser = "Firefox";
+			this.name = "Firefox";
 		else if($.browser.msie)
-			result.browser = "IE";
+			this.name = "IE";
 		else if($.browser.opera)
-			result.browser = "Opera";
+			this.name = "Opera";
 		else if($.browser.chrome)
-			result.browser = "Chrome";
+			this.name = "Chrome";
 		else if($.browser.safari)
-			result.browser = "Safari";
+			this.name = "Safari";
 		else
-			result.browser = "Unknown";
+			this.name = "Unknown";
 			
 
-		result.browserVersion = $.browser.version;
+		this.version = $.browser.version;
 				
 		  
-		$('.browserName').html(result.browser + " " + result.browserVersion);
-		
-		return result;
+		$('.browser_name').html(this.name + " " + this.version);
 	}
 };

@@ -1,5 +1,5 @@
 CodeMirror.defineMode("sparql", function(config) {
-  var indentUnit = config.indentUnit;
+  var indent_unit = config.indent_unit;
   var curPunc;
 
   function wordRegexp(words) {
@@ -135,7 +135,7 @@ CodeMirror.defineMode("sparql", function(config) {
       else if (context.align)
         return context.col + (closing ? 0 : 1);
       else
-        return context.indent + (closing ? 0 : indentUnit);
+        return context.indent + (closing ? 0 : indent_unit);
     }
   };
 });

@@ -138,7 +138,7 @@ var CodeMirror = (function() {
         options[option] = value;
         if (option == "lineNumbers" || option == "gutter" || option == "firstLineNumber")
           operation(gutterChanged)();
-        else if (option == "mode" || option == "indentUnit") loadMode();
+        else if (option == "mode" || option == "indent_unit") loadMode();
         else if (option == "readOnly" && value == "nocursor") input.blur();
         else if (option == "theme") scroller.className = scroller.className.replace(/cm-s-\w+/, "cm-s-" + value);
       },
@@ -209,9 +209,9 @@ var CodeMirror = (function() {
         return copyPos(start ? sel.from : sel.to);
       },
       somethingSelected: function() {return !posEq(sel.from, sel.to);},
-      setCursor: operation(function(line, ch) {
-        if (ch == null && typeof line.line == "number") setCursor(line.line, line.ch);
-        else setCursor(line, ch);
+      set_cursor: operation(function(line, ch) {
+        if (ch == null && typeof line.line == "number") set_cursor(line.line, line.ch);
+        else set_cursor(line, ch);
       }),
       setSelection: operation(function(from, to) {setSelection(clipPos(from), clipPos(to || from));}),
       getLine: function(line) {if (isLine(line)) return lines[line].text;},
@@ -276,7 +276,7 @@ var CodeMirror = (function() {
         if (gecko && !mac) onContextMenu(e);
         return;
       case 2:
-        if (start) setCursor(start.line, start.ch, true);
+        if (start) set_cursor(start.line, start.ch, true);
         return;
       }
       // For button 1, if it was clicked inside the editor
@@ -305,7 +305,7 @@ var CodeMirror = (function() {
           up();
           if (Math.abs(e.clientX - e2.clientX) + Math.abs(e.clientY - e2.clientY) < 10) {
             e_preventDefault(e2);
-            setCursor(start.line, start.ch, true);
+            set_cursor(start.line, start.ch, true);
             focusInput();
           }
         }), true);
@@ -313,7 +313,7 @@ var CodeMirror = (function() {
         return;
       }
       e_preventDefault(e);
-      setCursor(start.line, start.ch, true);
+      set_cursor(start.line, start.ch, true);
 
       function extend(e) {
         var cur = posFromMouse(e, true);
@@ -409,7 +409,7 @@ var CodeMirror = (function() {
                   mac && (code == 38 || code == 40))) { // cmd-up/down
         scrollEnd(code == 36 || code == 38); return e_preventDefault(e);
       }
-      if (mod && code == 65) {selectAll(); return e_preventDefault(e);} // ctrl-a
+      if (mod && code == 65) {select_all(); return e_preventDefault(e);} // ctrl-a
       if (!options.readOnly) {
         if (!anyMod && code == 13) {return;} // enter
         if (!anyMod && code == 9 && handleTab(e.shiftKey)) return e_preventDefault(e); // tab
@@ -1025,7 +1025,7 @@ var CodeMirror = (function() {
       sel.from = from; sel.to = to;
       selectionChanged = true;
     }
-    function setCursor(line, ch, user) {
+    function set_cursor(line, ch, user) {
       var pos = clipPos({line: line, ch: ch || 0});
       (user ? setSelectionUser : setSelection)(pos, pos);
     }
@@ -1042,13 +1042,13 @@ var CodeMirror = (function() {
 
     function scrollPage(down) {
       var linesPerPage = Math.floor(scroller.clientHeight / lineHeight()), head = sel.inverted ? sel.from : sel.to;
-      setCursor(head.line + (Math.max(linesPerPage - 1, 1) * (down ? 1 : -1)), head.ch, true);
+      set_cursor(head.line + (Math.max(linesPerPage - 1, 1) * (down ? 1 : -1)), head.ch, true);
     }
     function scrollEnd(top) {
       var pos = top ? {line: 0, ch: 0} : {line: lines.length - 1, ch: lines[lines.length-1].text.length};
       setSelectionUser(pos, pos);
     }
-    function selectAll() {
+    function select_all() {
       var endLine = lines.length - 1;
       setSelection({line: 0, ch: 0}, {line: endLine, ch: lines[endLine].text.length});
     }
@@ -1094,7 +1094,7 @@ var CodeMirror = (function() {
     }
     function smartHome() {
       var firstNonWS = Math.max(0, lines[sel.from.line].text.search(/\S/));
-      setCursor(sel.from.line, sel.from.ch <= firstNonWS && sel.from.ch ? 0 : firstNonWS, true);
+      set_cursor(sel.from.line, sel.from.ch <= firstNonWS && sel.from.ch ? 0 : firstNonWS, true);
     }
 
     function indentLine(n, how) {
@@ -1109,8 +1109,8 @@ var CodeMirror = (function() {
         else indentation = 0;
       }
       else if (how == "smart") indentation = mode.indent(state, line.text.slice(curSpaceString.length));
-      else if (how == "add") indentation = curSpace + options.indentUnit;
-      else if (how == "subtract") indentation = curSpace - options.indentUnit;
+      else if (how == "add") indentation = curSpace + options.indent_unit;
+      else if (how == "subtract") indentation = curSpace - options.indent_unit;
       indentation = Math.max(0, indentation);
       var diff = indentation - curSpace;
 
@@ -1120,7 +1120,7 @@ var CodeMirror = (function() {
       }
       else {
         var indentString = "", pos = 0;
-        if (options.indentWithTabs)
+        if (options.indent_with_tabs)
           for (var i = Math.floor(indentation / tabSize); i; --i) {pos += tabSize; indentString += "\t";}
         while (pos < indentation) {++pos; indentString += " ";}
       }
@@ -1307,7 +1307,7 @@ var CodeMirror = (function() {
       var pos = posFromMouse(e);
       if (!pos || window.opera) return; // Opera is difficult.
       if (posEq(sel.from, sel.to) || posLess(pos, sel.from) || !posLess(pos, sel.to))
-        operation(setCursor)(pos.line, pos.ch);
+        operation(set_cursor)(pos.line, pos.ch);
 
       var oldCSS = input.style.cssText;
       inputDiv.style.position = "absolute";
@@ -1641,8 +1641,8 @@ var CodeMirror = (function() {
     value: "",
     mode: null,
     theme: "default",
-    indentUnit: 2,
-    indentWithTabs: false,
+    indent_unit: 2,
+    indent_with_tabs: false,
     tabMode: "classic",
     enterMode: "indent",
     electricChars: true,

@@ -1,86 +1,86 @@
 var self = this;
 
-var fileTypes = core.fileTypes;
+var fileTypes = core.filetypes;
 
-for (var i = 0; i<core.fileTypes.length; i++) {
+for (var i = 0; i<core.filetypes.length; i++) {
 	
-	var extName = fileTypes[i].fileExtention;
+	var extName = fileTypes[i].file_extension;
 	var editor = fileTypes[i].editor;
 	var description = fileTypes[i].description;
 	var type = fileTypes[i].type;
 	
-	$(".fileTypeContents").find(".fileTypeList").append("<div class="+extName+">"+extName+"</div>");
-	$(".fileTypeContents").find("."+extName).click(function () {
+	$(".filetype_contents").find(".filetype_list").append("<div class="+extName+">"+extName+"</div>");
+	$(".filetype_contents").find("."+extName).click(function () {
 		
-		$(".fileTypeContents").find(".fileTypeList").children().each(function () {
+		$(".filetype_contents").find(".filetype_list").children().each(function () {
 			$(this).css('background-color', '#fff');
 		});
 		$(this).css('background-color', '#eee');
 		
-		$(".fileTypeContents").find(".fileTypeDetail").children().each(function() { 
+		$(".filetype_contents").find(".filetype_detail").children().each(function() { 
 			$(this).remove(); 
 		});	
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Extention Name</div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><input class='fileExtention' style='width:200px;' value='"+$(this).attr("id")+"'></input></div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Editor</div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><input class='editor' style='width:200px;' value='"+self.getFileTypeInfo($(this).attr("id"), "editor")+"'></input></div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Type</div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><input class='type' style='width:200px;' value='"+self.getFileTypeInfo($(this).attr("id"), "type")+"'></input></div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Description</div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><textarea class='description' style='resize: none; width:200px; height:100px; overflow:hidden;'>"+self.getFileTypeInfo($(this).attr("id"), "description")+"</textarea></div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Extention Name</div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><input class='file_extension' style='width:200px;' value='"+$(this).attr("id")+"'></input></div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Editor</div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><input class='editor' style='width:200px;' value='"+self.get_filetype_info($(this).attr("id"), "editor")+"'></input></div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Type</div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><input class='type' style='width:200px;' value='"+self.get_filetype_info($(this).attr("id"), "type")+"'></input></div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Description</div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><textarea class='description' style='resize: none; width:200px; height:100px; overflow:hidden;'>"+self.get_filetype_info($(this).attr("id"), "description")+"</textarea></div>");
 	});
 }
 
 $("#add").click(function () {
-	$(".fileTypeContents").find(".fileTypeList").append("<div class='newExt'>New Extention</div>");
-	$(".fileTypeContents").find(".fileTypeList").find(".newExt").click(function () {
+	$(".filetype_contents").find(".filetype_list").append("<div class='newExt'>New Extention</div>");
+	$(".filetype_contents").find(".filetype_list").find(".newExt").click(function () {
 		
-		$(".fileTypeContents").find(".fileTypeList").children().each(function () {
+		$(".filetype_contents").find(".filetype_list").children().each(function () {
 			$(this).css('background-color', '#fff');
 		});
 		$(this).css('background-color', '#eee');
 		
-		$(".fileTypeContents").find(".fileTypeDetail").children().each(function() { 
+		$(".filetype_contents").find(".filetype_detail").children().each(function() { 
 			$(this).remove(); 
 		});
 		
 		if ($(this).hasClass("newExt")) {	
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Extention Name</div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><input class='fileExtention' style='width:200px;' value=''></input></div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Editor</div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><input class='editor' style='width:200px;' value=''></input></div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Type</div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><input class='type' style='width:200px;' value=''></input></div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Description</div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><textarea class='description' style='resize: none; width:200px; height:100px; overflow:hidden;'></textarea></div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Extention Name</div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><input class='file_extension' style='width:200px;' value=''></input></div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Editor</div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><input class='editor' style='width:200px;' value=''></input></div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Type</div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><input class='type' style='width:200px;' value=''></input></div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Description</div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><textarea class='description' style='resize: none; width:200px; height:100px; overflow:hidden;'></textarea></div>");
 		}
 		else {
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Extention Name</div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><input class='fileExtention' style='width:200px;' value='"+$(this).attr("id")+"'></input></div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Editor</div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><input class='editor' style='width:200px;' value='"+self.getFileTypeInfo($(this).attr("id"), "editor")+"'></input></div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Type</div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><input class='type' style='width:200px;' value='"+self.getFileTypeInfo($(this).attr("id"), "type")+"'></input></div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Description</div>");
-			$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'><textarea class='description' style='resize: none; width:200px; height:100px; overflow:hidden;'>"+self.getFileTypeInfo($(this).attr("id"), "description")+"</textarea></div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Extention Name</div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><input class='file_extension' style='width:200px;' value='"+$(this).attr("id")+"'></input></div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Editor</div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><input class='editor' style='width:200px;' value='"+self.get_filetype_info($(this).attr("id"), "editor")+"'></input></div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Type</div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><input class='type' style='width:200px;' value='"+self.get_filetype_info($(this).attr("id"), "type")+"'></input></div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Description</div>");
+			$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'><textarea class='description' style='resize: none; width:200px; height:100px; overflow:hidden;'>"+self.get_filetype_info($(this).attr("id"), "description")+"</textarea></div>");
 		}
 	});
 })
 
 $("#del").click(function () {
-	$(".fileTypeContents").find(".fileTypeList").children().each(function() {
-		if ($(this).attr("id") == $(".fileTypeContents").find(".fileExtention").val()){
+	$(".filetype_contents").find(".filetype_list").children().each(function() {
+		if ($(this).attr("id") == $(".filetype_contents").find(".file_extension").val()){
 			var temp = $.makeArray();
-			for (var i = 0; i < core.fileTypes.length; i++) {
-				if (core.fileTypes[i].fileExtention != $(this).attr("id")) {
-					temp.push(core.fileTypes[i]);
+			for (var i = 0; i < core.filetypes.length; i++) {
+				if (core.filetypes[i].file_extension != $(this).attr("id")) {
+					temp.push(core.filetypes[i]);
 				}
 			}
-			core.fileTypes = temp;
+			core.filetypes = temp;
 			$(this).remove();
 		}
 	});
-	$(".fileTypeContents").find(".fileTypeDetail").children().each(function() {
+	$(".filetype_contents").find(".filetype_detail").children().each(function() {
 		$(this).remove();
 	});
 })
@@ -90,41 +90,41 @@ $("#save").click(function () {
 	
 	var finded = false;
 	
-	if ($(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").length != 0){
-		for (var i = 0; i < core.fileTypes.length; i++) {
-			if (core.fileTypes[i].fileExtention == $(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").val()) {
+	if ($(".filetype_contents").find(".filetype_detail").find(".file_extension").length != 0){
+		for (var i = 0; i < core.filetypes.length; i++) {
+			if (core.filetypes[i].file_extension == $(".filetype_contents").find(".filetype_detail").find(".file_extension").val()) {
 				finded = true;
-				core.fileTypes[i].editor = $(".fileTypeContents").find(".fileTypeDetail").find(".editor").val();
-				core.fileTypes[i].type = $(".fileTypeContents").find(".fileTypeDetail").find(".type").val();
-				core.fileTypes[i].description = $(".fileTypeContents").find(".fileTypeDetail").find(".description").val();
+				core.filetypes[i].editor = $(".filetype_contents").find(".filetype_detail").find(".editor").val();
+				core.filetypes[i].type = $(".filetype_contents").find(".filetype_detail").find(".type").val();
+				core.filetypes[i].description = $(".filetype_contents").find(".filetype_detail").find(".description").val();
 			}
 		}
 		
-		if (finded == false && $(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").val() != "") {
+		if (finded == false && $(".filetype_contents").find(".filetype_detail").find(".file_extension").val() != "") {
 			var temp = {
-				"fileExtention":$(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").val(),
-				"editor":$(".fileTypeContents").find(".fileTypeDetail").find(".editor").val(),
-				"description":$(".fileTypeContents").find(".fileTypeDetail").find(".description").val(),
-				"type":$(".fileTypeContents").find(".fileTypeDetail").find(".type").val()
+				"file_extension":$(".filetype_contents").find(".filetype_detail").find(".file_extension").val(),
+				"editor":$(".filetype_contents").find(".filetype_detail").find(".editor").val(),
+				"description":$(".filetype_contents").find(".filetype_detail").find(".description").val(),
+				"type":$(".filetype_contents").find(".filetype_detail").find(".type").val()
 			}
-			core.fileTypes.push(temp);
-			$(".fileTypeContents").find(".fileTypeList").find(".newExt").html($(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").val());
-			var ext = $(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").val();
-			$(".fileTypeContents").find(".fileTypeList").find(".newExt").attr("id", ext);
+			core.filetypes.push(temp);
+			$(".filetype_contents").find(".filetype_list").find(".newExt").html($(".filetype_contents").find(".filetype_detail").find(".file_extension").val());
+			var ext = $(".filetype_contents").find(".filetype_detail").find(".file_extension").val();
+			$(".filetype_contents").find(".filetype_list").find(".newExt").attr("id", ext);
 		}
 	}
 })
 
-var getFileTypeInfo = function (ext, attr) {
+var get_filetype_info = function (ext, attr) {
 	
-	for (var i = 0; i < core.fileTypes.length; i++) {
-		if (core.fileTypes[i].fileExtention == ext) {
+	for (var i = 0; i < core.filetypes.length; i++) {
+		if (core.filetypes[i].file_extension == ext) {
 			if (attr == "editor")
-				return core.fileTypes[i].editor;
+				return core.filetypes[i].editor;
 			else if (attr == "description")
-				return core.fileTypes[i].description;
+				return core.filetypes[i].description;
 			else if (attr == "type")
-				return core.fileTypes[i].type;
+				return core.filetypes[i].type;
 		}
 	}
 };

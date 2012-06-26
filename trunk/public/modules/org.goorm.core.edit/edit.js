@@ -2,200 +2,44 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module edit
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class edit
- **/
 org.goorm.core.edit = function () {
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 **/
 	this.target = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property editor
-	 **/
 	this.editor = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property findReplace
-	 **/
-	this.findReplace = null;
-		
-	/**
-	 * This presents the current browser version
-	 * @property filepath
-	 * @type String
-	 **/
+	this.find_and_replace = null;
 	this.filepath = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property filename
-	 * @type String
-	 **/
 	this.filename = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property filetype
- 	 * @type String
-	 **/
 	this.filetype = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property stringProps
-	 * @type String
-	 **/
-	this.stringProps = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property arrayProps
-	 **/
-	this.arrayProps = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property funcProps
-	 **/
-	this.funcProps = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property keywords
-	 * @type String
-	 **/
+	this.string_props = null;
+	this.array_props = null;
+	this.func_props = null;
 	this.keywords = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property collaboration
-	 **/
 	this.collaboration = null;
-	
-	
-	/**
-	 * This presents the current browser version
-	 * @property theme
-	 **/
 	this.theme = "elegant"; //"default", "neat", "elegant", "night", "cobalt"
-	
-
-	/**
-	 * This presents the current browser version
-	 * @property mode
-	 **/
 	this.mode = "htmlmixed";
-	
-	/**
-	 * This presents the current browser version
-	 * @property indentUnit
-	 **/
-	this.indentUnit = 2;
-	
-	/**
-	 * This presents the current browser version
-	 * @property indentWithTabs
-	 **/
-	this.indentWithTabs = true;
-	
-	/**
-	 * This presents the current browser version
-	 * @property tabMode
-	 **/
-	this.tabMode = "classic";
-	
-	/**
-	 * This presents the current browser version
-	 * @property enterMode
-	 **/
-	this.enterMode = "indent";
-				
-	/**
-	 * This presents the current browser version
-	 * @property showLineNumbers
-	 **/
-	this.showLineNumbers = true;
-	
-	/**
-	 * This presents the current browser version
-	 * @property firstLineNumber
-	 **/
-	this.firstLineNumber = 1;
-
-	/**
-	 * This presents the current browser version
-	 * @property undoDepth
-	 **/
-	this.undoDepth = 40;
-	
-	/**
-	 * This presents the current browser version
-	 * @property highlightCurrentCursorLine
-	 **/
-	this.highlightCurrentCursorLine = true;
-
-	/**
-	 * This presents the current browser version
-	 * @property highlightedLine
-	 **/
-	this.highlightedLine = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property preference
-	 **/
+	this.indent_unit = 2;
+	this.indent_with_tabs = true;
+	this.tab_mode = "classic";
+	this.enter_mode = "indent";
+	this.show_line_numbers = true;
+	this.first_line_number = 1;
+	this.undo_depth = 40;
+	this.highlight_current_cursor_line = true;
+	this.highlighted_line = null;
 	this.preference = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property preference
-	 **/
-	this.contextMenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property timestamp
-	 **/
+	this.context_menu = null;
 	this.timestamp = null;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property fromCh
-	 **/
 	this.fromCh = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property fromCh
-	 **/
 	this.toCh = null;	
 };
 
 org.goorm.core.edit.prototype = {
-	
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {Object} target The target.
-	 **/
 	init: function (target, title) {
 		var self = this;
-		var dontUpdateFirst = 0;
+		var dont_update_first = 0;
 		
-		var enterKey = false; // onChange can't get enterkey
+		var enter_key = false; // onChange can't get enter_key
 		
 		this.collaboration = new org.goorm.core.collaboration.edit();
 		
@@ -206,10 +50,11 @@ org.goorm.core.edit.prototype = {
 				
 		this.timestamp = new Date().getTime();
 				
-		$(target).append("<textarea class='codeEditor'>Loading Data...</textarea>");
+		$(target).append("<textarea class='code_editor'>Loading Data...</textarea>");
 		//$(target).append("<textarea class='clipboardBuffer'></textarea>");
 		
-		this.editor = CodeMirror.fromTextArea($(target).find(".codeEditor")[0], {
+		
+		this.editor = CodeMirror.fromTextArea($(target).find(".code_editor")[0], {
 			lineNumbers: true,
 			matchBrackets: true,
 			onKeyEvent: function(i, e) {			
@@ -218,11 +63,11 @@ org.goorm.core.edit.prototype = {
 				if (e.keyCode == 32 && (e.ctrlKey || e.metaKey) && !e.altKey) {
 					e.stopPropagation();
 					e.preventDefault();
-					return core.dictionary.startComplete(self.editor, self.target, self.filetype);
+					return core.module.dictionary.start_complete(self.editor, self.target, self.filetype);
 				}
 				
 				if(e.type == "keydown" && e.keyIdentifier == "Enter"){
-					enterKey = true;
+					enter_key = true;
 					self.toCh = self.editor.getCursor(false);
 					self.fromCh = self.editor.getCursor(true);
 					return false;
@@ -249,23 +94,19 @@ org.goorm.core.edit.prototype = {
 				}
 			},
 			onChange: function(i, e){
-				if(dontUpdateFirst){
-					if(self.collaboration.updatingProcessRunning == false){
+				if(dont_update_first){
+					if(self.collaboration.updating_process_running == false){
 						var ev = e;
 						
-						if(enterKey == true) {
+						if(enter_key == true) {
 							var line=self.editor.getLine(ev.to.line);
-/*
-							console.log(self.fromCh);
-							console.log(self.toCh);
-							console.log(line);
-*/
+
 							ev.text[0]="\n";
 							ev.from.line = self.fromCh.line;
 							ev.to.line = self.toCh.line;
 							ev.from.ch = self.fromCh.ch;
 							ev.to.ch = self.toCh.ch;
-							self.collaboration.updateChange(ev);
+							self.collaboration.update_change(ev);
 							
 							ev.text[0]=line;
 							ev.from.line = ev.to.line+1;
@@ -285,65 +126,65 @@ org.goorm.core.edit.prototype = {
 								// ev.text[0]+=" ";
 							// }
 							
-/*
-							console.log(ev);
-*/
-							enterKey = false;
+							enter_key = false;
 						}
 						
 						
 						//self.editor.getCursor();
 						
-						if(core.isCollaborationON == true){
-							self.collaboration.updateChange(ev);
+						if(core.flag.collaboration_on == true){
+							self.collaboration.update_change(ev);
 						}
 					}
 				}
 				else{
-					dontUpdateFirst=1;
+					dont_update_first=1;
 				}
 			  
-			  	var windowManager = core.mainLayout.workSpace.windowManager;
+			  	var window_manager = core.module.layout.workspace.window_manager;
 			  
-			  	windowManager.window[windowManager.activeWindow].setModified();
+			  	window_manager.window[window_manager.active_window].set_modified();
 			  
-			  	windowManager.tab[windowManager.activeWindow].setModified();
+			  	window_manager.tab[window_manager.active_window].set_modified();
 			},
 			onCursorActivity: function () {
-				if (self.highlightCurrentCursorLine) {
-					self.editor.setLineClass(self.highlightedLine, null);
-					self.highlightedLine = self.editor.setLineClass(self.editor.getCursor().line, "activeline");
+				if (self.highlight_current_cursor_line) {
+					self.editor.setLineClass(self.highlighted_line, null);
+					self.highlighted_line = self.editor.setLineClass(self.editor.getCursor().line, "active_line");
 				}
 				
-				$(self.target).parent().parent().find(".ft").find(".editorMessage").html("Line: " + (parseInt(self.editor.getCursor().line) + 1) + " | Col: " + self.editor.getCursor().ch);
+				$(self.target).parent().parent().find(".ft").find(".editor_message").html("Line: " + (parseInt(self.editor.getCursor().line) + 1) + " | Col: " + self.editor.getCursor().ch);
 			},
 			onFocus: function () {
-				core.focusOnEditor = true;
+				core.status.focus_on_editor = true;
 			},
 			onBlur: function () {
-				core.focusOnEditor = false;				
+				core.status.focus_on_editor = false;				
 			}
 		});
 		
-		if (this.highlightCurrentCursorLine) {
-			this.highlightedLine = this.editor.setLineClass(0, "activeline");
+		
+		if (this.highlight_current_cursor_line) {
+			this.highlighted_line = this.editor.setLineClass(0, "active_line");
 		}
 		
-		this.collaboration.setEditor(this.editor);
 		
-		this.setDictionary();
+		//this.collaboration.set_editor(this.editor);
+		this.set_dictionary();
 		
-		this.setOption();
+		//this.set_option();
+		
+		
 		
 		//this.mode = "htmlmixed";
-		//this.editor.setOption("mode", this.mode);
+		//this.editor.set_option("mode", this.mode);
 
-		//this.toggleFullscreenEditing();
+		//this.toggle_fullscreen_editing();
 		
-		//var findReplace = new org.goorm.core.edit.findReplace(this.editor, $(target).find(".codeEditor")[0]);
-		//this.findReplace = new org.goorm.core.edit.findReplace();
-		//this.findReplace.init(this.editor);
-		//this.findReplace.init(this.editor, $(target));
+		//var findReplace = new org.goorm.core.edit.find_and_replace(this.editor, $(target).find(".code_editor")[0]);
+		//this.find_and_replace = new org.goorm.core.edit.find_and_replace();
+		//this.find_and_replace.init(this.editor);
+		//this.find_and_replace.init(this.editor, $(target));
 		
 		$(target).keypress(function (e) {
 			if (!(e.which == 115 && e.ctrlKey)) return true;
@@ -356,53 +197,44 @@ org.goorm.core.edit.prototype = {
 		
 		
 		$(document).bind("onPreferenceConfirm", function () {
-			self.setOption();
+			self.set_option();
 		});
 		
 		
-		this.contextMenu = new org.goorm.core.menu.context();
-		this.contextMenu.init("configs/menu/org.goorm.core.edit/edit.context.html", "edit.context", this.target, this.timestamp, null, function () {
+		this.context_menu = new org.goorm.core.menu.context();
+		this.context_menu.init("configs/menu/org.goorm.core.edit/edit.context.html", "edit.context", this.target, this.timestamp, null, function () {
 			core.module.action.init();
 		});
-		
-		
 	},
 	
-	resizeAll: function () {
+	resize_all: function () {
 
 	},	
 
-	setOption:function(){
-		this.indentUnit = parseInt(this.preference["preference.editor.indentUnit"]);
-		this.indentWithTabs = this.preference["preference.editor.indentWithTabs"];
-		this.tabMode = this.preference["preference.editor.tabMode"];
-		this.enterMode = this.preference["preference.editor.enterMode"];
-		this.showLineNumbers = this.preference["preference.editor.showLineNumbers"];
-		this.firstLineNumber = parseInt(this.preference["preference.editor.firstLineNumber"]);
-		this.undoDepth = parseInt(this.preference["preference.editor.undoDepth"]);
-		this.highlightCurrentCursorLine = this.preference["preference.editor.highlightCurrentCursorLine"];
+	set_option:function(){
+		this.indent_unit = parseInt(this.preference["preference.editor.indent_unit"]);
+		this.indent_with_tabs = this.preference["preference.editor.indent_with_tabs"];
+		this.tab_mode = this.preference["preference.editor.tab_mode"];
+		this.enter_mode = this.preference["preference.editor.enter_mode"];
+		this.show_line_numbers = this.preference["preference.editor.show_line_numbers"];
+		this.first_line_number = parseInt(this.preference["preference.editor.first_line_number"]);
+		this.undo_depth = parseInt(this.preference["preference.editor.undo_depth"]);
+		this.highlight_current_cursor_line = this.preference["preference.editor.highlight_current_cursor_line"];
 		this.theme = this.preference["preference.editor.theme"];
 		
 		//////////////////////////////////////////////////////////////
 		//Edit Settings
 		//////////////////////////////////////////////////////////////
-		this.editor.setOption("indentUnit", this.indentUnit);
-		this.editor.setOption("indentWithTabs", this.indentWithTabs);
-		this.editor.setOption("tabMode", this.tabMode);		
-		this.editor.setOption("enterMode", this.enterMode);
-		this.editor.setOption("showLineNumbers", this.showLineNumbers);
-		this.editor.setOption("firstLineNumber", this.firstLineNumber);
-		this.editor.setOption("undoDepth", this.undoDepth);
+		this.editor.setOption("indent_unit", this.indent_unit);
+		this.editor.setOption("indent_with_tabs", this.indent_with_tabs);
+		this.editor.setOption("tabMode", this.tab_mode);		
+		this.editor.setOption("enterMode", this.enter_mode);
+		this.editor.setOption("show_line_numbers", this.show_line_numbers);
+		this.editor.setOption("firstLineNumber", this.first_line_number);
+		this.editor.setOption("undoDepth", this.undo_depth);
 		this.editor.setOption("theme", this.theme);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method load 
-	 * @param {String} filepath The path where the file is.
-	 * @param {String} filename The name of the file.
-	 * @param {String} filetype The type of the file.
-	 **/
 	load: function (filepath, filename, filetype) {
 		var self = this;
 		
@@ -422,7 +254,7 @@ org.goorm.core.edit.prototype = {
 		var i = 0;
 		this.interval = window.setInterval(function () { if(i<100) { statusbar.progressbar.set('value', i+=10); } else { window.clearInterval(self.interval); } }, 100);
 		
-		statusbar.startLoading();
+		statusbar.start();
 		
 		$.ajax({
 			url: url,			
@@ -432,8 +264,8 @@ org.goorm.core.edit.prototype = {
 				self.editor.setValue(data);
 				
 				self.collaboration.init(self.target,self);
-				if(core.isCollaborationON == true){
-					self.collaboration.setEditOn();
+				if(core.flag.collaboration_on == true){
+					self.collaboration.set_edit_on();
 				}
 				statusbar.progressbar.set('value', 100);
 				
@@ -443,21 +275,17 @@ org.goorm.core.edit.prototype = {
 				
 				self.editor.clearHistory();
 				
-				statusbar.stopLoading();
+				statusbar.stop();
 				
-			  	var windowManager = core.mainLayout.workSpace.windowManager;
+			  	var window_manager = core.module.layout.workspace.window_manager;
 				
-			  	windowManager.window[windowManager.activeWindow].setSaved();
+			  	window_manager.window[window_manager.active_window].set_saved();
 			  
-				windowManager.tab[windowManager.activeWindow].setSaved();
+				window_manager.tab[window_manager.active_window].set_saved();
 			}
 		});
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method save
-	 **/
 	save: function (option) {
 		
 		var self = this;
@@ -473,7 +301,7 @@ org.goorm.core.edit.prototype = {
 			data: { path: path, data: data },
 			success: function(data) {
 
-				if(core.isCollaborationON == true){
+				if(core.flag.collaboration_on == true){
 					self.collaboration.socket.send('{"channel": "edit","action":"autoSaved", "identifier":"'+self.collaboration.identifier+'", "message":""}');
 				}
 			  
@@ -482,90 +310,63 @@ org.goorm.core.edit.prototype = {
 				
 				m.s("Save Complete! (" + time + ")", "editor");
 			  
-			  	var windowManager = core.mainLayout.workSpace.windowManager;
+			  	var window_manager = core.module.layout.workspace.window_manager;
 			  
-			  	windowManager.window[windowManager.activeWindow].setSaved();
+			  	window_manager.window[window_manager.active_window].set_saved();
 			  
-				windowManager.tab[windowManager.activeWindow].setSaved();
+				window_manager.tab[window_manager.active_window].set_saved();
 				
 				if (option=="close") {
-					windowManager.window[windowManager.activeWindow].close();
+					window_manager.window[window_manager.active_window].close();
 				}
 			}
 		});
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method saveAs 
-	 * @param {String} filepath The path where the file will be.
-	 * @param {String} filename The name of the file to be saved.
-	 * @param {String} filetype The type of the file to be saved.
-	 **/
-	saveAs: function (filepath, filename, filetype) {
+
+	save_as: function (filepath, filename, filetype) {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method setDictionary 
-	 **/
-	setDictionary: function () {
-		this.stringProps = ("charAt charCodeAt indexOf lastIndexOf substring substr slice trim trimLeft trimRight " +
+	set_dictionary: function () {
+		this.string_props = ("charAt charCodeAt indexOf lastIndexOf substring substr slice trim trimLeft trimRight " +
                      "toUpperCase toLowerCase split concat match replace search").split(" ");
-		this.arrayProps = ("length concat join splice push pop shift unshift slice reverse sort indexOf " +
-							"lastIndexOf every some filter forEach map reduce reduceRight ").split(" ");
-		this.funcProps = "prototype apply call bind".split(" ");
+		this.array_props = ("length concat join splice push pop shift unshift slice reverse sort indexOf " +
+							"lastIndexOf every some filter for_each map reduce reduceRight ").split(" ");
+		this.func_props = "prototype apply call bind".split(" ");
 		this.keywords = ("break case catch continue debugger default delete do else false finally for function " +
 						  "if in instanceof new null return switch throw true try typeof var void while with").split(" ");
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method stopEvent 
-	 **/
-	stopEvent: function () {
+	stop_event: function () {
 		if (this.preventDefault) {this.preventDefault(); this.stopPropagation();}
-		else {this.returnValue = false; this.cancelBubble = true;}
+		else {this.return_value = false; this.cancel_bubble = true;}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method addStop
-	 * @param {Event} event The event.
-	 * @return {Event} 
-	 **/
-	addStop: function (event) {
-		if (!event.stop) event.stop = this.stopEvent;
+	add_stop: function (event) {
+		if (!event.stop) event.stop = this.stop_event;
 		return event;
 	},
 
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method forEach 
-	 * @param {Object} arr Target array.
-	 * @param {Object} f 
-	 **/
-	forEach: function (arr, f) {
+	for_each: function (arr, f) {
 		for (var i = 0, e = arr.length; i < e; ++i) f(arr[i]);
 	},
 	
-	setMode: function (mode) {
+	set_mode: function (mode) {
 		this.editor.setOption("mode", mode);
 	},
 	
-	toggleFullscreenEditing: function () {
-        var editorDiv = $(this.target).find('.CodeMirror-scroll');
-        if (!editorDiv.hasClass('fullscreen')) {
-            this.toggleFullscreenEditing.beforeFullscreen = { height: editorDiv.height(), width: editorDiv.width() }
-            editorDiv.addClass('fullscreen');
-            editorDiv.height('100%');
-            editorDiv.width('100%');
+	toggle_fullscreen_editing: function () {
+        var editor_div = $(this.target).find('.CodeMirror-scroll');
+        if (!editor_div.hasClass('fullscreen')) {
+            this.toggle_fullscreen_editing.beforeFullscreen = { height: editor_div.height(), width: editor_div.width() }
+            editor_div.addClass('fullscreen');
+            editor_div.height('100%');
+            editor_div.width('100%');
             this.editor.refresh();
         }
         else {
-            editorDiv.removeClass('fullscreen');
-            editorDiv.height(this.toggleFullscreenEditing.beforeFullscreen.height);
-            editorDiv.width(this.toggleFullscreenEditing.beforeFullscreen.width);
+            editor_div.removeClass('fullscreen');
+            editor_div.height(this.toggle_fullscreen_editing.beforeFullscreen.height);
+            editor_div.width(this.toggle_fullscreen_editing.beforeFullscreen.width);
             this.editor.refresh();
         }
     },
@@ -574,10 +375,10 @@ org.goorm.core.edit.prototype = {
 		this.editor.undo();
 	},
 	
-	
 	redo: function () {
 		this.editor.redo();
 	},
+	
 	cut: function () {
 		this.copy();
 		this.editor.replaceSelection("");
@@ -599,14 +400,10 @@ org.goorm.core.edit.prototype = {
 				
 		$(this.target).find(".clipboardBuffer")[0].focus();
 		$(this.target).find(".clipboardBuffer")[0].select();
-		//console.log($(this.target).find(".CodeMirror").find("div:first").html());
 		//$(this.target).find(".CodeMirror").find("div:first").find("textarea:first").trigger(evt);
 		$(this.target).find(".clipboardBuffer").trigger(evt);
 		//$(this.editor.getWrapperElement()).trigger(evt);
 		
-			
-		
-		//console.log(evt);
 		*/
 	},
 		
@@ -614,13 +411,16 @@ org.goorm.core.edit.prototype = {
 		var selection = this.editor.getSelection();
 		localStorage["clipboard"] = selection;
 	},
+	
 	paste: function () {
 		this.editor.replaceSelection(localStorage["clipboard"]);
 	},
-	doDelete: function () {
+	
+	do_delete: function () {
 		this.editor.replaceSelection("");
 	},
-	selectAll: function () {
+	
+	select_all: function () {
 		this.editor.setSelection({"line":0,"ch":0},{"line":this.editor.lineCount(),"ch":0});
 	}	
 };

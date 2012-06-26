@@ -2,58 +2,16 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module design
  **/
 
-/**
- * This is an goorm code generator.  
- * <br>goorm starts with this code generator.
- * @class design
- **/
 org.goorm.core.design.canvas.toolbar = function () {
-	/**
-	 * This presents the current browser version
-	 * @property canvas
-	 **/
 	this.canvas = null;
-
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 **/
 	this.target = null; 
-	
-	/**
-	 * This presents the current browser version
-	 * @property isCollaborationON
-	 **/
-	this.isCollaborationON = false; 
-	
-	/**
-	 * This presents the current browser version
-	 * @property isPreviewOn
-	 **/
-	this.isPreviewOn = true;
-	
-	/**
-	 * This presents the current browser version
-	 * @property isPreviewOn
-	 **/
-	this.isRulerOn = true; 	
-	
-	/**
-	 * This presents the current browser version
-	 * @property isGridOn
-	 **/
-	this.isGridOn = true; 	
-
-	/**
-	 * This presents the current browser version
-	 * @property zoomLevel
-	 **/
-	this.zoomLevel = 100;
+	this.is_collaboration_on = false; 
+	this.is_preview_on = true;
+	this.is_ruler_on = true; 	
+	this.is_grid_on = true; 	
+	this.zoom_level = 100;
 };
 
 org.goorm.core.design.canvas.toolbar.prototype = {
@@ -63,92 +21,92 @@ org.goorm.core.design.canvas.toolbar.prototype = {
 		this.canvas = canvas;
 		this.target = canvas.target;
 		
-		$(this.target).parent().prepend("<div class='designToolbarContainer'></div>");
-		$(this.target).parent().append("<div class='designPreviewContainer'></div>");
-		//$(this.target).append("<div class='designStatusContainer'></div>");
+		$(this.target).parent().prepend("<div class='design_toolbar_container'></div>");
+		$(this.target).parent().append("<div class='design.preview_container'></div>");
+		//$(this.target).append("<div class='design_status_container'></div>");
 		
-		$(this.target).parent().find(".designToolbarContainer").append("<img src='images/org.goorm.core.design/grid.png' action='gridOnOff' class='toolbarButton toolbarButtonPressed' border='0' />"); 
-		$(this.target).parent().find(".designToolbarContainer").append("<img src='images/org.goorm.core.design/grid-snap.png' action='snapToGrid' class='toolbarButton' border='0' />"); 
-		$(this.target).parent().find(".designToolbarContainer").append("<img src='images/org.goorm.core.design/resize.png' action='resize' class='toolbarButton' border='0' />"); 
-		$(this.target).parent().find(".designToolbarContainer").append("<img src='images/org.goorm.core.design/printer.png' class='toolbarButton' border='0' />"); 
-		$(this.target).parent().find(".designToolbarContainer").append("<img src='images/org.goorm.core.design/ruler_onoff.png' action='rulerOnOff' class='toolbarButton toolbarButtonPressed' border='0' />"); 
-		$(this.target).parent().find(".designToolbarContainer").append("<img src='images/org.goorm.core.design/share.png' action='collaborationOnOff' class='toolbarButton' border='0' />");
-		$(this.target).parent().find(".designToolbarContainer").append("<img src='images/org.goorm.core.design/preview.png' action='previewOnOff' class='toolbarButton toolbarButtonPressed' border='0' />"); 
-		$(this.target).parent().find(".designToolbarContainer").append("<img src='images/org.goorm.core.design/zoom-fit.png' action='zoomFit' class='toolbarButton' border='0' />"); 
-		$(this.target).parent().find(".designToolbarContainer").append("<img src='images/org.goorm.core.design/zoom-in.png' action='zoomIn' class='toolbarButton' border='0' />"); 
-		$(this.target).parent().find(".designToolbarContainer").append("<img src='images/org.goorm.core.design/zoom-out.png' action='zoomOut' class='toolbarButton' border='0' />"); 
+		$(this.target).parent().find(".design_toolbar_container").append("<img src='images/org.goorm.core.design/grid.png' action='gridOnOff' class='toolbar_button toolbar_buttonPressed' border='0' />"); 
+		$(this.target).parent().find(".design_toolbar_container").append("<img src='images/org.goorm.core.design/grid-snap.png' action='snap_to_grid' class='toolbar_button' border='0' />"); 
+		$(this.target).parent().find(".design_toolbar_container").append("<img src='images/org.goorm.core.design/resize.png' action='resize' class='toolbar_button' border='0' />"); 
+		$(this.target).parent().find(".design_toolbar_container").append("<img src='images/org.goorm.core.design/printer.png' class='toolbar_button' border='0' />"); 
+		$(this.target).parent().find(".design_toolbar_container").append("<img src='images/org.goorm.core.design/ruler_onoff.png' action='rulerOnOff' class='toolbar_button toolbar_buttonPressed' border='0' />"); 
+		$(this.target).parent().find(".design_toolbar_container").append("<img src='images/org.goorm.core.design/share.png' action='collaborationOnOff' class='toolbar_button' border='0' />");
+		$(this.target).parent().find(".design_toolbar_container").append("<img src='images/org.goorm.core.design/preview.png' action='previewOnOff' class='toolbar_button toolbar_buttonPressed' border='0' />"); 
+		$(this.target).parent().find(".design_toolbar_container").append("<img src='images/org.goorm.core.design/zoom-fit.png' action='zoomFit' class='toolbar_button' border='0' />"); 
+		$(this.target).parent().find(".design_toolbar_container").append("<img src='images/org.goorm.core.design/zoom-in.png' action='zoomIn' class='toolbar_button' border='0' />"); 
+		$(this.target).parent().find(".design_toolbar_container").append("<img src='images/org.goorm.core.design/zoom-out.png' action='zoomOut' class='toolbar_button' border='0' />"); 
 		
-		$(this.target).parent().find(".designToolbarContainer").append("<div style='float:right; width:150px; text-align:right; padding-top:2px;'><select class='zoomLevelSelector'><option value='25'>25%</option><option value='50'>50%</option><option value='75'>75%</option><option value='100' selected=true>100%</option><option value='150'>150%</option><option value='200'>200%</option><option value='400'>400%</option><option value='800'>800%</option><option value='1600'>1600%</option></select></div>"); 
+		$(this.target).parent().find(".design_toolbar_container").append("<div style='float:right; width:150px; text-align:right; padding-top:2px;'><select class='zoom_levelSelector'><option value='25'>25%</option><option value='50'>50%</option><option value='75'>75%</option><option value='100' selected=true>100%</option><option value='150'>150%</option><option value='200'>200%</option><option value='400'>400%</option><option value='800'>800%</option><option value='1600'>1600%</option></select></div>"); 
 		
-		$(this.target).parent().find(".zoomLevelSelector").change(function () {
+		$(this.target).parent().find(".zoom_levelSelector").change(function () {
 			self.zoom($(this).val());
 		});		
 
-		$(this.target).parent().find(".designToolbarContainer").find("img[action='gridOnOff']").click(function () {
-			self.toggleGrid();
+		$(this.target).parent().find(".design_toolbar_container").find("img[action='gridOnOff']").click(function () {
+			self.toggle_grid();
 		});
 
-		$(this.target).parent().find(".designToolbarContainer").find("img[action='snapToGrid']").click(function () {
-			self.toggleSnapToGrid();
+		$(this.target).parent().find(".design_toolbar_container").find("img[action='snap_to_grid']").click(function () {
+			self.toggle_snap_to_grid();
 		});
 		
-		$(this.target).parent().find(".designToolbarContainer").find("img[action='resize']").click(function () {			
+		$(this.target).parent().find(".design_toolbar_container").find("img[action='resize']").click(function () {			
 			self.canvas.dialog.panel.show();
 		});
 		
-//		$(this.target).find(".designToolbarContainer").find("img[action='collaborationOnOff']").click(function () {
-//			if (self.isCollaborationON) {
-//				self.isCollaborationON = false;
+//		$(this.target).find(".design_toolbar_container").find("img[action='collaborationOnOff']").click(function () {
+//			if (self.is_collaboration_on) {
+//				self.is_collaboration_on = false;
 //				
 //				//TO-DO: Change to event-based
-//				self.canvas.setCollaborationOff();
-//				$(self.target).find(".designToolbarContainer").find("img[action='collaborationOnOff']").removeClass("toolbarButtonPressed");
+//				self.canvas.set_collaboration_off();
+//				$(self.target).find(".design_toolbar_container").find("img[action='collaborationOnOff']").removeClass("toolbar_buttonPressed");
 //			}
 //			else {
-//				self.isCollaborationON = true;
-//				self.canvas.setCollaborationOn();
-//				$(self.target).find(".designToolbarContainer").find("img[action='collaborationOnOff']").addClass("toolbarButtonPressed");
+//				self.is_collaboration_on = true;
+//				self.canvas.set_collaboration_on();
+//				$(self.target).find(".design_toolbar_container").find("img[action='collaborationOnOff']").addClass("toolbar_buttonPressed");
 //			}
 //		});
 		
-		$(this.target).parent().find(".designToolbarContainer").find("img[action='previewOnOff']").click(function () {
-			self.togglePreview();
+		$(this.target).parent().find(".design_toolbar_container").find("img[action='previewOnOff']").click(function () {
+			self.toggle_preview();
 		});
 		
-		$(this.target).parent().find(".designToolbarContainer").find("img[action='rulerOnOff']").click(function () {
-			self.toggleRuler();
+		$(this.target).parent().find(".design_toolbar_container").find("img[action='rulerOnOff']").click(function () {
+			self.toggle_ruler();
 		});
 		
-		$(this.target).parent().find(".designToolbarContainer").find("img[action='zoomFit']").click(function () {
+		$(this.target).parent().find(".design_toolbar_container").find("img[action='zoomFit']").click(function () {
 			self.zoomFit();
 		});
 		
-		$(this.target).parent().find(".designToolbarContainer").find("img[action='zoomIn']").click(function () {
+		$(this.target).parent().find(".design_toolbar_container").find("img[action='zoomIn']").click(function () {
 			self.zoomIn();
 		});
 		
-		$(this.target).parent().find(".designToolbarContainer").find("img[action='zoomOut']").click(function () {
+		$(this.target).parent().find(".design_toolbar_container").find("img[action='zoomOut']").click(function () {
 			self.zoomOut();
 		});
 		
 		
-		//$(this.target).find(".designStatusContainer").append("<img src='images/org.goorm.core.design/line.png' class='lineDrawing toolbarButton' border='0' />");
-		//$(this.target).find(".designStatusContainer").append("<img src='images/org.goorm.core.design/shape.png' class='squareDrawing toolbarButton' border='0' />"); 
+		//$(this.target).find(".design_status_container").append("<img src='images/org.goorm.core.design/line.png' class='lineDrawing toolbar_button' border='0' />");
+		//$(this.target).find(".design_status_container").append("<img src='images/org.goorm.core.design/shape.png' class='squareDrawing toolbar_button' border='0' />"); 
 		
 	},
 	
 	zoom: function(value) {
 		if (0< value && value < 1600) {
-			this.zoomLevel = value;
+			this.zoom_level = value;
 		}
 		
-		$(this.target).find(".space").css("zoom", this.zoomLevel + "%");	
-		$(this.target).find(".skin").css("zoom", this.zoomLevel + "%");	
-		$(this.target).find(".canvas").css("zoom", this.zoomLevel + "%");	
+		$(this.target).find(".space").css("zoom", this.zoom_level + "%");	
+		$(this.target).find(".skin").css("zoom", this.zoom_level + "%");	
+		$(this.target).find(".canvas").css("zoom", this.zoom_level + "%");	
 	},
 	
 	zoomFit: function() {
-		this.zoomLevel = 100;
+		this.zoom_level = 100;
 		
 		$(this.target).find(".space").css("zoom", "100%");	
 		$(this.target).find(".skin").css("zoom", "100%");	
@@ -156,98 +114,94 @@ org.goorm.core.design.canvas.toolbar.prototype = {
 	},
 	
 	zoomIn: function() {
-		if (this.zoomLevel < 1600) {
-			this.zoomLevel += 10;
+		if (this.zoom_level < 1600) {
+			this.zoom_level += 10;
 		}
 		
-		$(this.target).find(".space").css("zoom", this.zoomLevel + "%");	
-		$(this.target).find(".skin").css("zoom", this.zoomLevel + "%");	
-		$(this.target).find(".canvas").css("zoom", this.zoomLevel + "%");	
+		$(this.target).find(".space").css("zoom", this.zoom_level + "%");	
+		$(this.target).find(".skin").css("zoom", this.zoom_level + "%");	
+		$(this.target).find(".canvas").css("zoom", this.zoom_level + "%");	
 	},	
 
 	zoomOut: function() {
-		if (this.zoomLevel >= 20) {
-			this.zoomLevel -= 10;
+		if (this.zoom_level >= 20) {
+			this.zoom_level -= 10;
 		}
 		
-		$(this.target).find(".space").css("zoom", this.zoomLevel + "%");	
-		$(this.target).find(".skin").css("zoom", this.zoomLevel + "%");	
-		$(this.target).find(".canvas").css("zoom", this.zoomLevel + "%");	
+		$(this.target).find(".space").css("zoom", this.zoom_level + "%");	
+		$(this.target).find(".skin").css("zoom", this.zoom_level + "%");	
+		$(this.target).find(".canvas").css("zoom", this.zoom_level + "%");	
 	},		
 	
-	togglePreview: function() {
+	toggle_preview: function() {
 		var self = this;
-		if (self.isPreviewOn) {
-			self.isPreviewOn = false;
-			$(self.target).parent().find(".designToolbarContainer").find("img[action='previewOnOff']").removeClass("toolbarButtonPressed");
-			$(self.target).parent().find(".designPreviewContainer").hide();
+		if (self.is_preview_on) {
+			self.is_preview_on = false;
+			$(self.target).parent().find(".design_toolbar_container").find("img[action='previewOnOff']").removeClass("toolbar_buttonPressed");
+			$(self.target).parent().find(".design.preview_container").hide();
 		}
 		else {
-			self.isPreviewOn = true;
-			$(self.target).parent().find(".designToolbarContainer").find("img[action='previewOnOff']").addClass("toolbarButtonPressed");
-			$(self.target).parent().find(".designPreviewContainer").show();
+			self.is_preview_on = true;
+			$(self.target).parent().find(".design_toolbar_container").find("img[action='previewOnOff']").addClass("toolbar_buttonPressed");
+			$(self.target).parent().find(".design.preview_container").show();
 		}
 	},
 	
-	toggleRuler: function() {
+	toggle_ruler: function() {
 		var self = this;
-		if (self.isRulerOn) {
-			self.isRulerOn = false;
-			$(self.target).parent().find(".designToolbarContainer").find("img[action='rulerOnOff']").removeClass("toolbarButtonPressed");
+		if (self.is_ruler_on) {
+			self.is_ruler_on = false;
+			$(self.target).parent().find(".design_toolbar_container").find("img[action='rulerOnOff']").removeClass("toolbar_buttonPressed");
 			self.canvas.parent.ruler.show(false);
 		}
 		else {
-			self.isRulerOn = true;
-			$(self.target).parent().find(".designToolbarContainer").find("img[action='rulerOnOff']").addClass("toolbarButtonPressed");
+			self.is_ruler_on = true;
+			$(self.target).parent().find(".design_toolbar_container").find("img[action='rulerOnOff']").addClass("toolbar_buttonPressed");
 			self.canvas.parent.ruler.show(true);
 		}
 		
-		console.log("3");
-		self.canvas.parent.resizeAll();
+		self.canvas.parent.resize_all();
 	},
 	
-	toggleSnapToGrid: function() {
+	toggle_snap_to_grid: function() {
 		var self = this;
-		console.log("toggleSnapToGrid");
-		if (self.canvas.snapToGrid) {
-			console.log("set false");
-			self.canvas.snapToGrid = false;
-			$(self.target).parent().find(".designToolbarContainer").find("img[action='snapToGrid']").removeClass("toolbarButtonPressed");
+		if (self.canvas.snap_to_grid) {
+			self.canvas.snap_to_grid = false;
+			$(self.target).parent().find(".design_toolbar_container").find("img[action='snap_to_grid']").removeClass("toolbar_buttonPressed");
 		}
 		else {
-			console.log("set true");
-			self.canvas.snapToGrid = true;
-			$(self.target).parent().find(".designToolbarContainer").find("img[action='snapToGrid']").addClass("toolbarButtonPressed");
+			self.canvas.snap_to_grid = true;
+			$(self.target).parent().find(".design_toolbar_container").find("img[action='snap_to_grid']").addClass("toolbar_buttonPressed");
 		}
 	},
 	
-	toggleGrid: function() {
+	toggle_grid: function() {
 		var self = this;
-		if (self.isGridOn) {
-			self.isGridOn = false;
+		if (self.is_grid_on) {
+			self.is_grid_on = false;
 			$(self.target).find(".grid").css("display", "none");
-			$(self.target).find(".designToolbarContainer").find("img[action='gridOnOff']").removeClass("toolbarButtonPressed");
+			$(self.target).find(".design_toolbar_container").find("img[action='gridOnOff']").removeClass("toolbar_buttonPressed");
 		}
 		else {
-			self.isGridOn = true;
+			self.is_grid_on = true;
 			$(self.target).find(".grid").css("display", "block");
-			$(self.target).find(".designToolbarContainer").find("img[action='gridOnOff']").addClass("toolbarButtonPressed");
+			$(self.target).find(".design_toolbar_container").find("img[action='gridOnOff']").addClass("toolbar_buttonPressed");
 		}
 	},
 	
-	changeGridUnit: function(size) {
+	change_grid_unit: function(size) {
 		var self = this;
 		$(self.target).find(".grid").css("background-image","url(images/org.goorm.core.design/grid_"+size+"px.png)");
 	},
 	
-	changeGridOpacity: function(opacity) {
+	change_grid_opacity: function(opacity) {
 		var self = this;
 		$(self.target).find(".grid").css("-moz-opacity",opacity);
 		$(self.target).find(".grid").css("filter","alpha(opacity="+(opacity*100)+")");
 		$(self.target).find(".grid").css("opacity",opacity);
 	},
 	
-	changeRulerUnit: function(unit) {
+	change_ruler_unit: function(unit) {
 		var self = this;
 		$(self.target).parent().find(".ruler_x").css("background-image","url(images/org.goorm.core.design/ruler_"+unit+"_x.png)");
 		$(self.target).parent().find(".ruler_y").css("background-image","url(images/org.goorm.core.design/ruler_"+unit+"_y.png)");

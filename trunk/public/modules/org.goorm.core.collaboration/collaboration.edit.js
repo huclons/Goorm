@@ -80,11 +80,11 @@ org.goorm.core.collaboration.edit = function () {
 	
 	/**
 	 * This presents the current browser version
-	 * @property updatingProcessRunning
+	 * @property updating_process_running
 	 * @type Object
 	 * @default null
 	 **/
-	this.updatingProcessRunning = false;
+	this.updating_process_running = false;
 	
 	/**
 	 * This presents the current browser version
@@ -153,15 +153,15 @@ org.goorm.core.collaboration.edit.prototype = {
 		*/
 	},
 	
-	setEditOn: function(){
+	set_edit_on: function(){
 		var self=this;
 
 		var checkForUpdates = function() {
 			
-			while(self.taskQueue.length > 0 && self.updatingProcessRunning == false) {
+			while(self.taskQueue.length > 0 && self.updating_process_running == false) {
 				var current_update = self.taskQueue.shift(); 
 				
-				self.updatingProcessRunning = true;
+				self.updating_process_running = true;
 				
 				self.applyUpdate(current_update["payload"]["action"], current_update["payload"]);
 			}
@@ -169,7 +169,7 @@ org.goorm.core.collaboration.edit.prototype = {
 		
 		
 		//Client Socket Methods
- 		this.socket = new WebSocket(core.dialogPreference.ini['CollaborationServerURL']+":"+core.dialogPreference.ini['CollaborationServerPort']);
+ 		this.socket = new WebSocket(core.dialog.preference.ini['collaboration_server_url']+":"+core.dialog.preference.ini['collaboration_server_port']);
  		
  		this.socket.onopen = function(){
  			self.status=1;
@@ -179,15 +179,15 @@ org.goorm.core.collaboration.edit.prototype = {
  		this.socket.onclose = function(){
  			// if server not open, socket.onopen is not called. so if status != 1, then server is not opened 
  			if(self.status != 1) {
-				core.isCollaborationON = true;
-	 			$("a[action=collaborationEditOnOff]").click();
+				core.flag.collaboration_on = true;
+	 			$("a[action=collaboration_edit_on_off]").click();
 	 			alert.show("Collaboration server is not opened!");
 			}
 			self.status = 0;
  		}
  		
  		$(window).unload(function() {
- 			self.setEditOff();
+ 			self.set_edit_off();
  		});
 
  		this.socket.onmessage = function(ev){
@@ -245,7 +245,7 @@ org.goorm.core.collaboration.edit.prototype = {
 			}
 		});
 	},
-	setEditOff:function(){
+	set_edit_off:function(){
 		var self=this;
 		//Unset Callback Function for Listening from Collaboration Server
 		if( this.socket != null && this.socket.readyState == 1){
@@ -269,12 +269,12 @@ org.goorm.core.collaboration.edit.prototype = {
 	    return editable_content;
 	},
 	
-	updateChange: function(data){
+	update_change: function(data){
 		var self = this;
 		if(this.socket != null){
 			if(this.socket.readyState != 1) {
-				core.isCollaborationON = true;
-	 			$("a[action=collaborationEditOnOff]").click();
+				core.flag.collaboration_on = true;
+	 			$("a[action=collaboration_edit_on_off]").click();
 	 			alert.show("Collaboration server is disconnected!");
 	 			return false;
 			}
@@ -329,7 +329,7 @@ org.goorm.core.collaboration.edit.prototype = {
 		}
 		this.editor.replaceRange(textStr, content.from, content.to);
 		
-		this.updatingProcessRunning = false;
+		this.updating_process_running = false;
 		
 		////console.log("added a line : " + content); 
 	},
@@ -372,7 +372,7 @@ org.goorm.core.collaboration.edit.prototype = {
 			"content": payload["message"]["content"]
 		};
 	
-		this.updatingProcessRunning = false;
+		this.updating_process_running = false;
 	},
 	
 	/**
@@ -396,7 +396,7 @@ org.goorm.core.collaboration.edit.prototype = {
 			"user_id": this.userID
 		});
 		
-		this.updatingProcessRunning = false;
+		this.updating_process_running = false;
 	},
 	
 	/**
@@ -415,7 +415,7 @@ org.goorm.core.collaboration.edit.prototype = {
 		line.remove();
 		delete this.storedLines[uuid];
 		
-		this.updatingProcessRunning = false;
+		this.updating_process_running = false;
 	},
 	
 	/**

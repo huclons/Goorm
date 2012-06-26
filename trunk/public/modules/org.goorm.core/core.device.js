@@ -1,71 +1,70 @@
 org.goorm.core.device = function() {
-	
+	this.os = "";
+	this.type = "";
 };
 
 org.goorm.core.device.prototype = {
-	get: function () {
+	init: function () {
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
-		// Get the device type / osType / isTouchDevice
+		// Get the device type / osType / is_touchable_device
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		var isiPad = navigator.userAgent.match(/iPad/i) != null;
-		var isiPhone = navigator.userAgent.match(/iPhone/i) != null;
-		var isiPod = navigator.userAgent.match(/iPod/i) != null;
-		var isAndroid = navigator.userAgent.match(/Android/i) != null;
-		var isWebOS = navigator.userAgent.match(/webOS/i) != null;
+		var is_ipad = navigator.userAgent.match(/iPad/i) != null;
+		var is_iphone = navigator.userAgent.match(/iPhone/i) != null;
+		var is_ipod = navigator.userAgent.match(/iPod/i) != null;
+		var is_android = navigator.userAgent.match(/Android/i) != null;
+		var is_webos = navigator.userAgent.match(/webOS/i) != null;
 		
 		
 		var result = {};
 
-		if(isiPad) {
-			$('.deviceType').html("iPad");
+		if(is_ipad) {
+			$('.device_type').html("iPad");
 			
-			result.deviceType = "iPad";
-			result.osType = "iOS";
+			this.type = "iPad";
+			this.os = "iOS";
 		}
-		else if(isiPhone) {
-			$('.deviceType').html("iPhone");
+		else if(is_iphone) {
+			$('.device_type').html("iPhone");
 			
-			result.deviceType = "iPhone";
-			result.osType = "iOS";			
+			this.type = "iPhone";
+			this.os = "iOS";			
 		}
-		else if(isiPod) {		
-			$('.deviceType').html("iPod");
+		else if(is_ipod) {		
+			$('.device_type').html("iPod");
 			
-			result.deviceType = "iPod";
-			result.osType = "iOS";			
+			this.type = "iPod";
+			this.os = "iOS";			
 		}
-		else if(isAndroid) {		
-			$('.deviceType').html("iPod");
+		else if(is_android) {		
+			$('.device_type').html("iPod");
 			
-			result.deviceType = "Android";
-			result.osType = "Android";			
+			this.type = "Android";
+			this.os = "Android";			
 		}	
-		else if(isWebOS) {		
-			$('.deviceType').html("webOS");
+		else if(is_webos) {		
+			$('.device_type').html("webOS");
 			
-			result.deviceType = "webOS";
-			result.osType = "webOS";			
+			this.type = "webOS";
+			this.os = "webOS";			
 		}		
 		else {
-			$('.deviceType').html("PC");
+			$('.device_type').html("PC");
 			
-			result.deviceType = "PC";
+			this.type = "PC";
 			
 			if (navigator.appVersion.indexOf("Win") != -1) {
-				result.osType = "Windows";
+				this.os = "windows";
 			}
 			if (navigator.appVersion.indexOf("Mac") != -1) {
-				result.osType = "MacOS";
+				this.os = "MacOS";
 			}
 			if (navigator.appVersion.indexOf("X11") != -1) {
-				result.osType = "UNIX";
+				this.os = "UNIX";
 			}
 			if (navigator.appVersion.indexOf("Linux") != -1) {
-				result.osType = "Linux";
+				this.os = "Linux";
 			}
 		}
-
-		return result;
 	}
 };

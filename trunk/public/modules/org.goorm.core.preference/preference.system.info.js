@@ -1,8 +1,8 @@
 org.goorm.core.preference.info = function (){
 	this.browser = name;
-	this.browserVersion = 0;
+	this.version = 0;
 	this.version = 3.0;
-	this.isiPad = false;
+	this.is_ipad = false;
 	this.os=null;
 };
 
@@ -15,10 +15,10 @@ org.goorm.core.preference.info.prototype = {
 			url: "configs/server.xml", 
 			data: "arg=L", 
 			success: function(xml) {
-				$("#sosV").append($(xml).find("OS").attr("version"));
-				$("#apacheV").append($(xml).find("Apache").attr("version"));
-				$("#phpV").append($(xml).find("PHP").attr("version"));
-				$("#redisV").append($(xml).find("Redis").attr("version"));
+				$("#server_osV").append($(xml).find("OS").attr("version"));
+				$("#apache_version").append($(xml).find("Apache").attr("version"));
+				$("#php_version").append($(xml).find("PHP").attr("version"));
+				$("#redis_version").append($(xml).find("Redis").attr("version"));
 				$("#nodeV").append($(xml).find("Node").attr("version"));
 			}
 		});
@@ -29,15 +29,15 @@ org.goorm.core.preference.info.prototype = {
 			url: "configs/goorm.xml", 
 			data: "arg=L", 
 			success: function(xml) {
-				$("#coreV").append($(xml).find("version").text());
-				$("#yuiV").append($(xml).find("YUI").attr("version"));
-				$("#jqueryV").append($(xml).find("jQuery").attr("version"));
-				$("#codemirrorV").append($(xml).find("CodeMirror").attr("version"));
+				$("#core_version").append($(xml).find("version").text());
+				$("#yui_version").append($(xml).find("YUI").attr("version"));
+				$("#jquery_version").append($(xml).find("jQuery").attr("version"));
+				$("#codemirror_version").append($(xml).find("CodeMirror").attr("version"));
 			}
 		});
 		
 		if (navigator.appVersion.indexOf("Win")!=-1) 
-			this.os="Windows";
+			this.os="windows";
 		else if (navigator.appVersion.indexOf("Mac")!=-1) 
 			this.os="MacOS";
 		else if (navigator.appVersion.indexOf("X11")!=-1) 
@@ -60,14 +60,14 @@ org.goorm.core.preference.info.prototype = {
 		else
 			this.browser = "Unknown";
 
-		this.browserVersion = $.browser.version;
+		this.version = $.browser.version;
 		
 		//Need for device identification
-		this.isiPad = navigator.userAgent.match(/iPad/i) != null;
+		this.is_ipad = navigator.userAgent.match(/iPad/i) != null;
 		
 		$("#cos").append(this.os);
-		$("#browser").append(this.browser+" ("+this.browserVersion+")");		
-		if(this.isiPad) {
+		$("#browser").append(this.browser+" ("+this.version+")");		
+		if(this.is_ipad) {
 			$("#device").append("iPad");
 		}
 		else {

@@ -102,7 +102,7 @@ CodeMirror.defineMode("pascal", function(config) {
     startState: function(basecolumn) {
       return {
         tokenize: null,
-        context: new Context((basecolumn || 0) - config.indentUnit, 0, "top", false),
+        context: new Context((basecolumn || 0) - config.indent_unit, 0, "top", false),
         indented: 0,
         startOfLine: true
       };

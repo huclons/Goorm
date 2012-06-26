@@ -2,67 +2,23 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module project
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class property
- * @extends project
- **/
 org.goorm.core.project.property = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 * @type Object
-	 * @default null
-	 **/
 	this.dialog = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property tabView
-	 * @type Object
-	 * @default null
-	 **/
-	this.tabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property treeView
-	 * @type Object
-	 * @default null
-	 **/
-
-	this.treeView = null;
-	/**
-	 * The array object that contains the information about buttons on the bottom of a dialog 
-	 * @property buttons
-	 * @type Object
-	 * @default null
-	 **/
+	this.tabview = null;
+	this.treeview = null;
 	this.buttons = null;
-	
 	this.manager = null;
-	
 	this.property = null;
-	
 	this.plugin = null;
 };
 
 org.goorm.core.project.property.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor
-	 **/
 	init: function () { 
 		var self = this;
 		this.manager = new org.goorm.core.project.property.manager();
-		this.manager.xmlParser("configs/project/property/default.xml");
+		this.manager.xml_parser("configs/project/property/default.xml");
 		this.xml=this.manager.xml;
 		
 		this.property = new Object();
@@ -71,11 +27,11 @@ org.goorm.core.project.property.prototype = {
 		this.dialog = new org.goorm.core.project.property.dialog();
 		
 		// Handler for OK button
-		var handleOk = function() {
+		var handle_ok = function() {
 			var valid = 1;
 			
 			// For input elements, validate values and put them into 'postdata'
-			$("#propertyTabview").find("input").each(function(){
+			$("#property_tabview").find("input").each(function(){
 				
 				var input = $(this);
 				if ($(this).attr("validate")){
@@ -102,7 +58,7 @@ org.goorm.core.project.property.prototype = {
 				}
 			});
 			// For textarea elements, validate values and put them into 'postdata'
-			$("#propertyTabview").find("textarea").each(function(){
+			$("#property_tabview").find("textarea").each(function(){
 				var str = $(this).val();
 				
 				if(valid){
@@ -110,23 +66,23 @@ org.goorm.core.project.property.prototype = {
 				}
 			});
 			
-			$("#propertyTabview").find("select").each(function(){
+			$("#property_tabview").find("select").each(function(){
 				self.property[$(this).attr("name")]=$(this).text();
 			});
 			// If all values are valid, call php function to save them in project.xml
 			if(valid) {
-				self.saveProjectXml();
+				self.save_project_xml();
 				this.hide();
 			}
 		};
 
-		var handleCancel = function() { 
+		var handle_cancel = function() { 
 			this.hide();
-			self.setBefore(); 
+			self.set_before(); 
 		};
 		
-		this.buttons = [ {text:"OK", handler:handleOk, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}]; 
+		this.buttons = [ {text:"OK", handler:handle_ok, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}]; 
 						 
 		this.dialog = new org.goorm.core.project.property.dialog();
 		this.dialog.init({
@@ -138,28 +94,28 @@ org.goorm.core.project.property.prototype = {
 			buttons:this.buttons,
 			success: function () {
 				// On the right side of dialog
-				self.manager.createTreeView(self.xml);
+				self.manager.create_treeview(self.xml);
 
 				// Plugin setting
-				for (var i=0;i < core.module.plugin_manager.pluginList.length; i++){
+				for (var i=0;i < core.module.plugin_manager.list.length; i++){
 										
-					var pluginName=core.module.plugin_manager.pluginList[i].pluginName;
-					self.manager.xmlParser('plugins/' + pluginName + '/config.xml');
-					pluginName = $(self.manager.xml).find("plugin").attr("name");
+					var plugin_name=core.module.plugin_manager.list[i].plugin_name;
+					self.manager.xml_parser('plugins/' + plugin_name + '/config.xml');
+					plugin_name = $(self.manager.xml).find("plugin").attr("name");
 				
-					self.plugin[pluginName] = new self.manager.plugin(core.module.plugin_manager.pluginList[i].pluginName);
-					self.plugin[pluginName].xml = self.manager.xml;
+					self.plugin[plugin_name] = new self.manager.plugin(core.module.plugin_manager.list[i].plugin_name);
+					self.plugin[plugin_name].xml = self.manager.xml;
 				}
 					
-				$("#propertyTabview #Information").show();
+				$("#property_tabview #Information").show();
 
 				// TreeView labelClick function
-				self.manager.treeView.subscribe("clickEvent", function(nodedata){
+				self.manager.treeview.subscribe("clickEvent", function(nodedata){
 					var label = nodedata.node.label;
 					label = label.replace(/[/#. ]/g,"");
 					
-					$("#propertyTabview").children().hide();
-					$("#propertyTabview #property_"+label).show();
+					$("#property_tabview").children().hide();
+					$("#property_tabview #property_"+label).show();
 				});
 			}
 		});
@@ -167,65 +123,53 @@ org.goorm.core.project.property.prototype = {
 		
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method show 
-	 **/
 	show: function () {
 		var self = this;
-		if(core.currentProjectPath != null && core.currentProjectPath != ""){
-			this.setProjectInformation();
+		if(core.status.current_project_path != null && core.status.current_project_path != ""){
+			this.set_project_information();
 			this.dialog.panel.show();
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method refreshToolBox 
-	 **/
-	refreshToolBox: function () {
+	refresh_toolbox: function () {
 
 		$(".toolsets").css("display", "none");
 		
-		var activeFileType = null;
+		var active_file_type = null;
 		
-		if (core.module.layout.workSpace.windowManager.activeWindow > -1) {
-			activeFileType = core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].filetype;
+		if (core.module.layout.workspace.window_manager.active_window > -1) {
+			active_file_type = core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].filetype;
 		}
 		
-		var toolBoxButtonMenu = core.module.plugin_manager.toolBoxSelector;
-		//console.log(activeFileType);
+		var toolbox_button_menu = core.module.plugin_manager.toolbox_selector;
 		
-		if(core.currentProjectType) {
+		if(core.status.current_project_type) {
 			for (var value in core.module.plugin_manager.plugins) {
-				if ("org.goorm.plugin." + core.currentProjectType.toLowerCase() == value) {
+				if ("org.goorm.plugin." + core.status.current_project_type.toLowerCase() == value) {
 					
-					if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.currentProjectType.toLowerCase()].refreshToolBox) {				
-							core.module.plugin_manager.plugins["org.goorm.plugin."+core.currentProjectType.toLowerCase()].refreshToolBox();
-							if(toolBoxButtonMenu)
-								toolBoxButtonMenu.set("label", core.module.plugin_manager.plugins[value].toolboxName);
+					if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type.toLowerCase()].refresh_toolbox) {				
+							core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type.toLowerCase()].refresh_toolbox();
+							if(toolbox_button_menu)
+								toolbox_button_menu.set("label", core.module.plugin_manager.plugins[value].toolbox_name);
 					}else{
-						$("#"+core.currentProjectType.toLowerCase()+"_toolset").css("display", "block");
+						$("#"+core.status.current_project_type.toLowerCase()+"_toolset").css("display", "block");
 					}
-					//console.log(core.module.plugin_manager.plugins[value].toolboxName);
 					
 					break;
 				}
 			}
 		}		
-		else if(activeFileType) {
+		else if(active_file_type) {
 			for (var value in core.module.plugin_manager.plugins) {
 				if (typeof(core.module.plugin_manager.plugins[value].filetypes)!="undefined") {
-					if(core.module.plugin_manager.plugins[value].filetypes.indexOf(activeFileType) > -1) {
-						if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.module.plugin_manager.plugins[value].name].refreshToolBox) {				
-							core.module.plugin_manager.plugins["org.goorm.plugin."+core.module.plugin_manager.plugins[value].name].refreshToolBox();
+					if(core.module.plugin_manager.plugins[value].filetypes.indexOf(active_file_type) > -1) {
+						if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.module.plugin_manager.plugins[value].name].refresh_toolbox) {				
+							core.module.plugin_manager.plugins["org.goorm.plugin."+core.module.plugin_manager.plugins[value].name].refresh_toolbox();
 						}else{
 							$("#"+core.module.plugin_manager.plugins[value].name+"_toolset").css("display", "block");
 						}
 						
-						
-						//console.log(core.module.plugin_manager.plugins[value].toolboxName);
-						toolBoxButtonMenu.set("label", core.module.plugin_manager.plugins[value].toolboxName);
+						toolbox_button_menu.set("label", core.module.plugin_manager.plugins[value].toolbox_name);
 						break;
 					}
 				}
@@ -233,19 +177,19 @@ org.goorm.core.project.property.prototype = {
 		}
 	},
 	
-	setProjectInformation: function () {
+	set_project_information: function () {
 		var self=this;
 		this.property = new Object();
-		this.getProperty(this.xml);			
+		this.get_property(this.xml);			
 			
 		// Get the contents of project.xml and put them into repective HTML elements
 		$.ajax({
 			type: "POST",
 			dataType: "xml",
-			url: "project/" + core.currentProjectPath + "/project.xml",
+			url: "project/" + core.status.current_project_path + "/project.xml",
 			success: function (xml) {
 				
-				$("#propertyTabview").text("");
+				$("#property_tabview").text("");
 				
 				$(xml).find("PROJECT").each(function(){
 					$(this).children().each(function(){
@@ -253,10 +197,10 @@ org.goorm.core.project.property.prototype = {
 					});
 				});
 				
-				self.manager.createTabView(self.xml);
+				self.manager.create_tabview(self.xml);
 				// Plugin setting
-				var pluginNode = self.manager.treeView.getNodeByProperty("label","Plugin");
-				self.manager.treeView.removeChildren(pluginNode);
+				var plugin_node = self.manager.treeview.getNodeByProperty("label","Plugin");
+				self.manager.treeview.removeChildren(plugin_node);
 				for (var name in self.plugin){
 					if(name == self.property['TYPE']){
 						$(self.plugin[name].xml).find("project").each(function(){
@@ -271,12 +215,12 @@ org.goorm.core.project.property.prototype = {
 							});
 						});
 						
-						self.manager.addTreeView(pluginNode,self.plugin[name].xml);
-						self.manager.treeView.render();
-						self.manager.createTabView(self.plugin[name].xml);
+						self.manager.add_treeview(plugin_node,self.plugin[name].xml);
+						self.manager.treeview.render();
+						self.manager.create_tabview(self.plugin[name].xml);
 						
 						// Set build configuration
-						core.dialogBuildConfiguration.setBuildConfig();
+						core.dialog.build_configuration.set_build_config();
 					}
 
 					else {
@@ -285,23 +229,23 @@ org.goorm.core.project.property.prototype = {
 				}
 				
 				// TreeView labelClick function
-				self.manager.treeView.subscribe("labelClick", function(node){
+				self.manager.treeview.subscribe("labelClick", function(node){
 					var label = node.label;
 					label = label.replace(/[/#. ]/g,"");
 					
-					$("#propertyTabview").children().hide();
-					$("#propertyTabview #property_"+label).show();
+					$("#property_tabview").children().hide();
+					$("#property_tabview #property_"+label).show();
 				});
 				
-				self.setBefore();
+				self.set_before();
 				
-				self.refreshToolBox();
+				self.refresh_toolbox();
 			}
 		});
 	},
-	setBefore: function(){
+	set_before: function(){
 		var self=this;
-		$("#propertyTabview").find("input").each(function(){
+		$("#property_tabview").find("input").each(function(){
 			if(self.property[$(this).attr("name")]!=null){
 				if($(this).attr("type") == "checkbox"){
 					if(self.property[$(this).attr("name")] == "true")
@@ -313,12 +257,12 @@ org.goorm.core.project.property.prototype = {
 				}
 			}
 		});
-		$("#propertyTabview").find("textarea").each(function(){
+		$("#property_tabview").find("textarea").each(function(){
 			if(self.property[$(this).attr("name")]!=null){
 				$(this).val(self.property[$(this).attr("name")]);
 			}
 		});
-		$("#propertyTabview").find("select").each(function(){
+		$("#property_tabview").find("select").each(function(){
 			if(self.property[$(this).attr("name")]!=null){
 				$(this).children("option[value = " + self.property[$(this).attr("name")] + "]").attr("selected", "ture");
 				$(this).val(self.property[$(this).attr("name")]);
@@ -326,7 +270,7 @@ org.goorm.core.project.property.prototype = {
 		});
 	},
 	
-	getProperty: function (xml) {
+	get_property: function (xml) {
 		var self=this;
 		$(xml).find("project").each(function(){
 			if ($(this).find("property").length > 0) {
@@ -337,9 +281,9 @@ org.goorm.core.project.property.prototype = {
 		});
 	},
 	
-	saveProjectXml: function(callback){
+	save_project_xml: function(callback){
 		var self=this;
-		self.property['projectPath'] = core.currentProjectPath;
+		self.property['project_path'] = core.status.current_project_path;
 		var str = JSON.stringify(self.property);
 		
 		$.ajax({

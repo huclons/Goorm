@@ -3,13 +3,13 @@
     <fieldset style="padding:10px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;">
         <legend> <b>Designer Configuration</b> </legend> 
         <div style="width:100%; height:22px;">
-            <div style="float:left;" class="checkboxDiv"><label for="showGrid"><input name="preference.designer.showGrid" type="checkbox" id="showGrid" class="checkboxMargin" /> Show Grid</label></div>
+            <div style="float:left;" class="checkbox_div"><label for="show_grid"><input name="preference.designer.show_grid" type="checkbox" id="show_grid" class="checkbox_margin" /> Show Grid</label></div>
         </div>
         <div style="width:100%; height:22px;">
-            <div style="float:left;" class="checkboxDiv"><label for="showRuler"><input name="preference.designer.showRuler" type="checkbox" id="showRuler" class="checkboxMargin" /> Show Ruler</label></div>
+            <div style="float:left;" class="checkbox_div"><label for="show_ruler"><input name="preference.designer.show_ruler" type="checkbox" id="show_ruler" class="checkbox_margin" /> Show Ruler</label></div>
         </div>        
         <div style="width:100%; height:22px;">
-            <div style="float:left;" class="checkboxDiv"><label for="showPreview"><input name="preference.designer.showPreview" type="checkbox" id="showPreview" class="checkboxMargin" /> Show Preview</label></div>            
+            <div style="float:left;" class="checkbox_div"><label for="show_preview"><input name="preference.designer.show_preview" type="checkbox" id="show_preview" class="checkbox_margin" /> Show Preview</label></div>            
         </div>
     </fieldset>
     
@@ -17,7 +17,7 @@
         <legend> <b>Grid Setting</b> </legend> 
         <div style="width:100%; height:22px;">
             Grid Unit:
-	    		<select name="preference.designer.gridUnit">
+	    		<select name="preference.designer.grid_unit">
 	    			<option value="5">5px</option>
 	    			<option value="10">10px</option>
 	    			<option value="20">20px</option>
@@ -25,14 +25,14 @@
 	    		</select>
         </div>
         <div style="width:100%; height:22px;">
-        	<div style="float:left;" class="checkboxDiv"><label for="snapToGrid"><input name="preference.designer.snapToGrid" type="checkbox" id="snapToGrid" class="checkboxMargin" /> Snap to Grid</label></div>
+        	<div style="float:left;" class="checkbox_div"><label for="snap_to_grid"><input name="preference.designer.snap_to_grid" type="checkbox" id="snap_to_grid" class="checkbox_margin" /> Snap to Grid</label></div>
         </div>
         <div style="width:100%; height:22px;">
             <div style="float:left;">Opacity: </div>
-            <div id="gridOpacitySliderBg" class="yui-h-slider" tabindex="-1" title="Slider" style="float:left;">
-			    <div id="gridOpacitySliderThumb" class="yui-slider-thumb"><img src="http://yui.yahooapis.com/2.9.0/build/slider/assets/thumb-n.gif"></div>
+            <div id="grid_opacity_sliderBg" class="yui-h-slider" tabindex="-1" title="Slider" style="float:left;">
+			    <div id="grid_opacity_slider_thumb" class="yui-slider-thumb"><img src="http://yui.yahooapis.com/2.9.0/build/slider/assets/thumb-n.gif"></div>
 			</div>
-            <div id="gridOpacitySliderValueText"></div><input type="hidden" id="gridOpacitySliderValue" name="preference.designer.gridOpacity" type="text"/>
+            <div id="grid_opacity_slider_value_text"></div><input type="hidden" id="grid_opacity_slider_value" name="preference.designer.grid_opacity" type="text"/>
         </div>        
     </fieldset>
     
@@ -40,7 +40,7 @@
         <legend> <b>Ruler Setting</b> </legend> 
         <div style="width:100%; height:22px;">
             Ruler Unit: 
-	    		<select name="preference.designer.rulerUnit">
+	    		<select name="preference.designer.ruler_unit">
 	    			<option value="px">px</option>
 	    			<option value="cm">cm</option>
 	    			<option value="inch">inch</option>
@@ -50,6 +50,6 @@
 
 </div>
 <div style="position: absolute;bottom: 10px;right:10px;">
-	<input type="button" class="restoreDefault" value="Restore Default" />
+	<input type="button" class="restore_default" value="Restore Default" />
 	<input type="button" class="apply" value="Apply" />
 </div>

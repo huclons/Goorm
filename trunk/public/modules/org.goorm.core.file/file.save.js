@@ -2,91 +2,51 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module file
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class saveAs
- * @extends file
- **/
-org.goorm.core.file.saveAs = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 **/
+org.goorm.core.file.save_as = function () {
 	this.dialog = null;
-	
-	/**
-	 * The array object that contains the information about buttons on the bottom of a dialog 
-	 * @property buttons
-	 * @type Object
-	 * @default null
-	 **/
 	this.buttons = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property tabView
-	 **/
-	this.tabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property treeView
-	 **/
-	this.treeView = null;
+	this.tabview = null;
+	this.treeview = null;
 };
 
-org.goorm.core.file.saveAs.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 **/
+org.goorm.core.file.save_as.prototype = {
 	init: function () { 
 		
-		var handleSave = function() { 
+		var handle_save = function() { 
 			this.hide(); 
 		};
 
-		var handleCancel = function() { 
-			
+		var handle_cancel = function() { 
 			this.hide(); 
 		};
 		
-		this.buttons = [ {text:"Save", handler:handleSave, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}];
+		this.buttons = [ {text:"Save", handler:handle_save, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}];
 						 
-		this.dialog = new org.goorm.core.file.saveAs.dialog();
+		this.dialog = new org.goorm.core.file.save_as.dialog();
 		this.dialog.init({
 			title:"Save as", 
-			path:"configs/dialogs/org.goorm.core.file/file.saveAs.html",
+			path:"configs/dialogs/org.goorm.core.file/file.save_as.html",
 			width:600,
 			height:400,
 			modal:true,
 			buttons:this.buttons,
 			success: function () {
 				//TabView Init
-				//self.tabView = new YAHOO.widget.TabView('fileSaveAsContents');
+				//self.tabview = new YAHOO.widget.TabView('filesave_asContents');
 				
 				//TreeView Init
-				self.treeView = new YAHOO.widget.TreeView("fileSaveAsTreeview");
-				self.treeView.render();
+				self.treeview = new YAHOO.widget.TreeView("file_save_as_treeview");
+				self.treeview.render();
 			}
 		});
 		this.dialog = this.dialog.dialog;
 		
 		//this.dialog.panel.setBody("AA");
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method show 
-	 **/
+
 	show: function () {
 		this.dialog.panel.show();
 	}	

@@ -1,19 +1,19 @@
-#preferenceTabview{
+#preference_tabview{
 	height: 410px;
 	background-color: #f2f2f2;
 }				
 
-#preferenceTabview .yui-content{
+#preference_tabview .yui-content{
 	background-color: #f2f2f2;
 	
 	height:364px;	
 }
 
-#preferenceTabview .checkboxDiv {
+#preference_tabview .checkbox_div {
 	cursor:pointer;
 }
 
-#preferenceTabview .checkboxMargin {
+#preference_tabview .checkbox_margin {
 	vertical-align:middle; 
 	margin-top:-2px; 
 	margin-right:3px; 
@@ -27,18 +27,18 @@
 
 }
 
-#selectedPreferenceTitle{
+#selected_preference_title{
 	padding: 0px 10px 10px 10px;
 	font-size: 15px;
 	font-weight: bold;
 	border-bottom: 1px solid #ccc;
 }
 
-#languageBody {
+#language_body {
 	padding:5px;
 }
 
-#languageBody .button {
+#language_body .button {
 	cursor: pointer;
 	margin: 5px 0;
 	padding: 5px;
@@ -49,133 +49,133 @@
 
 
 /* space */
-.dialogTreeview .ygtspacer { 
+.dialog_treeview .ygtspacer { 
 	width:17px; 
 	height:22px; 
 }
 
 /* first or middle sibling, no children */
-.dialogTreeview .ygtvtn { 
+.dialog_treeview .ygtvtn { 
 	width:17px; 
 	height:22px; 
 }
 
 /* first or middle sibling, collapsable */
-.dialogTreeview .ygtvtm { 
+.dialog_treeview .ygtvtm { 
 	width:17px; 
 	height:22px; 
 	cursor:pointer; 
 }
 
 /* first or middle sibling, collapsable, hover */
-.dialogTreeview .ygtvtmh { 
+.dialog_treeview .ygtvtmh { 
 	width:17px; 
 	height:22px; 
 	cursor:pointer; 
 }
 
 /* first or middle sibling, expandable */
-.dialogTreeview .ygtvtp { 
+.dialog_treeview .ygtvtp { 
 	width:17px; 
 	height:22px; 
 	cursor:pointer; 
 }
 
 /* first or middle sibling, expandable, hover */
-.dialogTreeview .ygtvtph { 
+.dialog_treeview .ygtvtph { 
 	width:17px; 
 	height:22px; 
 	cursor:pointer; 
 }
 
 /* last sibling, no children */
-.dialogTreeview .ygtvln { 
+.dialog_treeview .ygtvln { 
 	width:17px; 
 	height:22px; 
 }
 
 /* Last sibling, collapsable */
-.dialogTreeview .ygtvlm { 
+.dialog_treeview .ygtvlm { 
 	width:17px; 
 	height:22px; 
 	cursor:pointer; 
 }
 
 /* Last sibling, collapsable, hover */
-.dialogTreeview .ygtvlmh { 
+.dialog_treeview .ygtvlmh { 
 	width:17px;
 	height:22px; 
 	cursor:pointer; 
 }
 
 /* Last sibling, expandable */
-.dialogTreeview .ygtvlp { 
+.dialog_treeview .ygtvlp { 
 	width:17px; 
 	height:22px; 
 	cursor:pointer; 
 }
 
 /* Last sibling, expandable, hover */
-.dialogTreeview .ygtvlph { 
+.dialog_treeview .ygtvlph { 
 	width:17px; 
 	height:22px; 
 	cursor:pointer; 
 }
 
 /* Loading icon */
-.dialogTreeview .ygtvloading { 
+.dialog_treeview .ygtvloading { 
 	width:17px; 
 	height:22px;
 }
 
 /* the style for the empty cells that are used for rendering the depth 
  * of the node */
-.dialogTreeview .ygtvdepthcell { 
+.dialog_treeview .ygtvdepthcell { 
 	width:17px; 
 	height:22px; 
 }
 
-.dialogTreeview .ygtvblankdepthcell { 
+.dialog_treeview .ygtvblankdepthcell { 
 	width:17px; 
 	height:22px; 
 }
 
 /* the style of the div around each node */
-.dialogTreeview .ygtvitem { }  
+.dialog_treeview .ygtvitem { }  
 
-.dialogTreeview .ygtvitem  table{
+.dialog_treeview .ygtvitem  table{
     margin-bottom:0;
 }
-.dialogTreeview .ygtvitem  td {
+.dialog_treeview .ygtvitem  td {
     border:none;
     padding:0;
 } 
 
-.dialogTreeview .ygtvfocus { 
+.dialog_treeview .ygtvfocus { 
 	background-color:#B3D4FF;
 }
 
-.dialogTreeview .ygtvfocus .ygtvlabel { 
+.dialog_treeview .ygtvfocus .ygtvlabel { 
 	background-color:#B3D4FF;
 }
 
-.dialogTreeview .ygtvcell span:hover {
+.dialog_treeview .ygtvcell span:hover {
 	background-color:transparent;
 }
 	
 
 /* the style of the div around each node's collection of children */
-.dialogTreeview .ygtvchildren { }  
+.dialog_treeview .ygtvchildren { }  
 * html .ygtvchildren { 
 	height:1%;
 }  
 
-.dialogTreeview .ygtvlabel {
+.dialog_treeview .ygtvlabel {
 	background-color:transparent;
 }
 
 /* the style of the text label in ygTextNode */
-.dialogTreeview .ygtvlabel, .ygtvlabel:link, .ygtvlabel:visited, .ygtvlabel:hover { 
+.dialog_treeview .ygtvlabel, .ygtvlabel:link, .ygtvlabel:visited, .ygtvlabel:hover { 
 	background-color:transparent;
 	margin-left:2px;
 	text-decoration: none;

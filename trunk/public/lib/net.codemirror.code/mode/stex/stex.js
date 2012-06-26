@@ -34,9 +34,9 @@ CodeMirror.defineMode("stex", function(cmCfg, modeCfg)
       return null;
     }
 
-    function addPluginPattern(pluginName, cmdStyle, brackets, styles) {
+    function addPluginPattern(plugin_name, cmdStyle, brackets, styles) {
 	return function () {
-	    this.name=pluginName;
+	    this.name=plugin_name;
 	    this.bracketNo = 0;
 	    this.style=cmdStyle;
 	    this.styles = styles;

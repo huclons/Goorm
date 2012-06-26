@@ -89,7 +89,7 @@
 
     <script type="text/javascript">
       function setVersion(ver) {
-        var urlprefix = ver.options[ver.selectedIndex].value;
+        var urlprefix = ver.options[ver.selected_index].value;
         var select = document.getElementById("files"), m;
         for (var optgr = select.firstChild; optgr; optgr = optgr.nextSibling)
           for (var opt = optgr.firstChild; opt; opt = opt.nextSibling) {

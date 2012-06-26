@@ -2,83 +2,19 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module stencil
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class stencil
- **/
 org.goorm.core.stencil = function () {
-	/**
-	 * This presents the current browser version
-	 * @property container
-	 * @type Object
-	 * @default null
-	 **/
 	this.container = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property timestamp
-	 * @type String
-	 * @default null
-	 **/
 	this.timestamp = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property shape
-	 * @type Object
-	 * @default null
-	 **/
 	this.shape = null;
-
-	/**
-	 * This presents the current browser version
-	 * @property data
-	 * @type Object
-	 * @default null
-	 **/
 	this.data = null;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property shape
-	 * @type String
-	 * @default null
-	 **/
 	this.type = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property properties
-	 * @type Object
-	 * @default null
-	 **/
 	this.properties = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property javascript
-	 * @type Object
-	 * @default null
-	 **/
 	this.javascript = null;
 };
 
 org.goorm.core.stencil.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {Object} shape The shape.
-	 * @param {Object} type The type.
-	 * @param {Object} container The container.
-	 **/
 	init: function(shape, type, container, callback) {
 		this.timestamp = new Date().getTime();
 		
@@ -97,54 +33,38 @@ org.goorm.core.stencil.prototype = {
 		return this;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method move 
-	 * @param {Number} sx The position on x-coordinate of the starting point of the stencil.
-	 * @param {Number} sy The position on y-coordinate of the end point of the stencil.
-	 * @param {Number} ex The position on x-coordinate of the starting point of the stencil.
-	 * @param {Number} ey The position on y-coordinate of the end point of the stencil.
-	 **/
 	move: function(sx, sy, ex, ey) {
-		var startX, startY, width, height;
+		var start_x, start_y, width, height;
 		
 		if (this.type == "square") {
 		
 			if (sx > ex) {
-				startX = ex;
+				start_x = ex;
 			}
 			else {
-				startX = sx;
+				start_x = sx;
 			}
 			
 			if (sy > ey) {
-				startY = ey;
+				start_y = ey;
 			}
 			else {
-				startY = sy;
+				start_y = sy;
 			}
 			
 			width = Math.abs(ex-sx);
 			height = Math.abs(ey-sy);
 
 			
-			$(this.container).find("#"+"stencil_" + this.timestamp).css("left", startX);
-			$(this.container).find("#"+"stencil_" + this.timestamp).css("top", startY);
+			$(this.container).find("#"+"stencil_" + this.timestamp).css("left", start_x);
+			$(this.container).find("#"+"stencil_" + this.timestamp).css("top", start_y);
 			$(this.container).find("#"+"stencil_" + this.timestamp).css("width", width);
 			$(this.container).find("#"+"stencil_" + this.timestamp).css("height", height);
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method rotate
-	 * @param {Number} sx The position on x-coordinate of the starting point of the stencil.
-	 * @param {Number} sy The position on y-coordinate of the end point of the stencil.
-	 * @param {Number} ex The position on x-coordinate of the starting point of the stencil.
-	 * @param {Number} ey The position on y-coordinate of the end point of the stencil.
-	 **/
 	rotate: function(context, sx, sy, ex, ey) {
-		var startX, startY, width, height;
+		var start_x, start_y, width, height;
 		
 		if (this.type == "line") {
 						
@@ -154,8 +74,8 @@ org.goorm.core.stencil.prototype = {
 			var radian = Math.acos((ex-sx)/length);
 			
 			
-			startX = (sx+ex)/2-length/2;
-			startY = (sy+ey)/2;
+			start_x = (sx+ex)/2-length/2;
+			start_y = (sy+ey)/2;
 			
 			var minus = 1;
 			 
@@ -164,8 +84,8 @@ org.goorm.core.stencil.prototype = {
 			}
 			
 			
-			$(this.container).find("#"+"stencil_" + this.timestamp).css("left", startX);
-			$(this.container).find("#"+"stencil_" + this.timestamp).css("top", startY);
+			$(this.container).find("#"+"stencil_" + this.timestamp).css("left", start_x);
+			$(this.container).find("#"+"stencil_" + this.timestamp).css("top", start_y);
 			$(this.container).find("#"+"stencil_" + this.timestamp).css("width", length);
 			$(this.container).find("#"+"stencil_" + this.timestamp).css("height", 1);
 			
@@ -184,11 +104,7 @@ org.goorm.core.stencil.prototype = {
 			
 		}
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method adapter
-	 **/
+
 	adapter: function(callback) {
 		var self = this;
 		
@@ -208,7 +124,7 @@ org.goorm.core.stencil.prototype = {
 						callback();
 					}
 					
-					self.setShape();
+					self.set_shape();
 				}
 			});
 			
@@ -243,12 +159,8 @@ org.goorm.core.stencil.prototype = {
 		}
 
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method setShape 
-	 **/
-	setShape: function() {
+
+	set_shape: function() {
 		var self = this;
 		
 		if (this.properties != null) {
@@ -274,21 +186,14 @@ org.goorm.core.stencil.prototype = {
 			});
 		}
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method remove 
-	 **/
+
 	remove: function() {
 		$(this.container).find("#"+"stencil_" + this.timestamp).remove();
 		
 		delete this;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method remove 
-	 **/
+
 	show: function() {
 		$(this.container).find("#"+"stencil_" + this.timestamp).show();
 	}

@@ -84,7 +84,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
 
   // Inline
 
-  function inlineNormal(stream, state) {
+  function inline_normal(stream, state) {
     function getType() {
       return state.strong ? (state.em ? emstrong : strong)
                           : (state.em ? em       : null);
@@ -147,18 +147,18 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
       state.f = footnoteUrl;
       return linktext;
     }
-    return switchInline(stream, state, inlineNormal);
+    return switchInline(stream, state, inline_normal);
   }
 
   function footnoteUrl(stream, state) {
     stream.eatSpace();
     stream.match(/^[^\s]+/, true);
-    state.f = state.inline = inlineNormal;
+    state.f = state.inline = inline_normal;
     return linkhref;
   }
 
   function inlineElement(type, endChar, next) {
-    next = next || inlineNormal;
+    next = next || inline_normal;
     return function(stream, state) {
       while (!stream.eol()) {
         var ch = stream.next();
@@ -181,7 +181,7 @@ CodeMirror.defineMode("markdown", function(cmCfg, modeCfg) {
         htmlState: htmlMode.startState(),
         indentation: 0,
         
-        inline: inlineNormal,
+        inline: inline_normal,
         em: false,
         strong: false
       };

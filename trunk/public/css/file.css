@@ -5,13 +5,13 @@ http://www.goorm.org/License
 version: 3.0.0
 */
 
-#fileOpenTreeview {
+#file_open_treeview {
 	overflow-x:hidden; 
 	padding:5px;
 }
 
 
-#goormDialogContainer .fileitem {
+#goorm_dialog_container .file_item {
 	float: left;
 	width:70px;
 	height:100px;	
@@ -20,7 +20,7 @@ version: 3.0.0
 	cursor:pointer;
 }
 
-#goormDialogContainer .folderitem {
+#goorm_dialog_container .folder_item {
 	float: left;
 	width:70px;
 	height:100px;	
@@ -29,7 +29,7 @@ version: 3.0.0
 	cursor:pointer;
 }
 
-#goormDialogContainer .folderitem img {
+#goorm_dialog_container .folder_item img {
 	width: 48px;
 	height: 48px;
 	vertical-align: middle;
@@ -37,7 +37,7 @@ version: 3.0.0
 	margin-top:5px;
 }
 
-#goormDialogContainer .fileitem img {
+#goorm_dialog_container .file_item img {
 	width: 48px;
 	height: 48px;
 	vertical-align: middle;
@@ -45,7 +45,7 @@ version: 3.0.0
 	margin-top:5px;
 }
 
-#goormDialogContainer .fileitem:hover {
+#goorm_dialog_container .file_item:hover {
 	background-color: #FFFFDF;
 	border:1px dotted #999;
 	margin:9px;
@@ -55,7 +55,7 @@ version: 3.0.0
 	border-radius: 8px;
 }
 
-#goormDialogContainer .folderitem:hover {
+#goorm_dialog_container .folder_item:hover {
 	background-color: #FFFFDF;
 	border:1px dotted #999;
 	margin:9px;	
@@ -65,31 +65,31 @@ version: 3.0.0
 	border-radius: 8px;
 }
 
-#goormDialogContainer .fileitem:active {
+#goorm_dialog_container .file_item:active {
 	background-color: #B3D4FF;
 	border:1px dotted #999;
 	margin:9px;	
 }
 
-#goormDialogContainer .folderitem:active {
+#goorm_dialog_container .folder_item:active {
 	background-color: #B3D4FF;
 	border:1px dotted #999;
 	margin:9px;	
 }
 
-#goormDialogContainer .fileitem:focus {
+#goorm_dialog_container .file_item:focus {
 	background-color: #B3D4FF;
 	border:1px dotted #999;
 	margin:9px;	
 }
 
-#goormDialogContainer .folderitem:focus {
+#goorm_dialog_container .folder_item:focus {
 	background-color: #B3D4FF;
 	border:1px dotted #999;
 	margin:9px;	
 }
 
-#goormDialogContainer .selectedItem {
+#goorm_dialog_container .selected_item {
 	font-weight:normal;
 	background-color: #B3D4FF;
 	border:1px dotted #999;
@@ -105,7 +105,7 @@ version: 3.0.0
  아래부분 삭제 바람~ ㅋ
 */
 
-#goormDialogContainer .moveDialogCenter_item {
+#goorm_dialog_container .move_dialog_center_item {
 	float: left;
 	width:70px;
 	height:80px;	
@@ -114,7 +114,7 @@ version: 3.0.0
 	cursor:pointer;
 }
 
-#goormDialogContainer .saveAsDialogCenter_item {
+#goorm_dialog_container .save_as_dialog_center_item {
 	float: left;
 	width:70px;
 	height:80px;	
@@ -123,7 +123,7 @@ version: 3.0.0
 	cursor:pointer;
 }
 
-#goormDialogContainer .fileNewDialogCenter_item {
+#goorm_dialog_container .file_new_dialog_center_item {
 	float: left;
 	width:70px;
 	height:80px;	
@@ -132,7 +132,7 @@ version: 3.0.0
 	cursor:pointer;
 }
 
-#goormDialogContainer .fileImportDialogCenter_item {
+#goorm_dialog_container .file_import_dialog_center_item {
 	float: left;
 	width:70px;
 	height:80px;	
@@ -141,7 +141,7 @@ version: 3.0.0
 	cursor:pointer;
 }
 
-#goormDialogContainer .importDialogCenter_item {
+#goorm_dialog_container .import_dialog_center_item {
 	float: left;
 	width:70px;
 	height:80px;	
@@ -150,7 +150,7 @@ version: 3.0.0
 	cursor:pointer;
 }
 
-#goormDialogContainer .fileExportDialogCenter_item {
+#goorm_dialog_container .file_export_dialog_center_item {
 	float: left;
 	width:70px;
 	height:80px;	
@@ -159,7 +159,7 @@ version: 3.0.0
 	cursor:pointer;
 }
 
-#goormDialogContainer .projectImportDialogCenter_item {
+#goorm_dialog_container .project_import_dialog_center_item {
 	float: left;
 	width:70px;
 	height:80px;	

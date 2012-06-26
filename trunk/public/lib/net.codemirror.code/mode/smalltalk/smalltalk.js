@@ -1,6 +1,6 @@
 CodeMirror.defineMode("smalltalk", function(config, parserConfig) {
   var keywords = {"true": 1, "false": 1, nil: 1, self: 1, "super": 1, thisContext: 1};
-  var indentUnit = config.indentUnit;
+  var indent_unit = config.indent_unit;
 
   function chain(stream, state, f) {
     state.tokenize = f;
@@ -83,7 +83,7 @@ CodeMirror.defineMode("smalltalk", function(config, parserConfig) {
     startState: function(basecolumn) {
       return {
         tokenize: tokenBase,
-        context: new Context((basecolumn || 0) - indentUnit, 0, "top", false),
+        context: new Context((basecolumn || 0) - indent_unit, 0, "top", false),
         indented: 0,
         startOfLine: true
       };
@@ -112,7 +112,7 @@ CodeMirror.defineMode("smalltalk", function(config, parserConfig) {
       if (state.tokenize != tokenBase) return 0;
       var firstChar = textAfter && textAfter.charAt(0), ctx = state.context, closing = firstChar == ctx.type;
       if (ctx.align) return ctx.column + (closing ? 0 : 1);
-      else return ctx.indented + (closing ? 0 : indentUnit);
+      else return ctx.indented + (closing ? 0 : indent_unit);
     },
 
     electricChars: "]"

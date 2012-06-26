@@ -2,140 +2,29 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module layout
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class layout
- **/
 org.goorm.core.layout = function () {
-	/**
-	 * The layout object
-	 * @property layout
-	 * @type Object
-	 * @default null
-	 **/
 	this.layout = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property innerLayout
-	 * @type Object
-	 * @default null
-	 **/
-	this.innerLayout = null;
-
-	/**
-	 * This presents the current browser version
-	 * @property leftTabView
-	 * @type Object
-	 * @default null
-	 **/
-	this.leftTabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property innerRightTabView
-	 * @type Object
-	 * @default null
-	 **/
-	this.innerRightTabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property innerBottomTabView
-	 * @type Object
-	 * @default null
-	 **/
-	this.innerBottomTabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property innerCenterTabView
-	 * @type Object
-	 * @default null
-	 **/
-	this.innerCenterTabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property tableProperties
-	 * @type Object
-	 * @default null
-	 **/
-	this.tableProperties = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property treeviewProject
-	 * @type Object
-	 * @default null
-	 **/
-	this.treeviewProject = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property mainMenu
-	 * @type Object
-	 * @default null
-	 **/
-	this.mainMenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property toolbar
-	 * @type Object
-	 * @default null
-	 **/
+	this.inner_layout = null;
+	this.left_tabview = null;
+	this.inner_right_tabview = null;
+	this.inner_bottom_tabview = null;
+	this.inner_center_tabview = null;
+	this.table_properties = null;
+	this.treeview_project = null;
+	this.mainmenu = null;
 	this.toolbar = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property workspace
-	 * @type Object
-	 * @default null
-	 **/
-	this.workSpace = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property startpage
-	 * @type Object
-	 * @default null
-	 **/
+	this.workspace = null;
 	this.startpage = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property windowManager
-	 * @type Object
-	 * @default null
-	 **/
-	this.windowManager = null;
-
-	/**
-	 * This presents the current browser version
-	 * @property chat
-	 * @type Object
-	 * @default null
-	 **/
+	this.window_manager = null;
 	this.chat = null;
-	
-	this.tabProject = null;
-	this.tabToolbox = null;
+	this.tab_project = null;
+	this.tab_toolbox = null;
 };
 
 org.goorm.core.layout.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor
-	 * @param {Object} container The container object. 
-	 **/
+
 	init: function(container) {
 		
 		var self = this;
@@ -144,46 +33,44 @@ org.goorm.core.layout.prototype = {
 		this.layout = new YAHOO.widget.Layout({
 			units:
 			[
-				{ position: 'top', height: 59,maxHeight:150, body: container+'Top', scroll: null, zIndex: 2, gutter: '0px 0px 3px 0px' },
-				{ position: 'left', width: 250, body: container+'Left', animate: false, proxy:false, scroll: false, zIndex: 1, resize: true, gutter: '0px 3px 0px 0px', collapse: true, minWidth: 200 },
-				{ position: 'center', body: container+'CenterInnerLayout', scroll: false },
-				{ position: 'bottom', height:30, body: container+'Bottom', scroll: false, gutter: '0px 0px 0px 0px' }
+				{ position: 'top', height: 59,maxHeight:150, body: container+'_top', scroll: null, zIndex: 2, gutter: '0px 0px 3px 0px' },
+				{ position: 'left', width: 250, body: container+'_left', animate: false, proxy:false, scroll: false, zIndex: 1, resize: true, gutter: '0px 3px 0px 0px', collapse: true, minWidth: 200 },
+				{ position: 'center', body: container+'_center_inner_layout', scroll: false },
+				{ position: 'bottom', height:30, body: container+'_bottom', scroll: false, gutter: '0px 0px 0px 0px' }
 			]
 		});
 
 				
 
 		this.layout.on('render', function() {
-			
-			console.log(container);
-			
 			//Set main menu
-			self.attachMainMenu(container + "MainMenu"); 
+			self.attach_mainmenu(container + "_mainmenu"); 
 			
-			self.attachToolbar(container + "MainToolbar"); 
+			self.attach_toolbar(container + "_main_toolbar"); 
 			
 						
 			//Set nested inner layout
 			var el = self.layout.getUnitByPosition('center').get('wrap');
-			self.innerLayout = new YAHOO.widget.Layout(el, {
+			
+			self.inner_layout = new YAHOO.widget.Layout(el, {
 				parent: self.layout,
 				units:
 				[
-					{ position: 'right', width: 350, resize: true, scroll: false, body: container+'InnerLayoutRight', animate: false, proxy:false, gutter: '0px 0px 0px 3px', collapse: !ENV_COLLAPSE_RIGHT },
-					{ position: 'bottom', height: 200, body: container+'InnerLayoutBottom', animate: false, proxy:false, scroll: false, resize: true, gutter: '3px 0px 0px 0px', collapse: !ENV_COLLAPSE_BOTTOM },
-					{ position: 'center', body: container+'InnerLayoutCenter', scroll: false }
+					{ position: 'right', width: 350, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, proxy:false, gutter: '0px 0px 0px 3px', collapse: !ENV_COLLAPSE_RIGHT },
+					{ position: 'bottom', height: 200, body: container+'_inner_layout_bottom', animate: false, proxy:false, scroll: false, resize: true, gutter: '3px 0px 0px 0px', collapse: !ENV_COLLAPSE_BOTTOM },
+					{ position: 'center', body: container+'_inner_layout_center', scroll: false }
 				]
 			});
 			
-			self.innerLayout.render();
+			self.inner_layout.render();
 
 			
 			if (ENV_COLLAPSE_BOTTOM) {
-				self.innerLayout.getUnitByPosition("bottom").collapse();
+				self.inner_layout.getUnitByPosition("bottom").collapse();
 			}
 			
 			if (ENV_COLLAPSE_RIGHT) {
-				self.innerLayout.getUnitByPosition("right").collapse();
+				self.inner_layout.getUnitByPosition("right").collapse();
 			}			
 		});
 		
@@ -192,66 +79,66 @@ org.goorm.core.layout.prototype = {
 		//////////////////////////////////////////////////////////////////////////////////////////
 		
 		//Left TabView
-		this.leftTabView = new YAHOO.widget.TabView(container+'Left');
+		this.left_tabview = new YAHOO.widget.TabView(container+'_left');
 		
 		//Project Explorer Tab
-		this.attachProjectExplorer(this.leftTabView);
+		this.attach_project_explorer(this.left_tabview);
 		
-		this.attachToolBox(this.leftTabView);
+		this.attach_toolbox(this.left_tabview);
 		
 		//Select first tab
-		this.leftTabView.selectTab(0);
+		this.left_tabview.selectTab(0);
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
 		// Right
 		//////////////////////////////////////////////////////////////////////////////////////////
 				
 		//Right TabView
-		this.innerRightTabView = new YAHOO.widget.TabView(container+'InnerLayoutRight');
+		this.inner_right_tabview = new YAHOO.widget.TabView(container+'_inner_layout_right');
 		
 		//Properties Tab
-		this.attachProperties(this.innerRightTabView);
+		this.attach_properties(this.inner_right_tabview);
 		
 		//Object Explorer Tab
-		this.attachObjectExplorer(this.innerRightTabView);
+		this.attach_object_explorer(this.inner_right_tabview);
 		
 		//Chat Tab
-		this.attachChat(this.innerRightTabView);
+		this.attach_chat(this.inner_right_tabview);
 		
 		//Select first tab
-		this.innerRightTabView.selectTab(0);		
+		this.inner_right_tabview.selectTab(0);		
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
 		// Bottom
 		//////////////////////////////////////////////////////////////////////////////////////////
 				
 		//Bottom TabView
-		this.innerBottomTabView = new YAHOO.widget.TabView(container+'InnerLayoutBottom');
+		this.inner_bottom_tabview = new YAHOO.widget.TabView(container+'_inner_layout_bottom');
 		
 		//Message Tab
-		this.attachMessage(this.innerBottomTabView);
+		this.attach_message(this.inner_bottom_tabview);
 		
 		//Debug Tab
-		this.attachDebug(this.innerBottomTabView);
+		this.attach_debug(this.inner_bottom_tabview);
 		
 		//Console Tab
-		this.attachConsole(this.innerBottomTabView);
+		this.attach_console(this.inner_bottom_tabview);
 		
 		//Search Tab
-		this.attachSearch(this.innerBottomTabView);
+		this.attach_search(this.inner_bottom_tabview);
 		
 		//Select first tab
-		this.innerBottomTabView.selectTab(0);		
+		this.inner_bottom_tabview.selectTab(0);		
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
 		// Center
 		//////////////////////////////////////////////////////////////////////////////////////////
 		
-		this.workSpace = new org.goorm.core.layout.workspace();
-		this.workSpace.init(container+'InnerLayoutCenter');
+		this.workspace = new org.goorm.core.layout.workspace();
+		this.workspace.init(container+'_inner_layout_center');
 		
 		//this.startpage = new org.goorm.core.layout.startpage();
-		//this.startpage.init(container+'InnerLayoutCenter');
+		//this.startpage.init(container+'inner_layoutCenter');
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
 		// Final
@@ -260,31 +147,26 @@ org.goorm.core.layout.prototype = {
 		this.layout.render();		
 		
 		$(window).resize(function(){
-			self.resizeAll();
-			self.layout.getUnitByPosition("top").set("height",$("#goormMainMenu").height()+$("#goormMainToolbar").height()+7);
+			self.resize_all();
+			self.layout.getUnitByPosition("top").set("height",$("#goorm_mainmenu").height()+$("#goorm_main_toolbar").height()+7);
 		});
 
-		this.innerLayout.on("startResize", function() {
+		this.inner_layout.on("start_resize", function() {
 			$(".dummyspace").css("z-index", 999);
 		});
 
-		this.innerLayout.getUnitByPosition('center').on("resize", this.resizeAll);
+		this.inner_layout.getUnitByPosition('center').on("resize", this.resize_all);
 		
 		
-		this.resizeAll();
+		//this.resize_all();
 		//$(window).resize();
-		//this.layout.getUnitByPosition("top").set("height",$("#goormMainMenu").height()+$("#goormMainToolbar").height()+5);
+		//this.layout.getUnitByPosition("top").set("height",$("#goorm_mainmenu").height()+$("#goorm_main_toolbar").height()+5);
 		
-		//$(core).trigger("layoutLoaded");
+		$(core).trigger("layout_loaded");
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachMainMenu
-	 * @param {Object} container The container object.
-	 **/
-	attachMainMenu: function(container) {
-		this.mainMenu = new YAHOO.widget.MenuBar(container, { 
+
+	attach_mainmenu: function(container) {
+		this.mainmenu = new YAHOO.widget.MenuBar(container, { 
 			autosubmenudisplay: false, 
 			hidedelay: 750, 
 			lazyload: true ,
@@ -294,86 +176,60 @@ org.goorm.core.layout.prototype = {
 			}
 		});
 
-		this.mainMenu.render();
+		this.mainmenu.render();
 	
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method detachMainMenu
-	 **/
-	detachMainMenu: function() {
+
+	detach_mainmenu: function() {
+	},
+
+	show_mainmenu: function() {
+	},
+
+	hide_mainmenu: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showMainMenu 
-	 **/
-	showMainMenu: function() {
-	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideMainMenu 
-	 **/
-	hideMainMenu: function() {
-	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachProjectExplorer 
-	 * @param {Object} target The target object to be attached
-	 **/	
-	attachProjectExplorer: function(target) {
+	attach_project_explorer: function(target) {
 		var self = this;
 		
-		//this.tabProject = new YAHOO.widget.Tab({ label: "Project" +"&nbsp;"+ " <img src='images/icons/context/closebutton.png' class='close button' />", content: "<div id='projectExplorer' class='directoryTreeview'></div>" });
-		this.tabProject = new YAHOO.widget.Tab({ label: "Project", content: "<div id='projectExplorer' class='directoryTreeview'></div>" });
+		//this.tab_project = new YAHOO.widget.Tab({ label: "Project" +"&nbsp;"+ " <img src='images/icons/context/closebutton.png' class='close button' />", content: "<div id='project_explorer' class='directory_treeview'></div>" });
+		this.tab_project = new YAHOO.widget.Tab({ label: "Project", content: "<div id='project_explorer' class='directory_treeview'></div>" });
 
 		//attaching tab element
-		target.addTab(this.tabProject);
+		target.addTab(this.tab_project);
 		
 		//close button click event assign
 		/*
-		$(this.tabProject.get("labelEl")).find(".close").click(function() {
-			self.detachProjectExplorer();
+		$(this.tab_project.get("labelEl")).find(".close").click(function() {
+			self.detach_project_explorer();
 			
 			return false;
 		});
 		*/
 		
-		this.projectExplorer = new org.goorm.core.project.explorer();
-		this.projectExplorer.init();
+		this.project_explorer = new org.goorm.core.project.explorer();
+		this.project_explorer.init();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method detachProjectExplorer 
-	 **/	
-	detachProjectExplorer: function() {
-		 this.leftTabView.removeTab(this.tabProject);
+	detach_project_explorer: function() {
+		 this.left_tabview.removeTab(this.tab_project);
 
 		 delete this;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachToolBox 
-	 * @param {Object} target The target object
-	 **/
-	attachToolBox: function(target) {
+	attach_toolbox: function(target) {
 		var self = this;
 		
-		//this.tabToolbox = new YAHOO.widget.Tab({ label: "Tool Box" +"&nbsp;"+ " <img src='images/icons/context/closebutton.png' class='close button' />", content: "<div id='toolBox'></div>" });
-		this.tabToolbox = new YAHOO.widget.Tab({ label: "Tool Box", content: "<div id='toolBox'></div>" });
+		//this.tab_toolbox = new YAHOO.widget.Tab({ label: "Tool Box" +"&nbsp;"+ " <img src='images/icons/context/closebutton.png' class='close button' />", content: "<div id='toolbox'></div>" });
+		this.tab_toolbox = new YAHOO.widget.Tab({ label: "Tool Box", content: "<div id='toolbox'></div>" });
 
 		//attaching tab element
-		target.addTab(this.tabToolbox);		
+		target.addTab(this.tab_toolbox);		
 		
 		//close button click event assign
 		/*
-		$(this.tabToolbox.get("labelEl")).find(".close").click(function() {
-			self.detachToolBox();
+		$(this.tab_toolbox.get("labelEl")).find(".close").click(function() {
+			self.detach_toolbox();
 			
 			return false;
 		});
@@ -381,148 +237,79 @@ org.goorm.core.layout.prototype = {
 
 		//For Test Codes
 		/*
-		$("#toolBox").append("<div id='toolLine' style='cursor:pointer; width:100%; height:20px; border-bottom:1px solid #ccc;'>Line Tool</div>");
-		$("#toolBox").append("<div id='toolSquare' style='cursor:pointer; width:100%; height:20px; border-bottom:1px solid #ccc;'>Square Tool</div>");
+		$("#toolbox").append("<div id='toolLine' style='cursor:pointer; width:100%; height:20px; border-bottom:1px solid #ccc;'>Line Tool</div>");
+		$("#toolbox").append("<div id='toolSquare' style='cursor:pointer; width:100%; height:20px; border-bottom:1px solid #ccc;'>Square Tool</div>");
 		
 		$("#toolLine").click(function () {
-			self.windowManager.window[self.windowManager.activeWindow].designer.canvas.add("line");
-			self.windowManager.window[self.windowManager.activeWindow].designer.canvas.setDrawingMode("line");
+			self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line");
+			self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 		});
 		$("#toolSquare").click(function () {
-			self.windowManager.window[self.windowManager.activeWindow].designer.canvas.add("square");	
-			self.windowManager.window[self.windowManager.activeWindow].designer.canvas.setDrawingMode("square");		
+			self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square");	
+			self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");		
 		});
 		*/		
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method detachToolBox 
-	 **/	
-	detachToolBox: function() {
-		 this.leftTabView.removeTab(this.tabToolbox);
+	detach_toolbox: function() {
+		this.left_tabview.removeTab(this.tab_toolbox);
 		
 		delete this;
 	},
 	
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showProjectExplorer 
-	 **/
-	showProjectExplorer: function() {
+	show_project_explorer: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideProjectExplorer
-	 **/
-	hideProjectExplorer: function() {
+	hide_project_explorer: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachObjectExplorer 
-	 * @param {Object} target The target object to be attached
-	 **/	
-	attachObjectExplorer: function(target) {
+	attach_object_explorer: function(target) {
 		//attaching tab element
-		target.addTab(new YAHOO.widget.Tab({ label: "Object", content: "<div id='objectExplorer'><div id='objectTree'></div></div>" }));
+		target.addTab(new YAHOO.widget.Tab({ label: "Object", content: "<div id='object_explorer'><div id='object_tree'></div></div>" }));
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method detachObjectExplorer 
-	 **/		
-	detachObjectExplorer: function() {
+	detach_object_explorer: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showObjectExplorer 
-	 **/
-	showObjectExplorer: function() {
+	show_object_explorer: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideObjectExplorer 
-	 **/
-	hideObjectExplorer: function() {
+	hide_object_explorer: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachProperties 
-	 * @param {Object} target The target object
-	 **/	
-	attachProperties: function(target) {
+	attach_properties: function(target) {
 		//attaching tab element
 		target.addTab(new YAHOO.widget.Tab({ label: "Properties", content: "<div id='properties'></div>" }));
 		
 		var properties = new org.goorm.core.object.properties();
 		
-		this.tableProperties = properties.init("properties");
+		this.table_properties = properties.init("properties");
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method detachProperties 
-	 **/		
-	detachProperties: function() {
+	detach_properties: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showProperties 
-	 **/
-	showProperties: function() {
+	show_properties: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideProperties 
-	 **/
-	hideProperties: function() {
+	hide_properties: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachMessage 
-	 * @param {Object} target The target object.
-	 **/
-	attachMessage: function(target) {
+	attach_message: function(target) {
 		//attaching tab element
 		target.addTab(new YAHOO.widget.Tab({ label: "Message", content: "<div id='message'></div>" }));
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method detachMessage 
-	 **/	
-	detachMessage: function() {
+	detach_message: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showMessage 
-	 **/
-	showMessage: function() {
+	show_message: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideMessage 
-	 **/
-	hideMessage: function() {
+	hide_message: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachToolbar 
-	 * @param {Object} target The target object.
-	 **/
-	attachToolbar: function(target) {
+	attach_toolbar: function(target) {
 		/*
 		this.toolbar = new org.goorm.core.toolbar();
 		this.toolbar.add("../../configs/toolbars/org.goorm.core.file/file.toolbar.html", "file.toolbar", target);
@@ -531,225 +318,134 @@ org.goorm.core.layout.prototype = {
 		this.toolbar.add("../../configs/toolbars/org.goorm.core.design/design.toolbar.html", "design.toolbar", target);
 		*/
 		
-		var contextMenu = new org.goorm.core.menu.context();
-		contextMenu.init("configs/menu/org.goorm.core.toolbar/toolbar.html", "menu.context.toolbar", target);
+		var context_menu = new org.goorm.core.menu.context();
+		context_menu.init("configs/menu/org.goorm.core.toolbar/toolbar.html", "menu.context.toolbar", target);
 		
-		$(core).trigger("contextMenuCompleate");
+		$(core).trigger("context_menu_complete");
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method detachToolbar 
-	 **/		
-	detachToolbar: function() {
+	detach_toolbar: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showToolbar 
-	 **/
-	showToolbar: function() {
+	show_toolbar: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideToolbar 
-	 **/
 	hideToolbar: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachDebu 
-	 * @param {Obejct} target The target object.
-	 **/	
-	attachDebug: function(target) {
+	attach_debug: function(target) {
 		//attaching tab element
 		target.addTab(new YAHOO.widget.Tab({ label: "Debug", content: "<div id='debug'></div>" }));
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method detachDebug 
-	 **/		
-	detachDebug: function() {
+	detach_debug: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showDebug 
-	 **/	
-	showDebug: function() {
+	show_debug: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideDebug
-	 **/
-	hideDebug: function() {
+	hide_debug: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachChat
-	 * @param {Object} target The target object. 
-	 **/	
-	attachChat: function(target) {
+	attach_chat: function(target) {
 		//attaching tab element
-		target.addTab(new YAHOO.widget.Tab({ label: "Chat", content: "<div id='chat' class='layoutRightChatTab'></div>" }));
+		target.addTab(new YAHOO.widget.Tab({ label: "Chat", content: "<div id='chat' class='layout_right_chat_tab'></div>" }));
 
 /*
-		$("#chat").append("<div class='chatUserContainer' style='height:100px; border-bottom:1px #CCC solid; padding:5px;'></div>");		
-		$("#chat").append("<div class='chatMessageContainer' style='height:200px; border-bottom:1px #CCC solid; padding:5px;'></div>");
-		$("#chat").append("<div class='chatMessageInputContainer' style='height:50px; border-bottom:1px #CCC solid; padding:5px; background-color:#EFEFEF; text-align:center;'><input value='Chatting Message' style='width:90%;' /></div>");
+		$("#chat").append("<div class='chat_user_container' style='height:100px; border-bottom:1px #CCC solid; padding:5px;'></div>");		
+		$("#chat").append("<div class='chat_message_container' style='height:200px; border-bottom:1px #CCC solid; padding:5px;'></div>");
+		$("#chat").append("<div class='chat_message_input_container' style='height:50px; border-bottom:1px #CCC solid; padding:5px; background-color:#EFEFEF; text-align:center;'><input value='Chatting Message' style='width:90%;' /></div>");
 */
 		//$("#chat").append("<iframe src='http://localhost:8001/?room=11' width=99% height=300>");
 		this.chat = new org.goorm.core.collaboration.chat();
 		
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method detachChat 
-	 **/	
-	detachChat: function() {
+	detach_chat: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showChat 
-	 **/
-	showChat: function(project_id) {
-		$(".layoutRightChatTab").parent("div").attr("id",project_id);
+	show_chat: function(project_id) {
+		$(".layout_right_chat_tab").parent("div").attr("id",project_id);
 		this.chat.init(project_id);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideChat 
-	 **/
-	hideChat: function() {
+	hide_chat: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachConsole 
-	 * @param {Object} target The target object.
-	 **/	
-	attachConsole: function(target) {
+	attach_console: function(target) {
 		//attaching tab element
-		$(core).bind("preferenceLoadingComplete", function () {
+		$(core).bind("preference_loading_complete", function () {
 			
-			target.addTab(new YAHOO.widget.Tab({ label: "Console", content: "<div id='console' width='100%'><iframe id='iframeConsole' src='lib/com.googlecode.xwiterm/?serverID="+core.dialogPreference.ini['goorm.serverID']+"&serverPassword="+core.dialogPreference.ini['goorm.serverPassword']+"&default_path="+core.dialogPreference.ini['goorm.path']+"/project/' style='border:none;width:100%;height:100%-1px;'></div>" }));
+			target.addTab(new YAHOO.widget.Tab({ label: "Console", content: "<div id='console' width='100%'><iframe id='iframe_console' src='lib/com.googlecode.xwiterm/?serverID="+core.dialog.preference.ini['goorm.server_id']+"&serverPassword="+core.dialog.preference.ini['goorm.server_password']+"&default_path="+core.dialog.preference.ini['goorm.path']+"/project/' style='border:none;width:100%;height:100%-1px;'></div>" }));
 		});
 
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachSearch 
-	 * @param {Object} target The target object.
-	 **/	
-	attachSearch: function(target) {
+	attach_search: function(target) {
 		//attaching tab element
 		target.addTab(new YAHOO.widget.Tab({ label: "Search", content: "<div id='search' width='100%'></div>" }));
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method attachConsole 
-	 * @param {Object} target The target object.
-	 **/	
-	refreshConsole: function() {
+	refresh_console: function() {
 /*
-		this.innerBottomTabView.removeTab(this.innerBottomTabView.getTab(2));
+		this.inner_bottom_tabview.removeTab(this.inner_bottom_tabview.getTab(2));
 		//attaching tab element
 */
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method detachConsole 
-	 **/		
-	detachConsole: function() {
+	detach_console: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showConsole 
-	 **/
-	showConsole: function() {
+	show_console: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideConsole 
-	 **/
-	hideConsole: function() {
+	hide_console: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showWorkspace 
-	 **/
-	showWorkspace: function() {
+	show_workspace: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideWorkspace 
-	 **/
-	hideWorkspace: function() {
+	hide_workspace: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showWindowManager 
-	 **/
-	showWindowManager: function() {
+	show_window_manager: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideWindowManager 
-	 **/
-	hideWindowManager: function() {
+	hide_window_manager: function() {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method resizeAll 
-	 **/
-	resizeAll: function() {
-		var layoutLeftHeight = $(".yui-layout-unit-left").find(".yui-layout-wrap").height() - 26;		
-		$("#goormLeft").find(".yui-content").height(layoutLeftHeight);
-		$("#goormLeft").find("#projectExplorer").height(layoutLeftHeight-6);
-		$("#goormLeft").find("#projectTreeview").height(layoutLeftHeight-35);
+	resize_all: function() {
+		var layout_left_height = $(".yui-layout-unit-left").find(".yui-layout-wrap").height() - 26;		
+		$("#goorm_left").find(".yui-content").height(layout_left_height);
+		$("#goorm_left").find("#project_explorer").height(layout_left_height-6);
+		$("#goorm_left").find("#project_treeview").height(layout_left_height-35);
 		
-		var projectSelectorWidth = $(".yui-layout-unit-left").find(".yui-layout-wrap").find("#projectSelector").width();
-		$("#goormLeft").find("#projectSelectBox").width(projectSelectorWidth-19);
-		$("#goormLeft").find("#projectSelectBox").next().width(projectSelectorWidth-10);
-		$("#goormLeft").find("#projectSelectBox").find("button").width(projectSelectorWidth-18);
+		var project_selector_width = $(".yui-layout-unit-left").find(".yui-layout-wrap").find("#project_selector").width();
+		$("#goorm_left").find("#project_select_box").width(project_selector_width-19);
+		$("#goorm_left").find("#project_select_box").next().width(project_selector_width-10);
+		$("#goorm_left").find("#project_select_box").find("button").width(project_selector_width-18);
 		
-		var layoutRightHeight = $(".yui-layout-unit-right").find(".yui-layout-wrap").height() - 29;
-		$("#goormInnerLayoutRight").find(".yui-content").height(layoutRightHeight);
-		$("#goormInnerLayoutRight").find(".chatMessageContainer").height(layoutRightHeight - 182);
 		
-		var layoutBottomHeight = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 26;
-		$("#goormInnerLayoutBottom").find(".yui-content").height(layoutBottomHeight);
-		$("#iframeConsole").height(layoutBottomHeight-6);
+		var layout_right_height = $(".yui-layout-unit-right").find(".yui-layout-wrap").height() - 29;
+		$("#goorm_inner_layout_right").find(".yui-content").height(layout_right_height);
+		$("#goorm_inner_layout_right").find(".chat_message_container").height(layout_right_height - 182);
 		
-		var layoutCenterHeight = $(".yui-layout-unit-center").find(".yui-layout-unit-center").find(".yui-layout-wrap").height() - 2;
-		$("#goormInnerLayoutCenter").find("#workspace").height(layoutCenterHeight);
-
-		if (core.module.layout.workSpace.windowManager.isMaximize) {
-			$(document).trigger("maximizeResize");
+		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 26;
+		$("#goorm_inner_layout_bottom").find(".yui-content").height(layout_bottom_height);
+		$("#iframe_console").height(layout_bottom_height-6);
+		
+		var layout_center_height = $(".yui-layout-unit-center").find(".yui-layout-unit-center").find(".yui-layout-wrap").height() - 2;
+		$("#goorm_inner_layout_center").find("#workspace").height(layout_center_height);
+		
+		if (core.module.layout.workspace.window_manager.is_maxmizedd) {
+			$(document).trigger("maximize_resize");
 		}
 
 		$(".dummyspace").css("z-index", 0);
+
 		/*
 		var divChatContentsHeight = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 90;
-		$("#goormInnerLayoutBottom").find("#divChatContents").height(divChatContentsHeight);
+		$("#goorm_inner_layout_bottom").find("#divChatContents").height(divChatContentsHeight);
 		
 			
 		var divPropertiesValueColumnWidth = $("#divProperties").width() - 113;
@@ -775,6 +471,4 @@ org.goorm.core.layout.prototype = {
 		});
 		*/
 	}
-
-
-}
+};

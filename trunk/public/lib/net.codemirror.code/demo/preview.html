@@ -66,7 +66,7 @@
       
       function updatePreview() {
         var previewFrame = document.getElementById('preview');
-        var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
+        var preview =  previewFrame.contentDocument ||  previewFrame.contentwindow.document;
         preview.open();
         preview.write(editor.getValue());
         preview.close();

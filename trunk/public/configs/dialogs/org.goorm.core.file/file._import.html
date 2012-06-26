@@ -1,36 +1,36 @@
-<div class="contentHeader" localizationKey='dialog_file_import'>File Import</div>
+<div class="content_header" localization_key='dialog_file_import'>File Import</div>
 
-<div class="contentGuideMessage" localizationKey='dialog_file_import_guide'>Select a File to Import</div>
+<div class="content_guide_message" localization_key='dialog_file_import_guide'>Select a File to Import</div>
 
-<div id="fileImport" style="text-align:left; font-size:11px;">
+<div id="file_import" style="text-align:left; font-size:11px;">
 	<form id="myForm" action="file/import" method="post" enctype="multipart/form-data"> 
-		<div class="wizardStep" step="1">
+		<div class="wizard_step" step="1">
 			<div style="width:100%; height:20px; overflow:auto; font-size:11px;">
 		    	<div style="float:left;">
-		        	<span localizationKey='common_location'>Location : </span>
-            <input type="text" id="fileImportInputLocationPath" name="fileImportInputLocationPath" style="width:600px; height:15px;" readonly="readonly" />
+		        	<span localization_key='common_location'>Location : </span>
+            <input type="text" id="file_import_input_location_path" name="file_import_input_location_path" style="width:600px; height:15px;" readonly="readonly" />
 		        </div>
 		        <div style="float:right;">
-		        	<span localizationKey='common_target'>Target : </span>
+		        	<span localization_key='common_target'>Target : </span>
 		            <select name='selectbox'>
 		                <option value='2'>Remote</option>
 		            </select>
 		        </div>
 		    </div>
-			<div id="importDialogMiddle" style="width:780px; height:275px; margin-top:8px; font-size:11px;">
-				<div id="importDialogLeft" class="dialogsLeft">
-					<div id="fileImportTreeview" class='directoryTreeview dialogsLeftInner'></div>
+			<div id="import_dialog_middle" style="width:780px; height:275px; margin-top:8px; font-size:11px;">
+				<div id="import_dialog_left" class="dialogs_left">
+					<div id="file_import_treeview" class='directory_treeview dialogs_left_inner'></div>
 				</div>
-				<div id="importDialogCenter" class="dialogsCenter"></div>
+				<div id="import_dialog_center" class="dialog_center"></div>
 		    </div>
 		    <div style="margin-top:10px; border:1px solid #CCC; float:left; width:768px; padding:5px;">
 				<div style="overflow:auto; font-size:11px; float:left;">
-					<span localizationKey='dialog_file_import_file'>Choose the path that want to upload.</span>
+					<span localization_key='dialog_file_import_file'>Choose the path that want to upload.</span>
 				</div>
 				<div style="overflow:auto; font-size:11px; float:right;">
 			    	<div style="float:left;">
-						<input type="file" name="file" id="fileImportFile">
-						<div id="uploadOutput"></div>
+						<input type="file" name="file" id="file_import_file">
+						<div id="upload_output"></div>
 			        </div>
 			    </div>
 			</div>

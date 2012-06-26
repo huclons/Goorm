@@ -70,7 +70,7 @@ org.goorm.core.collaboration.chat = function () {
 	 **/
   	this.project_id = null;
   	
-  	this.isChatOn = null;
+  	this.is_chat_on = null;
   	this.timer = null;
   	
 };
@@ -86,15 +86,15 @@ org.goorm.core.collaboration.chat.prototype = {
 		
 		this.project_id = project_id;
 		
-		this.isChatOn = 0;
-		//project_id = "ChatJoinOnlineProject";
-		$("#"+this.project_id+" #chat").append("<div class='chatUserContainer'>User </div>");		
-		$("#"+this.project_id+" #chat").append("<div class='chatMessageContainer'></div>");
-		$("#"+this.project_id+" #chat").append("<div class='chatMessageInputContainer'><input id='inputChatMessage' value='Chatting Message' style='width:90%;' /></div>");
-		$("#ChatJoinOnlineProject .chatUserContainer").css("height","30px");
-		$("#ChatJoinOnlineProject .chatMessageContainer").css("height","217px");
-		$("#ChatJoinOnlineProject .chatMessageInputContainer").css("height","25px");
-		$("#ChatJoinOnlineProject").css("height","")
+		this.is_chat_on = 0;
+		//project_id = "chat_join_online_project";
+		$("#"+this.project_id+" #chat").append("<div class='chat_user_container'>User </div>");		
+		$("#"+this.project_id+" #chat").append("<div class='chat_message_container'></div>");
+		$("#"+this.project_id+" #chat").append("<div class='chat_message_input_container'><input id='inputChatMessage' value='Chatting Message' style='width:90%;' /></div>");
+		$("#chat_join_online_project .chat_user_container").css("height","30px");
+		$("#chat_join_online_project .chat_message_container").css("height","217px");
+		$("#chat_join_online_project .chat_message_input_container").css("height","25px");
+		$("#chat_join_online_project").css("height","")
 			.css("border-left","none")
 			.css("border-right","none")
 			.css("border-bottom","none");
@@ -109,15 +109,15 @@ org.goorm.core.collaboration.chat.prototype = {
 				
 				//message encoding to UTF-8
 				var encodedMsg = encodeURIComponent($(this).val());
-				if(self.isChatOn==1 && self.socket.readyState == 1){
+				if(self.is_chat_on==1 && self.socket.readyState == 1){
 					self.socket.send('{"channel": "chat", "action":"sendchat", "identifier": "'+ self.project_id +'", "message":"' + encodedMsg + '"}');
 				} else {
 					alert.show("Collaboration server is not opened!");
 
-					$(".isChatOn").html("Chat Off");
-					$("a[action=chatOnOff]").find("img").removeClass("toolbarButtonPressed");
+					$(".is_chat_on").html("Chat Off");
+					$("a[action=chat_on_off]").find("img").removeClass("toolbar_buttonPressed");
 	
-					$("a[action=chatOnOff]").each(function(i) {
+					$("a[action=chat_on_off]").each(function(i) {
 						if($(this).attr("status") == "enable") {
 							$(this).parent().hide();
 						} else if($(this).attr("status") == "disable") {
@@ -128,40 +128,40 @@ org.goorm.core.collaboration.chat.prototype = {
 				$(this).val("");
 			}
 		});
-		core.mainLayout.resizeAll();
+		core.module.layout.resize_all();
 	},
 	
 	/**
 	 * This function is an goorm core initializating function.  
-	 * @method startListening 
+	 * @method start_listening 
 	 **/
-	setChatOn: function () {
+	set_chat_on: function () {
 	
 		var self = this;
 		//this.socket = new WebSocket('ws://goorm.org:8090');
- 		this.socket = new WebSocket(core.dialogPreference.ini['CollaborationServerURL']+":"+core.dialogPreference.ini['CollaborationServerPort']);
+ 		this.socket = new WebSocket(core.dialog.preference.ini['collaboration_server_url']+":"+core.dialog.preference.ini['collaboration_server_port']);
 
- 		if(core.lastName != null && core.firstName != null){
-			this.userName = encodeURIComponent(core.lastName+" "+core.firstName);
+ 		if(core.user.last_name != null && core.user.first_name != null){
+			this.userName = encodeURIComponent(core.user.last_name+" "+core.user.first_name);
 		}
 		else{
-			this.userName = encodeURIComponent(localStorage['CollaborationNickname']);
+			this.userName = encodeURIComponent(localStorage['collaboration_nickname']);
 		}
 		
- 		this.startListening();
+ 		this.start_listening();
  		this.socket.onopen = function(){
- 			self.isChatOn = 1;
+ 			self.is_chat_on = 1;
  		 	this.send('{"channel": "chat","action":"init", "identifier": "'+ self.project_id +'",'+ '"message":"init","user":"'+self.userName+'"}');
  		};
  		this.socket.onclose = function(){
- 			if(self.isChatOn!=1){
- 		 		core.isChatOn = false;
- 		 		self.isChatOn = 0;
+ 			if(self.is_chat_on!=1){
+ 		 		core.chat_on = false;
+ 		 		self.is_chat_on = 0;
  		 		
-	 			$(".isChatOn").html("Chat Off");
-				$("a[action=chatOnOff]").find("img").removeClass("toolbarButtonPressed");
+	 			$(".is_chat_on").html("Chat Off");
+				$("a[action=chat_on_off]").find("img").removeClass("toolbar_buttonPressed");
 
-				$("a[action=chatOnOff]").each(function(i) {
+				$("a[action=chat_on_off]").each(function(i) {
 					if($(this).attr("status") == "enable") {
 						$(this).parent().hide();
 					} else if($(this).attr("status") == "disable") {
@@ -175,23 +175,23 @@ org.goorm.core.collaboration.chat.prototype = {
 	
 	/**
 	 * This function is an goorm core initializating function.  
-	 * @method startListening 
+	 * @method start_listening 
 	 **/
-	setChatOff: function () {
+	set_chat_off: function () {
 		
 		var self = this;
 		
- 		this.stopListening();
- 		this.isChatOn = 0;
+ 		this.stop_listening();
+ 		this.is_chat_on = 0;
  		
  		return false;
 	},
 	
 	/**
 	 * This function is an goorm core initializating function.  
-	 * @method startListening 
+	 * @method start_listening 
 	 **/
-	startListening: function () {
+	start_listening: function () {
 		
 		var self = this;
 		
@@ -204,7 +204,7 @@ org.goorm.core.collaboration.chat.prototype = {
 			}
 		}
 		$(window).unload(function() {
- 			self.stopListening();
+ 			self.stop_listening();
  		});
 
 		//Set Callback Function for Listening from Collaboration Server 
@@ -247,9 +247,9 @@ org.goorm.core.collaboration.chat.prototype = {
 	
 	/**
 	 * This function is an goorm core initializating function.  
-	 * @method stopListening 
+	 * @method stop_listening 
 	 **/
-	stopListening: function () {
+	stop_listening: function () {
 		var self=this;
 		
 		//Unset Callback Function for Listening from Collaboration Server
@@ -261,8 +261,8 @@ org.goorm.core.collaboration.chat.prototype = {
 			}
 		}
 		window.setInterval(this.timer);
-		$("#"+this.project_id+" .chatUserContainer").html("");
-		$("#"+this.project_id+" .chatMessageContainer").html("");
+		$("#"+this.project_id+" .chat_user_container").html("");
+		$("#"+this.project_id+" .chat_message_container").html("");
 	},
 	
 	/**
@@ -295,7 +295,7 @@ org.goorm.core.collaboration.chat.prototype = {
 	
 	    new_user_li.append("<span class='user_color' style='background-color:" + this.assigned_colors[userID] + "; color: " + this.assigned_colors[userID] + "'>.</span>");
 	    new_user_li.append("<span class='user_name'>" + userName + "</span>");
-	    $("#"+this.project_id+" .chatUserContainer").append(new_user_li);
+	    $("#"+this.project_id+" .chat_user_container").append(new_user_li);
 	},
 	
 	/**
@@ -305,7 +305,7 @@ org.goorm.core.collaboration.chat.prototype = {
 	 **/
 	removeUser: function (id) {
 		var userID = id.split("|@|")[0];
-		$("#"+this.project_id+" .chatUserContainer").find("#user-" + userID).remove();
+		$("#"+this.project_id+" .chat_user_container").find("#user-" + userID).remove();
 	},
 	
 	/**
@@ -328,9 +328,9 @@ org.goorm.core.collaboration.chat.prototype = {
 	   	chat_line.append(chat_message);
 	   	chat_line.append(chat_timestamp);
 	
-	    $("#"+this.project_id+" .chatMessageContainer").append(chat_line)
+	    $("#"+this.project_id+" .chat_message_container").append(chat_line)
 	    //TODO: set focus on last line added
-	    $("#"+this.project_id+" .chatMessageContainer").attr({ scrollTop: $("#"+this.project_id+" .chatMessageContainer").attr("scrollHeight") });
+	    $("#"+this.project_id+" .chat_message_container").attr({ scrollTop: $("#"+this.project_id+" .chat_message_container").attr("scrollHeight") });
 		
 	    this.updating_process_running = false;
 	},

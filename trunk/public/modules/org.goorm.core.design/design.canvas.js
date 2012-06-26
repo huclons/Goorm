@@ -2,249 +2,49 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module design
  **/
 
-/**
- * This is an goorm code generator.  
- * <br>goorm starts with this code generator.
- * @class canvas
- * @extends design
- **/
 org.goorm.core.design.canvas = function () {
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 **/
 	this.target = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property title
-	 **/
 	this.title = null;
-
-	/**
-	 * This presents the current browser version
-	 * @property toolbar
-	 **/
 	this.toolbar = null;
-		
-	/**
-	 * This presents the current browser version
-	 * @property width
-	 **/
 	this.width = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 **/
 	this.height = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property width
-	 **/
-	this.skinWidth = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 **/
-	this.skinHeight = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 **/
-	this.snapToGrid = false;
-	
-	/**
-	 * This presents the current browser version
-	 * @property contextMenu
-	 **/
-	this.contextMenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property objects
-	 **/
+	this.skin_width = null;
+	this.skin_height = null;
+	this.snap_to_grid = false;
+	this.context_menu = null;
 	this.objects = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property objectManager
-	 **/
-	this.objectManager = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property focus
-	 * @type Number
-	 * @default -1
-	 **/
+	this.object_manager = null;
 	this.focus = -1;
-	
-	/**
-	 * This presents the added midpoints in the line
-	 * @property innerNode
-	 **/
-	this.innerNode = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property hoveredIndex
-	 **/
-	this.hoveredIndex = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property selectedIndex
-	 **/
-	this.selectedIndex = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property isDrawing
-	 **/
-	this.isDrawing = false;
-	
-	/**
-	 * This presents the current browser version
-	 * @property isAdding
-	 **/
-	this.isAdding = -1;
-	
-	/**
-	 * This presents the current browser version
-	 * @property isModifying
-	 **/
-	this.isModifying = false;
-	
-	/**
-	 * This presents the current browser version
-	 * @property isDoubleClicking
-	 **/
-	this.isDoubleClicking = 0;
-	
-	/**
-	 * This presents the current browser version
-	 * @property prevX
-	 **/
-	this.prevX = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property prevY
-	 **/
-	this.prevY = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property sx
-	 **/
+	this.inner_node = null;
+	this.hovered_index = null;
+	this.selected_index = null;
+	this.is_drawing = false;
+	this.is_adding = -1;
+	this.is_modifying = false;
+	this.is_double_clicking = 0;
+	this.previous_x = null;
+	this.previous_y = null;
 	this.sx = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property sy
-	 **/
 	this.sy = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property ex
-	 **/
 	this.ex = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property ey
-	 **/
 	this.ey = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property copiedObjects
-	 **/
-	this.copiedObjects = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property copiedObjectsUndo
-	 **/
-	this.copiedObjectsUndo = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property copiedObjectsRedo
-	 **/
-	this.copiedObjectsRedo = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property undoManager
-	 **/	
-	this.undoManager = null;
-		
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 **/	
+	this.copied_objects = null;
+	this.copied_objects_undo = null;
+	this.copied_objects_redo = null;
+	this.undo_manager = null;
 	this.dialog = null;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property preview
-	 **/	
 	this.preview = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property collaboration
-	 **/
 	this.collaboration = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property objectexplorer
-	 **/
-	this.objectexplorer = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property multiNodeLine
-	 **/
-	this.multiNodeLine = false;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property previewSlider
-	 **/
-	this.previewSlider = null;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property isShiftPressed
-	 **/
-	this.isShiftPressed = null;
-		
+	this.object_explorer = null;
+	this.multi_node_line = false;	
+	this.preview_slider = null;	
+	this.is_shift_pressed = null;
 };
 
 org.goorm.core.design.canvas.prototype = {
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @constructor
-	 * @param {String} target The target.
-	 * @param {String} width The width of the canvas.
-	 * @param {String} height The height of the canvas.
-	 * @param {String} title The title of the canvas. 
-	 **/
 	init: function (target, width, height, title, parent) {
 		var self = this;
 		
@@ -265,21 +65,21 @@ org.goorm.core.design.canvas.prototype = {
 		this.parent = parent;
 		
 		this.objects = $.makeArray();
-		this.copiedObjects = $.makeArray();
-		this.copiedObjectsUndo = $.makeArray();
-		this.copiedObjectsRedo = $.makeArray();
+		this.copied_objects = $.makeArray();
+		this.copied_objects_undo = $.makeArray();
+		this.copied_objects_redo = $.makeArray();
 		
-		this.isAdding = -1;
-		this.isModifying = false;
+		this.is_adding = -1;
+		this.is_modifying = false;
 		
-		this.isShiftPressed = false;
+		this.is_shift_pressed = false;
 		
-		this.objectManager = new org.goorm.core.object.manager();
-		this.objectManager.init("", this);
+		this.object_manager = new org.goorm.core.object.manager();
+		this.object_manager.init("", this);
 		
-		//objectexplorer Initialization
-		this.objectExplorer = new org.goorm.core.design.canvas.objectexplorer();
-		this.objectExplorer.init(this);
+		//object_explorer Initialization
+		this.object_explorer = new org.goorm.core.design.canvas.object_explorer();
+		this.object_explorer.init(this);
 
 		//Toolbar Initialization		
 		this.toolbar = new org.goorm.core.design.canvas.toolbar();
@@ -287,11 +87,11 @@ org.goorm.core.design.canvas.prototype = {
 		
 		//preview Initialization		
 		this.preview = new org.goorm.core.design.canvas.preview();
-		this.preview.init($(target).parent().find(".designPreviewContainer")[0], width, height, 0.1, this);
+		this.preview.init($(target).parent().find(".design.preview_container")[0], width, height, 0.1, this);
 
 		//Blocking Context Menus for Empty Space		
-		var emptyContextMenu = new org.goorm.core.menu.context();
-		emptyContextMenu.init("", "none", $(target).find(".designPreviewContainer"), "");
+		var empty_context_menu = new org.goorm.core.menu.context();
+		empty_context_menu.init("", "none", $(target).find(".design.preview_container"), "");
 
 
 		this.collaboration = new org.goorm.core.collaboration.design();
@@ -302,36 +102,36 @@ org.goorm.core.design.canvas.prototype = {
 		
 		
 		$(document).bind("keydown", "Shift", function () {
-			self.isShiftPressed = true;
+			self.is_shift_pressed = true;
 		});
 		
 		$(document).bind("keyup", "Shift", function () {
-			self.isShiftPressed = false;
+			self.is_shift_pressed = false;
 		});
 
 
 		//Set Dialog
-		var handleOk = function() { 
-			var width = $("#" + self.dialog.containerID).find(".designCanvasSetting").find(".canvasWidth").val();
-			var height = $("#" + self.dialog.containerID).find(".designCanvasSetting").find(".canvasHeight").val();
+		var handle_ok = function() { 
+			var width = $("#" + self.dialog.container_id).find(".design_canvas_setting").find(".canvas_width").val();
+			var height = $("#" + self.dialog.container_id).find(".design_canvas_setting").find(".canvas_height").val();
 			
 			self.setSize(width, height);
 			
-			self.preview.scale=(self.previewSlider.getRealValue()/100).toFixed(2);
-			self.preview.setSize("change");
+			self.preview.scale=(self.preview_slider.get_real_value()/100).toFixed(2);
+			self.preview.set_size("change");
 			
-			parent.resizeAll();
+			parent.resize_all();
 		
 			this.hide(); 
 		};
 
-		var handleCancel = function() { 
+		var handle_cancel = function() { 
 
 			this.hide(); 
 		};
 		
-		this.buttons = [ {text:"OK", handler:handleOk, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}]; 
+		this.buttons = [ {text:"OK", handler:handle_ok, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}]; 
 		
 		this.dialog = new org.goorm.core.design.canvas.dialog();
 
@@ -344,67 +144,67 @@ org.goorm.core.design.canvas.prototype = {
 			draggable:true,
 			buttons:this.buttons,
 			success: function () {
-				var tabView = new YAHOO.widget.TabView($("#" + self.dialog.containerID).find(".designCanvasSetting").get(0));
+				var tabview = new YAHOO.widget.TabView($("#" + self.dialog.container_id).find(".design_canvas_setting").get(0));
 				
 				
 				var width = self.width;
-				$("#" + self.dialog.containerID).find(".designCanvasSetting").find(".canvasWidth").val(width);
+				$("#" + self.dialog.container_id).find(".design_canvas_setting").find(".canvas_width").val(width);
 				var height = self.height;
-				$("#" + self.dialog.containerID).find(".designCanvasSetting").find(".canvasHeight").val(height);
+				$("#" + self.dialog.container_id).find(".design_canvas_setting").find(".canvas_height").val(height);
 				
-				self.previewSlider = YAHOO.widget.Slider.getHorizSlider("previewSliderBg", "previewSliderThumb", 0, 200, 20);
-				self.previewSlider.animate = true;
-				self.previewSlider.getRealValue = function() {
+				self.preview_slider = YAHOO.widget.Slider.getHorizSlider("preview_slider_background", "preview_slider_thumb", 0, 200, 20);
+				self.preview_slider.animate = true;
+				self.preview_slider.get_real_value = function() {
 					return (Math.round((this.getValue()/4)+10));
 				}
-				self.previewSlider.subscribe("change", function(offsetFromStart) {
-					$("#previewSliderValue").empty();
-					$("#previewSliderValue").append(self.previewSlider.getRealValue());
+				self.preview_slider.subscribe("change", function(offsetFromStart) {
+					$("#preview_slider_value").empty();
+					$("#preview_slider_value").append(self.preview_slider.get_real_value());
 				});
 				
-				self.previewSlider.setValue(parseInt((self.preview.scale-0.1)*400));
+				self.preview_slider.setValue(parseInt((self.preview.scale-0.1)*400));
 			}
 		});
 		this.dialog = this.dialog.dialog;		
 				
 		//Set Undo Manager
-		this.undoManager = new UndoManager();
+		this.undo_manager = new undo_manager();
 		
 		
-		this.selectedIndex = $.makeArray();
+		this.selected_index = $.makeArray();
 		
 		//Set canvas size
 		this.setSize(width, height);
 				
 		//Set Context Menu
-		this.contextMenu = new org.goorm.core.menu.context();
-		this.contextMenu.init("configs/menu/org.goorm.core.design/design.canvas.html", "design.canvas", $(target).find(".canvas").find("canvas"), this.title, "", function() {
+		this.context_menu = new org.goorm.core.menu.context();
+		this.context_menu.init("configs/menu/org.goorm.core.design/design.canvas.html", "design.canvas", $(target).find(".canvas").find("canvas"), this.title, "", function() {
 			//Set context menu action
-			$("div[id='design.canvas_"+self.title+"']").find("a[action=pasteObject]").click(function () {
+			$("div[id='design.canvas_"+self.title+"']").find("a[action=paste_object]").click(function () {
 				self.paste();
 			});						
-			$("div[id='design.canvas_"+self.title+"']").find("a[action=canvasZoomFit]").click(function () {
+			$("div[id='design.canvas_"+self.title+"']").find("a[action=canvas_zoom_fit]").click(function () {
 				self.toolbar.zoomFit();
 			});			
-			$("div[id='design.canvas_"+self.title+"']").find("a[action=canvasZoomIn]").click(function () {
+			$("div[id='design.canvas_"+self.title+"']").find("a[action=canvas_zoom_in]").click(function () {
 				self.toolbar.zoomIn();
 			});
-			$("div[id='design.canvas_"+self.title+"']").find("a[action=canvasZoomOut]").click(function () {
+			$("div[id='design.canvas_"+self.title+"']").find("a[action=canvas_zoom_out]").click(function () {
 				self.toolbar.zoomOut();
 			});		
-			$("div[id='design.canvas_"+self.title+"']").find("a[action=canvasSnapToGridOn]").click(function () {
-				self.toolbar.toggleSnapToGrid();
+			$("div[id='design.canvas_"+self.title+"']").find("a[action=canvas_snap_to_grid_on]").click(function () {
+				self.toolbar.toggle_snap_to_grid();
 			});		
-			$("div[id='design.canvas_"+self.title+"']").find("a[action=showCanvasSetting]").click(function () {
+			$("div[id='design.canvas_"+self.title+"']").find("a[action=show_canvas_setting]").click(function () {
 				self.dialog.panel.show();
 			});				
 		});
 				
 		$(target).find(".canvas").find("canvas").dblclick(function (e) {
-			var parentOffset = $(this).parent().offset(); 
-			var ratio = self.toolbar.zoomLevel / 100;
-			var x = Math.floor(e.pageX - parentOffset.left) * ratio;
-			var y = Math.floor(e.pageY - parentOffset.top) * ratio;
+			var parent_offset = $(this).parent().offset(); 
+			var ratio = self.toolbar.zoom_level / 100;
+			var x = Math.floor(e.pageX - parent_offset.left) * ratio;
+			var y = Math.floor(e.pageY - parent_offset.top) * ratio;
 
 			$(self.objects).each(function (i) {
 				if (this.type == "square") {
@@ -412,7 +212,7 @@ org.goorm.core.design.canvas.prototype = {
 					//sx, sy : Line Start Position,
 					//ex, ey : Line End Position
 					var sx=0, sy=0, ex=0, ey=0;
-					var shapeProperties = this.shape.properties;
+					var shape_properties = this.shape.properties;
 					
 					if ($(this)[0].properties.sx) {
 						sx = parseInt($(this)[0].properties.sx);
@@ -432,21 +232,20 @@ org.goorm.core.design.canvas.prototype = {
 					
 					var tInputWidth = Math.floor((ex-sx-20)/6);
 					
-					var objectPointer = this;
+					var object_pointer = this;
 					
 					if ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy - 5 <= y && y <= ey + 5) || (ey - 5 <= y && y <= sy + 5) ) ) {
 						$("div[id='stencil_" + $(this)[0].shape.timestamp+"']").find("span").each(function() {
-							var tsx = Math.floor($(this).offset().left-parentOffset.left);
-							var tsy = Math.floor($(this).offset().top-parentOffset.top);
+							var tsx = Math.floor($(this).offset().left-parent_offset.left);
+							var tsy = Math.floor($(this).offset().top-parent_offset.top);
 							var tex = Math.floor(tsx + $(this).width());
 							var tey = Math.floor(tsy + $(this).height());
 							
 							if( (tsx <= x && x <= tex) && (tsy <= y && y <= tey) ) {
-								console.log("span"+self.isDoubleClicking);
-								self.isDoubleClicking = 100000;
+								self.is_double_clicking = 100000;
 								var tValue = $(this).text();
 								
-								var selectedObjectKey = this;
+								var selected_object_key = this;
 								
 								$(this).empty();
 								$(this).append("<input type='text' value='"+tValue+"' size='"+tInputWidth+"'>");
@@ -457,34 +256,32 @@ org.goorm.core.design.canvas.prototype = {
 									var code = (e.keyCode ? e.keyCode : e.which);
 									if (code == 13) {
 										tValue = $(this).val();
-										//console.log($(this).parent().attr("class"));
 										
-										eval("shapeProperties." + $(this).parent().attr("class") + "='" + tValue + "';");
+										eval("shape_properties." + $(this).parent().attr("class") + "='" + tValue + "';");
 
-										$(selectedObjectKey).empty();
-										$(selectedObjectKey).append(tValue);
+										$(selected_object_key).empty();
+										$(selected_object_key).append(tValue);
 										
-										self.selectItem(i);
+										self.select_item(i);
 										
-										self.isDoubleClicking = 3;
+										self.is_double_clicking = 3;
 										
-										objectPointer.properties.status = "modified";
+										object_pointer.properties.status = "modified";
 									}
 								});
 							}
 						});
 						$("div[id='stencil_" + $(this)[0].shape.timestamp+"']").find("ul").each(function() {
-							var tsx = Math.floor($(this).offset().left-parentOffset.left);
-							var tsy = Math.floor($(this).offset().top-parentOffset.top);
+							var tsx = Math.floor($(this).offset().left-parent_offset.left);
+							var tsy = Math.floor($(this).offset().top-parent_offset.top);
 							var tex = Math.floor(tsx + $(this).width());
 							var tey = Math.floor(tsy + $(this).height());
 							
 							if( (tsx <= x && x <= tex) && (tsy <= y && y <= tey) ) {
-								console.log("ul"+self.isDoubleClicking);
-								self.isDoubleClicking = 100000;
+								self.is_double_clicking = 100000;
 								var tValue = $(this).text();
 								
-								var selectedObjectKey = this;
+								var selected_object_key = this;
 								
 								$(this).empty();
 								$(this).append("<input type='text' value='"+tValue+"' size='"+tInputWidth+"'>");
@@ -495,16 +292,16 @@ org.goorm.core.design.canvas.prototype = {
 									var code = (e.keyCode ? e.keyCode : e.which);
 									if (code == 13) {
 										tValue = $(this).val();
-										eval("shapeProperties." + $(this).parent().attr("class") + "='" + tValue + "';");
+										eval("shape_properties." + $(this).parent().attr("class") + "='" + tValue + "';");
 
-										$(selectedObjectKey).empty();
-										$(selectedObjectKey).append(tValue);
+										$(selected_object_key).empty();
+										$(selected_object_key).append(tValue);
 										
-										self.selectItem(i);
+										self.select_item(i);
 										
-										self.isDoubleClicking = 3;
+										self.is_double_clicking = 3;
 										
-										objectPointer.properties.status = "modified";
+										object_pointer.properties.status = "modified";
 									}
 								});
 							}
@@ -526,27 +323,27 @@ org.goorm.core.design.canvas.prototype = {
 				self.ey = 0;				
 				
 				//self.deselect();
-				//self.objectManager.unset();
+				//self.object_manager.unset();
 				
 				//Calculate the position (x, y) in Canvas Axis
-				var parentOffset = $(this).parent().offset(); 	
-				var ratio = self.toolbar.zoomLevel / 100;
-				var x = Math.floor(e.pageX - parentOffset.left) * ratio;
-				var y = Math.floor(e.pageY - parentOffset.top) * ratio;
+				var parent_offset = $(this).parent().offset(); 	
+				var ratio = self.toolbar.zoom_level / 100;
+				var x = Math.floor(e.pageX - parent_offset.left) * ratio;
+				var y = Math.floor(e.pageY - parent_offset.top) * ratio;
 				
 				
-				if (!($(self.target).find(".canvas").hasClass("statusDrawingLine")) && 
-					!($(self.target).find(".canvas").hasClass("statusDrawingSquare")) &&
-					!($(self.target).find(".canvas").hasClass("statusMove")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeTopLeft")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeTopRight")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeBottomLeft")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeBottomRight")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeTop")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeBottom")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeLeft")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeRight")) &&
-					!self.isDrawing ) {
+				if (!($(self.target).find(".canvas").hasClass("status_drawing_line")) && 
+					!($(self.target).find(".canvas").hasClass("status_drawing_square")) &&
+					!($(self.target).find(".canvas").hasClass("status_move")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_top_left")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_top_right")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_bottom_left")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_bottom_right")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_top")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_bottom")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_left")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_right")) &&
+					!self.is_drawing ) {
 					//Set the start position for selection layer
 					self.sx = x;
 					self.sy = y;
@@ -555,20 +352,20 @@ org.goorm.core.design.canvas.prototype = {
 				}
 				
 				
-				var selectSomething = false;
+				var select_something = false;
 
 
 				//Set Status with Drawing Mode
-				if($(self.target).find(".canvas").hasClass("statusDrawingLine")) {			
-					$(self.target).parent().find(".designStatusContainer").find(".lineDrawing").addClass("toolbarButtonPressed");
+				if($(self.target).find(".canvas").hasClass("status_drawing_line")) {			
+					$(self.target).parent().find(".design_status_container").find(".lineDrawing").addClass("toolbar_buttonPressed");
 				}
 				//If square mode
-				else if($(self.target).find(".canvas").hasClass("statusDrawingSquare")) {
-					$(self.target).parent().find(".designStatusContainer").find(".squareDrawing").addClass("toolbarButtonPressed");
+				else if($(self.target).find(".canvas").hasClass("status_drawing_square")) {
+					$(self.target).parent().find(".design_status_container").find(".squareDrawing").addClass("toolbar_buttonPressed");
 				}
 				else {
-					$(self.target).parent().find(".designStatusContainer").find(".lineDrawing").removeClass("toolbarButtonPressed");
-					$(self.target).parent().find(".designStatusContainer").find(".squareDrawing").removeClass("toolbarButtonPressed");
+					$(self.target).parent().find(".design_status_container").find(".lineDrawing").removeClass("toolbar_buttonPressed");
+					$(self.target).parent().find(".design_status_container").find(".squareDrawing").removeClass("toolbar_buttonPressed");
 				}
 				
 				
@@ -580,9 +377,9 @@ org.goorm.core.design.canvas.prototype = {
 				$(self.objects).each(function (i) {
 
 					
-					if (this.properties.selectedNode == "body") {
-						self.prevX = x;
-						self.prevY = y;					
+					if (this.properties.selected_node == "body") {
+						self.previous_x = x;
+						self.previous_y = y;					
 					}
 					
 					if (this.shape) {
@@ -591,17 +388,17 @@ org.goorm.core.design.canvas.prototype = {
 					
 					if (this.type == "line") {
 					
-						self.isHovered(x, y, this, function() {
-							if (self.selectedIndex.length <= 1 && !self.isShiftPressed) {
-								self.selectedIndex = $.makeArray();
+						self.is_hovered(x, y, this, function() {
+							if (self.selected_index.length <= 1 && !self.is_shift_pressed) {
+								self.selected_index = $.makeArray();
 							}
 							
-							if (self.hoveredIndex == i) {
-								self.selectItem(i);
-								selectSomething = true;
+							if (self.hovered_index == i) {
+								self.select_item(i);
+								select_something = true;
 								
-								//if ($.inArray(i, self.selectedIndex) > -1 && self.isShiftPressed) {
-								//	self.selectedIndex.pop(i);
+								//if ($.inArray(i, self.selected_index) > -1 && self.is_shift_pressed) {
+								//	self.selected_index.pop(i);
 								//}
 							}							
 							
@@ -630,27 +427,26 @@ org.goorm.core.design.canvas.prototype = {
 						}
 						
 						if ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy - 5 <= y && y <= ey + 5) || (ey - 5 <= y && y <= sy + 5) ) ) {
-							if (self.selectedIndex.length <= 1 && !self.isShiftPressed) {
-								self.selectedIndex = $.makeArray();
+							if (self.selected_index.length <= 1 && !self.is_shift_pressed) {
+								self.selected_index = $.makeArray();
 							}
 							
-							if (self.hoveredIndex == i) {
+							if (self.hovered_index == i) {
 
 								
-								if ($.inArray(i, self.selectedIndex) > -1 && self.isShiftPressed) {
-									//console.log(i + "is hovered and selecte, Shift key is pressed!");
-									self.selectedIndex.splice(self.selectedIndex.indexOf(i), 1);
+								if ($.inArray(i, self.selected_index) > -1 && self.is_shift_pressed) {
+									self.selected_index.splice(self.selected_index.indexOf(i), 1);
 								}
 								else {
-									self.selectItem(i);
-									selectSomething = true;
+									self.select_item(i);
+									select_something = true;
 								}
 							}
 								
 							//return false; //exit the each function, because the cursor status can be changed by the other object		
 						}
 						else {
-							//self.deselectItem(i);							
+							//self.deselect_item(i);							
 						}
 					}
 				});	
@@ -658,20 +454,20 @@ org.goorm.core.design.canvas.prototype = {
 
 
 				
-				if (!selectSomething && !self.isShiftPressed) {
+				if (!select_something && !self.is_shift_pressed) {
 					self.deselect();
-					self.objectManager.unset();
+					self.object_manager.unset();
 				}
 			
 				self.draw();
 				
-				self.contextMenu.hide();
+				self.context_menu.hide();
 				
 			}
 			
 			if (e.which == 3) {
-				if (self.hoveredIndex > -1) {
-					self.contextMenu.hide();
+				if (self.hovered_index > -1) {
+					self.context_menu.hide();
 				}
 			}
 			
@@ -679,15 +475,15 @@ org.goorm.core.design.canvas.prototype = {
 		
 		//Mouse Move Event in Canvas
 		$(target).find(".canvas").find("canvas").mousemove(function (e) {
-			if( self.isDoubleClicking-- < 1 ) {
+			if( self.is_double_clicking-- < 1 ) {
 				//Calculate the position (x, y) in Canvas Axis
-				var parentOffset = $(this).parent().offset(); 	
-				var ratio = self.toolbar.zoomLevel / 100;
-				var x = Math.floor(e.pageX - parentOffset.left) * ratio;
-				var y = Math.floor(e.pageY - parentOffset.top) * ratio;
+				var parent_offset = $(this).parent().offset(); 	
+				var ratio = self.toolbar.zoom_level / 100;
+				var x = Math.floor(e.pageX - parent_offset.left) * ratio;
+				var y = Math.floor(e.pageY - parent_offset.top) * ratio;
 				
 				//Print the current position (x, y) to right bottom space of parent window. (window footer)
-				$(target).parent().parent().parent().find(".ft").find(".mousePositionView").html("(" + x + ", " + y + ")");
+				$(target).parent().parent().parent().find(".ft").find(".mouse_position_view").html("(" + x + ", " + y + ")");
 				
 				
 				//Selection Layer
@@ -719,76 +515,76 @@ org.goorm.core.design.canvas.prototype = {
 				
 				
 				
-				self.hoveredIndex = null; //Canvas has no hovered object
+				self.hovered_index = null; //Canvas has no hovered object
 								
 				//If user has selected the line drawing tool, keep the cursor is crosshair, unless, chanage the cursor is default
-				if (!(($(self.target).find(".canvas").hasClass("statusDrawingLine")) || ($(self.target).find(".canvas").hasClass("statusDrawingSquare")))) {
-					self.changeStatus("statusDefault");
+				if (!(($(self.target).find(".canvas").hasClass("status_drawing_line")) || ($(self.target).find(".canvas").hasClass("status_drawing_square")))) {
+					self.change_status("status_default");
 				}
 				
 				
 				//Set Status with Drawing Mode
-				if($(self.target).find(".canvas").hasClass("statusDrawingLine")) {			
-					$(self.target).parent().find(".designStatusContainer").find(".lineDrawing").addClass("toolbarButtonPressed");
+				if($(self.target).find(".canvas").hasClass("status_drawing_line")) {			
+					$(self.target).parent().find(".design_status_container").find(".lineDrawing").addClass("toolbar_buttonPressed");
 				}
 				//If square mode
-				else if($(self.target).find(".canvas").hasClass("statusDrawingSquare")) {
-					$(self.target).parent().find(".designStatusContainer").find(".squareDrawing").addClass("toolbarButtonPressed");
+				else if($(self.target).find(".canvas").hasClass("status_drawing_square")) {
+					$(self.target).parent().find(".design_status_container").find(".squareDrawing").addClass("toolbar_buttonPressed");
 				}
 				else {
-					$(self.target).parent().find(".designStatusContainer").find(".lineDrawing").removeClass("toolbarButtonPressed");
-					$(self.target).parent().find(".designStatusContainer").find(".squareDrawing").removeClass("toolbarButtonPressed");
+					$(self.target).parent().find(".design_status_container").find(".lineDrawing").removeClass("toolbar_buttonPressed");
+					$(self.target).parent().find(".design_status_container").find(".squareDrawing").removeClass("toolbar_buttonPressed");
 				}
 				
 				//Objects
 				$(self.objects).each(function (i) {
 					//Set grouply moving after selecting with making area
-					//if ($.inArray(i, self.selectedIndex) > -1) {
-						//this.properties.selectedNode = "body";
-						//this.properties.isDrag = true;
+					//if ($.inArray(i, self.selected_index) > -1) {
+						//this.properties.selected_node = "body";
+						//this.properties.is_dragging = true;
 					//}
 					
 					
-					if (this.shape && this.properties.isDrag && !this.properties.isDrawFinished) {
-						if(!self.isModifying && self.isAdding<0) {
-							delete self.copiedObjectUndo;
-							self.copiedObjectsUndo = $.makeArray();
+					if (this.shape && this.properties.is_dragging && !this.properties.is_drawing_finished) {
+						if(!self.is_modifying && self.is_adding<0) {
+							delete self.copied_objects_undo;
+							self.copied_objects_undo = $.makeArray();
 							
-							$(self.selectedIndex).each(function (i) {
+							$(self.selected_index).each(function (i) {
 								var properties = new Object();
 								properties.sx = self.objects[this].properties.sx;
 								properties.sy = self.objects[this].properties.sy;
 								properties.ex = self.objects[this].properties.ex;
 								properties.ey = self.objects[this].properties.ey;
 	
-								self.copiedObjectsUndo[this]=properties;
+								self.copied_objects_undo[this]=properties;
 							});
 							
-							self.isModifying = true;
+							self.is_modifying = true;
 						}
 						this.shape.show();
 					}
 					
 				
-					if (this.properties.selectedNode == "body" && this.properties.isDrag) {
-						self.move(i, x - this.properties.prevX, y - this.properties.prevY);
+					if (this.properties.selected_node == "body" && this.properties.is_dragging) {
+						self.move(i, x - this.properties.previous_x, y - this.properties.previous_y);
 						
 						var obj = this;
 						
-						$(self.selectedIndex).each(function (j) {
+						$(self.selected_index).each(function (j) {
 							if(i != this) {
-								self.objects[this].properties.sx += x - obj.properties.prevX;
-								self.objects[this].properties.sy += y - obj.properties.prevY;
+								self.objects[this].properties.sx += x - obj.properties.previous_x;
+								self.objects[this].properties.sy += y - obj.properties.previous_y;
 								
 								if (self.objects[this].type == "line") {
-									$(self.objects[this].properties.innerNode).each(function (i) {
-										this.x += x - obj.properties.prevX;
-										this.y += y - obj.properties.prevY;
+									$(self.objects[this].properties.inner_node).each(function (i) {
+										this.x += x - obj.properties.previous_x;
+										this.y += y - obj.properties.previous_y;
 									});
 								}
 								
-								self.objects[this].properties.ex += x - obj.properties.prevX;
-								self.objects[this].properties.ey += y - obj.properties.prevY;		
+								self.objects[this].properties.ex += x - obj.properties.previous_x;
+								self.objects[this].properties.ey += y - obj.properties.previous_y;		
 								
 								self.objects[this].properties.status = "modified";			
 							}
@@ -818,8 +614,8 @@ org.goorm.core.design.canvas.prototype = {
 							ey = parseInt($(this)[0].properties.ey);
 						}
 						
-						self.isHovered(x, y, this, function() {
-							self.hoverItem(i);
+						self.is_hovered(x, y, this, function() {
+							self.hover_item(i);
 						});
 						
 						
@@ -842,21 +638,21 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 								
 								
 								if ( Math.round((Math.abs(a)*1000))/1000 < 0.01 ||  Math.round((Math.abs(1/a)*1000))/1000 < 0.01) {
-									self.hoverItem(i);	
+									self.hover_item(i);	
 									
 									//return false; //exit the each function, because the cursor status can be changed by the other object
 								}
 								else {
 									//if a mouse cursor is in line selection coverage,
 									if (a * x + b1  <= y && y <= a * x + b2 && (((y - b1) / a <= x && x <=  (y - b2) / a) || ((y - b2) / a <= x && x <=  (y - b1) / a))) {
-										self.hoverItem(i);
+										self.hover_item(i);
 										
 										//return false; //exit the each function, because the cursor status can be changed by the other object
 									}
 								}
 							}
 							else {
-								self.hoverItem(i);	
+								self.hover_item(i);	
 								
 								//return false; //exit the each function, because the cursor status can be changed by the other object
 							}
@@ -866,130 +662,130 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 */
 						
 						//Connection between Line and Square Objects
-						if (this.properties.selectedNode == "head" && this.properties.isDrag) {
-							var currentObject = this;
+						if (this.properties.selected_node == "head" && this.properties.is_dragging) {
+							var current_object = this;
 							
 							//Objects
 							$(self.objects).each(function (i) {
 								if (this.type == "square") {
 									if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.sx = this.properties.sx;
-										currentObject.properties.sy = this.properties.sy;
+										current_object.properties.sx = this.properties.sx;
+										current_object.properties.sy = this.properties.sy;
 	
 										//return false;
 									}
 									else if ((this.properties.sx + this.properties.ex)/2 - 10 <= x && x <= (this.properties.sx + this.properties.ex)/2 + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.sx = Math.round((this.properties.sx + this.properties.ex)/2);
-										currentObject.properties.sy = this.properties.sy;
+										current_object.properties.sx = Math.round((this.properties.sx + this.properties.ex)/2);
+										current_object.properties.sy = this.properties.sy;
 										
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.sx = this.properties.ex;
-										currentObject.properties.sy = this.properties.sy;
+										current_object.properties.sx = this.properties.ex;
+										current_object.properties.sy = this.properties.sy;
 										
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && (this.properties.sy + this.properties.ey)/2 - 10 <= y && y <= (this.properties.sy + this.properties.ey)/2 + 10) {
 										
-										currentObject.properties.sx = this.properties.ex;
-										currentObject.properties.sy = Math.round((this.properties.sy + this.properties.ey)/2);
+										current_object.properties.sx = this.properties.ex;
+										current_object.properties.sy = Math.round((this.properties.sy + this.properties.ey)/2);
 										
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.sx = this.properties.ex;
-										currentObject.properties.sy = this.properties.ey;
+										current_object.properties.sx = this.properties.ex;
+										current_object.properties.sy = this.properties.ey;
 										
 										//return false;
 									}
 									else if ((this.properties.sx + this.properties.ex)/2 - 10 <= x && x <= (this.properties.sx + this.properties.ex)/2 + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.sx = Math.round((this.properties.sx + this.properties.ex)/2);
-										currentObject.properties.sy = this.properties.ey;
+										current_object.properties.sx = Math.round((this.properties.sx + this.properties.ex)/2);
+										current_object.properties.sy = this.properties.ey;
 										
 										//return false;
 									}
 									else if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.sx = this.properties.sx;
-										currentObject.properties.sy = this.properties.ey;
+										current_object.properties.sx = this.properties.sx;
+										current_object.properties.sy = this.properties.ey;
 										
 										//return false;
 									}
 									else if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && (this.properties.sy + this.properties.ey)/2 - 10 <= y && y <= (this.properties.sy + this.properties.ey)/2 + 10) {
 										
-										currentObject.properties.sx = this.properties.sx;
-										currentObject.properties.sy = Math.round((this.properties.sy + this.properties.ey)/2);
+										current_object.properties.sx = this.properties.sx;
+										current_object.properties.sy = Math.round((this.properties.sy + this.properties.ey)/2);
 										
 										//return false;
 									}
 								}
 							});
 						}
-						else if (this.properties.selectedNode == "tail" && this.properties.isDrag) {
-							var currentObject = this;
+						else if (this.properties.selected_node == "tail" && this.properties.is_dragging) {
+							var current_object = this;
 							
 							//Objects
 							$(self.objects).each(function (i) {
 								if (this.type == "square") {
 									if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.ex = this.properties.sx;
-										currentObject.properties.ey = this.properties.sy;
+										current_object.properties.ex = this.properties.sx;
+										current_object.properties.ey = this.properties.sy;
 										
 										//return false;
 									}
 									else if ((this.properties.sx + this.properties.ex)/2 - 10 <= x && x <= (this.properties.sx + this.properties.ex)/2 + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.ex = Math.round((this.properties.sx + this.properties.ex)/2);
-										currentObject.properties.ey = this.properties.sy;
+										current_object.properties.ex = Math.round((this.properties.sx + this.properties.ex)/2);
+										current_object.properties.ey = this.properties.sy;
 										
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.ex = this.properties.ex;
-										currentObject.properties.ey = this.properties.sy;
+										current_object.properties.ex = this.properties.ex;
+										current_object.properties.ey = this.properties.sy;
 										
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && (this.properties.sy + this.properties.ey)/2 - 10 <= y && y <= (this.properties.sy + this.properties.ey)/2 + 10) {
 										
-										currentObject.properties.ex = this.properties.ex;
-										currentObject.properties.ey = Math.round((this.properties.sy + this.properties.ey)/2);
+										current_object.properties.ex = this.properties.ex;
+										current_object.properties.ey = Math.round((this.properties.sy + this.properties.ey)/2);
 										
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.ex = this.properties.ex;
-										currentObject.properties.ey = this.properties.ey;
+										current_object.properties.ex = this.properties.ex;
+										current_object.properties.ey = this.properties.ey;
 										
 										//return false;
 									}
 									else if ((this.properties.sx + this.properties.ex)/2 - 10 <= x && x <= (this.properties.sx + this.properties.ex)/2 + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.ex = Math.round((this.properties.sx + this.properties.ex)/2);
-										currentObject.properties.ey = this.properties.ey;
+										current_object.properties.ex = Math.round((this.properties.sx + this.properties.ex)/2);
+										current_object.properties.ey = this.properties.ey;
 										
 										//return false;
 									}
 									else if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.ex = this.properties.sx;
-										currentObject.properties.ey = this.properties.ey;
+										current_object.properties.ex = this.properties.sx;
+										current_object.properties.ey = this.properties.ey;
 										
 										//return false;
 									}
 									else if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && (this.properties.sy + this.properties.ey)/2 - 10 <= y && y <= (this.properties.sy + this.properties.ey)/2 + 10) {
 										
-										currentObject.properties.ex = this.properties.sx;
-										currentObject.properties.ey = Math.round((this.properties.sy + this.properties.ey)/2);
+										current_object.properties.ex = this.properties.sx;
+										current_object.properties.ey = Math.round((this.properties.sy + this.properties.ey)/2);
 										
 										//return false;
 									}
@@ -1021,7 +817,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 						
 						if ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy - 5 <= y && y <= ey + 5) || (ey - 5 <= y && y <= sy + 5) ) ) {
 		
-							self.hoverItem(i);	
+							self.hover_item(i);	
 							
 							//return false; //exit the each function, because the cursor status can be changed by the other object	
 						}
@@ -1035,37 +831,37 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				self.draw();
 			}
 			
-			$(".designerMessage").html("Focus Index: " + this.focus + " / selectedIndex: " + this.selectedIndex);
+			$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
 		});
 		
 		
 		
 		//Set Mouse Up Event in Canvas
 		$(target).find(".canvas").find("canvas").mouseup(function (e) {
-			self.isDrawing = false;
+			self.is_drawing = false;
 			
 			//Calculate the position (x, y) in Canvas Axis
-			var parentOffset = $(this).parent().offset(); 	
-			var ratio = self.toolbar.zoomLevel / 100;
-			var x = Math.floor(e.pageX - parentOffset.left) * ratio;
-			var y = Math.floor(e.pageY - parentOffset.top) * ratio;
+			var parent_offset = $(this).parent().offset(); 	
+			var ratio = self.toolbar.zoom_level / 100;
+			var x = Math.floor(e.pageX - parent_offset.left) * ratio;
+			var y = Math.floor(e.pageY - parent_offset.top) * ratio;
 
 			
 			if (e.which == 1) {
 				
 				//Selection Layer
-				if(!($(self.target).find(".canvas").hasClass("statusDrawingLine")) && 
-					!($(self.target).find(".canvas").hasClass("statusDrawingSquare")) &&
-					!($(self.target).find(".canvas").hasClass("statusMove")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeTopLeft")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeTopRight")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeBottomLeft")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeBottomRight")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeTop")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeBottom")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeLeft")) &&
-					!($(self.target).find(".canvas").hasClass("statusResizeRight")) &&
-					!self.isDrawing ) {
+				if(!($(self.target).find(".canvas").hasClass("status_drawing_line")) && 
+					!($(self.target).find(".canvas").hasClass("status_drawing_square")) &&
+					!($(self.target).find(".canvas").hasClass("status_move")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_top_left")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_top_right")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_bottom_left")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_bottom_right")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_top")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_bottom")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_left")) &&
+					!($(self.target).find(".canvas").hasClass("status_resize_right")) &&
+					!self.is_drawing ) {
 					
 					if ($(self.target).find(".canvas").find(".grid").find(".selection") &&
 						($(self.target).find(".canvas").find(".grid").find(".selection").width() >= 5 || 
@@ -1082,65 +878,64 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 					self.ex = 0;
 					self.ey = 0;
 				}
-				else if (self.isAdding>-1) {
+				else if (self.is_adding>-1) {
 					var properties = new Object();
-					properties.sx = self.objects[self.isAdding].properties.sx;
-					properties.sy = self.objects[self.isAdding].properties.sy;
-					properties.ex = self.objects[self.isAdding].properties.ex;
-					properties.ey = self.objects[self.isAdding].properties.ey;
+					properties.sx = self.objects[self.is_adding].properties.sx;
+					properties.sy = self.objects[self.is_adding].properties.sy;
+					properties.ex = self.objects[self.is_adding].properties.ex;
+					properties.ey = self.objects[self.is_adding].properties.ey;
 					
 					//Register the undo function
-					self.undoManager.register(
+					self.undo_manager.register(
 						self, self.remove, [self.objects.length-1], 'Remove Item',
-						self, self.add, [self.objects[self.isAdding].type, self.objects[self.isAdding].shapeName, self.objects[self.isAdding].option, properties], 'Create Item'
+						self, self.add, [self.objects[self.is_adding].type, self.objects[self.is_adding].shape_name, self.objects[self.is_adding].option, properties], 'Create Item'
 					);
-					self.isAdding = -1;
+					self.is_adding = -1;
 				}
 
 				
-				if (Math.abs(x - self.prevX) < 4 && Math.abs(y - self.prevY) < 4) {
+				if (Math.abs(x - self.previous_x) < 4 && Math.abs(y - self.previous_y) < 4) {
 					
-					if (!self.isShiftPressed) {
+					if (!self.is_shift_pressed) {
 						self.deselect();
-						self.objectManager.unset();
+						self.object_manager.unset();
 					}
 					
-					if (self.hoveredIndex >= 0) {
+					if (self.hovered_index >= 0) {
 						
-						if (self.selectedIndex.length == 0) {
-							self.selectItem(self.hoveredIndex);
+						if (self.selected_index.length == 0) {
+							self.select_item(self.hovered_index);
 						}
 						/*
 						 
-						if ($.inArray(self.hoveredIndex, self.selectedIndex) > -1 && self.isShiftPressed) {
-							console.log(i + "is hovered and selecte, Shift key is pressed!");
-							self.selectedIndex.splice(self.selectedIndex.indexOf(self.hoveredIndex), 1);
+						if ($.inArray(self.hovered_index, self.selected_index) > -1 && self.is_shift_pressed) {
+							self.selected_index.splice(self.selected_index.indexOf(self.hovered_index), 1);
 						}
 						else {
-							self.selectItem(self.hoveredIndex);
+							self.select_item(self.hovered_index);
 						}
 						*/						
 					}
 				}
 
 				//Set Status with Drawing Mode
-				if($(self.target).find(".canvas").hasClass("statusDrawingLine")) {			
-					$(self.target).parent().find(".designStatusContainer").find(".lineDrawing").addClass("toolbarButtonPressed");
+				if($(self.target).find(".canvas").hasClass("status_drawing_line")) {			
+					$(self.target).parent().find(".design_status_container").find(".lineDrawing").addClass("toolbar_buttonPressed");
 				}
 				//If square mode
-				else if($(self.target).find(".canvas").hasClass("statusDrawingSquare")) {
-					$(self.target).parent().find(".designStatusContainer").find(".squareDrawing").addClass("toolbarButtonPressed");
+				else if($(self.target).find(".canvas").hasClass("status_drawing_square")) {
+					$(self.target).parent().find(".design_status_container").find(".squareDrawing").addClass("toolbar_buttonPressed");
 				}
 				else {
-					$(self.target).parent().find(".designStatusContainer").find(".lineDrawing").removeClass("toolbarButtonPressed");
-					$(self.target).parent().find(".designStatusContainer").find(".squareDrawing").removeClass("toolbarButtonPressed");
+					$(self.target).parent().find(".design_status_container").find(".lineDrawing").removeClass("toolbar_buttonPressed");
+					$(self.target).parent().find(".design_status_container").find(".squareDrawing").removeClass("toolbar_buttonPressed");
 				}
 				
 				//Objects
 				$(self.objects).each(function (i) {
 				
-					if (self.snapToGrid) {
-						var unit = parseInt(core.dialogPreference.preference["preference.designer.gridUnit"]);
+					if (self.snap_to_grid) {
+						var unit = parseInt(core.dialog.preference.preference["preference.designer.grid_unit"]);
 						
 						if (this.properties.sx % unit < unit / 4) {
 							this.properties.sx -= this.properties.sx % unit;
@@ -1180,88 +975,88 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 					if (this.type == "line") {
 
 						//Connection between Line and Square Objects
-						if (this.properties.selectedNode == "head") {
-							var currentObject = this;
+						if (this.properties.selected_node == "head") {
+							var current_object = this;
 							
 							//Objects
 							$(self.objects).each(function (j) {
 								if (this.type == "square") {
 									if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 					
-										currentObject.properties.connector['head'] = j;
+										current_object.properties.connector['head'] = j;
 										this.properties.connector['tl'] = i;
 										
-										currentObject.properties.sx = this.properties.sx;
-										currentObject.properties.sy = this.properties.sy;
+										current_object.properties.sx = this.properties.sx;
+										current_object.properties.sy = this.properties.sy;
 										//return false;
 									}
 									else if ((this.properties.sx + this.properties.ex)/2 - 10 <= x && x <= (this.properties.sx + this.properties.ex)/2 + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.connector['head'] = j;
+										current_object.properties.connector['head'] = j;
 										this.properties.connector['t'] = i;
 										
-										currentObject.properties.sx = Math.round((this.properties.sx + this.properties.ex)/2);
-										currentObject.properties.sy = this.properties.sy;
+										current_object.properties.sx = Math.round((this.properties.sx + this.properties.ex)/2);
+										current_object.properties.sy = this.properties.sy;
 										
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.connector['head'] = j;
+										current_object.properties.connector['head'] = j;
 										this.properties.connector['tr'] = i;
 										
-										currentObject.properties.sx = this.properties.ex;
-										currentObject.properties.sy = this.properties.sy;
+										current_object.properties.sx = this.properties.ex;
+										current_object.properties.sy = this.properties.sy;
 									
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && (this.properties.sy + this.properties.ey)/2 - 10 <= y && y <= (this.properties.sy + this.properties.ey)/2 + 10) {
 										
-										currentObject.properties.connector['head'] = j;
+										current_object.properties.connector['head'] = j;
 										this.properties.connector['r'] = i;
 										
-										currentObject.properties.sx = this.properties.ex;
-										currentObject.properties.sy = Math.round((this.properties.sy + this.properties.ey)/2);
+										current_object.properties.sx = this.properties.ex;
+										current_object.properties.sy = Math.round((this.properties.sy + this.properties.ey)/2);
 										
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.connector['head'] = j;
+										current_object.properties.connector['head'] = j;
 										this.properties.connector['br'] = i;
 										
-										currentObject.properties.sx = this.properties.ex;
-										currentObject.properties.sy = this.properties.ey;
+										current_object.properties.sx = this.properties.ex;
+										current_object.properties.sy = this.properties.ey;
 										
 										//return false;
 									}
 									else if ((this.properties.sx + this.properties.ex)/2 - 10 <= x && x <= (this.properties.sx + this.properties.ex)/2 + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.connector['head'] = j;
+										current_object.properties.connector['head'] = j;
 										this.properties.connector['b'] = i;
 										
-										currentObject.properties.sx = Math.round((this.properties.sx + this.properties.ex)/2);
-										currentObject.properties.sy = this.properties.ey;
+										current_object.properties.sx = Math.round((this.properties.sx + this.properties.ex)/2);
+										current_object.properties.sy = this.properties.ey;
 										
 										//return false;
 									}
 									else if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.connector['head'] = j;
+										current_object.properties.connector['head'] = j;
 										this.properties.connector['bl'] = i;
 										
-										currentObject.properties.sx = this.properties.sx;
-										currentObject.properties.sy = this.properties.ey;
+										current_object.properties.sx = this.properties.sx;
+										current_object.properties.sy = this.properties.ey;
 										
 										//return false;
 									}
 									else if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && (this.properties.sy + this.properties.ey)/2 - 10 <= y && y <= (this.properties.sy + this.properties.ey)/2 + 10) {
 										
-										currentObject.properties.connector['head'] = j;
+										current_object.properties.connector['head'] = j;
 										this.properties.connector['l'] = i;
 										
-										currentObject.properties.sx = this.properties.sx;
-										currentObject.properties.sy = Math.round((this.properties.sy + this.properties.ey)/2);
+										current_object.properties.sx = this.properties.sx;
+										current_object.properties.sy = Math.round((this.properties.sy + this.properties.ey)/2);
 										
 										//return false;
 									}
@@ -1269,89 +1064,89 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 								}
 							});
 						}
-						else if (this.properties.selectedNode == "tail") {
-							var currentObject = this;
+						else if (this.properties.selected_node == "tail") {
+							var current_object = this;
 							
 							//Objects
 							$(self.objects).each(function (j) {
 								if (this.type == "square") {
 									if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.connector['tail'] = j;
+										current_object.properties.connector['tail'] = j;
 										this.properties.connector['tl'] = i;
 										
-										currentObject.properties.ex = this.properties.sx;
-										currentObject.properties.ey = this.properties.sy;
+										current_object.properties.ex = this.properties.sx;
+										current_object.properties.ey = this.properties.sy;
 										
 										//return false;
 									}
 									else if ((this.properties.sx + this.properties.ex)/2 - 10 <= x && x <= (this.properties.sx + this.properties.ex)/2 + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.connector['tail'] = j;
+										current_object.properties.connector['tail'] = j;
 										this.properties.connector['t'] = i;
 										
-										currentObject.properties.ex = Math.round((this.properties.sx + this.properties.ex)/2);
-										currentObject.properties.ey = this.properties.sy;
+										current_object.properties.ex = Math.round((this.properties.sx + this.properties.ex)/2);
+										current_object.properties.ey = this.properties.sy;
 										
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && this.properties.sy - 10 <= y && y <= this.properties.sy + 10) {
 										
-										currentObject.properties.connector['tail'] = j;
+										current_object.properties.connector['tail'] = j;
 										this.properties.connector['tr'] = i;
 										
-										currentObject.properties.ex = this.properties.ex;
-										currentObject.properties.ey = this.properties.sy;
+										current_object.properties.ex = this.properties.ex;
+										current_object.properties.ey = this.properties.sy;
 									
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && (this.properties.sy + this.properties.ey)/2 - 10 <= y && y <= (this.properties.sy + this.properties.ey)/2 + 10) {
 										
-										currentObject.properties.connector['tail'] = j;
+										current_object.properties.connector['tail'] = j;
 										this.properties.connector['r'] = i;
 										
-										currentObject.properties.ex = this.properties.ex;
-										currentObject.properties.ey = Math.round((this.properties.sy + this.properties.ey)/2);										
+										current_object.properties.ex = this.properties.ex;
+										current_object.properties.ey = Math.round((this.properties.sy + this.properties.ey)/2);										
 										
 										//return false;
 									}
 									else if (this.properties.ex - 10 <= x && x <= this.properties.ex + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.connector['tail'] = j;
+										current_object.properties.connector['tail'] = j;
 										this.properties.connector['br'] = i;
 										
-										currentObject.properties.ex = this.properties.ex;
-										currentObject.properties.ey = this.properties.ey;
+										current_object.properties.ex = this.properties.ex;
+										current_object.properties.ey = this.properties.ey;
 										
 										//return false;
 									}
 									else if ((this.properties.sx + this.properties.ex)/2 - 10 <= x && x <= (this.properties.sx + this.properties.ex)/2 + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.connector['tail'] = j;
+										current_object.properties.connector['tail'] = j;
 										this.properties.connector['b'] = i;
 										
-										currentObject.properties.ex = Math.round((this.properties.sx + this.properties.ex)/2);
-										currentObject.properties.ey = this.properties.ey;										
+										current_object.properties.ex = Math.round((this.properties.sx + this.properties.ex)/2);
+										current_object.properties.ey = this.properties.ey;										
 										
 										//return false;
 									}
 									else if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && this.properties.ey - 10 <= y && y <= this.properties.ey + 10) {
 										
-										currentObject.properties.connector['tail'] = j;
+										current_object.properties.connector['tail'] = j;
 										this.properties.connector['bl'] = i;
 										
-										currentObject.properties.ex = this.properties.sx;
-										currentObject.properties.ey = this.properties.ey;
+										current_object.properties.ex = this.properties.sx;
+										current_object.properties.ey = this.properties.ey;
 										
 										//return false;
 									}
 									else if (this.properties.sx - 10 <= x && x <= this.properties.sx + 10 && (this.properties.sy + this.properties.ey)/2 - 10 <= y && y <= (this.properties.sy + this.properties.ey)/2 + 10) {
 										
-										currentObject.properties.connector['tail'] = j;
+										current_object.properties.connector['tail'] = j;
 										this.properties.connector['l'] = i;
 										
-										currentObject.properties.ex = this.properties.sx;
-										currentObject.properties.ey = Math.round((this.properties.sy + this.properties.ey)/2);
+										current_object.properties.ex = this.properties.sx;
+										current_object.properties.ey = Math.round((this.properties.sy + this.properties.ey)/2);
 										
 										//return false;
 									}
@@ -1362,11 +1157,11 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 								
 							});
 						}
-						else if (this.properties.selectedNode == "body") {
-							var currentObject = this;
+						else if (this.properties.selected_node == "body") {
+							var current_object = this;
 							
-							currentObject.properties.connector['head'] = null;
-							currentObject.properties.connector['tail'] = null;
+							current_object.properties.connector['head'] = null;
+							current_object.properties.connector['tail'] = null;
 							
 							$(self.objects).each(function (j) {
 								if (this.type == "square") {
@@ -1398,55 +1193,55 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 							});
 						}
 						// why?
-						//self.objectManager.set(this);
+						//self.object_manager.set(this);
 					}
 					
 				});
 				
-				// register undoManager in modify
-				if(self.isModifying) {
-					delete self.copiedObjectsRedo;
-					self.copiedObjectsRedo = $.makeArray();
+				// register undo_manager in modify
+				if(self.is_modifying) {
+					delete self.copied_objects_redo;
+					self.copied_objects_redo = $.makeArray();
 					
-					$(self.selectedIndex).each(function (i) {
+					$(self.selected_index).each(function (i) {
 						var properties = new Object();
 						properties.sx = self.objects[this].properties.sx;
 						properties.sy = self.objects[this].properties.sy;
 						properties.ex = self.objects[this].properties.ex;
 						properties.ey = self.objects[this].properties.ey;
 
-						self.copiedObjectsRedo[this]=properties;
+						self.copied_objects_redo[this]=properties;
 						
 						// refresh Property
-						self.objectManager.set(self.objects[this]);
+						self.object_manager.set(self.objects[this]);
 					});
 					
-					self.undoManager.register(
-						self, self.setProperties2, [self.selectedIndex.slice(0), self.copiedObjectsUndo], 'Undo Item',
-						self, self.setProperties2, [self.selectedIndex.slice(0), self.copiedObjectsRedo], 'Redo Item'
+					self.undo_manager.register(
+						self, self.set_properties2, [self.selected_index.slice(0), self.copied_objects_undo], 'Undo Item',
+						self, self.set_properties2, [self.selected_index.slice(0), self.copied_objects_redo], 'Redo Item'
 					);
 					
-					self.isModifying = false;
+					self.is_modifying = false;
 				}
 
 				self.draw();
 				
 				//self.deselect();
-				//self.objectManager.unset();
+				//self.object_manager.unset();
 			}
 			
 			this.focus = -1;
 			
 			//refresh Object
-			self.objectExplorer.refresh();
+			self.object_explorer.refresh();
 		});
 		
 		/*
 		
 		$(target).find(".canvas").click(function (e) {
-			var parentOffset = $(this).parent().offset(); 
-			var x = Math.floor(e.pageX - parentOffset.left);
-			var y = Math.floor(e.pageY - parentOffset.top);	
+			var parent_offset = $(this).parent().offset(); 
+			var x = Math.floor(e.pageX - parent_offset.left);
+			var y = Math.floor(e.pageY - parent_offset.top);	
 			
 			if (e.which == 1) {
 				$(self.objects).each(function (i) {
@@ -1471,7 +1266,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 						}
 						
 						if ( ( (sx <= x && x <= ex) || (ex <= x && x <= sx) ) && ( (sy <= y && y <= ey) || (ey <= y && y <= sy) ) ) {
-							self.objectManager.set(this);
+							self.object_manager.set(this);
 							
 							return false;
 						}
@@ -1482,57 +1277,52 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		
 		*/
 		
-		this.preview.setSize();
+		this.preview.set_size();
 		this.preview.setup();
 		
 		
 		
-		if(core.dialogPreference.preference["preference.designer.showPreview"]=="true") {
-			this.toolbar.isPreviewOn = false;
+		if(core.dialog.preference.preference["preference.designer.show_preview"]=="true") {
+			this.toolbar.is_preview_on = false;
 		}
 		else {
-			this.toolbar.isPreviewOn = true;
+			this.toolbar.is_preview_on = true;
 		}
-		this.toolbar.togglePreview();
+		this.toolbar.toggle_preview();
 		
-		if(core.dialogPreference.preference["preference.designer.showGrid"]=="true") {
-			this.toolbar.isGridOn = false;
+		if(core.dialog.preference.preference["preference.designer.show_grid"]=="true") {
+			this.toolbar.is_grid_on = false;
 		}
 		else {
-			this.toolbar.isGridOn = true;
+			this.toolbar.is_grid_on = true;
 		}
-		this.toolbar.toggleGrid();
+		this.toolbar.toggle_grid();
 		
-		if(core.dialogPreference.preference["preference.designer.showRuler"]=="true") {
-			this.toolbar.isRulerOn = false;
-		}
-		else {
-			this.toolbar.isRulerOn = true;
-		}
-		this.toolbar.toggleRuler();
-		
-		if(core.dialogPreference.preference["preference.designer.snapToGrid"]=="true") {
-			this.snapToGrid = false;
+		if(core.dialog.preference.preference["preference.designer.show_ruler"]=="true") {
+			this.toolbar.is_ruler_on = false;
 		}
 		else {
-			this.snapToGrid = true;
+			this.toolbar.is_ruler_on = true;
 		}
-		this.toolbar.toggleSnapToGrid();
+		this.toolbar.toggle_ruler();
 		
-		this.toolbar.changeGridUnit(core.dialogPreference.preference["preference.designer.gridUnit"]);
+		if(core.dialog.preference.preference["preference.designer.snap_to_grid"]=="true") {
+			this.snap_to_grid = false;
+		}
+		else {
+			this.snap_to_grid = true;
+		}
+		this.toolbar.toggle_snap_to_grid();
 		
-		this.toolbar.changeGridOpacity(core.dialogPreference.preference["preference.designer.gridOpacity"]);
+		this.toolbar.change_grid_unit(core.dialog.preference.preference["preference.designer.grid_unit"]);
 		
-		this.toolbar.changeRulerUnit(core.dialogPreference.preference["preference.designer.rulerUnit"]);
+		this.toolbar.change_grid_opacity(core.dialog.preference.preference["preference.designer.grid_opacity"]);
+		
+		this.toolbar.change_ruler_unit(core.dialog.preference.preference["preference.designer.ruler_unit"]);
 		
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method setCollaborationOn 
-	 **/
-	isHovered : function (x, y, object, callback) {
+
+	is_hovered : function (x, y, object, callback) {
 
 	
 		//sx, sy : Start Position,
@@ -1555,11 +1345,11 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			ey = parseInt(object.properties.ey);
 		}
 
-		if (object.properties.innerNode != null) {
-		for(var i=0; i<=object.properties.innerNode.length; i++) {
+		if (object.properties.inner_node != null) {
+		for(var i=0; i<=object.properties.inner_node.length; i++) {
 			if (i == 0) {  //start 
 				
-				if(object.properties.innerNode.length == 0) {
+				if(object.properties.inner_node.length == 0) {
 					sx = object.properties.sx;
 					sy = object.properties.sy;
 					ex = object.properties.ex;
@@ -1568,22 +1358,22 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				else {
 					sx = object.properties.sx;
 					sy = object.properties.sy;
-					ex = object.properties.innerNode[0].x;
-					ey = object.properties.innerNode[0].y;
+					ex = object.properties.inner_node[0].x;
+					ey = object.properties.inner_node[0].y;
 				}
 				
 			} 
-			else if(i == object.properties.innerNode.length) {  //end
-				sx = object.properties.innerNode[i-1].x;
-				sy = object.properties.innerNode[i-1].y;
+			else if(i == object.properties.inner_node.length) {  //end
+				sx = object.properties.inner_node[i-1].x;
+				sy = object.properties.inner_node[i-1].y;
 				ex = object.properties.ex;
 				ey = object.properties.ey;	
 			}
 			else {  //middle				
-				sx = object.properties.innerNode[i-1].x;
-				sy = object.properties.innerNode[i-1].y;
-				ex = object.properties.innerNode[i].x;
-				ey = object.properties.innerNode[i].y;
+				sx = object.properties.inner_node[i-1].x;
+				sy = object.properties.inner_node[i-1].y;
+				ex = object.properties.inner_node[i].x;
+				ey = object.properties.inner_node[i].y;
 			}
 		
 			
@@ -1638,41 +1428,20 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		}	
 	},
 
-
-
-
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method setCollaborationOn 
-	 **/
-	setCollaborationOn: function () {
+	set_collaboration_on: function () {
 		this.collaboration.init(this);
-		this.collaboration.startListening();
+		this.collaboration.start_listening();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method setCollaborationOff 
-	 **/
-	setCollaborationOff: function () {		
+	set_collaboration_off: function () {		
 		if(this.collaboration) {
-			this.collaboration.stopListening();
+			this.collaboration.stop_listening();
 			//this.collaboration = null;
 					
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method setSize 
-	 * @param {String} width The width to be set.
-	 * @param {String} height The height to be set.
-	 **/
-	setSize: function (width, height, indicatorTopFake) {
+	setSize: function (width, height, indicator_top_fake) {
 		//Set width, height properties
 		this.width = parseInt(width);
 		this.height = parseInt(height);
@@ -1705,49 +1474,35 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		$(this.target).find(".dummyspace").width(this.width + 90);
 		$(this.target).find(".dummyspace").height(this.height + 100);
 		
-		this.preview.setSize("change", indicatorTopFake);
+		this.preview.set_size("change", indicator_top_fake);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method setSkin 
-	 * @param {String} width The width to be set.
-	 * @param {String} height The height to be set.
-	 **/
 	setSkin: function (imgsrc, width, height) {
 		//Set width, height properties
-		this.skinWidth = parseInt(width);
-		this.skinHeight = parseInt(height);
+		this.skin_width = parseInt(width);
+		this.skin_height = parseInt(height);
 		
 		//Set Canvas Layer Style for aligning center
-		$(this.target).find(".skin").width(this.skinWidth);
-		$(this.target).find(".skin").height(this.skinHeight);	
+		$(this.target).find(".skin").width(this.skin_width);
+		$(this.target).find(".skin").height(this.skin_height);	
 
-		$(this.target).find(".skin").css("margin-left", 0 - (this.skinWidth/2));	
-		$(this.target).find(".skin").css("margin-top", 0 - (this.skinHeight/2));	
+		$(this.target).find(".skin").css("margin-left", 0 - (this.skin_width/2));	
+		$(this.target).find(".skin").css("margin-top", 0 - (this.skin_height/2));	
 		$(this.target).find(".skin").css("background-image", "url(" + imgsrc + ")");
 		
 		//Set Canvas Space Style : default margin is 50 (90 = 50 x 2 - 10)
-		$(this.target).find(".space").width(this.skinWidth + 90);
-		$(this.target).find(".space").height(this.skinHeight + 100);	
+		$(this.target).find(".space").width(this.skin_width + 90);
+		$(this.target).find(".space").height(this.skin_height + 100);	
 
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method add 
-	 * @param {String} type The type of the object to be added.
-	 * @param {String} shape The shape of the object to be added.
-	 **/
 	add: function (type, shape, option, properties, callback) {
 		var self = this;
 		
 		
-		if (!self.isDrawing) {
+		if (!self.is_drawing) {
 			
-			self.isDrawing = true;
+			self.is_drawing = true;
 			
 			var object = new org.goorm.core.object.ui();
 			object.init($(self.target).find(".canvas"), self, type, shape, option, function () {
@@ -1761,7 +1516,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			
 			//Add the object
 			
-			self.isAdding = self.objects.length-1;
+			self.is_adding = self.objects.length-1;
 
 			if(properties) {
 				self.objects[self.objects.length-1].properties.sx = properties.sx;
@@ -1769,37 +1524,27 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				self.objects[self.objects.length-1].properties.ex = properties.ex;
 				self.objects[self.objects.length-1].properties.ey = properties.ey;
 				
-				self.objects[self.objects.length-1].properties.isDrawFinished = true;
+				self.objects[self.objects.length-1].properties.is_drawing_finished = true;
 				
-				self.isDrawing = false;
-				self.isAdding = -1;
+				self.is_drawing = false;
+				self.is_adding = -1;
 				self.objects[self.objects.length-1].shape.show();
 				self.draw();
 			}
 
 			//Refresh the Object Explorer (for Testing)
-			self.objectExplorer.refresh();
+			self.object_explorer.refresh();
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method select 
-	 **/
-	selectAll: function () {
+	select_all: function () {
 		var self = this;
 		
 		$(this.objects).each(function (i) {
-			self.selectItem(i);
+			self.select_item(i);
 		});
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method select 
-	 **/
 	select: function () {
 		var self = this;
 		
@@ -1832,11 +1577,11 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				
 			
 				if( ( (self.sx <= ex && ex <= self.ex) || (self.ex <= ex && ex <= self.sx) ) && ( (self.sy <= ey && ey <= self.ey) || (self.ey <= ey && ey <= self.sy) ) ) {
-					self.selectedIndex.push(i);
+					self.selected_index.push(i);
 					/*
 					if($(this)[0].type == 'square') {
 						//is selected?
-						if($.inArray(i, $(self.selectedIndex)) >= 0) {
+						if($.inArray(i, $(self.selected_index)) >= 0) {
 							$(this)[0].select();
 						}
 					}
@@ -1845,7 +1590,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 					this.selected = true;
 					
 /*
-					$("#objectExplorer").find(".objectInformation").each(function (k) {
+					$("#object_explorer").find(".objectInformation").each(function (k) {
 						
 						
 						if(k == i) {
@@ -1853,22 +1598,17 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 						}
 					});
 */
-					self.objectExplorer.highlight(i);
+					self.object_explorer.highlight(i);
 					
-					self.objectManager.set(this);
+					self.object_manager.set(this);
 				}
 			}
 		});
 
 		
-		$(".designerMessage").html("Focus Index: " + this.focus + " / selectedIndex: " + this.selectedIndex);
+		$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method deselect 
-	 **/
 	deselect: function () {
 		var self = this;
 
@@ -1877,7 +1617,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		$(this.objects).each(function (i) {
 			if($(this)[0].type == 'square') {
 				//is selected?
-				if($.inArray(i, $(self.selectedIndex)) >= 0) {
+				if($.inArray(i, $(self.selected_index)) >= 0) {
 					$(this)[0].deselect();
 				}
 			}
@@ -1886,21 +1626,16 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		
 		
 		$(this.objects).each(function (i) {			
-			self.selectedIndex.pop();	
+			self.selected_index.pop();	
 		});
 	
-		$("#objectExplorer").find(".highlighted").each(function(i) {
+		$("#object_explorer").find(".highlighted").each(function(i) {
 			$(this).removeClass("highlighted");
 		});
 
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method unfocusAll 
-	 **/
-	unfocusAll: function () {
+	unfocus_all: function () {
 		var self = this;
 		
 		this.focus = -1;
@@ -1910,25 +1645,15 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		});
 	},
 		
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method resize 
-	 **/
 	resize: function () {
 					
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method draw 
-	 **/
 	draw: function () {
 		var self = this;
 		
 		
-		this.selectedIndex = $.unique(this.selectedIndex);
+		this.selected_index = $.unique(this.selected_index);
 		
 		
 		//Canvas Element (Supported in HTML5)
@@ -1937,7 +1662,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			var context = $(this.target).find(".canvas").find("canvas")[0].getContext('2d');
 			
 			//Clear the canvas
-			context.clearRect (0, 0, $(this.target).find(".canvas").find("canvas").width(), $(this.target).find(".canvas").find("canvas").height());	
+			context.clearRect(0, 0, $(this.target).find(".canvas").find("canvas").width(), $(this.target).find(".canvas").find("canvas").height());	
 			
 			//All objects
 			$(this.objects).each(function (i) {
@@ -1952,7 +1677,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				}
 				
 /*
-				if (self.snapToGrid) {
+				if (self.snap_to_grid) {
 					this.properties.sx = parseInt(Math.round(this.properties.sx/10)) * 10;
 					this.properties.sy = parseInt(Math.round(this.properties.sy/10)) * 10;
 					this.properties.ex = parseInt(Math.round(this.properties.ex/10)) * 10;
@@ -1984,13 +1709,13 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 
 
 					//is hovered?
-					if(self.hoveredIndex == i) {
+					if(self.hovered_index == i) {
 						context.beginPath();
 						context.strokeStyle = "#FFFF00";
 						
 						context.moveTo(sx, sy);
 						
-						$(this.properties.innerNode).each(function() {
+						$(this.properties.inner_node).each(function() {
 							context.lineTo(this.x, this.y);
 						});
 						
@@ -2009,12 +1734,12 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 					
 					if (this.properties.dashed) {
 						
-						var dashArray=[5*parseFloat($(this)[0].properties.thickness), 4*parseFloat($(this)[0].properties.thickness)];
-						var dashCount = dashArray.length;
+						var dash_array=[5*parseFloat($(this)[0].properties.thickness), 4*parseFloat($(this)[0].properties.thickness)];
+						var dash_count = dash_array.length;
 						
 						var dx, dy;
 						
-						var dashIndex=0, draw=true;
+						var dash_index=0, draw=true;
 						
 						var x, y;
 						
@@ -2030,27 +1755,27 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 						context.moveTo(x, y);
 						context.lineWidth = parseFloat($(this)[0].properties.thickness);
 						
-						$(this.properties.innerNode).each(function() {
+						$(this.properties.inner_node).each(function() {
 							dx = (x - this.x);
 							dy = (y - this.y);
 							
 							var slope = dy/dx;
-							var distRemaining = Math.sqrt( dx*dx + dy*dy );
+							var remaining_distance = Math.sqrt( dx*dx + dy*dy );
 							
-							while (distRemaining>=0.1){
-								var dashLength = dashArray[dashIndex++%dashCount];
+							while (remaining_distance>=0.1){
+								var dash_length = dash_array[dash_index++%dash_count];
 								
-								if (dashLength > distRemaining) 
-									dashLength = distRemaining;
+								if (dash_length > remaining_distance) 
+									dash_length = remaining_distance;
 									
-								var xStep = Math.sqrt( dashLength*dashLength / (1 + slope*slope) );
+								var step_x = Math.sqrt( dash_length*dash_length / (1 + slope*slope) );
 								
-								x += xStep
-								y += slope*xStep;
+								x += step_x
+								y += slope*step_x;
 								
 								context[draw ? 'lineTo' : 'moveTo'](x,y);
 							
-								distRemaining -= dashLength;
+								remaining_distance -= dash_length;
 								draw = !draw;
 							}							
 							
@@ -2069,22 +1794,22 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 						}
 												
 						var slope = dy/dx;
-						var distRemaining = Math.sqrt( dx*dx + dy*dy );
+						var remaining_distance = Math.sqrt( dx*dx + dy*dy );
 						
-						while (distRemaining>=0.1){
-							var dashLength = dashArray[dashIndex++%dashCount];
+						while (remaining_distance>=0.1){
+							var dash_length = dash_array[dash_index++ % dash_count];
 							
-							if (dashLength > distRemaining) 
-								dashLength = distRemaining;
+							if (dash_length > remaining_distance) 
+								dash_length = remaining_distance;
 								
-							var xStep = Math.sqrt( dashLength*dashLength / (1 + slope*slope) );
+							var step_x = Math.sqrt( dash_length*dash_length / (1 + slope * slope) );
 							
-							x += xStep
-							y += slope*xStep;
+							x += step_x
+							y += slope * step_x;
 							
 							context[draw ? 'lineTo' : 'moveTo'](x,y);
 						
-							distRemaining -= dashLength;
+							remaining_distance -= dash_length;
 							draw = !draw;
 						}
 						
@@ -2093,7 +1818,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 					else {	
 						context.moveTo(sx, sy);
 						
-						$(this.properties.innerNode).each(function() {
+						$(this.properties.inner_node).each(function() {
 							context.lineTo(this.x, this.y);
 						});
 						
@@ -2104,24 +1829,24 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 
 					
 					if (this.shape) {
-						var tempSX = this.properties.sx;
-						var tempSY = this.properties.sy;
-						var tempEX = this.properties.ex;
-						var tempEY = this.properties.ey;						
+						var temp_sx = this.properties.sx;
+						var temp_sy = this.properties.sy;
+						var temp_ex = this.properties.ex;
+						var temp_ey = this.properties.ey;						
 						
-						if (this.properties.innerNode.length > 0) {
-							tempSX = this.properties.innerNode[this.properties.innerNode.length - 1].x;
-							tempSY = this.properties.innerNode[this.properties.innerNode.length - 1].y;
+						if (this.properties.inner_node.length > 0) {
+							temp_sx = this.properties.inner_node[this.properties.inner_node.length - 1].x;
+							temp_sy = this.properties.inner_node[this.properties.inner_node.length - 1].y;
 
-							tempEX = this.properties.innerNode[0].x;
-							tempEY = this.properties.innerNode[0].y;							
+							temp_ex = this.properties.inner_node[0].x;
+							temp_ey = this.properties.inner_node[0].y;							
 						}
 
 						eval(this.shape.javascript);
 					}
 					
 					//is selected? 
-					if($.inArray(i, self.selectedIndex) >= 0 || self.selected) {
+					if($.inArray(i, self.selected_index) >= 0 || self.selected) {
 						context.beginPath();
 						context.strokeStyle = "#666666";
 						
@@ -2140,7 +1865,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 					    context.fillText('[H] ' + sx + ',' + sy, sx+8, sy+8);						
 						*/
 						
-						$(this.properties.innerNode).each(function(i) {
+						$(this.properties.inner_node).each(function(i) {
 							context.beginPath();
 							context.strokeStyle = "#666666";
 						
@@ -2203,7 +1928,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 					}
 					
 					//is hovered?
-					if(self.hoveredIndex == i) {
+					if(self.hovered_index == i) {
 						context.beginPath();
 						context.strokeStyle = "#FFFF00";
 						
@@ -2241,7 +1966,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 
 					
 					//is selected?
-					if($.inArray(i, self.selectedIndex) >= 0 || self.selected) {
+					if($.inArray(i, self.selected_index) >= 0 || self.selected) {
 						context.beginPath();
 						context.strokeStyle = "#666666";
 						context.fillStyle = "#FFFFFF";
@@ -2300,7 +2025,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 											
 						if (this.shape.move) {
 							this.shape.move(this.properties.sx, this.properties.sy, this.properties.ex, this.properties.ey);
-							this.shape.setShape();
+							this.shape.set_shape();
 						}
 					
 					}
@@ -2310,87 +2035,64 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.preview.draw();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method setCursor 
-	 **/	
-	setCursor: function (cursorType) {
+	set_cursor: function (cursorType) {
 		//Set the cursor in cavas layer
 		$(this.target).find(".canvas").css("cursor", cursorType);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method setDrawingMode 
-	 * @param {String} mode The drawing mode to be set.
-	 **/
-	setDrawingMode: function (mode) {
+	set_drawing_mode: function (mode) {
 		//Remove all status
-		$(this.target).find(".canvas").removeClass("statusDefault");
-		$(this.target).find(".canvas").removeClass("statusDrawingLine");
-		$(this.target).find(".canvas").removeClass("statusDrawingSquare");
-		$(this.target).find(".canvas").removeClass("statusMove");
+		$(this.target).find(".canvas").removeClass("status_default");
+		$(this.target).find(".canvas").removeClass("status_drawing_line");
+		$(this.target).find(".canvas").removeClass("status_drawing_square");
+		$(this.target).find(".canvas").removeClass("status_move");
 		
-		$(this.target).find(".canvas").removeClass("statusResizeTopLeft");
-		$(this.target).find(".canvas").removeClass("statusResizeTopRight");
-		$(this.target).find(".canvas").removeClass("statusResizeBottomLeft");
-		$(this.target).find(".canvas").removeClass("statusResizeBottomRight");
-		$(this.target).find(".canvas").removeClass("statusResizeTop");
-		$(this.target).find(".canvas").removeClass("statusResizeBottom");
-		$(this.target).find(".canvas").removeClass("statusResizeLeft");
-		$(this.target).find(".canvas").removeClass("statusResizeRight");
+		$(this.target).find(".canvas").removeClass("status_resize_top_left");
+		$(this.target).find(".canvas").removeClass("status_resize_top_right");
+		$(this.target).find(".canvas").removeClass("status_resize_bottom_left");
+		$(this.target).find(".canvas").removeClass("status_resize_bottom_right");
+		$(this.target).find(".canvas").removeClass("status_resize_top");
+		$(this.target).find(".canvas").removeClass("status_resize_bottom");
+		$(this.target).find(".canvas").removeClass("status_resize_left");
+		$(this.target).find(".canvas").removeClass("status_resize_right");
 		
 		
-		$(this.target).parent().find(".designStatusContainer").find(".lineDrawing").removeClass("toolbarButtonPressed");
-		$(this.target).parent().find(".designStatusContainer").find(".squareDrawing").removeClass("toolbarButtonPressed");
+		$(this.target).parent().find(".design_status_container").find(".lineDrawing").removeClass("toolbar_buttonPressed");
+		$(this.target).parent().find(".design_status_container").find(".squareDrawing").removeClass("toolbar_buttonPressed");
 		
 		//If line mode
 		if(mode == "line") {			
-			$(this.target).find(".canvas").addClass("statusDrawingLine");
+			$(this.target).find(".canvas").addClass("status_drawing_line");
 
 		}
 		//If square mode
 		else if(mode == "square") {
-			$(this.target).find(".canvas").addClass("statusDrawingSquare");
+			$(this.target).find(".canvas").addClass("status_drawing_square");
 
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method changeStatus 
-	 * @param {String} className The name of class to be changed its status.
-	 **/
-	changeStatus: function (className) {
-		$(this.target).find(".canvas").removeClass("statusDefault");
-		$(this.target).find(".canvas").removeClass("statusDrawingLine");
-		$(this.target).find(".canvas").removeClass("statusDrawingSquare");
-		$(this.target).find(".canvas").removeClass("statusMove");
+	change_status: function (className) {
+		$(this.target).find(".canvas").removeClass("status_default");
+		$(this.target).find(".canvas").removeClass("status_drawing_line");
+		$(this.target).find(".canvas").removeClass("status_drawing_square");
+		$(this.target).find(".canvas").removeClass("status_move");
 		
-		$(this.target).find(".canvas").removeClass("statusResizeTopLeft");
-		$(this.target).find(".canvas").removeClass("statusResizeTopRight");
-		$(this.target).find(".canvas").removeClass("statusResizeBottomLeft");
-		$(this.target).find(".canvas").removeClass("statusResizeBottomRight");
-		$(this.target).find(".canvas").removeClass("statusResizeTop");
-		$(this.target).find(".canvas").removeClass("statusResizeBottom");
-		$(this.target).find(".canvas").removeClass("statusResizeLeft");
-		$(this.target).find(".canvas").removeClass("statusResizeRight");
+		$(this.target).find(".canvas").removeClass("status_resize_top_left");
+		$(this.target).find(".canvas").removeClass("status_resize_top_right");
+		$(this.target).find(".canvas").removeClass("status_resize_bottom_left");
+		$(this.target).find(".canvas").removeClass("status_resize_bottom_right");
+		$(this.target).find(".canvas").removeClass("status_resize_top");
+		$(this.target).find(".canvas").removeClass("status_resize_bottom");
+		$(this.target).find(".canvas").removeClass("status_resize_left");
+		$(this.target).find(".canvas").removeClass("status_resize_right");
 		
 		$(this.target).find(".canvas").addClass(className);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method highlightObject 
-	 * @param {String} index The index of object to be highlighted.
-	 **/
-	highlightObject: function (index) {
+	highlight_object: function (index) {
 	
-		$("#objectTree").find(".ygtvcontent").each(function (i) {
+		$("#object_tree").find(".ygtvcontent").each(function (i) {
 			if("objectInformation"+index == $(this).text()) {
 				$(this).parent().parent().parent().parent().addClass("highlighted");
 			}
@@ -2400,9 +2102,9 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		});
 /*
 		
-		this.objectExplorer.highlight(index);
+		this.object_explorer.highlight(index);
 		
-		$("#objectExplorer").find(".objectInformation").each(function (k) {
+		$("#object_explorer").find(".objectInformation").each(function (k) {
 			$(this).removeClass("highlighted");
 			
 			if(k == index) {
@@ -2412,26 +2114,14 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 */
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method unhighlightObject 
-	 * @param {String} index The index of object to be unhighlighted.
-	 **/
-	unhighlightObject: function (index) {
-		this.objectExplorer.unHighlight(index);
+	unhighlight_object: function (index) {
+		this.object_explorer.unhighlight(index);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method selectItem
-	 * @param {String} index The index of the item to be selected. 
-	 **/
-	selectItem: function (index) {
+	select_item: function (index) {
 		///if (this.focus <= index) {
-		if (!this.isShiftPressed) {
-			this.unfocusAll();
+		if (!this.is_shift_pressed) {
+			this.unfocus_all();
 		}
 		//this.deselect();
 		this.focus = index;
@@ -2441,15 +2131,15 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			//}
 				
 			
-			this.selectedIndex.push(index); //Set current selected object
+			this.selected_index.push(index); //Set current selected object
 		
 			//Set the cursor shape to move
-			this.changeStatus("statusMove");
+			this.change_status("status_move");
 			
-			this.objectManager.set(this.objects[index]);
+			this.object_manager.set(this.objects[index]);
 			
 			//test
-			this.highlightObject(index);
+			this.highlight_object(index);
 		
 			
 			if (this.objects[index].type == "line") {
@@ -2458,14 +2148,14 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				if (this.objects[index].properties.connector["head"] != null) {
 					j = this.objects[index].properties.connector["head"];
 					this.objects[j].properties.focus = true;
-					this.selectedIndex.push(j);
-					this.highlightObject(j);
+					this.selected_index.push(j);
+					this.highlight_object(j);
 				}
 				if (this.objects[index].properties.connector["tail"] != null) {
 					j = this.objects[index].properties.connector["tail"];
 					this.objects[j].properties.focus = true;
-					this.selectedIndex.push(j);
-					this.highlightObject(j);
+					this.selected_index.push(j);
+					this.highlight_object(j);
 				}
 				
 				
@@ -2476,50 +2166,50 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				if (this.objects[index].properties.connector["tl"] != null) {
 					j = this.objects[index].properties.connector["tl"];
 					this.objects[j].properties.focus = true;
-					this.selectedIndex.push(j);
-					this.highlightObject(j);
+					this.selected_index.push(j);
+					this.highlight_object(j);
 				}
 				if (this.objects[index].properties.connector["t"] != null) {
 					j = this.objects[index].properties.connector["t"];
 					this.objects[j].properties.focus = true;
-					this.selectedIndex.push(j);
-					this.highlightObject(j);
+					this.selected_index.push(j);
+					this.highlight_object(j);
 				}
 				if (this.objects[index].properties.connector["tr"] != null) {
 					j = this.objects[index].properties.connector["tr"];
 					this.objects[j].properties.focus = true;
-					this.selectedIndex.push(j);
-					this.highlightObject(j);
+					this.selected_index.push(j);
+					this.highlight_object(j);
 				}
 				if (this.objects[index].properties.connector["r"] != null) {
 					j = this.objects[index].properties.connector["r"];
 					this.objects[j].properties.focus = true;
-					this.selectedIndex.push(j);
-					this.highlightObject(j);
+					this.selected_index.push(j);
+					this.highlight_object(j);
 				}
 				if (this.objects[index].properties.connector["br"] != null) {
 					j = this.objects[index].properties.connector["br"];
 					this.objects[j].properties.focus = true;
-					this.selectedIndex.push(j);
-					this.highlightObject(j);
+					this.selected_index.push(j);
+					this.highlight_object(j);
 				}
 				if (this.objects[index].properties.connector["b"] != null) {
 					j = this.objects[index].properties.connector["b"];
 					this.objects[j].properties.focus = true;
-					this.selectedIndex.push(j);
-					this.highlightObject(j);
+					this.selected_index.push(j);
+					this.highlight_object(j);
 				}
 				if (this.objects[index].properties.connector["bl"] != null) {
 					j = this.objects[index].properties.connector["bl"];
 					this.objects[j].properties.focus = true;
-					this.selectedIndex.push(j);
-					this.highlightObject(j);
+					this.selected_index.push(j);
+					this.highlight_object(j);
 				}
 				if (this.objects[index].properties.connector["l"] != null) {
 					j = this.objects[index].properties.connector["l"];
 					this.objects[j].properties.focus = true;
-					this.selectedIndex.push(j);
-					this.highlightObject(j);
+					this.selected_index.push(j);
+					this.highlight_object(j);
 				}
 	
 			}
@@ -2529,21 +2219,15 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		
 //		m.s("you selected " + index + " item", "canvas");
 		
-		$(".designerMessage").html("Focus Index: " + this.focus + " / selectedIndex: " + this.selectedIndex);
+		$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method deselectItem 
-	 * @param {String} index The index of the item to be deselected.
-	 **/
-	deselectItem: function (index) {
-		//this.selectedIndex.pop(index);
+	deselect_item: function (index) {
+		//this.selected_index.pop(index);
 										
 		//If user has selected the line drawing tool, keep the cursor is crosshair, unless, chanage the cursor is default
-		if (!(($(this.target).find(".canvas").hasClass("statusDrawingLine")) || ($(this.target).find(".canvas").hasClass("statusDrawingSquare")))) {
-			this.changeStatus("statusDefault");		
+		if (!(($(this.target).find(".canvas").hasClass("status_drawing_line")) || ($(this.target).find(".canvas").hasClass("status_drawing_square")))) {
+			this.change_status("status_default");		
 		}
   
 		if (this.focus > index) {
@@ -2551,39 +2235,25 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			this.objects[index].properties.focus = false;
 		}
 		
-		this.unhighlightObject(index);	
+		this.unhighlight_object(index);	
 		
 //		m.er("you deselected " + index + " item", "canvas");		
 
 
-		$(".designerMessage").html("Focus Index: " + this.focus + " / selectedIndex: " + this.selectedIndex);
+		$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method hoverItem 
-	 * @param {String} index The index of the item to be hovered.
-	 **/
-	hoverItem: function (index) { 
-		this.hoveredIndex = index; //Set current hovered object
+	hover_item: function (index) { 
+		this.hovered_index = index; //Set current hovered object
 									
 		//Set the cursor shape to move
-		this.changeStatus("statusMove");
+		this.change_status("status_move");
 		
-		//this.objectManager.set(this.objects[index]);
+		//this.object_manager.set(this.objects[index]);
 		
-		this.highlightObject(index);
+		this.highlight_object(index);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method move 
-	 * @param {String} index The index of the item to be moved.
-	 * @param {String} offsetX The position on the x-coordinate to be moved.
-	 * @param {String} offsetY The position on the y-coordinate to be moved.
-	 **/
 	move: function (index, offsetX, offsetY) {
 		if (this.objects[index].type == "line") {
 			/*
@@ -2712,11 +2382,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method bringForward 
-	 **/
-	bringForward: function (object) {
+	bring_forward: function (object) {
 		if (!object) {
 			object = this.objects[this.focus];
 		}
@@ -2731,10 +2397,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			}
 		});
 		
-		//console.log("!");
-		
 		if (this.objects.length - 1 > index && index >= 0) {
-			//console.log("!");
 			
 			var html = $(this.target).find(".canvas").find(".shapes").find("#stencil_" + this.objects[index].shape.timestamp).html();
 			$(this.target).find(".canvas").find(".shapes").find("#stencil_" + this.objects[index].shape.timestamp).remove();
@@ -2751,11 +2414,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method sendBackward 
-	 **/
-	sendBackward: function (object) {
+	send_backward: function (object) {
 		if (!object) {
 			object = this.objects[this.focus];
 		}
@@ -2768,11 +2427,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				index = i;
 		});
 		
-		//console.log("!");
-		
 		if (this.objects.length > index && index > 0) {
-			//console.log("!");
-			
 			var html = $(this.target).find(".canvas").find(".shapes").find("#stencil_" + this.objects[index].shape.timestamp).html();
 			$(this.target).find(".canvas").find(".shapes").find("#stencil_" + this.objects[index].shape.timestamp).remove();
 
@@ -2788,11 +2443,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method bringToFront 
-	 **/
-	bringToFront: function (object) {
+	bring_to_front: function (object) {
 		if (!object) {
 			object = this.objects[this.focus];
 		}
@@ -2819,11 +2470,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.focus = this.objects.length-1;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method sendToBack 
-	 **/
-	sendToBack: function (object) {
+	send_to_back: function (object) {
 		if (!object) {
 			object = this.objects[this.focus];
 		}
@@ -2850,16 +2497,12 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.focus = 0;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method sendToBack 
-	 **/
-	alignLeft: function () {
+	align_left: function () {
 		var self = this;
 		
 		var point = 0;
 		
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			if (i == 0) {
 				point = self.objects[this].properties.sx;
 			}
@@ -2877,7 +2520,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 
 		});
 		
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			if (self.objects[this].properties.sx < self.objects[this].properties.ex) {
 				self.objects[this].properties.ex -= (self.objects[this].properties.sx - point);
 				self.objects[this].properties.sx = point;
@@ -2891,16 +2534,12 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.draw();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method sendToBack 
-	 **/
-	alignRight: function () {
+	align_right: function () {
 		var self = this;
 		
 		var point = 0;
 		
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			if (self.objects[this].properties.sx < self.objects[this].properties.ex) {
 				if (self.objects[this].properties.ex > point) {
 					point = self.objects[this].properties.ex;
@@ -2913,7 +2552,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			}
 		});
 		
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			if (self.objects[this].properties.sx < self.objects[this].properties.ex) {
 				self.objects[this].properties.sx += (point - self.objects[this].properties.ex);
 				self.objects[this].properties.ex = point;
@@ -2927,16 +2566,12 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.draw();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method sendToBack 
-	 **/
-	alignTop: function () {
+	align_top: function () {
 		var self = this;
 		
 		var point = 0;
 		
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			if (i == 0) {
 				point = self.objects[this].properties.sy;
 			}
@@ -2954,7 +2589,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 
 		});
 		
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			if (self.objects[this].properties.sy < self.objects[this].properties.ey) {
 				self.objects[this].properties.ey -= (self.objects[this].properties.sy - point);
 				self.objects[this].properties.sy = point;
@@ -2968,16 +2603,12 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.draw();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method sendToBack 
-	 **/
-	alignBottom: function () {
+	align_bottom: function () {
 		var self = this;
 		
 		var point = 0;
 		
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			if (self.objects[this].properties.sy < self.objects[this].properties.ey) {
 				if (self.objects[this].properties.ey > point) {
 					point = self.objects[this].properties.ey;
@@ -2990,7 +2621,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			}
 		});
 		
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			if (self.objects[this].properties.sy < self.objects[this].properties.ey) {
 				self.objects[this].properties.sy += (point - self.objects[this].properties.ey);
 				self.objects[this].properties.ey = point;
@@ -3004,19 +2635,15 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.draw();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method sendToBack 
-	 **/
-	alignHorizontallyCenter: function () {
+	align_horizontally_center: function () {
 		var self = this;
 		
 		var point = 0;
 
-		point = (self.objects[this.selectedIndex[0]].properties.sx + self.objects[this.selectedIndex[0]].properties.ex) / 2;
+		point = (self.objects[this.selected_index[0]].properties.sx + self.objects[this.selected_index[0]].properties.ex) / 2;
 
 		
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			var halfVal = Math.abs(self.objects[this].properties.ex - self.objects[this].properties.sx)/2;
 			
 			if (self.objects[this].properties.sx < self.objects[this].properties.ex) {
@@ -3032,19 +2659,15 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.draw();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method sendToBack 
-	 **/
-	alignVerticallyCenter: function () {
+	align_vertically_center: function () {
 		var self = this;
 		
 		var point = 0;
 		
-		point = (self.objects[this.selectedIndex[0]].properties.sy + self.objects[this.selectedIndex[0]].properties.ey) / 2;
+		point = (self.objects[this.selected_index[0]].properties.sy + self.objects[this.selected_index[0]].properties.ey) / 2;
 
 		
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			var halfVal = Math.abs(self.objects[this].properties.ey - self.objects[this].properties.sy)/2;
 			
 			if (self.objects[this].properties.sy < self.objects[this].properties.ey) {
@@ -3060,86 +2683,61 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.draw();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method cut 
-	 * @param {String} index The index of the item to be hovered.
-	 **/
 	_delete: function () { 
 		var self = this;
 
-		$(this.selectedIndex).each(function (i) {
+		$(this.selected_index).each(function (i) {
 			self.objects[this].remove();
 		});
 	},
 	
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method cut 
-	 * @param {String} index The index of the item to be hovered.
-	 **/
 	cut: function () { 
 		var self = this;
 		
-		delete this.copiedObjects;
-		this.copiedObjects = $.makeArray();
+		delete this.copied_objects;
+		this.copied_objects = $.makeArray();
 		
-		$(this.selectedIndex).each(function (i) {
-			self.copiedObjects.push(self.clone(self.objects[this]));
+		$(this.selected_index).each(function (i) {
+			self.copied_objects.push(self.clone(self.objects[this]));
 			
 			self.objects[this].remove();
 		});
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method copy 
-	 * @param {String} index The index of the item to be hovered.
-	 **/
 	copy: function () { 
 		var self = this;
 		
-		delete this.copiedObjects;
-		this.copiedObjects = $.makeArray();
+		delete this.copied_objects;
+		this.copied_objects = $.makeArray();
 		
-		$(this.selectedIndex).each(function (i) {
-			self.copiedObjects.push(self.clone(self.objects[this]));
+		$(this.selected_index).each(function (i) {
+			self.copied_objects.push(self.clone(self.objects[this]));
 		});
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method paste 
-	 * @param {String} index The index of the item to be hovered.
-	 **/
 	paste: function () { 
 		var self = this;
 		
 		var length = self.objects.length;
 
 		
-		$(this.copiedObjects).each(function (i) {
-			self.isDrawing = false;
+		$(this.copied_objects).each(function (i) {
+			self.is_drawing = false;
 			
 			var dummyObject = this;
-			self.add(this.type, this.shapeName, null, null, function () {
+			self.add(this.type, this.shape_name, null, null, function () {
 				
-				self.setShapeProperties(self.objects[length+i], dummyObject);
+				self.set_shape_properties(self.objects[length+i], dummyObject);
 								
 				//self.objects[i].shape.move(dummyObject.properties.sx, dummyObject.properties.sy, dummyObject.properties.ex, dummyObject.properties.ey);
 				self.objects[length+i].shape.show();
 		
-				self.objects[length+i].shape.setShape();			
+				self.objects[length+i].shape.set_shape();			
 					
 				self.draw();
 			});
 						
-			self.setProperties(self.objects[length+i], this);
+			self.set_properties(self.objects[length+i], this);
 			
 			self.objects[length+i].properties.sx += 10;
 			self.objects[length+i].properties.sy += 10;
@@ -3149,7 +2747,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 
 		this.draw();
 		
-		delete this.copiedObjects;
+		delete this.copied_objects;
 	},
 	
 	load: function (objects) {
@@ -3163,33 +2761,27 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		
 
 		$(objects).each(function (i) {
-			self.isDrawing = false;
+			self.is_drawing = false;
 			
 			var dummyObject = this;
-			self.add(this.type, this.shapeName, null, null, function () {
+			self.add(this.type, this.shape_name, null, null, function () {
 		
-				self.setShapeProperties(self.objects[i], dummyObject);
+				self.set_shape_properties(self.objects[i], dummyObject);
 								
 				//self.objects[i].shape.move(dummyObject.properties.sx, dummyObject.properties.sy, dummyObject.properties.ex, dummyObject.properties.ey);
 				self.objects[i].shape.show();
 				
-				self.objects[i].shape.setShape();
+				self.objects[i].shape.set_shape();
 				
 				self.draw();
 			});
 						
-			self.setProperties(self.objects[i], this);
+			self.set_properties(self.objects[i], this);
 		});
 
 		this.draw();
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method copy 
-	 * @param {String} index The index of the item to be hovered.
-	 **/
+
 	clone: function (object) { 
 		var objectClone = {}; 
 
@@ -3236,32 +2828,14 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		return objectClone; 		
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method copy 
-	 * @param {String} index The index of the item to be hovered.
-	 **/
 	undo: function () { 
-		this.undoManager.undo();
+		this.undo_manager.undo();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method copy 
-	 * @param {String} index The index of the item to be hovered.
-	 **/
 	redo: function () { 
-		this.undoManager.redo();
+		this.undo_manager.redo();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method copy 
-	 * @param {String} index The index of the item to be hovered.
-	 **/
 	remove: function (index) { 
 		var self = this;
 		
@@ -3271,8 +2845,8 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		properties.ex = self.objects[index].properties.ex;
 		properties.ey = self.objects[index].properties.ey;
 				
-		self.undoManager.register(
-			self, self.add, [self.objects[index].type, self.objects[index].shapeName, self.objects[index].option, properties], 'Create Item',
+		self.undo_manager.register(
+			self, self.add, [self.objects[index].type, self.objects[index].shape_name, self.objects[index].option, properties], 'Create Item',
 			self, self.remove, [self.objects.length-1], 'Remove Item'
 		);
 	
@@ -3283,28 +2857,22 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.draw();
 	},
 
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method setProperties 
-	 * @param {Object} target The target.
-	 * @param {Object} source The source.
-	 **/
-	setProperties: function (target, source) {
+	set_properties: function (target, source) {
 			
 		target.type = source.type;
-		target.shapeName = source.shapeName;
+		target.shape_name = source.shape_name;
 		target.data_uuid = source.data_uuid;
 		
 		target.properties.kind = source.properties.kind;
 		target.properties.focus = source.properties.focus;
-		target.properties.isDrag = source.properties.isDrag;
-		target.properties.isDrawFinished = source.properties.isDrawFinished;
+		target.properties.is_dragging = source.properties.is_dragging;
+		target.properties.is_drawing_finished = source.properties.is_drawing_finished;
 		target.properties.sx = parseInt(source.properties.sx);
 		target.properties.sy = parseInt(source.properties.sy);
 		target.properties.ex = parseInt(source.properties.ex);
 		target.properties.ey = parseInt(source.properties.ey);
-		target.properties.prevX = parseInt(source.properties.prevX);
-		target.properties.prevY = parseInt(source.properties.prevY);
+		target.properties.previous_x = parseInt(source.properties.previous_x);
+		target.properties.previous_y = parseInt(source.properties.previous_y);
 		target.properties.id = source.properties.id;
 		target.properties.name = source.properties.name;		
 		target.properties.x = parseInt(source.properties.x);
@@ -3317,50 +2885,40 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			target.properties.thickness = source.properties.thickness;
 			target.properties.color = source.properties.color;
 			
-			if (source.properties.innerNode) {
-				target.properties.innerNode = source.properties.innerNode;
+			if (source.properties.inner_node) {
+				target.properties.inner_node = source.properties.inner_node;
 			}
 		}
 	},
 	
-	setShapeProperties: function (target, source) {
+	set_shape_properties: function (target, source) {
 		
 		if (target.type == "square") {
 			//target.shape.properties = null;
-			//console.log(target.shape.properties);
 			
 			$.each(source.shape.properties, function (key, value) {
-				//eval('console.log(target.shape.properties.' + key + ')');
 				eval('target.shape.properties.' + key + ' = value;');
 
 				
 				/*
 				try {
-					eval('console.log(target.shape.properties.' + key + ')');
 					eval('target.shape.properties.' + key + ' = value;');
 				}
 				catch (e) {
-					console.log(e);
 				}	
 				*/		
 			});
 		}
 		
-		//target.properties.attrList = source.properties.attrList;
+		//target.properties.attribute_list = source.properties.attribute_list;
 		
-		target.shape.setShape();
+		target.shape.set_shape();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method setProperties 
-	 * @param {Object} target The target.
-	 * @param {Object} source The source.
-	 **/
-	setProperties2: function (selectedIndex, properties) {
+	set_properties2: function (selected_index, properties) {
 		var self = this;
 	
-		$(selectedIndex).each(function (i) {
+		$(selected_index).each(function (i) {
 			self.objects[this].properties.sx = properties[this].sx;
 			self.objects[this].properties.sy = properties[this].sy;
 			self.objects[this].properties.ex = properties[this].ex;

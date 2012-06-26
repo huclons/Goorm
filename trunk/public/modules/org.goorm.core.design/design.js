@@ -2,77 +2,20 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module design
  **/
 
-/**
- * This is an goorm code generator.  
- * <br>goorm starts with this code generator.
- * @class design
- **/
 org.goorm.core.design = function () {
-	/**
-	 * This presents the current browser version
-	 * @property title
-	 **/
 	this.title = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property container
-	 **/
 	this.container = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property filepath
-	 **/
 	this.filepath = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property filename
-	 **/
 	this.filename = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property filetype
-	 **/
 	this.filetype = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property ruler
-	 **/
 	this.ruler = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property canvas
-	 **/
 	this.canvas = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 **/
 	this.target = null;
-	
-
 };
 
 org.goorm.core.design.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @constructor
-	 * @param {String} target The target.
-	 * @param {STring} title The title. 
-	 **/
 	init: function (target, title) {
 		var self = this;
 		
@@ -80,13 +23,13 @@ org.goorm.core.design.prototype = {
 		this.title = title;
 		this.target = target;
 		
-		this.marginTop = 200;
+		this.margin_top = 200;
 				
-		$(target).append("<div class='canvasContainer'></div>");
+		$(target).append("<div class='canvas_container'></div>");
 		
 		
-		$(target).find(".canvasContainer").css("left", 14);
-		$(target).find(".canvasContainer").css("top", 14);
+		$(target).find(".canvas_container").css("left", 14);
+		$(target).find(".canvas_container").css("top", 14);
 		
 		//Ruler Initialization		
 		this.ruler = new org.goorm.core.design.ruler();
@@ -95,13 +38,13 @@ org.goorm.core.design.prototype = {
 				
 		//Canvas Initialization		
 		this.canvas = new org.goorm.core.design.canvas();
-		this.canvas.init($(target).find(".canvasContainer"), 800, 1000, this.title, this);
+		this.canvas.init($(target).find(".canvas_container"), 800, 1000, this.title, this);
 
 
 
 		//Blocking Context Menus for Empty Space		
-		var emptyContextMenu = new org.goorm.core.menu.context();
-		emptyContextMenu.init("", "none", $(target).find(".canvasContainer"), "");
+		var empty_context_menu = new org.goorm.core.menu.context();
+		empty_context_menu.init("", "none", $(target).find(".canvas_container"), "");
 		
 		
 		
@@ -113,17 +56,9 @@ org.goorm.core.design.prototype = {
 		
 				
 		//for Test
-		//this.setCollaborationOn();		
+		//this.set_collaboration_on();		
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method load 
-	 * @param {String} filepath The filepath of target contents.
-	 * @param {String} filename The name of target file.
-	 * @param {String} filetype The type of target file. 
-	 **/
 	load: function (filepath, filename, filetype) {
 		var self = this;
 		
@@ -137,7 +72,7 @@ org.goorm.core.design.prototype = {
 		var i = 0;
 		this.interval = window.setInterval(function () { if(i<100) { statusbar.progressbar.set('value', i+=10); } else { window.clearInterval(self.interval); } }, 100);
 		
-		statusbar.startLoading();
+		statusbar.start();
 		
 		$.ajax({
 			url: url,			
@@ -155,21 +90,19 @@ org.goorm.core.design.prototype = {
 					self.canvas.load(filedata.objects);
 					
 /* why?
-					console.log(filedata);
 					self.canvas.setSize(parseInt(filedata.canvas_width), parseInt(filedata.canvas_height));
-					console.log("1");
-					self.resizeAll();
+					self.resize_all();
 					
-					self.canvas.preview.realWidth = filedata.canvas_width;
-					self.canvas.preview.realHeight = filedata.canvas_height;
-					self.canvas.preview.setSize();
+					self.canvas.preview.real_width = filedata.canvas_width;
+					self.canvas.preview.real_height = filedata.canvas_height;
+					self.canvas.preview.set_size();
 */
 				}
 				
 				self.canvas.collaboration.init(self.canvas);
 				
-				if(core.isCollaborationDrawON == true){
-					self.canvas.collaboration.startListening();
+				if(core.collaboration_draw_on == true){
+					self.canvas.collaboration.start_listening();
 				}
 
 				statusbar.progressbar.set('value', 100);
@@ -178,32 +111,27 @@ org.goorm.core.design.prototype = {
 					window.clearInterval(self.interval);
 				}
 				
-				statusbar.stopLoading();
+				statusbar.stop();
 			}
 		});
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method save 
-	 **/
 	save: function () {
 		var self = this;
 		
 		var url = "put_file_contents";
 		var path = this.filepath + "/" + this.filename;
 		
-		var objectdata = this.getSource(this.canvas.objects);
+		var object_data = this.get_source(this.canvas.objects);
 		
 		var filedata = "{"
 			+ '"filename":' + '"' + this.filename + '",'
 			+ '"file_type":' + '"' + this.filetype + '",'
-			+ '"project_type":' + '"' + core.currentProjectType + '",'
+			+ '"project_type":' + '"' + core.status.current_project_type + '",'
 			+ '"canvas_width":'  + '"' + this.canvas.width + '",'
 			+ '"canvas_height":' + '"' + this.canvas.height + '",'
 			+ '"last_modified_timestamp":' + '"' + new Date().getTime() + '",'
-			+ '"objects":' +  objectdata
+			+ '"objects":' +  object_data
 		+ "}";
 		
 		$.ajax({
@@ -224,160 +152,141 @@ org.goorm.core.design.prototype = {
 		});
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method saveAs 
-	 * @param {String} filepath The filepath of target contents.
-	 * @param {String} filename The name of target file.
-	 * @param {String} filetype The type of target file. 
-	 **/
-	saveAs: function (filepath, filename, filetype) {
+	save_as: function (filepath, filename, filetype) {
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method resizeAll
-	 **/
-	resizeAll: function () {		
-		if(this.canvas.toolbar.isRulerOn) {
-			$(this.container).find(".canvasContainer").width($(this.container).parent().width() - 14);
-			$(this.container).find(".canvasContainer").height($(this.container).parent().height() - 14 - 36);
+	resize_all: function () {		
+		if(this.canvas.toolbar.is_ruler_on) {
+			$(this.container).find(".canvas_container").width($(this.container).parent().width() - 14);
+			$(this.container).find(".canvas_container").height($(this.container).parent().height() - 14 - 36);
 		}
 		else {
-			$(this.container).find(".canvasContainer").width($(this.container).parent().width());
-			$(this.container).find(".canvasContainer").height($(this.container).parent().height() - 36);
+			$(this.container).find(".canvas_container").width($(this.container).parent().width());
+			$(this.container).find(".canvas_container").height($(this.container).parent().height() - 36);
 		}
 
-		$(this.container).find(".ruler_x").width($(this.container).find(".canvasContainer").width());
-		$(this.container).find(".ruler_y").height($(this.container).find(".canvasContainer").height()-1);
+		$(this.container).find(".ruler_x").width($(this.container).find(".canvas_container").width());
+		$(this.container).find(".ruler_y").height($(this.container).find(".canvas_container").height()-1);
 		
 		
 		
 		
-		if(this.canvas.height + 95 > $(this.container).find(".canvasContainer").height()) {
-			$(this.container).find(".canvasContainer").find(".canvas").css("top", 50);	
-			$(this.container).find(".canvasContainer").find(".canvas").css("margin-top", 0);
+		if(this.canvas.height + 95 > $(this.container).find(".canvas_container").height()) {
+			$(this.container).find(".canvas_container").find(".canvas").css("top", 50);	
+			$(this.container).find(".canvas_container").find(".canvas").css("margin-top", 0);
 			
 			$(this.container).find(".ruler_y").css("background-position", "0px 50px");			
 		}
 		else {
-			$(this.container).find(".canvasContainer").find(".canvas").css("top", "50%");
-			$(this.container).find(".canvasContainer").find(".canvas").css("margin-top", 0 - (this.canvas.height/2) + 10);
+			$(this.container).find(".canvas_container").find(".canvas").css("top", "50%");
+			$(this.container).find(".canvas_container").find(".canvas").css("margin-top", 0 - (this.canvas.height/2) + 10);
 			
 			$(this.container).find(".ruler_y").css("background-position", "0px " +  2 + ($(this.container).height() - this.canvas.height)/2 + "px");
 		}		
 		
-		if(this.canvas.width + 95 > $(this.container).find(".canvasContainer").width()) {
-			$(this.container).find(".canvasContainer").find(".canvas").css("left", 50);	
-			$(this.container).find(".canvasContainer").find(".canvas").css("margin-left", 0);
+		if(this.canvas.width + 95 > $(this.container).find(".canvas_container").width()) {
+			$(this.container).find(".canvas_container").find(".canvas").css("left", 50);	
+			$(this.container).find(".canvas_container").find(".canvas").css("margin-left", 0);
 			
 			$(this.container).find(".ruler_x").css("background-position", "50px 0px");
 		}
 		else {
-			$(this.container).find(".canvasContainer").find(".canvas").css("left", "50%");		
-			$(this.container).find(".canvasContainer").find(".canvas").css("margin-left", 0 - (this.canvas.width/2) + 10);	
+			$(this.container).find(".canvas_container").find(".canvas").css("left", "50%");		
+			$(this.container).find(".canvas_container").find(".canvas").css("margin-left", 0 - (this.canvas.width/2) + 10);	
 			
 			$(this.container).find(".ruler_x").css("background-position", ($(this.container).width() - this.canvas.width)/2 + 2 + "px 0px");
 		}
 
 		
-		if (this.canvas.skinWidth != null) {
+		if (this.canvas.skin_width != null) {
 			
-			if(this.canvas.skinHeight + 95 > $(this.container).find(".canvasContainer").height()) {
-				$(this.container).find(".canvasContainer").find(".skin").css("top", 50);	
-				$(this.container).find(".canvasContainer").find(".skin").css("margin-top", 0);
+			if(this.canvas.skin_height + 95 > $(this.container).find(".canvas_container").height()) {
+				$(this.container).find(".canvas_container").find(".skin").css("top", 50);	
+				$(this.container).find(".canvas_container").find(".skin").css("margin-top", 0);
 			}
 			else {
-				$(this.container).find(".canvasContainer").find(".skin").css("top", "50%");		
-				$(this.container).find(".canvasContainer").find(".skin").css("margin-top", 0 - (this.canvas.skinHeight/2) + 10);	
+				$(this.container).find(".canvas_container").find(".skin").css("top", "50%");		
+				$(this.container).find(".canvas_container").find(".skin").css("margin-top", 0 - (this.canvas.skin_height/2) + 10);	
 			}		
 			
-			if(this.canvas.skinWidth + 95 > $(this.container).find(".canvasContainer").width()) {
-				$(this.container).find(".canvasContainer").find(".skin").css("left", 50);	
-				$(this.container).find(".canvasContainer").find(".skin").css("margin-left", 0);
-				$(this.container).find(".canvasContainer").find(".canvas").css("left", ($(this.container).find(".canvasContainer").find(".space").width()-this.canvas.width)/2+1);
-				$(this.container).find(".canvasContainer").find(".canvas").css("margin-left", 0);	
+			if(this.canvas.skin_width + 95 > $(this.container).find(".canvas_container").width()) {
+				$(this.container).find(".canvas_container").find(".skin").css("left", 50);	
+				$(this.container).find(".canvas_container").find(".skin").css("margin-left", 0);
+				$(this.container).find(".canvas_container").find(".canvas").css("left", ($(this.container).find(".canvas_container").find(".space").width()-this.canvas.width)/2+1);
+				$(this.container).find(".canvas_container").find(".canvas").css("margin-left", 0);	
 			}
 			else {
-				$(this.container).find(".canvasContainer").find(".skin").css("left", "50%");		
-				$(this.container).find(".canvasContainer").find(".skin").css("margin-left", 0 - (this.canvas.skinWidth/2) + 10);	
-				$(this.container).find(".canvasContainer").find(".canvas").css("left", "50%");
-				$(this.container).find(".canvasContainer").find(".canvas").css("margin-left", 0 - (this.canvas.width/2) + 7);	
+				$(this.container).find(".canvas_container").find(".skin").css("left", "50%");		
+				$(this.container).find(".canvas_container").find(".skin").css("margin-left", 0 - (this.canvas.skin_width/2) + 10);	
+				$(this.container).find(".canvas_container").find(".canvas").css("left", "50%");
+				$(this.container).find(".canvas_container").find(".canvas").css("margin-left", 0 - (this.canvas.width/2) + 7);	
 			}
 			
-			$(this.container).find(".canvasContainer").find(".canvas").css("margin-top", this.marginTop);	
+			$(this.container).find(".canvas_container").find(".canvas").css("margin-top", this.margin_top);	
 		}
 		
-		this.canvas.preview.setSize();
+		this.canvas.preview.set_size();
 	},
 	
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method getSource 
-	 **/
-	getSource: function (objects) {
+	get_source: function (objects) {
 		
-		var objectsString = "[";
+		var object_string = "[";
 		
 		var objectsLength = objects.length;
 		
 		$(objects).each(function (i) {
-			objectsString += "{";
+			object_string += "{";
 			
 			var j = 0;
 			
-			objectsString += '"type": "' + this.type + '", ';
-			objectsString += '"shapeName": "' + this.shapeName + '", ';
-			objectsString += '"data_uuid": "' + this.data_uuid + '", ';
+			object_string += '"type": "' + this.type + '", ';
+			object_string += '"shape_name": "' + this.shape_name + '", ';
+			object_string += '"data_uuid": "' + this.data_uuid + '", ';
 			
-			objectsString += "\"properties\": {";
+			object_string += "\"properties\": {";
 
-				objectsString += '"kind": "' + this.properties.kind + '",';					
-				objectsString += '"focus": "' + this.properties.focus + '", ';
-				objectsString += '"isDrag": "' + this.properties.isDrag + '", ';
-				objectsString += '"isDrawFinished": "' + this.properties.isDrawFinished + '", ';
-				objectsString += '"sx": ' + this.properties.sx + ', ';
-				objectsString += '"sy": ' + this.properties.sy + ', ';
-				objectsString += '"ex": ' + this.properties.ex + ', ';
-				objectsString += '"ey": ' + this.properties.ey + ', ';
-				objectsString += '"prevX": ' + this.properties.prevX + ', ';
-				objectsString += '"prevY": ' + this.properties.prevY + ', ';
-				objectsString += '"id": "' + this.properties.id + '", ';
-				objectsString += '"name": "' + this.properties.name + '", ';
-				objectsString += '"x": ' + this.properties.x + ', ';
-				objectsString += '"y": ' + this.properties.y + ', ';
-				objectsString += '"width": ' + this.properties.width + ', ';
-				objectsString += '"height": ' + this.properties.height + ', ';
+				object_string += '"kind": "' + this.properties.kind + '",';					
+				object_string += '"focus": "' + this.properties.focus + '", ';
+				object_string += '"is_dragging": "' + this.properties.is_dragging + '", ';
+				object_string += '"is_drawing_finished": "' + this.properties.is_drawing_finished + '", ';
+				object_string += '"sx": ' + this.properties.sx + ', ';
+				object_string += '"sy": ' + this.properties.sy + ', ';
+				object_string += '"ex": ' + this.properties.ex + ', ';
+				object_string += '"ey": ' + this.properties.ey + ', ';
+				object_string += '"previous_x": ' + this.properties.previous_x + ', ';
+				object_string += '"previous_y": ' + this.properties.previous_y + ', ';
+				object_string += '"id": "' + this.properties.id + '", ';
+				object_string += '"name": "' + this.properties.name + '", ';
+				object_string += '"x": ' + this.properties.x + ', ';
+				object_string += '"y": ' + this.properties.y + ', ';
+				object_string += '"width": ' + this.properties.width + ', ';
+				object_string += '"height": ' + this.properties.height + ', ';
 				
 				if (this.type == "line") {
-					objectsString += '"thickness": "' + this.properties.thickness + '",';
-					objectsString += '"color": "' + this.properties.color + '",';
-					objectsString += '"innerNode": [';
+					object_string += '"thickness": "' + this.properties.thickness + '",';
+					object_string += '"color": "' + this.properties.color + '",';
+					object_string += '"inner_node": [';
 					
-					var length = this.properties.innerNode;
-					$(this.properties.innerNode).each(function (i) {
-						objectsString += '{"x": ' + this.x + ', "y": ' + this.y + '}';
+					var length = this.properties.inner_node;
+					$(this.properties.inner_node).each(function (i) {
+						object_string += '{"x": ' + this.x + ', "y": ' + this.y + '}';
 						
 						if (i != length - 1) {
-							objectsString += ",";
+							object_string += ",";
 						}	
 					});
-					objectsString += '],';
+					object_string += '],';
 				}
 				
-				objectsString += '"connector": "' + this.properties.connector + '"';
-				//objectsString += 'attrList: [' + this.properties.attrList + ']';
+				object_string += '"connector": "' + this.properties.connector + '"';
+				//object_string += 'attribute_list: [' + this.properties.attribute_list + ']';
 			
-			objectsString += "}";
+			object_string += "}";
 			
 			if (this.type == "square") {
 				//Stencil 占쏙옙占�占썬�占썲�占쏙옙占쏙옙�⑨옙
-				objectsString += ", \"shape\": {";
-				objectsString += "\"properties\": {";									
+				object_string += ", \"shape\": {";
+				object_string += "\"properties\": {";									
 				
 				var j = 0;
 				var length = 0;
@@ -389,38 +298,37 @@ org.goorm.core.design.prototype = {
 				
 				$.each(this.shape.properties, function (key, value) {
 					try {
-						objectsString += '"' + key + '": "' + value + '"';
+						object_string += '"' + key + '": "' + value + '"';
 						
 						if (j != length - 1) {
-							 objectsString += ',';
+							 object_string += ',';
 						}
 						
 						j++;
 					}
 					catch (e) {
-						console.log(e);
 					}	
 				});
 				
 				
-				objectsString += "}";
-				objectsString += "}";
+				object_string += "}";
+				object_string += "}";
 			}			
 
-			objectsString += "}";
+			object_string += "}";
 			
 			if (i != objectsLength - 1) {
-				objectsString += ", ";
+				object_string += ", ";
 			}
 		});
 		
-		objectsString += "]";
+		object_string += "]";
 		
 		/*
-		objectsString = objectsString.split(" ,").join("");
-		objectsString = objectsString.split(", }").join("}");
+		object_string = object_string.split(" ,").join("");
+		object_string = object_string.split(", }").join("}");
 		*/
 		
-		return objectsString;		
+		return object_string;		
 	}
 };

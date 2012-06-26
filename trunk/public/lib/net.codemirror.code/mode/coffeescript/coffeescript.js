@@ -178,19 +178,19 @@ CodeMirror.defineMode('coffeescript', function(conf) {
     
     function indent(stream, state, type) {
         type = type || 'coffee';
-        var indentUnit = 0;
+        var indent_unit = 0;
         if (type === 'coffee') {
             for (var i = 0; i < state.scopes.length; i++) {
                 if (state.scopes[i].type === 'coffee') {
-                    indentUnit = state.scopes[i].offset + conf.indentUnit;
+                    indent_unit = state.scopes[i].offset + conf.indent_unit;
                     break;
                 }
             }
         } else {
-            indentUnit = stream.column() + stream.current().length;
+            indent_unit = stream.column() + stream.current().length;
         }
         state.scopes.unshift({
-            offset: indentUnit,
+            offset: indent_unit,
             type: type
         });
     }

@@ -2,79 +2,43 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module file
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class _new
- * @extends file
- **/
 org.goorm.core.file._new = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 **/
 	this.dialog = null;
-	
-	/**
-	 * The array object that contains the information about buttons on the bottom of a dialog 
-	 * @property buttons
-	 * @type Object
-	 * @default null
-	 **/
 	this.buttons = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property treeView
-	 **/
-	this.treeView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property filepath
-	 **/
-	this.currentPath = null;
-	
-	this.isNewAnyway = null;
+	this.treeview = null;
+	this.current_path = null;
+	this.is_new_anyway = null;
 };
 
 org.goorm.core.file._new.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 **/
 	init: function () { 
 		var self = this;
 		
-		var handleOk = function() {
-			if($("#fileNewInputFileName").attr("value")=="") {
-				alert.show(core.localization.msg["alertFileNameEmpty"]);
+		var handle_ok = function() {
+			if($("#file_new_input_filename").attr("value")=="") {
+				alert.show(core.module.localization.msg["alertFileNameEmpty"]);
 				return false;
 			}
 			
-			var tempFilePath = $("#fileNewinputLocationPath").val();
-			var tempFileName = $("#fileNewInputFileName").val();
+			var temp_filepath = $("#file_new_input_location_path").val();
+			var temp_filename = $("#file_new_input_filename").val();
 
 			$.ajax({
 				url: "file/get_contents",			
 				type: "GET",
-				data: { path: "workspace/"+$("#fileNewinputLocationPath").val()+"/"+$("#fileNewInputFileName").attr("value")},
+				data: { path: "workspace/"+$("#file_new_input_location_path").val()+"/"+$("#file_new_input_filename").attr("value")},
 				success: function(data) {
-					if (data!=0 && !self.isNewAnyway) {
+					if (data!=0 && !self.is_new_anyway) {
 						confirmation.init({
-							title: core.localization.msg["confirmationNewTitle"], 
-							message: core.localization.msg["confirmationNewMessage"],
-							yesText: core.localization.msg["confirmationYes"],
-							noText: core.localization.msg["confirmationNo"],
+							title: core.module.localization.msg["confirmationNewTitle"], 
+							message: core.module.localization.msg["confirmationNewMessage"],
+							yes_text: core.module.localization.msg["confirmation_yes"],
+							no_text: core.module.localization.msg["confirmation_no"],
 							yes: function () {
-								self.isNewAnyway = true;
-								handleOk();
+								self.is_new_anyway = true;
+								handle_ok();
 							}, no: function () {
 							}
 						});
@@ -84,46 +48,46 @@ org.goorm.core.file._new.prototype = {
 					}
 
 					var postdata = {
-						currentProjectPath: $("#fileNewinputLocationPath").val(),
-						inputFileName: $("#fileNewInputFileName").attr("value"),
-						inputFileType: $("#fileNewInputFileType").attr("value")
+						current_project_path: $("#file_new_input_location_path").val(),
+						input_filename: $("#file_new_input_filename").attr("value"),
+						input_filetype: $("#fileNewInputFileType").attr("value")
 					};
 		
 					$.post("file/new", postdata, function (data) {
 		
-						var receivedData = eval("("+data+")");
+						var received_data = eval("("+data+")");
 		
-						if(receivedData.errCode==0) {
+						if(received_data.errCode==0) {
 						
-							var windowManager = core.mainLayout.workSpace.windowManager;
+							var window_manager = core.module.layout.workspace.window_manager;
 							
-							tempFilePath = "../../project/"+tempFilePath+"/";
-							tempFilePath = tempFilePath.replace("///", "/");
-							tempFilePath = tempFilePath.replace("//", "/");
+							temp_filepath = "../../project/"+temp_filepath+"/";
+							temp_filepath = temp_filepath.replace("///", "/");
+							temp_filepath = temp_filepath.replace("//", "/");
 							
-							for (var i = 0; i < windowManager.index; i++) {
-								var windowFileName = windowManager.window[i].filename;
-								var windowFilePath = windowManager.window[i].filepath;
-								windowFilePath = windowFilePath + "/";
-								windowFilePath = windowFilePath.replace("//", "/");
+							for (var i = 0; i < window_manager.index; i++) {
+								var window_filename = window_manager.window[i].filename;
+								var window_filepath = window_manager.window[i].filepath;
+								window_filepath = window_filepath + "/";
+								window_filepath = window_filepath.replace("//", "/");
 								
-								if( windowManager.window[i].alive && windowFileName == tempFileName && windowFilePath == tempFilePath) {
-									windowManager.window[i].close();
+								if( window_manager.window[i].alive && window_filename == temp_filename && window_filepath == temp_filepath) {
+									window_manager.window[i].close();
 								}
 							}
 						
-							var tempType = postdata.inputFileName;
-							tempType = tempType.split(".");
-							tempType = tempType[1];
+							var temp_type = postdata.input_filename;
+							temp_type = temp_type.split(".");
+							temp_type = temp_type[1];
 							
-							core.mainLayout.workSpace.windowManager.open(tempFilePath, tempFileName, tempType);
-							core.mainLayout.projectExplorer.refresh();
+							core.module.layout.workspace.window_manager.open(temp_filepath, temp_filename, temp_type);
+							core.module.layout.project_explorer.refresh();
 						}
 						else {
-							alert.show(core.localization.msg["alertError"] + receivedData.message);
+							alert.show(core.module.localization.msg["alertError"] + received_data.message);
 						}
 						
-						core.mainLayout.projectExplorer.refresh();
+						core.module.layout.project_explorer.refresh();
 						self.dialog.panel.hide();
 					});
 				}
@@ -131,13 +95,13 @@ org.goorm.core.file._new.prototype = {
 
 		};
 
-		var handleCancel = function() { 
+		var handle_cancel = function() { 
 			
 			this.hide(); 
 		};
 		
-		this.buttons = [ {text:"OK", handler:handleOk, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}]; 
+		this.buttons = [ {text:"OK", handler:handle_ok, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}]; 
 
 		this.dialog = new org.goorm.core.file._new.dialog();
 		this.dialog.init({
@@ -148,16 +112,16 @@ org.goorm.core.file._new.prototype = {
 			modal:true,
 			buttons:this.buttons, 
 			success: function () {
-				var resize = new YAHOO.util.Resize("fileNewDialogLeft", {
+				var resize = new YAHOO.util.Resize("file_new_dialog_left", {
 		            handles: ['r'],
 		            minWidth: 200,
 		            maxWidth: 400
 		        });
 				
 		        resize.on('resize', function(ev) {
-					var width = $("#fileNewDialogMiddle").width();
+					var width = $("#file_new_dialog_middle").width();
 		            var w = ev.width;
-		            $("#fileNewDialogCenter").css('width', (width - w - 9) + 'px');
+		            $("#file_new_dialog_center").css('width', (width - w - 9) + 'px');
 		        });
 			}
 		});
@@ -165,86 +129,78 @@ org.goorm.core.file._new.prototype = {
 		
 		//this.dialog.panel.setBody("AA");
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method show 
-	 **/
+
 	show: function (context) {
 		var self = this;
 	
-		this.isNewAnyway = false;
+		this.is_new_anyway = false;
 	
-		this.currentPath = "/"+core.currentProjectPath;
+		this.current_path = "/"+core.status.current_project_path;
 		
 		if(context) {
-			var dir =  core.selectedFile;
+			var dir =  core.status.selected_file;
 			dir = dir.replace(/\.\.\/\.\.\/project\/\//, "");
 			dir = dir.replace(/\.\.\/\.\.\/project\//, "");
 			dir = "/" + dir;
 			dir = dir.replace(/\/\/\//, "/");
 			dir = dir.replace(/\/\//, "/");
-			$("#fileNewinputLocationPath").val(dir);
+			$("#file_new_input_location_path").val(dir);
 		}
 		else {
-			$("#fileNewinputLocationPath").val(this.currentPath);
+			$("#file_new_input_location_path").val(this.current_path);
 		}
 	
 		var postdata = {
 			kind: "project",
-			projectName: this.currentPath,
-			folderOnly: "true"
+			project_name: this.current_path,
+			folder_only: "true"
 		};
 		
-		this.addDirectories(postdata);
+		this.add_directories(postdata);
 		
 		var postdata = {
 			kind: "project",
-			projectName: this.currentPath,
-			folderOnly: "false"
+			project_name: this.current_path,
+			folder_only: "false"
 		};
 				
-		this.addFileItems(postdata);
+		this.add_file_items(postdata);
 	
-		$("#fileNewInputFileName").val("");
+		$("#file_new_input_filename").val("");
 	
 		this.dialog.panel.show();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method addDirectories 
-	 **/	
-	addDirectories: function(postdata) {		
+	add_directories: function(postdata) {		
 		var self = this;
 
 		$.post("file/get_nodes", postdata, function (data) {
 
-			var sortProjectTreeview = function (sortingData) { 				
-				s.quickSort(sortingData);
+			var sort_project_treeview = function (sorting_data) { 				
+				s.quick_sort(sorting_data);
 				
-				for(i=0; i<sortingData.length; i++) {
-					if(sortingData[i].children) {
-						s.quickSort(sortingData[i].children);
+				for(i=0; i<sorting_data.length; i++) {
+					if(sorting_data[i].children) {
+						s.quick_sort(sorting_data[i].children);
 					}
 				}
 			};
 
-			var sortingData = eval(data);
+			var sorting_data = eval(data);
 			
-			sortProjectTreeview(sortingData);
+			sort_project_treeview(sorting_data);
 			
-			var newData = new Array();
+			var new_data = new Array();
 
-			for(var name in sortingData) {
-				if(sortingData[name].cls=="folder") {
-					newData.push(sortingData[name]);
+			for(var name in sorting_data) {
+				if(sorting_data[name].cls=="folder") {
+					new_data.push(sorting_data[name]);
 				}
 			}
 
-			self.treeView = new YAHOO.widget.TreeView("fileNewTreeview", newData);
+			self.treeview = new YAHOO.widget.TreeView("file_new_treeview", new_data);
 
-			self.treeView.subscribe("clickEvent", function(nodedata) {	
+			self.treeview.subscribe("clickEvent", function(nodedata) {	
 				if(nodedata.node.data.cls == "folder") {
 					var filename = nodedata.node.data.filename;
 					var filetype = nodedata.node.data.filetype;
@@ -257,22 +213,22 @@ org.goorm.core.file._new.prototype = {
 					dir = dir.replace(/\/\/\//, "/");
 					dir = dir.replace(/\/\//, "/");
 						
-					self.currentPath = dir;
+					self.current_path = dir;
 
-					$("#fileNewinputLocationPath").attr("value", self.currentPath);
+					$("#file_new_input_location_path").attr("value", self.current_path);
 
 					var postdata = {
 						kind: "project",
-						projectName: self.currentPath,
-						folderOnly: "false"
+						project_name: self.current_path,
+						folder_only: "false"
 					};
-					self.addFileItems(postdata);
+					self.add_file_items(postdata);
 				}
 				
 				return false;				
 			});
 			
-			self.treeView.subscribe("dblClickEvent", function(nodedata) {	
+			self.treeview.subscribe("dblClickEvent", function(nodedata) {	
 				if(nodedata.node.data.cls == "folder") {
 					if (nodedata.node.expanded) {
 						nodedata.node.collapse();
@@ -283,49 +239,41 @@ org.goorm.core.file._new.prototype = {
 				}
 			});
 						
-			self.treeView.render();
+			self.treeview.render();
 			
-			self.treeExpandComplete();
+			self.tree_expand_complete();
 			
-			self.treeView.subscribe("expandComplete", function () {
-				self.treeExpandComplete();	
+			self.treeview.subscribe("expandComplete", function () {
+				self.tree_expand_complete();	
 			});
 			
-			if (self.currentPath == "") {
-				$("#fileNewTreeview").find(".ygtvdepth0").find(".ygtvcell").prev().addClass("ygtvfocus");
-				$("#fileNewTreeview").find(".ygtvdepth0").find(".ygtvcell").addClass("ygtvfocus");
+			if (self.current_path == "") {
+				$("#file_new_treeview").find(".ygtvdepth0").find(".ygtvcell").prev().addClass("ygtvfocus");
+				$("#file_new_treeview").find(".ygtvdepth0").find(".ygtvcell").addClass("ygtvfocus");
 			}
 			
 		});
 	},
 
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method expandDirectory
-	 **/	
-	expandDirectory: function (directory) {
+	expand_directory: function (directory) {
 				
-		$("#fileNewTreeview").find(".ygtvfocus").parent().parent().parent().parent().find(".ygtvcell").each(function () {
+		$("#file_new_treeview").find(".ygtvfocus").parent().parent().parent().parent().find(".ygtvcell").each(function () {
 			if ($(this).find(".fullpath").text().split("/").pop() == directory) {
-				$("#fileNewTreeview").find(".ygtvfocus").removeClass("ygtvfocus");
+				$("#file_new_treeview").find(".ygtvfocus").removeClass("ygtvfocus");
 				
 				$(this).prev().addClass("ygtvfocus");
 				$(this).addClass("ygtvfocus");
 			}
 		});
 
-		this.treeView.getNodeByElement($("#fileNewTreeview").find(".ygtvfocus")[0]).expand();
+		this.treeview.getNodeByElement($("#file_new_treeview").find(".ygtvfocus")[0]).expand();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method treeExpandComplete
-	 **/	
-	treeExpandComplete: function () {
-		$("#fileNewTreeview").find(".ygtvcell").unbind("mousedown");		
-		$("#fileNewTreeview").find(".ygtvcell").mousedown(function (e) {
+	tree_expand_complete: function () {
+		$("#file_new_treeview").find(".ygtvcell").unbind("mousedown");		
+		$("#file_new_treeview").find(".ygtvcell").mousedown(function (e) {
 			if ($(this).hasClass("ygtvfocus") == false) {
-				$("#fileNewTreeview").find(".ygtvfocus").removeClass("ygtvfocus");
+				$("#file_new_treeview").find(".ygtvfocus").removeClass("ygtvfocus");
 				
 				if ($(this).hasClass("ygtvcontent")) {
 					$(this).prev().addClass("ygtvfocus");
@@ -335,75 +283,71 @@ org.goorm.core.file._new.prototype = {
 		});	
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method addFileItems
-	 **/	
-	addFileItems: function (postdata) {
+	add_file_items: function (postdata) {
 	
-		$("#fileNewDialogCenter").empty();
+		$("#file_new_dialog_center").empty();
 	
 		var self = this;
 		
 		$.post("file/get_nodes", postdata, function (data) {
 			
-			var sortProjectTreeview = function (sortingData) { 				
-				s.quickSort(sortingData);
+			var sort_project_treeview = function (sorting_data) { 				
+				s.quick_sort(sorting_data);
 			};
 
-			var sortingData = eval(data);
+			var sorting_data = eval(data);
 			
-			sortProjectTreeview(sortingData);
+			sort_project_treeview(sorting_data);
 
-			for(var name in sortingData) {
-				var iconStr = "";
-				if(sortingData[name].cls=="folder") {
-					iconStr += "<div class='folderitem'";
+			for(var name in sorting_data) {
+				var icon_str = "";
+				if(sorting_data[name].cls=="folder") {
+					icon_str += "<div class='folder_item'";
 				}
 				else {
-					iconStr += "<div class='fileitem'";
+					icon_str += "<div class='file_item'";
 				}
 				
-				iconStr +=" filename='"+sortingData[name].filename+"' filetype='"+sortingData[name].filetype+"' filepath='"+sortingData[name].parentLabel+"'>";
-				if(sortingData[name].cls=="folder") {
-					iconStr += "<img src='images/org.goorm.core.file/folder.png'>";
+				icon_str +=" filename='"+sorting_data[name].filename+"' filetype='"+sorting_data[name].filetype+"' filepath='"+sorting_data[name].parentLabel+"'>";
+				if(sorting_data[name].cls=="folder") {
+					icon_str += "<img src='images/org.goorm.core.file/folder.png'>";
 				}
 				else {
-					iconStr += "<img src='images/org.goorm.core.file/file.png'>";
+					icon_str += "<img src='images/org.goorm.core.file/file.png'>";
 				}
-				iconStr += "<div style='word-break:break-all; width:60px; line-height:12px; margin-left:5px; margin-right:5px; margin-bottom:5px;'>";
-				iconStr += sortingData[name].filename;
-				iconStr += "</div>";
-				iconStr += "</div>";
+				icon_str += "<div style='word-break:break-all; width:60px; line-height:12px; margin-left:5px; margin-right:5px; margin-bottom:5px;'>";
+				icon_str += sorting_data[name].filename;
+				icon_str += "</div>";
+				icon_str += "</div>";
 				
-				$("#fileNewDialogCenter").append(iconStr);
+				$("#file_new_dialog_center").append(icon_str);
 			}
 			
-			$("#fileNewDialogMiddle").find(".folderitem").dblclick(function() {
-				if (self.currentPath == "/")	self.currentPath = "";
-				self.currentPath = self.currentPath+"/"+$(this).attr("filename");
-				$("#fileNewinputLocationPath").val(self.currentPath);
+			$("#file_new_dialog_middle").find(".folder_item").dblclick(function() {
+				if (self.current_path == "/")	self.current_path = "";
+				self.current_path = self.current_path+"/"+$(this).attr("filename");
+				$("#file_new_input_location_path").val(self.current_path);
 
 				var postdata = {
 					kind: "project",
-					projectName: self.currentPath,
-					folderOnly: "false"
+					project_name: self.current_path,
+					folder_only: "false"
 				};
 
-				self.addFileItems(postdata);
-				self.expandDirectory($(this).attr("filename"));
+				self.add_file_items(postdata);
+				self.expand_directory($(this).attr("filename"));
 			});
 			
-			$("#fileNewDialogMiddle").find(".fileitem").click(function() {
-				$("#fileNewDialogMiddle").find(".fileitem").removeClass("selectedItem");
-				$("#fileNewDialogMiddle").find(".folderitem").removeClass("selectedItem");
-				$(this).addClass("selectedItem");
+			$("#file_new_dialog_middle").find(".file_item").click(function() {
+				$("#file_new_dialog_middle").find(".file_item").removeClass("selected_item");
+				$("#file_new_dialog_middle").find(".folder_item").removeClass("selected_item");
+				$(this).addClass("selected_item");
 			});
 			
-			$("#fileNewDialogMiddle").find(".folderitem").click(function() {
-				$("#fileNewDialogMiddle").find(".fileitem").removeClass("selectedItem");
-				$("#fileNewDialogMiddle").find(".folderitem").removeClass("selectedItem");
-				$(this).addClass("selectedItem");
+			$("#file_new_dialog_middle").find(".folder_item").click(function() {
+				$("#file_new_dialog_middle").find(".file_item").removeClass("selected_item");
+				$("#file_new_dialog_middle").find(".folder_item").removeClass("selected_item");
+				$(this).addClass("selected_item");
 			});	
 			
 		});

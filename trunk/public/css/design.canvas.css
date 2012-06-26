@@ -20,51 +20,51 @@ version: 3.0.0
 
 
 
-.statusDefault { 
+.status_default { 
 	cursor: default !important;
 }
 
-.statusDrawingLine { 
+.status_drawing_line { 
 	cursor: crosshair !important;
 }
 
-.statusDrawingSquare { 
+.status_drawing_square { 
 	cursor: crosshair !important;
 }
 
-.statusMove { 
+.status_move { 
 	cursor: move !important;
 }
 
-.statusResizeTopLeft { 
+.status_resize_top_left { 
 	cursor: nw-resize !important;
 }
 
-.statusResizeTopRight { 
+.status_resize_top_right { 
 	cursor: ne-resize !important;
 }
 
-.statusResizeBottomLeft { 
+.status_resize_bottom_left { 
 	cursor: sw-resize !important;
 }
 
-.statusResizeBottomRight { 
+.status_resize_bottom_right { 
 	cursor: se-resize !important;
 }
 
-.statusResizeTop { 
+.status_resize_top { 
 	cursor: n-resize !important;
 }
 
-.statusResizeBottom { 
+.status_resize_bottom { 
 	cursor: s-resize !important;
 }
 
-.statusResizeLeft { 
+.status_resize_left { 
 	cursor: w-resize !important;
 }
 
-.statusResizeRight { 
+.status_resize_right { 
 	cursor: e-resize !important;
 }
 

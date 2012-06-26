@@ -2,57 +2,22 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module menu
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class context
- * @extends menu
- **/
 org.goorm.core.menu.context = function () {
-	/**
-	 * This presents the current browser version
-	 * @property menu
-	 * @type Object
-	 * @default null
-	 **/
 	this.menu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 * @type Object
-	 * @default null
-	 **/
 	this.target = null;
-	
 	this.name = null;
 };
 
 org.goorm.core.menu.context.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {String} path The path.
-	 * @param {String} name The name.
-	 * @param {String} trigger The trigger.
-	 * @param {String} fingerprint The fingerprint.
-	 * @param {String} target The target.
-	 * @param {String} fn The fn.
-	 * 
-	 **/
 	init: function (path, name, trigger, fingerprint, target, fn) {
 		var self = this;
 		
 		this.target = target;
 		
 		if (name == "none") {
-			$(trigger).bind("contextmenu", function(e) {
+			$(trigger).bind("context_menu", function(e) {
 				return false;
 			});
 		}
@@ -76,8 +41,8 @@ org.goorm.core.menu.context.prototype = {
 						name = name + "_" + fingerprint;
 					}
 					self.name=name;
-					$("#goormMenuContainer").find("div[id='" + name + "']").remove();
-					$("#goormMenuContainer").append(data);
+					$("#goorm_menu_container").find("div[id='" + name + "']").remove();
+					$("#goorm_menu_container").append(data);
 					
 					self.menu = new YAHOO.widget.ContextMenu( 
 						name,  
@@ -100,7 +65,7 @@ org.goorm.core.menu.context.prototype = {
 					/*
 					if(fingerprint == "treeview") { //Does fingerprint div have a treeview?
 		
-						$("#"+trigger).find(".ygtvcell").bind("contextmenu", function (e) {
+						$("#"+trigger).find(".ygtvcell").bind("context_menu", function (e) {
 
 							var targetEl = e.target;
 			 
@@ -125,51 +90,30 @@ org.goorm.core.menu.context.prototype = {
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method blur 
-	 **/
 	show: function () {
 		if (this.menu) {
 			this.menu.show();
 		}
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method cancel 
-	 **/
+
 	cancel: function () {
 		if (this.menu) {
 			this.menu.cancel();
 		}
 	},
 	
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method blur 
-	 **/
 	blur: function () {
 		if (this.menu) {
 			this.menu.blur();
 		}
 	},	
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method blur 
-	 **/
 	hide: function () {
 		if (this.menu) {
 			this.menu.hide();
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method remove 
-	 **/
 	remove: function () {
 		$("#" + this.target).remove();
 		

@@ -57,7 +57,7 @@ module.exports = {
 					node.sortkey = 1 + node.filename;
 					node.type = "html";
 					node.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
-								+ "<img src=images/icons/filetype/" + node.filename.split('.').pop() + ".filetype.png class=\"directoryIcon file\" />"
+								+ "<img src=images/icons/filetype/" + node.filename.split('.').pop() + ".filetype.png class=\"directory_icon file\" />"
 								+ node.filename
 								+ "<div class=\"fullpath\" style=\"display:none;\">" + node.root + node.filename + "</div>"
 							  + "</div>";
@@ -102,7 +102,7 @@ module.exports = {
 				dir.sortkey = 0 + dir.name;
 				dir.type = "html";
 				dir.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
-							+ "<img src=images/icons/filetype/folder.filetype.png class=\"directoryIcon file\" />"
+							+ "<img src=images/icons/filetype/folder.filetype.png class=\"directory_icon file\" />"
 							+ dir.name
 							+ "<div class=\"fullpath\" style=\"display:none;\">" + dir.root + dir.name + "</div>"
 						 + "</div>";

@@ -2,77 +2,65 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module theme
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class theme
- **/
 org.goorm.core.theme = function () {
-	this.buttonThemeSelector = null;
-	this.buttonThemeSelectorFunction = null;
-	this.buttonThemeMenuRender = null;
+	this.button_theme_selector = null;
+	this.button_theme_selector_function = null;
+	this.button_theme_menu_renderer = null;
 /*
 	this.buttonNewTheme = null;
 	this.buttonNewThemeFunction = null;
 */
-	this.buttonApplyTheme = null;
-	this.buttonApplyThemeFunction = null;	
+	this.button_apply_theme = null;
+	this.button_apply_theme_function = null;	
 
-	this.colorPicker = null;
-	this.buttonColorPickerOk = null;
-	this.buttonColorPickerOkFunction = null;
-	this.buttonColorPickerCancel = null;
-	this.buttonColorPickerCancelFunction = null;
-	this.colorToRgb = null;	
+	this.color_picker = null;
+	this.button_color_picker_ok = null;
+	this.button_color_picker_ok_function = null;
+	this.button_color_picker_cancel = null;
+	this.button_color_picker_cancel_function = null;
+	this.color_to_rgb = null;	
 	
-	this.colorBoxClickFunction = null;
-	this.areaBoxClickFunction = null;
-	this.cssBoxClickFunction = null;
-	this.inputBoxClickFunction = null;
+	this.color_box_click_function = null;
+	this.area_box_click_function = null;
+	this.css_box_click_function = null;
+	this.input_box_click_function = null;
 	
-	this.applyTheme = null;
+	this.apply_theme = null;
 		
-	this.partArray = null;
+	this.part_array = null;
 
 /* 	this.dialogNewTheme = null; */
-	this.dialogNewArea = null;
-	this.dialogNewCss = null;
+	this.dialog_new_area = null;
+	this.dialog_new_css = null;
 	
-	this.currentTheme = null;
+	this.current_theme = null;
 	
-	this.themeTitle = null;
-	this.themeDir = null;
-	this.themeVersion = null;
-	this.themeAuthor = null;
-	this.themeAuthorMail = null;
+	this.theme_title = null;
+	this.theme_dir = null;
+	this.theme_version = null;
+	this.theme_author = null;
+	this.theme_author_mail = null;
 };
 
 org.goorm.core.theme.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor
-	 **/
+
 	init: function () {
 		var self = this;
 		
-		self.setOn();
+		self.set_on();
 		
-		self.currentTheme = core.dialogPreference.preference["preference.theme.currentTheme"];
-		self.buttonThemeSelector = new YAHOO.widget.Button("buttonThemeSelector", {  
+		self.current_theme = core.dialog.preference.preference["preference.theme.current_theme"];
+		self.button_theme_selector = new YAHOO.widget.Button("button_theme_selector", {  
 			type: "menu",  
-			menu: "buttonThemeSelectorMenu" 
+			menu: "button_theme_selectorMenu" 
 		}); 
 
 /* 		self.buttonNewTheme =  new YAHOO.widget.Button("buttonNewTheme", { onclick: { fn: self.buttonNewThemeFunction } }); */
-		self.buttonApplyTheme = new YAHOO.widget.Button("buttonApplyTheme", { onclick: { fn: self.buttonApplyThemeFunction } });
+		self.button_apply_theme = new YAHOO.widget.Button("button_apply_theme", { onclick: { fn: self.button_apply_theme_function } });
 
-		this.colorPicker = new YAHOO.widget.ColorPicker("yui-picker", {
+		this.color_picker = new YAHOO.widget.ColorPicker("yui-picker", {
 			showhsvcontrols: true,
 			showhexcontrols: true,
 			images: {
@@ -81,8 +69,8 @@ org.goorm.core.theme.prototype = {
 			}
 		});
 
-		this.buttonColorPickerOk =  new YAHOO.widget.Button("buttonColorPickerOk", { onclick: { fn: self.buttonColorPickerOkFunction } });
-		this.buttonColorPickerCancel =  new YAHOO.widget.Button("buttonColorPickerCancel", { onclick: { fn: self.buttonColorPickerCancelFunction } });
+		this.button_color_picker_ok =  new YAHOO.widget.Button("button_color_picker_ok", { onclick: { fn: self.button_color_picker_ok_function } });
+		this.button_color_picker_cancel =  new YAHOO.widget.Button("button_color_picker_cancel", { onclick: { fn: self.button_color_picker_cancel_function } });
 
 		self.load();
 
@@ -90,49 +78,49 @@ org.goorm.core.theme.prototype = {
 /* 		this.dialogNewTheme = new org.goorm.core.theme._new(); */
 /* 		this.dialogNewTheme.init(this); */
 
-		this.dialogNewArea = new org.goorm.core.theme.area();
-		this.dialogNewArea.init(this);
+		this.dialog_new_area = new org.goorm.core.theme.area();
+		this.dialog_new_area.init(this);
 
-		this.dialogNewCss = new org.goorm.core.theme._css();
-		this.dialogNewCss.init(this);
+		this.dialog_new_css = new org.goorm.core.theme._css();
+		this.dialog_new_css.init(this);
 		
-		if (localStorage.getItem("preference.theme.currentTheme")==null) {
-			self.currentTheme = core.serverTheme;
-			self.buttonApplyThemeFunction();
+		if (localStorage.getItem("preference.theme.current_theme")==null) {
+			self.current_theme = core.server_theme;
+			self.button_apply_theme_function();
 		}
 	},
 	
-	setOn: function() {
+	set_on: function() {
 		var self = this;	
-		this.applyTheme = function(){
-			for(var j = 0; j < self.partArray.length; j++ ){
+		this.apply_theme = function(){
+			for(var j = 0; j < self.part_array.length; j++ ){
 				i=1;
-				$("#cssBox"+self.partArray[j]).children().each(function(){
-					if($(this).attr("class").indexOf("addNewCss")>-1) {}
+				$("#css_box"+self.part_array[j]).children().each(function(){
+					if($(this).attr("class").indexOf("add_new_css")>-1) {}
 					else {
-						$($("#"+$(this).attr('id')+" .idClassName").attr("value")).css($("#"+$(this).attr('id')+" .property").text(),$("#"+$(this).attr('id')+" .cssValue").attr("value"));
+						$($("#"+$(this).attr('id')+" .id_class_name").attr("value")).css($("#"+$(this).attr('id')+" .property").text(),$("#"+$(this).attr('id')+" .css_value").attr("value"));
 						i++;
 					}
 				});
 			}
 		};
 		
-		this.buttonThemeSelectorFunction = function (p_sType, p_aArgs) {
+		this.button_theme_selector_function = function (p_sType, p_aArgs) {
 			var oEvent = p_aArgs[0],	//	DOM event
 				oMenuItem = p_aArgs[1];	//	MenuItem instance that was the target of the event
 				
-			self.currentTheme=oMenuItem.value;
-console.log($("#buttonThemeSelector-button"));
+			self.current_theme=oMenuItem.value;
+
 			if (oMenuItem) {
-				$("#buttonThemeSelector-button").html($(oMenuItem.element).text());
+				$("#button_theme_selector").html($(oMenuItem.element).text());
 			
 				var dir = "configs/themes/"+oMenuItem.value+"/"+oMenuItem.value+".json";
 
-				//clear areaBox 
-				$('.areaBox').children().remove();
-				$(".cssBox").remove();
+				//clear area_box 
+				$('.area_box').children().remove();
+				$(".css_box").remove();
 				
-				self.loadJson(dir);
+				self.load_json(dir);
 			}
 		};
 /*		
@@ -140,52 +128,52 @@ console.log($("#buttonThemeSelector-button"));
 			self.dialogNewTheme.show();
 		};
 */
-		this.buttonApplyThemeFunction = function () {
-			$("input[name='preference\.theme\.currentTheme']").attr("value",self.currentTheme);
+		this.button_apply_theme_function = function () {
+			$("input[name='preference\.theme\.current_theme']").attr("value", self.current_theme);
 
 			var i=1;
 			
 			var url = "module/org.goorm.core.theme/theme.save.php";
 			var data = "{\n";
-			var path = "configs/themes/"+self.currentTheme;
+			var path = "configs/themes/" + self.current_theme;
 
-			var cssUrl = "module/org.goorm.core.theme/theme.saveCss.php";
-			var cssData = "";
+			var css_url = "module/org.goorm.core.theme/theme.saveCss.php";
+			var css_data = "";
 
-			var previousAreaName = "0";
-			data=data+'\t"title":"'+self.themeTitle+'",\n\t"dirName":"'+self.themeDir+'",\n\t"version":"'+self.themeVersion+'",\n\t"author":"'+self.themeAuthor+'",\n\t"e-mail":"'+self.themeAuthorMail+'",\n\t"theme":{\n';
-			for(var j = 0; j < self.partArray.length; j++ ){
+			var previous_area_name = "0";
+			data=data+'\t"title":"'+self.theme_title+'",\n\t"dirName":"'+self.theme_dir+'",\n\t"version":"'+self.theme_version+'",\n\t"author":"'+self.theme_author+'",\n\t"e-mail":"'+self.theme_author_mail+'",\n\t"theme":{\n';
+			for(var j = 0; j < self.part_array.length; j++ ){
 				i=1;
-				data=data+'\t\t"'+self.partArray[j]+'":{\n';
+				data=data+'\t\t"'+self.part_array[j]+'":{\n';
 								
-				$("#cssBox"+self.partArray[j]).children().each(function(){	
-					if($(this).attr("class").indexOf("addNewCss")>-1){}
+				$("#css_box"+self.part_array[j]).children().each(function(){	
+					if($(this).attr("class").indexOf("add_new_css")>-1){}
 					
 					else {			
-						if(previousAreaName=="0"){
-							cssData=cssData+$("#"+$(this).attr('id')+" .idClassName").attr("value")+'{';
-							data=data+'\t\t\t"'+$("#"+$(this).attr('id')+" .idClassName").attr("value")+'":{';
+						if(previous_area_name=="0"){
+							css_data=css_data+$("#"+$(this).attr('id')+" .id_class_name").attr("value")+'{';
+							data=data+'\t\t\t"'+$("#"+$(this).attr('id')+" .id_class_name").attr("value")+'":{';
 						}
-						else if(previousAreaName==$("#"+$(this).attr('id')+" .idClassName").attr("value")){		
+						else if(previous_area_name==$("#"+$(this).attr('id')+" .id_class_name").attr("value")){		
 							data=data+',';
 						}
 						else{
-							cssData=cssData+"\n}\n"+$("#"+$(this).attr('id')+" .idClassName").attr("value")+"{";
+							css_data=css_data+"\n}\n"+$("#"+$(this).attr('id')+" .id_class_name").attr("value")+"{";
 							if(i==1){
-								data=data+'\t\t\t"'+$("#"+$(this).attr('id')+" .idClassName").attr("value")+'":{';
+								data=data+'\t\t\t"'+$("#"+$(this).attr('id')+" .id_class_name").attr("value")+'":{';
 							}
 							else{
-								data=data+'},\n\t\t\t"'+$("#"+$(this).attr('id')+" .idClassName").attr("value")+'":{';
+								data=data+'},\n\t\t\t"'+$("#"+$(this).attr('id')+" .id_class_name").attr("value")+'":{';
 							}
 						}
-						cssData=cssData+"\n\t\t"+$("#"+$(this).attr('id')+" .property").text()+":"+$("#"+$(this).attr('id')+" .cssValue").attr("value")+";";
-						data=data+'"'+$("#"+$(this).attr('id')+" .property").text()+'":"'+$("#"+$(this).attr('id')+" .cssValue").attr("value")+'"';
-						previousAreaName=$("#"+$(this).attr('id')+" .idClassName").attr("value");
+						css_data=css_data+"\n\t\t"+$("#"+$(this).attr('id')+" .property").text()+":"+$("#"+$(this).attr('id')+" .css_value").attr("value")+";";
+						data=data+'"'+$("#"+$(this).attr('id')+" .property").text()+'":"'+$("#"+$(this).attr('id')+" .css_value").attr("value")+'"';
+						previous_area_name=$("#"+$(this).attr('id')+" .id_class_name").attr("value");
 						i++;
 					}
 				});
 
-				if(j==(self.partArray.length)-1)
+				if(j==(self.part_array.length)-1)
 					data=data+"}\n\t\t}";
 				else
 
@@ -196,51 +184,51 @@ console.log($("#buttonThemeSelector-button"));
 			$.ajax({
 				url: url,			
 				type: "POST",
-				data: { path: path, fileName: self.currentTheme ,data: data },
+				data: { path: path, filename: self.current_theme ,data: data },
 				success: function(e) {
-					var receivedData = eval("("+e+")");
-					if(receivedData.errCode==0) {
+					var received_data = eval("("+e+")");
+					if(received_data.errCode==0) {
 						m.s("Save theme file successfully");
 					}
 					else {
-						alert.show(receivedData.errCode + " : " + receivedData.message);
+						alert.show(received_data.errCode + " : " + received_data.message);
 					}			
 				}
 			});
 						
 			$.ajax({
-				url: cssUrl,			
+				url: css_url,			
 				type: "POST",
-				data: { fileName: self.currentTheme, data: cssData },
+				data: { filename: self.current_theme, data: css_data },
 				success: function(e) {
-					var receivedData = eval("("+e+")");
-					if(receivedData.errCode==0) {
-						self.loadCSS();
+					var received_data = eval("("+e+")");
+					if(received_data.errCode==0) {
+						self.load_css();
 					}
 					else {
-						alert.show(receivedData.errCode + " : " + receivedData.message);
+						alert.show(received_data.errCode + " : " + received_data.message);
 					}				
 				}
 			});
 
 		};
 		
-		this.buttonThemeMenuRender = function (p_sType, p_aArgs, themeTitle) {
+		this.button_theme_menu_renderer = function (p_sType, p_aArgs, theme_title) {
 			this.addItems([
-				{ text: themeTitle[0], value: themeTitle[1] }
+				{ text: theme_title[0], value: theme_title[1] }
 			]);
 		};
-		this.buttonColorPickerOkFunction = function (p_oEvent) {
-			$("#"+$(".yui-picker-panel").attr("parent")+" .colorbox").css("background-color", "rgb("+$(self.colorPicker).attr("newValue")+")");
-			$("#"+$(".yui-picker-panel").attr("parent")+" .cssValue").attr("value", "#"+self.colorPicker.get("hex"));
+		this.button_color_picker_ok_function = function (p_oEvent) {
+			$("#"+$(".yui-picker-panel").attr("parent")+" .colorbox").css("background-color", "rgb("+$(self.color_picker).attr("newValue")+")");
+			$("#"+$(".yui-picker-panel").attr("parent")+" .css_value").attr("value", "#"+self.color_picker.get("hex"));
 			$(".yui-picker-panel").hide();
 		};
 
-		this.buttonColorPickerCancelFunction = function (p_oEvent) {
+		this.button_color_picker_cancel_function = function (p_oEvent) {
 			$(".yui-picker-panel").hide();
 		};
 
-		this.colorToRgb = function (color) {
+		this.color_to_rgb = function (color) {
 			var digits = /(.*?)rgb\((\d+), (\d+), (\d+)\)/.exec(color);
 			var red = parseInt(digits[2]);
 			var green = parseInt(digits[3]);
@@ -249,25 +237,25 @@ console.log($("#buttonThemeSelector-button"));
 			
 			return rgb;
 		};		
-		this.cssBoxClickFunction = function (o) {
+		this.css_box_click_function = function (o) {
 			$(".yui-picker-panel").hide();	
 
 			$(o.currentTarget).parent().children().removeClass("selected");
 			$(o.currentTarget).find("input").focus();
 
-			if($(o.currentTarget).attr("class").indexOf("addNewCss")>-1){
-				self.dialogNewCss.show(this);
+			if($(o.currentTarget).attr("class").indexOf("add_new_css")>-1){
+				self.dialog_new_css.show(this);
 			}
 			else
 				$(o.currentTarget).addClass("selected");
 		};		
-		this.inputBoxClickFunction = function (o) {
+		this.input_box_click_function = function (o) {
 			$(".yui-picker-panel").hide();
 
 			$(o.currentTarget).parent().parent().children().removeClass("selected");
 			$($(o.currentTarget).parent()).addClass("selected");
 		};	
-		this.colorBoxClickFunction = function (o) {
+		this.color_box_click_function = function (o) {
 		
 			$(o.currentTarget).parent().parent().children().removeClass("selected");		
 			$(o.currentTarget).parent().addClass("selected");	
@@ -285,27 +273,27 @@ console.log($("#buttonThemeSelector-button"));
 			
 			$(".yui-picker-panel").show();
 
-			var rgb = self.colorToRgb($(this).css("background-color"));
-			self.colorPicker.setValue([rgb[0],rgb[1],rgb[2]]);
+			var rgb = self.color_to_rgb($(this).css("background-color"));
+			self.color_picker.setValue([rgb[0],rgb[1],rgb[2]]);
 			
 			o.stopPropagation();
 		};	
-		this.areaBoxClickFunction = function(o){
-			$(".areaCell").removeClass("selected");
+		this.area_box_click_function = function(o){
+			$(".area_cell").removeClass("selected");
 			
-			var areaClassNames = $(o.target).attr("class").toString();
-			var areaClassNamesArray = areaClassNames.split(' ');
+			var area_class_names = $(o.target).attr("class").toString();
+			var area_class_names_array = area_class_names.split(' ');
 
-			$("#cssBox"+areaClassNamesArray[1]).children().removeClass("selected");
+			$("#css_box"+area_class_names_array[1]).children().removeClass("selected");
 
-			$(".cssBox").hide();
+			$(".css_box").hide();
 						
 			if($(o.target).attr("class").indexOf("addNewArea")>-1) {
-				$("#cssBoxdefault").show();
-				self.dialogNewArea.show(this);
+				$("#css_boxdefault").show();
+				self.dialog_new_area.show(this);
 			}
 			else{
-				$("#cssBox"+$(o.target).text()).show();
+				$("#css_box"+$(o.target).text()).show();
 				$(o.target).addClass("selected");
 			}
 		};
@@ -317,110 +305,110 @@ console.log($("#buttonThemeSelector-button"));
 		var postdata = {
 			kind: "theme"
 		};
-		var sortingData;			
+		var sorting_data;			
 
 		$.post("module/org.goorm.core.theme/theme.getList.php", postdata, function (data) {	
-			sortingData = eval(data);
+			sorting_data = eval(data);
 
-			for (var i in sortingData) {
-				if(sortingData[i].cls=='folder') {
-					if(sortingData[i].filename=='assets'||sortingData[i].filename=='.svn') {
+			for (var i in sorting_data) {
+				if(sorting_data[i].cls=='folder') {
+					if(sorting_data[i].filename=='assets'||sorting_data[i].filename=='.svn') {
 						continue;
 					}
 					//////////
 
-					var dir = "configs/themes/"+sortingData[i].filename+"/"+sortingData[i].filename+".json";
-					var themeTitle = "";
-					var themeDirName = "";
+					var dir = "configs/themes/"+sorting_data[i].filename+"/"+sorting_data[i].filename+".json";
+					var theme_title = "";
+					var theme_dirName = "";
 					$.ajax({
 						url : dir,
 						dataType : "json",
 						success : function(jd){
-							themeTitle = jd['title'];
-							themeDirName = jd['dirName'];							
+							theme_title = jd['title'];
+							theme_dirName = jd['dirName'];							
 
-							(self.buttonThemeSelector).getMenu().subscribe("render", self.buttonThemeMenuRender, [themeTitle, themeDirName]);
+							(self.button_theme_selector).getMenu().subscribe("render", self.button_theme_menu_renderer, [theme_title, theme_dirName]);
 						}
 					});
 												
 					/////////
-					//(self.buttonThemeSelector).getMenu().subscribe("render", self.buttonThemeMenuRender, sortingData[i].filename);	
+					//(self.button_theme_selector).getMenu().subscribe("render", self.button_theme_menu_renderer, sorting_data[i].filename);	
 					
-					if(core.dialogPreference.preference["preference.theme.currentTheme"]==sortingData[i].filename) {
-						dir = "configs/themes/"+sortingData[i].filename+"/"+sortingData[i].filename+".json";						
+					if(core.dialog.preference.preference["preference.theme.current_theme"]==sorting_data[i].filename) {
+						dir = "configs/themes/"+sorting_data[i].filename+"/"+sorting_data[i].filename+".json";						
 						$.ajax({
 							url : dir,
 							dataType : "json",
 							success : function(jd){
-								themeTitle = jd['title'];										
-								$("#buttonThemeSelector-button").html(themeTitle);
+								theme_title = jd['title'];										
+								$("#button_theme_selector").html(theme_title);
 							}
 						});
-						//init thème contents (areaBox, cssBox)
-						var selectedTheme = sortingData[i].filename;
-						dir = "configs/themes/"+sortingData[i].filename+"/"+sortingData[i].filename+".json";
+						//init thème contents (area_box, css_box)
+						var selected_theme = sorting_data[i].filename;
+						dir = "configs/themes/"+sorting_data[i].filename+"/"+sorting_data[i].filename+".json";
 
-						self.loadJson(dir);
-						self.loadCSS();
+						self.load_json(dir);
+						self.load_css();
 					}
 				}
 			}
 			
 
 		});
-		(self.buttonThemeSelector).getMenu().subscribe("click", self.buttonThemeSelectorFunction);	
+		(self.button_theme_selector).getMenu().subscribe("click", self.button_theme_selector_function);	
 	},
 	
 	
-	initDivView : function() {
+	init_div_view : function() {
 		var self = this;
-		$("#cssBoxdefault").show();
-		for(var i = 0; i < self.partArray.length; i++ ){
-			$("#cssBox"+self.partArray[i]).hide();
+		$("#css_boxdefault").show();
+		for(var i = 0; i < self.part_array.length; i++ ){
+			$("#css_box"+self.part_array[i]).hide();
 		}
 	},
 	
-	loadJson: function (dir) {
+	load_json: function (dir) {
 
 		var self = this;
-		self.partArray = new Array();
+		self.part_array = new Array();
 
 		$.ajax({
 			url : dir,
 			dataType : "json",
 			success : function(jd){
-				self.themeAuthor=jd['author'];
-				self.themeDir=jd['dirName']
-				self.themeVersion=jd['version'];
-				self.themeAuthorMail=jd['e-mail'];
-				self.themeTitle=jd['title'];
+				self.theme_author=jd['author'];
+				self.theme_dir=jd['dirName']
+				self.theme_version=jd['version'];
+				self.theme_author_mail=jd['e-mail'];
+				self.theme_title=jd['title'];
 			
 
-				for (var areaName in jd['theme']){
-					self.partArray.push(areaName);
-					$(".areaBox").append("<div class='areaCell "+areaName+"'>"+areaName+"</div>");	
+				for (var area_name in jd['theme']){
+					self.part_array.push(area_name);
+					$(".area_box").append("<div class='area_cell "+area_name+"'>"+area_name+"</div>");	
 
 				}
 				
-				$(".areaBox").append("<div class='areaCell addNewArea'>Add New Area</div>");	
+				$(".area_box").append("<div class='area_cell addNewArea'>Add New Area</div>");	
 																
 				var string = "";
 				for (var name in jd['theme']) {
 					var i=1;
-					string+="<div id='cssBox"+name+"' class='cssBox'>";
+					string+="<div id='css_box"+name+"' class='css_box'>";
 					for(var name2 in jd['theme'][name]) {
 	
 						//alert(name2) == id,class name
 						for(var name3 in jd['theme'][name][name2]) {
 							//alert(name3) == property
-							string+="<div id='"+name+"Cell"+i+"' class='cssCell'><div style='overflow:auto; float:left'><div class='property'>"+name3+"</div><br>";
+							string+="<div id='"+name+"Cell"+i+"' class='css_cell'><div style='overflow:auto; float:left'><div class='property'>"+name3+"</div><br>";
 							if(name2.length>40)
-								string+="<div class='idClassName' value='"+name2+"'>"+name2.substr(0,40)+"..."+"</div></div><br><br>";	
+								string+="<div class='id_class_name' value='"+name2+"'>"+name2.substr(0,40)+"..."+"</div></div><br><br>";	
 							else
-								string+="<div class='idClassName' value='"+name2+"'>"+name2+"</div></div><br><br>";	
+								string+="<div class='id_class_name' value='"+name2+"'>"+name2+"</div></div><br><br>";	
 	
 							//alert(jd[name][name2][name3]) == value
-							string+="<input type='text' class='cssValue' value='"+jd['theme'][name][name2][name3]+"'></input>";
+							string+="<input type='text' class='css_value' value='"+jd['theme'][name][name2][name3]+"'></input>";
 		
 							if(name3.indexOf("color") > -1)
 							{
@@ -431,39 +419,34 @@ console.log($("#buttonThemeSelector-button"));
 							i++;
 						}
 					}
-					string+="<div id='"+name+"Cell"+i+"' class='cssCell addNewCss'><div style='float:left; margin-left:5px;  margin-top:7px; font-size:11px'>Add New CSS</div></div>";
+					string+="<div id='"+name+"Cell"+i+"' class='css_cell add_new_css'><div style='float:left; margin-left:5px;  margin-top:7px; font-size:11px'>Add New CSS</div></div>";
 					string+="</div>";
 				}
-				string+="<div id='cssBoxdefault' class='cssBox'></div>";
+				string+="<div id='css_boxdefault' class='css_box'></div>";
 				$(".themeContents").append(string);	
 
-				self.initDivView();	
-				self.connectFunction();
+				self.init_div_view();	
+				self.connect();
 			}
 		});
 	},
 	
-	connectFunction: function(){
+	connect: function(){
 		var self = this;
 
-		$(".areaCell").bind('click', self.areaBoxClickFunction, this);
-		$(".colorbox").bind('click', self.colorBoxClickFunction, this);
-		$(".cssCell").bind('click', self.cssBoxClickFunction, this);
-		$(".cssCell input").bind('click', self.inputBoxClickFunction, this);
+		$(".area_cell").bind('click', self.area_box_click_function, this);
+		$(".colorbox").bind('click', self.color_box_click_function, this);
+		$(".css_cell").bind('click', self.css_box_click_function, this);
+		$(".css_cell input").bind('click', self.input_box_click_function, this);
  
  		//subscribe to the rgbChange event;
-		self.colorPicker.on("rgbChange", function(o){
-			$(self.colorPicker).attr("newValue",o.newValue);
+		self.color_picker.on("rgbChange", function(o){
+			$(self.color_picker).attr("newValue",o.newValue);
 		});	
 		
 	},
 	
-	
-	/**
-	 * To get css files for this plugin
-	 * @method loadCSS
-	 **/
-	loadCSS: function () {
+	load_css: function () {
 		var self = this;
 		
 		$("head").append("<link>");
@@ -471,7 +454,7 @@ console.log($("#buttonThemeSelector-button"));
 	    css.attr({
 	    	rel:  "stylesheet",
 	    	type: "text/css",
-	    	href: "temp/"+self.currentTheme+".css"
+	    	href: "temp/"+self.current_theme+".css"
 	    });
 	}
 };

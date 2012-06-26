@@ -2,9 +2,6 @@
  * @description <p>Copyright Sung-tae Ryu. All rights reserved.</p>
  * <p>Code licensed under the GPL v2 License:</p>
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module core
  **/
 
 var org = function() {
@@ -15,11 +12,6 @@ org.goorm = function() {
 	var core = null;
 };
 
-/**
- * @description This is an goorm core.  
- * <p>goorm starts with this core.</p>
-  * @class core
- **/
 org.goorm.core = function() {
 
 	this.user = {
@@ -60,20 +52,22 @@ org.goorm.core = function() {
 		browser: null,
 		device: null,
 		fn: null,
-		loading_bar: null
+		loading_bar: null,
+		dictionary: null
 	}
 		
 	this.container = "";
-	this.skinName = "";
+	this.skin_name = "";
 
 	this.xml = null;
-	this.loadingPanel = null;
+	this.loading_panel = null;
 		
 	this.dialog = {
 		new_project: null,
 		open_project: null,
 		new_file: null,
 		new_other_file: null,
+		new_folder: null,
 		new_untitled_textfile: null,
 		open_file: null,
 		open_url: null,
@@ -86,11 +80,12 @@ org.goorm.core = function() {
 		export_file: null,
 		export_project: null,
 		import_project: null,
+		delete_project:null,
 		build_all: null,
 		build_project: null,
 		build_clean: null,
 		build_configuration: null,
-		build_property: null,
+		property: null,
 		find_and_replace: null,
 		preference: null,
 		project_property: null,
@@ -102,7 +97,9 @@ org.goorm.core = function() {
 		help_check_for_updates: null,
 		help_install_new_plugin: null,
 		help_about: null,
-		help_bug_report: null
+		help_bug_report: null,
+		
+		loaded_count:0		
 	};
 	
 	this.flag = {
@@ -121,38 +118,37 @@ org.goorm.core = function() {
 		current_project_type: ""
 	};
 	
-	this.dialogLoadingCount = 0;
-	this.dialogCount = 27;
+	this.dialog_loading_count = 0;
+	//this.dialog_count = 27;
 
-	this.loadingCount = 0;
-	this.fileTypes = null;
-	
-	this.dictionary = null;
-	this.serverTheme = null;
-	this.serverLanguage = null;
+	this.loading_count = 0;
+	this.filetypes = null;
+
+	this.server_theme = null;
+	this.server_language = null;
 };
 
 org.goorm.core.prototype = {
 	init: function(container) {
 		
-		//this.startLoading();
+		//this.start();
 		
 		var self = this;
-		this.fileTypes = $.makeArray();
+		this.filetypes = $.makeArray();
 		
 		
-		$(this).bind("layoutLoaded", function () {
+		$(this).bind("layout_loaded", function () {
 			console.log("layout Loaded");
 
-			this.module.plugin_manager.getAllPlugins();
-			this.module.plugin_manager.loadAllPlugins(0);
+			this.module.plugin_manager.get_all_plugins();
+			this.module.plugin_manager.load_all_plugins(0);
 		});	
 		
-		$(this).bind("preferenceLoadingComplete", function () {
+		$(this).bind("preference_loading_complete", function () {
 			console.log("preference Loading Complete");
 		});
 		
-		$(this).bind("pluginLoaded", function () {
+		$(this).bind("plugin_loaded", function () {
 			console.log("plugin Loaded");
 			//Preference
 			//this.dialogPreference = new org.goorm.core.preference();
@@ -161,53 +157,55 @@ org.goorm.core.prototype = {
 			this.main();
 		});
 		
-		this.loadingCompleteFlag = 0;
+		this.loading_complete_flag = false;
 		//Loading Animation
-		$(this).bind("goormLoading", function () {
-			if(self.loadingCount < 37 + core.module.plugin_manager.pluginList.length) {
-				self.loadingCount++;
-				//console.log(self.loadingCount);
-				$("#goormLoadingStatusBar").width($("#goormLoadingStatusBar").width()+450/(37+core.module.plugin_manager.pluginList.length));
+		$(this).bind("goorm_loading", function () {
+			core.module.plugin_manager.list.length = 0;
+			
+			if(self.loading_count < Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)) {
+				self.loading_count++;
+				$("#goorm_loading_status_bar").width($("#goorm_loading_status_bar").width() + 450 / (37 + core.module.plugin_manager.list.length));
 			}
 			else {
-				if(!self.loadingCompleteFlag){
-					$(self).trigger("goormLoadingComplete");
-					self.loadingCompleteFlag = true;
+				if(!self.loading_complete_flag){
+					console.log("complete: " + self.loading_count);
+					$(self).trigger("goorm_load_complete");
+					self.loading_complete_flag = true;
 				}
 			}
 		});
 
 		//Loading Ending
-		$(this).bind("goormLoadingComplete", function () {
-			console.log("loading complete");
-			
+		$(this).bind("goorm_load_complete", function () {
 			$("input").bind("focus", function () {
-				self.focusOnInputBox = true;
+				self.status.focus_on_inputbox = true;
 			});
 			
 			$("input").bind("blur", function () {
-				self.focusOnInputBox = false;
+				self.status.focus_on_inputbox = false;
 			});
 
-			self.module.layout.resizeAll();
+			//console.log($(".yui-layout-unit-left").find(".yui-layout-wrap").html());
+			
+			self.module.layout.resize_all();
 
 			self.module.action.init();
 			
-			self.endLoading();
+			self.end_loading();
 			
-			var goormLoadingEndTime = new Date().getTime(); 
+			var goorm_loading_end_time = new Date().getTime(); 
 			
 			m.s("------------------------------------------------------------", "org.goorm.core");
-			m.s("Browser Name : " + self.browser_info.browser, "org.goorm.core");
-			m.s("Browser Version : " + self.browser_info.browserVersion, "org.goorm.core");
+			m.s("Browser Name : " + self.module.browser.name, "org.goorm.core");
+			m.s("Browser Version : " + self.module.browser.version, "org.goorm.core");
 			m.s("------------------------------------------------------------", "org.goorm.core");
-			m.s("Device Type : " + self.deviceType, "org.goorm.core");
+			m.s("Device Type : " + self.module.device.type, "org.goorm.core");
 			m.s("Resolution : " + screen.width + " x " + screen.height, "org.goorm.core");	
-			m.s("OS Type : " + self.device_info.osType, "org.goorm.core");	
-			m.s("Touchable : " + self.isTouchable, "org.goorm.core");
-			m.s("WebSocket : " + self.isSupportingWebSocket, "org.goorm.core");			
+			m.s("OS Type : " + self.module.device.os, "org.goorm.core");	
+			m.s("Touchable : " + self.env.touchable, "org.goorm.core");
+			m.s("WebSocket : " + self.env.websocket_support, "org.goorm.core");			
 			m.s("------------------------------------------------------------", "org.goorm.core");
-			m.s("Loading Time : " + (goormLoadingEndTime - goormLoadingStartTime) / 1000 + " sec.", "org.goorm.core");			
+			m.s("Loading Time : " + (goorm_loading_end_time - goorm_loading_start_time) / 1000 + " sec.", "org.goorm.core");			
 			m.s("------------------------------------------------------------", "org.goorm.core");
 			
 		});	
@@ -224,9 +222,9 @@ org.goorm.core.prototype = {
 			data: "arg=L", 
 			success: function(xml) {
 
-				self.serverTheme = $(xml).find("Theme").text();
+				self.server_theme = $(xml).find("Theme").text();
 
-				self.serverLanguage = $(xml).find("Language").text();
+				self.server_language = $(xml).find("Language").text();
 			}
 		});
 		*/					
@@ -250,20 +248,20 @@ org.goorm.core.prototype = {
 		this.module.action = new org.goorm.core.menu.action();
 
 		this.module.browser = new org.goorm.core.browser();
-		this.browser_info = this.module.browser.get();
+		this.module.browser.init();
 
 		this.module.device = new org.goorm.core.device();
-		this.device_info = this.module.device.get();		
+		this.module.device.init();
 
 		this.module.fn = new org.goorm.core.fn();
 		this.module.fn.init();
 		
-		this.env.touchable = this.isTouchDevice();
-		this.env.websocket_support = this.testWebSocket();
+		this.env.touchable = this.is_touchable_device();
+		this.env.websocket_support = this.test_web_socket();
 		
-		$('.goormVersion').html("goorm IDE " + this.version);
+		$('.goorm_version').html("goorm IDE " + this.version);
 		
-		$(document).bind("contextmenu", function(e) {
+		$(document).bind("context_menu", function(e) {
 			e.preventDefault();
 		});
 		
@@ -274,10 +272,6 @@ org.goorm.core.prototype = {
 		console.log("!");
 	},
 	
-	/**
-	 * goorm main process.  
-	 * @method main 
-	 **/
 	main: function() {
 		
 		this.dialog.new_project = new org.goorm.core.project._new();
@@ -295,16 +289,16 @@ org.goorm.core.prototype = {
 		this.dialog.new_folder = new org.goorm.core.file._new.folder();
 		this.dialog.new_folder.init();
 		
-		this.dialog.new_untitled_textfile = new org.goorm.core.file._new.untitledTextFile();
+		this.dialog.new_untitled_textfile = new org.goorm.core.file._new.untitled_textfile();
 		this.dialog.new_untitled_textfile.init();
 		
 		this.dialog.open_file = new org.goorm.core.file.open();
 		this.dialog.open_file.init();
 		
-		this.dialog.open_url = new org.goorm.core.file.openURL();
+		this.dialog.open_url = new org.goorm.core.file.open_url();
 		this.dialog.open_url.init();
 		
-		this.dialog.save_as_file = new org.goorm.core.file.saveAs();
+		this.dialog.save_as_file = new org.goorm.core.file.save_as();
 		this.dialog.save_as_file.init();
 		
 		this.dialog.rename_file = new org.goorm.core.file.rename();
@@ -316,7 +310,7 @@ org.goorm.core.prototype = {
 		this.dialog.print = new org.goorm.core.printer();
 		this.dialog.print.init();
 		
-		this.dialog.switch_workspace = new org.goorm.core.file.switchWorkspace();
+		this.dialog.switch_workspace = new org.goorm.core.file.switch_workspace();
 		this.dialog.switch_workspace.init();
 
 		this.dialog.import_file = new org.goorm.core.file._import();
@@ -334,10 +328,10 @@ org.goorm.core.prototype = {
 		this.dialog.delete_project = new org.goorm.core.project._delete();
 		this.dialog.delete_project.init();
 		
-		this.dialog.build_all = new org.goorm.core.project.build.buildAll();
+		this.dialog.build_all = new org.goorm.core.project.build.all();
 		this.dialog.build_all.init();
 		
-		this.dialog.build_project = new org.goorm.core.project.build.buildProject();
+		this.dialog.build_project = new org.goorm.core.project.build.project();
 		this.dialog.build_project.init();
 		
 		this.dialog.build_clean = new org.goorm.core.project.build.clean();
@@ -349,13 +343,16 @@ org.goorm.core.prototype = {
 		this.dialog.property = new org.goorm.core.file.property();
 		this.dialog.property.init();
 		
-		this.dialog.find_replace = new org.goorm.core.edit.findReplace();
-		this.dialog.find_replace.init();
+		this.dialog.find_and_replace = new org.goorm.core.edit.find_and_replace();
+		this.dialog.find_and_replace.init();
+		
+		//this.dialog.preference = new org.goorm.core.preference();
+		//this.dialog.preference.init();
 		
 		this.dialog.project_property = new org.goorm.core.project.property();
 		this.dialog.project_property.init();
 		
-		this.dialog.join_project = new org.goorm.core.collaboration.joinProject();
+		this.dialog.join_project = new org.goorm.core.collaboration.join();
 		this.dialog.join_project.init();
 		
 		this.dialog.collaboration_settings = new org.goorm.core.collaboration.settings();
@@ -367,29 +364,34 @@ org.goorm.core.prototype = {
 		this.dialog.help_search = new org.goorm.core.help.search();
 		this.dialog.help_search.init();
 		
-		this.dialog.help_tips_and_tricks = new org.goorm.core.help.tipsAndTricks();
+		this.dialog.help_tips_and_tricks = new org.goorm.core.help.tips_and_tricks();
 		this.dialog.help_tips_and_tricks.init();
 		
-		this.dialog.help_check_for_updates = new org.goorm.core.help.checkForUpdates();
+		this.dialog.help_check_for_updates = new org.goorm.core.help.check_for_updates();
 		this.dialog.help_check_for_updates.init();
 		
-		this.dialog.help_install_new_plugin = new org.goorm.core.help.installNewPlugin();
+		this.dialog.help_install_new_plugin = new org.goorm.core.help.install_new_plugin();
 		this.dialog.help_install_new_plugin.init();
 			
 		this.dialog.help_about = new org.goorm.core.help.about();
 		this.dialog.help_about.init();
 		
-		this.dialog.help_bug_report = new org.goorm.core.help.bugReport();
+		this.dialog.help_bug_report = new org.goorm.core.help.bug_report();
 		this.dialog.help_bug_report.init();		
 		
-		this.module.code_generator = new org.goorm.core.codeGenerator();
+		
+		////////////////////////////////////////////////////////////////////////////////////////
+		//module
+		////////////////////////////////////////////////////////////////////////////////////////
+		
+		this.module.code_generator = new org.goorm.core.code_generator();
 		this.module.code_generator.init();
 		
 		this.module.localization = new org.goorm.core.localization();
 		this.module.localization.init();
 		//$(core).trigger("coreDialogLoaded");
 		
-		this.module.loading_bar = new org.goorm.core.utility.loadingbar();
+		this.module.loading_bar = new org.goorm.core.utility.loading_bar();
 		this.module.loading_bar.init();
 		
 		alert.init();
@@ -400,11 +402,11 @@ org.goorm.core.prototype = {
 
 	},
 
-	skin: function(skinName) {
-		this.getCSS(skinName);
+	skin: function(skin_name) {
+		this.get_css(skin_name);
 	},
 
-	getCSS: function(url) {
+	get_css: function(url) {
 		$("head").append("<link>");
 		css = $("head").children(":last");
 		css.attr({
@@ -414,44 +416,44 @@ org.goorm.core.prototype = {
 		});
 	},
 
-	startLoading: function() {
-		$("#goormDialogContainer").append("<div id='loadingPanelContainer'></div>");
-		$("#goormDialogContainer").append("<div id='loadingBackground'></div>");
-		$("#loadingPanelContainer").append("<div id='mainLoadingImage' style='background-image:url(images/loading.png); width:660px; height:400px; position:relative;'><div id='goormLoadingStatusBar' style='left:170px; top:340px; position:absolute; width:0px; height:30px; background-color:#eee;'></div></div>");
-		$("#loadingPanelContainer").append("<div style='top:10px; left:50px; width:530px; position:absolute; text-align:left;'><font style='font-size:11px; color:#FFF;'>Developer : Sung-tae Ryu, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park, Noori Kim, Byuongwoong Ahn, Eungwi Jo.</font></div>");
-		$("#loadingPanelContainer").append("<div id='loadingMessage' style='top:345px; left:215px; position:absolute; text-align:left; font-size:10px; color:#fff;'></div>");
+	start: function() {
+		$("#goorm_dialog_container").append("<div id='loading_panel_container'></div>");
+		$("#goorm_dialog_container").append("<div id='loading_background'></div>");
+		$("#loading_panel_container").append("<div id='main_loading_image' style='background-image:url(images/loading.png); width:660px; height:400px; position:relative;'><div id='goorm_loading_status_bar' style='left:170px; top:340px; position:absolute; width:0px; height:30px; background-color:#eee;'></div></div>");
+		$("#loading_panel_container").append("<div style='top:10px; left:50px; width:530px; position:absolute; text-align:left;'><font style='font-size:11px; color:#FFF;'>Developer : Sung-tae Ryu, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park, Noori Kim, Byuongwoong Ahn, Eungwi Jo.</font></div>");
+		$("#loading_panel_container").append("<div id='loading_message' style='top:345px; left:215px; position:absolute; text-align:left; font-size:10px; color:#fff;'></div>");
 
 
-		$("#loadingBackground").css('position', "absolute");
-		$("#loadingBackground").width($(window).width());
-		$("#loadingBackground").height($(window).height());
-		$("#loadingBackground").css('left', 0);
-		$("#loadingBackground").css('top', 0);
-		$("#loadingBackground").css('z-index', 999);
-		$("#loadingBackground").css('background-color', "#EEE");		
+		$("#loading_background").css('position', "absolute");
+		$("#loading_background").width($(window).width());
+		$("#loading_background").height($(window).height());
+		$("#loading_background").css('left', 0);
+		$("#loading_background").css('top', 0);
+		$("#loading_background").css('z-index', 999);
+		$("#loading_background").css('background-color', "#EEE");		
 		
 		
-		$("#loadingPanelContainer").css('display', "none");
-		$("#loadingPanelContainer").width(660);
-		$("#loadingPanelContainer").height(400);
-		$("#loadingPanelContainer").css('position', "absolute");
-		$("#loadingPanelContainer").css('z-index', 1000);		
-		$("#loadingPanelContainer").css('left', $(window).width()/2-300);
-		$("#loadingPanelContainer").css('top', $(window).height()/2-200);
-		$("#loadingPanelContainer").fadeIn(2000);
+		$("#loading_panel_container").css('display', "none");
+		$("#loading_panel_container").width(660);
+		$("#loading_panel_container").height(400);
+		$("#loading_panel_container").css('position', "absolute");
+		$("#loading_panel_container").css('z-index', 1000);		
+		$("#loading_panel_container").css('left', $(window).width()/2-300);
+		$("#loading_panel_container").css('top', $(window).height()/2-200);
+		$("#loading_panel_container").fadeIn(2000);
 	},
 
-	endLoading: function() {
+	end_loading: function() {
 		$("#goorm").show();
-		$("#loadingBackground").delay(1000).fadeOut(1000);
-		$("#loadingPanelContainer").delay(1000).fadeOut(1000);
+		$("#loading_background").delay(1000).fadeOut(1000);
+		$("#loading_panel_container").delay(1000).fadeOut(1000);
 						
-		this.dialog.project_property.refreshToolBox();
+		this.dialog.project_property.refresh_toolbox();
 	},
 
-	adaptSmartPad: function () {
+	adapt_smart_pad: function () {
 		
-		function touchHandler(event) {
+		function touch_handler(event) {
 			var touches = event.changedTouches,
 				first = touches[0],
 				type = "";
@@ -467,28 +469,28 @@ org.goorm.core.prototype = {
 			//           screenX, screenY, clientX, clientY, ctrlKey, 
 			//           altKey, shiftKey, metaKey, button, relatedTarget);
 			
-			var simulatedEvent = document.createEvent("MouseEvent");
-			simulatedEvent.initMouseEvent(type, true, true, document, 1, 
+			var simulated_event = document.createEvent("MouseEvent");
+			simulated_event.initMouseEvent(type, true, true, document, 1, 
 									  first.screenX, first.screenY, 
 									  first.clientX, first.clientY, false, 
 									  false, false, false, 0, null);
 			
-			first.target.dispatchEvent(simulatedEvent);
+			first.target.dispatchEvent(simulated_event);
 			
 			event.preventDefault();
 		}
 		
-		document.addEventListener("touchstart", touchHandler, true);
-		document.addEventListener("touchmove", touchHandler, true);
-		document.addEventListener("touchend", touchHandler, true);
-		document.addEventListener("touchcancel", touchHandler, true);
+		document.addEventListener("touchstart", touch_handler, true);
+		document.addEventListener("touchmove", touch_handler, true);
+		document.addEventListener("touchend", touch_handler, true);
+		document.addEventListener("touchcancel", touch_handler, true);
 	},
 
-	newMainWindow: function () {
+	new_main_window: function () {
 		window.open("./");
 	},
 
-	isTouchDevice: function () {
+	is_touchable_device: function () {
 		var el = document.createElement('div');
 		el.setAttribute('ongesturestart', 'return;');
 		
@@ -500,7 +502,7 @@ org.goorm.core.prototype = {
 		}
 	},
 
-	testWebSocket: function () {
+	test_web_socket: function () {
 		if ("WebSocket" in window) {
 			return true;
 		}

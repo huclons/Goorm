@@ -15,7 +15,7 @@
  ***/
 //{{{
 CodeMirror.defineMode("tiddlywiki", function (config, parserConfig) {
-	var indentUnit = config.indentUnit;
+	var indent_unit = config.indent_unit;
 
 	// Tokenizer
 	var textwords = function () {
@@ -33,7 +33,7 @@ CodeMirror.defineMode("tiddlywiki", function (config, parserConfig) {
 			return { type: type, style: "macro"};
 		}
 		return {
-			"allTags": kw('allTags'), "closeAll": kw('closeAll'), "list": kw('list'),
+			"allTags": kw('allTags'), "close_all": kw('close_all'), "list": kw('list'),
 			"newJournal": kw('newJournal'), "newTiddler": kw('newTiddler'),
 			"permaview": kw('permaview'), "saveChanges": kw('saveChanges'),
 			"search": kw('search'), "slider": kw('slider'),	"tabs": kw('tabs'),

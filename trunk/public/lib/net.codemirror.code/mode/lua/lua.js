@@ -3,7 +3,7 @@
 // highlights keywords, strings, comments (no leveling supported! ("[==[")), tokens, basic indenting
  
 CodeMirror.defineMode("lua", function(config, parserConfig) {
-  var indentUnit = config.indentUnit;
+  var indent_unit = config.indent_unit;
 
   function prefixRE(words) {
     return new RegExp("^(?:" + words.join("|") + ")", "i");
@@ -132,7 +132,7 @@ CodeMirror.defineMode("lua", function(config, parserConfig) {
 
     indent: function(state, textAfter) {
       var closing = dedentPartial.test(textAfter);
-      return state.basecol + indentUnit * (state.indentDepth - (closing ? 1 : 0));
+      return state.basecol + indent_unit * (state.indentDepth - (closing ? 1 : 0));
     }
   };
 });

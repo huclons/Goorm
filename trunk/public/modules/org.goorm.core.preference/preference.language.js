@@ -3,35 +3,30 @@ org.goorm.core.preference.language = function () {
 };
 
 org.goorm.core.preference.language.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor
-	 **/
 	init: function () {
 		var self = this;
 		
 		var language = "";
 
-		var laguageButton = new YAHOO.widget.Button("languageButton", {
+		var language_button = new YAHOO.widget.Button("language_button", {
 													type: "menu",
-													menu: "languageSelect"});
+													menu: "language_select"});
 
-		var onMenuClick = function (p_sType, p_aArgs) {
-			var oEvent = p_aArgs[0],	//	DOM event
-				oMenuItem = p_aArgs[1];	//	MenuItem instance that was the target of 
+		var on_menu_click = function (type, menuitems) {
+			var event = menuitems[0],	//	DOM event
+				menuitem = menuitems[1];	//	MenuItem instance that was the target of 
 										//	the event 
-			if (oMenuItem) {
-				$("#languageButton-button").text($(oMenuItem.element).text());
-				core.localization.changeLanguage(oMenuItem.value);
+			if (menuitem) {
+				$("#language_button-button").text($(menuitem.element).text());
+				core.module.localization.change_language(menuitem.value);
 			}
 		 
 		};
  
-		laguageButton.getMenu().subscribe("click", onMenuClick);
+		language_button.getMenu().subscribe("click", on_menu_click);
 		
 		if(localStorage.getItem("language")==null) {
-			if (core.serverLanguage=="client") {
+			if (core.server_language=="client") {
 				if(navigator.language=="ko") {
 					language = "kor";
 				}
@@ -40,18 +35,18 @@ org.goorm.core.preference.language.prototype = {
 				}
 			}
 			else {
-				language = core.serverLanguage;
+				language = core.server_language;
 			}
 			
-			core.localization.changeLanguage(language);
-			core.localization.beforeLanguage=language;
+			core.module.localization.change_language(language);
+			core.module.localization.before_language=language;
 			
 		}
 		else {
-			core.localization.changeLanguage(localStorage.getItem("language"));
-			core.localization.beforeLanguage=localStorage.getItem("language");
+			core.module.localization.change_language(localStorage.getItem("language"));
+			core.module.localization.before_language=localStorage.getItem("language");
 		}
 		
-		var languagePackDownloadButton = new YAHOO.widget.Button("languagePackDownloadButton");
+		var language_pack_download_button = new YAHOO.widget.Button("language_pack_download_button");
 	}
 }

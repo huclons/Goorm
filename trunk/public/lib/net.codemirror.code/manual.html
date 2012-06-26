@@ -140,11 +140,11 @@
       the <a href="theme/"><code>theme</code></a> directory in the
       distribution).</dd>
 
-      <dt id="option_indentUnit"><code>indentUnit (integer)</code></dt>
+      <dt id="option_indent_unit"><code>indent_unit (integer)</code></dt>
       <dd>How many spaces a block (whatever that means in the edited
       language) should be indented. The default is 2.</dd>
 
-      <dt id="option_indentWithTabs"><code>indentWithTabs (boolean)</code></dt>
+      <dt id="option_indent_with_tabs"><code>indent_with_tabs (boolean)</code></dt>
       <dd>Whether, when indenting, the first N*8 spaces should be
       replaced by N tabs. Default is false.</dd>
 
@@ -158,7 +158,7 @@
           held, this behaves like the <code>"indent"</code> mode.)</dd>
           <dt><code>"shift"</code></dt>
           <dd>Indent all selected lines by
-          one <a href="#option_indentUnit"><code>indentUnit</code></a>.
+          one <a href="#option_indent_unit"><code>indent_unit</code></a>.
           If shift was held while pressing tab, un-indent all selected
           lines one unit.</dd>
           <dt><code>"indent"</code></dt>
@@ -438,7 +438,7 @@
       <dd>Reset the given line's indentation to the indentation
       prescribed by the mode. If the second argument is given,
       indentation will be increased (if <code>dir</code> is true) or
-      decreased (if false) by an <a href="#option_indentUnit">indent
+      decreased (if false) by an <a href="#option_indent_unit">indent
       unit</a> instead.</dd>
 
       <dt id="getSearchCursor"><code>getSearchCursor(query, start, caseFold) → cursor</code></dt>
@@ -545,7 +545,7 @@
       A <code>{line, ch}</code> object will be returned.</dd>
       <dt id="somethingSelected"><code>somethingSelected() → boolean</code></dt>
       <dd>Return true if any text is selected.</dd>
-      <dt id="setCursor"><code>setCursor(pos)</code></dt>
+      <dt id="set_cursor"><code>set_cursor(pos)</code></dt>
       <dd>Set the cursor position. You can either pass a
       single <code>{line, ch}</code> object, or the line and the
       character as two separate parameters.</dd>
@@ -811,7 +811,7 @@
     and optionally the <code>textAfter</code> string, which contains
     the text on the line that is being indented, and return an
     integer, the amount of spaces to indent. It should usually take
-    the <a href="#option_indentUnit"><code>indentUnit</code></a>
+    the <a href="#option_indent_unit"><code>indent_unit</code></a>
     option into account.</p>
 
     <p id="electricChars">Finally, a mode may define

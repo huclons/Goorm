@@ -2,101 +2,61 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module file
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class rename
- * @extends file
- **/
 org.goorm.core.file.rename = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 **/
 	this.dialog = null;
-	
-	/**
-	 * The array object that contains the information about buttons on the bottom of a dialog 
-	 * @property buttons
-	 * @type Object
-	 * @default null
-	 **/
 	this.buttons = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property tabView
-	 **/
-	this.tabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property treeView
-	 **/
-	this.treeView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property isAliveWindow
-	 **/
-	this.isAliveWindow = null;
+	this.tabview = null;
+	this.treeview = null;
+	this.is_alive_window = null;
 };
 
 org.goorm.core.file.rename.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 **/
 	init: function () { 
 		
 		var self = this;
 		
-		var handleOk = function() { 
+		var handle_ok = function() { 
 		
-			if ($("#inputRenameNewFileName").attr("value")=="") {
-				alert.show(core.localization.msg["alertFileNameEmpty"]);
+			if ($("#input_rename_new_filename").attr("value")=="") {
+				alert.show(core.module.localization.msg["alertFileNameEmpty"]);
 				return false;
 			}
 		
 			var postdata = {
-				selectedFilePath: $("#inputRenameOldFilePath").attr("value"),
-				selectedFileName: $("#inputRenameOldFileName").attr("value"),
-				inputFileName: $("#inputRenameNewFileName").attr("value")
+				selected_filepath: $("#input_rename_old_filepath").attr("value"),
+				selected_filename: $("#input_rename_old_filename").attr("value"),
+				input_filename: $("#input_rename_new_filename").attr("value")
 			};
 									
 			$.post("module/org.goorm.core.file/file.rename.php", postdata, function (data) {
-				var receivedData = eval("("+data+")");
+				var received_data = eval("("+data+")");
 								
-				if(receivedData.errCode==0) {
-					if(self.isAliveWindow) {
-						var windowManager = core.mainLayout.workSpace.windowManager;
-						var tFiletype = windowManager.window[windowManager.activeWindow].filetype;
+				if(received_data.errCode==0) {
+					if(self.is_alive_window) {
+						var window_manager = core.module.layout.workspace.window_manager;
+						var filetype = window_manager.window[window_manager.active_window].filetype;
 						
-						windowManager.window[windowManager.activeWindow].close();
-						windowManager.open(postdata.selectedFilePath, postdata.inputFileName, tFiletype);						
+						window_manager.window[window_manager.active_window].close();
+						window_manager.open(postdata.selected_filepath, postdata.input_filename, filetype);						
 					}
 					
-					core.mainLayout.projectExplorer.refresh();
+					core.module.layout.project_explorer.refresh();
 				}
 				else {
-					alert.show(core.localization.msg["alertError"] + receivedData.message);
+					alert.show(core.module.localization.msg["alertError"] + received_data.message);
 				}
 			});
 			this.hide(); 
 		};
 
-		var handleCancel = function() { 
+		var handle_cancel = function() { 
 			this.hide(); 
 		};
 		
-		this.buttons = [ {text:"OK", handler:handleOk, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}]; 
+		this.buttons = [ {text:"OK", handler:handle_ok, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}]; 
 		
 		this.dialog = new org.goorm.core.file.rename.dialog();
 		this.dialog.init({
@@ -119,43 +79,43 @@ org.goorm.core.file.rename.prototype = {
 	show: function (context) {
 		var self = this;
 		
-		self.isAliveWindow = false;	
+		self.is_alive_window = false;	
 
 		if (context) {
-			var filename = (core.selectedFile.split("/")).pop();
-			var filepath = 	core.selectedFile.replace(filename, "");
+			var filename = (core.status.selected_file.split("/")).pop();
+			var filepath = 	core.status.selected_file.replace(filename, "");
 			filepath = filepath.replace("//", "/");
 			
-			$("#inputRenameNewFileName").attr("value", filename);
-			$("#inputRenameOldFilePath").attr("value", filepath);
-			$("#inputRenameOldFileName").attr("value", filename);
+			$("#input_rename_new_filename").attr("value", filename);
+			$("#input_rename_old_filepath").attr("value", filepath);
+			$("#input_rename_old_filename").attr("value", filename);
 			
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 			
-			for (var i = 0; i < windowManager.index; i++) {
-				var windowFileName = windowManager.window[i].filename;
-				var windowFilePath = windowManager.window[i].filepath;
-				windowFilePath = windowFilePath + "/";
-				windowFilePath = windowFilePath.replace("//", "/");				
+			for (var i = 0; i < window_manager.index; i++) {
+				var window_filename = window_manager.window[i].filename;
+				var window_filepath = window_manager.window[i].filepath;
+				window_filepath = window_filepath + "/";
+				window_filepath = window_filepath.replace("//", "/");				
 			
-				if( windowManager.window[i].alive && windowFileName == filename && windowFilePath == filepath) {
-					self.isAliveWindow = true;
+				if( window_manager.window[i].alive && window_filename == filename && window_filepath == filepath) {
+					self.is_alive_window = true;
 				}
 			}
 			
 			this.dialog.panel.show();
 		}
 		else {	
-			for (var i = 0; i < core.mainLayout.workSpace.windowManager.index; i++) {
-				if(core.mainLayout.workSpace.windowManager.window[i].alive) {
-					self.isAliveWindow = true;
+			for (var i = 0; i < core.module.layout.workspace.window_manager.index; i++) {
+				if(core.module.layout.workspace.window_manager.window[i].alive) {
+					self.is_alive_window = true;
 				}
 			}
 		
-			if(self.isAliveWindow) {
-				$("#inputRenameNewFileName").attr("value", core.mainLayout.workSpace.windowManager.window[core.mainLayout.workSpace.windowManager.activeWindow].filename);
-				$("#inputRenameOldFilePath").attr("value", core.mainLayout.workSpace.windowManager.window[core.mainLayout.workSpace.windowManager.activeWindow].filepath);
-				$("#inputRenameOldFileName").attr("value", core.mainLayout.workSpace.windowManager.window[core.mainLayout.workSpace.windowManager.activeWindow].filename);
+			if(self.is_alive_window) {
+				$("#input_rename_new_filename").attr("value", core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].filename);
+				$("#input_rename_old_filepath").attr("value", core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].filepath);
+				$("#input_rename_old_filename").attr("value", core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].filename);
 				
 				this.dialog.panel.show();
 			}

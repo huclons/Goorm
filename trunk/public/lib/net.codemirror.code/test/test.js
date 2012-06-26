@@ -57,9 +57,9 @@ testCM("selection", function(cm) {
   cm.replaceSelection("def", "end");
   eq(cm.getSelection(), "");
   eqPos(cm.getCursor(true), {line: 1, ch: 3});
-  cm.setCursor({line: 2, ch: 1});
+  cm.set_cursor({line: 2, ch: 1});
   eqPos(cm.getCursor(true), {line: 2, ch: 1});
-  cm.setCursor(1, 2);
+  cm.set_cursor(1, 2);
   eqPos(cm.getCursor(true), {line: 1, ch: 2});
 }, {value: "111111\n222222\n333333"});
 
@@ -75,23 +75,23 @@ testCM("lines", function(cm) {
 testCM("indent", function(cm) {
   cm.indentLine(1);
   eq(cm.getLine(1), "   blah();");
-  cm.setOption("indentUnit", 8);
+  cm.setOption("indent_unit", 8);
   cm.indentLine(1);
   eq(cm.getLine(1), "\tblah();");
-}, {value: "if (x) {\nblah();\n}", indentUnit: 3, indentWithTabs: true});
+}, {value: "if (x) {\nblah();\n}", indent_unit: 3, indent_with_tabs: true});
 
 test("defaults", function() {
   var olddefaults = CodeMirror.defaults, defs = CodeMirror.defaults = {};
   for (var opt in olddefaults) defs[opt] = olddefaults[opt];
-  defs.indentUnit = 5;
+  defs.indent_unit = 5;
   defs.value = "uu";
   defs.enterMode = "keep";
   defs.tabindex = 55;
   var place = document.getElementById("testground"), cm = CodeMirror(place);
   try {
-    eq(cm.getOption("indentUnit"), 5);
-    cm.setOption("indentUnit", 10);
-    eq(defs.indentUnit, 5);
+    eq(cm.getOption("indent_unit"), 5);
+    cm.setOption("indent_unit", 10);
+    eq(defs.indent_unit, 5);
     eq(cm.getValue(), "uu");
     eq(cm.getOption("enterMode"), "keep");
     eq(cm.getInputField().tabindex, 55);
@@ -139,7 +139,7 @@ testCM("coordsChar", function(cm) {
   cm.setValue(content.join("\n"));
   for (var x = 0; x < 35; x += 2) {
     for (var y = 0; y < 70; y += 5) {
-      cm.setCursor(y, x);
+      cm.set_cursor(y, x);
       var pos = cm.coordsChar(cm.charCoords({line: y, ch: x}));
       eq(pos.line, y);
       eq(pos.ch, x);
