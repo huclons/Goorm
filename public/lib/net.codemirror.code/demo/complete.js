@@ -87,7 +87,7 @@
       complete.parentNode.removeChild(complete);
     }
     function pick() {
-      insert(sel.options[sel.selectedIndex].text);
+      insert(sel.options[sel.selected_index].text);
       close();
       setTimeout(function(){editor.focus();}, 50);
     }

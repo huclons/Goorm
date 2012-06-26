@@ -2,143 +2,71 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module window
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class tab
- * @extends window
- **/
 org.goorm.core.window.tab = function () {
-	/**
-	 * This presents the current browser version
-	 * @property tabView
-	 * @type Object
-	 * @default null
-	 **/
-	this.tabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property listmenu
-	 * @type Object
-	 * @default null
-	 **/
-	this.listmenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property tab
-	 * @type Object
-	 * @default null
-	 **/
+	this.tabview = null;
+	this.list_menu = null;
 	this.tab = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property menuitem
-	 * @type Object
-	 * @default null
-	 **/
 	this.menuitem = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property window
-	 * @type Object
-	 * @default null
-	 **/
 	this.window = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property contextMenu
-	 * @type Object
-	 * @default null
-	 **/
-	this.contextMenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property title
-	 * @type Object
-	 * @default null
-	 **/
+	this.context_menu = null;
 	this.title = null;
-	
-	this.isSaved = null;
+	this.is_saved = null;
 };
 
 org.goorm.core.window.tab.prototype = {
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {Object} container The container.
-	 * @param {Object} title The title.
-	 * @param {Object} tabView The tabView.
-	 * @param {Object} listmenu The listmenu.
-	 **/
-	init: function(container, title, tabView, listmenu) {
+	init: function(container, title, tabview, list_menu) {
+		
+		
 		var self = this;
 		
-		this.isSaved = true;
+		this.is_saved = true;
 		
-		this.tabView = tabView;
-		this.listmenu = listmenu;
+		this.tabview = tabview;
+		this.list_menu = list_menu;
 		
 		this.title = title;
 		
-		this.tab = new YAHOO.widget.Tab({ label: "<span class='tabtitle' style='float:left'>" + this.title + "</span> <div class='close tabCloseButton'></div>", content: "" });
+		this.tab = new YAHOO.widget.Tab({ label: "<span class='tabtitle' style='float:left'>" + this.title + "</span> <div class='close tab_close_button'></div>", content: "" });
+
 		
-		this.tabView.addTab(this.tab);
-		this.tabView.selectTab(this.tabView.getTabIndex(this.tab));
-				
+		this.tabview.addTab(this.tab);
+		
+		this.tabview.selectTab(this.tabview.getTabIndex(this.tab));
+
 		//For window list menu
-		var activateDummy = function () {
+		var activate_dummy = function () {
 			self.activate();
 		};
 		
-		this.menuitem = new YAHOO.widget.MenuItem("windowListMenu", {text: this.title, onclick: {fn: activateDummy}});
+		this.menuitem = new YAHOO.widget.MenuItem("window_list_menu", {text: this.title, onclick: {fn: activate_dummy}});
 		
-		this.listmenu.addItem(this.menuitem);
-		this.listmenu.render();
+		this.list_menu.addItem(this.menuitem);
+		this.list_menu.render();
 		
-		this.contextMenu = new org.goorm.core.menu.context();
-		this.contextMenu.init("configs/menu/org.goorm.core.window/window.tab.html", "window.tab", this.tab.get("labelEl"), this.title, null, function () { self.setEvent(); });
-		
+		this.context_menu = new org.goorm.core.menu.context();
+		this.context_menu.init("configs/menu/org.goorm.core.window/window.tab.html", "window.tab", this.tab.get("labelEl"), this.title, null, function () { self.set_event(); });
 	},
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method setEvent 
-	 * @param {Object} window The window.
-	 **/
-	setEvent: function(){
+
+	set_event: function(){
 		var self = this;
 		//////////////////////////////////////////////////////////////////////////////////////////
-		// Window tab events
+		// window tab events
 		//////////////////////////////////////////////////////////////////////////////////////////
-		var str = self.contextMenu.name.replace(/[/.]/g,"\\.");
+		var str = self.context_menu.name.replace(/[/.]/g,"\\.");
 		
 		//tab right click event assign
 		$(this.tab.get("labelEl")).mousedown(function(e) {
 		    if (e.which === 3) {
-		    	console.log(self.window.container);
-		    	console.log($("#"+self.window.container+"_c").css("display"));
-		    	
 		    	if($("#"+self.window.container+"_c").css("display") == "none"){
-		    		console.log("minimize must be disabled!");
 		    		$("#"+str).find(".unminimize").removeClass('yuimenuitemlabel-disabled');
 		    		$("#"+str).find(".unminimize").parent().removeClass('yuimenuitem-disabled');
 		    		$("#"+str).find(".minimize").addClass('yuimenuitemlabel-disabled');
 		    		$("#"+str).find(".minimize").parent().addClass('yuimenuitem-disabled');
 		    	}
 		    	else {
-		    		console.log("minimize must be abled!");
 		    		$("#"+str).find(".unminimize").addClass('yuimenuitemlabel-disabled');
 		    		$("#"+str).find(".unminimize").parent().addClass('yuimenuitem-disabled');
 		    		$("#"+str).find(".minimize").removeClass('yuimenuitemlabel-disabled');
@@ -170,7 +98,7 @@ org.goorm.core.window.tab.prototype = {
 		
 		$("#"+str).find(".close").click(function(e){
 			if (e.which == 1) {
-				self.contextMenu.hide();
+				self.context_menu.hide();
 				self.close();
 				return false;
 			}
@@ -178,7 +106,7 @@ org.goorm.core.window.tab.prototype = {
 		
 		$("#"+str).find(".minimize").click(function(e){
 			if (e.which == 1) {
-				self.contextMenu.hide();
+				self.context_menu.hide();
 				self.window.minimize();
 				return false;
 			}
@@ -187,7 +115,7 @@ org.goorm.core.window.tab.prototype = {
 		$("#"+str).find(".unminimize").click(function(e){
 			if (e.which == 1) {
 				if(!$(this).hasClass('yuimenuitemlabel-disabled')){
-					self.contextMenu.hide();
+					self.context_menu.hide();
 					self.activate();
 				}
 				return false;
@@ -195,56 +123,38 @@ org.goorm.core.window.tab.prototype = {
 		});
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method setModified
-	 **/
-	setModified: function() {
+	set_modified: function() {
 	 	var tabtitle = $(this.tab.get("labelEl")).find(".tabtitle").text();
 	  	tabtitle = tabtitle.replace(" *", "");
 		$(this.tab.get("labelEl")).find(".tabtitle").html(tabtitle + " *");
 		
-		this.isSaved = false;
+		this.is_saved = false;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method setSaved
-	 **/
-	setSaved: function() {
+	set_saved: function() {
 	  	var tabtitle = $(this.tab.get("labelEl")).find(".tabtitle").text();
 		$(this.tab.get("labelEl")).find(".tabtitle").html(tabtitle.replace(" *", ""));
 		
-		this.isSaved = true;
+		this.is_saved = true;
 	},
   
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method connect 
-	 * @param {Object} window The window.
-	 **/
 	connect: function(window) {
 		this.window = window;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method close 
-	 **/
 	close: function () {
-	
 		var self = this;
 
-		if(this.isSaved) {		
+		if(this.is_saved) {		
 			
-			this.tabView.removeTab(this.tab);
+			this.tabview.removeTab(this.tab);
 			
-			//core.mainLayout.workSpace.windowManager.window.splice(core.mainLayout.workSpace.windowManager.window.indexOf(this.tabView.getTabIndex(this.tab)), 1);
+			//core.module.layout.workspace.window_manager.window.splice(core.module.layout.workspace.window_manager.window.indexOf(this.tabview.getTabIndex(this.tab)), 1);
 					
 			
-			this.listmenu.removeItem(this.menuitem);
+			this.list_menu.removeItem(this.menuitem);
 			
-			this.contextMenu.remove();
+			this.context_menu.remove();
 			
 			if(this.window) {
 				this.window.tab = null;
@@ -254,46 +164,41 @@ org.goorm.core.window.tab.prototype = {
 			delete this;
 		}
 		else {
-			console.log(this);
-			confirmationSave.init({
-				title: core.localization.msg["confirmationSaveTitle"], 
-				message: "\""+this.window.filename+"\" "+core.localization.msg["confirmationSaveMessage"],
-				yesText: core.localization.msg["confirmationYes"],
-				cancelText: core.localization.msg["confirmationCancel"],
-				noText: core.localization.msg["confirmationNo"],
+			confirmation_save.init({
+				title: core.module.localization.msg["confirmation_save_title"], 
+				message: "\""+this.window.filename+"\" "+core.module.localization.msg["confirmation_save_message"],
+				yes_text: core.module.localization.msg["confirmation_yes"],
+				cancel_text: core.module.localization.msg["confirmation_cancel"],
+				no_text: core.module.localization.msg["confirmation_no"],
 				yes: function () {
 					self.window.editor.save("close");
 				}, cancel: function () {
 				}, no: function () {
-					self.isSaved = true;
-					self.window.isSaved = true;
+					self.is_saved = true;
+					self.window.is_saved = true;
 					self.close();
 				}
 			});
 			
-			confirmationSave.panel.show();
+			confirmation_save.panel.show();
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method activate 
-	 **/
 	activate: function() {
-		this.tabView.selectTab(this.tabView.getTabIndex(this.tab));
+		this.tabview.selectTab(this.tabview.getTabIndex(this.tab));
 		
 		
-		$("#windowListMenu").find(".yuimenuitem-checked").each(function(i) {
+		$("#window_list_menu").find(".yuimenuitem-checked").each(function(i) {
 			$(this).removeClass("yuimenuitem-checked");
 		});
 		
 		$(this.menuitem.element).addClass("yuimenuitem-checked");	
-		core.toolbar.switchState(this.window.type);
+		core.module.toolbar.switch_state(this.window.type);
 		this.window.show();
 		if (!$("#" + this.window.container).find(".hd").hasClass("activated")) {
-			for (var i = 0; i < core.mainLayout.workSpace.windowManager.index; i++) {
-				if(core.mainLayout.workSpace.windowManager.window[i].alive && core.mainLayout.workSpace.windowManager.window[i]==this.window ) {
-					core.mainLayout.workSpace.windowManager.activeWindow = i;
+			for (var i = 0; i < core.module.layout.workspace.window_manager.index; i++) {
+				if(core.module.layout.workspace.window_manager.window[i].alive && core.module.layout.workspace.window_manager.window[i]==this.window ) {
+					core.module.layout.workspace.window_manager.active_window = i;
 					break;
 				}
 			}
@@ -301,5 +206,4 @@ org.goorm.core.window.tab.prototype = {
 			this.window.activate();
 		}
 	}
-	
 };

@@ -2,119 +2,28 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module dialog
  **/
 
-/**
- * This is an goorm dialog.  
- * @class dialog
- **/
 org.goorm.core.dialog.wizard = function () {
-
-	/**
-	 * This presents the current browser version
-	 * @property panel
-	 **/
-	this.totalStep = null;
-
-	/**
-	 * This presents the current browser version
-	 * @property panel
-	 **/
+	this.total_step = null;
 	this.step = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property panel
-	 **/
 	this.panel = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property contextMenu
-	 **/
-	this.contextMenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property path
-	 **/
+	this.context_menu = null;
 	this.path = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property title
-	 **/
 	this.title = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property type
-	 **/
 	this.type = null;
-
-	/**
-	 * This presents the current browser version
-	 * @property left
-	 **/
 	this.left = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property top
-	 **/
 	this.top = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property width
-	 **/
 	this.width = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 **/
 	this.height = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property yes
-	 **/	
 	this.yes = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property no
-	 **/
 	this.no = null;
-	
-	/**
-	 * The array object that contains the information about buttons on the bottom of a dialog 
-	 * @property buttons
-	 * @type Object
-	 * @default null
-	 **/
 	this.buttons = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property success
-	 **/
 	this.success = null;
-	
 	this.kind = null;
 };
 
 org.goorm.core.dialog.wizard.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {String} option The option about contents to be set into the dialog.
-	 **/
 	init: function (option) {
 		var self = this;
 		
@@ -126,8 +35,8 @@ org.goorm.core.dialog.wizard.prototype = {
 		this.height = option["height"];
 		this.modal = option["modal"];
 		
-		// this.yesText = option["yesText"];
-		// this.noText = option["noText"];	
+		// this.yes_text = option["yes_text"];
+		// this.no_text = option["no_text"];	
 		this.buttons = option["buttons"];
 		// this.yes = option["yes"];
 		// this.no = option["no"];
@@ -139,62 +48,59 @@ org.goorm.core.dialog.wizard.prototype = {
 		this.kind = option["kind"];		
 
 		
-		if ($("#goormDialogContainer").find("#panelContainer_" + this.title)) {
-			$("#goormDialogContainer").find("#panelContainer_" + this.title).remove();
+		if ($("#goorm_dialog_container").find("#panelContainer_" + this.title)) {
+			$("#goorm_dialog_container").find("#panelContainer_" + this.title).remove();
 		}
 		
-		$("#goormDialogContainer").append("<div id='panelContainer_" + this.title + "'></div>");
+		$("#goorm_dialog_container").append("<div id='panelContainer_" + this.title + "'></div>");
 		
-		var handleNext = function() { 
-			console.log(self.totalStep);
-			console.log(self.step);
-			
-			var stopNext = false;
-			$("#goormDialogContainer").find("#panelContainer_" + self.title).find(".bd").find(".wizardStep").each(function (i){
+		var handle_next = function() { 
+			var stop_next = false;
+			$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step").each(function (i){
 				if(i==self.step-1) {
 					$(this).find("input[checkField=yes]").each(function (i){
 						if($(this).attr("value")=="") {
-							stopNext = true;
+							stop_next = true;
 						}
 					});
 				}
 			});
-			if (stopNext) {
-				alert.show(core.localization.msg["alertDialogMissing"]);
+			if (stop_next) {
+				alert.show(core.module.localization.msg["alertDialogMissing"]);
 				return false;
 			}
 			
-			if (self.step < self.totalStep) {
-				self.showPreviousButton(true);
+			if (self.step < self.total_step) {
+				self.show_previous_button(true);
 			
-				$("#goormDialogContainer").find("#panelContainer_" + self.title).find(".bd").find(".wizardStep[step='" + self.step + "']").css("display", "none");
+				$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").css("display", "none");
 			
-				if ($("#goormDialogContainer").find("#panelContainer_" + self.title).find(".bd").find(".wizardStep[step='" + self.step + "']")) {
+				if ($("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']")) {
 					self.step++;
-					$("#goormDialogContainer").find("#panelContainer_" + self.title).find(".bd").find(".wizardStep[step='" + self.step + "']").css("display", "block");
-					if (self.step == self.totalStep) {
-						self.showNextButton(false);
+					$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").css("display", "block");
+					if (self.step == self.total_step) {
+						self.show_next_button(false);
 					}	
 				}
 			}
 		};
 		
-		var handlePrev = function() { 
+		var handle_prev = function() { 
 			if (1 < self.step) {
-				self.showNextButton(true);
-				$("#goormDialogContainer").find("#panelContainer_" + self.title).find(".bd").find(".wizardStep[step='" + self.step + "']").css("display", "none");			
+				self.show_next_button(true);
+				$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").css("display", "none");			
 				self.step--;
 				
 				if (self.step == 1) {
-					self.showPreviousButton(false);
+					self.show_previous_button(false);
 				}
 				
-				$("#goormDialogContainer").find("#panelContainer_" + self.title).find(".bd").find(".wizardStep[step='" + self.step + "']").css("display", "block");		
+				$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").css("display", "block");		
 			}
 		};
 
-		this.buttons.unshift({ text:"Next", handler:handleNext });
-		this.buttons.unshift({ text:"Previous", handler:handlePrev });
+		this.buttons.unshift({ text:"Next", handler:handle_next });
+		this.buttons.unshift({ text:"Previous", handler:handle_prev });
 		
 		
 		
@@ -230,13 +136,13 @@ org.goorm.core.dialog.wizard.prototype = {
 				confirmation.panel.cfg.config.visible.value = false;
 			}
 			
-			if (self.buttons && self.panel.cfg.config.visible.value && !core.keydown && !alert.panel.cfg.config.visible.value && !notice.panel.cfg.config.visible.value && !confirmation.panel.cfg.config.visible.value) {
+			if (self.buttons && self.panel.cfg.config.visible.value && !core.status.keydown && !alert.panel.cfg.config.visible.value && !notice.panel.cfg.config.visible.value && !confirmation.panel.cfg.config.visible.value) {
 				$(self.buttons).each(function (i) { 
 					if (this.text == "Cancel") {
 						this.hide = function(){};
 						this.handler();
 						
-						core.keydown = true;
+						core.status.keydown = true;
 				
 						self.panel.hide();						
 					}
@@ -254,13 +160,13 @@ org.goorm.core.dialog.wizard.prototype = {
 				confirmation.panel.cfg.config.visible.value = false;
 			}
 			
-			if (self.buttons && self.panel.cfg.config.visible.value && !core.keydown && !alert.panel.cfg.config.visible.value && !notice.panel.cfg.config.visible.value && !confirmation.panel.cfg.config.visible.value) {
+			if (self.buttons && self.panel.cfg.config.visible.value && !core.status.keydown && !alert.panel.cfg.config.visible.value && !notice.panel.cfg.config.visible.value && !confirmation.panel.cfg.config.visible.value) {
 				$(self.buttons).each(function (i) {
 					if (this.isDefault) {
 						this.hide = function(){};
 						this.handler();
 						
-						core.keydown = true;
+						core.status.keydown = true;
 					}
 				});
 			}
@@ -281,23 +187,23 @@ org.goorm.core.dialog.wizard.prototype = {
 					self.success();			
 
 
-				core.dialogLoadingCount++;
+				core.dialog.loaded_count++;
 
-				if (core.dialogLoadingCount == core.dialogCount) {
+				if (core.dialog.loaded_count == (Object.keys(core.dialog).length - 1)) {
 /*
 					$(core).trigger("coreDialogLoaded");
 */
 				}
 			
-				$(core).trigger("goormLoading");
+				$(core).trigger("goorm_loading");
 			}
 		});
 		
-		self.showPreviousButton(false);
+		self.show_previous_button(false);
 		return this;
 	},
 	
-	showPreviousButton: function(show) {
+	show_previous_button: function(show) {
 		var self = this;
 
 		if (show) {
@@ -308,7 +214,7 @@ org.goorm.core.dialog.wizard.prototype = {
 		}
 	},
 	
-	showNextButton: function(show) {
+	show_next_button: function(show) {
 		var self = this;
 
 		if (show) {
@@ -322,14 +228,14 @@ org.goorm.core.dialog.wizard.prototype = {
 	showFirstPage: function() {
 		var self = this;
 		self.step=1;
-		$("#goormDialogContainer").find("#panelContainer_" + self.title).find(".bd").find(".wizardStep").each(function (i){
+		$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step").each(function (i){
 			$(this).css("display", "none");
 			if(i==0) {
 				$(this).css("display", "block");
 			}
 		});
-		self.showPreviousButton(false);
-		self.showNextButton(true);
+		self.show_previous_button(false);
+		self.show_next_button(true);
 	}
 	
 };

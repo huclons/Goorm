@@ -32,19 +32,19 @@ org.goorm.core.collaboration.settings = function () {
 	
 	/**
 	 * This presents the current browser version
-	 * @property tabView
+	 * @property tabview
 	 * @type Object
 	 * @default null
 	 **/
-	this.tabView = null;
+	this.tabview = null;
 	
 	/**
 	 * This presents the current browser version
-	 * @property treeView
+	 * @property treeview
 	 * @type Object
 	 * @default null
 	 **/
-	this.treeView = null;
+	this.treeview = null;
 };
 
 org.goorm.core.collaboration.settings.prototype = {
@@ -55,25 +55,25 @@ org.goorm.core.collaboration.settings.prototype = {
 	 **/
 	init: function () { 
 		
-		var handleOk = function() { 
-			localStorage['CollaborationNickname'] = $("#dialogCollaborationSettings #CollaborationNickname").val();
+		var handle_ok = function() { 
+			localStorage['collaboration_nickname'] = $("#dialog_collaboration_settings #collaboration_nickname").val();
 			
-			core.dialogPreference.ini['CollaborationServerURL'] = $("#dialogCollaborationSettings #CollaborationServerURL").val();
-			core.dialogPreference.ini['CollaborationServerPort'] = $("#dialogCollaborationSettings #CollaborationServerPort").val();
+			core.dialog.preference.ini['collaboration_server_url'] = $("#dialog_collaboration_settings #collaboration_server_url").val();
+			core.dialog.preference.ini['collaboration_server_port'] = $("#dialog_collaboration_settings #collaboration_server_port").val();
 			
-			var str = JSON.stringify(core.dialogPreference.ini);
-			core.dialogPreference.manager.iniMaker(str);
+			var str = JSON.stringify(core.dialog.preference.ini);
+			core.dialog.preference.manager.ini_maker(str);
 			
 			this.hide(); 
 		};
 
-		var handleCancel = function() { 
+		var handle_cancel = function() { 
 			
 			this.hide(); 
 		};
 		
-		this.buttons = [ {text:"OK", handler:handleOk, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}]; 
+		this.buttons = [ {text:"OK", handler:handle_ok, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}]; 
 						 
 		this.dialog = new org.goorm.core.collaboration.settings.dialog();
 		this.dialog.init({
@@ -85,13 +85,13 @@ org.goorm.core.collaboration.settings.prototype = {
 			buttons:this.buttons,
 			success: function () {
 				//TabView Init
-				self.tabView = new YAHOO.widget.TabView('settingsContents');
+				self.tabview = new YAHOO.widget.TabView('settings_contents');
 				
 				//TreeView Init
-				self.treeView = new YAHOO.widget.TreeView("settingsTreeview");
-				self.treeView.render();
-				if(localStorage['CollaborationNickname'] == undefined || localStorage['CollaborationNickname'] == ""){
-					localStorage['CollaborationNickname'] = "unknownUser";
+				self.treeview = new YAHOO.widget.TreeView("settings_treeview");
+				self.treeview.render();
+				if(localStorage['collaboration_nickname'] == undefined || localStorage['collaboration_nickname'] == ""){
+					localStorage['collaboration_nickname'] = "unknownUser";
 				}
 			}
 		});
@@ -105,14 +105,14 @@ org.goorm.core.collaboration.settings.prototype = {
 	 * @method show 
 	 **/
 	show: function () {
-		$("#dialogCollaborationSettings #CollaborationServerURL").val(core.dialogPreference.ini['CollaborationServerURL']);
-		$("#dialogCollaborationSettings #CollaborationServerPort").val(core.dialogPreference.ini['CollaborationServerPort']);
+		$("#dialog_collaboration_settings #collaboration_server_url").val(core.dialog.preference.ini['collaboration_server_url']);
+		$("#dialog_collaboration_settings #collaboration_server_port").val(core.dialog.preference.ini['collaboration_server_port']);
 		
-		if(core.lastName != null && core.firstName != null){
-			$("#dialogCollaborationSettings #CollaborationNickname").val(core.lastName+" "+core.firstName).attr("readonly","readonly");
+		if(core.user.last_name != null && core.user.first_name != null){
+			$("#dialog_collaboration_settings #collaboration_nickname").val(core.user.last_name+" "+core.user.first_name).attr("readonly","readonly");
 		}
 		else {
-			$("#dialogCollaborationSettings #CollaborationNickname").val(localStorage['CollaborationNickname']);
+			$("#dialog_collaboration_settings #collaboration_nickname").val(localStorage['collaboration_nickname']);
 		}
 		this.dialog.panel.show();
 	}	

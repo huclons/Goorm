@@ -10,7 +10,7 @@
 
     <style type="text/css">
       .CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}
-      .activeline {background: #f0fcff !important;}
+      .active_line {background: #f0fcff !important;}
     </style>
   </head>
   <body>
@@ -60,10 +60,10 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
   lineNumbers: true,
   onCursorActivity: function() {
     editor.setLineClass(hlLine, null);
-    hlLine = editor.setLineClass(editor.getCursor().line, "activeline");
+    hlLine = editor.setLineClass(editor.getCursor().line, "active_line");
   }
 });
-var hlLine = editor.setLineClass(0, "activeline");
+var hlLine = editor.setLineClass(0, "active_line");
 </script>
 
     <p>Styling the current cursor line.</p>

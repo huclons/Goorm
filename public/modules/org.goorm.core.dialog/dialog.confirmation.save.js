@@ -2,113 +2,34 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module dialog
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class confirmation
- * @extends dialog
- **/
 org.goorm.core.dialog.confirmation.save = function () {
-	/**
-	 * This presents the current browser version
-	 * @property panel
-	 **/
 	this.panel = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property contextMenu
-	 **/
-	this.contextMenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property path
-	 **/
+	this.context_menu = null;
 	this.path = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property title
-	 **/
 	this.title = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property type
-	 **/
 	this.type = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property left
-	 **/
 	this.left = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property top
-	 **/
 	this.top = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property width
-	 **/
 	this.width = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 **/
 	this.height = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property yesText
-	 **/
-	this.yesText = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property noText
-	 **/
-	this.noText = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property yes
-	 **/
+	this.yes_text = null;
+	this.no_text = null;
 	this.yes = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property no
-	 **/
 	this.no = null;
 };
 
 org.goorm.core.dialog.confirmation.save.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @Constructor 
-	 * @param {String} option The option about contents to be set into the dialog.
-	 **/
 	init: function (option) {
 		var self = this;
 
 		this.title = option["title"];
 		this.message = option["message"];
 		
-		this.yesText = option["yesText"];
-		this.cancelText = option["cancelText"];
-		this.noText = option["noText"];
+		this.yes_text = option["yes_text"];
+		this.cancel_text = option["cancel_text"];
+		this.no_text = option["no_text"];
 		
 		this.yes = option["yes"];
 		this.cancel = option["cancel"];
@@ -118,29 +39,29 @@ org.goorm.core.dialog.confirmation.save.prototype = {
 		this.title = this.title.split(" ").join("_");
 		this.timestamp = new Date().getTime();
 		
-		var handleYes = function() { 
+		var handle_yes = function() { 
 			if ( typeof self.yes == "function" )
 				self.yes();
 			this.hide(); 
 		};
 		
-		var handleCancel = function() {
+		var handle_cancel = function() {
 			if ( typeof self.cancel == "function" )
 				self.cancel();
 			this.hide(); 
 		}
 		
-		var handleNo = function() { 
+		var handle_no = function() { 
 			if ( typeof self.no == "function" )
 				self.no();
 			this.hide(); 
 		};
 		
-		if ($("#goormDialogContainer").find("#panelContainer_" + this.title)) {
-			$("#goormDialogContainer").find("#panelContainer_" + this.title).remove();
+		if ($("#goorm_dialog_container").find("#panelContainer_" + this.title)) {
+			$("#goorm_dialog_container").find("#panelContainer_" + this.title).remove();
 		}
 		
-		$("#goormDialogContainer").append("<div id='panelContainer_" + this.title + "'></div>");
+		$("#goorm_dialog_container").append("<div id='panelContainer_" + this.title + "'></div>");
 		
 		this.panel = new YAHOO.widget.SimpleDialog(
 			"panelContainer_" + this.title, { 
@@ -154,9 +75,9 @@ org.goorm.core.dialog.confirmation.save.prototype = {
 				fixedcenter: true,
 				effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.2},
 				buttons: [ 
-					{ text:self.yesText, handler:handleYes, isDefault:true },
-					{ text:self.cancelText,  handler:handleCancel },
-					{ text:self.noText,  handler:handleNo }
+					{ text:self.yes_text, handler:handle_yes, isDefault:true },
+					{ text:self.cancel_text,  handler:handle_cancel },
+					{ text:self.no_text,  handler:handle_no }
 				] 
 			} 
 		);
@@ -167,17 +88,17 @@ org.goorm.core.dialog.confirmation.save.prototype = {
 		
 		//$(document).unbind('keydown', 'esc');
 		$(document).bind('keydown', 'esc', function () {
-			if (self.panel.cfg.config.visible.value && !core.keydown) {
+			if (self.panel.cfg.config.visible.value && !core.status.keydown) {
 				self.panel.hide();
 			}
 		});
 		
 		//$(document).unbind('keydown', 'return');
 		$(document).bind('keydown', 'return', function (e) {
-			if (self.panel.cfg.config.visible.value && !core.keydown && !alert.panel.cfg.config.visible.value && !notice.panel.cfg.config.visible.value) {
-				handleYes();
+			if (self.panel.cfg.config.visible.value && !core.status.keydown && !alert.panel.cfg.config.visible.value && !notice.panel.cfg.config.visible.value) {
+				handle_yes();
 						
-				core.keydown = true;
+				core.status.keydown = true;
 			}
 		});	
 	}

@@ -2,142 +2,45 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module object
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class ui
- * @extends object
- **/
 org.goorm.core.object.ui = function () {
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 * @type Object
-	 * @default null
-	 **/
 	this.target = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property parent
-	 * @type Object
-	 * @default null
-	 **/
 	this.parent = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property type
-	 * @type Object
-	 * @default null
-	 **/
 	this.type = null; // square or line
-		
-	/**
-	 * This presents the current browser version
-	 * @property kind
-	 * @type Object
-	 * @default null
-	 **/
 	this.kind = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property shapeName
-	 * @type Object
-	 * @default null
-	 **/
-	this.shapeName = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property shape
-	 * @type Object
-	 * @default null
-	 **/
+	this.shape_name = null;
 	this.shape = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property dashed
-	 **/
 	this.dashed = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property proportion
-	 **/
 	this.proportion = null;
-		
-	/**
-	 * This presents the current browser version
-	 * @property properties
-	 * @type Object
-	 * @default null
-	 **/	
 	this.properties = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property selected
-	 * @type Object
-	 * @default null
-	 **/	
 	this.selected = false;
-	
-	/**
-	 * This presents the current browser version
-	 * @property data_uuid
-	 * @type Object
-	 * @default null
-	 **/
 	this.data_uuid = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property contextMenu
-	 * @type Object
-	 * @default null
-	 **/
-	this.contextMenu = null;
+	this.context_menu = null;
 };
 
 org.goorm.core.object.ui.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {Object} target The target.
-	 * @param {Object} type The type.
-	 * @param {Object} shapeName The name of shape.
-	 **/
-	init: function (target, parent, type, shapeName, option, callback) {
+	init: function (target, parent, type, shape_name, option, callback) {
 		var self = this;
 		
 		this.target = target;
 		this.parent = parent;
 		this.type = type;
-		this.shapeName = shapeName;
+		this.shape_name = shape_name;
 		this.properties = null;
 		
 		if (option) {
 			this.dashed = option['dashed'];
 			this.proportion = option['proportion'];
 		}
-		
 
 		
 		if(type == "line") {
-			if(shapeName != null) {
+			if(shape_name != null) {
 				this.shape = new org.goorm.core.stencil();
-				this.shape.init(shapeName, this.type, $("#" + core.mainLayout.workSpace.windowManager.window[core.mainLayout.workSpace.windowManager.activeWindow].container).find(".shapes"));
+				this.shape.init(shape_name, this.type, $("#" + core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].container).find(".shapes"));
 				
-				this.kind = this.shapeName.split("/");
+				this.kind = this.shape_name.split("/");
 				this.kind = this.kind[1];
 				
 				this.properties = new org.goorm.core.object.ui.line().init(target, this.kind, this.dashed);
@@ -149,11 +52,11 @@ org.goorm.core.object.ui.prototype = {
 		else if(type == "square") {
 			
 			
-			if(shapeName != null) {
+			if(shape_name != null) {
 				this.shape = new org.goorm.core.stencil();
-				this.shape.init(shapeName, this.type, $("#" + core.mainLayout.workSpace.windowManager.window[core.mainLayout.workSpace.windowManager.activeWindow].container).find(".shapes"), callback);
+				this.shape.init(shape_name, this.type, $("#" + core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].container).find(".shapes"), callback);
 				
-				this.kind = this.shapeName.split("/");
+				this.kind = this.shape_name.split("/");
 				this.kind = this.kind[1];
 				
 				this.properties = new org.goorm.core.object.ui.square().init(target, this.kind, this.proportion);
@@ -165,19 +68,19 @@ org.goorm.core.object.ui.prototype = {
 		
 		
 		//Set context menu
-		this.contextMenu = new org.goorm.core.menu.context();
-		this.contextMenu.init("configs/menu/org.goorm.core.object/object.ui.html", "object.ui", "", this.properties.timestamp, "", function() {
+		this.context_menu = new org.goorm.core.menu.context();
+		this.context_menu.init("configs/menu/org.goorm.core.object/object.ui.html", "object.ui", "", this.properties.timestamp, "", function() {
 			//Set context menu action
-			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=cutObject]").click(function () {
+			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=cut_object]").click(function () {
 				self.cut();
 			});
-			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=copyObject]").click(function () {
+			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=copy_object]").click(function () {
 				self.copy();
 			});
-			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=pasteObject]").click(function () {
+			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=paste_object]").click(function () {
 				self.paste();
 			});						
-			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=deleteObject]").click(function () {
+			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=delete_object]").click(function () {
 				/*for (var index in self.parent.objects) {
 					if (self.parent.objects[index]==self) {
 						self.parent.remove(index);
@@ -185,20 +88,20 @@ org.goorm.core.object.ui.prototype = {
 				}*/
 				self._delete();
 			});	
-			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=bringToFront]").click(function () {
-				self.bringToFront();
+			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=bring_to_front]").click(function () {
+				self.bring_to_front();
 			});	
-			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=sendToBack]").click(function () {
-				self.sendToBack();
+			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=send_to_back]").click(function () {
+				self.send_to_back();
 			});	
-			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=bringForward]").click(function () {
-				self.bringForward();
+			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=bring_forward]").click(function () {
+				self.bring_forward();
 			});	
-			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=sendBackward]").click(function () {
-				self.sendBackward();
+			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=send_backward]").click(function () {
+				self.send_backward();
 			});	
-			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=propertiesObject]").click(function () {
-				self.propertiesObject();
+			$("div[id='object.ui_"+self.properties.timestamp+"']").find("a[action=properties_object]").click(function () {
+				self.properties_object();
 			});				
 		});
 		
@@ -206,9 +109,9 @@ org.goorm.core.object.ui.prototype = {
 		$(target).find("canvas").mousedown(function (e) {
 			if (e.which == 3) {
 				if (self.type == "square") {
-					var parentOffset = $(this).parent().offset(); 
-					x = e.pageX - parentOffset.left;
-					y = e.pageY - parentOffset.top;
+					var parent_offset = $(this).parent().offset(); 
+					x = e.pageX - parent_offset.left;
+					y = e.pageY - parent_offset.top;
 					
 					//Select Body of Square
 					if ( ( (self.properties.sx - 5 < x && x < self.properties.ex + 5) || (self.properties.ex - 5 < x && x < self.properties.sx + 5) ) && ( (self.properties.sy - 5 < y && y < self.properties.ey + 5) || (self.properties.ey - 5 < y && y < self.properties.sy + 5) ) ) { //Body Selection
@@ -217,7 +120,7 @@ org.goorm.core.object.ui.prototype = {
 						/* Right Mousebutton was clicked! */
 						$("div.yuimenu").css("visibility", "hidden");
 						$("div.yui-menu-shadow").removeClass("yui-menu-shadow-visible");
-						self.contextMenu.menu.show();
+						self.context_menu.menu.show();
 		
 						$("div[id='object.ui_" + self.properties.timestamp+"']").css("z-index", 5);
 						$("div[id='object.ui_" + self.properties.timestamp+"']").css("left", e.pageX);
@@ -231,9 +134,9 @@ org.goorm.core.object.ui.prototype = {
 				}			
 				else if (self.type == "line") {
 					//Calculate the position (x, y) in Canvas Axis
-					var parentOffset = $(this).parent().offset(); 
-					x = e.pageX - parentOffset.left;
-					y = e.pageY - parentOffset.top;
+					var parent_offset = $(this).parent().offset(); 
+					x = e.pageX - parent_offset.left;
+					y = e.pageY - parent_offset.top;
 					
 					
 					if (self.properties.sx) {
@@ -275,7 +178,7 @@ org.goorm.core.object.ui.prototype = {
 								/* Right Mousebutton was clicked! */
 								$("div.yuimenu").css("visibility", "hidden");
 								$("div.yui-menu-shadow").removeClass("yui-menu-shadow-visible");
-								self.contextMenu.menu.show();
+								self.context_menu.menu.show();
 					
 								$("div[id='object.ui_" + self.properties.timestamp+"']").css("z-index", 5);
 								$("div[id='object.ui_" + self.properties.timestamp+"']").css("left", e.pageX);
@@ -291,85 +194,49 @@ org.goorm.core.object.ui.prototype = {
 				}
 			}
 			else if (e.which == 1) {
-				self.contextMenu.menu.hide();
+				self.context_menu.menu.hide();
 			}
 		});
 
 		return this;
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method setAdapter 
-	 **/
-	setAdapter: function () {
+
+	set_adapter: function () {
 		
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method select 
-	 **/
+
 	select: function () {
 		if(this.type == "square") {
 			//this.properties.select();
 		}
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method deselect 
-	 **/
+
 	deselect: function () {
 		if(this.type == "square") {
 			//this.properties.deselect();
 		}
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method bringToFront 
-	 **/
-	bringToFront: function () {
-		this.parent.bringToFront(this);
+
+	bring_to_front: function () {
+		this.parent.bring_to_front(this);
+	},
+
+	send_to_back: function () {
+		this.parent.send_to_back(this);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method sendToBack 
-	 **/
-	sendToBack: function () {
-		this.parent.sendToBack(this);
+	bring_forward: function () {
+		this.parent.bring_forward(this);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method bringForward 
-	 **/
-	bringForward: function () {
-		this.parent.bringForward(this);
+	send_backward: function () {
+		this.parent.send_backward(this);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method sendBackward 
-	 **/
-	sendBackward: function () {
-		this.parent.sendBackward(this);
+	properties_object: function () {
+		//this.parent.properties_object(this);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method propertiesObject 
-	 **/
-	propertiesObject: function () {
-		//this.parent.propertiesObject(this);
-	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method remove 
-	 **/
 	remove: function () {
 /*
 		//Register the undo function
@@ -380,7 +247,7 @@ org.goorm.core.object.ui.prototype = {
 		properties.ex = this.properties.ex;
 		properties.ey = this.properties.ey;
 		
-		this.parent.undoManager.register(
+		this.parent.undo_manager.register(
 			this.parent, this.parent.add, [this.type, this.shape, this.option, properties], 'Create Item',
 			self, self.remove, [], 'Remove Item'
 		);
@@ -395,27 +262,15 @@ org.goorm.core.object.ui.prototype = {
 	_delete: function () {
 		this.parent._delete();
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method cut 
-	 **/
+
 	cut: function () {
 		this.parent.cut();
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method copy 
-	 **/
+
 	copy: function () {
 		this.parent.copy();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method paste 
-	 **/
 	paste: function () {
 		this.parent.paste();
 	}

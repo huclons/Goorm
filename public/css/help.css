@@ -1,4 +1,4 @@
-.helpContentsTitle{
+.help_contents_title{
 	margin-top: 5px;
 	margin-left: 10px;
 	margin-right: 10px;
@@ -7,7 +7,7 @@
 	font-weight: bold;
 }
 
-.helpContentsSubtitle{
+.help_contents_subtitle{
 	margin-left: 10px;
 	margin-right: 10px;
 	color: rgb(180,180,180);
@@ -15,24 +15,24 @@
 	font-weight: bold;
 }
 
-.helpContentsDescription{
+.help_contents_description{
 	margin-left: 10px;
 	margin-right: 10px;
 	color: black;
 }
 
-.tipsAndTricksStep {
+.tips_and_tricks_step {
 	padding:10px;
 }
 
-.tipsAndTricksStep .subject {
+.tips_and_tricks_step .subject {
 	width:100%;
 	height:30px;
 	font-size:16px;
 	font-weight:bold;
 }
 
-.tipsAndTricksStep .media {
+.tips_and_tricks_step .media {
 	width:340px;
 	height:210px;
 	margin-right:10px;
@@ -40,7 +40,7 @@
 	float:left;
 }
 
-.tipsAndTricksStep .description {
+.tips_and_tricks_step .description {
 	width:310px;
 	height:210px;
 	float:left;	
@@ -49,19 +49,19 @@
 	line-height:22px;
 }
 
-.tipsAndTricksStep .description .title {
+.tips_and_tricks_step .description .title {
 	font-size:14px;
 	font-weight:bold;
 }
 
-.tipsAndTricksStep .additional {
+.tips_and_tricks_step .additional {
 	width:100%;
 	height:30px;
 	font-size:11px;
 	color:#999;
 }
 
-#bugReportIframe {
+#bug_report_iframe {
 	width: 100%;
 	height: 100%;
 }

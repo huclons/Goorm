@@ -1,5 +1,5 @@
 CodeMirror.defineMode("plsql", function(config, parserConfig) {
-  var indentUnit       = config.indentUnit,
+  var indent_unit       = config.indent_unit,
       keywords         = parserConfig.keywords,
       functions        = parserConfig.functions,
       types            = parserConfig.types,

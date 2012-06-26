@@ -1,5 +1,5 @@
 CodeMirror.defineMode("css", function(config) {
-  var indentUnit = config.indentUnit, type;
+  var indent_unit = config.indent_unit, type;
   function ret(style, tp) {type = tp; return style;}
 
   function tokenBase(stream, state) {
@@ -114,7 +114,7 @@ CodeMirror.defineMode("css", function(config) {
       var n = state.stack.length;
       if (/^\}/.test(textAfter))
         n -= state.stack[state.stack.length-1] == "rule" ? 2 : 1;
-      return state.baseIndent + n * indentUnit;
+      return state.baseIndent + n * indent_unit;
     },
 
     electricChars: "}"

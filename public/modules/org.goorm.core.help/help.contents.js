@@ -2,66 +2,31 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module help
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class contents
- * @extends help
- **/
 org.goorm.core.help.contents = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 **/
 	this.dialog = null;
-	
-	/**
-	 * The array object that contains the information about buttons on the bottom of a dialog 
-	 * @property buttons
-	 * @type Object
-	 * @default null
-	 **/
 	this.buttons = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property tabView
-	 **/
-	this.tabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property treeView
-	 **/
-	this.treeView = null;
+	this.tabview = null;
+	this.treeview = null;
 };
 
 org.goorm.core.help.contents.prototype = {
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 **/
-	
 	init: function () {
 		var self = this;
 		
-		var handleOk = function() { 
+		var handle_ok = function() { 
 			
 			this.hide(); 
 		};
 
-		var handleCancel = function() { 
+		var handle_cancel = function() { 
 			
 			this.hide(); 
 		};
 		
-		this.buttons = [ {text:"OK", handler:handleOk, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}]; 
+		this.buttons = [ {text:"OK", handler:handle_ok, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}]; 
 						 
 		this.dialog = new org.goorm.core.help.contents.dialog();
 		this.dialog.init({
@@ -70,12 +35,12 @@ org.goorm.core.help.contents.prototype = {
 			width:900,
 			height:600,
 			modal:true,
-			yesText: "OK",
-			noText: "Close",
+			yes_text: "OK",
+			no_text: "Close",
 			buttons:this.buttons,
 			success: function () {
 				//TabView Init
-				//self.tabView = new YAHOO.widget.TabView('helpContentsContents');
+				//self.tabview = new YAHOO.widget.TabView('help_contentsContents');
 				
 				//TreeView Init
 				// var treeviewUrl = "help/help.treeview";	
@@ -85,8 +50,8 @@ org.goorm.core.help.contents.prototype = {
 					// type: "POST",
 					// data: "path="+self.path,
 					// success: function(data) {
-						//var sortingData = eval(data);
-						var resize = new YAHOO.util.Resize("helpContentsLeft", {
+						//var sorting_data = eval(data);
+						var resize = new YAHOO.util.Resize("help_contents_left", {
 				            handles: ['r'],
 				            minWidth: 150,
 				            maxWidth: 350
@@ -94,15 +59,15 @@ org.goorm.core.help.contents.prototype = {
 						
 						resize.on('resize', function(ev) {
 				            var w = ev.width;
-				            $("#helpContentsMiddle").css('width', (900 - w - 30) + 'px');
+				            $("#help_contents_middle").css('width', (900 - w - 30) + 'px');
 				        });
 				        
-						self.treeView = new YAHOO.widget.TreeView("helpContentsTreeview");
-						self.treeView.render();
+						self.treeview = new YAHOO.widget.TreeView("help_contents_treeview");
+						self.treeview.render();
 								
 						
 						
-						//$(".yui-content").append(sortingData[i].url.text());
+						//$(".yui-content").append(sorting_data[i].url.text());
 						
 								
 					// }
@@ -122,18 +87,14 @@ org.goorm.core.help.contents.prototype = {
 		
 		
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method show 
-	 **/
+
 	show: function () {
 		this.dialog.panel.show();
 		
 		
 		
 		
-		// this.treeView.subscribe("clickEvent", function(nodedata) {	
+		// this.treeview.subscribe("clickEvent", function(nodedata) {	
 // 
 			// var contentsUrl = nodedata.node.data.url;
 // 						
@@ -144,8 +105,8 @@ org.goorm.core.help.contents.prototype = {
 				// type: "POST",
 				// data: "path="+self.path,
 				// success: function(data) {
-					// $("#helpContents").empty();
-					// $("#helpContents").append(data);	
+					// $("#help_contents").empty();
+					// $("#help_contents").append(data);	
 // 							
 				// }
 			// });
@@ -159,7 +120,7 @@ org.goorm.core.help.contents.prototype = {
 				// var filetype = nodedata.node.data.filetype;
 				// var filepath = nodedata.node.data.parentLabel;
 // 				
-				// self.windowManager.open(filepath, filename, filetype);
+				// self.window_manager.open(filepath, filename, filetype);
 			// }*/
 		// });
 // 		

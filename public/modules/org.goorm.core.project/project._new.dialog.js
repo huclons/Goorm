@@ -7,29 +7,11 @@
  * @module project
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class _new.dialog
- * @extends project
- **/
 org.goorm.core.project._new.dialog = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 * @type Object
-	 * @default null
-	 **/
 	this.dialog = null;
 };
 
 org.goorm.core.project._new.dialog.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor
-	 * @param {Object} option The option for dialog. 
-	 **/
 	init: function (option) {
 		this.dialog = new org.goorm.core.dialog.wizard();
 		this.dialog.init(option);

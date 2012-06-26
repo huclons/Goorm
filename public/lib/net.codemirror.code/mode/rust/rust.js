@@ -1,5 +1,5 @@
 CodeMirror.defineMode("rust", function() {
-  var indentUnit = 4, altIndentUnit = 2;
+  var indent_unit = 4, altIndentUnit = 2;
   var valKeywords = {
     "if": "if-style", "while": "if-style", "else": "else-style",
     "do": "else-style", "ret": "else-style", "fail": "else-style",
@@ -356,7 +356,7 @@ CodeMirror.defineMode("rust", function() {
       return {
         tokenize: tokenBase,
         cc: [],
-        lexical: {indented: -indentUnit, column: 0, type: "top", align: false},
+        lexical: {indented: -indent_unit, column: 0, type: "top", align: false},
         keywords: valKeywords,
         indented: 0
       };
@@ -383,9 +383,9 @@ CodeMirror.defineMode("rust", function() {
       if (state.tokenize != tokenBase) return 0;
       var firstChar = textAfter && textAfter.charAt(0), lexical = state.lexical,
           type = lexical.type, closing = firstChar == type;
-      if (type == "stat") return lexical.indented + indentUnit;
+      if (type == "stat") return lexical.indented + indent_unit;
       if (lexical.align) return lexical.column + (closing ? 0 : 1);
-      return lexical.indented + (closing ? 0 : (lexical.info == "alt" ? altIndentUnit : indentUnit));
+      return lexical.indented + (closing ? 0 : (lexical.info == "alt" ? altIndentUnit : indent_unit));
     },
 
     electricChars: "{}"

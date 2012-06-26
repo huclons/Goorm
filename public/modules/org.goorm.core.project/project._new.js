@@ -2,163 +2,128 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module project
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class _new
- * @extends project
- **/
 org.goorm.core.project._new = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 * @type Object
-	 * @default null
-	 **/
 	this.dialog = null;
-	
-	/**
-	 * The array object that contains the information about buttons on the bottom of a dialog 
-	 * @property buttons
-	 * @type Object
-	 * @default null
-	 **/
 	this.buttons = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 * @type Object
-	 * @default null
-	 **/
-	this.tabView = null;
+	this.tabview = null;
 };
 
 org.goorm.core.project._new.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 **/
 	init: function () { 
 		var self = this;
 		
-		var handleOk = function() {
+		var handle_ok = function() {
 			// project create
-			if ($("#inputProjectType").attr("value")=="") {
-				alert.show(core.localization.msg["alertProjectType"]);
+			if ($("#input_project_type").attr("value")=="") {
+				alert.show(core.module.localization.msg["alertProjectType"]);
 				return false;
 			}
 			else if ($("#inputProjectSource").attr("value")=="") {
-				alert.show(core.localization.msg["alertProjectSource"]);
+				alert.show(core.module.localization.msg["alertProjectSource"]);
 				return false;
 			}
-			else if ($("#inputProjectDetailedType").attr("value")=="") {
-				alert.show(core.localization.msg["alertProjectDetailedType"]);
+			else if ($("#input_project_detailed_type").attr("value")=="") {
+				alert.show(core.module.localization.msg["alertProjectDetailedType"]);
 				return false;
 			}
-			else if ($("#inputProjectAuthor").attr("value")=="") {
-				alert.show(core.localization.msg["alertProjectAuthor"]);
+			else if ($("#input_project_author").attr("value")=="") {
+				alert.show(core.module.localization.msg["alertProjectAuthor"]);
 				return false;
 			}
-			else if ($("#inputProjectName").attr("value")=="") {
-				alert.show(core.localization.msg["alertProjectName"]);
+			else if ($("#input_project_name").attr("value")=="") {
+				alert.show(core.module.localization.msg["alertProjectName"]);
 				return false;
 			}
-			else if ($("#inputProjectAbout").attr("value")=="") {
-				alert.show(core.localization.msg["alertProjectAbout"]);
+			else if ($("#input_project_about").attr("value")=="") {
+				alert.show(core.module.localization.msg["alertProjectAbout"]);
 				return false;
 			}
-			else if ($("#checkProjectNewImport").is(":checked")) {
-				if($("#projectNewImportFile").attr("value").substr($("#projectNewImportFile").attr("value").length-3,3).toLowerCase()!="zip") {
-					alert.show(core.localization.msg["alertOnlyZipAllowed"]);
+			else if ($("#check_project_new_import").is(":checked")) {
+				if($("#project_new_import_file").attr("value").substr($("#project_new_import_file").attr("value").length-3,3).toLowerCase()!="zip") {
+					alert.show(core.module.localization.msg["alertOnlyZipAllowed"]);
 					return false;
 				}
 			}
-			else if (!/^[\w-]*$/.test($("#inputProjectAuthor").attr("value"))) {
-				alert.show(core.localization.msg["alertAllowCharacter"]);
+			else if (!/^[\w-]*$/.test($("#input_project_author").attr("value"))) {
+				alert.show(core.module.localization.msg["alertAllowCharacter"]);
 				return false;
 			}
-			else if (!/^[\w-]*$/.test($("#inputProjectName").attr("value"))) {
-				alert.show(core.localization.msg["alertAllowCharacter"]);
+			else if (!/^[\w-]*$/.test($("#input_project_name").attr("value"))) {
+				alert.show(core.module.localization.msg["alertAllowCharacter"]);
 				return false;
 			}
-
-
-			if ($("#newProjectUsingPlugin").val() == "yes") {			
+			
+			if ($("#new_projectUsingPlugin").val() == "yes") {			
 				var postdata = {
-					projectNewSVNURL: $("#projectNewSVNURL").attr("value"),
-					projectNewSVNID: $("#projectNewSVNID").attr("value"),
-					projectNewSVNPW: $("#projectNewSVNPW").attr("value"),
-					projectNewSVNSavePW: $("#projectNewSVNSavePW").is(":checked")									
+					project_new_svn_url: $("#project_new_svn_url").attr("value"),
+					project_new_svn_id: $("#project_new_svn_id").attr("value"),
+					project_new_svn_pw: $("#project_new_svn_pw").attr("value"),
+					project_new_svn_save_pw: $("#project_new_svn_save_pw").is(":checked")									
 				}
 				
-				var inputProjectType = $("#inputProjectType").attr("value");
-				var inputProjectDetailedType = $("#inputProjectDetailedType").attr("value");
-				var inputProjectAuthor = $("#inputProjectAuthor").attr("value");
-				var inputProjectName = $("#inputProjectName").attr("value");
+				var input_project_type = $("#input_project_type").attr("value");
+				var input_project_detailed_type = $("#input_project_detailed_type").attr("value");
+				var input_project_author = $("#input_project_author").attr("value");
+				var input_project_name = $("#input_project_name").attr("value");
 				
-				core.currentProjectPath = inputProjectAuthor+"_"+inputProjectName;
-				core.currentProjectName = inputProjectName;
-				core.currentProjectType = inputProjectType;
+				core.status.current_project_path = input_project_author+"_"+input_project_name;
+				core.status.current_project_name = input_project_name;
+				core.status.current_project_type = input_project_type;
 				
-				core.pluginManager.newProject(inputProjectName, inputProjectAuthor, inputProjectType, inputProjectDetailedType, inputProjectAuthor+"_"+inputProjectName, postdata);
+				core.module.plugin_manager.new_project(input_project_name, input_project_author, input_project_type, input_project_detailed_type, input_project_author+"_"+input_project_name, postdata);
 			}
 			else {
 				var postdata = {
-					inputProjectType: $("#inputProjectType").attr("value"),
-					inputProjectDetailedType: $("#inputProjectDetailedType").attr("value"),
-					inputProjectAuthor: $("#inputProjectAuthor").attr("value"),
-					inputProjectName: $("#inputProjectName").attr("value"),
-					inputProjectAbout: $("#inputProjectAbout").attr("value"),
-					inputUseCollaboration: $("#checkUseCollaboration").attr("checked")
+					input_project_type: $("#input_project_type").attr("value"),
+					input_project_detailed_type: $("#input_project_detailed_type").attr("value"),
+					input_project_author: $("#input_project_author").attr("value"),
+					input_project_name: $("#input_project_name").attr("value"),
+					input_project_about: $("#input_project_about").attr("value"),
+					input_use_collaboration: $("#check_use_collaboration").attr("checked")
 				};
 				
 				$.post("project/new", postdata, function (data) {
-					var receivedData = eval("("+data+")");
+					var received_data = eval("("+data+")");
 					
-					if(receivedData.errCode==0) {
+					if(received_data.errCode==0) {
 					
-						core.currentProjectPath = receivedData.author+"_"+receivedData.projectName;
-						core.currentProjectName = receivedData.projectName;
-						core.currentProjectType = receivedData.type;
+						core.status.current_project_path = received_data.author+"_"+received_data.project_name;
+						core.status.current_project_name = received_data.project_name;
+						core.status.current_project_type = received_data.type;
 	
 	
-						core.dialogOpenProject.open(core.currentProjectPath, core.currentProjectName, core.currentProjectType);
+						core.dialog.open_project.open(core.status.current_project_path, core.status.current_project_name, core.status.current_project_type);
 						
-						if(!$("#checkProjectNewImport").is(":checked")) {
+						if(!$("#check_project_new_import").is(":checked")) {
 							
-							var inputProjectType = $("#inputProjectType").attr("value");
-							var inputProjectDetailedType = $("#inputProjectDetailedType").attr("value");
-							var inputProjectAuthor = $("#inputProjectAuthor").attr("value");
+							var input_project_type = $("#input_project_type").attr("value");
+							var input_project_detailed_type = $("#input_project_detailed_type").attr("value");
+							var input_project_author = $("#input_project_author").attr("value");
 
-							core.pluginManager.newProject(core.currentProjectName, postdata.inputProjectAuthor, postdata.inputProjectType, postdata.inputProjectDetailedType, core.currentProjectPath);
+							core.module.plugin_manager.new_project(core.status.current_project_name, postdata.input_project_author, postdata.input_project_type, postdata.input_project_detailed_type, core.status.current_project_path);
 						}
 						else {
 							//여기서 전용 로딩중을 알림
-							core.loadingBar.startLoading("Import processing...");
-							$('#projectNewImportForm').submit();
+							core.module.loading_bar.start("Import processing...");
+							$('#project_new_import_form').submit();
 						}
 
 						
-						// core.mainLayout.projectExplorer.refresh();
-						// core.mainLayout.refreshConsole();
-						// core.dialogProjectProperty.refreshToolBox();
-						// $("a[action=showProperties]").removeClass('yuimenuitemlabel-disabled');
-						// $("a[action=showProperties]").parent().removeClass('yuimenuitem-disabled');
-						// var str = core.currentProjectPath;
+						// core.module.layout.project_explorer.refresh();
+						// core.module.layout.refresh_console();
+						// core.dialog.project_property.refresh_toolbox();
+						// $("a[action=show_properties]").removeClass('yuimenuitemlabel-disabled');
+						// $("a[action=show_properties]").parent().removeClass('yuimenuitem-disabled');
+						// var str = core.status.current_project_path;
 						// str.replace(".","");
 						// str.replace("#","");
 // 						
-						// core.mainLayout.showChat(str);
+						// core.module.layout.show_chat(str);
 					}
 					else {
-						alert.show(core.localization.msg["alertError"] + receivedData.message);
+						alert.show(core.module.localization.msg["alertError"] + received_data.message);
 						return false;
 					}
 				});				
@@ -167,13 +132,13 @@ org.goorm.core.project._new.prototype = {
 			this.hide(); 
 		};
 
-		var handleCancel = function() { 
+		var handle_cancel = function() { 
 			
 			this.hide(); 
 		};
 		
-		this.buttons = [ {text:"OK", handler:handleOk, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}]; 
+		this.buttons = [ {text:"OK", handler:handle_ok, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}]; 
 						 
 		this.dialog = new org.goorm.core.project._new.dialog();
 		this.dialog.init({
@@ -184,83 +149,79 @@ org.goorm.core.project._new.prototype = {
 			modal:true,
 			buttons:this.buttons,
 			success: function () {
-				self.addProjectItem();
+				self.add_project_item();
 				
-				var formOptions = {
-					target: "#projectNewImportUploadOutput",
+				var form_options = {
+					target: "#project_new_import_upload_output",
 					success: function(data) {
-						core.mainLayout.projectExplorer.refresh();
-						core.mainLayout.refreshConsole();
-						core.dialogProjectProperty.refreshToolBox();
-						core.loadingBar.stopLoading();
+						core.module.layout.project_explorer.refresh();
+						core.module.layout.refresh_console();
+						core.dialog.project_property.refresh_toolbox();
+						core.module.loading_bar.stop();
 						//여기서 전용 로딩중을 뺌
 					}
 				}
-	            //$('#projectNewImportForm').ajaxForm(formOptions);
+	            //$('#project_new_import_form').ajaxForm(form_options);
 				
-				$('#projectNewImportForm').submit(function() { 
+				$('#project_new_import_form').submit(function() { 
 				    // submit the form 
 				    $(this).ajaxSubmit(); 
 				    // return false to prevent normal browser submit and page navigation 
 				    return false; 
 				});
 				
-				$("#checkProjectNewImport").click(function() {
+				$("#check_project_new_import").click(function() {
 					if($(this).is(":checked")) {
-						$("#projectNewImportDiv").css("display", "block");
+						$("#project_new_import_div").css("display", "block");
 					}
 					else {
-						$("#projectNewImportDiv").css("display", "none");
+						$("#project_new_import_div").css("display", "none");
 					}
 				});
 				
 			},		
-			kind:"newProject"
+			kind:"new_project"
 		});
 				
 		this.dialog = this.dialog.dialog;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method show 
-	 **/
 	show: function () {
 		//count the total step of wizard dialog 
-		this.dialog.totalStep = $("div[id='projectNew']").find(".wizardStep").size();
+		this.dialog.total_step = $("div[id='project_new']").find(".wizard_step").size();
 		
 		// Add click event on dialog select item
-		$(".projectWizardFirstButton").click(function () {
-			$(".projectWizardSecondButton").removeClass("selectedButton");
+		$(".project_wizard_first_button").click(function () {
+			$(".project_wizard_second_button").removeClass("selected_button");
 			
-			$("#inputProjectType").attr("value", "");
-			$("#inputProjectDetailedType").attr("value", "");
+			$("#input_project_type").attr("value", "");
+			$("#input_project_detailed_type").attr("value", "");
 			
-			$("#textProjectDescription").empty();
+			$("#text_project_description").empty();
 		
-			$(".projectWizardFirstButton").removeClass("selectedButton");
-			$(this).addClass("selectedButton");
+			$(".project_wizard_first_button").removeClass("selected_button");
+			$(this).addClass("selected_button");
 						
 			$(".all").css("display", "none");
 			$("."+$(this).attr("project-type")).css("display", "block");
 		});
 		
-		$(".projectWizardSecondButton").click(function () {
-			$(".projectWizardSecondButton").removeClass("selectedButton");
-			$(this).addClass("selectedButton");
+		$(".project_wizard_second_button").click(function () {
+			$(".project_wizard_second_button").removeClass("selected_button");
+			$(this).addClass("selected_button");
 			
-			$("#inputProjectType").attr("value", "");
-			$("#inputProjectDetailedType").attr("value", "");
+			$("#input_project_type").attr("value", "");
+			$("#input_project_detailed_type").attr("value", "");
 			
-			$("#inputProjectType").attr("value", $(this).attr("projecttype"));
-			$("#inputProjectDetailedType").attr("value", $(this).text());
+			$("#input_project_type").attr("value", $(this).attr("projecttype"));
+			$("#input_project_detailed_type").attr("value", $(this).text());
 			
-			$("#textProjectDescription").empty();
-			$("#textProjectDescription").append($(this).attr('description'));
+			$("#text_project_description").empty();
+			$("#text_project_description").append($(this).attr('description'));
 			
 			
 			var self = this;
-			$("#newProjectExpansionContainer").children().each(function (i) {
+			$("#new_projectExpansionContainer").children().each(function (i) {
 				if ($(this).attr("expansion") == $(self).attr("expansion")) {
 					$(this).css("display", "block");
 				}
@@ -271,38 +232,34 @@ org.goorm.core.project._new.prototype = {
 		});
 		
 		//for init
-		$(".projectWizardSecondButton").removeClass("selectedButton");
-		$(".projectWizardSecondButton").removeClass("selectedButton");
-		$("#inputProjectType").attr("value","");
-		$("#inputProjectDetailedType").val("");
-		$("#inputProjectAuthor").val(core.firstName+"_"+core.lastName);
-		$("#inputProjectName").val("");
-		$("#inputProjectAbout").val("");
-		$("#projectNewImportUploadOutput").empty();
-		$("#projectNewImportFile").val("");
-		$("#checkProjectNewImport").attr('checked', "");
-		$("#checkUseCollaboration").attr('checked', "");
+		$(".project_wizard_second_button").removeClass("selected_button");
+		$(".project_wizard_second_button").removeClass("selected_button");
+		$("#input_project_type").attr("value","");
+		$("#input_project_detailed_type").val("");
+		$("#input_project_author").val(core.user.first_name+"_"+core.user.last_name);
+		$("#input_project_name").val("");
+		$("#input_project_about").val("");
+		$("#project_new_import_upload_output").empty();
+		$("#project_new_import_file").val("");
+		$("#check_project_new_import").attr('checked', "");
+		$("#check_use_collaboration").attr('checked', "");
 		
-		$("div[id='projectNew']").find(".projectTypes").scrollTop(0);
-		$("div[id='projectNew']").find(".projectItems").scrollTop(0);
+		$("div[id='project_new']").find(".project_types").scrollTop(0);
+		$("div[id='project_new']").find(".project_items").scrollTop(0);
 		
 		this.dialog.showFirstPage();
 		
 		this.dialog.panel.show();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method addProjectItem
-	 **/
-	addProjectItem: function () {
+	add_project_item: function () {
 		// for step 1
-		$("div[id='projectNew']").find(".projectTypes").append("<div class='projectWizardFirstButton' project-type='all'><div class='projectTypeIcon'><img src='images/org.goorm.core.project/project.png' class='projectIcon' /></div><div class='projectTypeTitle'>All</div><div class='projectTypeDescription'>View all available project items (including plugins)</div></div>");
+		$("div[id='project_new']").find(".project_types").append("<div class='project_wizard_first_button' project-type='all'><div class='project_type_icon'><img src='images/org.goorm.core.project/project.png' class='project_icon' /></div><div class='project_type_title'>All</div><div class='project_type_description'>View all available project items (including plugins)</div></div>");
 
-		$("div[id='projectNew']").find(".projectTypes").append("<div class='projectWizardFirstButton' project-type='goormp'><div class='projectTypeIcon'><img src='images/org.goorm.core.project/goormProject.png' class='projectIcon' /></div><div class='projectTypeTitle'>goorm Project</div><div class='projectTypeDescription'>goorm3 Project Customization/Plugin/Theme</div></div>");
+		$("div[id='project_new']").find(".project_types").append("<div class='project_wizard_first_button' project-type='goormp'><div class='project_type_icon'><img src='images/org.goorm.core.project/goormProject.png' class='project_icon' /></div><div class='project_type_title'>goorm Project</div><div class='project_type_description'>goorm3 Project Customization/Plugin/Theme</div></div>");
 		
-		$("div[id='projectNew']").find(".projectItems").append("<div class='projectWizardSecondButton all goormp' description=' Create New goorm Customization Project' projecttype='goorm'><img src='images/org.goorm.core.project/customization.png' class='projectItemIcon' /><br /><a>goorm Customization</a></div>");
-		$("div[id='projectNew']").find(".projectItems").append("<div class='projectWizardSecondButton all goormp' description=' Create New goorm Plugin' projecttype='goorm'><img src='images/org.goorm.core.project/plugin.png' class='projectItemIcon' /><br /><a>goorm Plugin</a></div>");
-		$("div[id='projectNew']").find(".projectItems").append("<div class='projectWizardSecondButton all goormp' description=' Create New goorm Theme' projecttype='goorm'><img src='images/org.goorm.core.project/theme.png' class='projectItemIcon' /><br /><a>goorm Theme</a></div>");
+		$("div[id='project_new']").find(".project_items").append("<div class='project_wizard_second_button all goormp' description=' Create New goorm Customization Project' projecttype='goorm'><img src='images/org.goorm.core.project/customization.png' class='project_item_icon' /><br /><a>goorm Customization</a></div>");
+		$("div[id='project_new']").find(".project_items").append("<div class='project_wizard_second_button all goormp' description=' Create New goorm Plugin' projecttype='goorm'><img src='images/org.goorm.core.project/plugin.png' class='project_item_icon' /><br /><a>goorm Plugin</a></div>");
+		$("div[id='project_new']").find(".project_items").append("<div class='project_wizard_second_button all goormp' description=' Create New goorm Theme' projecttype='goorm'><img src='images/org.goorm.core.project/theme.png' class='project_item_icon' /><br /><a>goorm Theme</a></div>");
 	}	
 };

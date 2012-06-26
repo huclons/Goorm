@@ -12,15 +12,15 @@
 		</item>
 		<item label="Editor">
 			<tab label="Setting" src="config/preference/org.uizard.core.edit/edit.setting.html">
-				<preference name="preference.editor.indentUnit" default="2" />
-				<preference name="preference.editor.indentWithTabs" default="false" />
-				<preference name="preference.editor.showLineNumbers" default="true" />
-				<preference name="preference.editor.firstLineNumber" default="1"/>
-				<preference name="preference.editor.undoDepth" default="40"/>
-				<preference name="preference.editor.highlightCurrentCursorLine" default="true" />
-				<preference name="preference.editor.tabMode" default="classic" />
-				<preference name="preference.editor.enterMode" default="indent" />
-				<preference name="preference.editor.useClipboard" default="false" />
+				<preference name="preference.editor.indent_unit" default="2" />
+				<preference name="preference.editor.indent_with_tabs" default="false" />
+				<preference name="preference.editor.show_line_numbers" default="true" />
+				<preference name="preference.editor.first_line_number" default="1"/>
+				<preference name="preference.editor.undo_depth" default="40"/>
+				<preference name="preference.editor.highlight_current_cursor_line" default="true" />
+				<preference name="preference.editor.tab_mode" default="classic" />
+				<preference name="preference.editor.enter_mode" default="indent" />
+				<preference name="preference.editor.use_clipboard" default="false" />
 			</tab>
 			<tab label="Theme" src="config/preference/org.uizard.core.edit/edit.theme.html">
 				<preference name="preference.editor.theme" default="default" />
@@ -28,16 +28,16 @@
 		</item>
 		<item label="Designer">
 			<tab label="Setting" src="config/preference/org.uizard.core.design/design.setting.html">
-				<preference name="preference.designer.showGrid" default="true" />
-				<preference name="preference.designer.showRuler" default="true" />
-				<preference name="preference.designer.showPreview" default="false" />
-				<preference name="preference.designer.gridUnit" default="10" />
-				<preference name="preference.designer.snapToGrid" default="false"/>
-				<preference name="preference.designer.gridOpacity" default="0.3"/>
-				<preference name="preference.designer.rulerUnit" default="px"/>
+				<preference name="preference.designer.show_grid" default="true" />
+				<preference name="preference.designer.show_ruler" default="true" />
+				<preference name="preference.designer.show_preview" default="false" />
+				<preference name="preference.designer.grid_unit" default="10" />
+				<preference name="preference.designer.snap_to_grid" default="false"/>
+				<preference name="preference.designer.grid_opacity" default="0.3"/>
+				<preference name="preference.designer.ruler_unit" default="px"/>
 			</tab>
 			<tab label="Theme" src="config/preference/org.uizard.core.design/design.theme.html">
-				<preference name="preference.theme.currentTheme" default="default" />
+				<preference name="preference.theme.current_theme" default="default" />
 			</tab>
 		</item>
 		<!--
@@ -58,7 +58,7 @@
 			<tab label="File Type" src="config/preference/org.uizard.core/filetype.html" classname="org.uizard.core.preference.filetype" />
 		</item>
 		<item label="Language">
-			<tab label="Language" src="config/preference/org.uizard.core.localization/language.html" classname="org.uizard.core.preference.language"/>
+			<tab label="Language" src="config/preference/org.uizard.core.module.localization/language.html" classname="org.uizard.core.preference.language"/>
 		</item>				
 	</root>
 	<root label="Plugin" src="module/org.uizard.plugin/plugin.preference.html"></root>

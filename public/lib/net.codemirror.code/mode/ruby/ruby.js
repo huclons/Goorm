@@ -148,7 +148,7 @@ CodeMirror.defineMode("ruby", function(config, parserConfig) {
     startState: function() {
       return {tokenize: [tokenBase],
               indented: 0,
-              context: {type: "top", indented: -config.indentUnit},
+              context: {type: "top", indented: -config.indent_unit},
               continuedLine: false,
               lastTok: null,
               varList: false};
@@ -186,8 +186,8 @@ CodeMirror.defineMode("ruby", function(config, parserConfig) {
       var ct = state.context;
       var closing = ct.type == matching[firstChar] ||
         ct.type == "keyword" && /^(?:end|until|else|elsif|when)\b/.test(textAfter);
-      return ct.indented + (closing ? 0 : config.indentUnit) +
-        (state.continuedLine ? config.indentUnit : 0);
+      return ct.indented + (closing ? 0 : config.indent_unit) +
+        (state.continuedLine ? config.indent_unit : 0);
     }
   };
 });

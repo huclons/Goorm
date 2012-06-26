@@ -2,102 +2,23 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module design
  **/
 
-/**
- * This is an goorm code generator.  
- * <br>goorm starts with this code generator.
- * @class preview
- * @extends design.canvas.preview
- **/
 org.goorm.core.printer.design = function () {
-	/**
-	 * This presents the current browser version
-	 * @property canvas
-	 **/
 	this.canvas = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property panel
-	 **/
 	this.panel = null;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 **/
 	this.target = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 **/
-	this.realTarget = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property width
-	 **/
-	this.realWidth = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 **/
-	this.realHeight = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property width
-	 **/
+	this.real_target = null;
+	this.real_width = null;
+	this.real_height = null;
 	this.width = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 **/
 	this.height = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property left
-	 **/
 	this.left = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property top
-	 **/
 	this.top = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property scale
-	 **/
 	this.scale = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property parent
-	 **/
 	this.parent = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property indicatorWidth
-	 **/
-	this.indicatorWidth = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property indicatorHeight
-	 **/
-	this.isPreviewClicked = null;
-	
+	this.indicator_width = null;
+	this.is_preview_clicked = null;
 };
 
 
@@ -109,13 +30,13 @@ org.goorm.core.printer.design.prototype = {
 
 		//Set Properties
 		self.target = target;
-		self.realWidth = width;
+		self.real_width = width;
 		self.width = width*scale;
-		self.realHeight = height;
+		self.real_height = height;
 		self.height = height*scale;
 		self.scale = scale;
 		self.parent = parent;
-		self.isPreviewClicked = false;
+		self.is_preview_clicked = false;
 		
 		
 
@@ -140,16 +61,11 @@ org.goorm.core.printer.design.prototype = {
 		});
 	},
 
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method draw 
-	 **/
 	draw: function () {
 		var self = this;
 		
 		/*
-		this.selectedIndex = $.unique(this.selectedIndex);
+		this.selected_index = $.unique(this.selected_index);
 		*/
 		
 		//Canvas Element (Supported in HTML5)
@@ -197,10 +113,10 @@ org.goorm.core.printer.design.prototype = {
 						ey = parseInt($(this)[0].properties.ey);
 					}
 					
-					if (!self.parent.multiNodeLine) {
+					if (!self.parent.multi_node_line) {
 					
 						//is hovered?
-						if(self.parent.hoveredIndex == i) {
+						if(self.parent.hovered_index == i) {
 							context.beginPath();
 							context.strokeStyle = "#FFFF00";
 							
@@ -219,12 +135,12 @@ org.goorm.core.printer.design.prototype = {
 						
 						
 						if (this.properties.dashed) {
-							var dashArray=[5*parseFloat($(this)[0].properties.thickness), 4*parseFloat($(this)[0].properties.thickness)];
-							var dashCount = dashArray.length;
+							var dash_array=[5*parseFloat($(this)[0].properties.thickness), 4*parseFloat($(this)[0].properties.thickness)];
+							var dash_count = dash_array.length;
 							
 							var dx, dy;
 							
-							var dashIndex=0, draw=true;
+							var dash_index=0, draw=true;
 							
 							var x, y;
 							
@@ -243,22 +159,22 @@ org.goorm.core.printer.design.prototype = {
 							context.lineWidth = parseFloat($(this)[0].properties.thickness);
 							
 							var slope = dy/dx;
-							var distRemaining = Math.sqrt( dx*dx + dy*dy );
+							var remaining_distance = Math.sqrt( dx*dx + dy*dy );
 							
-							while (distRemaining>=0.1){
-								var dashLength = dashArray[dashIndex++%dashCount];
+							while (remaining_distance>=0.1){
+								var dash_length = dash_array[dash_index++%dash_count];
 								
-								if (dashLength > distRemaining) 
-									dashLength = distRemaining;
+								if (dash_length > remaining_distance) 
+									dash_length = remaining_distance;
 									
-								var xStep = Math.sqrt( dashLength*dashLength / (1 + slope*slope) );
+								var step_x = Math.sqrt( dash_length*dash_length / (1 + slope*slope) );
 								
-								x += xStep
-								y += slope*xStep;
+								x += step_x
+								y += slope * step_x;
 								
 								context[draw ? 'lineTo' : 'moveTo'](x,y);
 							
-								distRemaining -= dashLength;
+								remaining_distance -= dash_length;
 								draw = !draw;
 							}
 							
@@ -274,7 +190,7 @@ org.goorm.core.printer.design.prototype = {
 	
 						
 						//is selected? or hovered?
-						if($.inArray(i, self.parent.selectedIndex) >= 0 || self.parent.selected) {
+						if($.inArray(i, self.parent.selected_index) >= 0 || self.parent.selected) {
 							context.beginPath();
 							context.strokeStyle = "#666666";
 							
@@ -312,12 +228,12 @@ org.goorm.core.printer.design.prototype = {
 						context.strokeStyle = $(this)[0].properties.color;
 		
 						if (this.properties.dashed) {
-							var dashArray=[5*parseFloat($(this)[0].properties.thickness), 4*parseFloat($(this)[0].properties.thickness)];
-							var dashCount = dashArray.length;
+							var dash_array=[5*parseFloat($(this)[0].properties.thickness), 4*parseFloat($(this)[0].properties.thickness)];
+							var dash_count = dash_array.length;
 							
 							var dx, dy;
 							
-							var dashIndex=0, draw=true;
+							var dash_index=0, draw=true;
 							
 							var x, y;
 							
@@ -336,22 +252,22 @@ org.goorm.core.printer.design.prototype = {
 							context.lineWidth = parseFloat($(this)[0].properties.thickness);
 							
 							var slope = dy/dx;
-							var distRemaining = Math.sqrt( dx*dx + dy*dy );
+							var remaining_distance = Math.sqrt( dx*dx + dy*dy );
 							
-							while (distRemaining>=0.1){
-								var dashLength = dashArray[dashIndex++%dashCount];
+							while (remaining_distance>=0.1){
+								var dash_length = dash_array[dash_index++%dash_count];
 								
-								if (dashLength > distRemaining) 
-									dashLength = distRemaining;
+								if (dash_length > remaining_distance) 
+									dash_length = remaining_distance;
 									
-								var xStep = Math.sqrt( dashLength*dashLength / (1 + slope*slope) );
+								var step_x = Math.sqrt( dash_length*dash_length / (1 + slope*slope) );
 								
-								x += xStep
-								y += slope*xStep;
+								x += step_x
+								y += slope*step_x;
 								
 								context[draw ? 'lineTo' : 'moveTo'](x,y);
 							
-								distRemaining -= dashLength;
+								remaining_distance -= dash_length;
 								draw = !draw;
 							}
 							
@@ -369,7 +285,7 @@ org.goorm.core.printer.design.prototype = {
 	
 						
 						//is selected? or hovered?
-						if($.inArray(i, self.parent.selectedIndex) >= 0 || self.parent.selected) {
+						if($.inArray(i, self.parent.selected_index) >= 0 || self.parent.selected) {
 							context.beginPath();
 							context.strokeStyle = "#666666";
 							
@@ -423,7 +339,7 @@ org.goorm.core.printer.design.prototype = {
 					}
 					
 					//is hovered?
-					if(self.parent.hoveredIndex == i) {
+					if(self.parent.hovered_index == i) {
 						context.beginPath();
 						context.strokeStyle = "#FFFF00";
 						
@@ -461,7 +377,7 @@ org.goorm.core.printer.design.prototype = {
 
 					
 					//is selected?
-					if($.inArray(i, self.parent.selectedIndex) >= 0 || self.parent.selected) {
+					if($.inArray(i, self.parent.selected_index) >= 0 || self.parent.selected) {
 						context.beginPath();
 						context.strokeStyle = "#666666";
 						context.fillStyle = "#FFFFFF";
@@ -520,35 +436,35 @@ org.goorm.core.printer.design.prototype = {
 						$(self.target).find(".canvas").find(".shapes").append("<div id='stencil_" + this.shape.timestamp + "' style='position:absolute;'></div>");
 						
 						if (this.shape.move) {
-							var startX, startY, width, height;
+							var start_x, start_y, width, height;
 
 							$(self.target).find(".canvas").find(".shapes").find("#"+"stencil_" + this.shape.timestamp).html(this.shape.data);
 							
 							
 							if (this.properties.sx > this.properties.ex) {
-								startX = this.properties.ex;
+								start_x = this.properties.ex;
 							}
 							else {
-								startX = this.properties.sx;
+								start_x = this.properties.sx;
 							}
 							
 							if (this.properties.sy > this.properties.ey) {
-								startY = this.properties.ey;
+								start_y = this.properties.ey;
 							}
 							else {
-								startY = this.properties.sy;
+								start_y = this.properties.sy;
 							}
 							
 							width = Math.abs(this.properties.ex-this.properties.sx);
 							height = Math.abs(this.properties.ey-this.properties.sy);
 							
-							$(self.target).find(".canvas").find(".shapes").find("#"+"stencil_" + this.shape.timestamp).css("left", startX);
-							$(self.target).find(".canvas").find(".shapes").find("#"+"stencil_" + this.shape.timestamp).css("top", startY);
+							$(self.target).find(".canvas").find(".shapes").find("#"+"stencil_" + this.shape.timestamp).css("left", start_x);
+							$(self.target).find(".canvas").find(".shapes").find("#"+"stencil_" + this.shape.timestamp).css("top", start_y);
 							$(self.target).find(".canvas").find(".shapes").find("#"+"stencil_" + this.shape.timestamp).css("width", width);
 							$(self.target).find(".canvas").find(".shapes").find("#"+"stencil_" + this.shape.timestamp).css("height", height);
 							//$(self.target).find(".canvas").find(".shapes").find("#"+"stencil_" + this.shape.timestamp).css("border", "1px solid #000");
 
-							self.setShape(this.shape);							
+							self.set_shape(this.shape);							
 						}
 					
 					}
@@ -557,12 +473,8 @@ org.goorm.core.printer.design.prototype = {
 		}
 		//this.preview.draw();
 	},
-		
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method setShape 
-	 **/
-	setShape: function(object) {
+
+	set_shape: function(object) {
 		var self = this;
 		
 		if (object.properties != null) {
@@ -589,11 +501,6 @@ org.goorm.core.printer.design.prototype = {
 		}
 	}
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method draw 
-	 **/
 /*	draw: function () {
 		var self = this;
 		
@@ -638,7 +545,7 @@ org.goorm.core.printer.design.prototype = {
 
 					
 					//is hovered?
-					if(self.parent.hoveredIndex == i) {
+					if(self.parent.hovered_index == i) {
 						context.beginPath();
 						context.strokeStyle = "#FFFF00";
 						
@@ -657,12 +564,12 @@ org.goorm.core.printer.design.prototype = {
 					
 					
 					if (this.properties.dashed) {
-						var dashArray=[5, 4];
-						var dashCount = dashArray.length;
+						var dash_array=[5, 4];
+						var dash_count = dash_array.length;
 						
 						var dx, dy;
 						
-						var dashIndex=0, draw=true;
+						var dash_index=0, draw=true;
 						
 						var x, y;
 						
@@ -681,22 +588,22 @@ org.goorm.core.printer.design.prototype = {
 						context.lineWidth = parseFloat($(this)[0].properties.thickness);
 						
 						var slope = dy/dx;
-						var distRemaining = Math.sqrt( dx*dx + dy*dy );
+						var remaining_distance = Math.sqrt( dx*dx + dy*dy );
 						
-						while (distRemaining>=0.1){
-							var dashLength = dashArray[dashIndex++%dashCount];
+						while (remaining_distance>=0.1){
+							var dash_length = dash_array[dash_index++%dash_count];
 							
-							if (dashLength > distRemaining) 
-								dashLength = distRemaining;
+							if (dash_length > remaining_distance) 
+								dash_length = remaining_distance;
 								
-						  	var xStep = Math.sqrt( dashLength*dashLength / (1 + slope*slope) );
+						  	var step_x = Math.sqrt( dash_length*dash_length / (1 + slope*slope) );
 							
-						  	x += xStep
-						  	y += slope*xStep;
+						  	x += step_x
+						  	y += slope*step_x;
 							
 						  	context[draw ? 'lineTo' : 'moveTo'](x,y);
 						
-						  	distRemaining -= dashLength;
+						  	remaining_distance -= dash_length;
 						  	draw = !draw;
 						}
 						
@@ -741,7 +648,7 @@ org.goorm.core.printer.design.prototype = {
 					}
 					
 					//is hovered?
-					if(self.parent.hoveredIndex == i) {
+					if(self.parent.hovered_index == i) {
 						context.beginPath();
 						context.strokeStyle = "#FFFF00";
 						
@@ -779,7 +686,7 @@ org.goorm.core.printer.design.prototype = {
 											
 						if (this.shape.move) {
 							this.shape.move(this.properties.sx, this.properties.sy, this.properties.ex, this.properties.ey);
-							this.shape.setShape();
+							this.shape.set_shape();
 						}
 					
 					}

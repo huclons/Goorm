@@ -2,34 +2,19 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module project
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class open.dialog
- * @extends project
- * 
- **/
 org.goorm.core.shortcut.manager = function () {
 
 };
 
 org.goorm.core.shortcut.manager.prototype = {
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {Object} option The option for dialog.
-	 **/
 	init: function () {
 
 		//Prevent Backspace Key
 		$(document).bind('keydown', 'Backspace', function (e) {
 			
-			if (core.focusOnEditor) {
+			if (core.status.focus_on_editor) {
 				
 			}
 			else if (core.focusOnInputBox) {
@@ -44,7 +29,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		});
 			 
 		$(document).bind('keyup', function (e) {
-			core.keydown = false;
+			core.status.keydown = false;
 		  	
 		  	if (e.keyCode != 27 && e.keyCode != 13) {
 				e.stopPropagation();
@@ -56,10 +41,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		$("input").keyup(function (e) {
 			var ev = e || event;
 			
-			console.log("keyup");
-			
 		  	if (e.keyCode == 27 && e.keyCode == 13) {
-		  		console.log("keyup");
 				$(document).trigger(e);
 				
 				e.stopPropagation();
@@ -71,10 +53,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		$("input").keydown(function (e) {
 			var ev = e || event;
 			
-			console.log("keydown");
-			
 		  	if (e.keyCode == 27 && e.keyCode == 13) {
-		  		console.log("keydown");
 				$(document).trigger(e);
 				
 				e.stopPropagation();
@@ -90,8 +69,8 @@ org.goorm.core.shortcut.manager.prototype = {
 					
 		//Main Menu Selection
 		$(document).bind('keydown', "Alt", function (e) {
-			//core.mainLayout.mainMenu.setInitialSelection();
-			core.mainLayout.mainMenu.focus();
+			//core.module.layout.mainmenu.setInitialSelection();
+			core.module.layout.mainmenu.focus();
 		  
 			e.stopPropagation();
 			e.preventDefault();
@@ -106,9 +85,9 @@ org.goorm.core.shortcut.manager.prototype = {
 		//New Project
 		$(document).bind('keydown', 'Alt+N', function (e) {
 
-			core.dialogNewProject.show();
+			core.dialog.new_project.show();
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 
 			e.stopPropagation();
 			e.preventDefault();
@@ -120,7 +99,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Open Project
 		$(document).bind('keydown', 'Ctrl+O', function (e) {
 			
-			core.dialogOpenProject.show();
+			core.dialog.open_project.show();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -130,7 +109,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Open File
 		$(document).bind('keydown', 'Ctrl+Shift+O', function (e) {
 			
-			core.dialogOpenFile.show();
+			core.dialog.open_file.show();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -139,7 +118,7 @@ org.goorm.core.shortcut.manager.prototype = {
 
 		//Close
 		$(document).bind('keydown', 'Alt+X', function (e) {
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 		
 			e.stopPropagation();
 			e.preventDefault();
@@ -148,10 +127,10 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Close All
 		$(document).bind('keydown', 'Alt+Shift+X', function (e) {
-			var windowManager = core.mainLayout.workSpace.windowManager;
-			windowManager.closeAll();
+			var window_manager = core.module.layout.workspace.window_manager;
+			window_manager.close_all();
 
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -160,13 +139,13 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Save
 		$(document).bind('keydown', 'Ctrl+S', function (e) {
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if (windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.save();
+			if (window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.save();
 			}
-			else if (windowManager.window[windowManager.activeWindow].editor) {
-				windowManager.window[windowManager.activeWindow].editor.save();
+			else if (window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.save();
 			}
 
 			e.stopPropagation();
@@ -177,7 +156,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Save as File
 		$(document).bind('keydown', 'Ctrl+Shift+S', function (e) {
 
-			core.dialogSaveAsFile.show();
+			core.dialog.save_as_file.show();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -187,9 +166,9 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Save All
 		$(document).bind('keydown', 'Alt+Ctrl+S', function (e) {
 		
-			core.mainLayout.workSpace.windowManager.saveAll();
+			core.module.layout.workspace.window_manager.saveAll();
 
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 
 			e.stopPropagation();
 			e.preventDefault();
@@ -207,7 +186,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Rename
 		$(document).bind('keydown', 'Ctrl+Shift+R', function (e) {
 
-			core.dialogRenameFile.show("");
+			core.dialog.rename_file.show("");
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -217,7 +196,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Refresh
 		$(document).bind('keydown', 'Ctrl+R', function (e) {
 
-			core.mainLayout.projectExplorer.refresh();
+			core.module.layout.project_explorer.refresh();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -240,10 +219,10 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Undo
 		$(document).bind('keydown', 'Ctrl+Z', function (e) {
 
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 			
-			if (windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.undo();
+			if (window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.undo();
 			}
 
 			e.stopPropagation();
@@ -254,10 +233,10 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Redo
 		$(document).bind('keydown', 'Ctrl+Y', function (e) {
 
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 			
-			if (windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.redo();
+			if (window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.redo();
 			}
 
 			e.stopPropagation();
@@ -269,18 +248,18 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Cut
 		$(document).bind('keydown', 'Ctrl+X', function (e) {
 
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 			
-			if (windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.cut();
+			if (window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.cut();
 				
 				e.stopPropagation();
 				e.preventDefault();
 				return false;	
 			}
 			else {
-				if(core.dialogPreference.preference['preference.editor.useClipboard']=="false"){
-					$("a[action=doCut]").trigger("click");
+				if(core.dialog.preference.preference['preference.editor.use_clipboard']=="false"){
+					$("a[action=do_cut]").trigger("click");
 					e.stopPropagation();
 					e.preventDefault();
 					return false;				
@@ -291,18 +270,18 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Copy
 		$(document).bind('keydown', 'Ctrl+C', function (e) {
 
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 			
-			if (windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.copy();
+			if (window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.copy();
 				
 				e.stopPropagation();
 				e.preventDefault();
 				return false;	
 			}
 			else {
-				if(core.dialogPreference.preference['preference.editor.useClipboard']=="false"){
-					$("a[action=doCopy]").trigger("click");
+				if(core.dialog.preference.preference['preference.editor.use_clipboard']=="false"){
+					$("a[action=do_copy]").trigger("click");
 					e.stopPropagation();
 					e.preventDefault();
 					return false;		
@@ -314,18 +293,18 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Paste
 		$(document).bind('keydown', 'Ctrl+V', function (e) {
 
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 			
-			if (windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.paste();
+			if (window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.paste();
 				
 				e.stopPropagation();
 				e.preventDefault();
 				return false;	
 			}
 			else {
-				if(core.dialogPreference.preference['preference.editor.useClipboard']=="false"){
-					$("a[action=doPaste]").trigger("click");
+				if(core.dialog.preference.preference['preference.editor.use_clipboard']=="false"){
+					$("a[action=do_paste]").trigger("click");
 					e.stopPropagation();
 					e.preventDefault();
 					return false;
@@ -336,17 +315,17 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Delete
 		$(document).bind('keydown', 'Del', function (e) {
 
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 			
-			if (windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas._delete();
+			if (window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas._delete();
 				
 				e.stopPropagation();
 				e.preventDefault();
 				return false;	
 			}
 			else {
-				$("a[action=doDelete]").trigger("click");
+				$("a[action=do_delete]").trigger("click");
 				e.stopPropagation();
 				e.preventDefault();
 				return false;		
@@ -357,7 +336,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Select All
 		$(document).bind('keydown', 'Ctrl+A', function (e) {
 
-			$("a[action=selectAll]").trigger("click");
+			$("a[action=select_all]").trigger("click");
 			e.stopPropagation();
 			e.preventDefault();
 			return false;
@@ -366,10 +345,10 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Find and Replace
 		$(document).bind('keydown', 'Ctrl+F', function (e) {
 
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 			
-			if (windowManager.window[windowManager.activeWindow].editor) {
-				core.dialogFindReplace.show();
+			if (window_manager.window[window_manager.active_window].editor) {
+				core.dialog.find_and_replace.show();
 			}
 			
 			e.stopPropagation();
@@ -379,11 +358,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Find Next
 		$(document).bind('keydown', 'Ctrl+G', function (e) {
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 			
-			if (windowManager.window[windowManager.activeWindow].editor&&!core.keydown) {
-				core.dialogFindReplace.find("next");
-				core.keydown=true;
+			if (window_manager.window[window_manager.active_window].editor&&!core.status.keydown) {
+				core.dialog.find_and_replace.find("next");
+				core.status.keydown=true;
 
 			}
 			
@@ -396,11 +375,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Find Previous
 		$(document).bind('keydown', 'Ctrl+Shift+G', function (e) {
 
-			var windowManager = core.mainLayout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 			
-			if (windowManager.window[windowManager.activeWindow].editor&&!core.keydown) {
-				core.dialogFindReplace.find("previous");
-				core.keydown=true;
+			if (window_manager.window[window_manager.active_window].editor&&!core.status.keydown) {
+				core.dialog.find_and_replace.find("previous");
+				core.status.keydown=true;
 			}
 			
 			e.stopPropagation();
@@ -411,9 +390,9 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Open Preference
 		$(document).bind('keydown', 'Alt+P', function (e) {
 
-			core.dialogPreference.show();
+			core.dialog.preference.show();
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -427,8 +406,8 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Run
 		$(document).bind('keydown', 'Ctrl+F5', function (e) {
 
-			if(core.pluginManager.plugins["org.goorm.plugin."+core.currentProjectType]!=undefined) {
-				core.pluginManager.plugins["org.goorm.plugin."+core.currentProjectType].run(core.currentProjectPath);
+			if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type]!=undefined) {
+				core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type].run(core.status.current_project_path);
 			}
 
 			e.stopPropagation();
@@ -439,9 +418,9 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Debug
 		$(document).bind('keydown', 'F7', function (e) {
 
-			if(core.pluginManager.plugins["org.goorm.plugin."+core.currentProjectType]!=undefined) {
-				core.mainLayout.innerBottomTabView.selectTab(1);
-				core.pluginManager.plugins["org.goorm.plugin."+core.currentProjectType].debug(core.currentProjectPath);
+			if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type]!=undefined) {
+				core.module.layout.inner_bottom_tabview.selectTab(1);
+				core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type].debug(core.status.current_project_path);
 			}
 
 			e.stopPropagation();
@@ -464,7 +443,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Clean
 		$(document).bind('keydown', 'Ctrl+Del', function (e) {
 
-			core.dialogBuildClean.show();
+			core.dialog.build_clean.show();
 
 			e.stopPropagation();
 			e.preventDefault();
@@ -479,7 +458,7 @@ org.goorm.core.shortcut.manager.prototype = {
 		//Open Join the Project
 		$(document).bind('keydown', 'Ctrl+J', function (e) {
 
-			core.dialogJoinProject.show();
+			core.dialog.join_project.show();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -488,31 +467,31 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 				
 		//////////////////////////////////////////////////
-		//Main Menu : Window
+		//Main Menu : window
 		//////////////////////////////////////////////////
 			
-		//Previous Window
+		//Previous window
 		$(document).bind('keydown', 'Alt+Shift+left', function (e) {
-			if (!core.keydown) {
-			      core.mainLayout.workSpace.windowManager.previousWindow();
-			      core.keydown = true;
+			if (!core.status.keydown) {
+			      core.module.layout.workspace.window_manager.previous_window();
+			      core.status.keydown = true;
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 		  
 			e.stopPropagation();
 			e.preventDefault();
 			return false;
 		});
 	 
-		//Next Window
+		//Next window
 		$(document).bind('keydown', 'Alt+Shift+right', function (e) {
-		 	if (!core.keydown) {
-				core.mainLayout.workSpace.windowManager.nextWindow();
-				core.keydown = true;
+		 	if (!core.status.keydown) {
+				core.module.layout.workspace.window_manager.next_window();
+				core.status.keydown = true;
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 		  
 			e.stopPropagation();
 			e.preventDefault();
@@ -521,16 +500,16 @@ org.goorm.core.shortcut.manager.prototype = {
 	  
 		//Left Layout Show/Hide
 		$(document).bind('keydown', 'Alt+Shift+L', function (e) {
-			if (!core.keydown) {
-				if (core.mainLayout.layout.getUnitByPosition("left")._collapsed) {
-					core.mainLayout.layout.getUnitByPosition("left").expand();
+			if (!core.status.keydown) {
+				if (core.module.layout.layout.getUnitByPosition("left")._collapsed) {
+					core.module.layout.layout.getUnitByPosition("left").expand();
 				}
 				else {
-					core.mainLayout.layout.getUnitByPosition("left").collapse();
+					core.module.layout.layout.getUnitByPosition("left").collapse();
 				}
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -539,11 +518,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Left Layout Show/Hide
 		$(document).bind('keydown', 'Alt+Shift+1', function (e) {
-			if (!core.keydown) {
-				core.mainLayout.leftTabView.selectTab(0);
+			if (!core.status.keydown) {
+				core.module.layout.left_tabview.selectTab(0);
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -552,11 +531,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Left Layout Toggle Project Explorer
 		$(document).bind('keydown', 'Alt+Shift+2', function (e) {
-			if (!core.keydown) {
-				core.mainLayout.leftTabView.selectTab(1);
+			if (!core.status.keydown) {
+				core.module.layout.left_tabview.selectTab(1);
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 
 			e.stopPropagation();
 			e.preventDefault();
@@ -565,16 +544,16 @@ org.goorm.core.shortcut.manager.prototype = {
 
 		//Left Layout Show/Hide
 		$(document).bind('keydown', 'Alt+Shift+R', function (e) {
-			if (!core.keydown) {
-				if (core.mainLayout.innerLayout.getUnitByPosition("right")._collapsed) {
-					core.mainLayout.innerLayout.getUnitByPosition("right").expand();
+			if (!core.status.keydown) {
+				if (core.module.layout.inner_layout.getUnitByPosition("right")._collapsed) {
+					core.module.layout.inner_layout.getUnitByPosition("right").expand();
 				}
 				else {
-					core.mainLayout.innerLayout.getUnitByPosition("right").collapse();
+					core.module.layout.inner_layout.getUnitByPosition("right").collapse();
 				}
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -583,11 +562,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Left Layout Toggle Toolbox
 		$(document).bind('keydown', 'Alt+Shift+3', function (e) {
-			if (!core.keydown) {
-				core.mainLayout.innerRightTabView.selectTab(0);
+			if (!core.status.keydown) {
+				core.module.layout.inner_right_tabview.selectTab(0);
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -596,11 +575,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Right Layout Show/Hide
 		$(document).bind('keydown', 'Alt+Shift+4', function (e) {
-			if (!core.keydown) {
-				core.mainLayout.innerRightTabView.selectTab(1);
+			if (!core.status.keydown) {
+				core.module.layout.inner_right_tabview.selectTab(1);
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -609,11 +588,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Right Layout Toggle Properties
 		$(document).bind('keydown', 'Alt+Shift+5', function (e) {
-			if (!core.keydown) {
-				core.mainLayout.innerRightTabView.selectTab(2);
+			if (!core.status.keydown) {
+				core.module.layout.inner_right_tabview.selectTab(2);
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -622,16 +601,16 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Left Layout Show/Hide
 		$(document).bind('keydown', 'Alt+Shift+B', function (e) {
-			if (!core.keydown) {
-				if (core.mainLayout.innerLayout.getUnitByPosition("bottom")._collapsed) {
-					core.mainLayout.innerLayout.getUnitByPosition("bottom").expand();
+			if (!core.status.keydown) {
+				if (core.module.layout.inner_layout.getUnitByPosition("bottom")._collapsed) {
+					core.module.layout.inner_layout.getUnitByPosition("bottom").expand();
 				}
 				else {
-					core.mainLayout.innerLayout.getUnitByPosition("bottom").collapse();
+					core.module.layout.inner_layout.getUnitByPosition("bottom").collapse();
 				}
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -640,11 +619,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Right Layout Toggle Object Explorer
 		$(document).bind('keydown', 'Alt+Shift+6', function (e) {
-			if (!core.keydown) {
-				core.mainLayout.innerBottomTabView.selectTab(0);
+			if (!core.status.keydown) {
+				core.module.layout.inner_bottom_tabview.selectTab(0);
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -653,11 +632,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Bottom Layout Show/Hide
 		$(document).bind('keydown', 'Alt+Shift+7', function (e) {
-			if (!core.keydown) {
-				core.mainLayout.innerBottomTabView.selectTab(1);
+			if (!core.status.keydown) {
+				core.module.layout.inner_bottom_tabview.selectTab(1);
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
@@ -666,11 +645,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Bottom Layout Toggle Messages
 		$(document).bind('keydown', 'Alt+Shift+8', function (e) {
-			if (!core.keydown) {
-				core.mainLayout.innerBottomTabView.selectTab(2);
+			if (!core.status.keydown) {
+				core.module.layout.inner_bottom_tabview.selectTab(2);
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 
 			e.stopPropagation();
 			e.preventDefault();
@@ -679,11 +658,11 @@ org.goorm.core.shortcut.manager.prototype = {
 		
 		//Bottom Layout Toggle Generator
 		$(document).bind('keydown', 'Alt+Shift+9', function (e) {
-			if (!core.keydown) {
-				core.mainLayout.innerBottomTabView.selectTab(3);
+			if (!core.status.keydown) {
+				core.module.layout.inner_bottom_tabview.selectTab(3);
 			}
 
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 	
 			e.stopPropagation();
 			e.preventDefault();
@@ -691,42 +670,38 @@ org.goorm.core.shortcut.manager.prototype = {
 		});
 		
 		$(document).bind('keydown', 'Alt+Shift+W', function (e) {
-			console.log("!!!!!!!");
-			
-			if (!core.keydown) {
-				$($("a[action=toggleFullWorkspace]").get(0)).trigger("click");
-				core.keydown = true;
+			if (!core.status.keydown) {
+				$($("a[action=toggle_full_workspace]").get(0)).trigger("click");
+				core.status.keydown = true;
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
 			return false;
 		});
 				
-		//Hide All Window
+		//Hide All window
 		$(document).bind('keydown', 'Alt+Shift+H', function (e) {
-			if (!core.keydown) {
-				console.log("!");
-				core.mainLayout.workSpace.windowManager.hideAllWindows();
+			if (!core.status.keydown) {
+				core.module.layout.workspace.window_manager.hide_all_windows();
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();
 			return false;
 		});
 				
-		//Show All Window
+		//Show All window
 		$(document).bind('keydown', 'Alt+Shift+S', function (e) {
-			if (!core.keydown) {
-				console.log("!!");
-				core.mainLayout.workSpace.windowManager.showAllWindows();
+			if (!core.status.keydown) {
+				core.module.layout.workspace.window_manager.show_all_windows();
 			}
 			
-			core.mainLayout.mainMenu.blur();
+			core.module.layout.mainmenu.blur();
 			
 			e.stopPropagation();
 			e.preventDefault();

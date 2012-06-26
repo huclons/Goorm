@@ -2,39 +2,18 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module project
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class project
- **/
 org.goorm.core.project = function () {
-	/**
-	 * This presents the current browser version
-	 * @property treeview
-	 * @type Object
-	 * @default null
-	 **/
 	this.treeview = null;
-	
 };
 
 org.goorm.core.project.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor
-	 * @param {Object} target The target object.
-	 **/
-	makeTreeview: function(target) {
+	make_treeview: function(target) {
 		
-		this.treeview = new YAHOO.widget.TreeView(target, this.getDirectoriesAndFiles("type", "url"));
+		this.treeview = new YAHOO.widget.TreeView(target, this.get_directories_and_files("type", "url"));
 	
-				//projectProperties.files = sortingData;
+				//projectProperties.files = sorting_data;
 				
 				/*
 				self.treeview.subscribe("dblClickEvent", function(nodedata) {	
@@ -43,8 +22,8 @@ org.goorm.core.project.prototype = {
 						var filetype = nodedata.node.data.filetype;
 						var fullpath = nodedata.node.data.parentLabel;
 						
-						windowManager.add(filename, filetype, fullpath);
-						//windowManager.show();
+						window_manager.add(filename, filetype, fullpath);
+						//window_manager.show();
 						//messageManager.write("alarm", directory, "adsf");
 					}
 				});
@@ -54,27 +33,12 @@ org.goorm.core.project.prototype = {
 		this.treeview.expandAll();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * This operates the initialization tasks for layout, actions, plugins...
-	 * First written: Sung-tae Ryu 
-	 * Latest modified: Sung-tae Ryu 
-	 * @method refreshTreeview() 
-	 * @return void
-	 **/
-	refreshTreeview: function() {
+	refresh_treeview: function() {
 		this.treeview.refresh();
 		
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method getDirectoriesAndFiles 
-	 * @param {String} type The type.
-	 * @param {String} url The URL.
-	 * @return {Object} The result.
-	 **/
-	getDirectoriesAndFiles: function(type, url) {
+	get_directories_and_files: function(type, url) {
 		
 		var postdata = {
 			type: type,
@@ -86,22 +50,22 @@ org.goorm.core.project.prototype = {
 		
 		$.get("file/get_contents", postdata, function (data) {
 			
-				var sortJsonData = function (x,y) {
+				var sort_function = function (x,y) {
 					return ((x.cls > y.cls) ? -1 : ((x.cls < y.cls) ? 1 : 0 ));
 				};
 				
-				var quickSort = function (data) { 				
-					data.sort(sortJsonData);
+				var quick_sort = function (data) { 				
+					data.sort(sort_function);
 					
 					for(i=0; i<data.length; i++) {
 						if(data[i].children) {
-							quickSort(data[i].children);
+							quick_sort(data[i].children);
 						}
 					}
 				};
 				
 				result = eval(data);
-				quickSort(result);
+				quick_sort(result);
 		});
 		
 		return result;		

@@ -1,29 +1,29 @@
-<div class="contentHeader" localizationKey='dialog_project_import'>Import Project</div>
+<div class="content_header" localization_key='dialog_project_import'>Import Project</div>
 
-<div class="contentGuideMessage" localizationKey='dialog_project_import_guide'>Select a File to Project</div>
+<div class="content_guide_message" localization_key='dialog_project_import_guide'>Select a File to Project</div>
 
-<div id="projectImport" style="text-align:left; font-size:11px;">
-	<form id="projectImportMyForm" action="project/import" method="post" enctype="multipart/form-data"> 
+<div id="project_import" style="text-align:left; font-size:11px;">
+	<form id="project_import_my_form" action="project/import" method="post" enctype="multipart/form-data"> 
 		<div style="width:100%; height:20px; overflow:auto; font-size:11px;">
 	    	<div style="float:left;">
-	        	<span localizationKey='common_location'>Location : </span>
-	            <input type="text" id="projectImportInputLocationPath" name="projectImportInputLocationPath" style="width:600px; height:15px;" readonly="readonly" />
+	        	<span localization_key='common_location'>Location : </span>
+	            <input type="text" id="project_import_input_location_path" name="project_import_input_location_path" style="width:600px; height:15px;" readonly="readonly" />
 	        </div>
 	    </div>
-		<div id="projectImportDialogMiddle" style="width:780px; height:275px; margin-top:8px; font-size:11px;">
-			<div id="projectImportDialogLeft" class="dialogsLeft">
-				<div id="projectImportTreeview" class='directoryTreeview dialogsLeftInner'></div>
+		<div id="project_import_dialog_middle" style="width:780px; height:275px; margin-top:8px; font-size:11px;">
+			<div id="project_import_dialog_left" class="dialogs_left">
+				<div id="project_import_treeview" class='directory_treeview dialogs_left_inner'></div>
 			</div>
-			<div id="projectImportDialogCenter" class="dialogsCenter"></div>
+			<div id="project_import_dialog_center" class="dialog_center"></div>
 	    </div>
 		    <div style="margin-top:10px; border:1px solid #CCC; float:left; width:768px; padding:5px;">
 			<div style="overflow:auto; font-size:11px; float:left;">
-				<span localizationKey="dialog_project_import_msg">Choose the path that want to upload.</span>
+				<span localization_key="dialog_project_import_msg">Choose the path that want to upload.</span>
 			</div>
 			<div style="overflow:auto; font-size:11px; float:right;">
-		    	<div id="projectImportFileWrapper" style="float:left;">
-					<input type="file" name="file" id="projectImportFile">
-					<div id="projectImportUploadOutput"></div>
+		    	<div id="project_import_file_wrapper" style="float:left;">
+					<input type="file" name="file" id="project_import_file">
+					<div id="project_import_upload_output"></div>
 		        </div>
 		    </div>
 		</div>

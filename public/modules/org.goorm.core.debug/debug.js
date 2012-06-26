@@ -2,16 +2,8 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module debug
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class debug
- **/
 org.goorm.core.debug = function () {
 	//this.ready = 1;
 	this.func = null;
@@ -32,7 +24,7 @@ org.goorm.core.debug.prototype = {
 			},
 			success: function(data) {
 				
-				core.mainLayout.innerBottomTabView.selectTab(1);
+				core.module.layout.inner_bottom_tabview.selectTab(1);
 				
 				data = data.replace(/ /gi, "");
 				
@@ -50,7 +42,7 @@ org.goorm.core.debug.prototype = {
 				if ( typeof func == "function" ) {
 					func();
 				}
-				core.mainLayout.projectExplorer.refresh();
+				core.module.layout.project_explorer.refresh();
 			}
 		});
 	},
@@ -69,7 +61,7 @@ org.goorm.core.debug.prototype = {
 			},
 			success: function(data) {
 			
-				core.mainLayout.projectExplorer.refresh();
+				core.module.layout.project_explorer.refresh();
 
 				$("#debug").prepend("<pre>"+data+"</pre>");
 				if ( typeof func == "function" )
@@ -82,10 +74,10 @@ org.goorm.core.debug.prototype = {
 		var self=this;
 		this.func=func;
 
-		$("#console").find("iframe")[0].contentWindow.manda(cmd);
+		$("#console").find("iframe")[0].contentwindow.manda(cmd);
 
-		core.mainLayout.projectExplorer.refresh();
-		core.mainLayout.innerBottomTabView.selectTab(3);
+		core.module.layout.project_explorer.refresh();
+		core.module.layout.inner_bottom_tabview.selectTab(3);
 		if ( typeof self.func == "function" )
 			self.func();
 		// var self = this;
@@ -96,8 +88,8 @@ org.goorm.core.debug.prototype = {
 			// type: "POST",
 			// data: "cmd="+cmd,
 			// success: function(data) {
-				// core.mainLayout.projectExplorer.refresh();
-				// core.mainLayout.innerBottomTabView.selectTab(2);
+				// core.module.layout.project_explorer.refresh();
+				// core.module.layout.inner_bottom_tabview.selectTab(2);
 // 				
 				// c.m(data.split("\n").join("<br/>"), "run");
 // 				

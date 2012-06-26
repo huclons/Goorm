@@ -2,113 +2,70 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * @module preference
  **/
 
-/**
- * This is file type manager in preference dialog  
- * @class preference.filetype
- * @extends preference
- **/
 org.goorm.core.preference.filetype = function () {
-	/**
-	 * This is "add" button on file type manager in preference dialog
-	 * @property addButton
-	 * @type Obejct
-	 * @default null
-	 **/
-	this.addButton = null;
-	/**
-	 * This is "del" button on file type manager in preference dialog
-	 * @property delButton
-	 * @type Obejct
-	 * @default null
-	 **/
-	this.delButton = null;
-	/**
-	 * This is "save" button on file type manager in preference dialog
-	 * @property saveButton
-	 * @type Obejct
-	 * @default null
-	 **/
-	this.saveButton = null;
-	/**
-	 * This is a reference for this class.
-	 * @property self
-	 * @type Obejct
-	 * @default null
-	 **/
+	this.add_button = null;
+	this.del_button = null;
+	this.save_button = null;
 	this.self = null;
 };
 
 org.goorm.core.preference.filetype.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 **/
 	init: function () {
 		self = this;
 		
 		// Initializing
-		self.initFileTypeTab();
+		self.init_filetype_tab();
 		
 		// Buttons on dialog
-		this.addButton =  new YAHOO.widget.Button("filetypeAdd", { onclick: { fn: this.add } });
-		this.delButton =  new YAHOO.widget.Button("filetypeDelete", { onclick: { fn: this.del } });
-		this.saveButton =  new YAHOO.widget.Button("filetypeSave", { onclick: { fn: this.save } });
+		this.add_button =  new YAHOO.widget.Button("filetype_add", { onclick: { fn: this.add } });
+		this.del_button =  new YAHOO.widget.Button("filetype_delete", { onclick: { fn: this.del } });
+		this.save_button =  new YAHOO.widget.Button("filetypesave", { onclick: { fn: this.save } });
 		
 	},
 	
-	/**
-	 * This function is adding new file type into file type tab.  
-	 * @method add
-	 **/
 	add: function () {
 		
 		// Temporary type element is added to file type list.
-		$(".fileTypeContents").find(".fileTypeList").append("<div style='padding:3px;' class='newExt'>New Extention</div>");
-		$(".fileTypeContents").find(".fileTypeList").scrollTop(9999999);
+		$(".filetype_contents").find(".filetype_list").append("<div style='padding:3px;' class='newExt'>New Extention</div>");
+		$(".filetype_contents").find(".filetype_list").scrollTop(9999999);
 		
 		// Event handler for creating filetype detail view is registered
-		$(".fileTypeContents").find(".fileTypeList").find(".newExt").click(function () {
+		$(".filetype_contents").find(".filetype_list").find(".newExt").click(function () {
 			
 			// highlighting in filetype list
-			$(".fileTypeContents").find(".fileTypeList").children().each(function () {
+			$(".filetype_contents").find(".filetype_list").children().each(function () {
 				$(this).css('background-color', '#fff');
 			});
 			$(this).css('background-color', '#b3d4ff');
 			
 			// removing old filetype detail view
-			$(".fileTypeContents").find(".fileTypeDetail").children().each(function() { 
+			$(".filetype_contents").find(".filetype_detail").children().each(function() { 
 				$(this).remove(); 
 			});
 			
 			// creating new filetype detail view
-			self.createFileTypeDetail("", null, "", null, null);
+			self.create_filetype_detail("", null, "", null, null);
 		});
 	},
-	/**
-	 * This function is deleting file type from file type tab.  
-	 * @method del
-	 **/
+
 	del: function () {
 		
 		// This part find file type is viewing in filetype detail view from filetype list and remove it.
-		$(".fileTypeContents").find(".fileTypeList").children().each(function() {
-			if ($(this).attr("class") == $(".fileTypeContents").find(".fileExtention").val()){
+		$(".filetype_contents").find(".filetype_list").children().each(function() {
+			if ($(this).attr("class") == $(".filetype_contents").find(".file_extension").val()){
 				var temp = $.makeArray();
-				for (var i = 0; i < core.fileTypes.length; i++) {
-					if (core.fileTypes[i].fileExtention != $(this).attr("class")) {
+				for (var i = 0; i < core.filetypes.length; i++) {
+					if (core.filetypes[i].file_extension != $(this).attr("class")) {
 						
 						// Keep filetype element except one user want to delete.
-						temp.push(core.fileTypes[i]);
+						temp.push(core.filetypes[i]);
 					}
 				}
 				
 				// Update filetype information.
-				core.fileTypes = temp;
+				core.filetypes = temp;
 				
 				// Remove this filetype from filetype list.
 				$(this).remove();
@@ -116,189 +73,169 @@ org.goorm.core.preference.filetype.prototype = {
 		});
 		
 		// Remove this filetype detail from filetype detail view.
-		$(".fileTypeContents").find(".fileTypeDetail").children().each(function() {
+		$(".filetype_contents").find(".filetype_detail").children().each(function() {
 			$(this).remove();
 		});
 	},
-	/**
-	 * This function is saving a file type.  
-	 * @method save
-	 **/
+
 	save: function () {
 		
 		var finded = false;
 		
 		
-		if ($(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").length != 0){
+		if ($(".filetype_contents").find(".filetype_detail").find(".file_extension").length != 0){
 			
 			// If the file type of current information is already exist, update the information
-			for (var i = 0; i < core.fileTypes.length; i++) {
-				if (core.fileTypes[i].fileExtention == $(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").val()) {
+			for (var i = 0; i < core.filetypes.length; i++) {
+				if (core.filetypes[i].file_extension == $(".filetype_contents").find(".filetype_detail").find(".file_extension").val()) {
 					finded = true;
-					core.fileTypes[i].editor = $(".fileTypeContents").find(".fileTypeDetail").find(".editor").attr("value");
-					core.fileTypes[i].type = $(".fileTypeContents").find(".fileTypeDetail").find(".type").attr("value");
-					core.fileTypes[i].mode = $(".fileTypeContents").find(".fileTypeDetail").find(".mode").attr("value");
-					core.fileTypes[i].description = $(".fileTypeContents").find(".fileTypeDetail").find(".description").val();
+					core.filetypes[i].editor = $(".filetype_contents").find(".filetype_detail").find(".editor").attr("value");
+					core.filetypes[i].type = $(".filetype_contents").find(".filetype_detail").find(".type").attr("value");
+					core.filetypes[i].mode = $(".filetype_contents").find(".filetype_detail").find(".mode").attr("value");
+					core.filetypes[i].description = $(".filetype_contents").find(".filetype_detail").find(".description").val();
 				}
 			}
 			// If the file type is new, add the information of the new file type
-			if (finded == false && $(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").val() != "") {
+			if (finded == false && $(".filetype_contents").find(".filetype_detail").find(".file_extension").val() != "") {
 				var temp = {
-					"fileExtention":$(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").val(),
-					"editor":$(".fileTypeContents").find(".fileTypeDetail").find(".editor").attr("value"),
-					"description":$(".fileTypeContents").find(".fileTypeDetail").find(".description").val(),
-					"type":$(".fileTypeContents").find(".fileTypeDetail").find(".type").attr("value"),
-					"mode":$(".fileTypeContents").find(".fileTypeDetail").find(".mode").attr("value")
+					"file_extension":$(".filetype_contents").find(".filetype_detail").find(".file_extension").val(),
+					"editor":$(".filetype_contents").find(".filetype_detail").find(".editor").attr("value"),
+					"description":$(".filetype_contents").find(".filetype_detail").find(".description").val(),
+					"type":$(".filetype_contents").find(".filetype_detail").find(".type").attr("value"),
+					"mode":$(".filetype_contents").find(".filetype_detail").find(".mode").attr("value")
 				}
-				core.fileTypes.push(temp);
+				core.filetypes.push(temp);
 				
 				// Temporary name in file type list have to be updated to right file type name
-				var ext = $(".fileTypeContents").find(".fileTypeDetail").find(".fileExtention").val();
-				$(".fileTypeContents").find(".fileTypeList").find(".newExt").html(ext);
-				$(".fileTypeContents").find(".fileTypeList").find(".newExt").attr("class", ext);
+				var ext = $(".filetype_contents").find(".filetype_detail").find(".file_extension").val();
+				$(".filetype_contents").find(".filetype_list").find(".newExt").html(ext);
+				$(".filetype_contents").find(".filetype_list").find(".newExt").attr("class", ext);
 				
-				$(".fileTypeContents").find("."+ext).click(function () {
+				$(".filetype_contents").find("."+ext).click(function () {
 					
 					self.save();
 					// highlight refresh
-					$(".fileTypeContents").find(".fileTypeList").children().each(function () {
+					$(".filetype_contents").find(".filetype_list").children().each(function () {
 						$(this).css('background-color', '#fff');
 					});
 					$(this).css('background-color', '#b3d4ff');
 					
 					// clearing type information area 
-					$(".fileTypeContents").find(".fileTypeDetail").children().each(function() { 
+					$(".filetype_contents").find(".filetype_detail").children().each(function() { 
 						$(this).remove(); 
 					});	
 					var en = $(this).attr("class");
-					var e = self.getFileTypeInfo(en, "editor");
-					var d = self.getFileTypeInfo(en, "description");
-					var t = self.getFileTypeInfo(en, "type");
-					var m = self.getFileTypeInfo(en, "mode");
-					self.createFileTypeDetail(en, e, d, t, m);
+					var e = self.get_filetype_info(en, "editor");
+					var d = self.get_filetype_info(en, "description");
+					var t = self.get_filetype_info(en, "type");
+					var m = self.get_filetype_info(en, "mode");
+					self.create_filetype_detail(en, e, d, t, m);
 								
 				});
 			}
 		}		
 	},
-	/**
-	 * This function is getting information of filetype from core.filetype.  
-	 * @method getFileTypeInfo
-	 * @param {String} ext The filetype name. 
-	 * @param {String} attr The attribute name of filetype.
-	 **/
-	getFileTypeInfo: function (ext, attr) {
+
+	get_filetype_info: function (ext, attr) {
 		
-		for (var i = 0; i < core.fileTypes.length; i++) {
-			if (core.fileTypes[i].fileExtention == ext) {
+		for (var i = 0; i < core.filetypes.length; i++) {
+			if (core.filetypes[i].file_extension == ext) {
 				if (attr == "editor")
-					return core.fileTypes[i].editor;
+					return core.filetypes[i].editor;
 				else if (attr == "description")
-					return core.fileTypes[i].description;
+					return core.filetypes[i].description;
 				else if (attr == "type")
-					return core.fileTypes[i].type;
+					return core.filetypes[i].type;
 				else if (attr == "mode")
-					return core.fileTypes[i].mode;					
+					return core.filetypes[i].mode;					
 			}
 		}
 	},
-	/**
-	 * This function is initializing filetype manager in preference dialog.  
-	 * @method initFileTypeTab 
-	 **/
-	initFileTypeTab: function () {
+
+	init_filetype_tab: function () {
 		
 		// Get filetype information from the file, filetype.json.
 		$.getJSON("configs/filetype/filetype.json", function(data) {
 			
-			// Loading the information to core.fileTypes.
-			core.fileTypes = eval(data);
+			// Loading the information to core.filetypes.
+			core.filetypes = eval(data);
 			
-			var fileTypes = core.fileTypes;
+			var filetypes = core.filetypes;
 		
 			// For all filetypes, 
-			for (var i = 0; i<core.fileTypes.length; i++) {
+			for (var i = 0; i<core.filetypes.length; i++) {
 				
-				var extName = fileTypes[i].fileExtention;
-				var editor = fileTypes[i].editor;
-				var description = fileTypes[i].description;
-				var type = fileTypes[i].type;
-				var mode = fileTypes[i].mode;
+				var extName = filetypes[i].file_extension;
+				var editor = filetypes[i].editor;
+				var description = filetypes[i].description;
+				var type = filetypes[i].type;
+				var mode = filetypes[i].mode;
 				
 				// Add filetype label to filetype list,
-				$(".fileTypeContents").find(".fileTypeList").append("<div style='padding:3px;' class="+extName+">"+extName+"</div>");
+				$(".filetype_contents").find(".filetype_list").append("<div style='padding:3px;' class="+extName+">"+extName+"</div>");
 				
 				// And register event handler.
-				$(".fileTypeContents").find("."+extName).click(function () {
+				$(".filetype_contents").find("."+extName).click(function () {
 					
 					self.save();
 					// highlight refresh
-					$(".fileTypeContents").find(".fileTypeList").children().each(function () {
+					$(".filetype_contents").find(".filetype_list").children().each(function () {
 						$(this).css('background-color', '#fff');
 					});
 					$(this).css('background-color', '#b3d4ff');
 					
 					// clearing type information area 
-					$(".fileTypeContents").find(".fileTypeDetail").children().each(function() { 
+					$(".filetype_contents").find(".filetype_detail").children().each(function() { 
 						$(this).remove(); 
 					});	
 					var en = $(this).attr("class");
-					var e = self.getFileTypeInfo(en, "editor");
-					var d = self.getFileTypeInfo(en, "description");
-					var t = self.getFileTypeInfo(en, "type");
-					var m = self.getFileTypeInfo(en, "mode");
-					self.createFileTypeDetail(en, e, d, t, m);
+					var e = self.get_filetype_info(en, "editor");
+					var d = self.get_filetype_info(en, "description");
+					var t = self.get_filetype_info(en, "type");
+					var m = self.get_filetype_info(en, "mode");
+					self.create_filetype_detail(en, e, d, t, m);
 								
 				});
 			}
 		});
 	},
 	
-	/**
-	 * This function is creating filetype detail view.  
-	 * @method add
-	 * @param {String} extName The filetype name. 
-	 * @param {String} editor The editor of the filetype.
-	 * @param {String} description The description of the filetype.
-	 * @param {String} type The type of the filetype.
-	 * @param {String} mode The syntax highlighting mode of the filetype.
-	 **/
-	createFileTypeDetail: function (extName, editor, description, type, mode) {
+	create_filetype_detail: function (extName, editor, description, type, mode) {
 		
 		// Creating name field.
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%;'>Extention Name</div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%; margin-top:4px;'><input class='fileExtention' style='width:280px;' value='"+ extName +"' /></div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%;'>Extention Name</div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%; margin-top:4px;'><input class='file_extension' style='width:280px;' value='"+ extName +"' /></div>");
 		
 		// Creating Editor field.
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%; margin-top:7px;'>Editor</div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%; margin-top:4px;'>"+
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%; margin-top:7px;'>Editor</div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%; margin-top:4px;'>"+
 															"<select class='editor' style='width:280px;'>"+
 															"<option value='Editor'>Editor</option>"+
 															"<option value='Designer'>Designer</option>"+
 															"<option value='Rule_Editor'>Rule_Editor</option></select></div>");
 		// "selected" decision.
-		$(".fileTypeContents").find(".fileTypeDetail").find("option").each(function() {
+		$(".filetype_contents").find(".filetype_detail").find("option").each(function() {
 			if ($(this).attr("value") == editor)
 				$(this).attr("selected", "selected");
 		});
 		
 		// Creating Type fieldl
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%; margin-top:7px;'>Type</div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%; margin-top:4px;'>"+
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%; margin-top:7px;'>Type</div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%; margin-top:4px;'>"+
 															"<select class='type' style='width:280px;'>"+
 															"<option value='Code'>Code</option>"+
 															"<option value='uml'>uml</option>"+
 															"<option value='ui'>ui</option>"+
 															"<option value='xml'>xml</option></select></div>");
 		// "selected" decision.												
-		$(".fileTypeContents").find(".fileTypeDetail").find("option").each(function() {
+		$(".filetype_contents").find(".filetype_detail").find("option").each(function() {
 			if ($(this).attr("value") == type)
 				$(this).attr("selected", "selected");
 		});
 		
 		// Creating syntax highlighting mode field.
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%; margin-top:7px;'>Syntax Highlighting Mode</div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%; margin-top:4px;'><select class='mode' style='width:280px;'>"+
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%; margin-top:7px;'>Syntax Highlighting Mode</div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%; margin-top:4px;'><select class='mode' style='width:280px;'>"+
 															"<option value='text/javascript'>text/javascript</option>"+
 															"<option value='application/json'>application/json</option>"+
 															"<option value='application/xml'>application/xml</option>"+
@@ -328,13 +265,13 @@ org.goorm.core.preference.filetype.prototype = {
 															"<option value='text/velocity'>text/velocity</option>"+
 															"<option value='text/x-rsrc'>text/x-rsrc</option></select></div>");
 		// "selected" decision.
-		$(".fileTypeContents").find(".fileTypeDetail").find("option").each(function() {
+		$(".filetype_contents").find(".filetype_detail").find("option").each(function() {
 			if ($(this).attr("value") == mode)
 				$(this).attr("selected", "selected");
 		});
 		
 		// Creating description field.
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%; margin-top:7px;'>Description</div>");
-		$(".fileTypeContents").find(".fileTypeDetail").append("<div style='width:100%; margin-top:4px;'><textarea class='description' style='resize: none; width:280px; height:90px; overflow:auto;'>" + description + "</textarea></div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%; margin-top:7px;'>Description</div>");
+		$(".filetype_contents").find(".filetype_detail").append("<div style='width:100%; margin-top:4px;'><textarea class='description' style='resize: none; width:280px; height:90px; overflow:auto;'>" + description + "</textarea></div>");
 	}
 };

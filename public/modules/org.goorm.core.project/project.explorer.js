@@ -2,16 +2,8 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module object
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class object
- **/
 org.goorm.core.project.explorer = function () {
 	this.target = null;
 	this.treeview = null;
@@ -27,19 +19,19 @@ org.goorm.core.project.explorer.prototype = {
 		
 		var self = this;
 
-		$("#projectExplorer").prepend("<div id='projectSelector' style='height:27px; padding-left:5px; padding-right:5px; padding-top:5px; background-color:#eee; border-bottom:1px solid #ddd; font-size:10px; overflow:hidden; text-align:center;'></div>");
-		$("#projectSelector").append("<select id='projectSelectBox'></select>")
+		$("#project_explorer").prepend("<div id='project_selector' style='height:27px; padding-left:5px; padding-right:5px; padding-top:5px; background-color:#eee; border-bottom:1px solid #ddd; font-size:10px; overflow:hidden; text-align:center;'></div>");
+		$("#project_selector").append("<select id='project_select_box'></select>")
 
-		$("#projectSelectBox").change(function() {
-			self.onProjectSelectBoxChange($(this).val());
+		$("#project_select_box").change(function() {
+			self.on_project_selectbox_change($(this).val());
 		});
 
 		$.get("project/get_list", "", function (data) {
 			var sorting_data = eval(data);
-			self.makeProjectSelectBox(sorting_data);			
+			self.make_project_select_box(sorting_data);			
 		});
 		
-		$("#projectExplorer").append("<div id='projectTreeview' style='overflow-x:hidden'></div>");
+		$("#project_explorer").append("<div id='project_treeview' style='overflow-x:hidden'></div>");
 		
 		var postdata = {
 			kind: "project",
@@ -52,9 +44,9 @@ org.goorm.core.project.explorer.prototype = {
 			
 				var sorting_data = eval(data);
 				
-				self.sortProjectTreeview(sorting_data);
+				self.sort_project_treeview(sorting_data);
 	
-				self.treeview = new YAHOO.widget.TreeView("projectTreeview", sorting_data);
+				self.treeview = new YAHOO.widget.TreeView("project_treeview", sorting_data);
 				
 				self.current_tree_data = self.treeview.getTreeDefinition();
 	
@@ -66,7 +58,7 @@ org.goorm.core.project.explorer.prototype = {
 						var filetype = nodedata.node.data.filetype;
 						var filepath = nodedata.node.data.parent_label;
 						
-						core.module.layout.workSpace.windowManager.open(filepath, filename, filetype);
+						core.module.layout.workspace.window_manager.open(filepath, filename, filetype);
 					}
 					else if(nodedata.node.data.cls == "folder") {
 						if (nodedata.node.expanded) {
@@ -80,32 +72,32 @@ org.goorm.core.project.explorer.prototype = {
 				
 	
 				self.treeview.render();
-				//self.treeviewProject.expandAll();
+				//self.treeview_project.expandAll();
 				
 				
-				//$("#projectTreeview").prepend("<div class='projectName'>" + core.current_projectName + "</div>");
+				//$("#project_treeview").prepend("<div class='project_name'>" + core.current_project_name + "</div>");
 				
 				
 				self.treeview.subscribe("expandComplete", function () {
-					self.refreshContextMenu();
+					self.refresh_context_menu();
 					self.current_tree_data = self.treeview.getTreeDefinition();
 				});
 				
 				
-				self.setContextMenu();
+				self.set_context_menu();
 			}			
 		});
 		
 		//for test
-		self.setContextMenu();
+		self.set_context_menu();
 		
-		$(core).bind("goormLoadingComplete",function(){
+		$(core).bind("goorm_load_complete",function(){
 			self.current_project = new Object();
 			
 			if(!$.isEmptyObject(localStorage["current_project"])){
 				self.current_project = $.parseJSON(localStorage["current_project"]);
-				if(self.current_project.current_projectName != ""){
-					core.dialog.open_project.open(self.current_project.current_projectPath, self.current_project.current_projectName, self.current_project.current_projectType);
+				if(self.current_project.current_project_name != ""){
+					core.dialog.open_project.open(self.current_project.current_project_path, self.current_project.current_project_name, self.current_project.current_projectType);
 				}
 			}
 		});
@@ -116,19 +108,19 @@ org.goorm.core.project.explorer.prototype = {
 			
 		$.post("project/get_list", "", function (data) {
 			var sorting_data = eval(data);
-			self.makeProjectSelectBox(sorting_data);			
+			self.make_project_select_box(sorting_data);			
 		});
 
 		var temp_project_path = core.status.current_project_path;
 		
 		if ( temp_project_path == "" ) {
-			$("#projectTreeview").empty();
-			$("#projectTreeview").css("background-color", "#CCC");
-			$("#projectTreeview").append("<div style='text-align:center;padding-top:50%;'>Project not opened</div>");
+			$("#project_treeview").empty();
+			$("#project_treeview").css("background-color", "#CCC");
+			$("#project_treeview").append("<div style='text-align:center;padding-top:50%;'>Project not opened</div>");
 		}
 		else {
 
-			$("#projectTreeview").css("background-color", "#FFF");
+			$("#project_treeview").css("background-color", "#FFF");
 
 			var postdata = {
 				kind: "project",
@@ -138,23 +130,23 @@ org.goorm.core.project.explorer.prototype = {
 			$.post("file/get_nodes", postdata, function (data) {
 							
 				var sorting_data = eval(data);
-				console.log(data);
-				self.sortProjectTreeview(sorting_data);	
+				
+				self.sort_project_treeview(sorting_data);	
 			
 				self.treeview.removeChildren(self.treeview.getRoot(), true);
 				
-				self.expandTreeview(self.current_tree_data, sorting_data);
+				self.expand_treeview(self.current_tree_data, sorting_data);
 				
 				self.treeview.buildTreeFromObject(sorting_data);
 	
 				self.treeview.render();
 				
-				self.refreshContextMenu();
+				self.refresh_context_menu();
 			});
 		}
 	},
 	
-	expandTreeview: function (source, target) {
+	expand_treeview: function (source, target) {
 		var self = this;		
 		$(source).each(function (i) {
 			if (this.expanded == true && this.cls == "folder") {
@@ -163,21 +155,21 @@ org.goorm.core.project.explorer.prototype = {
 					if (object.filename == this.filename && this.cls == "folder") {
 						this.expanded = true;
 						
-						self.expandTreeview(object.children, this.children);
+						self.expand_treeview(object.children, this.children);
 					}	
 				});
 			}
 		});
 	},
 	
-	makeProjectSelectBox: function(sorting_data) {
+	make_project_select_box: function(sorting_data) {
 		var self = this;
 
-		$("#projectSelectBox").empty();
+		$("#project_select_box").empty();
 		
-		$("#projectSelectBox").append("<option value='' selected>Select Project</option>");
-
-		var max_num = parseInt($("#projectSelector").width()/8);
+		$("#project_select_box").append("<option value='' selected>Select Project</option>");
+		
+		var max_num = parseInt($("#project_selector").width()/8);
 		
 		for(var name in sorting_data) {
 			var temp_name = sorting_data[name].filename;
@@ -187,16 +179,16 @@ org.goorm.core.project.explorer.prototype = {
 				temp_name += " …";
 			}			
 			
-			if (sorting_data[name].filename == core.current_projectPath) {
-				$("#projectSelectBox").append("<option value='"+sorting_data[name].filename+"' selected>"+temp_name+"</option>");
+			if (sorting_data[name].filename == core.status.current_project_path) {
+				$("#project_select_box").append("<option value='"+sorting_data[name].filename+"' selected>"+temp_name+"</option>");
 			}
 			else {
-				$("#projectSelectBox").append("<option value='"+sorting_data[name].filename+"'>"+temp_name+"</option>");
+				$("#project_select_box").append("<option value='"+sorting_data[name].filename+"'>"+temp_name+"</option>");
 			}
 		}
 	},
 		
-	onProjectSelectBoxChange: function (project) {
+	on_project_selectbox_change: function (project) {
 		var self = this;
 	
 		if (project!="") {
@@ -206,23 +198,23 @@ org.goorm.core.project.explorer.prototype = {
 				async :false,
 				url: "project/" +  project + "/project.xml",
 				success: function(xml) {
-					self.current_project.current_projectPath =  project;
-					self.current_project.current_projectName = $(xml).find("NAME").text();
+					self.current_project.current_project_path =  project;
+					self.current_project.current_project_name = $(xml).find("NAME").text();
 					self.current_project.current_projectType = $(xml).find("TYPE").text();
 					localStorage["current_project"] = JSON.stringify(self.current_project);
 					core.dialog.open_project.open(project, $(xml).find("NAME").text(), $(xml).find("TYPE").text());
 				}
 				, error: function(xhr, status, error) {
-					alert.show(core.localization.msg["alertProjectCannotOpen"]);
+					alert.show(core.module.localization.msg["alertProjectCannotOpen"]);
 				}
 			});
 		}
 		else {
-			core.current_projectName = "";
-			core.current_projectPath = "";
+			core.current_project_name = "";
+			core.status.current_project_path = "";
 			core.current_projectType = "";
-			self.current_project.current_projectPath = "";
-			self.current_project.current_projectName = "";
+			self.current_project.current_project_path = "";
+			self.current_project.current_project_name = "";
 			self.current_project.current_projectType = "";
 			localStorage["current_project"] = JSON.stringify(self.current_project);
 
@@ -231,19 +223,19 @@ org.goorm.core.project.explorer.prototype = {
 
 	},
 	
-	sortProjectTreeview: function (sorting_data) { 				
+	sort_project_treeview: function (sorting_data) { 				
 		/*
-		s.quickSort(sorting_data);
+		s.quick_sort(sorting_data);
 		
 		for(i=0; i<sorting_data.length; i++) {
 			if(sorting_data[i].children) {
-				s.quickSort(sorting_data[i].children);
+				s.quick_sort(sorting_data[i].children);
 			}
 		}
 		*/
 	},	
 	
-	setContextMenu: function() {
+	set_context_menu: function() {
 		var self = this;
 
 		self.context_menu_file = new org.goorm.core.menu.context();
@@ -255,22 +247,22 @@ org.goorm.core.project.explorer.prototype = {
 		self.context_menu_project = new org.goorm.core.menu.context();
 		self.context_menu_project.init("configs/menu/org.goorm.core.project/project.explorer.html", "project.explorer", "", null, null);
 		
-		self.refreshContextMenu();
+		self.refresh_context_menu();
 
-		$(core).trigger("layoutLoaded");
+		//$(core).trigger("layout_loaded");
 	},
 	
-	refreshContextMenu: function () {
+	refresh_context_menu: function () {
 		var self = this;
 
-		$("#projectTreeview").unbind("mousedown");
-		$("#projectTreeview").mousedown(function (e) {
+		$("#project_treeview").unbind("mousedown");
+		$("#project_treeview").mousedown(function (e) {
 			
 			self.context_menu_file.hide()
 			self.context_menu_project.hide();
 			self.context_menu_folder.hide();
 			
-			$("#projectTreeview").find(".ygtvfocus").removeClass("ygtvfocus");
+			$("#project_treeview").find(".ygtvfocus").removeClass("ygtvfocus");
 				
 			if (e.which == 3) {
 				
@@ -291,15 +283,15 @@ org.goorm.core.project.explorer.prototype = {
 		});
 
 
-		$("#projectTreeview").find(".ygtvcell").unbind("mousedown");		
-		$("#projectTreeview").find(".ygtvcell").mousedown(function (e) {
+		$("#project_treeview").find(".ygtvcell").unbind("mousedown");		
+		$("#project_treeview").find(".ygtvcell").mousedown(function (e) {
 			
 			self.context_menu_project.hide();
 			self.context_menu_file.hide();
 			self.context_menu_folder.hide();
 			
 			if ($(this).hasClass("ygtvfocus") == false) {
-				$("#projectTreeview").find(".ygtvfocus").removeClass("ygtvfocus");
+				$("#project_treeview").find(".ygtvfocus").removeClass("ygtvfocus");
 				
 				if ($(this).hasClass("ygtvcontent")) {
 					$(this).prev().addClass("ygtvfocus");

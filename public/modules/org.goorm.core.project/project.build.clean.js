@@ -2,73 +2,37 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module project
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class open
- * @extends project
- **/
 org.goorm.core.project.build.clean = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 * @type Object
-	 * @default null
-	 **/
 	this.dialog = null;
-	
-	/**
-	 * The array object that contains the information about buttons on the bottom of a dialog 
-	 * @property buttons
-	 * @type Object
-	 * @default null
-	 **/
 	this.buttons = null;
-		
-	/**
-	 * This presents the current browser version 
-	 * @property Object
-	 * @type Object
-	 * @default null
-	 **/
 	this.chat = null;
 };
 
 org.goorm.core.project.build.clean.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor
-	 **/
 	init: function () {
 		
 		var self = this;
 				
-		var handleClean = function() { 
-			$("#buildCleanList input[type=checkbox]").each(function(){
+		var handle_clean = function() { 
+			$("#build_clean_list input[type=checkbox]").each(function(){
 				if($(this).is(":checked")){
 
-					if(core.pluginManager.plugins["org.goorm.plugin."+$(this).attr("projectType")]!=undefined) {
-						console.log("why?");
-						console.log("org.goorm.plugin."+$(this).attr("projectType"));
-						core.pluginManager.plugins["org.goorm.plugin."+$(this).attr("projectType")].clean($(this).attr("name"));
+					if(core.module.plugin_manager.plugins["org.goorm.plugin."+$(this).attr("projectType")]!=undefined) {
+						core.module.plugin_manager.plugins["org.goorm.plugin."+$(this).attr("projectType")].clean($(this).attr("name"));
 					}
 				}
 			});
 			this.hide(); 
 		};
 
-		var handleCancel = function() { 
+		var handle_cancel = function() { 
 			this.hide(); 
 		};
 		
-		this.buttons = [ {text:"Clean", handler:handleClean, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}]; 
+		this.buttons = [ {text:"Clean", handler:handle_clean, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}]; 
 						 
 		this.dialog = new org.goorm.core.project.build.clean.dialog();
 		this.dialog.init({
@@ -79,14 +43,14 @@ org.goorm.core.project.build.clean.prototype = {
 			modal:true,
 			buttons:this.buttons,
 			success: function () {
-				self.buttonSelectAll = new YAHOO.widget.Button("buildCleanSelectAll");
-				self.buttonDeselectAll = new YAHOO.widget.Button("buildCleanUnSelectAll");
+				self.button_select_all = new YAHOO.widget.Button("build_clean_select_all");
+				self.button_deselect_all = new YAHOO.widget.Button("build_clean_unselect_all");
 				
-				$("#buildCleanSelectAll").click(function(){
-					self.selectAll();
+				$("#build_clean_select_all").click(function(){
+					self.select_all();
 				});
-				$("#buildCleanUnSelectAll").click(function(){
-					self.unselectAll();
+				$("#build_clean_unselect_all").click(function(){
+					self.unselect_all();
 				});
 			}
 		});
@@ -95,55 +59,47 @@ org.goorm.core.project.build.clean.prototype = {
 		//this.dialog.panel.setBody("AA");
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method show 
-	 **/
 	show: function () {
-		this.projectList();
+		this.project_list();
 		this.dialog.panel.show();
 	},
 
-	selectAll: function(){
-		$("#buildCleanList input[type=checkbox]").attr("checked",true);
+	select_all: function(){
+		$("#build_clean_list input[type=checkbox]").attr("checked",true);
 	},
 	
-	unselectAll: function(){
-		$("#buildCleanList input[type=checkbox]").attr("checked",false);
+	unselect_all: function(){
+		$("#build_clean_list input[type=checkbox]").attr("checked",false);
 	},
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method addbuild\.projectList 
-	 **/	
-	projectList: function () {
-		$("#buildCleanList").empty();
+
+	project_list: function () {
+		$("#build_clean_list").empty();
 	
 		$.post("project/get_list", "", function (data) {
 			
-			var sortingData = eval(data);
+			var sorting_data = eval(data);
 			
-			for(var name in sortingData) {
-				if(!$.isEmptyObject(core.pluginManager.plugins["org.goorm.plugin."+sortingData[name].type])) {
-					if(core.pluginManager.plugins["org.goorm.plugin."+sortingData[name].type].clean){
-						var iconStr = "";
-						iconStr += "<div id='claeanSelector_" + sortingData[name].filename + "' value='" + sortingData[name].filename + "' class='selectDiv' style='height:14px;'>";
-						iconStr += "<div style='float:left;'>";
-						iconStr += "<input type='checkbox' name='"+sortingData[name].filename+"' projectPath='"+sortingData[name].author+"_"+sortingData[name].name+"' projectName='"+sortingData[name].name+"' projectType='"+sortingData[name].type+"'";
+			for(var name in sorting_data) {
+				if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+sorting_data[name].type])) {
+					if(core.module.plugin_manager.plugins["org.goorm.plugin."+sorting_data[name].type].clean){
+						var icon_str = "";
+						icon_str += "<div id='claeanSelector_" + sorting_data[name].filename + "' value='" + sorting_data[name].filename + "' class='select_div' style='height:14px;'>";
+						icon_str += "<div style='float:left;'>";
+						icon_str += "<input type='checkbox' name='"+sorting_data[name].filename+"' project_path='"+sorting_data[name].author+"_"+sorting_data[name].name+"' project_name='"+sorting_data[name].name+"' projectType='"+sorting_data[name].type+"'";
 		
-						if (sortingData[name].filename == core.currentProjectPath) {
-							iconStr += "checked";
+						if (sorting_data[name].filename == core.status.current_project_path) {
+							icon_str += "checked";
 						}
 						
-						iconStr += ">";
+						icon_str += ">";
 						
-						iconStr += "</div>";
-						iconStr += "<div style='float:left; padding-top:1px; padding-left:5px;'>" + sortingData[name].filename + "</div>";
-						iconStr += "</div>";
+						icon_str += "</div>";
+						icon_str += "<div style='float:left; padding-top:1px; padding-left:5px;'>" + sorting_data[name].filename + "</div>";
+						icon_str += "</div>";
 			
-						$("#buildCleanList").append(iconStr);
+						$("#build_clean_list").append(icon_str);
 						
-						$("#claeanSelector_" + sortingData[name].filename).click(function () {
-							console.log("AAA");
+						$("#claeanSelector_" + sorting_data[name].filename).click(function () {
 							$(this).find("input").attr("checked", !$(this).find("input").attr("checked"));
 						});
 					}

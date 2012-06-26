@@ -29,7 +29,7 @@ CodeMirror.defineMode("xmlpure", function(config, parserConfig) {
     };
 
     // options
-    var indentUnit = config.indentUnit;
+    var indent_unit = config.indent_unit;
 
     ///////////////////////////////////////////////////////////////////////////
     // helper functions
@@ -62,7 +62,7 @@ CodeMirror.defineMode("xmlpure", function(config, parserConfig) {
         var newContext = {
             tagName: tagName,
             prev: state.context,
-            indent: state.context ? state.context.indent + indentUnit : 0,
+            indent: state.context ? state.context.indent + indent_unit : 0,
             lineNumber: state.lineNumber,
             indented: state.indented,
             noIndent: noIndent
@@ -462,7 +462,7 @@ CodeMirror.defineMode("xmlpure", function(config, parserConfig) {
                     return state.context.indent;
                 }
                 // indent to last context + regular indent unit
-                return state.context.indent + indentUnit;
+                return state.context.indent + indent_unit;
             }
             return 0;
         },

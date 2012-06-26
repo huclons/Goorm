@@ -1,37 +1,37 @@
-<div class="contentHeader" localizationKey='dialog_file_export'>File Export</div>
+<div class="content_header" localization_key='dialog_file_export'>File Export</div>
 
-<div class="contentGuideMessage" localizationKey='dialog_file_export_guide'>Select a File to Export</div>
+<div class="content_guide_message" localization_key='dialog_file_export_guide'>Select a File to Export</div>
 
-<div id="fileExport" style="text-align:left;">
+<div id="file_export" style="text-align:left;">
 	<div style="width:100%; height:20px; overflow:auto; font-size:11px;">
     	<div style="float:left;">
-        	<span localizationKey='common_location'>Location : </span>
-            <input type="text" id="fileExportInputLocationPath" style="width:600px; height:15px;" readonly="readonly" />
+        	<span localization_key='common_location'>Location : </span>
+            <input type="text" id="file_export_input_location_path" style="width:600px; height:15px;" readonly="readonly" />
         </div>
         <div style="float:right;">
-        	<span localizationKey='common_target'>Target : </span>
+        	<span localization_key='common_target'>Target : </span>
             <select name='selectbox'>
                 <option value='1'>Remote</option>
             </select>
         </div>
     </div>
-	<div id="fileExportDialogMiddle" style="width:780px; height:275px; margin-top:8px; font-size:11px;">
-		<div id="fileExportDialogLeft" class="dialogsLeft">
-			<div id="fileExportTreeview" class='directoryTreeview dialogsLeftInner'></div>
+	<div id="file_export_dialog_middle" style="width:780px; height:275px; margin-top:8px; font-size:11px;">
+		<div id="file_export_dialog_left" class="dialogs_left">
+			<div id="file_export_treeview" class='directory_treeview dialogs_left_inner'></div>
 		</div>
-		<div id="fileExportDialogCenter" class="dialogsCenter"></div>
+		<div id="file_export_dialog_center" class="dialog_center"></div>
     </div>
-	<input id="fileExportProjectPath" type="hidden">
+	<input id="file_export_project_path" type="hidden">
 	<div style="width:100%; height:20px; overflow:auto; font-size:11px; margin-top:10px;">
 		<div style="float:left;">
-			<span localizationKey='dialog_file_export_file'>Selected File : </span><input type"text" id="fileExportProjectNameRead" style="width:500px; height:15px" readonly/>
+			<span localization_key='dialog_file_export_file'>Selected File : </span><input type"text" id="file_export_project_name_read" style="width:500px; height:15px" readonly/>
 		</div>
 		<div style="float:right;">
-            <select id='fileExportType'>
+            <select id='export_type'>
                 <option value='1' selected="selected">tar</option>
                 <option value='2'>zip</option>
             </select>
 		</div>
-		<div style="float:right; margin-right:20px;" localizationKey='dialog_file_export_exporttype'>Export file type</div>
+		<div style="float:right; margin-right:20px;" localization_key='dialog_file_export_exporttype'>Export file type</div>
 	</div>
 </div>

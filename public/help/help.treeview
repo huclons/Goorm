@@ -1,13 +1,13 @@
 [ 
 	{
-		label: "helpContents1",
+		label: "help_contents1",
 		url: "help/kor/contents1.html",
-		divID: "helpContents1"
+		divID: "help_contents1"
     },
     {
-		label: "helpContents2",
+		label: "help_contents2",
 		url: "help/kor/contents2.html",
-		divID:"helpContents2"
+		divID:"help_contents2"
 	}
 ]
 

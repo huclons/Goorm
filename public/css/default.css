@@ -35,61 +35,61 @@ input {
 	background-color: #F8F8F8;
 }
 
-#goormLeft {
+#goorm_left {
 	border-right: 1px solid #999;
 	border-top: 1px solid #999;
 }
 
-#goormInnerLayoutRight {
+#goorm_inner_layout_right {
 	border-left: 1px solid #999;
 	border-top: 1px solid #999;
 	border-bottom: 1px solid #999;	
 }
 
-#goormInnerLayoutCenter {
+#goorm_inner_layout_center {
 	border-left: 1px solid #999;
 	border-right: 1px solid #999;
 	border-top: 1px solid #999;
 	border-bottom: 1px solid #999;	
 }
 
-#goormInnerLayoutBottom {
+#goorm_inner_layout_bottom {
 	border-left: 1px solid #999;
 	border-top: 1px solid #999;
 }
 
-#goormBottom {
+#goorm_bottom {
 	border-top: 1px solid #999;
 }
 
-#goormBottom .deviceType {
+#goorm_bottom .device_type {
 	margin-left:2px;
 	float:left;	
 }
 
-#goormBottom .goormVersion {
+#goorm_bottom .goorm_version {
 	margin-left:2px;
 	float:left;	
 }
 
-#goormBottom .browserName {
+#goorm_bottom .browser_name {
 	margin-left:2px;
 	float:left;	
 }
 
-#goormBottom .isCollaborationOn {
+#goorm_bottom .is_collaboration_on {
 	margin-left:2px;	
 	float:left;	
 	color:#999;
 }
 
-#goormBottom .isChatOn {
+#goorm_bottom .is_chat_on {
 	margin-left:2px;	
 	float:left;
 	color:#999;	
 }
 
-#goormStatusbarDeviceType {
+#goorm_statusbar_device_type {
 	height:16px;	
 	padding-top:1px;
 	padding-left:7px;
@@ -101,7 +101,7 @@ input {
 	border-right:1px solid #999;
 }
 
-#goormStatusbargoormVersion {
+#goorm_statusbar_goorm_version {
 	height:16px;	
 	padding-top:1px;
 	padding-left:7px;
@@ -113,7 +113,7 @@ input {
 	border-right:1px solid #999;
 }
 
-#goormStatusbarBrowserVersion {
+#goorm_statusbar_version {
 	height:16px;	
 	padding-top:1px;
 	padding-left:7px;
@@ -125,7 +125,7 @@ input {
 	border-right:1px solid #999;
 }
 
-#goormStatusbarCollaboration {
+#goorm_statusbar_collaboration {
 	height:16px;
 	padding-top:1px;
 	padding-left:7px;
@@ -137,7 +137,7 @@ input {
 	border-right:1px solid #999;
 }
 
-#goormStatusbarChat {
+#goorm_statusbar_chat {
 	height:16px;	
 	padding-top:1px;
 	padding-left:7px;
@@ -148,7 +148,7 @@ input {
 	text-align:left;
 }
 
-#goormStatusbarMessage {
+#goorm_statusbar_message {
 	padding: 7px;
 	font-size: 11px;
 	width:200px;
@@ -156,14 +156,14 @@ input {
 	text-align:right;
 }
 
-#goormLoadingIndicator {
+#goorm_loading_indicator {
 	padding-top: 7px;
 	width:30px;
 	float:left;
 	text-align:right;
 }
 
-#goormProgressBar {
+#goorm_progress_bar {
 	padding: 7px;
 	font-size: 11px;
 	width:100px;
@@ -190,11 +190,11 @@ input {
 	font-size:11px;
 }
 
-#projectSelector {
+#project_selector {
 	overflow:hidden;
 }
 
-#startpageContainer {
+#startpage_container {
 	position:absolute;
 	left:0px;
 	top:0px;
@@ -210,23 +210,23 @@ input {
 }
 
 
-.debugTabLineSelection {
+.debug_tab_line_selection {
 	cursor:pointer;
 	border-bottom:1px solid #eee;
 	padding:3px;
 }
 
-.debugTabLineSelection:hover {
+.debug_tab_line_selection:hover {
 	background-color:#FFFFDF;
 }
 
-.selectDiv {
+.select_div {
 	padding: 3px;
 	cursor: pointer;
 	line-height: 11px;
 }
 
-.selectDiv:hover {
+.select_div:hover {
 	background-color:#B3D4FF;
 	color:#FFF;
 }
@@ -316,7 +316,7 @@ YUI MENU STYLE CUSTOMIZATION
 	font-family: Tahoma, Arial, 굴림체, 굴림;
 }
 
-#goormTop .yuimenuitem .yuimenuitemlabel {
+#goorm_top .yuimenuitem .yuimenuitemlabel {
 	width:200px;
 	height:18px;
 	padding-left:26px;

@@ -2,102 +2,24 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module design
  **/
 
-/**
- * This is an goorm code generator.  
- * <br>goorm starts with this code generator.
- * @class preview
- * @extends design.canvas.preview
- **/
 org.goorm.core.design.canvas.preview = function () {
 	
-	/**
-	 * This presents the current browser version
-	 * @property panel
-	 **/
 	this.panel = null;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 **/
 	this.target = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 **/
-	this.realTarget = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property width
-	 **/
-	this.realWidth = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 **/
-	this.realHeight = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property width
-	 **/
+	this.real_target = null;
+	this.real_width = null;
+	this.real_height = null;
 	this.width = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 **/
 	this.height = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property left
-	 **/
 	this.left = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property top
-	 **/
 	this.top = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property scale
-	 **/
 	this.scale = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property parent
-	 **/
 	this.parent = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property indicatorWidth
-	 **/
-	this.indicatorWidth = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property indicatorHeight
-	 **/
-	this.isPreviewClicked = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property indicatorTopFake
-	 **/
-	this.indicatorTopFake = null;
+	this.indicator_width = null;
+	this.is_preview_clicked = null;
+	this.indicator_top_fake = null;
 };
 
 
@@ -107,15 +29,15 @@ org.goorm.core.design.canvas.preview.prototype = {
 
 		//Set Properties
 		self.target = target;
-		self.realWidth = width;
+		self.real_width = width;
 		self.width = width*scale;
-		self.realHeight = height;
+		self.real_height = height;
 		self.height = height*scale;
 		self.scale = scale;
 		self.parent = parent;
-		self.isPreviewClicked = false;
+		self.is_preview_clicked = false;
 		
-		self.indicatorTopFake = 30;
+		self.indicator_top_fake = 30;
 				
 		this.panel = new YAHOO.widget.Panel(
 			target, { 
@@ -129,11 +51,11 @@ org.goorm.core.design.canvas.preview.prototype = {
 		);	
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
-		// Window setting
+		// window setting
 		//////////////////////////////////////////////////////////////////////////////////////////	
 		
-		this.panel.setHeader("<div style='overflow:auto' class='titlebar'><div style='float:left; font-size:9px;'>Preview</div><div style='float:right;'><img src='images/icons/context/closebutton.png' class='closePreview windowButton' /></div></div>");
-		this.panel.setBody("<div class='windowContainer'></div>");
+		this.panel.setHeader("<div style='overflow:auto' class='titlebar'><div style='float:left; font-size:9px;'>Preview</div><div style='float:right;'><img src='images/icons/context/closebutton.png' class='closePreview window_button' /></div></div>");
+		this.panel.setBody("<div class='window_container'></div>");
 		this.panel.render();
 		
 		$(target).parent().css("left", 30);
@@ -146,52 +68,52 @@ org.goorm.core.design.canvas.preview.prototype = {
 		
 
 		//adding html container
-		$(target).find(".windowContainer").append("<div class='previewCanvasIndicator'></div>");
-		$(target).find(".windowContainer").append("<div class='previewCanvas'></div>");
-		$(target).find(".windowContainer").find(".previewCanvas").append("<canvas width='"+self.width+"' height='"+self.height+"'></canvas>");
-		$(target).find(".windowContainer").find(".previewCanvas").append("<div class='previewEvent' style='width:"+self.width+"px; height:"+self.height+"px;'></div>");		
+		$(target).find(".window_container").append("<div class='previewCanvasIndicator'></div>");
+		$(target).find(".window_container").append("<div class='previewCanvas'></div>");
+		$(target).find(".window_container").find(".previewCanvas").append("<canvas width='"+self.width+"' height='"+self.height+"'></canvas>");
+		$(target).find(".window_container").find(".previewCanvas").append("<div class='previewEvent' style='width:"+self.width+"px; height:"+self.height+"px;'></div>");		
 		
 		$(self.target).find(".closePreview").click(function() {
-			self.parent.toolbar.togglePreview();
+			self.parent.toolbar.toggle_preview();
 		});
 
 	},
 	
-	setSize: function (option, indicatorTopFake) {
+	setSize: function (option, indicator_top_fake) {
 		var self = this;
 		
 		if (option=="change") {
-			self.realWidth = self.parent.width;
+			self.real_width = self.parent.width;
 			self.width = self.parent.width*self.scale;
-			self.realHeight = self.parent.height;
+			self.real_height = self.parent.height;
 			self.height = self.parent.height*self.scale;
 			
-			if (!indicatorTopFake) {
-				self.indicatorTopFake = 30;
+			if (!indicator_top_fake) {
+				self.indicator_top_fake = 30;
 			}
 			else {
-				self.indicatorTopFake = indicatorTopFake;
+				self.indicator_top_fake = indicator_top_fake;
 			}
 			
-			$(self.target).find(".windowContainer").find(".previewCanvas").find("canvas").attr("width", self.width);
-			$(self.target).find(".windowContainer").find(".previewCanvas").find("canvas").attr("height", self.height);
-			$(self.target).find(".windowContainer").find(".previewCanvas").find(".previewEvent").width(self.width);
-			$(self.target).find(".windowContainer").find(".previewCanvas").find(".previewEvent").height(self.height);
+			$(self.target).find(".window_container").find(".previewCanvas").find("canvas").attr("width", self.width);
+			$(self.target).find(".window_container").find(".previewCanvas").find("canvas").attr("height", self.height);
+			$(self.target).find(".window_container").find(".previewCanvas").find(".previewEvent").width(self.width);
+			$(self.target).find(".window_container").find(".previewCanvas").find(".previewEvent").height(self.height);
 		}
 		
-		// set windowContainer size
-		$(self.target).find(".windowContainer").width(self.width);
-		$(self.target).find(".windowContainer").height(self.height);
+		// set window_container size
+		$(self.target).find(".window_container").width(self.width);
+		$(self.target).find(".window_container").height(self.height);
 		
 		// set indicator size
-		if(($(self.target).parent().parent().find(".canvasContainer").width()-14) > self.realWidth) {
-			self.indicatorWidth = $(self.target).find(".windowContainer").width()+3;
+		if(($(self.target).parent().parent().find(".canvas_container").width()-14) > self.real_width) {
+			self.indicator_width = $(self.target).find(".window_container").width()+3;
 		}
 		else {
-			self.indicatorWidth = ($(self.target).parent().parent().find(".canvasContainer").width()-14)*self.scale;
+			self.indicator_width = ($(self.target).parent().parent().find(".canvas_container").width()-14)*self.scale;
 		}
-		self.indicatorHeight = ($(self.target).parent().parent().find(".canvasContainer").height()-14)*self.scale;
-		$(self.target).find(".previewCanvasIndicator").width(self.indicatorWidth-5);
+		self.indicatorHeight = ($(self.target).parent().parent().find(".canvas_container").height()-14)*self.scale;
+		$(self.target).find(".previewCanvasIndicator").width(self.indicator_width-5);
 		$(self.target).find(".previewCanvasIndicator").height(self.indicatorHeight-5);
 		
 	},
@@ -203,7 +125,7 @@ org.goorm.core.design.canvas.preview.prototype = {
 		self.left = parseInt($(self.target).parent().css("left"));
 		self.top = parseInt($(self.target).parent().css("top"));
 		
-		self.indicatorTopFake = 30;
+		self.indicator_top_fake = 30;
 		
 		// set scroll event
 		$(self.parent.target).scroll(function () {
@@ -212,20 +134,19 @@ org.goorm.core.design.canvas.preview.prototype = {
 			var movedTop = $(this).scrollTop();
 			
 /*
-			var zoomValue = self.parent.toolbar.zoomLevel/100;
+			var zoomValue = self.parent.toolbar.zoom_level/100;
 			
-			console.log(zoomValue);
 			
 			movedLeft = movedLeft/zoomValue;
 			movedTop = movedTop/zoomValue;
 */
 			
-			var threshold = self.realHeight * self.scale - $(self.target).find(".previewCanvasIndicator").height();
+			var threshold = self.real_height * self.scale - $(self.target).find(".previewCanvasIndicator").height();
 			
 			if ((movedLeft-45) * self.scale <= 0) {
 				$(self.target).find(".previewCanvasIndicator").css("left", 0);
 			}
-			else if ( (movedLeft-45) * self.scale > self.width - self.indicatorWidth + 3) {
+			else if ( (movedLeft-45) * self.scale > self.width - self.indicator_width + 3) {
 				$(self.target).find(".previewCanvasIndicator").css("left", "");
 				$(self.target).find(".previewCanvasIndicator").css("right", 0);
 			}
@@ -233,15 +154,15 @@ org.goorm.core.design.canvas.preview.prototype = {
 				$(self.target).find(".previewCanvasIndicator").css("left", ((movedLeft-45) * self.scale));
 			}
 			
-			if ((movedTop-self.indicatorTopFake) * self.scale <= 0) {
+			if ((movedTop-self.indicator_top_fake) * self.scale <= 0) {
 				$(self.target).find(".previewCanvasIndicator").css("top", 0);
 			}
-			else if ( (movedTop-self.indicatorTopFake) * self.scale > self.height - self.indicatorHeight + 3) {
+			else if ( (movedTop-self.indicator_top_fake) * self.scale > self.height - self.indicatorHeight + 3) {
 				$(self.target).find(".previewCanvasIndicator").css("top", "");
 				$(self.target).find(".previewCanvasIndicator").css("bottom", 0);
 			}
 			else {
-				$(self.target).find(".previewCanvasIndicator").css("top", ((movedTop-self.indicatorTopFake) * self.scale));
+				$(self.target).find(".previewCanvasIndicator").css("top", ((movedTop-self.indicator_top_fake) * self.scale));
 			}
 
 		});
@@ -249,11 +170,11 @@ org.goorm.core.design.canvas.preview.prototype = {
 		
 		// set previewEvent
 		$(self.target).find(".previewEvent").mousedown(function (event) {
-			self.isPreviewClicked=true;
+			self.is_preview_clicked=true;
 		});
 		
 		$(self.target).find(".previewEvent").mouseup(function (event) {
-			self.isPreviewClicked = false;
+			self.is_preview_clicked = false;
 			var clickedX = event.pageX-$(this).offset().left;
 			var clickedY = event.pageY-$(this).offset().top;
 									
@@ -261,7 +182,7 @@ org.goorm.core.design.canvas.preview.prototype = {
 		});
 		
 		$(self.target).find(".previewEvent").mousemove(function (event) {
-			if(self.isPreviewClicked) {
+			if(self.is_preview_clicked) {
 				var clickedX = event.pageX-$(this).offset().left;
 				var clickedY = event.pageY-$(this).offset().top;
 				
@@ -270,7 +191,7 @@ org.goorm.core.design.canvas.preview.prototype = {
 		});
 				
 		$(self.target).find(".previewEvent").mouseout(function (event) {
-			self.isPreviewClicked=false;
+			self.is_preview_clicked=false;
 		});
 	},
 	
@@ -278,52 +199,46 @@ org.goorm.core.design.canvas.preview.prototype = {
 		var self = this;
 
 		if ( clickedY < self.indicatorHeight/2 ) {
-			$(self.target).parent().parent().find(".canvasContainer").scrollTop(self.indicatorTopFake);			
+			$(self.target).parent().parent().find(".canvas_container").scrollTop(self.indicator_top_fake);			
 		}
 		else if ( clickedY > self.height - self.indicatorHeight/2 ) {
-			var totalHeight = $(self.target).parent().parent().find(".canvasContainer").find(".space").height();
-			var currentWindowHeight = $(self.target).parent().parent().find(".canvasContainer").height()-14;
+			var totalHeight = $(self.target).parent().parent().find(".canvas_container").find(".space").height();
+			var currentwindowHeight = $(self.target).parent().parent().find(".canvas_container").height()-14;
 
-			$(self.target).parent().parent().find(".canvasContainer").scrollTop(totalHeight-currentWindowHeight-self.indicatorTopFake);
+			$(self.target).parent().parent().find(".canvas_container").scrollTop(totalHeight-currentwindowHeight-self.indicator_top_fake);
 		}
 		else {
-			$(self.target).parent().parent().find(".canvasContainer").scrollTop((clickedY-(self.indicatorHeight/2))/self.scale+self.indicatorTopFake);			
+			$(self.target).parent().parent().find(".canvas_container").scrollTop((clickedY-(self.indicatorHeight/2))/self.scale+self.indicator_top_fake);			
 		}
 				
 		if ((self.width-2) > $(self.target).find(".previewCanvasIndicator").width()) {
-			if ( clickedX < self.indicatorWidth/2 ) {
-				$(self.target).parent().parent().find(".canvasContainer").scrollLeft(18);			
+			if ( clickedX < self.indicator_width/2 ) {
+				$(self.target).parent().parent().find(".canvas_container").scrollLeft(18);			
 			}
-			else if ( clickedX > self.width - self.indicatorWidth/2 + 5 ) {				
-				var totalWidth = $(self.target).parent().parent().find(".canvasContainer").find(".space").width();
-				var currentWindowWidth = $(self.target).parent().parent().find(".canvasContainer").width()-14;
+			else if ( clickedX > self.width - self.indicator_width/2 + 5 ) {				
+				var totalWidth = $(self.target).parent().parent().find(".canvas_container").find(".space").width();
+				var currentwindowWidth = $(self.target).parent().parent().find(".canvas_container").width()-14;
 				
-				$(self.target).parent().parent().find(".canvasContainer").scrollLeft(totalWidth-currentWindowWidth-18+14);
+				$(self.target).parent().parent().find(".canvas_container").scrollLeft(totalWidth-currentwindowWidth-18+14);
 			}
 			else {
-				$(self.target).parent().parent().find(".canvasContainer").scrollLeft((clickedX-(self.indicatorWidth/2)+4)/self.scale);
+				$(self.target).parent().parent().find(".canvas_container").scrollLeft((clickedX-(self.indicator_width/2)+4)/self.scale);
 			}
 		}
 		else {
-			var totalWidth = $(self.target).parent().parent().find(".canvasContainer").find(".space").width();
-			var currentWindowWidth = $(self.target).parent().parent().find(".canvasContainer").width()-14;
+			var totalWidth = $(self.target).parent().parent().find(".canvas_container").find(".space").width();
+			var currentwindowWidth = $(self.target).parent().parent().find(".canvas_container").width()-14;
 	
-			$(self.target).parent().parent().find(".canvasContainer").scrollLeft((totalWidth-currentWindowWidth)/2);
+			$(self.target).parent().parent().find(".canvas_container").scrollLeft((totalWidth-currentwindowWidth)/2);
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * <br>This operates the initialization tasks for layout, actions, plugins...
-	 * @method draw 
-	 **/
 	draw: function () {
-		//console.log("draw");
 		var self = this;
 		
 		
 /*
-		this.selectedIndex = $.unique(this.selectedIndex);
+		this.selected_index = $.unique(this.selected_index);
 */
 		
 		
@@ -365,7 +280,7 @@ org.goorm.core.design.canvas.preview.prototype = {
 
 					
 					//is hovered?
-					if(self.parent.hoveredIndex == i) {
+					if(self.parent.hovered_index == i) {
 						context.beginPath();
 						context.strokeStyle = "#FFFF00";
 						
@@ -384,12 +299,12 @@ org.goorm.core.design.canvas.preview.prototype = {
 					
 					
 					if (this.properties.dashed) {
-						var dashArray=[5, 4];
-						var dashCount = dashArray.length;
+						var dash_array=[5, 4];
+						var dash_count = dash_array.length;
 						
 						var dx, dy;
 						
-						var dashIndex=0, draw=true;
+						var dash_index=0, draw=true;
 						
 						var x, y;
 						
@@ -408,22 +323,22 @@ org.goorm.core.design.canvas.preview.prototype = {
 						context.lineWidth = parseFloat($(this)[0].properties.thickness);
 						
 						var slope = dy/dx;
-						var distRemaining = Math.sqrt( dx*dx + dy*dy );
+						var remaining_distance = Math.sqrt( dx*dx + dy*dy );
 						
-						while (distRemaining>=0.1){
-							var dashLength = dashArray[dashIndex++%dashCount];
+						while (remaining_distance>=0.1){
+							var dash_length = dash_array[dash_index++%dash_count];
 							
-							if (dashLength > distRemaining) 
-								dashLength = distRemaining;
+							if (dash_length > remaining_distance) 
+								dash_length = remaining_distance;
 								
-						  	var xStep = Math.sqrt( dashLength*dashLength / (1 + slope*slope) );
+						  	var step_x = Math.sqrt( dash_length*dash_length / (1 + slope*slope) );
 							
-						  	x += xStep
-						  	y += slope*xStep;
+						  	x += step_x
+						  	y += slope*step_x;
 							
 						  	context[draw ? 'lineTo' : 'moveTo'](x,y);
 						
-						  	distRemaining -= dashLength;
+						  	remaining_distance -= dash_length;
 						  	draw = !draw;
 						}
 						
@@ -468,7 +383,7 @@ org.goorm.core.design.canvas.preview.prototype = {
 					}
 					
 					//is hovered?
-					if(self.parent.hoveredIndex == i) {
+					if(self.parent.hovered_index == i) {
 						context.beginPath();
 						context.strokeStyle = "#FFFF00";
 						
@@ -506,7 +421,7 @@ org.goorm.core.design.canvas.preview.prototype = {
 											
 						if (this.shape.move) {
 							this.shape.move(this.properties.sx, this.properties.sy, this.properties.ex, this.properties.ey);
-							this.shape.setShape();
+							this.shape.set_shape();
 						}
 					
 					}

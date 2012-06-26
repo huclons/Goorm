@@ -2,71 +2,56 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module menu
  **/
 
-/**
- * This is an goorm code generator.
- * goorm starts with this code generator.
- * @class action
- * @extends menu
- **/
 org.goorm.core.menu.action = function() {
 
 };
 
 org.goorm.core.menu.action.prototype = {
-
-	/**
-	 * This function is an goorm core initializating function.
-	 * @constructor
-	 **/
 	init : function() {
-
 		//////////////////////////////////////////////////
 		//Main Menu : File
 		//////////////////////////////////////////////////
-		$("a[action=newProject]").unbind("click");
-		$("a[action=newProject]").click(function() {
+		$("a[action=new_project]").unbind("click");
+		$("a[action=new_project]").click(function() {
 			core.dialog.new_project.show();
-			$(".projectWizardFirstButton[project-type=all]").trigger("click"); 
+			$(".project_wizard_first_button[project-type=all]").trigger("click"); 
 		});
 
-		$("a[action=newFile_goormProject]").unbind("click");
-		$("a[action=newFile_goormProject]").click(function() {
+		$("a[action=new_file_goorm_project]").unbind("click");
+		$("a[action=new_file_goorm_project]").click(function() {
 			core.dialog.new_project.show();
-			$(".projectWizardFirstButton[project-type=goormp]").trigger("click");
+			$(".project_wizard_first_button[project-type=goormp]").trigger("click");
 		});
 
-		$("a[action=newFile_file]").unbind("click");
-		$("a[action=newFile_file]").click(function() {
+		$("a[action=new_file_file]").unbind("click");
+		$("a[action=new_file_file]").click(function() {
 			core.dialog.new_file.show("");
 		});
 
-		$("a[action=newFile_folder]").unbind("click");
-		$("a[action=newFile_folder]").click(function() {
+		$("a[action=new_file_folder]").unbind("click");
+		$("a[action=new_file_folder]").click(function() {
 			core.dialog.new_folder.show("");
 		});
 
-		$("a[action=newFile_textFile]").unbind("click");
-		$("a[action=newFile_textFile]").click(function() {
+		$("a[action=new_file_textfile]").unbind("click");
+		$("a[action=new_file_textfile]").click(function() {
 			core.dialog.new_untitled_textfile.show("");
 		});
 
-		$("a[action=newFile_other]").unbind("click");
-		$("a[action=newFile_other]").click(function() {
+		$("a[action=new_file_other]").unbind("click");
+		$("a[action=new_file_other]").click(function() {
 			core.dialog.new_other_file.show("");
 		});
 
-		$("a[action=openProject]").unbind("click");
-		$("a[action=openProject]").click(function() {
+		$("a[action=open_project]").unbind("click");
+		$("a[action=open_project]").click(function() {
 			core.dialog.open_project.show();
 		});
 
-		$("a[action=openFile]").unbind("click");
-		$("a[action=openFile]").click(function() {
+		$("a[action=open_file]").unbind("click");
+		$("a[action=open_file]").click(function() {
 			core.dialog.open_file.show();
 		});
 
@@ -76,8 +61,8 @@ org.goorm.core.menu.action.prototype = {
 			confirmation.init({
 				title : "Do you want exit?",
 				message : "Do you want exit?",
-				yesText : "Yes",
-				noText : "No",
+				yes_text : "Yes",
+				no_text : "No",
 				yes : function() {
 
 				},
@@ -89,77 +74,77 @@ org.goorm.core.menu.action.prototype = {
 			confirmation.panel.show();
 		});
 
-		$("a[action=openURL]").unbind("click");
-		$("a[action=openURL]").click(function() {
+		$("a[action=open_url]").unbind("click");
+		$("a[action=open_url]").click(function() {
 			core.dialog.open_url.show();
 		});
 
-		$("a[action=closeFile]").unbind("click");
-		$("a[action=closeFile]").click(function() {
-			var windowManager = core.module.layout.workSpace.windowManager;
+		$("a[action=close_file]").unbind("click");
+		$("a[action=close_file]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(windowManager.window[windowManager.activeWindow]) {
-				windowManager.window[windowManager.activeWindow].close();
+			if(window_manager.window[window_manager.active_window]) {
+				window_manager.window[window_manager.active_window].close();
 			}
 		});
 
-		$("a[action=closeAll]").unbind("click");
-		$("a[action=closeAll]").click(function() {
-			core.module.layout.workSpace.windowManager.closeAll();
+		$("a[action=close_all]").unbind("click");
+		$("a[action=close_all]").click(function() {
+			core.module.layout.workspace.window_manager.close_all();
 		});
 
-		$("a[action=saveFile]").unbind("click");
-		$("a[action=saveFile]").click(function() {
-			var windowManager = core.module.layout.workSpace.windowManager;
+		$("a[action=save_file]").unbind("click");
+		$("a[action=save_file]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if (windowManager.activeWindow<0) {
-				alert.show(core.localization.msg.alertFileNotOpened);
+			if (window_manager.active_window<0) {
+				alert.show(core.module.localization.msg.alert_file_not_opened);
 			}
 			else {
-				if(windowManager.window[windowManager.activeWindow].designer != undefined) {
-					windowManager.window[windowManager.activeWindow].designer.save();
-				} else if(windowManager.window[windowManager.activeWindow].editor != undefined) {
-					windowManager.window[windowManager.activeWindow].editor.save();
+				if(window_manager.window[window_manager.active_window].designer != undefined) {
+					window_manager.window[window_manager.active_window].designer.save();
+				} else if(window_manager.window[window_manager.active_window].editor != undefined) {
+					window_manager.window[window_manager.active_window].editor.save();
 				}
 			}
 		});
 
-		$("a[action=saveAllFile]").unbind("click");
-		$("a[action=saveAllFile]").click(function() {
-			core.module.layout.workSpace.windowManager.saveAll();
+		$("a[action=save_all_file]").unbind("click");
+		$("a[action=save_all_file]").click(function() {
+			core.module.layout.workspace.window_manager.saveAll();
 		});
 
-		$("a[action=saveAsFile]").unbind("click");
-		$("a[action=saveAsFile]").click(function() {
+		$("a[action=save_as_file]").unbind("click");
+		$("a[action=save_as_file]").click(function() {
 			core.dialog.save_as_file.show();
 		});
 
-		$("a[action=moveFile]").unbind("click");
-		$("a[action=moveFile]").click(function() {
+		$("a[action=move_file]").unbind("click");
+		$("a[action=move_file]").click(function() {
 			core.dialog.move_file.show("");
 		});
 
-		$("a[action=renameFile]").unbind("click");
-		$("a[action=renameFile]").click(function() {
+		$("a[action=rename_file]").unbind("click");
+		$("a[action=rename_file]").click(function() {
 			core.dialog.rename_file.show();
 		});
 
-		$("a[action=deleteFile]").unbind("click");
-		$("a[action=deleteFile]").click(function() {
-			if(core.seletedFile) {
+		$("a[action=delete_file]").unbind("click");
+		$("a[action=delete_file]").click(function() {
+			if(core.status.selected_file) {
 				confirmation.init({
 					title : "Delete",
 					message : "Do you want to delete this file?",
-					yesText : "Yes",
-					noText : "No",
+					yes_text : "Yes",
+					no_text : "No",
 					yes : function() {
 						var postdata = {
-							fileName : core.selectedFile
+							filename : core.status.selected_file
 						};
 	
 						$.get("file/do_delete", postdata, function(data) {
-							c.m("delete: " + core.selectedFile);
-							core.module.layout.projectExplorer.refresh();
+							c.m("delete: " + core.status.selected_file);
+							core.module.layout.project_explorer.refresh();
 						});
 					},
 					no : function() {
@@ -172,9 +157,9 @@ org.goorm.core.menu.action.prototype = {
 
 		});
 
-		$("a[action=refreshProjectDirectory]").unbind("click");
-		$("a[action=refreshProjectDirectory]").click(function() {
-			core.module.layout.projectExplorer.refresh();
+		$("a[action=refresh_project_directory]").unbind("click");
+		$("a[action=refresh_project_directory]").click(function() {
+			core.module.layout.project_explorer.refresh();
 		});
 
 		$("a[action=print]").unbind("click");
@@ -185,18 +170,18 @@ org.goorm.core.menu.action.prototype = {
 			//window.open("./module/org.goorm.core.printer/print.html", "", "width=500, height=300, scrollbars=yes");
 		});
 
-		$("a[action=switchWorkspace]").unbind("click");
-		$("a[action=switchWorkspace]").click(function() {
+		$("a[action=switch_workspace]").unbind("click");
+		$("a[action=switch_workspace]").click(function() {
 			core.dialog.switch_workspace.show();
 		});
 
-		$("a[action=importFile]").unbind("click");
-		$("a[action=importFile]").click(function() {
+		$("a[action=import_file]").unbind("click");
+		$("a[action=import_file]").click(function() {
 			core.dialog.import_file.show();
 		});
 
-		$("a[action=exportFile]").unbind("click");
-		$("a[action=exportFile]").click(function() {
+		$("a[action=export_file]").unbind("click");
+		$("a[action=export_file]").click(function() {
 			core.dialog.export_file.show();
 		});
 
@@ -207,74 +192,72 @@ org.goorm.core.menu.action.prototype = {
 		//////////////////////////////////////////////////
 		//Main Menu : Edit
 		//////////////////////////////////////////////////
-		$("a[action=doUndo]").unbind("click");
-		$("a[action=doUndo]").click(function() {
-			var windowManager = core.module.layout.workSpace.windowManager;
+		$("a[action=do_undo]").unbind("click");
+		$("a[action=do_undo]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.undo();
-			} else if(windowManager.window[windowManager.activeWindow].editor) {
-				windowManager.window[windowManager.activeWindow].editor.undo();
+			if(window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.undo();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.undo();
 			}
 		});
 
-		$("a[action=doRedo]").unbind("click");
-		$("a[action=doRedo]").click(function() {
-			var windowManager = core.module.layout.workSpace.windowManager;
+		$("a[action=do_redo]").unbind("click");
+		$("a[action=do_redo]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.redo();
-			} else if(windowManager.window[windowManager.activeWindow].editor) {
-				windowManager.window[windowManager.activeWindow].editor.redo();
+			if(window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.redo();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.redo();
 			}
 		});
 
-		$("a[action=doCut]").unbind("click");
-		$("a[action=doCut]").click(function() {
-			//core.dialog.Preference.preference['preference.editor.useClipboard'];
-			var windowManager = core.module.layout.workSpace.windowManager;
+		$("a[action=do_cut]").unbind("click");
+		$("a[action=do_cut]").click(function() {
+			//core.dialog.preference.preference['preference.editor.use_clipboard'];
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.cut();
-			} else if(windowManager.window[windowManager.activeWindow].editor) {
-				windowManager.window[windowManager.activeWindow].editor.cut();
+			if(window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.cut();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.cut();
 			}
 		});
 
-		$("a[action=doCopy]").unbind("click");
-		$("a[action=doCopy]").click(function() {
+		$("a[action=do_copy]").unbind("click");
+		$("a[action=do_copy]").click(function() {
 
-			var windowManager = core.module.layout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.copy();
-			} else if(windowManager.window[windowManager.activeWindow].editor) {
-				windowManager.window[windowManager.activeWindow].editor.copy();
+			if(window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.copy();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.copy();
 			}
 		});
 
-		$("a[action=doPaste]").unbind("click");
-		$("a[action=doPaste]").click(function() {
+		$("a[action=do_paste]").unbind("click");
+		$("a[action=do_paste]").click(function() {
 
-			var windowManager = core.module.layout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.paste();
-			} else if(windowManager.window[windowManager.activeWindow].editor) {
-				windowManager.window[windowManager.activeWindow].editor.paste();
+			if(window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.paste();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.paste();
 			}
 		});
 
-		$("a[action=doDelete]").unbind("click");
-		$("a[action=doDelete]").click(function() {
-			console.log("doDelete");
+		$("a[action=do_delete]").unbind("click");
+		$("a[action=do_delete]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			var windowManager = core.module.layout.workSpace.windowManager;
-
-			if(windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas._delete();
-			} else if(windowManager.window[windowManager.activeWindow].editor) {
-				windowManager.window[windowManager.activeWindow].editor.doDelete();
+			if(window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas._delete();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.do_delete();
 			}
 		});
 
@@ -283,159 +266,157 @@ org.goorm.core.menu.action.prototype = {
 			core.dialog.preference.show();
 		});
 
-		$("a[action=doFind]").unbind("click");
-		$("a[action=doFind]").click(function() {
+		$("a[action=do_find]").unbind("click");
+		$("a[action=do_find]").click(function() {
 			core.dialog.find_and_replace.show();
 		});
 
-		$("a[action=doFindNext]").unbind("click");
-		$("a[action=doFindNext]").click(function() {
+		$("a[action=do_find_next]").unbind("click");
+		$("a[action=do_find_next]").click(function() {
 
-			var windowManager = core.module.layout.workSpace.windowManager;
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.doDelete();
-			} else if(windowManager.window[windowManager.activeWindow].editor) {
+			if(window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+			} else if(window_manager.window[window_manager.active_window].editor) {
 				core.dialog.find_and_replace.find("next");
 			}
 		});
 
-		$("a[action=doFindPrevious]").unbind("click");
-		$("a[action=doFindPrevious]").click(function() {
-			var windowManager = core.module.layout.workSpace.windowManager;
+		$("a[action=do_find_previous]").unbind("click");
+		$("a[action=do_find_previous]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(windowManager.window[windowManager.activeWindow].designer) {
-				//windowManager.window[windowManager.activeWindow].designer.canvas.doDelete();
-			} else if(windowManager.window[windowManager.activeWindow].editor) {
+			if(window_manager.window[window_manager.active_window].designer) {
+				//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+			} else if(window_manager.window[window_manager.active_window].editor) {
 				core.dialog.find_and_replace.find("previous");
 			}
 		});
 
-		$("a[action=selectAll]").unbind("click");
-		$("a[action=selectAll]").click(function() {
-			var windowManager = core.module.layout.workSpace.windowManager;
+		$("a[action=select_all]").unbind("click");
+		$("a[action=select_all]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.selectAll();
-			} else if(windowManager.window[windowManager.activeWindow].editor) {
-				windowManager.window[windowManager.activeWindow].editor.selectAll();
+			if(window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.select_all();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.select_all();
 			}
 		});
 		
-		$("a[action=useClipboard]").unbind("click");
-		$("a[action=useClipboard]").click(function() {
+		$("a[action=use_clipboard]").unbind("click");
+		$("a[action=use_clipboard]").click(function() {
 			
-			if(core.dialog.Preference.preference['preference.editor.useClipboard'] == "true") {
-				$(this).find("img").removeClass("toolbarButtonPressed");
-				core.dialog.preference.preference['preference.editor.useClipboard'] = "false";
-				localStorage['preference.editor.useClipboard'] = "false";
-				console.log("1");
+			if(core.dialog.preference.preference['preference.editor.use_clipboard'] == "true") {
+				$(this).find("img").removeClass("toolbar_buttonPressed");
+				core.dialog.preference.preference['preference.editor.use_clipboard'] = "false";
+				localStorage['preference.editor.use_clipboard'] = "false";
 			} else {
-				$(this).find("img").addClass("toolbarButtonPressed");
-				core.dialog.preference.preference['preference.editor.useClipboard'] = "true";
-				localStorage['preference.editor.useClipboard'] = "true";
-				console.log("2");
+				$(this).find("img").addClass("toolbar_buttonPressed");
+				core.dialog.preference.preference['preference.editor.use_clipboard'] = "true";
+				localStorage['preference.editor.use_clipboard'] = "true";
 			}
 
 		});
 		//////////////////////////////////////////////////
 		//Main Menu : Design
 		//////////////////////////////////////////////////
-		$("a[action=alignLeft]").unbind("click");
-		$("a[action=alignLeft]").click(function() {
+		$("a[action=align_left]").unbind("click");
+		$("a[action=align_left]").click(function() {
 			if(!$(this).hasClass('disabled')) {
-				if(core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer) {
-					core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer.canvas.alignLeft();
+				if(core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer) {
+					core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer.canvas.align_left();
 				}
 			}
 		});
 
-		$("a[action=alignRight]").unbind("click");
-		$("a[action=alignRight]").click(function() {
+		$("a[action=align_right]").unbind("click");
+		$("a[action=align_right]").click(function() {
 			if(!$(this).hasClass('disabled')) {
-				if(core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer) {
-					core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer.canvas.alignRight();
+				if(core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer) {
+					core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer.canvas.align_right();
 				}
 			}
 		});
 
-		$("a[action=alignTop]").unbind("click");
-		$("a[action=alignTop]").click(function() {
+		$("a[action=align_top]").unbind("click");
+		$("a[action=align_top]").click(function() {
 			if(!$(this).hasClass('disabled')) {
-				if(core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer) {
-					core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer.canvas.alignTop();
+				if(core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer) {
+					core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer.canvas.align_top();
 				}
 			}
 		});
 
-		$("a[action=alignBottom]").unbind("click");
-		$("a[action=alignBottom]").click(function() {
+		$("a[action=align_bottom]").unbind("click");
+		$("a[action=align_bottom]").click(function() {
 			if(!$(this).hasClass('disabled')) {
-				if(core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer) {
-					core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer.canvas.alignBottom();
+				if(core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer) {
+					core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer.canvas.align_bottom();
 				}
 			}
 		});
 
-		$("a[action=alignHorizontallyCenter]").unbind("click");
-		$("a[action=alignHorizontallyCenter]").click(function() {
+		$("a[action=align_horizontally_center]").unbind("click");
+		$("a[action=align_horizontally_center]").click(function() {
 			if(!$(this).hasClass('disabled')) {
-				if(core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer) {
-					core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer.canvas.alignHorizontallyCenter();
+				if(core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer) {
+					core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer.canvas.align_horizontally_center();
 				}
 			}
 		});
 
-		$("a[action=alignVerticallyCenter]").unbind("click");
-		$("a[action=alignVerticallyCenter]").click(function() {
+		$("a[action=align_vertically_center]").unbind("click");
+		$("a[action=align_vertically_center]").click(function() {
 			if(!$(this).hasClass('disabled')) {
-				if(core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer) {
-					core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer.canvas.alignVerticallyCenter();
+				if(core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer) {
+					core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer.canvas.align_vertically_center();
 				}
 			}
 		});
 
-		$("a[action=bringToFront]").unbind("click");
-		$("a[action=bringToFront]").click(function() {
+		$("a[action=bring_to_front]").unbind("click");
+		$("a[action=bring_to_front]").click(function() {
 			if(!$(this).hasClass('disabled')) {
-				if(core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer) {
-					core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer.canvas.bringToFront();
+				if(core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer) {
+					core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer.canvas.bring_to_front();
 				}
 			}
 		});
 
-		$("a[action=sendToBack]").unbind("click");
-		$("a[action=sendToBack]").click(function() {
+		$("a[action=send_to_back]").unbind("click");
+		$("a[action=send_to_back]").click(function() {
 			if(!$(this).hasClass('disabled')) {
-				if(core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer) {
-					core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer.canvas.sendToBack();
+				if(core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer) {
+					core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer.canvas.send_to_back();
 				}
 			}
 		});
 
-		$("a[action=bringForward]").unbind("click");
-		$("a[action=bringForward]").click(function() {
+		$("a[action=bring_forward]").unbind("click");
+		$("a[action=bring_forward]").click(function() {
 			if(!$(this).hasClass('disabled')) {
-				if(core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer) {
-					core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer.canvas.bringForward();
+				if(core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer) {
+					core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer.canvas.bring_forward();
 				}
 			}
 		});
 
-		$("a[action=sendBackward]").unbind("click");
-		$("a[action=sendBackward]").click(function() {
+		$("a[action=send_backward]").unbind("click");
+		$("a[action=send_backward]").click(function() {
 			if(!$(this).hasClass('disabled')) {
-				if(core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer) {
-					core.module.layout.workSpace.windowManager.window[core.module.layout.workSpace.windowManager.activeWindow].designer.canvas.sendBackward();
+				if(core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer) {
+					core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].designer.canvas.send_backward();
 				}
 			}
 		});
 
-		$("a[action=canvasSetting]").unbind("click");
-		$("a[action=canvasSetting]").click(function() {
-			var windowManager = core.module.layout.workSpace.windowManager;
-			if(windowManager.window[windowManager.activeWindow].designer) {
-				windowManager.window[windowManager.activeWindow].designer.canvas.dialog.panel.show();
+		$("a[action=canvas_setting]").unbind("click");
+		$("a[action=canvas_setting]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
+			if(window_manager.window[window_manager.active_window].designer) {
+				window_manager.window[window_manager.active_window].designer.canvas.dialog.panel.show();
 			}
 		});
 		//////////////////////////////////////////////////
@@ -443,104 +424,101 @@ org.goorm.core.menu.action.prototype = {
 		//////////////////////////////////////////////////
 		$("a[action=run]").unbind("click");
 		$("a[action=run]").click(function() {
-			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.currentProjectType] != undefined
+			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
 			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
-				console.log(core.currentProjectType);
-				core.module.plugin_manager.plugins["org.goorm.plugin." + core.currentProjectType].run(core.currentProjectPath);
+				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].run(core.status.current_project_path);
 			}
 		});
 
 		$("a[action=debug]").unbind("click");
 		$("a[action=debug]").click(function() {
-			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.currentProjectType] != undefined
+			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
 			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
-				core.module.layout.innerBottomTabView.selectTab(1);
-				console.log(core.module.plugin_manager.plugins["org.goorm.plugin." + core.currentProjectType]);
-				core.module.plugin_manager.plugins["org.goorm.plugin." + core.currentProjectType].debug(core.currentProjectPath);
+				core.module.layout.inner_bottom_tabview.selectTab(1);
+				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].debug(core.status.current_project_path);
 			}
 		});
 
-		$("a[action=remoteRun]").unbind("click");
-		$("a[action=remoteRun]").click(function() {
+		$("a[action=remote_run]").unbind("click");
+		$("a[action=remote_run]").click(function() {
 
-			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.currentProjectType] != undefined
+			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
 			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
 				// Android
-				core.module.plugin_manager.plugins["org.goorm.plugin." + core.currentProjectType].remoteRun(core.currentProjectPath);
+				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].remote_run(core.status.current_project_path);
 			}
 		});
 
 		$("a[action=generate]").unbind("click");
 		$("a[action=generate]").click(function() {
-			console.log(core.currentProjectType);
-			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.currentProjectType] != undefined
+			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
 			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
 
-				core.module.plugin_manager.plugins["org.goorm.plugin." + core.currentProjectType].generate();
+				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].generate();
 			}
 		});
 
-		$("a[action=generateAll]").unbind("click");
-		$("a[action=generateAll]").click(function() {
+		$("a[action=generate_all]").unbind("click");
+		$("a[action=generate_all]").click(function() {
 
 		});
 
-		$("a[action=buildProject]").unbind("click");
-		$("a[action=buildProject]").click(function() {
+		$("a[action=build_project]").unbind("click");
+		$("a[action=build_project]").click(function() {
 			if(!$(this).hasClass('yuimenuitemlabel-disabled')) {
 				core.dialog.build_project.show();
 			}
-			// if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.currentProjectType]!=undefined) {
+			// if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type]!=undefined) {
 			//
 			// // C, Web
 			//
-			// core.module.plugin_manager.plugins["org.goorm.plugin."+core.currentProjectType].build(core.currentProjectPath);
+			// core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type].build(core.status.current_project_path);
 			// }
 		});
 
-		$("a[action=buildAll]").unbind("click");
-		$("a[action=buildAll]").click(function() {
+		$("a[action=build_all]").unbind("click");
+		$("a[action=build_all]").click(function() {
 			if(!$(this).hasClass('yuimenuitemlabel-disabled')) {
 				core.dialog.build_all.show();
 			}
 		});
 
-		$("a[action=buildClean]").unbind("click");
-		$("a[action=buildClean]").click(function() {
+		$("a[action=build_clean]").unbind("click");
+		$("a[action=build_clean]").click(function() {
 			if(!$(this).hasClass('yuimenuitemlabel-disabled')) {
 				core.dialog.build_clean.show();
 			}
 		});
 
-		$("a[action=buildConfiguration]").unbind("click");
-		$("a[action=buildConfiguration]").click(function() {
+		$("a[action=build_configuration]").unbind("click");
+		$("a[action=build_configuration]").click(function() {
 			core.dialog.build_configuration.show();
 		});
 
-		$("a[action=importProject]").unbind("click");
-		$("a[action=importProject]").click(function() {
+		$("a[action=import_project]").unbind("click");
+		$("a[action=import_project]").click(function() {
 			core.dialog.import_project.show();
 		});
 
-		$("a[action=exportProject]").unbind("click");
-		$("a[action=exportProject]").click(function() {
+		$("a[action=export_project]").unbind("click");
+		$("a[action=export_project]").click(function() {
 			core.dialog.export_project.show();
 		});
 
-		$("a[action=deleteProject]").unbind("click");
-		$("a[action=deleteProject]").click(function() {
+		$("a[action=delete_project]").unbind("click");
+		$("a[action=delete_project]").click(function() {
 			core.dialog.delete_project.show();
 		});
 
-		$("a[action=showProperties]").unbind("click");
-		$("a[action=showProperties]").click(function() {
+		$("a[action=show_properties]").unbind("click");
+		$("a[action=show_properties]").click(function() {
 			core.dialog.project_property.show();
 		});
 		//////////////////////////////////////////////////
 		//Main Menu : Collaboration
 		//////////////////////////////////////////////////
-		$("a[action=joinProject]").unbind("click");
-		$("a[action=joinProject]").click(function() {
+		$("a[action=join_project]").unbind("click");
+		$("a[action=join_project]").click(function() {
 			core.dialog.join_project.show();
 		});
 
@@ -549,17 +527,17 @@ org.goorm.core.menu.action.prototype = {
 			core.dialog.collaboration_settings.show();
 		});
 
-		$("a[action=chatOnOff]").unbind("click");
-		$("a[action=chatOnOff]").click(function() {
+		$("a[action=chat_on_off]").unbind("click");
+		$("a[action=chat_on_off]").click(function() {
 			
-			if(core.isChatOn==true) {
+			if(core.chat_on==true) {
 				
-				core.isChatOn = false;
-				core.module.layout.chat.setChatOff();
-				$(".isChatOn").html("Chat Off");
-				$("a[action=chatOnOff]").find("img").removeClass("toolbarButtonPressed");
+				core.chat_on = false;
+				core.module.layout.chat.set_chat_off();
+				$(".is_chat_on").html("Chat Off");
+				$("a[action=chat_on_off]").find("img").removeClass("toolbar_buttonPressed");
 
-				$("a[action=chatOnOff]").each(function(i) {
+				$("a[action=chat_on_off]").each(function(i) {
 					if($(this).attr("status") == "enable") {
 						$(this).parent().hide();
 					} else if($(this).attr("status") == "disable") {
@@ -568,13 +546,13 @@ org.goorm.core.menu.action.prototype = {
 				});
 			} else {
 				
-				core.isChatOn = true;
+				core.chat_on = true;
 				//core.module.layout.chat.init();
-				core.module.layout.chat.setChatOn();
-				$(".isChatOn").html("Chat On");
-				$("a[action=chatOnOff]").find("img").addClass("toolbarButtonPressed");
+				core.module.layout.chat.set_chat_on();
+				$(".is_chat_on").html("Chat On");
+				$("a[action=chat_on_off]").find("img").addClass("toolbar_buttonPressed");
 
-				$("a[action=chatOnOff]").each(function(i) {
+				$("a[action=chat_on_off]").each(function(i) {
 					if($(this).attr("status") == "enable") {
 						$(this).parent().show();
 					} else if($(this).attr("status") == "disable") {
@@ -582,51 +560,51 @@ org.goorm.core.menu.action.prototype = {
 					}
 				});
 
-				core.module.layout.innerRightTabView.selectTab(2);
+				core.module.layout.inner_right_tabview.selectTab(2);
 			}
 
 		});
 
-		$("a[action=collaborationEditOnOff]").unbind("click");
-		$("a[action=collaborationEditOnOff]").click(function() {
+		$("a[action=collaboration_edit_on_off]").unbind("click");
+		$("a[action=collaboration_edit_on_off]").click(function() {
 			
-			if(core.isCollaborationON) {
-				core.isCollaborationON = false;
-				$(".isCollaborationOn").html("Collaboration Off");
+			if(core.flag.collaboration_on) {
+				core.flag.collaboration_on = false;
+				$(".is_collaboration_on").html("Collaboration Off");
 
-				$("a[action=collaborationEditOnOff]").find("img").removeClass("toolbarButtonPressed");
+				$("a[action=collaboration_edit_on_off]").find("img").removeClass("toolbar_buttonPressed");
 
-				$("a[action=collaborationEditOnOff]").each(function(i) {
+				$("a[action=collaboration_edit_on_off]").each(function(i) {
 					if($(this).attr("status") == "enable") {
 						$(this).parent().hide();
 					} else if($(this).attr("status") == "disable") {
 						$(this).parent().show();
 					}
 				});
-				for(var i = 0; i < core.module.layout.workSpace.windowManager.index; i++) {
-					if(core.module.layout.workSpace.windowManager.window[i].alive) {
-						var editor = core.module.layout.workSpace.windowManager.window[i].editor;
+				for(var i = 0; i < core.module.layout.workspace.window_manager.index; i++) {
+					if(core.module.layout.workspace.window_manager.window[i].alive) {
+						var editor = core.module.layout.workspace.window_manager.window[i].editor;
 						if(editor != null) {
-							editor.collaboration.setEditOff();
+							editor.collaboration.set_edit_off();
 						}
 					}
 				}
 			} else {
-				core.isCollaborationON = true;
-				$(".isCollaborationOn").html("Collaboration On");
+				core.flag.collaboration_on = true;
+				$(".is_collaboration_on").html("Collaboration On");
 
-				$("a[action=collaborationEditOnOff]").find("img").addClass("toolbarButtonPressed");
+				$("a[action=collaboration_edit_on_off]").find("img").addClass("toolbar_buttonPressed");
 
-				$("a[action=collaborationEditOnOff]").each(function(i) {
+				$("a[action=collaboration_edit_on_off]").each(function(i) {
 					if($(this).attr("status") == "enable") {
 						$(this).parent().show();
 					} else if($(this).attr("status") == "disable") {
 						$(this).parent().hide();
 					}
 				});
-				for(var i = 0; i < core.module.layout.workSpace.windowManager.index; i++) {
-					if(core.module.layout.workSpace.windowManager.window[i].alive) {
-						var editor = core.module.layout.workSpace.windowManager.window[i].editor;
+				for(var i = 0; i < core.module.layout.workspace.window_manager.index; i++) {
+					if(core.module.layout.workspace.window_manager.window[i].alive) {
+						var editor = core.module.layout.workspace.window_manager.window[i].editor;
 						if(editor != null) {
 							editor.load(editor.filepath, editor.filename, editor.filetype);
 						}
@@ -635,41 +613,41 @@ org.goorm.core.menu.action.prototype = {
 			}
 		});
 
-		$("a[action=collaborationDrawOnOff]").unbind("click");
-		$("a[action=collaborationDrawOnOff]").click(function() {
-			if(core.isCollaborationDrawON) {
-				core.isCollaborationDrawON = false;
-				$("a[action=collaborationDrawOnOff]").find("img").removeClass("toolbarButtonPressed");
+		$("a[action=collaboration_draw_on_off]").unbind("click");
+		$("a[action=collaboration_draw_on_off]").click(function() {
+			if(core.collaboration_draw_on) {
+				core.collaboration_draw_on = false;
+				$("a[action=collaboration_draw_on_off]").find("img").removeClass("toolbar_buttonPressed");
 
-				$("a[action=collaborationDrawOnOff]").each(function(i) {
+				$("a[action=collaboration_draw_on_off]").each(function(i) {
 					if($(this).attr("status") == "enable") {
 						$(this).parent().hide();
 					} else if($(this).attr("status") == "disable") {
 						$(this).parent().show();
 					}
 				});
-				for(var i = 0; i < core.module.layout.workSpace.windowManager.index; i++) {
-					if(core.module.layout.workSpace.windowManager.window[i].alive) {
-						var designer = core.module.layout.workSpace.windowManager.window[i].designer;
+				for(var i = 0; i < core.module.layout.workspace.window_manager.index; i++) {
+					if(core.module.layout.workspace.window_manager.window[i].alive) {
+						var designer = core.module.layout.workspace.window_manager.window[i].designer;
 						if(designer != null) {
-							designer.canvas.setCollaborationOff();
+							designer.canvas.set_collaboration_off();
 						}
 					}
 				}
 			} else {
-				core.isCollaborationDrawON = true;
-				$("a[action=collaborationDrawOnOff]").find("img").addClass("toolbarButtonPressed");
+				core.collaboration_draw_on = true;
+				$("a[action=collaboration_draw_on_off]").find("img").addClass("toolbar_buttonPressed");
 
-				$("a[action=collaborationDrawOnOff]").each(function(i) {
+				$("a[action=collaboration_draw_on_off]").each(function(i) {
 					if($(this).attr("status") == "enable") {
 						$(this).parent().show();
 					} else if($(this).attr("status") == "disable") {
 						$(this).parent().hide();
 					}
 				});
-				for(var i = 0; i < core.module.layout.workSpace.windowManager.index; i++) {
-					if(core.module.layout.workSpace.windowManager.window[i].alive) {
-						var designer = core.module.layout.workSpace.windowManager.window[i].designer;
+				for(var i = 0; i < core.module.layout.workspace.window_manager.index; i++) {
+					if(core.module.layout.workspace.window_manager.window[i].alive) {
+						var designer = core.module.layout.workspace.window_manager.window[i].designer;
 						if(designer != null) {
 							designer.load(designer.filepath, designer.filename, designer.filetype);
 						}
@@ -681,28 +659,28 @@ org.goorm.core.menu.action.prototype = {
 
 		$("a[action=collaborationSettings]").unbind("click");
 		$("a[action=collaborationSettings]").click(function() {
-			core.dialog.CollaborationSettings.show();
+			core.dialog.collaboration_settings.show();
 		});
 		//////////////////////////////////////////////////
-		//Main Menu : Window
+		//Main Menu : window
 		//////////////////////////////////////////////////
-		$("a[action=newMainWindow]").unbind("click");
-		$("a[action=newMainWindow]").click(function() {
-			core.newMainWindow();
+		$("a[action=new_main_window]").unbind("click");
+		$("a[action=new_main_window]").click(function() {
+			core.new_main_window();
 		});
 
-		$("a[action=previousWindow]").unbind("click");
-		$("a[action=previousWindow]").click(function() {
-			core.module.layout.workSpace.windowManager.previousWindow();
+		$("a[action=previous_window]").unbind("click");
+		$("a[action=previous_window]").click(function() {
+			core.module.layout.workspace.window_manager.previous_window();
 		});
 
-		$("a[action=nextWindow]").unbind("click");
-		$("a[action=nextWindow]").click(function() {
-			core.module.layout.workSpace.windowManager.nextWindow();
+		$("a[action=next_window]").unbind("click");
+		$("a[action=next_window]").click(function() {
+			core.module.layout.workspace.window_manager.next_window();
 		});
 
-		$("a[action=leftLayoutToggle]").unbind("click");
-		$("a[action=leftLayoutToggle]").click(function() {
+		$("a[action=left_layout_toggle]").unbind("click");
+		$("a[action=left_layout_toggle]").click(function() {
 			if(core.module.layout.layout.getUnitByPosition("left")._collapsed) {
 				core.module.layout.layout.getUnitByPosition("left").expand();
 			} else {
@@ -710,111 +688,111 @@ org.goorm.core.menu.action.prototype = {
 			}
 		});
 
-		$("a[action=leftProjectExplorerShow]").unbind("click");
-		$("a[action=leftProjectExplorerShow]").click(function() {
-			core.module.layout.leftTabView.selectTab(0);
+		$("a[action=left_project_explorer_show]").unbind("click");
+		$("a[action=left_project_explorer_show]").click(function() {
+			core.module.layout.left_tabview.selectTab(0);
 		});
 
-		$("a[action=leftToolBoxShow]").unbind("click");
-		$("a[action=leftToolBoxShow]").click(function() {
-			core.module.layout.leftTabView.selectTab(1);
+		$("a[action=left_toolbox_show]").unbind("click");
+		$("a[action=left_toolbox_show]").click(function() {
+			core.module.layout.left_tabview.selectTab(1);
 		});
 
-		$("a[action=rightLayoutToggle]").unbind("click");
-		$("a[action=rightLayoutToggle]").click(function() {
-			if(core.module.layout.innerLayout.getUnitByPosition("right")._collapsed) {
-				core.module.layout.innerLayout.getUnitByPosition("right").expand();
+		$("a[action=right_layout_toggle]").unbind("click");
+		$("a[action=right_layout_toggle]").click(function() {
+			if(core.module.layout.inner_layout.getUnitByPosition("right")._collapsed) {
+				core.module.layout.inner_layout.getUnitByPosition("right").expand();
 			} else {
-				core.module.layout.innerLayout.getUnitByPosition("right").collapse();
+				core.module.layout.inner_layout.getUnitByPosition("right").collapse();
 			}
 		});
 
-		$("a[action=rightPropertiesShow]").unbind("click");
-		$("a[action=rightPropertiesShow]").click(function() {
-			core.module.layout.innerRightTabView.selectTab(0);
+		$("a[action=right_properties_show]").unbind("click");
+		$("a[action=right_properties_show]").click(function() {
+			core.module.layout.inner_right_tabview.selectTab(0);
 		});
 
-		$("a[action=rightObjectExplorerShow]").unbind("click");
-		$("a[action=rightObjectExplorerShow]").click(function() {
-			core.module.layout.innerRightTabView.selectTab(1);
+		$("a[action=right_object_explorer_show]").unbind("click");
+		$("a[action=right_object_explorer_show]").click(function() {
+			core.module.layout.inner_right_tabview.selectTab(1);
 		});
 
-		$("a[action=rightChatShow]").unbind("click");
-		$("a[action=rightChatShow]").click(function() {
-			core.module.layout.innerRightTabView.selectTab(2);
+		$("a[action=right_chat_show]").unbind("click");
+		$("a[action=right_chat_show]").click(function() {
+			core.module.layout.inner_right_tabview.selectTab(2);
 		});
 
-		$("a[action=bottomLayoutToggle]").unbind("click");
-		$("a[action=bottomLayoutToggle]").click(function() {
-			if(core.module.layout.innerLayout.getUnitByPosition("bottom")._collapsed) {
-				core.module.layout.innerLayout.getUnitByPosition("bottom").expand();
+		$("a[action=bottom_layout_toggle]").unbind("click");
+		$("a[action=bottom_layout_toggle]").click(function() {
+			if(core.module.layout.inner_layout.getUnitByPosition("bottom")._collapsed) {
+				core.module.layout.inner_layout.getUnitByPosition("bottom").expand();
 			} else {
-				core.module.layout.innerLayout.getUnitByPosition("bottom").collapse();
+				core.module.layout.inner_layout.getUnitByPosition("bottom").collapse();
 			}
 		});
 
-		$("a[action=bottomMessageShow]").unbind("click");
-		$("a[action=bottomMessageShow]").click(function() {
-			core.module.layout.innerBottomTabView.selectTab(0);
+		$("a[action=bottom_message_show]").unbind("click");
+		$("a[action=bottom_message_show]").click(function() {
+			core.module.layout.inner_bottom_tabview.selectTab(0);
 		});
 
-		$("a[action=bottomDebugShow]").unbind("click");
-		$("a[action=bottomDebugShow]").click(function() {
-			core.module.layout.innerBottomTabView.selectTab(1);
+		$("a[action=bottom_debug_show]").unbind("click");
+		$("a[action=bottom_debug_show]").click(function() {
+			core.module.layout.inner_bottom_tabview.selectTab(1);
 		});
 
-		$("a[action=bottomConsoleShow]").unbind("click");
-		$("a[action=bottomConsoleShow]").click(function() {
-			core.module.layout.innerBottomTabView.selectTab(2);
+		$("a[action=bottom_console_show]").unbind("click");
+		$("a[action=bottom_console_show]").click(function() {
+			core.module.layout.inner_bottom_tabview.selectTab(2);
 		});
 
-		$("a[action=bottomSearchShow]").unbind("click");
-		$("a[action=bottomSearchShow]").click(function() {
-			core.module.layout.innerBottomTabView.selectTab(3);
+		$("a[action=bottom_search_show]").unbind("click");
+		$("a[action=bottom_search_show]").click(function() {
+			core.module.layout.inner_bottom_tabview.selectTab(3);
 		});
 
-		$("a[action=toggleFullWorkspace]").unbind("click");
-		$("a[action=toggleFullWorkspace]").click(function() {
+		$("a[action=toggle_full_workspace]").unbind("click");
+		$("a[action=toggle_full_workspace]").click(function() {
 			if(core.module.layout.layout.getUnitByPosition("left")._collapsed) {
 				core.module.layout.layout.getUnitByPosition("left").expand();
-				core.module.layout.innerLayout.getUnitByPosition("right").expand();
-				core.module.layout.innerLayout.getUnitByPosition("bottom").expand();
+				core.module.layout.inner_layout.getUnitByPosition("right").expand();
+				core.module.layout.inner_layout.getUnitByPosition("bottom").expand();
 			} else {
 				core.module.layout.layout.getUnitByPosition("left").collapse();
-				core.module.layout.innerLayout.getUnitByPosition("right").collapse();
-				core.module.layout.innerLayout.getUnitByPosition("bottom").collapse();
+				core.module.layout.inner_layout.getUnitByPosition("right").collapse();
+				core.module.layout.inner_layout.getUnitByPosition("bottom").collapse();
 			}
 		});
 
-		$("a[action=hideAllWindows]").unbind("click");
-		$("a[action=hideAllWindows]").click(function() {
-			core.module.layout.workSpace.windowManager.hideAllWindows();
+		$("a[action=hide_all_windows]").unbind("click");
+		$("a[action=hide_all_windows]").click(function() {
+			core.module.layout.workspace.window_manager.hide_all_windows();
 		});
 
-		$("a[action=showAllWindows]").unbind("click");
-		$("a[action=showAllWindows]").click(function() {
-			core.module.layout.workSpace.windowManager.showAllWindows();
+		$("a[action=show_all_windows]").unbind("click");
+		$("a[action=show_all_windows]").click(function() {
+			core.module.layout.workspace.window_manager.show_all_windows();
 		});
 
 		$("a[action=cascade]").unbind("click");
 		$("a[action=cascade]").click(function() {
-			core.module.layout.workSpace.windowManager.cascade();
+			core.module.layout.workspace.window_manager.cascade();
 		});
 
-		$("a[action=tileVertically]").unbind("click");
-		$("a[action=tileVertically]").click(function() {
-			core.module.layout.workSpace.windowManager.tileVertically();
+		$("a[action=tile_vertically]").unbind("click");
+		$("a[action=tile_vertically]").click(function() {
+			core.module.layout.workspace.window_manager.tile_vertically();
 		});
 
-		$("a[action=tileHorizontally]").unbind("click");
-		$("a[action=tileHorizontally]").click(function() {
-			core.module.layout.workSpace.windowManager.tileHorizontally();
+		$("a[action=tile_horizontally]").unbind("click");
+		$("a[action=tile_horizontally]").click(function() {
+			core.module.layout.workspace.window_manager.tile_horizontally();
 		});
 		//////////////////////////////////////////////////
 		//Main Menu : Help
 		//////////////////////////////////////////////////
-		$("a[action=helpContents]").unbind("click");
-		$("a[action=helpContents]").click(function() {
+		$("a[action=help_contents]").unbind("click");
+		$("a[action=help_contents]").click(function() {
 			core.dialog.help_contents.show();
 		});
 
@@ -828,85 +806,85 @@ org.goorm.core.menu.action.prototype = {
 			core.dialog.help_tips_and_tricks.show();
 		});
 
-		$("a[action=helpCheckForUpdates]").unbind("click");
-		$("a[action=helpCheckForUpdates]").click(function() {
+		$("a[action=help_check_for_updates]").unbind("click");
+		$("a[action=help_check_for_updates]").click(function() {
 			core.dialog.help_check_for_updates.show();
 		});
 
-		$("a[action=helpInstallNewPlugin]").unbind("click");
-		$("a[action=helpInstallNewPlugin]").click(function() {
+		$("a[action=help_install_new_plugin]").unbind("click");
+		$("a[action=help_install_new_plugin]").click(function() {
 			core.dialog.help_install_new_plugin.show();
 		});
 
-		$("a[action=helpAbout]").unbind("click");
-		$("a[action=helpAbout]").click(function() {
+		$("a[action=help_about]").unbind("click");
+		$("a[action=help_about]").click(function() {
 			core.dialog.help_about.show();
 		});
 
-		$("a[action=helpBugReport]").unbind("click");
-		$("a[action=helpBugReport]").click(function() {
+		$("a[action=help_bug_report]").unbind("click");
+		$("a[action=help_bug_report]").click(function() {
 			core.dialog.help_bug_report.show();
 		});
 		//////////////////////////////////////////////////
 		//Context Menu : File
 		//////////////////////////////////////////////////
-		$("a[action=newFile_file_context]").unbind("click");
-		$("a[action=newFile_file_context]").click(function() {
+		$("a[action=new_file_file_context]").unbind("click");
+		$("a[action=new_file_file_context]").click(function() {
 			core.dialog.new_file.show("context");
 		});
 
 		$("a[action=open_context]").unbind("click");
 		$("a[action=open_context]").click(function() {
-			var filename = (core.selectedFile.split("/")).pop();
+			var filename = (core.status.selected_file.split("/")).pop();
 			var filetype = (filename.split(".")).pop();
-			var filepath = core.selectedFile.replace(filename, "");
+			var filepath = core.status.selected_file.replace(filename, "");
 
-			core.module.layout.workSpace.windowManager.open(filepath, filename, filetype);
+			core.module.layout.workspace.window_manager.open(filepath, filename, filetype);
 		});
 
-		$("a[action=open_defaultEditor]").unbind("click");
-		$("a[action=open_defaultEditor]").click(function() {
-			var filename = (core.selectedFile.split("/")).pop();
+		$("a[action=open_default_editor]").unbind("click");
+		$("a[action=open_default_editor]").click(function() {
+			var filename = (core.status.selected_file.split("/")).pop();
 			var filetype = (filename.split(".")).pop();
-			var filepath = core.selectedFile.replace(filename, "");
+			var filepath = core.status.selected_file.replace(filename, "");
 
-			core.module.layout.workSpace.windowManager.open(filepath, filename, filetype);
+			core.module.layout.workspace.window_manager.open(filepath, filename, filetype);
 		});
 
-		$("a[action=open_textEditor]").unbind("click");
-		$("a[action=open_textEditor]").click(function() {
-			var filename = (core.selectedFile.split("/")).pop();
+		$("a[action=open_text_editor]").unbind("click");
+		$("a[action=open_text_editor]").click(function() {
+			var filename = (core.status.selected_file.split("/")).pop();
 			var filetype = (filename.split(".")).pop();
-			var filepath = core.selectedFile.replace(filename, "");
+			var filepath = core.status.selected_file.replace(filename, "");
 
-			core.module.layout.workSpace.windowManager.open(filepath, filename, filetype, "Editor");
+			core.module.layout.workspace.window_manager.open(filepath, filename, filetype, "Editor");
 		});
 
-		$("a[action=open_codeEditor]").unbind("click");
-		$("a[action=open_codeEditor]").click(function() {
-			var filename = (core.selectedFile.split("/")).pop();
+		$("a[action=open_code_editor]").unbind("click");
+		$("a[action=open_code_editor]").click(function() {
+			var filename = (core.status.selected_file.split("/")).pop();
 			var filetype = (filename.split(".")).pop();
-			var filepath = core.selectedFile.replace(filename, "");
+			var filepath = core.status.selected_file.replace(filename, "");
 
-			core.module.layout.workSpace.windowManager.open(filepath, filename, filetype, "Editor");
+			core.module.layout.workspace.window_manager.open(filepath, filename, filetype, "Editor");
 		});
 
-		$("a[action=open_uiDesigner]").unbind("click");
-		$("a[action=open_uiDesigner]").click(function() {
-			var filename = (core.selectedFile.split("/")).pop();
+		$("a[action=open_ui_designer]").unbind("click");
+		$("a[action=open_ui_designer]").click(function() {
+			var filename = (core.status.selected_file.split("/")).pop();
 			var filetype = (filename.split(".")).pop();
-			var filepath = core.selectedFile.replace(filename, "");
+			var filepath = core.status.selected_file.replace(filename, "");
 
-			core.module.layout.workSpace.windowManager.open(filepath, filename, filetype, "Designer");
+			core.module.layout.workspace.window_manager.open(filepath, filename, filetype, "Designer");
 		});
 
-		$("a[action=open_umlDesigner]").unbind("click");
-		$("a[action=open_umlDesigner]").click(function() {
-			var filename = (core.selectedFile.split("/")).pop();
+		$("a[action=open_uml_designer]").unbind("click");
+		$("a[action=open_uml_designer]").click(function() {
+			var filename = (core.status.selected_file.split("/")).pop();
 			var filetype = (filename.split(".")).pop();
-			var filepath = core.selectedFile.replace(filename, "");
+			var filepath = core.status.selected_file.replace(filename, "");
 
-			core.module.layout.workSpace.windowManager.open(filepath, filename, filetype, "Designer");
+			core.module.layout.workspace.window_manager.open(filepath, filename, filetype, "Designer");
 		});
 
 		$("a[action=move_context]").unbind("click");
@@ -924,15 +902,15 @@ org.goorm.core.menu.action.prototype = {
 			confirmation.init({
 				title : "Delete",
 				message : "Do you want to delete this file?",
-				yesText : "Yes",
-				noText : "No",
+				yes_text : "Yes",
+				no_text : "No",
 				yes : function() {
 					var postdata = {
-						fileName : core.selectedFile
+						filename : core.status.selected_file
 					};
 					$.post("file/delete", postdata, function(data) {
-						c.m("delete: " + core.selectedFile);
-						core.module.layout.projectExplorer.refresh();
+						c.m("delete: " + core.status.selected_file);
+						core.module.layout.project_explorer.refresh();
 					});
 				},
 				no : function() {
@@ -945,39 +923,38 @@ org.goorm.core.menu.action.prototype = {
 		//////////////////////////////////////////////////
 		//Context Menu : Folder
 		//////////////////////////////////////////////////
-		$("a[action=newFile_folder_context]").unbind("click");
-		$("a[action=newFile_folder_context]").click(function(e) {
+		$("a[action=new_file_folder_context]").unbind("click");
+		$("a[action=new_file_folder_context]").click(function(e) {
 			core.dialog.new_folder.show("context");
 		});
 
-		$("a[action=newFile_textFile_context]").unbind("click");
-		$("a[action=newFile_textFile_context]").click(function(e) {
+		$("a[action=new_file_textfile_context]").unbind("click");
+		$("a[action=new_file_textfile_context]").click(function(e) {
 			core.dialog.new_untitled_textfile.show("context");
 		});
 
 		$("a[action=folder_open_context]").unbind("click");
 		$("a[action=folder_open_context]").click(function(e) {
-			var target = $("#projectTreeview").find(".ygtvfocus")[0];
+			var target = $("#project_treeview").find(".ygtvfocus")[0];
 
-			core.module.layout.projectExplorer.treeview.getNodeByElement(target).expand();
+			core.module.layout.project_explorer.treeview.getNodeByElement(target).expand();
 		});
 		
 		//////////////////////////////////////////////////
 		//Plugin Menu Action
 		//////////////////////////////////////////////////
 
-		for(var i = 0; i < core.module.plugin_manager.pluginList.length; i++) {
+		for(var i = 0; i < core.module.plugin_manager.list.length; i++) {
 			
-			var pluginName = core.module.plugin_manager.pluginList[i].pluginName;
+			var plugin_name = core.module.plugin_manager.list[i].plugin_name;
 
-			//console.log(core.module.plugin_manager.plugins[pluginName]);
-			// if(core.module.plugin_manager.plugins[pluginName] != undefined) {
-				if(core.module.plugin_manager.plugins[pluginName].addMenuAction()){
-					core.module.plugin_manager.plugins[pluginName].addMenuAction();
+			// if(core.module.plugin_manager.plugins[plugin_name] != undefined) {
+				if(core.module.plugin_manager.plugins[plugin_name].add_menu_action()){
+					core.module.plugin_manager.plugins[plugin_name].add_menu_action();
 				}
 			// }
-			// if(core.module.plugin_manager.plugins[core.module.plugin_manager.pluginList[i].pluginName].addMenuAction())
-				// core.module.plugin_manager.plugins[core.module.plugin_manager.pluginList[i].pluginName].addMenuAction();
+			// if(core.module.plugin_manager.plugins[core.module.plugin_manager.list[i].plugin_name].add_menu_action())
+				// core.module.plugin_manager.plugins[core.module.plugin_manager.list[i].plugin_name].add_menu_action();
 		}
 	}
 }

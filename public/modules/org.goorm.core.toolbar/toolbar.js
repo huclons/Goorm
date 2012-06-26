@@ -2,9 +2,6 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module toolbar
  **/
 
 org.goorm.core.toolbar = function () {
@@ -27,7 +24,7 @@ org.goorm.core.toolbar.prototype = {
 			this.order = this.order.split("|");
 			
 			for(var i=0; i < this.order.length; i++){
-				this.add("configs/toolbars/"+this.order[i] + "/" + (this.order[i].split(".")).pop() + ".toolbar.html", this.order[i], "goormMainToolbar");
+				this.add("configs/toolbars/"+this.order[i] + "/" + (this.order[i].split(".")).pop() + ".toolbar.html", this.order[i], "goorm_main_toolbar");
 			}
 		} 
 		else {
@@ -41,17 +38,17 @@ org.goorm.core.toolbar.prototype = {
 			}
 			localStorage['toolbar.order'] = str;
 			
-			this.add("configs/toolbars/org.goorm.core.file/file.toolbar.html","org.goorm.core.file","goormMainToolbar");
-			this.add("configs/toolbars/org.goorm.core.edit/edit.toolbar.html","org.goorm.core.edit","goormMainToolbar");
-			this.add("configs/toolbars/org.goorm.core.project/project.toolbar.html","org.goorm.core.project","goormMainToolbar");
-			this.add("configs/toolbars/org.goorm.core.window/window.toolbar.html","org.goorm.core.window","goormMainToolbar");
-			this.add("configs/toolbars/org.goorm.core.design/design.toolbar.html","org.goorm.core.design","goormMainToolbar");
-			this.add("configs/toolbars/org.goorm.core.collaboration/collaboration.toolbar.html","org.goorm.core.collaboration","goormMainToolbar");
+			this.add("configs/toolbars/org.goorm.core.file/file.toolbar.html","org.goorm.core.file","goorm_main_toolbar");
+			this.add("configs/toolbars/org.goorm.core.edit/edit.toolbar.html","org.goorm.core.edit","goorm_main_toolbar");
+			this.add("configs/toolbars/org.goorm.core.project/project.toolbar.html","org.goorm.core.project","goorm_main_toolbar");
+			this.add("configs/toolbars/org.goorm.core.window/window.toolbar.html","org.goorm.core.window","goorm_main_toolbar");
+			this.add("configs/toolbars/org.goorm.core.design/design.toolbar.html","org.goorm.core.design","goorm_main_toolbar");
+			this.add("configs/toolbars/org.goorm.core.collaboration/collaboration.toolbar.html","org.goorm.core.collaboration","goorm_main_toolbar");
 		//}
 		
 		$(this).bind("toolbarLoaded", function () {
 			var ddList = new Array();
-			var handleTarget = new Array();
+			var handle_target = new Array();
 			var Dom = YAHOO.util.Dom; 
 			var Event = YAHOO.util.Event; 
 			var DDM = YAHOO.util.DragDropMgr; 
@@ -61,13 +58,13 @@ org.goorm.core.toolbar.prototype = {
 			
 			for(var i=0; i < self.order.length; i++){
 				ddList[i] = new YAHOO.util.DD((self.order[i].split(".")).pop()+".toolbar");
-				ddList[i].setHandleElId("toolbarHandle_"+self.order[i]);
+				ddList[i].setHandleElId("toolbar_handle_"+self.order[i]);
 				
 				var here = this;
 				var destEl = null;
 				
 				ddList[i].on('startDragEvent',function(ev){
-					$(".toolbarMovingHandle").css("background","#eee");
+					$(".toolbar_moving_handle").css("background","#eee");
 					here.dragEl = this.getDragEl();
 				}, ddList[i], true);
 				
@@ -91,7 +88,7 @@ org.goorm.core.toolbar.prototype = {
 						var str="";
 						var j=0;
 					
-						$("#goormMainToolbar").children("div .toolbarPart").each(function(i){
+						$("#goorm_main_toolbar").children("div .toolbar_part").each(function(i){
 							if(i != 0) str+="|";
 							str += ($(this).children("div").attr("id").split("_")).pop();
 						});
@@ -101,7 +98,7 @@ org.goorm.core.toolbar.prototype = {
 				}, ddList[i], true);
 				
 				ddList[i].on('endDragEvent',function(ev){
-					$(".toolbarMovingHandle").css("background","none");
+					$(".toolbar_moving_handle").css("background","none");
 					
 					var srcEl = here.dragEl; 
 					
@@ -111,20 +108,20 @@ org.goorm.core.toolbar.prototype = {
 				}, ddList[i], true);
 				
 				ddList[i].on('mouseUpEvent',function(ev){
-					$(".toolbarMovingHandle").css("background","none");
+					$(".toolbar_moving_handle").css("background","none");
 				}, ddList[i], true);
 			}
 			
 			// default Button Setting.
-			if(localStorage['preference.editor.useClipboard'] == "true") {
-				$("a[action=useClipboard]").find("img").addClass("toolbarButtonPressed");
+			if(localStorage['preference.editor.use_clipboard'] == "true") {
+				$("a[action=use_clipboard]").find("img").addClass("toolbar_buttonPressed");
 			}
 			
 			$(document).bind("onPreferenceConfirm",function(){
-				if(localStorage['preference.editor.useClipboard'] == "true") {
-					$("a[action=useClipboard]").find("img").addClass("toolbarButtonPressed");
+				if(localStorage['preference.editor.use_clipboard'] == "true") {
+					$("a[action=use_clipboard]").find("img").addClass("toolbar_buttonPressed");
 				}else {
-					$("a[action=useClipboard]").find("img").removeClass("toolbarButtonPressed");
+					$("a[action=use_clipboard]").find("img").removeClass("toolbar_buttonPressed");
 				}
 			});
 		});
@@ -145,7 +142,7 @@ org.goorm.core.toolbar.prototype = {
 				$("#"+container).append(data);
 				
 				var div_name = name.split(".").pop(); 
-				$("div[id='"+div_name+".toolbar']").prepend("<div id='toolbarHandle_"+name+"' class='toolbarMovingHandle'><div class='toolbarHandle'></div></div>");
+				$("div[id='"+div_name+".toolbar']").prepend("<div id='toolbar_handle_"+name+"' class='toolbar_moving_handle'><div class='toolbar_handle'></div></div>");
 				
 				self.index_check++;
 				if(self.index_check == self.order.length){
@@ -160,20 +157,20 @@ org.goorm.core.toolbar.prototype = {
 		});
 	},
 
-	switchState: function(type){
+	switch_state: function(type){
 		switch(type){
 			case "Rule_Editor":
 			case "Editor" :
 				$("#design\\.toolbar").css("opacity","0.3").css("filter","alpha(opacity=30)").children().addClass('disabled');
 				$("#edit\\.toolbar").css("opacity","1.0").css("filter","alpha(opacity=100)").children().removeClass('disabled');
-				$("#goormMainMenu #Design").find("li").each(function(){
+				$("#goorm_mainmenu #Design").find("li").each(function(){
 					$(this).addClass("yuimenuitem-disabled");
 					$(this).children("a").addClass("yuimenuitemlabel-disabled");
 				});
 				break;
 			case "Designer" :
 				$("#design\\.toolbar").css("opacity","1.0").css("filter","alpha(opacity=100)").children().removeClass('disabled');
-				$("#goormMainMenu #Design").find("li").each(function(){
+				$("#goorm_mainmenu #Design").find("li").each(function(){
 					$(this).removeClass("yuimenuitem-disabled");
 					$(this).children("a").removeClass("yuimenuitemlabel-disabled");
 				});

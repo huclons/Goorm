@@ -2,62 +2,50 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module preference.manager
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class preference.dialog
- * @extends preference.manager
- **/
 org.goorm.core.preference.manager = function () {
 	this.ini = null;
-	this.treeView = null;
+	this.treeview = null;
 	this.preferences = null;
 };
 
 org.goorm.core.preference.manager.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {Object} option The option.
-	 **/
 	init: function (option) {
 		var self = this;
 		this.preferences = $.makeArray();
 	},
-	addTreeView: function (treeView, xml){
+
+	add_treeview: function (treeview, xml){
 		
 		$(xml).find("plugin").find("tree").each(function(){
 			$(this).find("item").each(function(){
-				var tmpnode2 = new YAHOO.widget.TextNode($(this).attr("label"), treeView, false);
+				var tmpnode2 = new YAHOO.widget.TextNode($(this).attr("label"), treeview, false);
 			});
 		});
 	},
-	createTreeView: function (xml) {
+
+	create_treeview: function (xml) {
 		if ($(xml).find("tree").length > 0) {
-			var treeView = new YAHOO.widget.TreeView("preferenceTreeview");
+			var treeview = new YAHOO.widget.TreeView("preference_treeview");
 			
 			$(xml).find("tree").each(function(){
 				$(this).find("root").each(function(){
-					var tmpnode = new YAHOO.widget.TextNode($(this).attr("label"), treeView.getRoot(), $(this).attr("expanded"));
+					var tmpnode = new YAHOO.widget.TextNode($(this).attr("label"), treeview.getRoot(), $(this).attr("expanded"));
 					$(this).find("item").each(function(){
 						var tmpnode2 = new YAHOO.widget.TextNode($(this).attr("label"), tmpnode, false);
 					});
 				});
 			});
-			treeView.render();
-			this.treeView = treeView;
+			treeview.render();
+			this.treeview = treeview;
 		}	
 	},
-	createTabView: function (xml) {
+
+	create_tabview: function (xml) {
 		
 		var self = this;
-		var tabView = null;
+		var tabview = null;
 		$(xml).find("tree").each(function(){
 			
 			if ($(this).find("item").length > 0){
@@ -65,8 +53,8 @@ org.goorm.core.preference.manager.prototype = {
 					if ($(this).find("tab").length > 0) {
 						var label=$(this).attr("label");
 						label = label.replace(/[/#. ]/g,"");
-						$("#preferenceTabview").append("<div id='" + label + "' style='display:none'></div>");
-						tabView = new YAHOO.widget.TabView(label);
+						$("#preference_tabview").append("<div id='" + label + "' style='display:none'></div>");
+						tabview = new YAHOO.widget.TabView(label);
 						
 						$(this).find("tab").each(function(){
 							
@@ -84,7 +72,7 @@ org.goorm.core.preference.manager.prototype = {
 										    label: label, 
 										    content: data, 
 										});
-										tabView.addTab(tab);
+										tabview.addTab(tab);
 										
 										if(classname) {
 											eval("self.preferences.push("+"new "+classname+"())");
@@ -96,8 +84,8 @@ org.goorm.core.preference.manager.prototype = {
 							
 						});
 	
-						tabView.set('activeIndex', 0);
-						//tabView.appendTo("preferenceTabview");
+						tabview.set('activeIndex', 0);
+						//tabview.appendTo("preference_tabview");
 					}
 					else {
 						var content="";
@@ -111,7 +99,7 @@ org.goorm.core.preference.manager.prototype = {
 								url: url,
 								success: function(data) {
 									content=data;
-									$("#preferenceTabview").append("<div class='yui-content' id='"+label+"' style='display:none'>"+content+"</div>");
+									$("#preference_tabview").append("<div class='yui-content' id='"+label+"' style='display:none'>"+content+"</div>");
 								}
 							});
 						}
@@ -132,7 +120,7 @@ org.goorm.core.preference.manager.prototype = {
 						dataType: "html",
 						url: url,
 						success: function(data) {
-							$("#preferenceTabview").append("<div class='yui-content' id='"+label+"' style='display:none'>"+data+"</div>");
+							$("#preference_tabview").append("<div class='yui-content' id='"+label+"' style='display:none'>"+data+"</div>");
 						}
 					});
 				}
@@ -140,7 +128,8 @@ org.goorm.core.preference.manager.prototype = {
 		});
 		
 	},
-	xmlParser: function (url) {
+	
+	xml_parser: function (url) {
 		var self=this;
 		$.ajax({
 			type: "GET",
@@ -150,10 +139,11 @@ org.goorm.core.preference.manager.prototype = {
 			success: function(xml) {
 				self.xml = xml;
 			}
-			, error: function(xhr, status, error) {alert.show(core.localization.msg["alertError"] + error); }
+			, error: function(xhr, status, error) {alert.show(core.module.localization.msg["alertError"] + error); }
 		});
 	},
-	iniParser: function () {
+	
+	ini_parser: function () {
 		var self=this;
 		var url = "preference/ini_parser";
 		$.ajax({
@@ -166,7 +156,8 @@ org.goorm.core.preference.manager.prototype = {
 			}
 		});
 	},
-	iniMaker :function(jsonStr){
+	
+	ini_maker :function(jsonStr){
 		var self=this;
 		var jsonStr = jsonStr;
 		var url = "preference/ini_maker";
@@ -181,6 +172,7 @@ org.goorm.core.preference.manager.prototype = {
 			}
 		});
 	},
+	
 	unserialize : function(data){
 	    // Takes a string representation of variable and recreates it  
 	    // 
@@ -195,10 +187,11 @@ org.goorm.core.preference.manager.prototype = {
 	    // %            note: Aiming for PHP-compatibility, we have to translate objects to arrays 
 	    // *       example 1: unserialize('a:3:{i:0;s:5:"Kevin";i:1;s:3:"van";i:2;s:9:"Zonneveld";}');
 	    // *       returns 1: ['Kevin', 'van', 'Zonneveld']
-	    // *       example 2: unserialize('a:3:{s:9:"firstName";s:5:"Kevin";s:7:"midName";s:3:"van";s:7:"surName";s:9:"Zonneveld";}');
-	    // *       returns 2: {firstName: 'Kevin', midName: 'van', surName: 'Zonneveld'}
+	    // *       example 2: unserialize('a:3:{s:9:"first_name";s:5:"Kevin";s:7:"midName";s:3:"van";s:7:"surName";s:9:"Zonneveld";}');
+	    // *       returns 2: {first_name: 'Kevin', midName: 'van', surName: 'Zonneveld'}
 	    
 	    var error = function (type, msg, filename, line){throw new window[type](msg, filename, line);};
+	    
 	    var read_until = function (data, offset, stopchr){
 	        var buf = [];
 	        var chr = data.slice(offset, offset + 1);
@@ -213,6 +206,7 @@ org.goorm.core.preference.manager.prototype = {
 	        }
 	        return [buf.length, buf.join('')];
 	    };
+	    
 	    var read_chrs = function (data, offset, length){
 	        buf = [];
 	        for(var i = 0;i < length;i++){
@@ -221,6 +215,7 @@ org.goorm.core.preference.manager.prototype = {
 	        }
 	        return [buf.length, buf.join('')];
 	    };
+	    
 	    var _unserialize = function (data, offset){
 	        if(!offset) offset = 0;
 	        var buf = [];
@@ -303,8 +298,8 @@ org.goorm.core.preference.manager.prototype = {
 	    return _unserialize(data, 0)[2];
 	},
 	
-	plugin: function (pluginName) {
-		this.pluginName = null;
+	plugin: function (plugin_name) {
+		this.plugin_name = null;
 		this.xml = null;
 		this.version = null;
 		this.url = null;
@@ -317,56 +312,56 @@ org.goorm.core.preference.manager.prototype = {
 		switch (option){
 			case "required" : {
 				if(!$(input).val().match(/[^.*]/)) {
-					alert.show($(input).attr("name")+core.localization.msg["alertValidateRequired"]);
+					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateRequired"]);
 				     valid=0;
 				}
 				break;
 			}
 			case "alpha" : {
 				if(!$(input).val().match(/^[a-z ._-]+$/i)) {
-					alert.show($(input).attr("name")+core.localization.msg["alertValidateAlpha"]);
+					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateAlpha"]);
 				     valid=0;
 				}
 				break;
 			}
 			case "alphanum" : {
 				if(!$(input).val().match(/^[a-z0-9 ._-]+$/i)) {
-					alert.show($(input).attr("name")+core.localization.msg["alertValidateAlphaNum"]);
+					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateAlphaNum"]);
 				     valid=0;
 				}
 				break;
 			}
 			case "digit" : {
 				if(!$(input).val().match(/^[-+]?[0-9]+$/)) {
-					alert.show($(input).attr("name")+core.localization.msg["alertValidateDigit"]);
+					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateDigit"]);
 				     valid=0;
 				}
 				break;
 			}
 			case "nodigit" : {
 				if(!$(input).val().match( /^[^0-9]+$/)) {
-					alert.show($(input).attr("name")+core.localization.msg["alertValidateNoDigit"]);
+					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateNoDigit"]);
 				     valid=0;
 				}
 				break;
 			}
 			case "number" : {
 				if(!$(input).val().match(/^[-+]?\d*\.?\d+$/)) {
-					alert.show($(input).attr("name")+core.localization.msg["alertValidateNum"]);
+					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateNum"]);
 				     valid=0;
 				}
 				break;
 			}
 			case "email" : {
 				if(!$(input).val().match(/^([a-zA-Z0-9_\.\-\+%])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/)) {
-					alert.show($(input).attr("name")+core.localization.msg["alertValidateEmail"]);
+					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateEmail"]);
 				     valid=0;
 				}
 				break;
 			}
 			case "url" : {
 				if(!$(input).val().match(/^(http|https|ftp)\:\/\/[a-z0-9\-\.]+\.[a-z]{2,3}(:[a-z0-9]*)?\/?([a-z0-9\-\._\?\,\'\/\\\+&amp;%\$#\=~])*$/i)) {
-					alert.show($(input).attr("name")+core.localization.msg["alertValidateUrl"]);
+					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateUrl"]);
 				     valid=0;
 				}
 				break;

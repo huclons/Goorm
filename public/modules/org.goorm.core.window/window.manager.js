@@ -2,141 +2,37 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module window
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class manager
- * @extends window
- **/
 org.goorm.core.window.manager = function () {
-	/**
-	 * This presents the current browser version
-	 * @property window
-	 * @type Object
-	 * @default null
-	 **/
 	this.window = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property tab
-	 * @type Object
-	 * @default null
-	 **/
 	this.tab = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property contextMenu
-	 * @type Object
-	 * @default null
-	 **/
-	this.contextMenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property listmenu
-	 * @type Object
-	 * @default null
-	 **/
-	this.listmenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property windowListMenu
-	 * @type Object
-	 * @default null
-	 **/
-	this.windowListMenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property workspaceContainer
-	 * @type Object
-	 * @default null
-	 **/	
-	this.workspaceContainer = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property windowListContainer
-	 * @type Object
-	 * @default null
-	 **/
-	this.windowListContainer = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property index
-	 * @type Number
-	 * @default 0
-	 **/		
+	this.context_menu = null;
+	this.list_menu = null;
+	this.window_list_menu = null;
+	this.workspace_container = null;
+	this.window_list_container = null;
 	this.index = 0;
-	
-	/**
-	 * This presents the current browser version
-	 * @property tabScrollIndex
-	 * @type Number
-	 * @default 0
-	 **/		
-	this.tabScrollIndex = 0;
-	
-	/**
-	 * This presents the current browser version
-	 * @property windowTabView
-	 * @type Object
-	 * @default null
-	 **/
-	this.windowTabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property activeWindow
-	 * @type Number
-	 * @default -1
-	 **/
-	this.activeWindow = -1;
-	
-	/**
-	 * This presents the current browser version
-	 * @property isMaximize
-	 * @type Number
-	 * @default true
-	 **/
-	this.isMaximize = true;
-	
-	/**
-	 * This presents the current browser version
-	 * @property windowList
-	 * @type Object
-	 **/
-	this.windowList = null;
+	this.tab_scroll_index = 0;
+	this.window_tabview = null;
+	this.active_window = -1;
+	this.is_maxmizedd = true;
+	this.window_list = null;
 };
 
 org.goorm.core.window.manager.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {Object} container
-	 **/
 	init: function(container) {
 		var self = this;
 		
 		this.window = $.makeArray();
 		this.tab = $.makeArray();
-		this.contextMenu = $.makeArray();
-		this.windowListMenu = $.makeArray();
-		this.workspaceContainer = container;
+		this.context_menu = $.makeArray();
+		this.window_list_menu = $.makeArray();
+		this.workspace_container = container;
 		
-		this.windowList = new Object();
-		this.windowList.activeWindow=0;
-		this.windowList.windows = new Object();
+		this.window_list = new Object();
+		this.window_list.active_window=0;
+		this.window_list.windows = new Object();
 		
 		/*
 		this.panel.setHeader("<div style='overflow:auto' class='titlebar'><div style='float:left'>"+this.title+"</div><div style='width:40px; text-align:right; float:right'><img src='images/icons/context/minimizebutton.png' class='minimize button' /> <img src='images/icons/context/maximizebutton.png' class='maximize button' /> <img src='images/icons/context/closebutton.png' class='close button' /></div></div>");
@@ -144,102 +40,102 @@ org.goorm.core.window.manager.prototype = {
 
 		//$("#" + container).append("");
 
-		$("#" + container).append("<div id='" + container + "WindowList'><div style='float:right'><div class='windowList windowButton'></div></div><div class='tapMaxButtons' style='float:right;'><div class='maxmaximize windowButton'></div> <div class='maxclose windowButton'></div></div><div class='tabScroll' style='float:right;'><div class='tabListLeft windowButton'></div> <div class='tabListRight windowButton'></div></div></div>");
+		$("#" + container).append("<div id='" + container + "_window_list'><div style='float:right'><div class='window_list window_button'></div></div><div class='tab_max_buttons' style='float:right;'><div class='max_maximize window_button'></div> <div class='max_close window_button'></div></div><div class='tab_scroll' style='float:right;'><div class='tab_list_left window_button'></div> <div class='tab_list_right window_button'></div></div></div>");
 		
-		$(".maxmaximize").click(function (e) {
+		$(".max_maximize").click(function (e) {
 			self.cascade();
 			e.preventDefault();
 			e.stopPropagation();
 			return false;
 		});
-		$(".tapMaxButtons").css("display", "none");
-		$(".maxclose").click(function () {
-			self.window[self.activeWindow].close();
+		$(".tab_max_buttons").css("display", "none");
+		$(".max_close").click(function () {
+			self.window[self.active_window].close();
 		});
 		
-		$(".tabListLeft").click(function () {
-			if(self.tabScrollIndex>0) {
-				self.tabScrollIndex--;
-				$("#workspaceWindowList").find("li").eq(self.tabScrollIndex).css("display", "inline-block");
+		$(".tab_list_left").click(function () {
+			if(self.tab_scroll_index>0) {
+				self.tab_scroll_index--;
+				$("#workspace_window_list").find("li").eq(self.tab_scroll_index).css("display", "inline-block");
 			}
 		});
-		$(".tabListRight").click(function () {
-			if(self.tabScrollIndex<self.index-1) {
-				$("#workspaceWindowList").find("li").eq(self.tabScrollIndex).css("display", "none");
-				self.tabScrollIndex++;
+		$(".tab_list_right").click(function () {
+			if(self.tab_scroll_index<self.index-1) {
+				$("#workspace_window_list").find("li").eq(self.tab_scroll_index).css("display", "none");
+				self.tab_scroll_index++;
 			}
 		});
 		
-		this.windowListContainer = container + "WindowList";
+		this.window_list_container = container + "_window_list";
 		
-		this.windowTabView = new YAHOO.widget.TabView(this.windowListContainer);
+		this.window_tabview = new YAHOO.widget.TabView(this.window_list_container);
 
-		this.listmenu = new YAHOO.widget.Menu("windowListMenu");
-		this.listmenu.render(document.body);
+		this.list_menu = new YAHOO.widget.Menu("window_list_menu");
+		this.list_menu.render(document.body);
 		
-		this.contextMenu[0] = new org.goorm.core.menu.context();
-		this.contextMenu[0].init("configs/menu/org.goorm.core.window/window.manager.html", "window.manager", container);
+		this.context_menu[0] = new org.goorm.core.menu.context();
+		this.context_menu[0].init("configs/menu/org.goorm.core.window/window.manager.html", "window.manager", container);
 		
-		this.contextMenu[1] = new org.goorm.core.menu.context();
-		this.contextMenu[1].init("configs/menu/org.goorm.core.window/window.manager.tabView.html", "window.manager.tabView", container + "WindowList");
+		this.context_menu[1] = new org.goorm.core.menu.context();
+		this.context_menu[1].init("configs/menu/org.goorm.core.window/window.manager.tabview.html", "window.manager.tabview", container + "_window_list");
 				
 		//testCode
 		/*
-		$("#" + container + "WindowList").dblclick(function() {
+		$("#" + container + "window_list").dblclick(function() {
 			self.add("designer"); //type : designer or editor
 		});
 		*/
 		
 		/*
-		$("#workspace").append("<button id='addWindowButton'>add a window</button>");
+		$("#workspace").append("<button id='addwindow_button'>add a window</button>");
 		
 		var self = this;
-		$("#addWindowButton").click(function() {
+		$("#addwindow_button").click(function() {
 			self.add();
 			m.s("added a window", "window manager");
 		});
 		*/
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
-		// Window events
+		// window events
 		//////////////////////////////////////////////////////////////////////////////////////////
 
 		$("#" + container).click(function () {
-			self.contextMenu[0].cancel();
-			self.contextMenu[1].cancel();
+			self.context_menu[0].cancel();
+			self.context_menu[1].cancel();
 			
 			for(i=0; i<self.index; i++) {
-				if (self.window[i].contextMenu) {
-					self.window[i].contextMenu.cancel();
+				if (self.window[i].context_menu) {
+					self.window[i].context_menu.cancel();
 				}
 				
-				if (self.tab[i].contextMenu) {
-					self.tab[i].contextMenu.cancel();					
+				if (self.tab[i].context_menu) {
+					self.tab[i].context_menu.cancel();					
 				}
 			}
 			
 		});
 				
-		$("#" + container + "WindowList").find(".windowList").click(function () {
-			self.listmenu.show();
+		$("#" + container + "window_list").find(".window_list").click(function () {
+			self.list_menu.show();
 			
-			$("#windowListMenu").css("z-index", 5);
-			$("#windowListMenu").css("left", $("#" + container + "WindowList").find(".windowList").offset().left - $("#windowListMenu").width() + 10);
-			$("#windowListMenu").css("top", $("#" + container + "WindowList").find(".windowList").offset().top + 10);	
+			$("#window_list_menu").css("z-index", 5);
+			$("#window_list_menu").css("left", $("#" + container + "window_list").find(".window_list").offset().left - $("#window_list_menu").width() + 10);
+			$("#window_list_menu").css("top", $("#" + container + "window_list").find(".window_list").offset().top + 10);	
 		
 			return false;
 		});
 		
-		$(core).bind("goormLoadingComplete", function () {
-			if(!$.isEmptyObject(localStorage["windowList"])){
-				var tempWindowList = $.parseJSON(localStorage["windowList"]);
+		$(core).bind("goorm_load_complete", function () {
+			if(!$.isEmptyObject(localStorage["window_list"])){
+				var temp_window_list = $.parseJSON(localStorage["window_list"]);
 				var count = 0;
 				var active = 0;
 				
-				for(var id in tempWindowList.windows){
-					var fileID = tempWindowList.windows[id];
-					self.open(fileID.filepath, fileID.filename, fileID.filetype, fileID.editor);
-					if(tempWindowList.activeWindow == id) 
+				for(var id in temp_window_list.windows){
+					var file_id = temp_window_list.windows[id];
+					self.open(file_id.filepath, file_id.filename, file_id.filetype, file_id.editor);
+					if(temp_window_list.active_window == id) 
 						active = count;
 					else count++;
 				}
@@ -250,98 +146,73 @@ org.goorm.core.window.manager.prototype = {
 		});
 	},
 
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method open 
-	 * @param {String} filepath The path of the file.
-	 * @param {String} filename The name of the file.
-	 * @param {String} filetype The type of the file.
-	 **/
 	open: function(filepath, filename, filetype, editor) {
-		var i = this.isOpened(filepath, filename);
+		var i = this.is_opened(filepath, filename);
 		
 		if(i >= 0) {
-			this.activeWindow = i;
+			this.active_window = i;
 			this.window[i].activate();
 		}
 		else {
-			console.log(editor);
-			
 			this.add(filepath, filename, filetype, editor);
-			var fileID = filepath+filename;
-			this.windowList.windows[fileID] = new Object();
-			this.windowList.windows[fileID].filepath = filepath;
-			this.windowList.windows[fileID].filename = filename;
-			this.windowList.windows[fileID].filetype = filetype;
-			this.windowList.windows[fileID].editor = editor;
-			localStorage["windowList"] = JSON.stringify(this.windowList);
+			var file_id = filepath+filename;
+			this.window_list.windows[file_id] = new Object();
+			this.window_list.windows[file_id].filepath = filepath;
+			this.window_list.windows[file_id].filename = filename;
+			this.window_list.windows[file_id].filetype = filetype;
+			this.window_list.windows[file_id].editor = editor;
+			localStorage["window_list"] = JSON.stringify(this.window_list);
 		}
 		
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method isOpened 
-	 * @param {String} filepath The path of the file.
-	 * @param {String} filename The name of the file.
-	 * @return {Number} The index of the window.
-	 **/
-	isOpened: function (filepath, filename) {
+	is_opened: function (filepath, filename) {
 		var self = this;
-		var windowIndex = -1;
-		var emptyWindows = $.makeArray();
+		var window_index = -1;
+		var empty_windows = $.makeArray();
 		
 		$(this.window).each(function (i) {
 			if (this.filepath == null && this.filename == null) {
-				emptyWindows.push(i);
+				empty_windows.push(i);
 			}
 		});
 		
-		$(emptyWindows).each(function (i) {
+		$(empty_windows).each(function (i) {
 			self.window.pop(this);
 		});
 		
 		$(this.window).each(function (i) {
 			if (this.filepath == filepath && this.filename == filename) {
-				windowIndex = i;
+				window_index = i;
 			}
 		});
 		
-		return windowIndex;
+		return window_index;
 	},	
 
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method add 
-	 * @param {String} filepath The path of the file.
-	 * @param {String} filename The name of the file.
-	 * @param {String} filetype The type of the file.
-	 **/
 	add: function(filepath, filename, filetype, editor) {
-		if(this.checkAlreadyOpened()) {
-			m.s("warning", "This file is already opened!!", "windowManager");
+		if(this.check_already_opened()) {
+			m.s("warning", "This file is already opened!!", "window_manager");
 		}
 		else {
 			var self = this;
-			this.activeWindow = this.index;
+			this.active_window = this.index;
 			
 			
 			var title = filename;
 
-			$("#"+this.workspaceContainer).append("<div id='fileWindow"+this.index+"'></div>");
+			$("#"+this.workspace_container).append("<div id='filewindow"+this.index+"'></div>");
 			
 			this.window[this.index] = new org.goorm.core.window.panel();
-			this.window[this.index].init("fileWindow"+this.index, title, this.workspaceContainer, filepath, filename, filetype, editor);	
-			
+			this.window[this.index].init("filewindow"+this.index, title, this.workspace_container, filepath, filename, filetype, editor);	
 			
 			this.tab[this.index] = new org.goorm.core.window.tab();
-			this.tab[this.index].init("fileWindow"+this.index, title, this.windowTabView, this.listmenu);			
-			
+			this.tab[this.index].init("filewindow"+this.index, title, this.window_tabview, this.list_menu);			
 			
 			this.window[this.index].connect(this.tab[this.index]);
 			this.tab[this.index].connect(this.window[this.index]);
 			
-			this.activeWindow = this.index;
+			this.active_window = this.index;
 			this.window[this.index].activate();				
 			this.tab[this.index].activate();
 			
@@ -352,84 +223,60 @@ org.goorm.core.window.manager.prototype = {
 			this.index++;
 			
 			/*
-			if(!this.isMaximize){
+			if(!this.is_maxmizedd){
 				this.cascade();
 			}
 			*/
 		}
 		
-		$(document).bind("maximizeResize", function() {
-			if(self.activeWindow!=-1) {
-				self.window[self.activeWindow].maximize(true);
+		$(document).bind("maximize_resize", function() {
+			if(self.active_window!=-1) {
+				self.window[self.active_window].maximize(true);
 			}
 		});
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method checkAlreadyOpened 
-	 * @param {String} filepath The path of the file.
-	 * @param {String} filename The name of the file.
-	 **/
-	checkAlreadyOpened: function(fullpath, filename) {
+	check_already_opened: function(fullpath, filename) {
 	},
 		
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method previousWindow 
-	 * @param {Number} i The index.
-	 **/
-	previousWindow: function () {	
-		if (this.window[this.activeWindow-1]) {
-			this.window[this.activeWindow-1].activate();
-			this.activeWindow--;
+	previous_window: function () {	
+		if (this.window[this.active_window-1]) {
+			this.window[this.active_window-1].activate();
+			this.active_window--;
 		  
-		 	if (this.window[this.activeWindow].type == "Editor") {
-				this.window[this.activeWindow].editor.editor.focus();
+		 	if (this.window[this.active_window].type == "Editor") {
+				this.window[this.active_window].editor.editor.focus();
 			}
 		}
 	},
 
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method nextWindow 
-	 * @param {Number} i The index.
-	 **/
-	nextWindow: function () {
-		if (this.window[this.activeWindow+1]) {
-			this.window[this.activeWindow+1].activate();
-			this.activeWindow++;
+	next_window: function () {
+		if (this.window[this.active_window+1]) {
+			this.window[this.active_window+1].activate();
+			this.active_window++;
 		  
-		  	if (this.window[this.activeWindow].type == "Editor") {
-				this.window[this.activeWindow].editor.editor.focus();
+		  	if (this.window[this.active_window].type == "Editor") {
+				this.window[this.active_window].editor.editor.focus();
 			}			  
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method hideAllWindows 
-	 **/
-	hideAllWindows: function () {
+	hide_all_windows: function () {
 		$(this.window).each(function (i) {
 			$("#" + this.container + "_c").hide("fast");
 			this.status = "minimized";	
 		});
 	},
 
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method showAllWindows 
-	 **/
-	showAllWindows: function () {
+	show_all_windows: function () {
 		$(this.window).each(function (i) {
 			$("#" + this.container + "_c").show("fast");
 			this.status = null;	
-			this.resizeAll();
+			this.resize_all();
 		});
 	},
 	
-	saveAll: function() {
+	save_all: function() {
 		for (var i = 0; i < this.index; i++) {
 			if(this.window[i].alive) {
 				if (this.window[i].designer) {
@@ -442,168 +289,151 @@ org.goorm.core.window.manager.prototype = {
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method cascade 
-	 **/
 	cascade: function () {
 		var count = 0;
-		var widthRatio = 0.6;
-		var heightRatio = 0.7;
+		var width_ratio = 0.6;
+		var height_ratio = 0.7;
 		
 		for (var i = 0; i < this.index; i++) {
 			if(this.window[i].alive) {
 				if(this.window[i].status=="maximized") {
 					this.window[i].maximize();
-					this.isMaximize = true;
+					this.is_maxmizedd = true;
 				}
 
 				this.window[i].panel.left	= 4+(24*count);
 				this.window[i].panel.top	= 29+(24*count);
-				this.window[i].panel.width = $('#workspace').width() * widthRatio;
-				this.window[i].panel.height = $('#workspace').height() * heightRatio;
+				this.window[i].panel.width = $('#workspace').width() * width_ratio;
+				this.window[i].panel.height = $('#workspace').height() * height_ratio;
 				
 				//m.s(this.window[i].designer.toSource());
-				//if($('#fileWindow'+i+'_c').find(".codeEditor") != null) {
+				//if($('#filewindow'+i+'_c').find(".code_editor") != null) {
 				if(this.window[i].designer){
 					m.s(this.window[i].type);
-					$('#fileWindow'+i+'_c').find(".canvasContainer").css('width', this.window[i].panel.width - 14 + 'px');
-			  	 	$('#fileWindow'+i+'_c').find(".canvasContainer").css('height', this.window[i].panel.height - 68 + 'px');
-			  	 	$('#fileWindow'+i+'_c').find(".ruler_x").css('width', this.window[i].panel.width - 15 + 'px');
-			  	 	$('#fileWindow'+i+'_c').find(".ruler_y").css('height', this.window[i].panel.height - 65 + 'px');
+					$('#filewindow'+i+'_c').find(".canvas_container").css('width', this.window[i].panel.width - 14 + 'px');
+			  	 	$('#filewindow'+i+'_c').find(".canvas_container").css('height', this.window[i].panel.height - 68 + 'px');
+			  	 	$('#filewindow'+i+'_c').find(".ruler_x").css('width', this.window[i].panel.width - 15 + 'px');
+			  	 	$('#filewindow'+i+'_c').find(".ruler_y").css('height', this.window[i].panel.height - 65 + 'px');
 				}
 								
-				$('#fileWindow'+i+'_c').css('left', this.window[i].panel.left + 'px');
-				$('#fileWindow'+i+'_c').css('top', this.window[i].panel.top + 'px');
-				$('#fileWindow'+i+'_c').css('z-index', i);
+				$('#filewindow'+i+'_c').css('left', this.window[i].panel.left + 'px');
+				$('#filewindow'+i+'_c').css('top', this.window[i].panel.top + 'px');
+				$('#filewindow'+i+'_c').css('z-index', i);
 
 				this.window[i].panel.cfg.setProperty('left', this.window[i].panel.left + 'px');
 				this.window[i].panel.cfg.setProperty('top', this.window[i].panel.top + 'px');
 
-//				$('#fileWindow'+i+'_c').find('.yui-panel').css('width', this.window[i].panel.width + 'px');
-//				$('#fileWindow'+i+'_c').find('.yui-panel').css('height', this.window[i].panel.height-22 + 'px');
-				$('#fileWindow'+i+'_c').css('width', this.window[i].panel.width + 'px');
-				$('#fileWindow'+i+'_c').css('height', this.window[i].panel.height + 'px');
-				$('#fileWindow'+i).children(".bd").height(this.window[i].panel.height - 50);
-				$('#fileWindow'+i).css('width', this.window[i].panel.width + 'px');
-				$('#fileWindow'+i+'_c').children(".windowContainer").height(this.window[i].panel.height - 50);
-				this.window[i].resizeAll();
+//				$('#filewindow'+i+'_c').find('.yui-panel').css('width', this.window[i].panel.width + 'px');
+//				$('#filewindow'+i+'_c').find('.yui-panel').css('height', this.window[i].panel.height-22 + 'px');
+				$('#filewindow'+i+'_c').css('width', this.window[i].panel.width + 'px');
+				$('#filewindow'+i+'_c').css('height', this.window[i].panel.height + 'px');
+				$('#filewindow'+i).children(".bd").height(this.window[i].panel.height - 50);
+				$('#filewindow'+i).css('width', this.window[i].panel.width + 'px');
+				$('#filewindow'+i+'_c').children(".window_container").height(this.window[i].panel.height - 50);
+				this.window[i].resize_all();
 				count++;
 			}
 		}
 		
-		this.isMaximize = false;
-		$(".tapMaxButtons").css("display", "none");
+		this.is_maxmizedd = false;
+		$(".tab_max_buttons").css("display", "none");
 		
-		//this.window[this.activeWindow].activate();
+		//this.window[this.active_window].activate();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method tileVertically 
-	 **/
-	tileVertically: function () {
+	tile_vertically: function () {
 		var count = 0;
-		var eachWidth = Math.floor(($('#workspace').width()-9) / this.countTheAliveWindows());
-		var eachHeight = $('#workspace').height()-33;
+		var each_width = Math.floor(($('#workspace').width()-9) / this.count_alive_windows());
+		var each_height = $('#workspace').height()-33;
 			
 		for (var i = 0; i < this.index; i++) {
 			if(this.window[i].alive) {
 				if(this.window[i].status=="maximized") {
 					this.window[i].maximize();
-					this.isMaximize = true;
+					this.is_maxmizedd = true;
 				}
-				this.window[i].panel.left	= 4+(eachWidth*count);
+				this.window[i].panel.left	= 4+(each_width*count);
 				this.window[i].panel.top	= 29;
-				this.window[i].panel.width	= eachWidth;
-				this.window[i].panel.height	= eachHeight;
+				this.window[i].panel.width	= each_width;
+				this.window[i].panel.height	= each_height;
 				
 				if(this.window[i].designer){
-					$('#fileWindow'+i+'_c').find(".canvasContainer").css('width', this.window[i].panel.width - 14 + 'px');
-			  	 	$('#fileWindow'+i+'_c').find(".canvasContainer").css('height', this.window[i].panel.height - 68 + 'px');
-			  	 	$('#fileWindow'+i+'_c').find(".ruler_x").css('width', this.window[i].panel.width - 15 + 'px');
-			  	 	$('#fileWindow'+i+'_c').find(".ruler_y").css('height', this.window[i].panel.height - 65 + 'px');
+					$('#filewindow'+i+'_c').find(".canvas_container").css('width', this.window[i].panel.width - 14 + 'px');
+			  	 	$('#filewindow'+i+'_c').find(".canvas_container").css('height', this.window[i].panel.height - 68 + 'px');
+			  	 	$('#filewindow'+i+'_c').find(".ruler_x").css('width', this.window[i].panel.width - 15 + 'px');
+			  	 	$('#filewindow'+i+'_c').find(".ruler_y").css('height', this.window[i].panel.height - 65 + 'px');
 				}
 				
-				$('#fileWindow'+i+'_c').css('left', this.window[i].panel.left + 'px');
-				$('#fileWindow'+i+'_c').css('top', this.window[i].panel.top + 'px');
-				$('#fileWindow'+i+'_c').css('width', this.window[i].panel.width + 'px');
-				$('#fileWindow'+i+'_c').css('height', this.window[i].panel.height + 'px');
-				$('#fileWindow'+i+'_c').css('z-index', i);
+				$('#filewindow'+i+'_c').css('left', this.window[i].panel.left + 'px');
+				$('#filewindow'+i+'_c').css('top', this.window[i].panel.top + 'px');
+				$('#filewindow'+i+'_c').css('width', this.window[i].panel.width + 'px');
+				$('#filewindow'+i+'_c').css('height', this.window[i].panel.height + 'px');
+				$('#filewindow'+i+'_c').css('z-index', i);
 
 				this.window[i].panel.cfg.setProperty('left', this.window[i].panel.left + 'px');
 				this.window[i].panel.cfg.setProperty('top', this.window[i].panel.top + 'px');
 
-				$('#fileWindow'+i+'_c').find('.yui-panel').css('width', this.window[i].panel.width + 'px');
-				$('#fileWindow'+i+'_c').find('.yui-panel').css('height', this.window[i].panel.height + 'px');
-				$('#fileWindow'+i+'_c').children('.yui-panel').children(".bd").height(this.window[i].panel.height - 50);
-				$('#fileWindow'+i+'_c').find(".windowContainer").find(".CodeMirror").height(this.window[i].panel.height - 50);
-				this.window[i].resizeAll();
+				$('#filewindow'+i+'_c').find('.yui-panel').css('width', this.window[i].panel.width + 'px');
+				$('#filewindow'+i+'_c').find('.yui-panel').css('height', this.window[i].panel.height + 'px');
+				$('#filewindow'+i+'_c').children('.yui-panel').children(".bd").height(this.window[i].panel.height - 50);
+				$('#filewindow'+i+'_c').find(".window_container").find(".CodeMirror").height(this.window[i].panel.height - 50);
+				this.window[i].resize_all();
 				count++;
 			}
 		}
 		
 				
-		this.isMaximize = false;
-		$(".tapMaxButtons").css("display", "none");
+		this.is_maxmizedd = false;
+		$(".tab_max_buttons").css("display", "none");
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method tileHorizontally 
-	 **/
-	tileHorizontally: function() {
+	tile_horizontally: function() {
 		var count = 0;
-		var eachWidth = $('#workspace').width()-9;
-		var eachHeight = Math.floor(($('#workspace').height()-33) / this.countTheAliveWindows());
+		var each_width = $('#workspace').width()-9;
+		var each_height = Math.floor(($('#workspace').height()-33) / this.count_alive_windows());
 			
 		for (var i = 0; i < this.index; i++) {
 			if(this.window[i].alive) {
 				if(this.window[i].status=="maximized") {
 					this.window[i].maximize();
-					this.isMaximize = true;
+					this.is_maxmizedd = true;
 				}
 				this.window[i].panel.left	= 4;
-				this.window[i].panel.top	= 29+(eachHeight*count);
-				this.window[i].panel.width	= eachWidth;
-				this.window[i].panel.height	= eachHeight;
+				this.window[i].panel.top	= 29+(each_height*count);
+				this.window[i].panel.width	= each_width;
+				this.window[i].panel.height	= each_height;
 				
 				if(this.window[i].designer){
 					m.s(this.window[i].type);
-					$('#fileWindow'+i+'_c').find(".canvasContainer").css('width', this.window[i].panel.width - 14 + 'px');
-			  	 	$('#fileWindow'+i+'_c').find(".canvasContainer").css('height', this.window[i].panel.height - 68 + 'px');
-			  	 	$('#fileWindow'+i+'_c').find(".ruler_x").css('width', this.window[i].panel.width - 15 + 'px');
-			  	 	$('#fileWindow'+i+'_c').find(".ruler_y").css('height', this.window[i].panel.height - 65 + 'px');
+					$('#filewindow'+i+'_c').find(".canvas_container").css('width', this.window[i].panel.width - 14 + 'px');
+			  	 	$('#filewindow'+i+'_c').find(".canvas_container").css('height', this.window[i].panel.height - 68 + 'px');
+			  	 	$('#filewindow'+i+'_c').find(".ruler_x").css('width', this.window[i].panel.width - 15 + 'px');
+			  	 	$('#filewindow'+i+'_c').find(".ruler_y").css('height', this.window[i].panel.height - 65 + 'px');
 				}
 				
-				$('#fileWindow'+i+'_c').css('left', this.window[i].panel.left + 'px');
-				$('#fileWindow'+i+'_c').css('top', this.window[i].panel.top + 'px');
-				$('#fileWindow'+i+'_c').css('width', this.window[i].panel.width + 'px');
-				$('#fileWindow'+i+'_c').css('height', this.window[i].panel.height + 'px');
-				$('#fileWindow'+i+'_c').css('z-index', i);
+				$('#filewindow'+i+'_c').css('left', this.window[i].panel.left + 'px');
+				$('#filewindow'+i+'_c').css('top', this.window[i].panel.top + 'px');
+				$('#filewindow'+i+'_c').css('width', this.window[i].panel.width + 'px');
+				$('#filewindow'+i+'_c').css('height', this.window[i].panel.height + 'px');
+				$('#filewindow'+i+'_c').css('z-index', i);
 
 				this.window[i].panel.cfg.setProperty('left', this.window[i].panel.left + 'px');
 				this.window[i].panel.cfg.setProperty('top', this.window[i].panel.top + 'px');
 
-				$('#fileWindow'+i+'_c').find('.yui-panel').css('width', this.window[i].panel.width + 'px');
-				$('#fileWindow'+i+'_c').find('.yui-panel').css('height', this.window[i].panel.height + 'px');
-				$('#fileWindow'+i+'_c').children('.yui-panel').children(".bd").height(this.window[i].panel.height - 50);
-				$('#fileWindow'+i+'_c').find(".windowContainer").find(".CodeMirror").height(this.window[i].panel.height - 50);
-				this.window[i].resizeAll();
+				$('#filewindow'+i+'_c').find('.yui-panel').css('width', this.window[i].panel.width + 'px');
+				$('#filewindow'+i+'_c').find('.yui-panel').css('height', this.window[i].panel.height + 'px');
+				$('#filewindow'+i+'_c').children('.yui-panel').children(".bd").height(this.window[i].panel.height - 50);
+				$('#filewindow'+i+'_c').find(".window_container").find(".CodeMirror").height(this.window[i].panel.height - 50);
+				this.window[i].resize_all();
 				count++;
 			}
 		}
 			
-		this.isMaximize = false;
-		$(".tapMaxButtons").css("display", "none");
+		this.is_maxmizedd = false;
+		$(".tab_max_buttons").css("display", "none");
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method countTheAliveWindows
-	 * @return {Number} The count. 
-	 **/
-	countTheAliveWindows: function() {
+	count_alive_windows: function() {
 		var count = 0;
 		
 		for (var i = 0; i < this.index; i++) {
@@ -615,11 +445,7 @@ org.goorm.core.window.manager.prototype = {
 		return count;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method closeAll 
-	 **/
-	closeAll: function() {
+	close_all: function() {
 		var self = this;
 		
 		$(this.window).each(function (i) {
@@ -635,7 +461,7 @@ org.goorm.core.window.manager.prototype = {
 		});
 				
 		this.index = 0;
-		this.activeWindow = -1;
+		this.active_window = -1;
 		
 		this.window = null;
 		delete this.window;

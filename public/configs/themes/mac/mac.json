@@ -5,25 +5,25 @@
 	"author":"Jo Eun-gwi",
 	"e-mail":"jeg0330@gmail.com",
 	"theme":{
-		"TopLayout":{
+		"top_layout":{
 			".yui-skin-sam":{"background-image":"url(../config/theme/mac/image/top.png)","background-repeat":"repeat-x","background-color":"#a7a7a7"},
 			".yui-skin-sam .yuimenubaritemlabel":{"color":"black"},
-			".mainToolbar .toolbarPart":{"border-color":"gray"},
+			".main_toolbar .toolbar_part":{"border-color":"gray"},
 			".yui-skin-sam .yuimenubar":{"background-color":"none","background-image":"none"},
-			".mainToolbar .toolbarHandle":{"border-left":"3px double #DDD","background-image":"none"}
+			".main_toolbar .toolbar_handle":{"border-left":"3px double #DDD","background-image":"none"}
 		},
-		"Workspace":{
+		"workspace":{
 			"#workspace .yui-panel .hd":{"background":"url(../config/theme/mac/image/windowTopOff.png)","border-bottom":"1px solid gray"},
 			"#workspace .yui-panel .activated":{"color":"#ffffff","background":"url(../config/theme/mac/image/windowTopOn.png)"},
 			"#workspace .yui-panel":{"background":"url(../config/theme/mac/image/windowTopOff.png)"},
-			"#workspaceWindowList .yui-nav":{"padding-top":"3px","padding-left":"2px","height":"21px","border-bottom":"0px"},
-			"#workspaceWindowList":{"background-color":"#f7f7f7","border-bottom":"1px solid #ccc","-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-rxadius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"},
-			"#workspaceWindowList li":{"margin-top":"0px","margin-left":"0px"},
-			"#workspaceWindowList a":{"height":"22px"},
+			"#workspace_window_list .yui-nav":{"padding-top":"3px","padding-left":"2px","height":"21px","border-bottom":"0px"},
+			"#workspace_window_list":{"background-color":"#f7f7f7","border-bottom":"1px solid #ccc","-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-rxadius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"},
+			"#workspace_window_list li":{"margin-top":"0px","margin-left":"0px"},
+			"#workspace_window_list a":{"height":"22px"},
 			"#uizardInnerLayoutCenter #workspace":{"background-color":"#cdcdcd","-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-radius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"},
 			"#uizardInnerLayoutCenter":{"-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-radius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"}
 		},
-		"LeftLayout":{
+		"left_layout":{
 			".yui-skin-sam .yui-navset .yui-nav .selected a, .yui-skin-sam .yui-navset .yui-nav .selected a:focus, .yui-skin-sam .yui-navset .yui-nav .selected a:hover":{"font-weight":"normal","background-color":"white","padding-left":"0px","padding-right":"0px","height":"20px","background-image":"url(../config/theme/mac/image/tabBarSelected.png)","background-repeat":"repeat-x","color":"white","border-color":"#aaaaaa","border-top":"none","border-left":"1px solid #AAA","border-right":"1px solid #AAA","border-bottom":"none","-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-radius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"},
 			".yui-skin-sam .yui-navset .yui-nav a":{"padding-left":"0px","padding-right":"0px","height":"20px","border-top":"none","border-left":"1px solid #aaaaaa","border-right":"1px solid #aaaaaa","border-bottom":"none","background-image":"url(../config/theme/mac/image/nonSelected.png)","background-repeat":"repeat-x","color":"#333","-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-radius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"},
 			".yui-skin-sam .yui-navset .yui-nav a:hover, .yui-skin-sam .yui-navset .yui-nav a:focus":{"padding-left":"0px","padding-right":"0px","height":"20px","background-image":"url(../config/theme/mac/image/nonSelected.png)","background-repeat":"repeat-x","color":"#333","border-color":"#aaaaaa","border-top":"none","background":"none","-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-radius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"},
@@ -35,13 +35,13 @@
 			"#uizardLeft .yui-nav li":{"margin-top":"0px","margin-left":"0px"},
 			"#uizardLeft":{"border-left":"none","-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-radius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"}
 		},
-		"RightLayout":{
+		"right_layout":{
 			"#uizardInnerLayoutRight .yui-nav":{"padding-top":"5px","padding-left":"2px","background-image":"url(../config/theme/mac/image/bottom.png)","background-repeat":"repeat-x","background-color":"#a7a7a7","-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-radius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"},
 			"#uizardInnerLayoutRight .yui-nav li":{"margin-top":"0px","margin-left":"0px"},
 			"#uizardInnerLayoutRight .yui-content":{"padding-bottom":"1px","background-color":"#e1e6eb"},
 			"#uizardInnerLayoutRight":{"-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-radius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"}
 		},
-		"BottomLayout":{
+		"button_layout":{
 			"#uizardStatusbarMessage":{"color":"white"},
 			"#yui-gen15":{"background-image":"url(../config/theme/mac/image/bottom.png)","background-repeat":"repeat-x","background-color":"#a7a7a7"},
 			"#uizardInnerLayoutBottom .yui-content":{"background-color":"#e1e6eb"},
@@ -49,7 +49,7 @@
 			"#uizardInnerLayoutBottom .yui-nav li":{"margin-top":"0px","margin-left":"0px"},
 			"#uizardInnerLayoutBottom":{"-moz-border-radius-topright":"0px","-moz-border-radius-topleft":"0px","-webkit-top-right-border-radius":"0px","-webkit-top-left-border-radius":"0px","-khtml-border-radius-topleft":"0px","-khtml-border-radius-topright":"0px","border-top-right-radius":"0px","border-top-left-radius":"0px"}
 		},
-		"DialogDesign":{
+		"dialog_design":{
 			"#uizardDialogContainer .yui-navset .yui-nav a em, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em":{"border-top":"1px solid #AAA"},
 			".yui-skin-sam .yui-navset .yui-nav a, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a":{"border-width":"0px 1px"},
 			".yui-skin-sam .container-close":{"width":"12px","height":"12px","top":"5px","right":"6px","background":"url(../config/theme/mac/image/closeButton.png)","border":"none"},
@@ -62,24 +62,24 @@
 			".yui-picker-panel .bd":{"-moz-border-radius-topright":"10px","-moz-border-radius-topleft":"10px","-webkit-top-right-border-radius":"10px","-webkit-top-left-border-radius":"10px","-khtml-border-radius-topleft":"10px","-khtml-border-radius-topright":"10px","border-top-right-radius":"10px","border-top-left-radius":"10px"},
 			".yui-skin-sam .yui-button":{"-moz-border-radius":"8px","-webkit-border-radius":"8px","-khtml-border-radius":"8px","border-radius":"8px"}
 		},
-		"Window":{
-			"#workspace .minimize.windowButton":{"width":"8px","height":"8px","margin":"0px 3px 0px 0px","padding":"2px 4px 2px 2px","background-position":"2px","background-image":"url(../config/theme/mac/image/minimizeButton.png)"},
-			"#workspace .maximize.windowButton":{"width":"8px","height":"8px","margin":"0px 3px 0px 0px","padding":"2px 4px 2px 2px","background-position":"2px","background-image":"url(../config/theme/mac/image/maximizeButton.png)"},
-			"#workspace .close.windowButton":{"width":"8px","height":"8px","margin":"0px","padding":"2px 4px 2px 2px","background-position":"2px","background-image":"url(../config/theme/mac/image/closeButton.png)"},
-			"#workspace .minimize.windowButton:hover":{"background-image":"url(../config/theme/mac/image/minimizeButton_h.png)","background-color":"transparent"},
-			"#workspace .maximize.windowButton:hover":{"background-image":"url(../config/theme/mac/image/maximizeButton_h.png)","background-color":"transparent"},
-			"#workspace .close.windowButton:hover":{"background-image":"url(../config/theme/mac/image/closeButton_h.png)","background-color":"transparent"},
-			"#workspace .maxmaximize.windowButton":{"padding-right":"2px","background-image":"url(../config/image/icons/context/maximizebutton.png)"},
-			"#workspace .maxclose.windowButton":{"padding-right":"2px","background-image":"url(../config/image/icons/context/closebutton.png)"},
-			".tabCloseButton":{"background-position":"0px","margin-top":"0px","width":"13px","height":"13px","padding":"0px","background-image":"url(../config/theme/mac/image/windowClosebutton.png)"},
-			".tabCloseButton:hover":{"background-color":"transparent","background-image":"url(../config/theme/mac/image/windowClosebutton_h.png)"},
-			"#workspace .tabListRight.windowButton":{"background-position":"0px","width":"24px","height":"16px","padding":"0px","background-image":"url(../config/theme/mac/image/tabListRightButton.png)"},
-			"#workspace .tabListRight.windowButton:active":{"background-image":"url(../config/theme/mac/image/tabListRightButton_a.png)"},
-			"#workspace .tabListLeft.windowButton":{"background-position":"0px","width":"23px","height":"16px","padding":"0px","background-image":"url(../config/theme/mac/image/tabListLeftButton.png)","margin-left":"0px"},
-			"#workspace .tabListLeft.windowButton:active":{"background-image":"url(../config/theme/mac/image/tabListLeftButton_a.png)"},
-			"#workspace .tabScroll":{"width":"47px","padding":"0px","background-color":"#ccc"},
-			"#workspace .windowButtons":{"margin-top":"4px","padding-top":"2px","background-color":"transparent","float":"right","margin-left":"0px"},
-			"#workspace .tapMaxButtons":{"background-color":"#ccc","padding-left":"5px","border-left":"0px","-moz-border-radius":"5px","-webkit-border-radius":"5px","-khtml-border-radius":"5px","border-radius":"5px","width":"28px"},
+		"window":{
+			"#workspace .minimize.window_button":{"width":"8px","height":"8px","margin":"0px 3px 0px 0px","padding":"2px 4px 2px 2px","background-position":"2px","background-image":"url(../config/theme/mac/image/minimizeButton.png)"},
+			"#workspace .maximize.window_button":{"width":"8px","height":"8px","margin":"0px 3px 0px 0px","padding":"2px 4px 2px 2px","background-position":"2px","background-image":"url(../config/theme/mac/image/maximizeButton.png)"},
+			"#workspace .close.window_button":{"width":"8px","height":"8px","margin":"0px","padding":"2px 4px 2px 2px","background-position":"2px","background-image":"url(../config/theme/mac/image/closeButton.png)"},
+			"#workspace .minimize.window_button:hover":{"background-image":"url(../config/theme/mac/image/minimizeButton_h.png)","background-color":"transparent"},
+			"#workspace .maximize.window_button:hover":{"background-image":"url(../config/theme/mac/image/maximizeButton_h.png)","background-color":"transparent"},
+			"#workspace .close.window_button:hover":{"background-image":"url(../config/theme/mac/image/closeButton_h.png)","background-color":"transparent"},
+			"#workspace .max_maximize.window_button":{"padding-right":"2px","background-image":"url(../config/image/icons/context/maximizebutton.png)"},
+			"#workspace .max_close.window_button":{"padding-right":"2px","background-image":"url(../config/image/icons/context/closebutton.png)"},
+			".tab_close_button":{"background-position":"0px","margin-top":"0px","width":"13px","height":"13px","padding":"0px","background-image":"url(../config/theme/mac/image/windowClosebutton.png)"},
+			".tab_close_button:hover":{"background-color":"transparent","background-image":"url(../config/theme/mac/image/windowClosebutton_h.png)"},
+			"#workspace .tab_list_right.window_button":{"background-position":"0px","width":"24px","height":"16px","padding":"0px","background-image":"url(../config/theme/mac/image/tab_list_rightButton.png)"},
+			"#workspace .tab_list_right.window_button:active":{"background-image":"url(../config/theme/mac/image/tab_list_rightButton_a.png)"},
+			"#workspace .tab_list_left.window_button":{"background-position":"0px","width":"23px","height":"16px","padding":"0px","background-image":"url(../config/theme/mac/image/tab_list_leftButton.png)","margin-left":"0px"},
+			"#workspace .tab_list_left.window_button:active":{"background-image":"url(../config/theme/mac/image/tab_list_leftButton_a.png)"},
+			"#workspace .tab_scroll":{"width":"47px","padding":"0px","background-color":"#ccc"},
+			"#workspace .window_buttons":{"margin-top":"4px","padding-top":"2px","background-color":"transparent","float":"right","margin-left":"0px"},
+			"#workspace .tab_max_buttons":{"background-color":"#ccc","padding-left":"5px","border-left":"0px","-moz-border-radius":"5px","-webkit-border-radius":"5px","-khtml-border-radius":"5px","border-radius":"5px","width":"28px"},
 			".yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-hd .collapse":{"background":"url(../config/theme/mac/image/collapseDown.png) no-repeat 0px","border":"none"},
 			".yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-hd .collapse:hover":{"background":"url(../config/theme/mac/image/collapseDown_h.png) no-repeat 0px","border":"none"},
 			".yui-skin-sam .yui-layout .yui-layout-unit-right div.yui-layout-hd .collapse":{"background":"url(../config/theme/mac/image/collapseRight.png) no-repeat 0px","border":"none"},
@@ -97,15 +97,15 @@
 			".yui-skin-sam .yui-resize .yui-resize-handle-br":{"background-image":"none"},
 			".yui-skin-sam .yui-resize .yui-resize-handle-tl":{"background-image":"none"},
 			".yui-skin-sam .yui-resize .yui-resize-handle-tr":{"background-image":"none"},
-			"#workspace .windowContainer":{"margin-top":"0px"},
-			"#projectSelectBox":{"border":"1px solid","background-image":"url(../config/image/org.uizard.core/button_bg.png)","-moz-border-radius":"8px","-webkit-border-radius":"8px","-khtml-border-radius":"8px","border-radius":"8px"},
+			"#workspace .window_container":{"margin-top":"0px"},
+			"#project_select_box":{"border":"1px solid","background-image":"url(../config/image/org.uizard.core/button_bg.png)","-moz-border-radius":"8px","-webkit-border-radius":"8px","-khtml-border-radius":"8px","border-radius":"8px"},
 			".yui-skin-sam .yuimenu .bd":{"background-color":"#ffffff","-moz-border-radius":"0px","-webkit-border-radius":"0px","-khtml-border-radius":"0px","border-radius":"0px","-moz-border-radius-bottomright":"5px","-moz-border-radius-bottomleft":"5px","-webkit-bottom-right-border-radius":"5px","-webkit-bottom-left-border-radius":"5px","-khtml-border-radius-bottomleft":"5px","-khtml-border-radius-bottomright":"5px","border-bottom-right-radius":"5px","border-bottom-left-radius":"5px"},
 			".yui-menu-shadow":{"-moz-border-radius":"0px","-webkit-border-radius":"0px","-khtml-border-radius":"0px","border-radius":"0px","-moz-border-radius-bottomright":"5px","-moz-border-radius-bottomleft":"5px","-webkit-bottom-right-border-radius":"5px","-webkit-bottom-left-border-radius":"5px","-khtml-border-radius-bottomleft":"5px","-khtml-border-radius-bottomright":"5px","border-bottom-right-radius":"5px","border-bottom-left-radius":"5px"},
 			"#uizardDialogContainer .hd":{"text-align":"center"},
-			".mainToolbar .toolbarButton":{"-moz-border-radius":"0px","-webkit-border-radius":"0px","-khtml-border-radius":"0px","border-radius":"0px"},
-			".mainToolbar .toolbarButton:hover":{"background":"url(../config/theme/mac/image/toolbarBackground_h.png)","background-color":"#f7f7f7","border":"1px solid white","border-top":"1px","border-left":"1px solid white"},
-			".mainToolbar .toolbarButton:active":{"background":"url(../config/theme/mac/image/toolbarBackground_a.png)","background-color":"#ffffff","border":"1px solid gray","border-top":"1px solid gray","border-left":"1px solid gray"},
-			".mainToolbar .toolbarButtonPressed":{"border":"1px solid #fff","border-top":"1px solid #999","border-left":"1px solid #999","margin-top":"-2px","padding-top":"5px","background":"none","background-color":"#ccc"},
+			".main_toolbar .toolbar_button":{"-moz-border-radius":"0px","-webkit-border-radius":"0px","-khtml-border-radius":"0px","border-radius":"0px"},
+			".main_toolbar .toolbar_button:hover":{"background":"url(../config/theme/mac/image/toolbarBackground_h.png)","background-color":"#f7f7f7","border":"1px solid white","border-top":"1px","border-left":"1px solid white"},
+			".main_toolbar .toolbar_button:active":{"background":"url(../config/theme/mac/image/toolbarBackground_a.png)","background-color":"#ffffff","border":"1px solid gray","border-top":"1px solid gray","border-left":"1px solid gray"},
+			".main_toolbar .toolbar_buttonPressed":{"border":"1px solid #fff","border-top":"1px solid #999","border-left":"1px solid #999","margin-top":"-2px","padding-top":"5px","background":"none","background-color":"#ccc"},
 			".yui-skin-sam .yuimenuitem .helptext":{"color":"#000000"},
 			".yui-skin-sam .yuimenubaritem-selected":{"background":"white"},
 			".yui-skin-sam .yuimenuitem-hassubmenu":{"background-image":"url(../config/theme/mac/image/menuitem_submenuindicator.png)"},

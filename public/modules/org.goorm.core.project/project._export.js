@@ -2,77 +2,41 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module file
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class _export
- * @extends file
- **/
 org.goorm.core.project._export = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 **/
 	this.dialog = null;
-	
-	/**
-	 * The array object that contains the information about buttons on the bottom of a dialog 
-	 * @property buttons
-	 * @type Object
-	 * @default null
-	 **/
 	this.buttons = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property tabView
-	 **/
-	this.tabView = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property treeView
-	 **/
-	this.treeView = null;	
+	this.tabview = null;
+	this.treeview = null;	
 };
 
 org.goorm.core.project._export.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor
-	 **/
 	init: function () { 
 	
 		var self = this;
 		
-		var handleOk = function() { 
+		var handle_ok = function() { 
 
-			if ($("#projectExportProjectPath").attr("value")=="Not selected") {
-				alert.show(core.localization.msg["alertProjectNotSelected"]);
+			if ($("#project_export_project_path").attr("value")=="Not selected") {
+				alert.show(core.module.localization.msg["alertProjectNotSelected"]);
 				return false;
 			}
 
 			var postdata = {
-				selectProjectName: $("#projectExportProjectName").attr("value"),
-				selectProjectPath: $("#projectExportProjectPath").attr("value"),
-				projectExportType: $("#projectExportDataType").attr("value")
+				selected_project_name: $("#project_export_project_name").attr("value"),
+				selected_project_path: $("#project_export_project_path").attr("value"),
+				project_export_type: $("#project_export_datatype").attr("value")
 			};
-			
-			console.log(postdata);
+
 						
 			$.post("project/export", postdata, function (data) {
-				var receivedData = eval("("+data+")");
+				var received_data = eval("("+data+")");
 
-				if(receivedData.errCode==0) {
-					location.href=receivedData.downloadPath;
+				if(received_data.errCode==0) {
+					location.href=received_data.download_path;
 					setTimeout(function() {
-						core.mainLayout.projectExplorer.refresh();
+						core.module.layout.project_explorer.refresh();
 					}, 50);
 				}
 
@@ -82,13 +46,13 @@ org.goorm.core.project._export.prototype = {
 			this.hide(); 
 		};
 
-		var handleCancel = function() { 
+		var handle_cancel = function() { 
 			
 			this.hide(); 
 		};
 		
-		this.buttons = [ {text:"OK", handler:handleOk, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}]; 
+		this.buttons = [ {text:"OK", handler:handle_ok, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}]; 
 						 
 		this.dialog = new org.goorm.core.project._export.dialog();
 		this.dialog.init({
@@ -97,76 +61,67 @@ org.goorm.core.project._export.prototype = {
 			width:800,
 			height:500,
 			modal:true,
-			yesText:"Open",
-			noText:"Cancel",
+			yes_text:"Open",
+			no_text:"Cancel",
 			buttons:this.buttons,
 			success: function () {
-				var resize = new YAHOO.util.Resize("projectExportDialogLeft", {
+				var resize = new YAHOO.util.Resize("project_export_dialog_left", {
 		            handles: ['r'],
 		            minWidth: 250,
 		            maxWidth: 400
 		        });
 				
 		        resize.on('resize', function(ev) {
-					var width = $("#projectExportDialogMiddle").width();
+					var width = $("#project_export_dialog_middle").width();
 		            var w = ev.width;
-		            $("#projectExportDialogCenter").css('width', (width - w - 9) + 'px');
+		            $("#project_export_dialog_center").css('width', (width - w - 9) + 'px');
 		        });
 		        
-				self.addProjectItem();
+				self.add_project_item();
 			}
 		});
 		this.dialog = this.dialog.dialog;
 		
 		//this.dialog.panel.setBody("AA");
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method show 
-	 **/
+
 	show: function () {
-		console.log("project export");
-		this.addProjectList();
-		$("#projectExportType").val("All");
-		$("#projectExportLocation").val("");
-		$("#projectExportProjectInformation").empty();
-		$("div[id='projectExport']").find("#projectExportDialogLeft").scrollTop(0);
+		this.add_project_list();
+		$("#project_export_type").val("All");
+		$("#project_export_location").val("");
+		$("#project_export_project_information").empty();
+		$("div[id='project_export']").find("#project_export_dialog_left").scrollTop(0);
 		this.dialog.panel.show();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method addProjectList 
-	 **/	
-	addProjectList: function () {
-		$("#projectExportProjectList").empty();
+	add_project_list: function () {
+		$("#project_export_project_list").empty();
 	
 		$.post("project/get_list", "", function (data) {
 			
-			var sortingData = eval(data);
+			var sorting_data = eval(data);
 			
-			for(var name in sortingData) {
-				var iconStr = "";
-				iconStr += "<div id='selector_" + sortingData[name].filename + "' value='" + sortingData[name].filename + "' class='selector_project'>";
-				iconStr += "<div style='white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-left:65px; padding-top:20px;'>";
-				iconStr += sortingData[name].filename;
-				iconStr += "</div>";
-				iconStr += "</div>";
+			for(var name in sorting_data) {
+				var icon_str = "";
+				icon_str += "<div id='selector_" + sorting_data[name].filename + "' value='" + sorting_data[name].filename + "' class='selector_project'>";
+				icon_str += "<div style='white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-left:65px; padding-top:20px;'>";
+				icon_str += sorting_data[name].filename;
+				icon_str += "</div>";
+				icon_str += "</div>";
 	
-				$("#projectExportProjectList").append(iconStr);
+				$("#project_export_project_list").append(icon_str);
 			}
 			
 			
 			$(".selector_project").click(function() {
-				$("#projectExportProjectName").attr("value", "");
-				$("#projectExportProjectPath").attr("value", "");
+				$("#project_export_project_name").attr("value", "");
+				$("#project_export_project_path").attr("value", "");
 			
-				$(".selector_project").removeClass("selectedButton");
-				$(this).addClass("selectedButton");
+				$(".selector_project").removeClass("selected_button");
+				$(this).addClass("selected_button");
 				
-				$("#projectExportProjectPath").attr("value", $(this).attr("value"));
-				$("#projectExportLocation").attr("value", "/" + $(this).attr("value") + "/");
+				$("#project_export_project_path").attr("value", $(this).attr("value"));
+				$("#project_export_location").attr("value", "/" + $(this).attr("value") + "/");
 
 				$.ajax({
 					type: "GET",
@@ -174,39 +129,39 @@ org.goorm.core.project._export.prototype = {
 					async :false,
 					url: "project/"+$(this).attr("value")+"/project.xml",
 					success: function(xml) {
-						$("#projectExportProjectInformation").empty();
-						$("#projectExportProjectInformation").append("<b>project Type : </b>");
-						$("#projectExportProjectInformation").append($(xml).find("TYPE").text()+"<br/>");
-						$("#projectExportProjectInformation").append("<b>project Author : </b>");
-						$("#projectExportProjectInformation").append($(xml).find("AUTHOR").text()+"<br/>");
-						$("#projectExportProjectInformation").append("<b>project Name : </b>");
-						$("#projectExportProjectInformation").append($(xml).find("NAME").text()+"<br/>");
-						$("#projectExportProjectInformation").append("<b>project About : </b>");
-						$("#projectExportProjectInformation").append($(xml).find("ABOUT").text()+"<br/>");
-						$("#projectExportProjectInformation").append("<b>project Date : </b>");
-						$("#projectExportProjectInformation").append($(xml).find("DATE").text()+"<br/>");
+						$("#project_export_project_information").empty();
+						$("#project_export_project_information").append("<b>project Type : </b>");
+						$("#project_export_project_information").append($(xml).find("TYPE").text()+"<br/>");
+						$("#project_export_project_information").append("<b>project Author : </b>");
+						$("#project_export_project_information").append($(xml).find("AUTHOR").text()+"<br/>");
+						$("#project_export_project_information").append("<b>project Name : </b>");
+						$("#project_export_project_information").append($(xml).find("NAME").text()+"<br/>");
+						$("#project_export_project_information").append("<b>project About : </b>");
+						$("#project_export_project_information").append($(xml).find("ABOUT").text()+"<br/>");
+						$("#project_export_project_information").append("<b>project Date : </b>");
+						$("#project_export_project_information").append($(xml).find("DATE").text()+"<br/>");
 						
-						$("#projectExportProjectName").attr("value", $(xml).find("NAME").text());
+						$("#project_export_project_name").attr("value", $(xml).find("NAME").text());
 					}
-					, error: function(xhr, status, error) {alert.show(core.localization.msg["alertError"] + error);}
+					, error: function(xhr, status, error) {alert.show(core.module.localization.msg["alertError"] + error);}
 				});
 			});
 		});
 	},
 	
-	addProjectItem: function() {
-		$("div[id='projectExport']").find("#projectExportType").append("<option value='All'>All Project</option>");
-		$("div[id='projectExport']").find("#projectExportType").append("<option value='goorm'>goorm Project</option>");
+	add_project_item: function() {
+		$("div[id='project_export']").find("#project_export_type").append("<option value='All'>All Project</option>");
+		$("div[id='project_export']").find("#project_export_type").append("<option value='goorm'>goorm Project</option>");
 		
-		$("#projectExportType").change(function() {
-			var type = $("#projectExportType option:selected").val();
+		$("#project_export_type").change(function() {
+			var type = $("#project_export_type option:selected").val();
 			if(type=="All") {
-				$("div[id='projectExport']").find(".selector_project").each(function() {
+				$("div[id='project_export']").find(".selector_project").each(function() {
 					$(this).css("display", "block");
 				});
 			}
 			else {
-				$("div[id='projectExport']").find(".selector_project").each(function() {
+				$("div[id='project_export']").find(".selector_project").each(function() {
 					if($(this).attr("type")==type) {
 						$(this).css("display", "block");
 					}

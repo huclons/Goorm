@@ -2,154 +2,29 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module object
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class backup
- * @extends square
- **/
 org.goorm.core.object.ui.square = function () {
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 * @type Object
-	 * @default null
-	 **/
 	this.target = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property timestamp
-	 * @type String	
-	 * @default null
-	 **/
 	this.timestamp = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property container
-	 * @type Object
-	 * @default null
-	 **/
 	this.container = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property contextMenu
-	 * @type Object
-	 * @default null
-	 **/
-	this.contextMenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property id
-	 * @type Object
-	 * @default null
-	 **/
+	this.context_menu = null;
 	this.id = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property name
-	 * @type String
-	 * @default null
-	 **/
 	this.name = null;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property x
-	 * @type Number
-	 * @default null
-	 **/
 	this.x = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property y
-	 * @type Number
-	 * @default null
-	 **/
 	this.y = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property sx
-	 * @type Number
-	 * @default null
-	 **/
 	this.sx = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property sy
-	 * @type Number
-	 * @default null
-	 **/
 	this.sy = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property ex
-	 * @type Number
-	 * @default null
-	 **/
 	this.ex = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property ey
-	 * @type Number
-	 * @default null
-	 **/
 	this.ey = null;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property width
-	 * @type Number
-	 * @default null
-	 **/
 	this.width = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 * @type Number
-	 * @default null
-	 **/
 	this.height = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property connector
-	 * @type Number
-	 * @default null
-	 **/	
 	this.connector = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property attrList
-	 * @type Array
-	 * @default Array("id", "name", "x", "y", "width", "height")
-	 **/
-	this.attrList = new Array("id", "name", "x", "y", "width", "height");
+	this.attribute_list = new Array("id", "name", "x", "y", "width", "height");
 };
 
 org.goorm.core.object.ui.square.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {Object} target The target.
-	 **/
+
 	init: function (target) {
 		var self = this;
 
@@ -191,8 +66,8 @@ org.goorm.core.object.ui.square.prototype = {
 		this.ey = this.sy + this.height;		
 		
 		//Set context menu
-		this.contextMenu = new org.goorm.core.menu.context();
-		this.contextMenu.init("configs/menu/org.goorm.core.object/object.ui.html", "object.ui", $(target).find("." + this.container), this.timestamp);
+		this.context_menu = new org.goorm.core.menu.context();
+		this.context_menu.init("configs/menu/org.goorm.core.object/object.ui.html", "object.ui", $(target).find("." + this.container), this.timestamp);
 		
 		//Set Draggable
 		$(target).find("." + this.container).draggable({
@@ -240,38 +115,18 @@ org.goorm.core.object.ui.square.prototype = {
 		return this;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * This operates the initialization tasks for layout, actions, plugins...
-	 * First written: Sung-tae Ryu 
-	 * Latest modified: Sung-tae Ryu 
-	 * @method select() 
-	 * @return void
-	 **/
 	select: function () {
 		$(this.target).find("." + this.container).find(".ui-resizable-handle").show();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method deselect 
-	 **/
 	deselect: function () {
 		$(this.target).find("." + this.container).find(".ui-resizable-handle").hide();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method remove 
-	 **/
 	remove: function () {
 		
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method apply 
-	 **/
 	apply: function () {
 		$(this.target).find("." + this.container).width(this.width);
 		$(this.target).find("." + this.container).height(this.height);

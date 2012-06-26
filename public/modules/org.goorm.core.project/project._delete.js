@@ -2,93 +2,59 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module project
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class delete
- * @extends project
- **/
 org.goorm.core.project._delete = function () {
-	/**
-	 * This presents the current browser version
-	 * @property dialog
-	 * @type Object
-	 * @default null
-	 **/
 	this.dialog = null;
-	
-	/**
-	 * The array object that contains the information about buttons on the bottom of a dialog 
-	 * @property buttons
-	 * @type Object
-	 * @default null
-	 **/
 	this.buttons = null;
-	
-	/**
-	 * This presents the current browser version 
-	 * @property Object
-	 * @type Object
-	 * @default null
-	 **/
 	this.chat = null;
 };
 
 org.goorm.core.project._delete.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor
-	 **/
 	init: function () {
 		
 		var self = this;
 				
-		var handleDelete = function() { 
-		this.hide(); 
+		var handle_delete = function() { 
+			this.hide(); 
 			// project delete
-			if ($("#projectDeleteProjectPath").attr("value")=="Not selected") {
-				alert.show(core.localization.msg["alertProjectNotSelected"]);
+			if ($("#project_delete_project_path").attr("value")=="Not selected") {
+				alert.show(core.module.localization.msg["alertProjectNotSelected"]);
 				return false;
 			}
 
 			var postdata = {
-				projectPath: $("#projectDeleteProjectPath").attr("value")
+				project_path: $("#project_delete_project_path").attr("value")
 			};
 			
 			$.post("project/delete", postdata, function (data) {
-				var receivedData = eval("("+data+")");
+				var received_data = eval("("+data+")");
 				
-				if(receivedData.errCode==0) {
-					if ( postdata.projectPath == core.currentProjectPath ) {
-						core.currentProjectPath = "";
-						core.currentProjectName = "";
-						core.currentProjectType = "";
+				if(received_data.errCode==0) {
+					if ( postdata.project_path == core.status.current_project_path ) {
+						core.status.current_project_path = "";
+						core.status.current_project_name = "";
+						core.status.current_project_type = "";
 					}
 				}
 				else {
-					alert.show(core.localization.msg["alertError"] + receivedData.message);
+					alert.show(core.module.localization.msg["alertError"] + received_data.message);
 				}
 				
-				core.mainLayout.projectExplorer.refresh();
-				core.dialogProjectProperty.refreshToolBox();
+				core.module.layout.project_explorer.refresh();
+				core.dialog.project_property.refresh_toolbox();
 			});
 			
 			this.hide(); 
 		};
 
-		var handleCancel = function() { 
+		var handle_cancel = function() { 
 			
 			this.hide(); 
 		};
 		
-		this.buttons = [ {text:"Delete", handler:handleDelete, isDefault:true},
-						 {text:"Cancel",  handler:handleCancel}]; 
+		this.buttons = [ {text:"Delete", handler:handle_delete, isDefault:true},
+						 {text:"Cancel",  handler:handle_cancel}]; 
 						 
 		this.dialog = new org.goorm.core.project._delete.dialog();
 		this.dialog.init({
@@ -99,19 +65,19 @@ org.goorm.core.project._delete.prototype = {
 			modal:true,
 			buttons:this.buttons,
 			success: function () {
-				var resize = new YAHOO.util.Resize("projectDeleteDialogLeft", {
+				var resize = new YAHOO.util.Resize("project_delete_dialog_left", {
 		            handles: ['r'],
 		            minWidth: 250,
 		            maxWidth: 400
 		        });
 				
 		        resize.on('resize', function(ev) {
-					var width = $("#projectDeleteDialogMiddle").width();
+					var width = $("#project_delete_dialog_middle").width();
 		            var w = ev.width;
-		            $("#projectDeleteDialogCenter").css('width', (width - w - 9) + 'px');
+		            $("#project_delete_dialog_center").css('width', (width - w - 9) + 'px');
 		        });
 		       
-				self.addProjectItem();
+				self.add_project_item();
 			}
 		});
 		this.dialog = this.dialog.dialog;
@@ -119,46 +85,38 @@ org.goorm.core.project._delete.prototype = {
 		//this.dialog.panel.setBody("AA");
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method show 
-	 **/
 	show: function () {
-		this.addProjectList();
-		$("#projectDeleteType").val("All");
-		$("#projectDeleteLocation").val("");
-		$("#projectDeleteProjectInformation").empty();
+		this.add_project_list();
+		$("#project_delete_type").val("All");
+		$("#project_delete_location").val("");
+		$("#project_delete_project_information").empty();
 		this.dialog.panel.show();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method addProjectList 
-	 **/	
-	addProjectList: function () {
-		$("#projectDeleteList").empty();
+	add_project_list: function () {
+		$("#project_delete_list").empty();
 			
 		$.post("project/get_list", "", function (data) {
 						
-			var sortingData = eval(data);
+			var sorting_data = eval(data);
 			
-			for(var name in sortingData) {
-				var iconStr = "";
-				iconStr += "<div id='selector_" + sortingData[name].filename + "' value='" + sortingData[name].filename + "' class='selector_project' type='"+sortingData[name].type+"'>";
-				iconStr += "<div style='white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-left:65px; padding-top:20px;'>";
-				iconStr += sortingData[name].filename;
-				iconStr += "</div>";
-				iconStr += "</div>";
+			for(var name in sorting_data) {
+				var icon_str = "";
+				icon_str += "<div id='selector_" + sorting_data[name].filename + "' value='" + sorting_data[name].filename + "' class='selector_project' type='"+sorting_data[name].type+"'>";
+				icon_str += "<div style='white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding-left:65px; padding-top:20px;'>";
+				icon_str += sorting_data[name].filename;
+				icon_str += "</div>";
+				icon_str += "</div>";
 	
-				$("#projectDeleteList").append(iconStr);
+				$("#project_delete_list").append(icon_str);
 			}
 			
 			$(".selector_project").click(function() {
-				$(".selector_project").removeClass("selectedButton");
-				$(this).addClass("selectedButton");
+				$(".selector_project").removeClass("selected_button");
+				$(this).addClass("selected_button");
 				
-				$("#projectDeleteProjectPath").attr("value", $(this).attr("value"));
-				$("#projectDeleteLocation").attr("value", "/" + $(this).attr("value") + "/");
+				$("#project_delete_project_path").attr("value", $(this).attr("value"));
+				$("#project_delete_location").attr("value", "/" + $(this).attr("value") + "/");
 
 				$.ajax({
 					type: "GET",
@@ -166,35 +124,35 @@ org.goorm.core.project._delete.prototype = {
 					async :false,
 					url: "project/" +  $(this).attr("value") + "/project.xml",
 					success: function(xml) {
-						$("#projectDeleteProjectInformation").empty();
-						$("#projectDeleteProjectInformation").append("<b>Project Type : </b>");
-						$("#projectDeleteProjectInformation").append($(xml).find("TYPE").text()+"<br/>");
-						$("#projectDeleteProjectInformation").append("<b>Project detailed Type : </b>");
-						$("#projectDeleteProjectInformation").append($(xml).find("DETAILEDTYPE").text()+"<br/>");
-						$("#projectDeleteProjectInformation").append("<b>Project Author : </b>");
-						$("#projectDeleteProjectInformation").append($(xml).find("AUTHOR").text()+"<br/>");
-						$("#projectDeleteProjectInformation").append("<b>Project Name : </b>");
-						$("#projectDeleteProjectInformation").append($(xml).find("NAME").text()+"<br/>");
-						$("#projectDeleteProjectInformation").append("<b>Project About : </b>");
-						$("#projectDeleteProjectInformation").append($(xml).find("ABOUT").text()+"<br/>");
-						$("#projectDeleteProjectInformation").append("<b>Project Date : </b>");
-						$("#projectDeleteProjectInformation").append($(xml).find("DATE").text()+"<br/>");
+						$("#project_delete_project_information").empty();
+						$("#project_delete_project_information").append("<b>Project Type : </b>");
+						$("#project_delete_project_information").append($(xml).find("TYPE").text()+"<br/>");
+						$("#project_delete_project_information").append("<b>Project detailed Type : </b>");
+						$("#project_delete_project_information").append($(xml).find("DETAILEDTYPE").text()+"<br/>");
+						$("#project_delete_project_information").append("<b>Project Author : </b>");
+						$("#project_delete_project_information").append($(xml).find("AUTHOR").text()+"<br/>");
+						$("#project_delete_project_information").append("<b>Project Name : </b>");
+						$("#project_delete_project_information").append($(xml).find("NAME").text()+"<br/>");
+						$("#project_delete_project_information").append("<b>Project About : </b>");
+						$("#project_delete_project_information").append($(xml).find("ABOUT").text()+"<br/>");
+						$("#project_delete_project_information").append("<b>Project Date : </b>");
+						$("#project_delete_project_information").append($(xml).find("DATE").text()+"<br/>");
 						
-						$("#projectDeleteProjectName").attr("value", $(xml).find("NAME").text());
-						$("#projectDeleteProjectType").attr("value", $(xml).find("TYPE").text());
+						$("#project_delete_project_name").attr("value", $(xml).find("NAME").text());
+						$("#project_delete_project_type").attr("value", $(xml).find("TYPE").text());
 					}
-					, error: function(xhr, status, error) {alert.show(core.localization.msg["alertError"] + error);}
+					, error: function(xhr, status, error) {alert.show(core.module.localization.msg["alertError"] + error);}
 				});
 			});
 		});
 	},
 	
-	addProjectItem: function() {
-		$("div[id='project.delete']").find("#projectDeleteType").append("<option value='All'>All Project</option>");
-		$("div[id='project.delete']").find("#projectDeleteType").append("<option value='goorm'>goorm Project</option>");
+	add_project_item: function() {
+		$("div[id='project.delete']").find("#project_delete_type").append("<option value='All'>All Project</option>");
+		$("div[id='project.delete']").find("#project_delete_type").append("<option value='goorm'>goorm Project</option>");
 		
-		$("#projectDeleteType").change(function() {
-			var type = $("#projectDeleteType option:selected").val();
+		$("#project_delete_type").change(function() {
+			var type = $("#project_delete_type option:selected").val();
 			if(type=="All") {
 				$("div[id='project.delete']").find(".selector_project").each(function() {
 					$(this).css("display", "block");

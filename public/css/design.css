@@ -5,21 +5,21 @@ http://www.goorm.org/License
 version: 3.0.0
 */
 
-.windowContainer {
+.window_container {
 	position: relative;
 }
 
-.canvasContainer {
+.canvas_container {
 	position: relative;
 	overflow: auto;
 	background-color:#999;
 }
 
-.designPreviewContainer .bd {
+.design.preview_container .bd {
 	padding: 10px !important;
 }
 
-.divDesignCollaborationUserContainer {
+.div_design_collaboration_user_container {
 	position:absolute;
 	left:70px;
 	top:55px;
@@ -32,7 +32,7 @@ version: 3.0.0
 	z-index: 2;	
 }
 
-.designPreviewContainer {
+.design.preview_container {
 	position:absolute;
 	left:70px;
 	top:120px;
@@ -43,29 +43,29 @@ version: 3.0.0
 	z-index: 2;	
 }
 
-.designPreviewContainer .windowContainer {
+.design.preview_container .window_container {
 	border:1px solid #CCC;
 }
 
 
-.designPreviewContainer .previewCanvasIndicator {
+.design.preview_container .previewCanvasIndicator {
 	border:1px solid #999;
 	position:absolute;
 	z-index:100;
 	cursor: move;
 }
 
-.designPreviewContainer .previewEvent {
+.design.preview_container .previewEvent {
 	position:absolute;
 	z-index:110;
 	background:transparent;
 }
 
-.designPreviewContainer .previewCanvas canvas {
+.design.preview_container .previewCanvas canvas {
 	position: absolute;
 }
 
-.designToolbarContainer {
+.design_toolbar_container {
 	padding: 6px;
 	background-color:#EEE;
 	border-color: #AAA;
@@ -76,7 +76,7 @@ version: 3.0.0
 	border-bottom-style: solid;
 }
 
-.designToolbarContainer .toolbarButton {
+.design_toolbar_container .toolbar_button {
 	font-size: 9pt;
 	text-decoration: none;
 	color: #565656;
@@ -90,11 +90,11 @@ version: 3.0.0
 	margin-right:3px;
 }	
 
-.designToolbarContainer .toolbarButton img {
+.design_toolbar_container .toolbar_button img {
 	
 }
 
-.designToolbarContainer .toolbarButton:hover {
+.design_toolbar_container .toolbar_button:hover {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-top: 1px solid #eee;
@@ -107,7 +107,7 @@ version: 3.0.0
 	margin-top: -1px;
 }
 
-.designToolbarContainer .toolbarButton:active {
+.design_toolbar_container .toolbar_button:active {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-top: 1px solid #eee;
@@ -120,7 +120,7 @@ version: 3.0.0
 	margin-top: -1px;
 }
 
-.designToolbarContainer .toolbarButtonPressed {
+.design_toolbar_container .toolbar_buttonPressed {
 	background-color: #ccc;
 	border: 1px solid #fff;
 	border-top: 1px solid #999;
@@ -134,7 +134,7 @@ version: 3.0.0
 }
 
 
-.designStatusContainer {
+.design_status_container {
 	position: absolute;
 	left:70px;
 	top:30px;
@@ -147,7 +147,7 @@ version: 3.0.0
 	z-index: 2;
 }
 
-.designStatusContainer .toolbarButton {
+.design_status_container .toolbar_button {
 	font-size: 9pt;
 	text-decoration: none;
 	color: #565656;
@@ -161,7 +161,7 @@ version: 3.0.0
 	margin-left: -3px;
 }	
 
-.designStatusContainer .toolbarButtonPressed {
+.design_status_container .toolbar_buttonPressed {
 	background-color: #ccc;
 	border: 1px solid #fff;
 	border-top: 1px solid #999;
@@ -174,7 +174,7 @@ version: 3.0.0
 	margin-top: -2px;
 }
 
-.windowContainer .ruler {
+.window_container .ruler {
 	position: absolute;
 	left:0px;
 	top:37px;
@@ -184,7 +184,7 @@ version: 3.0.0
 	background-image: url(images/org.goorm.core.design/ruler.png);	
 }
 
-.windowContainer .ruler_x {
+.window_container .ruler_x {
 	position: absolute;
 	left:14px;
 	top:37px;
@@ -194,7 +194,7 @@ version: 3.0.0
 	background-image: url(images/org.goorm.core.design/ruler_px_x.png);
 }
 
-.windowContainer .ruler_y {
+.window_container .ruler_y {
 	position: absolute;
 	left:0px;
 	top:51px;
@@ -204,11 +204,11 @@ version: 3.0.0
 	background-image: url(images/org.goorm.core.design/ruler_px_y.png);
 }
 
-.canvasContainer {
+.canvas_container {
 	z-index: 1;	
 }
 
-.canvasContainer .canvas {
+.canvas_container .canvas {
 	position: absolute;
 	top: 50px;
 	left: 50px;
@@ -217,39 +217,39 @@ version: 3.0.0
 	z-index: 2;	
 }
 
-.canvasContainer .skin {
+.canvas_container .skin {
 	position: absolute;
 	top: 50px;
 	left: 50px;
 	z-index: 0;	
 }
 
-.canvasContainer .dummyspace {
+.canvas_container .dummyspace {
 	position: absolute;
 	z-index: 0;	
 }
 
-.canvasContainer .canvas .grid {
+.canvas_container .canvas .grid {
 	background-image:url(images/org.goorm.core.design/grid_10px.png);
 	-moz-opacity:.30; filter:alpha(opacity=30); opacity:.30;
 	width:100%;
 	height:100%;
 }
 
-.canvasContainer .canvas .shapes {
+.canvas_container .canvas .shapes {
 	position: absoulte;
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
 }
 
-#workspace .yui-panel-container .yui-panel .ft .designerMessage {
+#workspace .yui-panel-container .yui-panel .ft .designer_message {
 	font-size: 10px;
 	height:20px;
 	float:left;
 }
 
-#workspace .yui-panel-container .yui-panel .ft .mousePositionView {
+#workspace .yui-panel-container .yui-panel .ft .mouse_position_view {
 	font-size: 10px;
 	height:20px;
 	float:right;

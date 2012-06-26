@@ -64,11 +64,11 @@ org.goorm.core.collaboration.design = function () {
   	
 	/**
 	 * This presents the current browser version
-	 * @property updatingProcessRunning
+	 * @property updating_process_running
 	 * @type Object
 	 * @default null
 	 **/
-  	this.updatingProcessRunning = false;
+  	this.updating_process_running = false;
 	
 	/**
 	 * This presents the current browser version
@@ -118,7 +118,7 @@ org.goorm.core.collaboration.design = function () {
 	 **/
 	 this.file_id = null;
 	 
-	 this.isCollaborationOn = null;
+	 this.is_collaboration_on = null;
 	 
 	 this.panel = null;
 	 this.left = null;
@@ -156,18 +156,18 @@ org.goorm.core.collaboration.design.prototype = {
 	
 	/**
 	 * This function is an goorm core initializating function.  
-	 * @method startListening 
+	 * @method start_listening 
 	 **/
-	startListening: function () {
+	start_listening: function () {
 		
 		var self = this;
 		this.setUserPanel();
-		//self.project_id = core.currentProjectName;
+		//self.project_id = core.status.current_project_name;
 		//self.file_id = this.target.parent.filename;
 				
 		//Client Socket Initializing
  		//this.socket = new WebSocket('ws://goorm.org:8090');
- 		this.socket = new WebSocket(core.dialogPreference.ini['CollaborationServerURL']+":"+core.dialogPreference.ini['CollaborationServerPort']);
+ 		this.socket = new WebSocket(core.dialog.preference.ini['collaboration_server_url']+":"+core.dialog.preference.ini['collaboration_server_port']);
  		 		
  		this.diffWorker = new Worker('module/org.goorm.core.collaboration/collaboration.design.worker.diff.js');
  		this.patchWorker = new Worker('module/org.goorm.core.collaboration/collaboration.design.worker.patch.js');
@@ -176,7 +176,7 @@ org.goorm.core.collaboration.design.prototype = {
  		this.objectUUIDs = $.makeArray();
  		
  		$(window).unload(function() {
- 			self.stopListening();
+ 			self.stop_listening();
  		});
  		
  		this.socket.onopen = function(){
@@ -190,8 +190,8 @@ org.goorm.core.collaboration.design.prototype = {
  		this.socket.onclose = function(){
  			// if server not open, socket.onopen is not called. so if status != 1, then server is not opened 
  			if(self.status != 1) {
-				core.isCollaborationDrawON = true;
-	 			$("a[action=collaborationDrawOnOff]").click();
+				core.collaboration_draw_on = true;
+	 			$("a[action=collaboration_draw_on_off]").click();
 	 			alert.show("Collaboration server is not opened!");
 			}
 			self.status = 0;
@@ -226,7 +226,7 @@ org.goorm.core.collaboration.design.prototype = {
 		
 		var checkForUpdates = function () {
 			
-			while(self.updateQueue.length > 0 && self.updatingProcessRunning == false) {
+			while(self.updateQueue.length > 0 && self.updating_process_running == false) {
 				var current_update = self.updateQueue.shift(); 
 				
 				if(current_update["channel"] != "chat"){
@@ -240,7 +240,7 @@ org.goorm.core.collaboration.design.prototype = {
 					}
 				}
 				
-				self.updatingProcessRunning = true;
+				self.updating_process_running = true;
 				
 				self.applyUpdate(current_update["payload"]["action"], current_update["payload"]);
 			}
@@ -250,8 +250,8 @@ org.goorm.core.collaboration.design.prototype = {
 			
 			if(self.socket != null){
 				if(self.socket.readyState != 1) {
-			 			core.isCollaborationDrawON = true;
-						$("a[action=collaborationDrawOnOff]").click();
+			 			core.collaboration_draw_on = true;
+						$("a[action=collaboration_draw_on_off]").click();
 			 			alert.show("Collaboration server is disconnected!");
 						self.status = 0;
 						//window.clearInterval(self.timer1);
@@ -259,32 +259,32 @@ org.goorm.core.collaboration.design.prototype = {
 						return false;
 				}
 			}
-			var currentObjectUUIDs = $.makeArray();
+			var current_objectUUIDs = $.makeArray();
 			
 			//psuedo code...
 			$(self.objects).each(function (i) {
 				//add				
 				if (this.data_uuid == undefined || this.data_uuid == "null" || this.data_uuid == null) {
-					if (this.properties.isDrawFinished) {
+					if (this.properties.is_drawing_finished) {
 						this.data_uuid = self.generateUUID();
 						
 						self.objectUUIDs.push(this.data_uuid);
 						
 						var objectData = {
 							type: this.type,
-							shapeName: this.shapeName,
+							shape_name: this.shape_name,
 							data_uuid: this.data_uuid,
 							properties: {
 								focus: this.properties.focus,
-								isDrag: this.properties.isDrag,
-								isDrawFinished: this.properties.isDrawFinished,
-								selectedNode: this.properties.selectedNode,
+								is_dragging: this.properties.is_dragging,
+								is_drawing_finished: this.properties.is_drawing_finished,
+								selected_node: this.properties.selected_node,
 								sx: this.properties.sx,
 								sy: this.properties.sy,
 								ex: this.properties.ex,
 								ey: this.properties.ey,
-								prevX: this.properties.prevX,
-								prevY: this.properties.prevY,
+								previous_x: this.properties.previous_x,
+								previous_y: this.properties.previous_y,
 								id: this.properties.id,
 								name: this.properties.name,
 								x: this.properties.x,
@@ -293,7 +293,7 @@ org.goorm.core.collaboration.design.prototype = {
 								height: this.properties.height,
 								dashed: this.properties.dashed,
 								connector: this.properties.connector,
-								attrList: this.properties.attrList
+								attribute_list: this.properties.attribute_list
 							} 
 						};
 						
@@ -312,27 +312,27 @@ org.goorm.core.collaboration.design.prototype = {
 				else if (this.properties.status == "modified") {
 					this.properties.status = "none";
 					
-					var innerNode = $.makeArray();
+					var inner_node = $.makeArray();
 					
-					$(this.properties.innerNode).each(function(){
-						innerNode.push({x:this.x, y:this.y});
+					$(this.properties.inner_node).each(function(){
+						inner_node.push({x:this.x, y:this.y});
 					});
 					
 					var objectData = {
 						type: this.type,
-						shapeName: this.shapeName,
+						shape_name: this.shape_name,
 						data_uuid: this.data_uuid,
 						properties: {
 							focus: this.properties.focus,
-							isDrag: this.properties.isDrag,
-							isDrawFinished: this.properties.isDrawFinished,
-							selectedNode: this.properties.selectedNode,
+							is_dragging: this.properties.is_dragging,
+							is_drawing_finished: this.properties.is_drawing_finished,
+							selected_node: this.properties.selected_node,
 							sx: this.properties.sx,
 							sy: this.properties.sy,
 							ex: this.properties.ex,
 							ey: this.properties.ey,
-							prevX: this.properties.prevX,
-							prevY: this.properties.prevY,
+							previous_x: this.properties.previous_x,
+							previous_y: this.properties.previous_y,
 							id: this.properties.id,
 							name: this.properties.name,
 							x: this.properties.x,
@@ -340,9 +340,9 @@ org.goorm.core.collaboration.design.prototype = {
 							width: this.properties.width,
 							height: this.properties.height,
 							dashed: this.properties.dashed,
-							innerNode: innerNode,
+							inner_node: inner_node,
 							connector: this.properties.connector,
-							attrList: this.properties.attrList
+							attribute_list: this.properties.attribute_list
 						}
 					};
 					
@@ -359,13 +359,13 @@ org.goorm.core.collaboration.design.prototype = {
 		    		self.socket.send('{"channel":"design","action": "modify_object", "identifier": "'+ self.identifier +'", "message": { "uuid": "' + this.data_uuid + '", "object": ' + JSON.stringify(objectData) + ' }}');
 				}
 				
-				currentObjectUUIDs.push(this.data_uuid);
+				current_objectUUIDs.push(this.data_uuid);
 			});
 		
 			
 			//remove
 			$(self.objectUUIDs).each(function (i){
-				if ($.inArray(this.toString(), currentObjectUUIDs) == -1) {
+				if ($.inArray(this.toString(), current_objectUUIDs) == -1) {
 					self.socket.send('{"channel":"design", "action": "remove_object", "identifier": "'+ self.identifier +'",  "message": { "uuid": "' + this.toString() + '" }}');
 						
 					self.objectUUIDs.pop(this.toString());
@@ -431,15 +431,15 @@ org.goorm.core.collaboration.design.prototype = {
 	 * This operates the initialization tasks for layout, actions, plugins...
 	 * First written: Sung-tae Ryu 
 	 * Latest modified: Sung-tae Ryu 
-	 * @method stopListening() 
+	 * @method stop_listening() 
 	 * @return void
 	 **/
-	stopListening: function () {
+	stop_listening: function () {
 		//Unset Callback Function for Listening from Collaboration Server
-		$(this.target.target).find(".divDesignCollaborationUserContainer").remove();
+		$(this.target.target).find(".div_design_collaboration_user_container").remove();
 		this.socket.send('{"channel":"design","action": "leave", "identifier": "'+ this.identifier +'"}');
 		
-		console.log("stopListening");
+		console.log("stop_listening");
 		window.clearInterval(this.timer1);
 		window.clearInterval(this.timer2);
 		this.socket.onmessage = null;
@@ -479,10 +479,10 @@ org.goorm.core.collaboration.design.prototype = {
 	setUserPanel: function(){
 		var self = this;
 		
-		$(this.target.target).append("<div class='divDesignCollaborationUserContainer'></div>");
+		$(this.target.target).append("<div class='div_design_collaboration_user_container'></div>");
 		
 		this.panel = new YAHOO.widget.Panel(
-				$(this.target.target).find(".divDesignCollaborationUserContainer")[0], { 
+				$(this.target.target).find(".div_design_collaboration_user_container")[0], { 
 				width: 200,
 				height: 90,
 				visible: true, 
@@ -495,15 +495,15 @@ org.goorm.core.collaboration.design.prototype = {
 		);	
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
-		// Window setting
+		// window setting
 		//////////////////////////////////////////////////////////////////////////////////////////	
 		
-		this.panel.setHeader("<div style='overflow:auto' class='titlebar'><div style='float:left; font-size:9px;'>User</div><div class='windowButtons'><img src='images/icons/context/closebutton.png' class='close windowButton' /></div></div>");
+		this.panel.setHeader("<div style='overflow:auto' class='titlebar'><div style='float:left; font-size:9px;'>User</div><div class='window_buttons'><img src='images/icons/context/closebutton.png' class='close window_button' /></div></div>");
 		this.panel.setBody("<div class='designCollaborationUserContainer' style='overflow-y:scroll;height:65px;padding-left:5px'></div>");
 		this.panel.render();
 		
-		$(this.target.target).find(".divDesignCollaborationUserContainer").parent().css("left", 70);
-		$(this.target.target).find(".divDesignCollaborationUserContainer").parent().css("top", 55);
+		$(this.target.target).find(".div_design_collaboration_user_container").parent().css("left", 70);
+		$(this.target.target).find(".div_design_collaboration_user_container").parent().css("top", 55);
 		
 		this.left = 70;
 		this.top = 55;
@@ -512,8 +512,8 @@ org.goorm.core.collaboration.design.prototype = {
 				var movedLeft = $(self.target.target).scrollLeft();
 				var movedTop = $(self.target.target).scrollTop();
 				
-				self.left = parseInt($(self.target.target).find(".divDesignCollaborationUserContainer").parent().css("left")) - movedLeft;
-				self.top = parseInt($(self.target.target).find(".divDesignCollaborationUserContainer").parent().css("top")) - movedTop;
+				self.left = parseInt($(self.target.target).find(".div_design_collaboration_user_container").parent().css("left")) - movedLeft;
+				self.top = parseInt($(self.target.target).find(".div_design_collaboration_user_container").parent().css("top")) - movedTop;
 			}
 		});
 		
@@ -525,8 +525,8 @@ org.goorm.core.collaboration.design.prototype = {
 				$(this).scrollTop($(this).find(".space").height()-$(this).height()+14);
 			}
 			else {
-				$(this).find(".divDesignCollaborationUserContainer").parent().css("left", movedLeft + self.left);
-				$(this).find(".divDesignCollaborationUserContainer").parent().css("top", movedTop + self.top);
+				$(this).find(".div_design_collaboration_user_container").parent().css("left", movedLeft + self.left);
+				$(this).find(".div_design_collaboration_user_container").parent().css("top", movedTop + self.top);
 			}
 		});
 	},
@@ -576,38 +576,38 @@ org.goorm.core.collaboration.design.prototype = {
 		});
 		
 		if (addObjectAvailable) {
-			this.target.add(object.type, object.shapeName);			
-			this.setProperties(self.objects[self.objects.length-1], object);			
+			this.target.add(object.type, object.shape_name);			
+			this.set_properties(self.objects[self.objects.length-1], object);			
 			this.target.draw();
 
 			this.objectUUIDs.push(object.data_uuid);
 		}
 		
 		
-		this.updatingProcessRunning = false;
+		this.updating_process_running = false;
 	},
 
 	/**
 	 * This function is an goorm core initializating function.  
-	 * @method setProperties 
+	 * @method set_properties 
 	 * @param {Object} target The target.
 	 * @param {Object} source The source.
 	 **/
-	setProperties: function (target, source) {
+	set_properties: function (target, source) {
 		target.type = source.type;
-		target.shapeName = source.shapeName;
+		target.shape_name = source.shape_name;
 		target.data_uuid = source.data_uuid;
 		
 		target.properties.focus = source.properties.focus;
-		target.properties.isDrag = source.properties.isDrag;
-		target.properties.isDrawFinished = source.properties.isDrawFinished;
-		target.properties.selectedNode = source.properties.selectedNode;
+		target.properties.is_dragging = source.properties.is_dragging;
+		target.properties.is_drawing_finished = source.properties.is_drawing_finished;
+		target.properties.selected_node = source.properties.selected_node;
 		target.properties.sx = source.properties.sx;
 		target.properties.sy = source.properties.sy;
 		target.properties.ex = source.properties.ex;
 		target.properties.ey = source.properties.ey;
-		target.properties.prevX = source.properties.prevX;
-		target.properties.prevY = source.properties.prevY;
+		target.properties.previous_x = source.properties.previous_x;
+		target.properties.previous_y = source.properties.previous_y;
 		target.properties.id = source.properties.id;
 		target.properties.name = source.properties.name;
 		target.properties.x = source.properties.x;
@@ -616,16 +616,16 @@ org.goorm.core.collaboration.design.prototype = {
 		target.properties.height = source.properties.height;
 		target.properties.dashed = source.properties.dashed;
 		
-		//console.log(source.properties.innerNode);
+		//console.log(source.properties.inner_node);
 		
-		target.properties.innerNode = $.makeArray();
+		target.properties.inner_node = $.makeArray();
 		
-		$(source.properties.innerNode).each(function() {
-			target.properties.innerNode.push({x:this.x, y:this.y});
+		$(source.properties.inner_node).each(function() {
+			target.properties.inner_node.push({x:this.x, y:this.y});
 		});
 		
 		target.properties.connector = source.properties.connector;
-		target.properties.attrList = source.properties.attrList;
+		target.properties.attribute_list = source.properties.attribute_list;
 				
 		if(source.shape.properties != null){
 			$.each(source.shape.properties, function (key, value) {						
@@ -633,7 +633,7 @@ org.goorm.core.collaboration.design.prototype = {
 			});
 		}
 		
-		target.shape.setShape();
+		target.shape.set_shape();
 		target.shape.show();
 	},
 
@@ -660,11 +660,11 @@ org.goorm.core.collaboration.design.prototype = {
 		
 		
 		if (modifyObjectAvailable) {
-			this.setProperties(self.objects[index], object);			
+			this.set_properties(self.objects[index], object);			
 			this.target.draw();
 		}
 		
-		this.updatingProcessRunning = false;
+		this.updating_process_running = false;
 	},
 	
 	/**
@@ -686,7 +686,7 @@ org.goorm.core.collaboration.design.prototype = {
 			}
 		});
 		
-		this.updatingProcessRunning = false;
+		this.updating_process_running = false;
 	},
 	
 	/**

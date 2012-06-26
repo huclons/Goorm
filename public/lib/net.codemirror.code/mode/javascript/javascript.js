@@ -1,5 +1,5 @@
 CodeMirror.defineMode("javascript", function(config, parserConfig) {
-  var indentUnit = config.indentUnit;
+  var indent_unit = config.indent_unit;
   var jsonMode = parserConfig.json;
 
   // Tokenizer
@@ -311,7 +311,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
         tokenize: jsTokenBase,
         reAllowed: true,
         cc: [],
-        lexical: new JSLexical((basecolumn || 0) - indentUnit, 0, "block", false),
+        lexical: new JSLexical((basecolumn || 0) - indent_unit, 0, "block", false),
         localVars: null,
         context: null,
         indented: 0
@@ -337,11 +337,11 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
           type = lexical.type, closing = firstChar == type;
       if (type == "vardef") return lexical.indented + 4;
       else if (type == "form" && firstChar == "{") return lexical.indented;
-      else if (type == "stat" || type == "form") return lexical.indented + indentUnit;
+      else if (type == "stat" || type == "form") return lexical.indented + indent_unit;
       else if (lexical.info == "switch" && !closing)
-        return lexical.indented + (/^(?:case|default)\b/.test(textAfter) ? indentUnit : 2 * indentUnit);
+        return lexical.indented + (/^(?:case|default)\b/.test(textAfter) ? indent_unit : 2 * indent_unit);
       else if (lexical.align) return lexical.column + (closing ? 0 : 1);
-      else return lexical.indented + (closing ? 0 : indentUnit);
+      else return lexical.indented + (closing ? 0 : indent_unit);
     },
 
     electricChars: ":{}"

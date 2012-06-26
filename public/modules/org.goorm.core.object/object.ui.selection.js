@@ -2,194 +2,33 @@
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * This is the module example for YUI_DOCS
- * @module object
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class selection
- * @extends ui
- **/
 org.goorm.core.object.ui.selection = function () {
-	/**
-	 * This presents the current browser version
-	 * @property target
-	 * @type Object
-	 * @default null
-	 **/
 	this.target = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property timestamp
-	 * @type String
-	 * @default null
-	 **/
 	this.timestamp = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property contextMenu
-	 * @type Object
-	 * @default null
-	 **/
-	this.contextMenu = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property focus
-	 * @type Boolean
-	 * @default true
-	 **/
+	this.context_menu = null;
 	this.focus = true;
-	
-	/**
-	 * This presents the current browser version
-	 * @property isDrag
-	 * @type Boolean
-	 * @default false
-	 **/
-	this.isDrag = false;
-	
-	/**
-	 * This presents the current browser version
-	 * @property isDrawFinished
-	 * @type Boolean
-	 * @default false
-	 **/
-	this.isDrawFinished = false;
-	
-	/**
-	 * This presents the current browser version
-	 * @property selectedNode
-	 * @type Object
-	 * @default null
-	 **/
-	this.selectedNode = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property sx
-	 * @type Number
-	 * @default null
-	 **/
+	this.is_dragging = false;
+	this.is_drawing_finished = false;
+	this.selected_node = null;
 	this.sx = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property sy
-	 * @type Number
-	 * @default null
-	 **/
 	this.sy = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property ex
-	 * @type Number
-	 * @default null
-	 **/
 	this.ex = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property ey
-	 * @type Number
-	 * @default null
-	 **/
 	this.ey = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property prevX
-	 * @type Number
-	 * @default null
-	 **/
-	this.prevX = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property prevY
-	 * @type Number
-	 * @default null
-	 **/
-	this.prevY = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property id
-	 * @type Object
-	 * @default null
-	 **/
+	this.previous_x = null;
+	this.previous_y = null;
 	this.id = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property name
-	 * @type String
-	 * @default null
-	 **/
 	this.name = null;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property x
-	 * @type Number
-	 * @default null
-	 **/
 	this.x = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property y
-	 * @type Number
-	 * @default null
-	 **/
 	this.y = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property width
-	 * @type Number
-	 * @default null
-	 **/
 	this.width = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property height
-	 * @type Number
-	 * @default null
-	 **/
 	this.height = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property connector
-	 * @type Object
-	 * @default null
-	 **/	
 	this.connector = null;	
-	
-	/**
-	 * This presents the current browser version
-	 * @property attrList
-	 * @type Array
-	 * @default Array("id", "name", "sx", "sy", "ex", "ey")
-	 **/
-	this.attrList = new Array("id", "name", "sx", "sy", "ex", "ey");
+	this.attribute_list = new Array("id", "name", "sx", "sy", "ex", "ey");
 };
 
 org.goorm.core.object.ui.selection.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 * @param {Object} target The target.
-	 **/
 	init: function (target) {
 		var self = this;
 		
@@ -211,19 +50,19 @@ org.goorm.core.object.ui.selection.prototype = {
 		this.height = 0;
 		
 		//Set context menu
-		this.contextMenu = new org.goorm.core.menu.context();
-		this.contextMenu.init("configs/menu/org.goorm.core.object/object.ui.html", "object.ui", "", this.timestamp, "", function() {
+		this.context_menu = new org.goorm.core.menu.context();
+		this.context_menu.init("configs/menu/org.goorm.core.object/object.ui.html", "object.ui", "", this.timestamp, "", function() {
 			//Set context menu action
-			$("div[id='object.ui_"+self.timestamp+"']").find("a[action=cutObject]").click(function () {
+			$("div[id='object.ui_"+self.timestamp+"']").find("a[action=cut_object]").click(function () {
 				m.s("cut", "context menu");
 			});
-			$("div[id='object.ui_"+self.timestamp+"']").find("a[action=copyObject]").click(function () {
+			$("div[id='object.ui_"+self.timestamp+"']").find("a[action=copy_object]").click(function () {
 				m.s("copy", "context menu");
 			});
-			$("div[id='object.ui_"+self.timestamp+"']").find("a[action=pasteObject]").click(function () {
+			$("div[id='object.ui_"+self.timestamp+"']").find("a[action=paste_object]").click(function () {
 				m.s("paste", "context menu");
 			});						
-			$("div[id='object.ui_"+self.timestamp+"']").find("a[action=deleteObject]").click(function () {
+			$("div[id='object.ui_"+self.timestamp+"']").find("a[action=delete_object]").click(function () {
 				m.s("delete", "context menu");
 			});			
 		});
@@ -239,9 +78,9 @@ org.goorm.core.object.ui.selection.prototype = {
 			}
 			
 			//Calculate the position (x, y) in Canvas Axis
-			var parentOffset = $(this).parent().offset(); 
-			x = e.pageX - parentOffset.left;
-			y = e.pageY - parentOffset.top;
+			var parent_offset = $(this).parent().offset(); 
+			x = e.pageX - parent_offset.left;
+			y = e.pageY - parent_offset.top;
 			
 			
 			if (self.sx) {
@@ -264,22 +103,22 @@ org.goorm.core.object.ui.selection.prototype = {
 			//Select Body of Line
 			if ( ( (self.sx - 5 < x && x < self.ex + 5) || (self.ex - 5 < x && x < self.sx + 5) ) && ( (self.sy - 5 < y && y < self.ey + 5) || (self.ey - 5 < y && y < self.sy + 5) ) ) { //Body Selection
 				if (e.which == 1) {
-					self.isDrag = true;
-					self.isDrawFinished = false;
+					self.is_dragging = true;
+					self.is_drawing_finished = false;
 						  
-					self.selectedNode = "body";
+					self.selected_node = "body";
 					
 					//Using Current x, y
-					x = e.pageX - parentOffset.left;
-					y = e.pageY - parentOffset.top;
+					x = e.pageX - parent_offset.left;
+					y = e.pageY - parent_offset.top;
 					
-					self.prevX = x;
-					self.prevY = y;
+					self.previous_x = x;
+					self.previous_y = y;
 				}
 				else if (e.which === 3) {
 					
 					/* Right Mousebutton was clicked! */
-					self.contextMenu.menu.show();
+					self.context_menu.menu.show();
 	
 					$("div[id='object.ui_" + self.timestamp+"']").css("z-index", 5);
 					$("div[id='object.ui_" + self.timestamp+"']").css("left", e.pageX);
@@ -295,51 +134,51 @@ org.goorm.core.object.ui.selection.prototype = {
 			if (e.which == 1) {
 				
 				//First Drawing			
-				if (!self.isDrawFinished && !self.isDrag) {
-					self.isDrag = true;
-					self.isDrawFinished = false;
+				if (!self.is_drawing_finished && !self.is_dragging) {
+					self.is_dragging = true;
+					self.is_drawing_finished = false;
 					
 					//Using Current x, y
-					x = e.pageX - parentOffset.left;
-					y = e.pageY - parentOffset.top;
+					x = e.pageX - parent_offset.left;
+					y = e.pageY - parent_offset.top;
 					
 					self.sx = x;
 					self.sy = y;
 					
-					self.selectedNode = null;
+					self.selected_node = null;
 				}
 				else {
 					//Using Current x, y
-					x = e.pageX - parentOffset.left;
-					y = e.pageY - parentOffset.top;
+					x = e.pageX - parent_offset.left;
+					y = e.pageY - parent_offset.top;
 					
 					//Dragging Top Left
 					if (self.sy - 3 < y && y < self.sy + 3 && self.sx - 3 < x && x <  self.sx + 3) {
-						self.isDrag = true;
-						self.isDrawFinished = false;
+						self.is_dragging = true;
+						self.is_drawing_finished = false;
 			
-						self.selectedNode = "tl";
+						self.selected_node = "tl";
 					}
 					//Dragging Top Right
 					if (self.sy - 3 < y && y < self.sy + 3 && self.ex - 3 < x && x <  self.ex + 3) {
-						self.isDrag = true;
-						self.isDrawFinished = false;
+						self.is_dragging = true;
+						self.is_drawing_finished = false;
 			
-						self.selectedNode = "tr";
+						self.selected_node = "tr";
 					}
 					//Dragging Bottom Right
 					else if (self.ey - 3 < y && y < self.ey + 3 && self.ex - 3 < x && x <  self.ex + 3) {
-						self.isDrag = true;
-						self.isDrawFinished = false;
+						self.is_dragging = true;
+						self.is_drawing_finished = false;
 						
-						self.selectedNode = "br";
+						self.selected_node = "br";
 					}
 					//Dragging Bottom Left
 					else if (self.ey - 3 < y && y < self.ey + 3 && self.sx - 3 < x && x <  self.sx + 3) {
-						self.isDrag = true;
-						self.isDrawFinished = false;
+						self.is_dragging = true;
+						self.is_drawing_finished = false;
 						
-						self.selectedNode = "bl";
+						self.selected_node = "bl";
 					}
 				}
 				
@@ -355,24 +194,24 @@ org.goorm.core.object.ui.selection.prototype = {
 			}
 			
 			//Calculate the position (x, y) in Canvas Axis
-			var parentOffset = $(this).parent().offset(); 	
-			x = Math.floor(e.pageX - parentOffset.left);
-			y = Math.floor(e.pageY - parentOffset.top);
+			var parent_offset = $(this).parent().offset(); 	
+			x = Math.floor(e.pageX - parent_offset.left);
+			y = Math.floor(e.pageY - parent_offset.top);
 			  
-			if(!self.isDrawFinished && self.isDrag) {
+			if(!self.is_drawing_finished && self.is_dragging) {
 				//Dragging Head
-				if (self.selectedNode == "tl") {
+				if (self.selected_node == "tl") {
 					self.sx = x;
 					self.sy = y;
 				}
-				else if (self.selectedNode == "body") {
-					self.sx += x - self.prevX;
-					self.sy += y - self.prevY;
-					self.ex += x - self.prevX;
-					self.ey += y - self.prevY;
+				else if (self.selected_node == "body") {
+					self.sx += x - self.previous_x;
+					self.sy += y - self.previous_y;
+					self.ex += x - self.previous_x;
+					self.ey += y - self.previous_y;
 					
-					self.prevX = x;
-					self.prevY = y;
+					self.previous_x = x;
+					self.previous_y = y;
 				}
 				//Dragging Tail and Default
 				else {
@@ -380,15 +219,15 @@ org.goorm.core.object.ui.selection.prototype = {
 					self.ey = y;
 				}	
 				
-				self.drawLine(self.sx, self.sy, self.ex, self.ey);
+				self.draw_line(self.sx, self.sy, self.ex, self.ey);
 			}
 			
 			if((self.sy - 3 < y && y < self.sy + 3 && self.sx - 3 < x && x <  self.sx + 3) || (self.sy - 3 < y && y < self.sy + 3 && self.ex - 3 < x && x <  self.ex + 3) || (self.ey - 3 < y && y < self.ey + 3 && self.ex - 3 < x && x <  self.ex + 3) || (self.ey - 3 < y && y < self.ey + 3 && self.sx - 3 < x && x <  self.sx + 3)) {
 				//Set the cursor is crosshair
-				$(self.target).removeClass("statusDefault");
-				$(self.target).removeClass("statusMove");
-				$(self.target).removeClass("statusDrawingSquare");
-				$(self.target).addClass("statusDrawingLine");
+				$(self.target).removeClass("status_default");
+				$(self.target).removeClass("status_move");
+				$(self.target).removeClass("status_drawing_square");
+				$(self.target).addClass("status_drawing_line");
 			}
 		});		
 		
@@ -400,9 +239,9 @@ org.goorm.core.object.ui.selection.prototype = {
 			
 			if (e.which == 1) {
 				//If Drawing and Dragging is not finished and
-				if(!self.isDrawFinished && self.isDrag) {	
-					self.isDrag = false;
-					self.isDrawFinished = true;
+				if(!self.is_drawing_finished && self.is_dragging) {	
+					self.is_dragging = false;
+					self.is_drawing_finished = true;
 					
 					if (self.sx) {
 						self.sx = parseInt(self.sx);
@@ -427,10 +266,10 @@ org.goorm.core.object.ui.selection.prototype = {
 				}
 				
 				//Set the cursor is default
-				$(self.target).removeClass("statusDrawingLine");
-				$(self.target).removeClass("statusMove");
-				$(self.target).removeClass("statusDrawingSquare");
-				$(self.target).addClass("statusDefault");
+				$(self.target).removeClass("status_drawing_line");
+				$(self.target).removeClass("status_move");
+				$(self.target).removeClass("status_drawing_square");
+				$(self.target).addClass("status_default");
 			}
 			else if (e.which === 3) {
 				
@@ -456,16 +295,8 @@ org.goorm.core.object.ui.selection.prototype = {
 		
 		return this;
 	},
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method drawLine 
-	 * @param {Number} sx The position on x-coordinate of the starting point of the line.
-	 * @param {Number} sy The position on y-coordinate of the end point of the line.
-	 * @param {Number} ex The position on x-coordinate of the starting point of the line.
-	 * @param {Number} ey The position on y-coordinate of the end point of the line.
-	 **/
-	drawLine: function (sx, sy, ex, ey) {
+
+	draw_line: function (sx, sy, ex, ey) {
 		
 		if (sx) {
 			sx = parseInt(sx);
@@ -500,10 +331,6 @@ org.goorm.core.object.ui.selection.prototype = {
 		}
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method remove 
-	 **/
 	remove: function () {
 		
 	}
