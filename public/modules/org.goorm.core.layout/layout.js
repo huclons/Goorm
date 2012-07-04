@@ -19,6 +19,7 @@ org.goorm.core.layout = function () {
 	this.startpage = null;
 	this.window_manager = null;
 	this.chat = null;
+	this.console = null;
 	this.tab_project = null;
 	this.tab_toolbox = null;
 };
@@ -374,11 +375,13 @@ org.goorm.core.layout.prototype = {
 	
 	attach_console: function(target) {
 		//attaching tab element
-		$(core).bind("preference_loading_complete", function () {
+		//$(core).bind("preference_loading_complete", function () {
 			
-			target.addTab(new YAHOO.widget.Tab({ label: "Console", content: "<div id='console' width='100%'><iframe id='iframe_console' src='lib/com.googlecode.xwiterm/?serverID="+core.dialog.preference.ini['goorm.server_id']+"&serverPassword="+core.dialog.preference.ini['goorm.server_password']+"&default_path="+core.dialog.preference.ini['goorm.path']+"/project/' style='border:none;width:100%;height:100%-1px;'></div>" }));
-		});
-
+			target.addTab(new YAHOO.widget.Tab({ label: "Console", content: "<div id='console' width='100%'></div>" }));
+		//});
+		
+		this.console = new org.goorm.core.console();
+		this.console.init($("#console"));
 	},
 	
 	attach_search: function(target) {
