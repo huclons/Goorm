@@ -56,8 +56,14 @@ module.exports = {
 					node.expanded = false;
 					node.sortkey = 1 + node.filename;
 					node.type = "html";
+					
+					var extension = node.filename.split('.').pop();
+					console.log(extension + ", " + node.filename);
+					if (extension == node.filename) {
+						extension = "etc";
+					}
 					node.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
-								+ "<img src=images/icons/filetype/" + node.filename.split('.').pop() + ".filetype.png class=\"directory_icon file\" />"
+								+ "<img src=images/icons/filetype/" + extension + ".filetype.png class=\"directory_icon file\" />"
 								+ node.filename
 								+ "<div class=\"fullpath\" style=\"display:none;\">" + node.root + node.filename + "</div>"
 							  + "</div>";
