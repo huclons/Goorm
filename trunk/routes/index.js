@@ -187,12 +187,28 @@ exports.shell = function(req, res){
 	res.send(null);
 };
 
-exports.shell.do_execute = function(req, res){
-	res.send(null);
+exports.shell.exec = function(req, res){
+	var evt = new EventEmitter();
+	var command = req.query.command;
+	
+	console.log(command);
+	res.setHeader("Content-Type", "application/json");
+	
+	evt.on("executed_command", function (data) {
+		try {
+			res.send(JSON.stringify(data));
+			res.end();
+		}
+		catch (exception) {
+			throw exception;
+		}
+	});
+	
+	g_shell.exec(command, evt);
 };
 
 /*
- * API : Shell
+ * API : Preference
  */
 
 exports.preference = function(req, res){
@@ -212,7 +228,7 @@ exports.preference.ini_maker = function(req, res){
 };
 
 /*
- * API : Shell
+ * API : Theme
  */
 
 exports.theme = function(req, res){

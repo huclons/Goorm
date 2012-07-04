@@ -63,7 +63,7 @@ app.get('/file/rename', routes.file.do_rename);
 app.get('/file/get_property', routes.file.get_property);
 
 //for shell
-app.get('/shell/execute', routes.shell.do_execute);
+app.get('/shell/exec', routes.shell.exec);
 
 //for preference
 app.get('/preference/save', routes.preference.save);
