@@ -62,9 +62,6 @@ org.goorm.core.terminal.prototype = {
 		self.socket.emit("execute_command", "");
 		
 		$(target).find("#prompt_input").keydown(function (event) {
-			console.log(event.keyCode);
-			console.log(event.ctrlKey);
-			
 			if (event.keyCode == '13') {
 				event.preventDefault();
 
@@ -114,13 +111,9 @@ org.goorm.core.terminal.prototype = {
 		
 		this.socket.on("command_result", function (data) {
 			var stdout = data.stdout;
-			
-			console.log(stdout);
-			
+
 			stdout = self.transform_bash_to_html(stdout);
-			
-			console.log(stdout);
-			
+
 			$(self.target).find("#results").append(stdout);
 			
 			$(self.target).find("#prompt_input").appendTo("#results");
