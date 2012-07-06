@@ -187,6 +187,7 @@ input {
 }
 
 #terminal {
+	font-family: Consolas, Monotype;
 	font-size:11px;
 	background-color: black;
 	color: white;
@@ -194,6 +195,7 @@ input {
 }
 
 #terminal #prompt_input {
+	font-family: Consolas, Monotype;
 	font-size:11px;
 	background-color: black;
 	border:0px;
@@ -202,7 +204,6 @@ input {
 
 #terminal .stdout {
 	font-size:11px;
-	color: gray;
 }
 
 #project_selector {
