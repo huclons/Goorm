@@ -58,7 +58,6 @@ module.exports = {
 					node.type = "html";
 					
 					var extension = node.filename.split('.').pop();
-					console.log(extension + ", " + node.filename);
 					if (extension == node.filename) {
 						extension = "etc";
 					}

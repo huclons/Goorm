@@ -4,17 +4,17 @@
  * http://www.goorm.org/License
  **/
 
-org.goorm.core.console.message = function () {
+org.goorm.core.terminal.message = function () {
 
 };
 
-org.goorm.core.console.message.prototype = {
+org.goorm.core.terminal.message.prototype = {
 
 	m: function (text, from) {
 		var header = "[MSG] ";
 		var color = "black";
 	
-		$("#console").prepend(this.make_message(header, color, text, from)); 
+		$("#terminal").prepend(this.make_message(header, color, text, from)); 
 	},
 
 	make_message: function (header, color, text, from) {	
@@ -31,6 +31,6 @@ org.goorm.core.console.message.prototype = {
 	},
 
 	clean: function () {
-		$("#console").html("");
+		$("#terminal").html("");
 	}
 };

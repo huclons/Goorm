@@ -186,21 +186,21 @@ input {
 	cursor: pointer;
 }
 
-#console {
+#terminal {
 	font-size:11px;
 	background-color: black;
 	color: white;
 	padding:5px;
 }
 
-#console #prompt_input {
+#terminal #prompt_input {
 	font-size:11px;
 	background-color: black;
 	border:0px;
 	color:white;
 }
 
-#console .stdout {
+#terminal .stdout {
 	font-size:11px;
 	color: gray;
 }
