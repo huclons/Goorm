@@ -137,8 +137,8 @@ html
 		script(type='text/javascript', src='/modules/org.goorm.core.utility/utility.sorting.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.debug/debug.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.debug/debug.message.js')
-		script(type='text/javascript', src='/modules/org.goorm.core.console/console.js')
-		script(type='text/javascript', src='/modules/org.goorm.core.console/console.message.js')
+		script(type='text/javascript', src='/modules/org.goorm.core.terminal/terminal.js')
+		script(type='text/javascript', src='/modules/org.goorm.core.terminal/terminal.message.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.search/search.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.search/search.message.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.window/window.js')
@@ -274,6 +274,8 @@ html
 		script(type='text/javascript', src='/modules/org.goorm.plugin/plugin.js')
 		script(type='text/javascript', src='/modules/org.goorm.plugin/plugin.manager.js')
 		script(type='text/javascript', src='/modules/org.goorm.plugin/plugin.loader.js')
+		
+		script(type='text/javascript', src='/socket.io/socket.io.js')
 
 		title goorm1
 		
@@ -284,7 +286,7 @@ html
 			var core = new org.goorm.core();
 			var m = new org.goorm.core.utility.message();
 			var d = new org.goorm.core.debug.message();
-			var c = new org.goorm.core.console.message();
+			//var c = new org.goorm.core.console.message();
 			var s = new org.goorm.core.utility.sorting();
 			var statusbar = new org.goorm.core.utility.statusbar();
 			var confirmation = new org.goorm.core.dialog.confirmation();

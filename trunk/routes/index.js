@@ -5,7 +5,7 @@ var g_env = require("../configs/env.js");
 var g_file = require("../modules/org.goorm.core.file/file");
 var g_preference = require("../modules/org.goorm.core.preference/preference");
 var g_project = require("../modules/org.goorm.core.project/project");
-var g_shell = require("../modules/org.goorm.core.shell/shell");
+var g_terminal = require("../modules/org.goorm.core.terminal/terminal");
 var g_theme = require("../modules/org.goorm.core.theme/theme");
 var g_plugin = require("../modules/org.goorm.plugin/plugin");
 
@@ -180,14 +180,14 @@ exports.file.get_property = function(req, res){
 
 
 /*
- * API : Shell
+ * API : Terminal
  */
 
-exports.shell = function(req, res){
+exports.terminal = function(req, res){
 	res.send(null);
 };
 
-exports.shell.exec = function(req, res){
+exports.terminal.exec = function(req, res){
 	var evt = new EventEmitter();
 	var command = req.query.command;
 	
@@ -204,7 +204,7 @@ exports.shell.exec = function(req, res){
 		}
 	});
 	
-	g_shell.exec(command, evt);
+	g_terminal.exec(command, evt);
 };
 
 /*

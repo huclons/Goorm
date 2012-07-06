@@ -122,8 +122,8 @@ org.goorm.core.layout.prototype = {
 		//Debug Tab
 		this.attach_debug(this.inner_bottom_tabview);
 		
-		//Console Tab
-		this.attach_console(this.inner_bottom_tabview);
+		//Terminal Tab
+		this.attach_terminal(this.inner_bottom_tabview);
 		
 		//Search Tab
 		this.attach_search(this.inner_bottom_tabview);
@@ -373,15 +373,15 @@ org.goorm.core.layout.prototype = {
 	hide_chat: function() {
 	},
 	
-	attach_console: function(target) {
+	attach_terminal: function(target) {
 		//attaching tab element
 		//$(core).bind("preference_loading_complete", function () {
 			
-			target.addTab(new YAHOO.widget.Tab({ label: "Console", content: "<div id='console' width='100%'></div>" }));
+			target.addTab(new YAHOO.widget.Tab({ label: "Terminal", content: "<div id='terminal' width='100%'></div>" }));
 		//});
 		
-		this.console = new org.goorm.core.console();
-		this.console.init($("#console"));
+		this.terminal = new org.goorm.core.terminal();
+		this.terminal.init($("#terminal"));
 	},
 	
 	attach_search: function(target) {
@@ -389,20 +389,20 @@ org.goorm.core.layout.prototype = {
 		target.addTab(new YAHOO.widget.Tab({ label: "Search", content: "<div id='search' width='100%'></div>" }));
 	},
 	
-	refresh_console: function() {
+	refresh_terminal: function() {
 /*
 		this.inner_bottom_tabview.removeTab(this.inner_bottom_tabview.getTab(2));
 		//attaching tab element
 */
 	},
 	
-	detach_console: function() {
+	detach_terminal: function() {
 	},
 	
-	show_console: function() {
+	show_terminal: function() {
 	},
 	
-	hide_console: function() {
+	hide_terminal: function() {
 	},
 	
 	show_workspace: function() {
