@@ -5,7 +5,14 @@
  */
 
 var net = require('net');
-var pty = require('./pty.node');
+
+var os = require('os');
+if(/darwin/.test(os.platform())) {
+	var pty = require('./pty_darwin.node');
+}
+else if(/linux/.test(os.platform())) {
+	var pty = require('./pty_linux.node');
+}
 
 /**
  * Terminal
