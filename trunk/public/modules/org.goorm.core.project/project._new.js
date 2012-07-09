@@ -17,46 +17,55 @@ org.goorm.core.project._new.prototype = {
 		var handle_ok = function() {
 			// project create
 			if ($("#input_project_type").attr("value")=="") {
-				alert.show(core.module.localization.msg["alertProjectType"]);
+				//alert.show(core.module.localization.msg["alertProjectType"]);
+				alert.show("error");
 				return false;
 			}
 			else if ($("#inputProjectSource").attr("value")=="") {
-				alert.show(core.module.localization.msg["alertProjectSource"]);
+				//alert.show(core.module.localization.msg["alertProjectSource"]);
+				alert.show("error");
 				return false;
 			}
 			else if ($("#input_project_detailed_type").attr("value")=="") {
-				alert.show(core.module.localization.msg["alertProjectDetailedType"]);
+				//alert.show(core.module.localization.msg["alertProjectDetailedType"]);
+				alert.show("error");
 				return false;
 			}
 			else if ($("#input_project_author").attr("value")=="") {
-				alert.show(core.module.localization.msg["alertProjectAuthor"]);
+				//alert.show(core.module.localization.msg["alertProjectAuthor"]);
+				alert.show("error");
 				return false;
 			}
 			else if ($("#input_project_name").attr("value")=="") {
-				alert.show(core.module.localization.msg["alertProjectName"]);
+				//alert.show(core.module.localization.msg["alertProjectName"]);
+				alert.show("error");
 				return false;
 			}
 			else if ($("#input_project_about").attr("value")=="") {
-				alert.show(core.module.localization.msg["alertProjectAbout"]);
+				//alert.show(core.module.localization.msg["alertProjectAbout"]);
+				alert.show("error");
 				return false;
 			}
 			else if ($("#check_project_new_import").is(":checked")) {
 				if($("#project_new_import_file").attr("value").substr($("#project_new_import_file").attr("value").length-3,3).toLowerCase()!="zip") {
-					alert.show(core.module.localization.msg["alertOnlyZipAllowed"]);
+					//alert.show(core.module.localization.msg["alertOnlyZipAllowed"]);
+					alert.show("error");
 					return false;
 				}
 			}
 			else if (!/^[\w-]*$/.test($("#input_project_author").attr("value"))) {
-				alert.show(core.module.localization.msg["alertAllowCharacter"]);
+				//alert.show(core.module.localization.msg["alertAllowCharacter"]);
+				alert.show("error");
 				return false;
 			}
 			else if (!/^[\w-]*$/.test($("#input_project_name").attr("value"))) {
-				alert.show(core.module.localization.msg["alertAllowCharacter"]);
+				//alert.show(core.module.localization.msg["alertAllowCharacter"]);
+				alert.show("error");
 				return false;
 			}
 			
 			if ($("#new_projectUsingPlugin").val() == "yes") {			
-				var postdata = {
+				var senddata = {
 					project_new_svn_url: $("#project_new_svn_url").attr("value"),
 					project_new_svn_id: $("#project_new_svn_id").attr("value"),
 					project_new_svn_pw: $("#project_new_svn_pw").attr("value"),
@@ -72,28 +81,33 @@ org.goorm.core.project._new.prototype = {
 				core.status.current_project_name = input_project_name;
 				core.status.current_project_type = input_project_type;
 				
-				core.module.plugin_manager.new_project(input_project_name, input_project_author, input_project_type, input_project_detailed_type, input_project_author+"_"+input_project_name, postdata);
+				core.module.plugin_manager.new_project(input_project_name, input_project_author, input_project_type, input_project_detailed_type, input_project_author+"_"+input_project_name, senddata);
 			}
 			else {
-				var postdata = {
-					input_project_type: $("#input_project_type").attr("value"),
-					input_project_detailed_type: $("#input_project_detailed_type").attr("value"),
-					input_project_author: $("#input_project_author").attr("value"),
-					input_project_name: $("#input_project_name").attr("value"),
-					input_project_about: $("#input_project_about").attr("value"),
-					input_use_collaboration: $("#check_use_collaboration").attr("checked")
-				};
 				
-				$.post("project/new", postdata, function (data) {
-					var received_data = eval("("+data+")");
+				var use_collaboration = $("#check_use_collaboration").attr("checked");
+				if (use_collaboration==undefined || use_collaboration=="undefined") {
+					use_collaboration = "not checked";
+				}
+
+				var senddata = {
+					project_type: $("#input_project_type").attr("value"),
+					project_detailed_type: $("#input_project_detailed_type").attr("value"),
+					project_author: $("#input_project_author").attr("value"),
+					project_name: $("#input_project_name").attr("value"),
+					project_about: $("#input_project_about").attr("value"),
+					use_collaboration: use_collaboration
+				};
+
+				$.get("project/new", senddata, function (data) {
+
+					if(data.err_code==0) {
 					
-					if(received_data.errCode==0) {
-					
-						core.status.current_project_path = received_data.author+"_"+received_data.project_name;
-						core.status.current_project_name = received_data.project_name;
-						core.status.current_project_type = received_data.type;
+						core.status.current_project_path = data.project_author+"_"+data.project_name;
+						core.status.current_project_name = data.project_name;
+						core.status.current_project_type = data.project_type;
 	
-	
+/*	작성필요
 						core.dialog.open_project.open(core.status.current_project_path, core.status.current_project_name, core.status.current_project_type);
 						
 						if(!$("#check_project_new_import").is(":checked")) {
@@ -102,14 +116,14 @@ org.goorm.core.project._new.prototype = {
 							var input_project_detailed_type = $("#input_project_detailed_type").attr("value");
 							var input_project_author = $("#input_project_author").attr("value");
 
-							core.module.plugin_manager.new_project(core.status.current_project_name, postdata.input_project_author, postdata.input_project_type, postdata.input_project_detailed_type, core.status.current_project_path);
+							core.module.plugin_manager.new_project(core.status.current_project_name, senddata.input_project_author, senddata.input_project_type, senddata.input_project_detailed_type, core.status.current_project_path);
 						}
 						else {
 							//여기서 전용 로딩중을 알림
 							core.module.loading_bar.start("Import processing...");
 							$('#project_new_import_form').submit();
 						}
-
+*/
 						
 						// core.module.layout.project_explorer.refresh();
 						// core.module.layout.refresh_console();
@@ -123,7 +137,8 @@ org.goorm.core.project._new.prototype = {
 						// core.module.layout.show_chat(str);
 					}
 					else {
-						alert.show(core.module.localization.msg["alertError"] + received_data.message);
+						//alert.show(core.module.localization.msg["alertError"] + data.message);
+						alert.show("error");
 						return false;
 					}
 				});				
@@ -236,13 +251,13 @@ org.goorm.core.project._new.prototype = {
 		$(".project_wizard_second_button").removeClass("selected_button");
 		$("#input_project_type").attr("value","");
 		$("#input_project_detailed_type").val("");
-		$("#input_project_author").val(core.user.first_name+"_"+core.user.last_name);
+		$("#input_project_author").val("");
 		$("#input_project_name").val("");
 		$("#input_project_about").val("");
 		$("#project_new_import_upload_output").empty();
 		$("#project_new_import_file").val("");
-		$("#check_project_new_import").attr('checked', "");
-		$("#check_use_collaboration").attr('checked', "");
+		$("#check_project_new_import").attr('checked', false);
+		$("#check_use_collaboration").attr('checked', false);
 		
 		$("div[id='project_new']").find(".project_types").scrollTop(0);
 		$("div[id='project_new']").find(".project_items").scrollTop(0);
