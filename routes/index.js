@@ -29,7 +29,15 @@ exports.project = function(req, res){
 };
 
 exports.project.do_new = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	
+	evt.on("project_do_new", function (data) {
+		console.log("start");
+		console.log(data);
+		res.json(data);
+	});
+	
+	g_project.do_new(req.query, evt);
 };
 
 exports.project.do_load = function(req, res){
