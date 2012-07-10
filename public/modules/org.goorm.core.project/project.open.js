@@ -16,15 +16,18 @@ org.goorm.core.project.open.prototype = {
 		var self = this;
 				
 		var handle_open = function() { 
-		this.hide(); 
-			// project open
-			if ($("#div_project_path").attr("value")=="Not selected") {
-				alert.show(core.module.localization.msg["alertProjectNotSelected"]);
+			console.log("1");
+			if ($("#div_project_path").attr("value")=="") {
+				console.log("2");
+				//alert.show(core.module.localization.msg["alertProjectNotSelected"]);
+				alert.show("not selected");
 				return false;
 			}
-			
-			self.open($("#div_project_path").attr("value"), $("#div_project_name").attr("value"), $("#div_project_type").attr("value"));
-			this.hide(); 
+			else {
+				console.log("3");
+				self.open($("#div_project_path").attr("value"), $("#div_project_name").attr("value"), $("#div_project_type").attr("value"));
+				this.hide(); 
+			}
 		};
 
 		var handle_cancel = function() { 
@@ -78,6 +81,7 @@ org.goorm.core.project.open.prototype = {
 		core.status.current_project_name = current_project_name;
 		core.status.current_project_type = current_project_type;
 		
+/*
 		if(core.chat_on){
 			core.module.layout.chat.set_chat_off();
 		}
@@ -160,21 +164,22 @@ org.goorm.core.project.open.prototype = {
 				$("a[action=clean]").parent().addClass("yuimenuitem-disabled");
 			}
 		}
+*/
 		$(document).trigger('onOpenProject');		
 	},
 
 	add_project_list: function () {
 		$("#project_open_project_list").empty();
 			
-		$.post("project/get_list", "", function (data) {
+		$.get("project/get_list", null, function (data) {
 						
-			var sorting_data = eval(data);
+			var sorting_data = data;
 						
-			for(var name in sorting_data) {
+			for(var project_idx in sorting_data) {
 				var icon_str = "";
-				icon_str += "<div id='selector_" + sorting_data[name].filename + "' value='" + sorting_data[name].filename + "' class='selector_project' type='"+sorting_data[name].type+"'>";
+				icon_str += "<div id='selector_" + sorting_data[project_idx].contents.name + "' value='" + project_idx + "' class='selector_project' type='"+sorting_data[project_idx].contents.type+"'>";
 				icon_str += "<div style='padding-left:65px; padding-top:20px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis'>";
-				icon_str += sorting_data[name].filename;
+				icon_str += sorting_data[project_idx].contents.name;
 				icon_str += "</div>";
 				icon_str += "</div>";
 
@@ -185,34 +190,27 @@ org.goorm.core.project.open.prototype = {
 				$(".selector_project").removeClass("selected_button");
 				$(this).addClass("selected_button");
 				
-				$("#div_project_path").attr("value", $(this).attr("value"));
-				$("#project_open_location").attr("value", "/" + $(this).attr("value") + "/");
+				var idx = $(this).attr("value");
+				
+				$("#div_project_path").attr("value", sorting_data[idx].name);
+				$("#project_open_location").attr("value", "/" + sorting_data[idx].name);
 
-				$.ajax({
-					type: "GET",
-					dataType: "xml",
-					async :false,
-					url: "project/" +  $(this).attr("value") + "/project.xml",
-					success: function(xml) {
-						$("#div_project_information").empty();
-						$("#div_project_information").append("<b>Project Type : </b>");
-						$("#div_project_information").append($(xml).find("TYPE").text()+"<br/>");
-						$("#div_project_information").append("<b>Project detailed Type : </b>");
-						$("#div_project_information").append($(xml).find("DETAILEDTYPE").text()+"<br/>");
-						$("#div_project_information").append("<b>Project Author : </b>");
-						$("#div_project_information").append($(xml).find("AUTHOR").text()+"<br/>");
-						$("#div_project_information").append("<b>Project Name : </b>");
-						$("#div_project_information").append($(xml).find("NAME").text()+"<br/>");
-						$("#div_project_information").append("<b>Project About : </b>");
-						$("#div_project_information").append($(xml).find("ABOUT").text()+"<br/>");
-						$("#div_project_information").append("<b>Project Date : </b>");
-						$("#div_project_information").append($(xml).find("DATE").text()+"<br/>");
-						
-						$("#div_project_name").attr("value", $(xml).find("NAME").text());
-						$("#div_project_type").attr("value", $(xml).find("TYPE").text());
-					}
-					, error: function(xhr, status, error) {alert.show(core.module.localization.msg["alertError"] + error);}
-				});
+				$("#div_project_information").empty();
+				$("#div_project_information").append("<b>Project Type : </b>");
+				$("#div_project_information").append(sorting_data[idx].contents.type+"<br/>");
+				$("#div_project_information").append("<b>Project detailed Type : </b>");
+				$("#div_project_information").append(sorting_data[idx].contents.detailedtype+"<br/>");
+				$("#div_project_information").append("<b>Project Author : </b>");
+				$("#div_project_information").append(sorting_data[idx].contents.author+"<br/>");
+				$("#div_project_information").append("<b>Project Name : </b>");
+				$("#div_project_information").append(sorting_data[idx].contents.name+"<br/>");
+				$("#div_project_information").append("<b>Project About : </b>");
+				$("#div_project_information").append(sorting_data[idx].contents.about+"<br/>");
+				$("#div_project_information").append("<b>Project Date : </b>");
+				$("#div_project_information").append(sorting_data[idx].contents.date+"<br/>");
+				
+				$("#div_project_name").attr("value", sorting_data[idx].contents.name);
+				$("#div_project_type").attr("value", sorting_data[idx].contents.type);
 			});
 		});
 	},
