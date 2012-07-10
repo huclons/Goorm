@@ -32,8 +32,6 @@ exports.project.do_new = function(req, res){
 	var evt = new EventEmitter();
 	
 	evt.on("project_do_new", function (data) {
-		console.log("start");
-		console.log(data);
 		res.json(data);
 	});
 	
@@ -53,7 +51,13 @@ exports.project.do_delete = function(req, res){
 };
 
 exports.project.get_list = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	
+	evt.on("project_get_list", function (data) {
+		res.json(data);
+	});
+	
+	g_project.get_list(evt);
 };
 
 exports.project.do_import = function(req, res){

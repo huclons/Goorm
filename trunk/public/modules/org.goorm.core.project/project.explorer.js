@@ -27,8 +27,7 @@ org.goorm.core.project.explorer.prototype = {
 		});
 
 		$.get("project/get_list", "", function (data) {
-			var sorting_data = eval(data);
-			self.make_project_select_box(sorting_data);			
+			self.make_project_select_box(data);			
 		});
 		
 		$("#project_explorer").append("<div id='project_treeview' style='overflow-x:hidden'></div>");
@@ -107,8 +106,7 @@ org.goorm.core.project.explorer.prototype = {
 		var self = this;
 			
 		$.post("project/get_list", "", function (data) {
-			var sorting_data = eval(data);
-			self.make_project_select_box(sorting_data);			
+			self.make_project_select_box(data);			
 		});
 
 		var temp_project_path = core.status.current_project_path;
@@ -162,7 +160,7 @@ org.goorm.core.project.explorer.prototype = {
 		});
 	},
 	
-	make_project_select_box: function(sorting_data) {
+	make_project_select_box: function(data) {
 		var self = this;
 
 		$("#project_select_box").empty();
@@ -171,19 +169,19 @@ org.goorm.core.project.explorer.prototype = {
 		
 		var max_num = parseInt($("#project_selector").width()/8);
 		
-		for(var name in sorting_data) {
-			var temp_name = sorting_data[name].filename;
+		for(var project_idx in data) {
+			var temp_name = data[project_idx].name;
 
 			if(temp_name.length > max_num) {
 				temp_name = temp_name.substring(0, max_num-1);
 				temp_name += " …";
 			}			
 			
-			if (sorting_data[name].filename == core.status.current_project_path) {
-				$("#project_select_box").append("<option value='"+sorting_data[name].filename+"' selected>"+temp_name+"</option>");
+			if (data[project_idx].filename == core.status.current_project_path) {
+				$("#project_select_box").append("<option value='"+data[project_idx].name+"' selected>"+temp_name+"</option>");
 			}
 			else {
-				$("#project_select_box").append("<option value='"+sorting_data[name].filename+"'>"+temp_name+"</option>");
+				$("#project_select_box").append("<option value='"+data[project_idx].name+"'>"+temp_name+"</option>");
 			}
 		}
 	},
@@ -205,7 +203,8 @@ org.goorm.core.project.explorer.prototype = {
 					core.dialog.open_project.open(project, $(xml).find("NAME").text(), $(xml).find("TYPE").text());
 				}
 				, error: function(xhr, status, error) {
-					alert.show(core.module.localization.msg["alertProjectCannotOpen"]);
+					//alert.show(core.module.localization.msg["alertProjectCannotOpen"]);
+					alert.show("can not open project")
 				}
 			});
 		}

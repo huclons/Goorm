@@ -1,5 +1,9 @@
 var fs = require('fs');
+var walk = require('walk');
 var g_env = require("../../configs/env.js");
+var EventEmitter = require("events").EventEmitter;
+
+var projects = [];
 
 module.exports = {
 	do_new: function (query, evt) {
@@ -33,22 +37,12 @@ module.exports = {
 								evt.emit("project_do_new", data);
 							}
 							else {
-								var file_contents = '<?xml version="1.0" encoding="utf-8"?>\n';
-								file_contents += '<PROJECT>\n';
-								file_contents += '	<TYPE>'+query.project_type+'</TYPE>\n';
-								file_contents += '	<DETAILEDTYPE>'+query.project_detailed_type+'</DETAILEDTYPE>\n';
-								file_contents += '	<AUTHOR>'+query.project_author+'</AUTHOR>\n';
-								file_contents += '	<NAME>'+query.project_name+'</NAME>\n';
-								file_contents += '	<ABOUT>'+query.project_about+'</ABOUT>\n';
-								
 								var today = new Date();
-								var date_string = today.getYear+'/'+today.getMonth()+'/'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
-																
-								file_contents += '	<DATE>'+date_string+'</DATE>\n';
-								file_contents += '	<COLLABORATION>'+query.use_collaboration+'</COLLABORATION>\n';
-								file_contents += '</PROJECT>';
+								var date_string = today.getFullYear()+'/'+today.getMonth()+'/'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+							
+								var file_contents = '{"type": "'+query.project_type+'", "detailedtype": "'+query.project_detailed_type+'", "author": "'+query.project_author+'", "name": "'+query.project_name+'", "about": "'+query.project_about+'", "date": "'+date_string+'", "collaboration": "'+query.use_collaboration+'"}';
 
-								fs.writeFile(g_env.path+'workspace/'+project_dir+'/project.xml', file_contents, function(err) {
+								fs.writeFile(g_env.path+'workspace/'+project_dir+'/project.json', file_contents, function(err) {
 									if (err!=null) {
 										data.err_code = 40;
 										data.message = "Can not make project file";
@@ -75,6 +69,58 @@ module.exports = {
 
 			evt.emit("project_do_new", data);
 		}
-	}
+	},
+	
+	get_list: function (evt) {
+	
+		var self = this;
+		projects = [];
+		
+		var options = {
+			followLinks: false
+		};
+				
+		walker = walk.walk(g_env.path+"workspace", options);
+		
+		walker.on("directories", function (root, dirStatsArray, next) {
 
+			var count = dirStatsArray.length;
+			if (root==g_env.path+"workspace" ) {
+				var dir_count = 0;
+
+				var evt_dir = new EventEmitter();
+	
+				evt_dir.on("get_list", function () {
+					dir_count++;
+					if (dir_count<dirStatsArray.length) {
+						self.get_project_info(dirStatsArray[dir_count], evt_dir);						
+					}
+					else {
+						evt.emit("project_get_list", projects);
+					}
+				});
+				
+				self.get_project_info(dirStatsArray[dir_count], evt_dir);
+			}
+			
+			next();
+		});
+		
+		walker.on("end", function () {
+		});
+	},
+	
+	get_project_info: function (dirStatsArray, evt_dir) {
+		var project = {};
+		project.name = dirStatsArray.name;
+
+		fs.readFile(g_env.path+"workspace/"+project.name+"/project.json", 'utf-8', function (err, data) {
+			if (err==null) {
+				project.contents = JSON.parse(data);
+				console.log(project.contents.type);
+				projects.push(project);
+			}
+			evt_dir.emit("get_list");
+		});
+	}
 };
