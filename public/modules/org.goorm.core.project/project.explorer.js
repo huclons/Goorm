@@ -12,6 +12,7 @@ org.goorm.core.project.explorer = function () {
 	this.context_menu_project = null;	
 	this.current_tree_data = null;	
 	this.current_project = null;
+	this.project_data = null;
 };
 
 org.goorm.core.project.explorer.prototype = {
@@ -27,7 +28,8 @@ org.goorm.core.project.explorer.prototype = {
 		});
 
 		$.get("project/get_list", "", function (data) {
-			self.make_project_select_box(data);			
+			self.project_data = data
+			self.make_project_select_box();
 		});
 		
 		$("#project_explorer").append("<div id='project_treeview' style='overflow-x:hidden'></div>");
@@ -105,8 +107,9 @@ org.goorm.core.project.explorer.prototype = {
 	refresh: function() {
 		var self = this;
 			
-		$.post("project/get_list", "", function (data) {
-			self.make_project_select_box(data);			
+		$.get("project/get_list", "", function (data) {
+			self.project_data = data		
+			self.make_project_select_box();			
 		});
 
 		var temp_project_path = core.status.current_project_path;
@@ -160,7 +163,7 @@ org.goorm.core.project.explorer.prototype = {
 		});
 	},
 	
-	make_project_select_box: function(data) {
+	make_project_select_box: function() {
 		var self = this;
 
 		$("#project_select_box").empty();
@@ -169,44 +172,34 @@ org.goorm.core.project.explorer.prototype = {
 		
 		var max_num = parseInt($("#project_selector").width()/8);
 		
-		for(var project_idx in data) {
-			var temp_name = data[project_idx].name;
+		for(var project_idx in self.project_data) {
+			var temp_name = self.project_data[project_idx].name;
 
 			if(temp_name.length > max_num) {
 				temp_name = temp_name.substring(0, max_num-1);
 				temp_name += " …";
 			}			
 			
-			if (data[project_idx].filename == core.status.current_project_path) {
-				$("#project_select_box").append("<option value='"+data[project_idx].name+"' selected>"+temp_name+"</option>");
+			if (self.project_data[project_idx].filename == core.status.current_project_path) {
+				$("#project_select_box").append("<option value='"+project_idx+"' selected>"+temp_name+"</option>");
 			}
 			else {
-				$("#project_select_box").append("<option value='"+data[project_idx].name+"'>"+temp_name+"</option>");
+				$("#project_select_box").append("<option value='"+project_idx+"'>"+temp_name+"</option>");
 			}
 		}
 	},
 		
-	on_project_selectbox_change: function (project) {
+	on_project_selectbox_change: function (project_idx) {
 		var self = this;
-	
-		if (project!="") {
-			$.ajax({
-				type: "GET",
-				dataType: "xml",
-				async :false,
-				url: "project/" +  project + "/project.xml",
-				success: function(xml) {
-					self.current_project.current_project_path =  project;
-					self.current_project.current_project_name = $(xml).find("NAME").text();
-					self.current_project.current_projectType = $(xml).find("TYPE").text();
-					localStorage["current_project"] = JSON.stringify(self.current_project);
-					core.dialog.open_project.open(project, $(xml).find("NAME").text(), $(xml).find("TYPE").text());
-				}
-				, error: function(xhr, status, error) {
-					//alert.show(core.module.localization.msg["alertProjectCannotOpen"]);
-					alert.show("can not open project")
-				}
-			});
+
+		// need modify. NullA
+		if (project_idx!="") {
+			self.current_project.current_project_path =  self.project_data[project_idx].name;
+			self.current_project.current_project_name = self.project_data[project_idx].contents.name;
+			self.current_project.current_projectType = self.project_data[project_idx].contents.type;
+			localStorage["current_project"] = JSON.stringify(self.current_project);
+			core.dialog.open_project.open(self.project_data[project_idx].name, self.project_data[project_idx].contents.name, self.project_data[project_idx].contents.type);
+		
 		}
 		else {
 			core.current_project_name = "";
@@ -219,7 +212,7 @@ org.goorm.core.project.explorer.prototype = {
 
 			self.refresh();
 		}
-
+		
 	},
 	
 	sort_project_treeview: function (sorting_data) { 				
