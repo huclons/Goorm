@@ -43,7 +43,7 @@ module.exports = {
 			var options = {
 				followLinks: false
 			};
-			
+
 			walker = walk.walk(path, options);
 			
 			walker.on("files", function (root, fileStats, next) {
@@ -75,9 +75,10 @@ module.exports = {
 			
 			walker.on("end", function () {
 				tree = self.make_dir_tree('/', dirs);
+//				console.log(tree);
 				tree = self.make_file_tree(tree, nodes);
-
 				evt.emit("got_nodes", tree);
+				//console.log(tree);
 			});
 		
 		});
@@ -128,7 +129,7 @@ module.exports = {
 	make_dir_tree: function (root, dirs) {
 		var tree = [];
 		var rest = [];
-		
+				
 		for (var i=0; i<dirs.length; i++) {
 			if (dirs[i].root == root) {
 				tree.push(dirs[i]);
@@ -149,10 +150,19 @@ module.exports = {
 	make_file_tree: function (tree, files) {
 		if (tree != undefined) {
 			var marked = [];
+
+			//fucking root			
+			for (var j=0; j<files.length; j++) {
+				if (files[j].root == "/") {
+					marked.push(j);
+					tree.push(files[j]);
+				}
+			}
 			
 			for (var i=0; i<tree.length; i++) {
 				for (var j=0; j<files.length; j++) {
-					if (tree[i].root + tree[i].name + '/' == files[j].root) {
+//					console.log(tree[i].root + tree[i].name + '/' +"        "+ files[j].root +"        "+ files[j].filename);
+					if (!marked.hasObject(j) && tree[i].root + tree[i].name + '/' == files[j].root) {
 						marked.push(j);
 						tree[i].children.push(files[j]);
 					}
