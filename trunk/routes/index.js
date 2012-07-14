@@ -134,7 +134,6 @@ exports.file.get_nodes = function(req, res){
 	var evt = new EventEmitter();
 	var path = req.query.path;
 	
-	console.log(path);
 	res.setHeader("Content-Type", "application/json");
 	
 	evt.on("got_nodes", function (data) {

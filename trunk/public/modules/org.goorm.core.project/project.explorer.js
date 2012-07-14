@@ -128,7 +128,7 @@ org.goorm.core.project.explorer.prototype = {
 				path: "" + temp_project_path
 			};
 			
-			$.post("file/get_nodes", postdata, function (data) {
+			$.get("file/get_nodes", postdata, function (data) {
 							
 				var sorting_data = eval(data);
 				
