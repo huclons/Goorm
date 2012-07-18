@@ -41,7 +41,10 @@ module.exports = {
 	},
 	
 	exec: function (command) {
-		if (command.indexOf('\e[9') > -1) { //TAB
+		if (command == '^C') {
+			term.write(command);
+		}
+		else if (command.indexOf('\t') > -1) { //TAB
 			term.write(command);
 		}
 		else {
