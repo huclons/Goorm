@@ -202,6 +202,10 @@ input {
 	color:white;
 }
 
+#terminal #prompt_input:focus {
+	outline: none;
+}
+
 #terminal .stdout {
 	font-size:11px;
 }

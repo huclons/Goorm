@@ -150,6 +150,8 @@ org.goorm.core.layout.prototype = {
 		$(window).resize(function(){
 			self.resize_all();
 			self.layout.getUnitByPosition("top").set("height",$("#goorm_mainmenu").height()+$("#goorm_main_toolbar").height()+7);
+			
+			$(core).trigger("layout_resized");
 		});
 
 		this.inner_layout.on("start_resize", function() {
@@ -435,7 +437,6 @@ org.goorm.core.layout.prototype = {
 		
 		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 26;
 		$("#goorm_inner_layout_bottom").find(".yui-content").height(layout_bottom_height);
-		$("#iframe_console").height(layout_bottom_height-6);
 		
 		var layout_center_height = $(".yui-layout-unit-center").find(".yui-layout-unit-center").find(".yui-layout-wrap").height() - 2;
 		$("#goorm_inner_layout_center").find("#workspace").height(layout_center_height);

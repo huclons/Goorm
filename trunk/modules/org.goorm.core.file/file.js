@@ -46,11 +46,11 @@ module.exports = {
 
 			walker = walk.walk(path, options);
 			
-			walker.on("files", function (root, fileStats, next) {
-				for (var i=0; i < fileStats.length; i++) {
+			walker.on("files", function (root, file_stats, next) {
+				for (var i=0; i < file_stats.length; i++) {
 					var node = {};
 					node.root = root.replace(g_env.path + "workspace/", "") + "/";
-					node.filename = fileStats[i].name;
+					node.filename = file_stats[i].name;
 					node.parent_label = node.root;
 					node.cls = "file";
 					node.expanded = false;
@@ -97,11 +97,11 @@ module.exports = {
 		
 		walker = walk.walk(path, options);
 		
-		walker.on("directories", function (root, dirStatsArray, next) {
-			for (var i=0; i < dirStatsArray.length; i++) {
+		walker.on("directories", function (root, dir_stats_array, next) {
+			for (var i=0; i < dir_stats_array.length; i++) {
 				var dir = {};
 				dir.root = root.replace(g_env.path + "workspace/", "") + "/";
-				dir.name = dirStatsArray[i].name;
+				dir.name = dir_stats_array[i].name;
 				dir.parent_label = dir.root;
 				dir.cls = "dir";
 				dir.expanded = true;
