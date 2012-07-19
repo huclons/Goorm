@@ -50,6 +50,7 @@ exports.project.do_delete = function(req, res){
 	var evt = new EventEmitter();
 	
 	evt.on("project_do_delete", function (data) {
+		console.log(data);
 		res.json(data);
 	});
 
