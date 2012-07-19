@@ -944,9 +944,10 @@ org.goorm.core.menu.action.prototype = {
 		//Plugin Menu Action
 		//////////////////////////////////////////////////
 
+		/*
 		for(var i = 0; i < core.module.plugin_manager.list.length; i++) {
 			
-			var plugin_name = core.module.plugin_manager.list[i].plugin_name;
+			var plugin_name = core.module.plugin_manager.list[i].name;
 
 			// if(core.module.plugin_manager.plugins[plugin_name] != undefined) {
 				if(core.module.plugin_manager.plugins[plugin_name].add_menu_action()){
@@ -956,5 +957,6 @@ org.goorm.core.menu.action.prototype = {
 			// if(core.module.plugin_manager.plugins[core.module.plugin_manager.list[i].plugin_name].add_menu_action())
 				// core.module.plugin_manager.plugins[core.module.plugin_manager.list[i].plugin_name].add_menu_action();
 		}
+		*/
 	}
 }

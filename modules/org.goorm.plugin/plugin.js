@@ -16,7 +16,9 @@ module.exports = {
 		walker.on("directories", function (root, dirStatsArray, next) {
 			if (root == g_env.path + "plugins" ) {
 				for (var i=0; i<dirStatsArray.length; i++) {
-					plugins.push(dirStatsArray[i].name);
+					if (dirStatsArray[i].name != '.svn') {
+						plugins.push({name:dirStatsArray[i].name});
+					}
 				}
 				
 				evt.emit("plugin_get_list", plugins);

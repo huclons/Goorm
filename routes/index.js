@@ -96,7 +96,6 @@ exports.plugin.get_list = function(req, res){
 	var evt = new EventEmitter();
 	
 	evt.on("plugin_get_list", function (data) {
-		console.log(data);
 		res.json(data);
 	});
 
