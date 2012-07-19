@@ -28,27 +28,27 @@ org.goorm.plugin.manager.prototype = {
 		
 		//statusbar.start();
 		
-		// $.ajax({
-			// url: url,			
-			// type: "GET",
-			// async: false,
-			// success: function(data) {
-				// self.list = eval(data);
-// 				
-				// //statusbar.progressbar.set('value', 100);
-				// /*
-				// if(self.interval) {
-					// window.clearInterval(self.interval);
-				// }
-				// */
-// 				
-				// //statusbar.stop();
-// 				
-				// $(core).trigger("plugin_loaded");
-// 				
-				// //$(core).trigger("goorm_loading");
-			// }
-		// });
+		$.ajax({
+			url: url,			
+			type: "GET",
+			async: false,
+			success: function(data) {
+				self.list = eval(data);
+				
+				//statusbar.progressbar.set('value', 100);
+				/*
+				if(self.interval) {
+					window.clearInterval(self.interval);
+				}
+				*/
+				
+				//statusbar.stop();
+				
+				//$(core).trigger("plugin_loaded");
+				
+				//$(core).trigger("goorm_loading");
+			}
+		});
 		
 		$(core).trigger("plugin_loaded");
 	},
