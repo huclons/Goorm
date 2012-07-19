@@ -38,7 +38,7 @@ org.goorm.core.project.explorer.prototype = {
 			kind: "project",
 			path: "" + core.status.current_project_path
 		};
-		
+
 		$.get("file/get_nodes", postdata, function (data) {
 			
 			if (data != null) {
@@ -114,12 +114,14 @@ org.goorm.core.project.explorer.prototype = {
 
 		var temp_project_path = core.status.current_project_path;
 		
+/*
 		if ( temp_project_path == "" ) {
 			$("#project_treeview").empty();
 			$("#project_treeview").css("background-color", "#CCC");
 			$("#project_treeview").append("<div style='text-align:center;padding-top:50%;'>Project not opened</div>");
 		}
 		else {
+*/
 
 			$("#project_treeview").css("background-color", "#FFF");
 
@@ -127,7 +129,7 @@ org.goorm.core.project.explorer.prototype = {
 				kind: "project",
 				path: "" + temp_project_path
 			};
-			
+
 			$.get("file/get_nodes", postdata, function (data) {
 							
 				var sorting_data = eval(data);
@@ -144,7 +146,9 @@ org.goorm.core.project.explorer.prototype = {
 				
 				self.refresh_context_menu();
 			});
+/*
 		}
+*/
 	},
 	
 	expand_treeview: function (source, target) {
@@ -179,8 +183,8 @@ org.goorm.core.project.explorer.prototype = {
 				temp_name = temp_name.substring(0, max_num-1);
 				temp_name += " …";
 			}			
-			
-			if (self.project_data[project_idx].filename == core.status.current_project_path) {
+
+			if (self.project_data[project_idx].name == core.status.current_project_path) {
 				$("#project_select_box").append("<option value='"+project_idx+"' selected>"+temp_name+"</option>");
 			}
 			else {
