@@ -47,7 +47,13 @@ exports.project.do_save = function(req, res){
 };
 
 exports.project.do_delete = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	
+	evt.on("project_do_delete", function (data) {
+		res.json(data);
+	});
+
+	g_project.do_delete(req.query, evt);
 };
 
 exports.project.get_list = function(req, res){

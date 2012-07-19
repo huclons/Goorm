@@ -16,15 +16,12 @@ org.goorm.core.project.open.prototype = {
 		var self = this;
 				
 		var handle_open = function() { 
-			console.log("1");
 			if ($("#div_project_path").attr("value")=="") {
-				console.log("2");
 				//alert.show(core.module.localization.msg["alertProjectNotSelected"]);
 				alert.show("not selected");
 				return false;
 			}
 			else {
-				console.log("3");
 				self.open($("#div_project_path").attr("value"), $("#div_project_name").attr("value"), $("#div_project_type").attr("value"));
 				this.hide(); 
 			}
@@ -81,7 +78,9 @@ org.goorm.core.project.open.prototype = {
 		core.status.current_project_path = current_project_path;
 		core.status.current_project_name = current_project_name;
 		core.status.current_project_type = current_project_type;
-		
+
+		core.dialog.project_property.refresh_toolbox();
+		core.module.layout.project_explorer.refresh();
 /*
 		if(core.chat_on){
 			core.module.layout.chat.set_chat_off();

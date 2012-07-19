@@ -27,6 +27,8 @@ Array.prototype.hasObject = (
   }
 );
 
+var root_dir = "";
+
 module.exports = {
 	init: function () {
 	
@@ -38,6 +40,8 @@ module.exports = {
 		var evt_dir = new EventEmitter();
 				
 		var nodes = [];
+		
+		root_dir = path.replace(g_env.path + "workspace/", "") + "/";
 		
 		evt_dir.on("got_dir_nodes_for_get_nodes", function (dirs) {
 			var options = {
@@ -74,11 +78,9 @@ module.exports = {
 			});
 			
 			walker.on("end", function () {
-				tree = self.make_dir_tree('/', dirs);
-//				console.log(tree);
+				tree = self.make_dir_tree(root_dir, dirs);
 				tree = self.make_file_tree(tree, nodes);
 				evt.emit("got_nodes", tree);
-				//console.log(tree);
 			});
 		
 		});
@@ -120,7 +122,7 @@ module.exports = {
 		});
 		
 		walker.on("end", function () {
-			tree = self.make_dir_tree('/', dirs);
+			tree = self.make_dir_tree(root_dir, dirs);
 			evt.emit("got_dir_nodes", tree);
 			evt.emit("got_dir_nodes_for_get_nodes", dirs);
 		});
@@ -153,7 +155,7 @@ module.exports = {
 
 			//fucking root			
 			for (var j=0; j<files.length; j++) {
-				if (files[j].root == "/") {
+				if (files[j].root == root_dir) {
 					marked.push(j);
 					tree.push(files[j]);
 				}
@@ -161,7 +163,6 @@ module.exports = {
 			
 			for (var i=0; i<tree.length; i++) {
 				for (var j=0; j<files.length; j++) {
-//					console.log(tree[i].root + tree[i].name + '/' +"        "+ files[j].root +"        "+ files[j].filename);
 					if (!marked.hasObject(j) && tree[i].root + tree[i].name + '/' == files[j].root) {
 						marked.push(j);
 						tree[i].children.push(files[j]);

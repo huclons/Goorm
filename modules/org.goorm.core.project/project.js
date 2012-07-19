@@ -1,5 +1,6 @@
 var fs = require('fs');
 var walk = require('walk');
+var rimraf = require('rimraf');
 var g_env = require("../../configs/env.js");
 var EventEmitter = require("events").EventEmitter;
 
@@ -69,6 +70,43 @@ module.exports = {
 
 			evt.emit("project_do_new", data);
 		}
+	},
+	
+	do_delete: function (query, evt) {
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+		
+		console.log(query);
+		
+		if (query.project_path != null) {
+			rimraf(g_env.path+"workspace/"+query.project_path, function(err) {
+				console.log(g_env.path+query.project_path);
+				console.log(err);
+				if (err!=null) {
+					data.err_code = 20;
+					data.message = "Can not delete project";
+					
+					evt.emit("project_do_delete", data);
+				}
+				else {
+					//success
+					evt.emit("project_do_delete", data);
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalide query";
+			
+			evt.emit("project_do_delete", data);
+		}		
+/*
+		rimraf(g_env.path+query.path, function(err) {
+		evt.emit("project_do_delete", err);			
+		});
+*/
+		
 	},
 	
 	get_list: function (evt) {
