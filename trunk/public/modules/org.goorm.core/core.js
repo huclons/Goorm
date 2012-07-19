@@ -126,6 +126,8 @@ org.goorm.core = function() {
 
 	this.server_theme = null;
 	this.server_language = null;
+	
+	this.plugins = [];
 };
 
 org.goorm.core.prototype = {
@@ -140,16 +142,18 @@ org.goorm.core.prototype = {
 		$(this).bind("layout_loaded", function () {
 			console.log("layout Loaded");
 
-			this.module.plugin_manager.get_all_plugins();
-			this.module.plugin_manager.load_all_plugins(0);
+			this.module.plugin_manager.get();
 		});	
 		
-		$(this).bind("preference_loading_complete", function () {
+		$(this).bind("preference_load_complete", function () {
 			console.log("preference Loading Complete");
 		});
 		
 		$(this).bind("plugin_loaded", function () {
 			console.log("plugin Loaded");
+			
+			this.module.plugin_manager.load(0);
+			
 			//Preference
 			//this.dialogPreference = new org.goorm.core.preference();
 			//this.dialogPreference.init();
@@ -157,20 +161,19 @@ org.goorm.core.prototype = {
 			this.main();
 		});
 		
-		this.loading_complete_flag = false;
+		this.load_complete_flag = false;
+		
 		//Loading Animation
 		$(this).bind("goorm_loading", function () {
-			core.module.plugin_manager.list.length = 0;
-			
-			if(self.loading_count < Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)) {
+			if(self.loading_count < Object.keys(core.dialog).length - 5 + parseInt(core.module.plugin_manager.list.length)) {
 				self.loading_count++;
-				$("#goorm_loading_status_bar").width($("#goorm_loading_status_bar").width() + 636 / (Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)));
+				$("#goorm_loading_status_bar").width($("#goorm_loading_status_bar").width() + 636 / (Object.keys(core.dialog).length - 5 + parseInt(core.module.plugin_manager.list.length)));
 			}
 			else {
-				if(!self.loading_complete_flag){
+				if(!self.load_complete_flag){
 					console.log("complete: " + self.loading_count);
 					$(self).trigger("goorm_load_complete");
-					self.loading_complete_flag = true;
+					self.load_complete_flag = true;
 				}
 			}
 		});
@@ -268,8 +271,6 @@ org.goorm.core.prototype = {
 		
 		this.module.layout = new org.goorm.core.layout();
 		this.module.layout.init(container);
-
-		console.log("!");
 	},
 	
 	main: function() {
@@ -419,7 +420,7 @@ org.goorm.core.prototype = {
 	start: function() {
 		$("#goorm_dialog_container").append("<div id='loading_panel_container'></div>");
 		$("#goorm_dialog_container").append("<div id='loading_background'></div>");
-		$("#loading_panel_container").append("<div id='main_loading_image' style='background-image:url(images/loading.png); width:640px; height:480px; position:relative;'><div id='goorm_loading_status_bar' style='left:2px; top:414px; position:absolute; width:28px; height:10px; background-color:#000; filter:alpha(opacity=50); opacity:0.5;'></div></div>");
+		$("#loading_panel_container").append("<div id='main_loading_image' style='background-image:url(images/loading.png); width:640px; height:480px; position:relative;'><div id='goorm_loading_status_bar' style='left:2px; top:414px; position:absolute; width:7px; height:10px; background-color:#000; filter:alpha(opacity=50); opacity:0.5;'></div></div>");
 		$("#loading_panel_container").append("<div style='top:10px; left:10px; width:620px; position:absolute; text-align:left; filter:alpha(opacity=50); opacity:0.5;'><font style='font-size:11px; color:#000;'>Developer : Sung-tae Ryu, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park, Noori Kim, Byuongwoong Ahn, Eungwi Jo.</font></div>");
 		$("#loading_panel_container").append("<div id='loading_message' style='top:345px; left:215px; position:absolute; text-align:left; font-size:10px; color:#fff;'></div>");
 

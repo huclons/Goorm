@@ -20,7 +20,7 @@ goorm.configure(function(){
   goorm.use(express.methodOverride());
   goorm.use(goorm.router);
   goorm.use(express.static(__dirname + '/public'));
-  goorm.use(express.static(__dirname + '/plugins'));  
+  goorm.use(express.static(__dirname + '/plugins'));
 });
 
 goorm.configure('development', function(){

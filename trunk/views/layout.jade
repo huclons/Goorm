@@ -303,9 +303,9 @@ html
 				var first_name="<?=$first_name?>";
 				var last_name="<?=$last_name?>";
 			
-				console.log("initialized!");
+				//console.log("initialized!");
 				$(core).bind("goorm_load_complete", function () {
-					console.log("goorm Load Complete");
+					console.log("goormIDE Load Complete");
 					core.email = email;
 					core.user.first_name = first_name;
 					core.user.last_name = last_name;

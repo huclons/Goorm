@@ -15,10 +15,10 @@ org.goorm.plugin.manager = function () {
 org.goorm.plugin.manager.prototype = {
 	init: function () {
 		this.plugins = new Object();
-		this.list = $.makeArray();
+		this.list = [];
 	},
 	
-	get_all_plugins: function () {
+	get: function () {
 		var self = this;
 		
 		var url = "plugin/get_list";
@@ -44,21 +44,18 @@ org.goorm.plugin.manager.prototype = {
 				
 				//statusbar.stop();
 				
-				//$(core).trigger("plugin_loaded");
+				$(core).trigger("plugin_loaded");
 				
 				//$(core).trigger("goorm_loading");
 			}
 		});
 		
-		$(core).trigger("plugin_loaded");
+		//$(core).trigger("plugin_loaded");
 	},
 	
-	load_all_plugins: function (index) {
+	load: function (index) {
 		var self = this;
 		
-		//for refactoring
-		this.list = [];
-
 		if (index == this.list.length && this.list.length != 0) {
 		
 			$("#toolboxSelectBoxDummy").prepend("<option value='all'>ALL</option>");
@@ -94,32 +91,30 @@ org.goorm.plugin.manager.prototype = {
 			return false;
 		}
 		else if(this.list.length != 0){
-			if (index==0) {
+			if (index == 0) {
 				$("#toolbox").empty();
 				$("#toolbox").prepend("<div id='toolbox_selector' style='height:22px; background-color:#eee; border-bottom:1px solid #ddd; padding:5px; font-size:10px;'><div style='float:left; padding-top:4px; padding-right:4px; font-weight:bold;'>Tool</div></div>");
 				$("#toolbox_selector").append("<select id='toolboxSelectBoxDummy' name='toolboxSelectBoxDummy' style='width:100%;'></select>");
 			}
 			
-			var plugin_name = this.list[index].plugin_name;
+			var plugin_name = this.list[index].name;
 
 			if (plugin_name != undefined) {	
-				
 				$.getScript('/' + plugin_name + '/plug.js', function () {
 					//Plugin initialization
 					eval("self.plugins['"+plugin_name+"'] = new " + plugin_name + "();");
 					self.plugins[plugin_name].init();
-		
+
 					index++;
-					
-					self.load_all_plugins(index);
+					self.load(index);
 
 					$(core).trigger("goorm_loading");
 				});	
 			}
 		}
-		else {
-			$(core).trigger("goorm_loading");
-		}
+		// else {
+			// $(core).trigger("goorm_loading");
+		// }
 	},
 
 	new_project: function (project_name, project_author, project_type, project_detailed_type, project_path, postdata){
