@@ -31,16 +31,17 @@ org.goorm.core.project._delete.prototype = {
 			$.get("project/delete", postdata, function (data) {
 				var received_data = data;
 				
-				if(received_data.errCode==0) {
+				if(received_data.err_code==0) {
 					if ( postdata.project_path == core.status.current_project_path ) {
 						core.status.current_project_path = "";
 						core.status.current_project_name = "";
 						core.status.current_project_type = "";
+						core.dialog.open_project.open("","","");
 					}
 				}
 				else {
 					//alert.show(core.module.localization.msg["alertError"] + received_data.message);
-					allert.show("Can not delete project");
+					alert.show("Can not delete project");
 				}
 				
 				core.module.layout.project_explorer.refresh();

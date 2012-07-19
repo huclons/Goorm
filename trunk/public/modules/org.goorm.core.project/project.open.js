@@ -79,6 +79,13 @@ org.goorm.core.project.open.prototype = {
 		core.status.current_project_name = current_project_name;
 		core.status.current_project_type = current_project_type;
 
+		var current_project = {};
+		current_project.current_project_path = current_project_path;
+		current_project.current_project_name = current_project_name;
+		current_project.current_project_type = current_project_type;
+
+		localStorage["current_project"] = JSON.stringify(current_project);
+
 		core.dialog.project_property.refresh_toolbox();
 		core.module.layout.project_explorer.refresh();
 /*

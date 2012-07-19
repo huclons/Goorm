@@ -201,9 +201,7 @@ org.goorm.core.project.explorer.prototype = {
 			self.current_project.current_project_path =  self.project_data[project_idx].name;
 			self.current_project.current_project_name = self.project_data[project_idx].contents.name;
 			self.current_project.current_projectType = self.project_data[project_idx].contents.type;
-			localStorage["current_project"] = JSON.stringify(self.current_project);
-			core.dialog.open_project.open(self.project_data[project_idx].name, self.project_data[project_idx].contents.name, self.project_data[project_idx].contents.type);
-		
+			core.dialog.open_project.open(self.current_project.current_project_path, self.current_project.current_project_name, self.current_project.current_projectType);
 		}
 		else {
 			core.current_project_name = "";
@@ -212,9 +210,7 @@ org.goorm.core.project.explorer.prototype = {
 			self.current_project.current_project_path = "";
 			self.current_project.current_project_name = "";
 			self.current_project.current_projectType = "";
-			localStorage["current_project"] = JSON.stringify(self.current_project);
-
-			self.refresh();
+			core.dialog.open_project.open(self.current_project.current_project_path, self.current_project.current_project_name, self.current_project.current_projectType);
 		}
 		
 	},
