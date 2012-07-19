@@ -93,7 +93,14 @@ exports.plugin = function(req, res){
 };
 
 exports.plugin.get_list = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	
+	evt.on("plugin_get_list", function (data) {
+		console.log(data);
+		res.json(data);
+	});
+
+	g_plugin.get_list(evt);
 };
 
 /*

@@ -131,7 +131,7 @@ org.goorm.core = function() {
 org.goorm.core.prototype = {
 	init: function(container) {
 		
-		//this.start();
+		this.start();
 		
 		var self = this;
 		this.filetypes = $.makeArray();
@@ -164,7 +164,7 @@ org.goorm.core.prototype = {
 			
 			if(self.loading_count < Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)) {
 				self.loading_count++;
-				$("#goorm_loading_status_bar").width($("#goorm_loading_status_bar").width() + 450 / (37 + core.module.plugin_manager.list.length));
+				$("#goorm_loading_status_bar").width($("#goorm_loading_status_bar").width() + 636 / (Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)));
 			}
 			else {
 				if(!self.loading_complete_flag){
@@ -419,8 +419,8 @@ org.goorm.core.prototype = {
 	start: function() {
 		$("#goorm_dialog_container").append("<div id='loading_panel_container'></div>");
 		$("#goorm_dialog_container").append("<div id='loading_background'></div>");
-		$("#loading_panel_container").append("<div id='main_loading_image' style='background-image:url(images/loading.png); width:660px; height:400px; position:relative;'><div id='goorm_loading_status_bar' style='left:170px; top:340px; position:absolute; width:0px; height:30px; background-color:#eee;'></div></div>");
-		$("#loading_panel_container").append("<div style='top:10px; left:50px; width:530px; position:absolute; text-align:left;'><font style='font-size:11px; color:#FFF;'>Developer : Sung-tae Ryu, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park, Noori Kim, Byuongwoong Ahn, Eungwi Jo.</font></div>");
+		$("#loading_panel_container").append("<div id='main_loading_image' style='background-image:url(images/loading.png); width:640px; height:480px; position:relative;'><div id='goorm_loading_status_bar' style='left:2px; top:414px; position:absolute; width:28px; height:10px; background-color:#000; filter:alpha(opacity=50); opacity:0.5;'></div></div>");
+		$("#loading_panel_container").append("<div style='top:10px; left:10px; width:620px; position:absolute; text-align:left; filter:alpha(opacity=50); opacity:0.5;'><font style='font-size:11px; color:#000;'>Developer : Sung-tae Ryu, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park, Noori Kim, Byuongwoong Ahn, Eungwi Jo.</font></div>");
 		$("#loading_panel_container").append("<div id='loading_message' style='top:345px; left:215px; position:absolute; text-align:left; font-size:10px; color:#fff;'></div>");
 
 
