@@ -104,18 +104,16 @@ org.goorm.plugin.manager.prototype = {
 
 			if (plugin_name != undefined) {	
 				
-				$.getScript('plugins/' + plugin_name + '/plug.js', function () {
-										
-						//Plugin initialization
-						eval("self.plugins['"+plugin_name+"'] = new " + plugin_name + "();");
-						self.plugins[plugin_name].init();
+				$.getScript('/' + plugin_name + '/plug.js', function () {
+					//Plugin initialization
+					eval("self.plugins['"+plugin_name+"'] = new " + plugin_name + "();");
+					self.plugins[plugin_name].init();
 		
-						index++;
-						
-						self.load_all_plugins(index);
-
-						$(core).trigger("goorm_loading");
+					index++;
 					
+					self.load_all_plugins(index);
+
+					$(core).trigger("goorm_loading");
 				});	
 			}
 		}
@@ -124,13 +122,13 @@ org.goorm.plugin.manager.prototype = {
 		}
 	},
 
-	new_project: function (project_name, project_author, projectType, projectDetailedType, project_path, postdata){
-		if(projectType == "goorm") {
+	new_project: function (project_name, project_author, project_type, project_detailed_type, project_path, postdata){
+		if(project_type == "goorm") {
 		
 		}
 		else {
-			if(eval("typeof this.plugins['org.goorm.plugin."+projectType+"'].new_project") == "function") {				
-				eval("this.plugins['org.goorm.plugin."+projectType+"'].new_project(project_name, project_author, projectType, projectDetailedType, project_path, postdata)");
+			if(eval("typeof this.plugins['org.goorm.plugin."+project_type+"'].new_project") == "function") {				
+				eval("this.plugins['org.goorm.plugin."+project_type+"'].new_project(project_name, project_author, project_type, project_detailed_type, project_path, postdata)");
 				core.dialog.project_property.set_project_information();
 			}
 		}

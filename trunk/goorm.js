@@ -9,6 +9,7 @@ var express = require('express')
 
 var goorm = module.exports = express.createServer();
 var g_terminal = require("./modules/org.goorm.core.terminal/terminal");
+var g_utility = require("./modules/org.goorm.core.utility/utility");
 
 // Configuration
 
@@ -19,6 +20,7 @@ goorm.configure(function(){
   goorm.use(express.methodOverride());
   goorm.use(goorm.router);
   goorm.use(express.static(__dirname + '/public'));
+  goorm.use(express.static(__dirname + '/plugins'));  
 });
 
 goorm.configure('development', function(){
@@ -30,7 +32,6 @@ goorm.configure('production', function(){
 });
 
 // Routes
-
 goorm.get('/', routes.index);
 
 //for project
