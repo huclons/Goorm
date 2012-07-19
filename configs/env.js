@@ -1,3 +1,3 @@
 module.exports = {
-	path:"/Users/nrkim87/Work/goorm/" 
+	path:"/Users/nrkim87/Work/goorm/"
 };
