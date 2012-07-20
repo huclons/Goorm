@@ -13,7 +13,7 @@ module.exports = {
 		data.message = "process done";
 
 		if ( query.project_type!=null && query.project_detailed_type !=null && query.project_author!=null && query.project_name!=null && query.project_about!=null && query.use_collaboration ) {
-			fs.readdir(__dirname+'workspace/', function(err, files) {
+			fs.readdir(__path+'workspace/', function(err, files) {
 				if (err!=null) {
 					data.err_code = 10;
 					data.message = "Server can not response";
@@ -29,7 +29,7 @@ module.exports = {
 						evt.emit("project_do_new", data);
 					}
 					else {
-						fs.mkdir(__dirname+'workspace/'+project_dir, '0777', function(err) {
+						fs.mkdir(__path+'/workspace/'+project_dir, '0777', function(err) {
 							if (err!=null) {
 								data.err_code = 30;
 								data.message = "Cannot make directory";
@@ -42,7 +42,7 @@ module.exports = {
 							
 								var file_contents = '{"type": "'+query.project_type+'", "detailedtype": "'+query.project_detailed_type+'", "author": "'+query.project_author+'", "name": "'+query.project_name+'", "about": "'+query.project_about+'", "date": "'+date_string+'", "collaboration": "'+query.use_collaboration+'"}';
 
-								fs.writeFile(__dirname+'workspace/'+project_dir+'/project.json', file_contents, function(err) {
+								fs.writeFile(__path+'workspace/'+project_dir+'/project.json', file_contents, function(err) {
 									if (err!=null) {
 										data.err_code = 40;
 										data.message = "Can not make project file";
@@ -79,8 +79,8 @@ module.exports = {
 		console.log(query);
 		
 		if (query.project_path != null) {
-			rimraf(__dirname+"workspace/"+query.project_path, function(err) {
-				console.log(__dirname+query.project_path);
+			rimraf(__path+"workspace/"+query.project_path, function(err) {
+				console.log(__path+query.project_path);
 				console.log(err);
 				if (err!=null) {
 					data.err_code = 20;
@@ -101,7 +101,7 @@ module.exports = {
 			evt.emit("project_do_delete", data);
 		}		
 /*
-		rimraf(__dirname+query.path, function(err) {
+		rimraf(__path+query.path, function(err) {
 		evt.emit("project_do_delete", err);			
 		});
 */
@@ -117,12 +117,12 @@ module.exports = {
 			followLinks: false
 		};
 				
-		walker = walk.walk(__dirname+"workspace", options);
+		walker = walk.walk(__path+"workspace", options);
 		
 		walker.on("directories", function (root, dirStatsArray, next) {
 
 			var count = dirStatsArray.length;
-			if (root==__dirname+"workspace" ) {
+			if (root==__path+"workspace" ) {
 				var dir_count = 0;
 
 				var evt_dir = new EventEmitter();
@@ -151,7 +151,7 @@ module.exports = {
 		var project = {};
 		project.name = dirStatsArray.name;
 
-		fs.readFile(__dirname+"workspace/"+project.name+"/project.json", 'utf-8', function (err, data) {
+		fs.readFile(__path+"workspace/"+project.name+"/project.json", 'utf-8', function (err, data) {
 			if (err==null) {
 				project.contents = JSON.parse(data);
 				console.log(project.contents.type);
