@@ -16,7 +16,7 @@ module.exports = {
 				
 		var nodes = [];
 		
-		root_dir = path.replace(__dirname + "workspace/", "") + "/";
+		root_dir = path.replace(__path + "workspace/", "") + "/";
 		
 		evt_dir.on("got_dir_nodes_for_get_nodes", function (dirs) {
 			var options = {
@@ -28,7 +28,7 @@ module.exports = {
 			walker.on("files", function (root, file_stats, next) {
 				for (var i=0; i < file_stats.length; i++) {
 					var node = {};
-					node.root = root.replace(__dirname + "workspace/", "") + "/";
+					node.root = root.replace(__path + "workspace/", "") + "/";
 					node.filename = file_stats[i].name;
 					node.parent_label = node.root;
 					node.cls = "file";
@@ -77,7 +77,7 @@ module.exports = {
 		walker.on("directories", function (root, dir_stats_array, next) {
 			for (var i=0; i < dir_stats_array.length; i++) {
 				var dir = {};
-				dir.root = root.replace(__dirname + "workspace/", "") + "/";
+				dir.root = root.replace(__path + "workspace/", "") + "/";
 				dir.name = dir_stats_array[i].name;
 				dir.parent_label = dir.root;
 				dir.cls = "dir";
