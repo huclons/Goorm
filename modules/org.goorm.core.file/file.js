@@ -23,7 +23,7 @@ module.exports = {
 				followLinks: false
 			};
 
-			walker = walk.walk(path, options);
+			var walker = walk.walk(path, options);
 			
 			walker.on("files", function (root, file_stats, next) {
 				for (var i=0; i < file_stats.length; i++) {
@@ -72,7 +72,7 @@ module.exports = {
 		
 		var dirs = [];
 		
-		walker = walk.walk(path, options);
+		var walker = walk.walk(path, options);
 		
 		walker.on("directories", function (root, dir_stats_array, next) {
 			for (var i=0; i < dir_stats_array.length; i++) {

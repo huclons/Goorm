@@ -11,10 +11,10 @@ module.exports = {
 			followLinks: false
 		};
 				
-		walker = walk.walk(g_env.path + "plugins", options);
+		walker = walk.walk(__path + "plugins", options);
 		
 		walker.on("directories", function (root, dirStatsArray, next) {
-			if (root == g_env.path + "plugins" ) {
+			if (root == __path + "plugins" ) {
 				for (var i=0; i<dirStatsArray.length; i++) {
 					if (dirStatsArray[i].name != '.svn') {
 						plugins.push({name:dirStatsArray[i].name});
