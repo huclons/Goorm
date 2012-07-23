@@ -139,6 +139,7 @@ org.goorm.core.file._new.prototype = {
 		
 		if(context) {
 			var dir =  core.status.selected_file;
+			conso
 			dir = dir.replace(/\.\.\/\.\.\/project\/\//, "");
 			dir = dir.replace(/\.\.\/\.\.\/project\//, "");
 			dir = "/" + dir;
@@ -174,7 +175,7 @@ org.goorm.core.file._new.prototype = {
 	add_directories: function(postdata) {		
 		var self = this;
 
-		$.post("file/get_nodes", postdata, function (data) {
+		$.get("file/get_nodes", postdata, function (data) {
 
 			var sort_project_treeview = function (sorting_data) { 				
 				s.quick_sort(sorting_data);
@@ -289,7 +290,7 @@ org.goorm.core.file._new.prototype = {
 	
 		var self = this;
 		
-		$.post("file/get_nodes", postdata, function (data) {
+		$.get("file/get_nodes", postdata, function (data) {
 			
 			var sort_project_treeview = function (sorting_data) { 				
 				s.quick_sort(sorting_data);
