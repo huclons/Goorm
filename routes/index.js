@@ -114,6 +114,22 @@ exports.file.do_new = function(req, res){
 	res.send(null);
 };
 
+exports.file.do_new_folder = function(req, res){
+	var evt = new EventEmitter();
+	
+	evt.on("file_do_new_folder", function (data) {
+		res.json(data);
+	});
+
+	g_file.do_new_folder(req.query, evt);
+};
+
+exports.file.do_new_untitled_text_file = function(req, res){
+	var evt = new EventEmitter();
+	// not yet
+	res.json();
+};
+
 exports.file.do_load = function(req, res){
 	res.send(null);
 };
@@ -130,7 +146,7 @@ exports.file.do_delete = function(req, res){
 exports.file.get_contents = function(req, res){
 	var path = req.query.path;
 
-	fs.readFile(__path + 'public/' + path, "utf8", function(err, data) {
+	fs.readFile(__path + 'workspace/' + path, "utf8", function(err, data) {
 		res.json(data);
 	});
 };

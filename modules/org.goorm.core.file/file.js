@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 var walk = require('walk');
 
 var EventEmitter = require("events").EventEmitter;
@@ -7,6 +9,56 @@ var root_dir = "";
 module.exports = {
 	init: function () {
 	
+	},
+	
+	do_new: function (path, evt) {
+		
+	},
+	
+	do_new_folder: function (query, evt) {
+		var self = this;
+		
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+
+		if ( query.current_path!=null && query.folder_name!=null ) {
+			console.log(__path+'workspace/'+query.current_path);
+			fs.readdir(__path+'workspace/'+query.current_path, function(err, files) {
+				if (err!=null) {
+					data.err_code = 10;
+					data.message = "Server can not response";
+
+					evt.emit("file_do_new_folder", data);
+				}
+				else {
+					if (files.hasObject(query.folder_name)) {
+						data.err_code = 20;
+						data.message = "Exist folder";
+
+						evt.emit("file_do_new_folder", data);
+					}
+					else {
+						fs.mkdir(__path+'workspace/'+query.current_path+'/'+query.folder_name, '0777', function(err) {
+							if (err!=null) {
+								data.err_code = 30;
+								data.message = "Cannot make directory";
+		
+								evt.emit("file_do_new_folder", data);							}
+							else {
+								evt.emit("file_do_new_folder", data);
+							}
+						});
+					}					
+				}
+			});
+			// make?
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalid query";
+			evt.emit("file_do_new_folder", data);
+		}
 	},
 		
 	get_nodes: function (path, evt) {

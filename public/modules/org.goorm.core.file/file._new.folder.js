@@ -17,17 +17,18 @@ org.goorm.core.file._new.folder.prototype = {
 		
 		var handle_ok = function() {
 			if($("#folder_new_input_folder_name").attr("value")=="") {
-				alert.show(core.module.localization.msg["alertFolderNameEmpty"]);
+				//alert.show(core.module.localization.msg["alertFolderNameEmpty"]);
+				alert.show("Folder Name is empty.");
 				return false;
 			}
 			else {
 				var postdata = {
-					current_project_path: $("#folder_new_input_location_path").val(),
-					input_folder_name: $("#folder_new_input_folder_name").val(),
+					current_path: $("#folder_new_input_location_path").val(),
+					folder_name: $("#folder_new_input_folder_name").val(),
 				};
 
-				$.post("file/new", postdata, function (data) {
-					var received_data = eval("("+data+")");
+				$.get("file/new_folder", postdata, function (data) {
+					var received_data = data;
 					core.module.layout.project_explorer.refresh();
 				});
 			}
@@ -94,7 +95,7 @@ org.goorm.core.file._new.folder.prototype = {
 	add_directories: function(postdata) {		
 		var self = this;
 
-		$.post("file/get_nodes", postdata, function (data) {
+		$.get("file/get_nodes", postdata, function (data) {
 
 			var sort_project_treeview = function (sorting_data) { 				
 				s.quick_sort(sorting_data);
