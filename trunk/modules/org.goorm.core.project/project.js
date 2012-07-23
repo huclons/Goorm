@@ -76,12 +76,8 @@ module.exports = {
 		data.err_code = 0;
 		data.message = "process done";
 		
-		console.log(query);
-		
 		if (query.project_path != null) {
 			rimraf(__path+"workspace/"+query.project_path, function(err) {
-				console.log(__path+query.project_path);
-				console.log(err);
 				if (err!=null) {
 					data.err_code = 20;
 					data.message = "Can not delete project";
@@ -117,8 +113,8 @@ module.exports = {
 			followLinks: false
 		};
 				
-		walker = walk.walk(__path+"workspace", options);
-		
+		var walker = walk.walk(__path+"workspace", options);
+
 		walker.on("directories", function (root, dirStatsArray, next) {
 
 			var count = dirStatsArray.length;
@@ -154,7 +150,7 @@ module.exports = {
 		fs.readFile(__path+"workspace/"+project.name+"/project.json", 'utf-8', function (err, data) {
 			if (err==null) {
 				project.contents = JSON.parse(data);
-				console.log(project.contents.type);
+
 				projects.push(project);
 			}
 			evt_dir.emit("get_list");

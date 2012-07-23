@@ -11,7 +11,7 @@ var goorm = module.exports = express.createServer();
 var g_terminal = require("./modules/org.goorm.core.terminal/terminal");
 var g_utility = require("./modules/org.goorm.core.utility/utility");
 
-global.__path = __dirname;
+global.__path = __dirname+"/";
 
 
 // Configuration

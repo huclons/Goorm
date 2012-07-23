@@ -1,6 +1,6 @@
 var fs = require("fs");
 
-var g_env = require("../configs/env.js");
+//var g_env = require("../configs/env.js");
 
 var g_file = require("../modules/org.goorm.core.file/file");
 var g_preference = require("../modules/org.goorm.core.preference/preference");
@@ -130,7 +130,7 @@ exports.file.do_delete = function(req, res){
 exports.file.get_contents = function(req, res){
 	var path = req.query.path;
 
-	fs.readFile(g_env.path + 'public/' + path, "utf8", function(err, data) {
+	fs.readFile(__path + 'public/' + path, "utf8", function(err, data) {
 		res.json(data);
 	});
 };
@@ -159,7 +159,7 @@ exports.file.get_nodes = function(req, res){
 		}
 	});
 	
-	g_file.get_nodes(g_env.path + 'workspace/' + path, evt);
+	g_file.get_nodes(__path + 'workspace/' + path, evt);
 };
 
 exports.file.get_dir_nodes = function(req, res){
@@ -179,7 +179,7 @@ exports.file.get_dir_nodes = function(req, res){
 		}
 	});
 	
-	g_file.get_dir_nodes(g_env.path + 'workspace/' + path, evt);
+	g_file.get_dir_nodes(__path + 'workspace/' + path, evt);
 };
 
 exports.file.do_import = function(req, res){
