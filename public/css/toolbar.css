@@ -28,10 +28,9 @@ version: 3.0.0
 }
 
 .main_toolbar .toolbar_button:hover {
-	background-color: #fff;
-	border: 1px solid #ccc;
-	border-top: 1px solid #eee;
-	border-left: 1px solid #eee;
+	border: 1px solid #999;
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-top: 4px;
@@ -40,10 +39,9 @@ version: 3.0.0
 }
 
 .main_toolbar .toolbar_button:active {
-	background-color: #fff;
-	border: 1px solid #ccc;
-	border-top: 1px solid #eee;
-	border-left: 1px solid #eee;
+	border: 1px solid #999;
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-top: 4px;
@@ -52,10 +50,10 @@ version: 3.0.0
 }
 
 .main_toolbar .toolbar_buttonPressed {
-	background-color: #ccc;
-	border: 1px solid #fff;
-	border-top: 1px solid #999;
-	border-left: 1px solid #999;
+	background-color: #888;
+	border: 1px solid #ccc;
+	border-top: 1px solid #777;
+	border-left: 1px solid #777;
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-top: 5px;

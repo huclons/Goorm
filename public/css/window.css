@@ -6,14 +6,21 @@ version: 3.0.0
 */
 
 #workspace_window_list {
-	background-color: #999;
+	background-image: -o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image: -webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	
+	border-bottom: 1px solid #666;
 	z-index:4;
 }
 
 #workspace_window_list .yui-nav {
-	height: 20px;
-	border-bottom: 1px solid #777;
+	height: 24px;
 	overflow: hidden;
+	border: 0px;
 }
 
 #workspace_window_list .yui-navset .yui-nav a em, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em {
@@ -79,12 +86,16 @@ version: 3.0.0
 	margin-right:8px;
 	padding-right:5px;
 	padding-left:5px;
-	background-color: #CCC;
+	background-color: #999;
 	padding-top:0px;
 	height:16px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+	border-top: 1px solid #888;
+	border-left: 1px solid #888;
+	border-bottom: 1px solid #eee;
+	border-right: 1px solid #eee;
 }
 
 .tab_close_button {
@@ -101,7 +112,7 @@ version: 3.0.0
 	
 }
 #goorm_inner_layout_center #workspace{
-	background-color:#BBB;
+	background-color:#777;
 }
 
 .tab_close_button:hover {
