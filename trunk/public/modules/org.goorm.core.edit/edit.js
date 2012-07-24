@@ -239,7 +239,7 @@ org.goorm.core.edit.prototype = {
 		var self = this;
 		
 		var url = "file/get_contents";
-		
+				
 		if (filetype == "url"){
 			filename = "";
 			url = "file/get_url_contents";
@@ -250,6 +250,10 @@ org.goorm.core.edit.prototype = {
 		this.filepath = filepath;
 		this.filename = filename;
 		this.filetype = filetype;
+
+		console.log(filepath);
+		console.log(filename);
+		console.log(filetype);
 		
 		var i = 0;
 		this.interval = window.setInterval(function () { if(i<100) { statusbar.progressbar.set('value', i+=10); } else { window.clearInterval(self.interval); } }, 100);
@@ -258,8 +262,8 @@ org.goorm.core.edit.prototype = {
 		
 		$.ajax({
 			url: url,			
-			type: "POST",
-			data: "path="+path,
+			type: "get",
+			data: "path=workspace/"+path,
 			success: function(data) {
 				self.editor.setValue(data);
 				

@@ -28,8 +28,12 @@ org.goorm.core.file._new.folder.prototype = {
 				};
 
 				$.get("file/new_folder", postdata, function (data) {
-					var received_data = data;
-					core.module.layout.project_explorer.refresh();
+					if (data.err_code==0) {
+						core.module.layout.project_explorer.refresh();
+					}
+					else {
+						alert.show(data.message);
+					}
 				});
 			}
 			

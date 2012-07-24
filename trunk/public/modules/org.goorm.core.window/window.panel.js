@@ -31,6 +31,13 @@ org.goorm.core.window.panel = function () {
 
 org.goorm.core.window.panel.prototype = {
 	init: function(container, title, workspace_container, filepath, filename, filetype, editor) {
+		console.log(container);
+		console.log(title);
+		console.log(workspace_container);
+		console.log(filepath);
+		console.log(filename);
+		console.log(filetype);
+		console.log(editor);
 		
 		var self = this;
 		
@@ -86,9 +93,10 @@ org.goorm.core.window.panel.prototype = {
 		$("#" + this.container).width(this.width);
 		$("#" + this.container).height(this.height);
 		
-		
+		console.log("init?");
 		// Due to file type, create proper tool.
 		if (editor == "Editor") {
+			console.log("Editor");
 			this.type = "Editor";
 			
 			var mode = core.filetypes[this.inArray(this.filetype)].mode;

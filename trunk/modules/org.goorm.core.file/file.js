@@ -52,12 +52,64 @@ module.exports = {
 					}					
 				}
 			});
-			// make?
 		}
 		else {
 			data.err_code = 10;
 			data.message = "Invalid query";
 			evt.emit("file_do_new_folder", data);
+		}
+	},
+	
+	do_new_untitled_text_file: function (query, evt) {
+		var self = this;
+		
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+		
+		if ( query.current_path!=null ) {
+			fs.readdir(__path+'workspace/'+query.current_path, function(err, files) {
+				if (err!=null) {
+					data.err_code = 10;
+					data.message = "Server can not response";
+
+					evt.emit("file_do_new_untitled_text_file", data);
+				}
+				else {
+					var temp_file_name = "untitled";
+					var i=1;
+					
+					while(1) {
+						if (files.hasObject(temp_file_name+i+".txt")) {
+						}
+						else {
+							break;
+						}
+						i++;
+					}
+					
+					console.log(temp_file_name);
+					
+					fs.writeFile(__path+'workspace/'+query.current_path+'/'+temp_file_name+i+'.txt', "", function(err) {
+						if (err!=null) {
+							data.err_code = 40;
+							data.message = "Can not make project file";
+							
+							evt.emit("file_do_new_untitled_text_file", data);
+						}
+						else {
+							//data.
+
+							evt.emit("file_do_new_untitled_text_file", data);
+						}
+					});
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalid query";
+			evt.emit("file_do_new_untitled_text_file", data);
 		}
 	},
 		

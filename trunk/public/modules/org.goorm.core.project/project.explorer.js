@@ -59,6 +59,12 @@ org.goorm.core.project.explorer.prototype = {
 						var filetype = nodedata.node.data.filetype;
 						var filepath = nodedata.node.data.parent_label;
 						
+						console.log(nodedata.node.data);
+						console.log(nodedata.node.type);
+						//console.log(filename);
+						//console.log(filetype);
+						//console.log(parent_label);
+						
 						core.module.layout.workspace.window_manager.open(filepath, filename, filetype);
 					}
 					else if(nodedata.node.data.cls == "folder") {
