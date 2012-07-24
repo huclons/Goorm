@@ -15,7 +15,7 @@ A:active  {color:#333333;text-decoration:none;}
 A:hover   {color:#2d88dc;text-decoration:none;}
 
 body {
-	font-family: Tahoma, Arial, 굴림체, 굴림;
+	font-family: Verdana, Arial, 굴림체, 굴림;
 	width:100%;
 	margin:0px;
 	overflow:hidden;
@@ -36,30 +36,32 @@ input {
 }
 
 #goorm_left {
-	border-right: 1px solid #999;
-	border-top: 1px solid #999;
+	border-right: 1px solid #666;
+	/* border-top: 1px solid #999; */
 }
 
 #goorm_inner_layout_right {
-	border-left: 1px solid #999;
-	border-top: 1px solid #999;
-	border-bottom: 1px solid #999;	
+	border-left: 1px solid #666;
+	/*border-top: 1px solid #999;
+	border-bottom: 1px solid #999;*/	
 }
 
 #goorm_inner_layout_center {
+	/*
 	border-left: 1px solid #999;
 	border-right: 1px solid #999;
 	border-top: 1px solid #999;
-	border-bottom: 1px solid #999;	
+	border-bottom: 1px solid #999;
+	*/	
 }
 
 #goorm_inner_layout_bottom {
-	border-left: 1px solid #999;
-	border-top: 1px solid #999;
+	/* border-left: 1px solid #999; */
+	border-top: 1px solid #666;
 }
 
 #goorm_bottom {
-	border-top: 1px solid #999;
+	border-top: 1px solid #666;
 }
 
 #goorm_bottom .device_type {
@@ -301,7 +303,7 @@ YUI MENU STYLE CUSTOMIZATION
 **************************************************************************/
 .yui-skin-sam .yuimenu {
 	font-size: 11px;
-	font-family: Tahoma, Arial, 굴림체, 굴림;
+	font-family: Verdana, Arial, 굴림체, 굴림;
 }
 
 .yui-skin-sam .yui-menu-button button {
@@ -324,7 +326,7 @@ YUI MENU STYLE CUSTOMIZATION
 
 .yui-skin-sam .yuimenubaritem .yuimenubaritemlabel {
 	font-size: 11px;
-	font-family: Tahoma, Arial, 굴림체, 굴림;
+	font-family: Verdana, Arial, 굴림체, 굴림;
 }
 
 .yui-skin-sam .yuimenubaritemlabel {
@@ -333,7 +335,7 @@ YUI MENU STYLE CUSTOMIZATION
 
 .yui-skin-sam .yuimenuitem .yuimenuitemlabel {
 	font-size: 11px;
-	font-family: Tahoma, Arial, 굴림체, 굴림;
+	font-family: Verdana, Arial, 굴림체, 굴림;
 }
 
 #goorm_top .yuimenuitem .yuimenuitemlabel {
@@ -367,8 +369,15 @@ YUI LAYOUT STYLE CUSTOMIZATION
 }
 
 .yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd {
-	border: none;
+	border: 0px;
+	border-bottom: 1px solid #666;
 	
+	background-image: -o-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: -moz-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: -webkit-gradient(linear, left top, left top, color-stop(0.24, rgb(220,220,220)), color-stop(0.62, rgb(170,170,170)));
+	background-image: -webkit-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: -ms-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
 }
 
 .yui-skin-sam .yui-layout .yui-layout-unit-left div.yui-layout-bd {
@@ -460,17 +469,17 @@ YUI LAYOUT STYLE CUSTOMIZATION
 
 .yui-skin-sam .yui-layout .yui-layout-unit-left div.yui-layout-hd .collapse {
 	background: transparent url(../images/org.goorm.core.layout/collapse_left.png) no-repeat 0px 0px;
-	border: 1px dotted #CCC;
+	border: 0px;
 }
 
 .yui-skin-sam .yui-layout .yui-layout-unit-right div.yui-layout-hd .collapse {
 	background: transparent url(../images/org.goorm.core.layout/collapse_right.png) no-repeat 0px 0px;
-	border: 1px dotted #CCC;
+	border: 0px;
 }
 
 .yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-hd .collapse {
 	background: transparent url(../images/org.goorm.core.layout/collapse_down.png) no-repeat 0px 0px;
-	border: 1px dotted #CCC;
+	border: 0px;
 }
 
 .yui-layout .yui-layout-clip .collapse {
@@ -502,13 +511,21 @@ YUI TAB STYLE CUSTOMIZATION
 .yui-skin-sam .yui-navset .yui-nav,  
 .yui-skin-sam .yui-navset .yui-navset-top .yui-nav { /* protect nested tabviews from other orientations */  
     border:solid #ccc; /* color between tab list and content */  
-    border-width:0 0 1px;   
+	border: 0px;
+	border-bottom: 1px solid #666;
     Xposition:relative;   
-    zoom:1;
+    /*zoom:1;*/
 	font-size:11px;   
-	padding-left:2px;
-	padding-right:2px;
-	padding-top:3px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+	
+	background-image: -o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image: -webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
 }
 .yui-skin-sam .yui-navset .yui-content {  
 	background: #ffffff;
@@ -531,33 +548,69 @@ YUI TAB STYLE CUSTOMIZATION
 .yui-skin-sam .yui-navset .yui-navset-top .yui-nav li {
     margin:0; /* space between tabs */
     padding:0; /* gecko: make room for overflow */
-    zoom:1;
-	font-size:10px;
-	font-family: Tahoma, Arial, 굴림체, 굴림;
+    /*zoom:1;*/
+    zoom:0;
+	font-size:11px;
+	font-family: Verdana, Arial, 굴림체, 굴림;
+	padding-top:0px;
+	border:0px;
+	border-right:1px solid #666;
+}
+
+.yui-skin-sam .yui-navset .yui-nav a em, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em {
+	border:0px;
+	padding-top:3px;
+	top:0px;
+	
+	padding-left: 10px;
+	padding-right: 10px;	
 }
 
 .yui-skin-sam .yui-navset .yui-nav a,
 .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
     color:#222;
 	background:none;
-	background-color:#ddd;
+	background-color:#F8F8F8;
+	height:24px;
+	border:0px;
+	
+	background-image: -o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image: -webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);	
 }
 .yui-skin-sam .yui-navset .yui-nav .selected a,   
 .yui-skin-sam .yui-navset .yui-nav .selected a:focus, /* no focus effect for selected */ 
 .yui-skin-sam .yui-navset .yui-nav .selected a:hover { /* no hover effect for selected */  
 	margin: 0; /* space between tabs */
 	background:none;
-	background-color:#fff; /* selected tab background */
-    color:#666;
-	font-size:10px; 
-	font-weight:bold;
-	font-family: Tahoma, Arial, 굴림체, 굴림;
+	/* background-color:#999; /* selected tab background */
+	font-size:11px; 
+	font-family: Verdana, Arial, 굴림체, 굴림;
+	color: #333;
+	
+	background-image: -o-linear-gradient(bottom, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: -moz-linear-gradient(bottom, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: -webkit-gradient(linear, left bottom, left bottom, color-stop(0.1, rgb(220,220,220)), color-stop(0.9, rgb(170,170,170)));
+	background-image: -webkit-linear-gradient(bottom, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: -ms-linear-gradient(bottom, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: linear-gradient(bottom, rgb(220,220,220) 10%, rgb(170,170,170) 90%);	
 }
 
 
 .yui-skin-sam .yui-navset .yui-nav .selected a,  
 .yui-skin-sam .yui-navset .yui-nav .selected a em {  
-    border-color:#ccc; /* selected tab border color */  
+	border: 0px;
+	top:0px;
+    /* border-color:#ccc; /* selected tab border color */
+}
+
+.yui-skin-sam .yui-navset .yui-nav .selected a em {
+	padding-top: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 .yui-skin-sam .yui-navset .yui-nav .selected,

@@ -34,8 +34,8 @@ org.goorm.core.layout.prototype = {
 		this.layout = new YAHOO.widget.Layout({
 			units:
 			[
-				{ position: 'top', height: 59,maxHeight:150, body: container+'_top', scroll: null, zIndex: 2, gutter: '0px 0px 3px 0px' },
-				{ position: 'left', width: 250, body: container+'_left', animate: false, proxy:false, scroll: false, zIndex: 1, resize: true, gutter: '0px 3px 0px 0px', collapse: true, minWidth: 200 },
+				{ position: 'top', height: 62,maxHeight:150, body: container+'_top', scroll: null, zIndex: 2, gutter: '0px 0px 0px 0px' },
+				{ position: 'left', width: 250, body: container+'_left', animate: false, proxy:false, scroll: false, zIndex: 1, resize: true, gutter: '0px 0px 0px 0px', collapse: true, minWidth: 200 },
 				{ position: 'center', body: container+'_center_inner_layout', scroll: false },
 				{ position: 'bottom', height:30, body: container+'_bottom', scroll: false, gutter: '0px 0px 0px 0px' }
 			]
@@ -57,8 +57,8 @@ org.goorm.core.layout.prototype = {
 				parent: self.layout,
 				units:
 				[
-					{ position: 'right', width: 350, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, proxy:false, gutter: '0px 0px 0px 3px', collapse: !ENV_COLLAPSE_RIGHT },
-					{ position: 'bottom', height: 200, body: container+'_inner_layout_bottom', animate: false, proxy:false, scroll: false, resize: true, gutter: '3px 0px 0px 0px', collapse: !ENV_COLLAPSE_BOTTOM },
+					{ position: 'right', width: 350, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, proxy:false, gutter: '0px 0px 0px 0px', collapse: !ENV_COLLAPSE_RIGHT },
+					{ position: 'bottom', height: 200, body: container+'_inner_layout_bottom', animate: false, proxy:false, scroll: false, resize: true, gutter: '0px 0px 0px 0px', collapse: !ENV_COLLAPSE_BOTTOM },
 					{ position: 'center', body: container+'_inner_layout_center', scroll: false }
 				]
 			});
@@ -420,7 +420,7 @@ org.goorm.core.layout.prototype = {
 	},
 	
 	resize_all: function() {
-		var layout_left_height = $(".yui-layout-unit-left").find(".yui-layout-wrap").height() - 26;		
+		var layout_left_height = $(".yui-layout-unit-left").find(".yui-layout-wrap").height() - 22;		
 		$("#goorm_left").find(".yui-content").height(layout_left_height);
 		$("#goorm_left").find("#project_explorer").height(layout_left_height-6);
 		$("#goorm_left").find("#project_treeview").height(layout_left_height-35);
@@ -431,14 +431,14 @@ org.goorm.core.layout.prototype = {
 		$("#goorm_left").find("#project_select_box").find("button").width(project_selector_width-18);
 		
 		
-		var layout_right_height = $(".yui-layout-unit-right").find(".yui-layout-wrap").height() - 29;
+		var layout_right_height = $(".yui-layout-unit-right").find(".yui-layout-wrap").height() - 25;
 		$("#goorm_inner_layout_right").find(".yui-content").height(layout_right_height);
 		$("#goorm_inner_layout_right").find(".chat_message_container").height(layout_right_height - 182);
 		
-		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 26;
+		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 20;
 		$("#goorm_inner_layout_bottom").find(".yui-content").height(layout_bottom_height);
 		
-		var layout_center_height = $(".yui-layout-unit-center").find(".yui-layout-unit-center").find(".yui-layout-wrap").height() - 2;
+		var layout_center_height = $(".yui-layout-unit-center").find(".yui-layout-unit-center").find(".yui-layout-wrap").height();
 		$("#goorm_inner_layout_center").find("#workspace").height(layout_center_height);
 		
 		if (core.module.layout.workspace.window_manager.is_maxmizedd) {
