@@ -178,7 +178,7 @@ org.goorm.core.dialog.wizard.prototype = {
 		$.ajax({
 			url: url,			
 			type: "GET",
-			data: "path="+self.path,
+			data: "path=public/"+self.path,
 			success: function(data) {
 
 				self.panel.setBody(data);

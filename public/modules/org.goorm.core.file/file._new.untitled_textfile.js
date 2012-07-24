@@ -17,14 +17,20 @@ org.goorm.core.file._new.untitled_textfile.prototype = {
 		
 		var handle_ok = function() {
 			var postdata = {
-				current_project_path: $("#text_new_input_location_path").val(),
+				current_path: $("#text_new_input_location_path").val(),
 			};
 
-			$.post("file/new", postdata, function (data) {
-				var received_data = eval("("+data+")");
+			$.get("file/new_untitled_text_file", postdata, function (data) {
+				var received_data = data;
+				
+				if (data.err_code==0) {
+					//core.module.layout.workspace.window_manager.open("../../project/"+$("#text_new_input_location_path").val(), received_data.filename, "txt");
+					core.module.layout.project_explorer.refresh();
+				}
+				else {
+					alert.show(data.message);
+				}
 
-				core.module.layout.workspace.window_manager.open("../../project/"+$("#text_new_input_location_path").val(), received_data.filename, "txt");
-				core.module.layout.project_explorer.refresh();
 			});
 
 			this.hide();
@@ -87,7 +93,7 @@ org.goorm.core.file._new.untitled_textfile.prototype = {
 	add_directories: function(postdata) {		
 		var self = this;
 
-		$.post("file/get_nodes", postdata, function (data) {
+		$.get("file/get_nodes", postdata, function (data) {
 
 			var sort_project_treeview = function (sorting_data) { 				
 				s.quick_sort(sorting_data);

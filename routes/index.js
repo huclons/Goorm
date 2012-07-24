@@ -126,8 +126,13 @@ exports.file.do_new_folder = function(req, res){
 
 exports.file.do_new_untitled_text_file = function(req, res){
 	var evt = new EventEmitter();
-	// not yet
-	res.json();
+
+	evt.on("file_do_new_untitled_text_file", function (data) {
+		res.json(data);
+	});
+
+	g_file.do_new_untitled_text_file(req.query, evt);
+
 };
 
 exports.file.do_load = function(req, res){
@@ -146,7 +151,7 @@ exports.file.do_delete = function(req, res){
 exports.file.get_contents = function(req, res){
 	var path = req.query.path;
 
-	fs.readFile(__path + 'public/' + path, "utf8", function(err, data) {
+	fs.readFile(__path + path, "utf8", function(err, data) {
 		res.json(data);
 	});
 };

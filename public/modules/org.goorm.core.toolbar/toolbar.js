@@ -38,12 +38,12 @@ org.goorm.core.toolbar.prototype = {
 			}
 			localStorage['toolbar.order'] = str;
 			
-			this.add("configs/toolbars/org.goorm.core.file/file.toolbar.html","org.goorm.core.file","goorm_main_toolbar");
-			this.add("configs/toolbars/org.goorm.core.edit/edit.toolbar.html","org.goorm.core.edit","goorm_main_toolbar");
-			this.add("configs/toolbars/org.goorm.core.project/project.toolbar.html","org.goorm.core.project","goorm_main_toolbar");
-			this.add("configs/toolbars/org.goorm.core.window/window.toolbar.html","org.goorm.core.window","goorm_main_toolbar");
-			this.add("configs/toolbars/org.goorm.core.design/design.toolbar.html","org.goorm.core.design","goorm_main_toolbar");
-			this.add("configs/toolbars/org.goorm.core.collaboration/collaboration.toolbar.html","org.goorm.core.collaboration","goorm_main_toolbar");
+			this.add("public/configs/toolbars/org.goorm.core.file/file.toolbar.html","org.goorm.core.file","goorm_main_toolbar");
+			this.add("public/configs/toolbars/org.goorm.core.edit/edit.toolbar.html","org.goorm.core.edit","goorm_main_toolbar");
+			this.add("public/configs/toolbars/org.goorm.core.project/project.toolbar.html","org.goorm.core.project","goorm_main_toolbar");
+			this.add("public/configs/toolbars/org.goorm.core.window/window.toolbar.html","org.goorm.core.window","goorm_main_toolbar");
+			this.add("public/configs/toolbars/org.goorm.core.design/design.toolbar.html","org.goorm.core.design","goorm_main_toolbar");
+			this.add("public/configs/toolbars/org.goorm.core.collaboration/collaboration.toolbar.html","org.goorm.core.collaboration","goorm_main_toolbar");
 		//}
 		
 		$(this).bind("toolbarLoaded", function () {
