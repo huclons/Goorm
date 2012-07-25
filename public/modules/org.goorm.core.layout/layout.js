@@ -18,7 +18,7 @@ org.goorm.core.layout = function () {
 	this.workspace = null;
 	this.startpage = null;
 	this.window_manager = null;
-	this.chat = null;
+	this.communication = null;
 	this.console = null;
 	this.tab_project = null;
 	this.tab_toolbox = null;
@@ -104,7 +104,7 @@ org.goorm.core.layout.prototype = {
 		this.attach_object_explorer(this.inner_right_tabview);
 		
 		//Chat Tab
-		this.attach_chat(this.inner_right_tabview);
+		this.attach_communication(this.inner_right_tabview);
 		
 		//Select first tab
 		this.inner_right_tabview.selectTab(0);		
@@ -350,29 +350,30 @@ org.goorm.core.layout.prototype = {
 	hide_debug: function() {
 	},
 	
-	attach_chat: function(target) {
+	attach_communication: function(target) {
 		//attaching tab element
-		target.addTab(new YAHOO.widget.Tab({ label: "Chat", content: "<div id='chat' class='layout_right_chat_tab'></div>" }));
+		target.addTab(new YAHOO.widget.Tab({ label: "Communication", content: "<div id='communication' class='layout_right_communication_tab'></div>" }));
 
 /*
-		$("#chat").append("<div class='chat_user_container' style='height:100px; border-bottom:1px #CCC solid; padding:5px;'></div>");		
-		$("#chat").append("<div class='chat_message_container' style='height:200px; border-bottom:1px #CCC solid; padding:5px;'></div>");
-		$("#chat").append("<div class='chat_message_input_container' style='height:50px; border-bottom:1px #CCC solid; padding:5px; background-color:#EFEFEF; text-align:center;'><input value='Chatting Message' style='width:90%;' /></div>");
+		$("#communication").append("<div class='communication_user_container' style='height:100px; border-bottom:1px #CCC solid; padding:5px;'></div>");		
+		$("#communication").append("<div class='communication_message_container' style='height:200px; border-bottom:1px #CCC solid; padding:5px;'></div>");
+		$("#communication").append("<div class='communication_message_input_container' style='height:50px; border-bottom:1px #CCC solid; padding:5px; background-color:#EFEFEF; text-align:center;'><input value='Chatting Message' style='width:90%;' /></div>");
 */
-		//$("#chat").append("<iframe src='http://localhost:8001/?room=11' width=99% height=300>");
-		this.chat = new org.goorm.core.collaboration.chat();
-		
+		//$("#communication").append("<iframe src='http://localhost:8001/?room=11' width=99% height=300>");
+		this.communication = new org.goorm.core.collaboration.communication();
+		this.communication.init("communication");
+		this.communication.set_chat_on();
 	},
 	
-	detach_chat: function() {
+	detach_communication: function() {
 	},
 	
-	show_chat: function(project_id) {
-		$(".layout_right_chat_tab").parent("div").attr("id",project_id);
-		this.chat.init(project_id);
+	show_communication: function(project_id) {
+		$(".layout_right_communication_tab").parent("div").attr("id",project_id);
+		this.communication.init(project_id);
 	},
 	
-	hide_chat: function() {
+	hide_communication: function() {
 	},
 	
 	attach_terminal: function(target) {
@@ -433,7 +434,6 @@ org.goorm.core.layout.prototype = {
 		
 		var layout_right_height = $(".yui-layout-unit-right").find(".yui-layout-wrap").height() - 25;
 		$("#goorm_inner_layout_right").find(".yui-content").height(layout_right_height);
-		$("#goorm_inner_layout_right").find(".chat_message_container").height(layout_right_height - 182);
 		
 		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 20;
 		$("#goorm_inner_layout_bottom").find(".yui-content").height(layout_bottom_height);
@@ -441,11 +441,13 @@ org.goorm.core.layout.prototype = {
 		var layout_center_height = $(".yui-layout-unit-center").find(".yui-layout-unit-center").find(".yui-layout-wrap").height();
 		$("#goorm_inner_layout_center").find("#workspace").height(layout_center_height);
 		
-		if (core.module.layout.workspace.window_manager.is_maxmizedd) {
+		if (core.module.layout.workspace.window_manager.is_maximized) {
 			$(document).trigger("maximize_resize");
 		}
 
 		$(".dummyspace").css("z-index", 0);
+		
+		$(core).trigger("layout_resized");
 
 		/*
 		var divChatContentsHeight = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 90;

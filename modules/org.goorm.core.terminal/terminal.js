@@ -1,12 +1,5 @@
 var pty = require('../../libs/pty/pty.js');
 
-var socketio = require('socket.io')
-  , express = require('express')
-  , util = require('util')
-  , app = express.createServer()
-  , connect = require('connect');
-
-
 var term = pty.spawn('bash', [], {
 	name: 'xterm-color',
 	cols: 80,
@@ -17,14 +10,12 @@ var term = pty.spawn('bash', [], {
 
 
 module.exports = {
-	start: function (app) {
+	start: function (io) {
 		var self = this;
-		
-		var io = socketio.listen(app);
 		
 		io.set('log level', 0);
 		io.sockets.on('connection', function (socket) {
-			socket.on('execute_command', function (command) {
+			socket.on('pty_execute_command', function (command) {
 				self.exec(command);
 			});
 			
@@ -33,11 +24,9 @@ module.exports = {
 				result.stdout = data;
 				//evt.emit("executed_command", result);
 				//console.log(data);
-				socket.emit("command_result", result);
+				socket.emit("pty_command_result", result);
 			});
 		});
-		
-
 	},
 	
 	exec: function (command) {

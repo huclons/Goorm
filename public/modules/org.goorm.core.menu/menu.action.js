@@ -533,7 +533,7 @@ org.goorm.core.menu.action.prototype = {
 			if(core.chat_on==true) {
 				
 				core.chat_on = false;
-				core.module.layout.chat.set_chat_off();
+				core.module.layout.communication.set_chat_off();
 				$(".is_chat_on").html("Chat Off");
 				$("a[action=chat_on_off]").find("img").removeClass("toolbar_buttonPressed");
 
@@ -548,7 +548,7 @@ org.goorm.core.menu.action.prototype = {
 				
 				core.chat_on = true;
 				//core.module.layout.chat.init();
-				core.module.layout.chat.set_chat_on();
+				core.module.layout.communication.set_chat_on();
 				$(".is_chat_on").html("Chat On");
 				$("a[action=chat_on_off]").find("img").addClass("toolbar_buttonPressed");
 

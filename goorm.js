@@ -5,10 +5,11 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , io = require('socket.io');
+  , socketio = require('socket.io');
 
 var goorm = module.exports = express.createServer();
 var g_terminal = require("./modules/org.goorm.core.terminal/terminal");
+var g_collaboration = require("./modules/org.goorm.core.collaboration/collaboration");
 var g_utility = require("./modules/org.goorm.core.utility/utility");
 
 global.__path = __dirname+"/";
@@ -87,4 +88,9 @@ goorm.listen(9999, function(){
 });
 
 
-g_terminal.start(goorm);
+var io = socketio.listen(goorm);
+
+g_terminal.start(io);
+g_collaboration.start(io);
+
+
