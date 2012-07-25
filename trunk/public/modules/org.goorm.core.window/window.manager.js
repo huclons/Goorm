@@ -195,7 +195,6 @@ org.goorm.core.window.manager.prototype = {
 			m.s("warning", "This file is already opened!!", "window_manager");
 		}
 		else {
-			console.log("window.manmager");
 			var self = this;
 			this.active_window = this.index;
 			
@@ -206,7 +205,7 @@ org.goorm.core.window.manager.prototype = {
 			
 			this.window[this.index] = new org.goorm.core.window.panel();
 			this.window[this.index].init("filewindow"+this.index, title, this.workspace_container, filepath, filename, filetype, editor);	
-			console.log(filename);
+			
 			this.tab[this.index] = new org.goorm.core.window.tab();
 			this.tab[this.index].init("filewindow"+this.index, title, this.window_tabview, this.list_menu);			
 			

@@ -23,7 +23,7 @@ module.exports = {
 		data.message = "process done";
 
 		if ( query.current_path!=null && query.folder_name!=null ) {
-			console.log(__path+'workspace/'+query.current_path);
+
 			fs.readdir(__path+'workspace/'+query.current_path, function(err, files) {
 				if (err!=null) {
 					data.err_code = 10;
@@ -88,8 +88,6 @@ module.exports = {
 						i++;
 					}
 					
-					console.log(temp_file_name);
-					
 					fs.writeFile(__path+'workspace/'+query.current_path+'/'+temp_file_name+i+'.txt', "", function(err) {
 						if (err!=null) {
 							data.err_code = 40;
@@ -150,6 +148,7 @@ module.exports = {
 								+ "<div class=\"fullpath\" style=\"display:none;\">" + node.root + node.filename + "</div>"
 							  + "</div>";
 					node.children = [];
+					node.filetype = extension;
 					nodes.push(node);
 				}
 				
