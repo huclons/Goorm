@@ -438,19 +438,18 @@ YUI LAYOUT STYLE CUSTOMIZATION
 }
 
 .yui-skin-sam .yui-layout .yui-layout-clip-left {
-	border-top: 1px dashed #ccc;
-	border-right: 1px dashed #ccc;
+	border:0px;
+	border-right:1px solid #666;
 }
 
 .yui-skin-sam .yui-layout .yui-layout-clip-bottom {
-	border-top: 1px dashed #ccc;
-	border-left: 1px dashed #ccc;
+	border:0px;
+	border-top:1px solid #666;
 }
 
 .yui-skin-sam .yui-layout .yui-layout-clip-right {
-	border-top: 1px dashed #ccc;
-	border-left: 1px dashed #ccc;
-	border-bottom: 1px dashed #ccc;	
+	border:0px;	
+	border-left:1px solid #666;
 }
 
 .yui-skin-sam .yui-layout .yui-layout-hd {
@@ -492,17 +491,17 @@ YUI LAYOUT STYLE CUSTOMIZATION
 
 .yui-skin-sam .yui-layout .yui-layout-clip-left .collapse {
 	background: transparent url(../images/org.goorm.core.layout/uncollapse_right.png) no-repeat 0px 0px;
-	border: 1px dotted #CCC;
+	border: 0px;
 }
 
 .yui-skin-sam .yui-layout .yui-layout-clip-right .collapse {
 	background: transparent url(../images/org.goorm.core.layout/uncollapse_left.png) no-repeat 0px 0px;
-	border: 1px dotted #CCC;
+	border: 0px;
 }
 
 .yui-skin-sam .yui-layout .yui-layout-clip-bottom .collapse {
 	background: transparent url(../images/org.goorm.core.layout/uncollapse_up.png) no-repeat 0px 0px;
-	border: 1px dotted #CCC;
+	border: 0px;
 }
 
 /**************************************************************************
@@ -591,12 +590,12 @@ YUI TAB STYLE CUSTOMIZATION
 	font-family: Verdana, Arial, 굴림체, 굴림;
 	color: #333;
 	
-	background-image: -o-linear-gradient(bottom, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
-	background-image: -moz-linear-gradient(bottom, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
-	background-image: -webkit-gradient(linear, left bottom, left bottom, color-stop(0.1, rgb(220,220,220)), color-stop(0.9, rgb(170,170,170)));
-	background-image: -webkit-linear-gradient(bottom, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
-	background-image: -ms-linear-gradient(bottom, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
-	background-image: linear-gradient(bottom, rgb(220,220,220) 10%, rgb(170,170,170) 90%);	
+	background-image: -o-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image: -moz-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image: -webkit-gradient(linear, left bottom, left bottom, color-stop(0.1, rgb(200,200,200)), color-stop(0.9, rgb(150,150,150)));
+	background-image: -webkit-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image: -ms-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image: linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 }
 
 
@@ -613,9 +612,13 @@ YUI TAB STYLE CUSTOMIZATION
 	padding-right: 10px;
 }
 
+.yui-skin-sam .yui-navset .yui-nav .selected a {
+	border-right: 1px #ccc solid;
+}
+
 .yui-skin-sam .yui-navset .yui-nav .selected,
 .yui-skin-sam .yui-navset .yui-navset-top .yui-nav .selected {
-	margin: 0px;;
+	margin: 0px;
 }
 
 
@@ -638,4 +641,8 @@ YUI PANEL STYLE CUSTOMIZATION
 	height: 12px;
 	border: 1px solid #CCC;
 	background-color: #FFF;
+}
+
+.yui-skin-sam .yui-panel .hd {
+	font-weight: normal;
 }

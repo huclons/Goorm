@@ -1,96 +1,33 @@
-
 /**
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the GPL v2 License:
  * http://www.goorm.org/License
- * version: 3.0.0
- * @module collaboration
  **/
 
-/**
- * This is an goorm code generator.  
- * goorm starts with this code generator.
- * @class chat
- * @extends collaboration
- **/
-org.goorm.core.collaboration.chat = function () {
-	/**
-	 * This presents the current browser version
-	 * @property userID
-	 * @type Number
-	 * @default 0
-	 **/
+org.goorm.core.collaboration.communication = function () {
 	this.userID = 0;
 	this.userName = null;
-	/**
-	 * This presents the current browser version
-	 * @property socket
-	 * @type Object
-	 * @default null
-	 **/
 	this.socket = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property predefined_colors
-	 * @type String
-	 * @default null
-	 **/
 	this.predefined_colors = null;
-	
-	/**
-	 * This presents the current browser version
-	 * @property assigned_colors
-	 * @type String
-	 * @default null
-	 **/
   	this.assigned_colors = null;
-  	
-	/**
-	 * This presents the current browser version
-	 * @property updating_process_running
-	 * @type Boolean
-	 * @default false
-	 **/
   	this.updating_process_running = false;
-	
-	/**
-	 * This presents the current browser version
-	 * @property update_queue
-	 * @type Array
-	 * @default null
-	 **/
   	this.update_queue = [];
-  	
-  	/**
-	 * This presents the current browser version
-	 * @property project_id
-	 * @type Array
-	 * @default null
-	 **/
   	this.project_id = null;
-  	
   	this.is_chat_on = null;
   	this.timer = null;
   	
 };
 
-org.goorm.core.collaboration.chat.prototype = {
-	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @constructor 
-	 **/
-	init: function (project_id) {
+org.goorm.core.collaboration.communication.prototype = {
+
+	init: function (target) {
 		var self = this;
 		
+		/*
 		this.project_id = project_id;
 		
 		this.is_chat_on = 0;
 		//project_id = "chat_join_online_project";
-		$("#"+this.project_id+" #chat").append("<div class='chat_user_container'>User </div>");		
-		$("#"+this.project_id+" #chat").append("<div class='chat_message_container'></div>");
-		$("#"+this.project_id+" #chat").append("<div class='chat_message_input_container'><input id='inputChatMessage' value='Chatting Message' style='width:90%;' /></div>");
 		$("#chat_join_online_project .chat_user_container").css("height","30px");
 		$("#chat_join_online_project .chat_message_container").css("height","217px");
 		$("#chat_join_online_project .chat_message_input_container").css("height","25px");
@@ -102,8 +39,9 @@ org.goorm.core.collaboration.chat.prototype = {
 		
 		this.predefined_colors = ["#FFCFEA", "#E8FF9C", "#FFCC91", "#42C0FF", "#A7FF9E", "#7DEFFF", "#BABDFF", "#FFD4EB", "#AAFF75", "#FF9EAB", "#DCFF91", "#8088FF"];
   		this.assigned_colors = {};
- 		$("#"+this.project_id+" #inputChatMessage").unbind("keypress");
-		$("#"+this.project_id+" #inputChatMessage").keypress(function(ev){
+  		
+ 		$("#"+this.project_id+" #input_chat_message").unbind("keypress");
+		$("#"+this.project_id+" #input_chat_message").keypress(function(ev){
 			if((ev.keyCode || ev.which) == 13){
 				ev.preventDefault();
 				
@@ -128,15 +66,55 @@ org.goorm.core.collaboration.chat.prototype = {
 				$(this).val("");
 			}
 		});
-		core.module.layout.resize_all();
+		
+		*/
+		
+		$("#" + target).append("<div class='chatting_user_container'>User </div>");		
+		$("#" + target).append("<div class='chatting_message_container'></div>");
+		$("#" + target).append("<div class='chatting_message_input_container'><input id='input_chat_message' value='Chatting Message' style='width:90%;' /></div>");		
+		
+		$("#" + target + " #input_chat_message").keypress(function(ev){
+			if((ev.keyCode || ev.which) == 13){
+				ev.preventDefault();
+				
+				//message encoding to UTF-8
+				var encodedMsg = encodeURIComponent($(this).val());
+				if(self.is_chat_on==1 && self.socket.readyState == 1){
+					self.socket.send('{"channel": "chat", "action":"sendchat", "identifier": "'+ self.project_id +'", "message":"' + encodedMsg + '"}');
+				} else {
+					alert.show("Collaboration server is not opened!");
+
+					$(".is_chat_on").html("Chat Off");
+					$("a[action=chat_on_off]").find("img").removeClass("toolbar_buttonPressed");
+	
+					$("a[action=chat_on_off]").each(function(i) {
+						if($(this).attr("status") == "enable") {
+							$(this).parent().hide();
+						} else if($(this).attr("status") == "disable") {
+							$(this).parent().show();
+						}
+					});
+				}
+				$(this).val("");
+			}
+		});
+		
+		
+		$(core).bind("layout_resized", function () {
+			var layout_right_height = $(".yui-layout-unit-right").find(".yui-layout-wrap").height() - 25;
+			$("#goorm_inner_layout_right").find(".communication_message_container").height(layout_right_height - 182);
+		});
+		
+		
+		//core.module.layout.resize_all();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method start_listening 
-	 **/
-	set_chat_on: function () {
+	resize: function () {
+		
+	},
 	
+	set_chat_on: function () {
+		/*
 		var self = this;
 		//this.socket = new WebSocket('ws://goorm.org:8090');
  		this.socket = new WebSocket(core.dialog.preference.ini['collaboration_server_url']+":"+core.dialog.preference.ini['collaboration_server_port']);
@@ -171,12 +149,9 @@ org.goorm.core.collaboration.chat.prototype = {
 	 			alert.show("Collaboration server is not opened!");
  		 	}
  		};
+ 		*/
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method start_listening 
-	 **/
 	set_chat_off: function () {
 		
 		var self = this;
@@ -187,10 +162,6 @@ org.goorm.core.collaboration.chat.prototype = {
  		return false;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method start_listening 
-	 **/
 	start_listening: function () {
 		
 		var self = this;
@@ -200,7 +171,7 @@ org.goorm.core.collaboration.chat.prototype = {
 			if(self.update_queue.length > 0 && self.updating_process_running == false) {
 				var current_update = self.update_queue.shift(); 
 				self.updating_process_running = true;
-				self.applyUpdate(current_update["payload"]["action"], current_update["payload"]);
+				self.apply_update(current_update["payload"]["action"], current_update["payload"]);
 			}
 		}
 		$(window).unload(function() {
@@ -219,7 +190,7 @@ org.goorm.core.collaboration.chat.prototype = {
 				self.userID = received_msg["id"].split("|@|")[0];
 
 		        for(var user_index in received_msg["users"]){
-		        	self.addUser(received_msg["users"][user_index]);
+		        	self.add_user(received_msg["users"][user_index]);
 		        }
 		
 		        // periodically check for available updates and apply them
@@ -229,10 +200,10 @@ org.goorm.core.collaboration.chat.prototype = {
 				switch(received_msg["payload"]["action"]){
 					case "join":
 						if(received_msg["payload"]["user"].split("|@|")[0] != self.userID)
-	           				self.addUser(received_msg["payload"]["user"]);
+	           				self.add_user(received_msg["payload"]["user"]);
 						break;
 					case "leave":
-						self.removeUser(received_msg["payload"]["user"]);
+						self.remove_user(received_msg["payload"]["user"]);
 						break;
 					case "sendchat":
 						self.update_queue.push(received_msg);
@@ -245,10 +216,6 @@ org.goorm.core.collaboration.chat.prototype = {
 		};
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method stop_listening 
-	 **/
 	stop_listening: function () {
 		var self=this;
 		
@@ -265,28 +232,17 @@ org.goorm.core.collaboration.chat.prototype = {
 		$("#"+this.project_id+" .chat_message_container").html("");
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method applyUpdate 
-	 * @param {Object} action The action.
-	 * @param {Object} update The update. 
-	 **/	
-	applyUpdate: function (action, update) {
+	apply_update: function (action, update) {
 		switch(action){
 			case "sendchat":
-				this.newChatMessage(update["user"], update["message"]);
+				this.new_chat_message(update["user"], update["message"]);
 				break;
 			default:
 				console.log("invalid update");
 		};
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method addUser 
-	 * @param {Number} id The identifier.
-	 **/
-	addUser: function (id) {
+	add_user: function (id) {
 		var userID = id.split("|@|")[0];
 		var userName = id.split("|@|")[1];
 
@@ -298,30 +254,19 @@ org.goorm.core.collaboration.chat.prototype = {
 	    $("#"+this.project_id+" .chat_user_container").append(new_user_li);
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method removeUser 
-	 * @param {Number} id The identifier.
-	 **/
-	removeUser: function (id) {
+	remove_user: function (id) {
 		var userID = id.split("|@|")[0];
 		$("#"+this.project_id+" .chat_user_container").find("#user-" + userID).remove();
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method newChatMessage 
-	 * @param {Number} uid The id of a user.
-	 * @param {String} msg The message.
-	 **/
-	newChatMessage: function (uid, msg) {
+	new_chat_message: function (uid, msg) {
 		var userID = uid.split("|@|")[0];
 		var userName = uid.split("|@|")[1];
 		
 		var chat_user = $("<span class='user' style='color:" + this.assigned_colors[userID] + "'>" + userName+ "</span>")
 		msg = decodeURIComponent(msg);
 	   	var chat_message = $("<span class='message'>" + msg + "</span>");
-	   	var chat_timestamp = $("<span class='timestamp'>(" + this.getClockTime() + ")</span>");
+	   	var chat_timestamp = $("<span class='timestamp'>(" + this.get_clock_time() + ")</span>");
 	
 	   	var chat_line = $("<div class='chat_message unread'></div>");
 	   	chat_line.append(chat_user);
@@ -335,11 +280,7 @@ org.goorm.core.collaboration.chat.prototype = {
 	    this.updating_process_running = false;
 	},
 	
-	/**
-	 * This function is an goorm core initializating function.  
-	 * @method getClockTime 
-	 **/
-	getClockTime: function () {
+	get_clock_time: function () {
 		var now    = new Date();
 		var hour   = now.getHours();
 		var minute = now.getMinutes();

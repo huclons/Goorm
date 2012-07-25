@@ -99,16 +99,16 @@ version: 3.0.0
 }
 
 .tab_close_button {
-	width: 8px;
-	height: 8px;
+	width: 12px;
+	height: 10px;
 	float:left;
-	margin-left:9px;
-	padding:2px;
+	margin-left:6px;
+	padding-top:7px;
 	cursor: pointer;
 	vertical-align:middle;
 	background-image:url(../images/icons/context/closebutton.png);
 	background-repeat: no-repeat;
-	background-position: 2px; 
+	background-position: 2px;
 	
 }
 #goorm_inner_layout_center #workspace{

@@ -61,7 +61,7 @@ org.goorm.core.terminal.prototype = {
 		
 		//$(target).find("#prompt").html("<span id='prompt_user'>" + this.user+ "</span>@<span id='prompt_server'>" + this.server + "</span>:<span id='prompt_path'>" + this.path + "</span>$ <input id='prompt_input' />");
 		
-		self.socket.emit("execute_command", "");
+		self.socket.emit("pty_execute_command", "");
 		
 		$(target).find("#prompt_input").keydown(function (event) {
 			if (event.keyCode == '13') {
@@ -74,7 +74,7 @@ org.goorm.core.terminal.prototype = {
 				//$(target).find("#results").append("<div id='result_" + self.timestamp + "'></div>");
 				//$(target).find("#result_" + self.timestamp).append("<span id='prompt_user'>" + self.user+ "</span>@<span id='prompt_server'>" + self.server + "</span>:<span id='prompt_path'>" + self.path + "</span>$ ");
 				
-				self.socket.emit("execute_command", command);
+				self.socket.emit("pty_execute_command", command);
 				
 				self.history.push(command);
 				self.history_count = self.history.length - 1;
@@ -98,12 +98,12 @@ org.goorm.core.terminal.prototype = {
 				
 				var command = $(this).val();
 				
-				self.socket.emit("execute_command", command + '\t');
+				self.socket.emit("pty_execute_command", command + '\t');
 			}
 			else if ((event.keyCode == '99' || event.keyCode == '67') && event.ctrlKey) { //Ctrl + C
 				event.preventDefault();
 				
-				self.socket.emit("execute_command", '^C');
+				self.socket.emit("pty_execute_command", '^C');
 			}
 		});
 		
@@ -111,7 +111,7 @@ org.goorm.core.terminal.prototype = {
 			$(self.target).find("#prompt_input").focus();
 		});
 		
-		this.socket.on("command_result", function (data) {
+		this.socket.on("pty_command_result", function (data) {
 			var stdout = data.stdout;
 
 			stdout = self.transform_bash_to_html(stdout);
