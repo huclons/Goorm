@@ -52,7 +52,7 @@ org.goorm.core.edit.prototype = {
 				
 		$(target).append("<textarea class='code_editor'>Loading Data...</textarea>");
 		//$(target).append("<textarea class='clipboardBuffer'></textarea>");
-		
+		console.log("fuck");
 		
 		this.editor = CodeMirror.fromTextArea($(target).find(".code_editor")[0], {
 			lineNumbers: true,
@@ -237,7 +237,7 @@ org.goorm.core.edit.prototype = {
 	
 	load: function (filepath, filename, filetype) {
 		var self = this;
-		
+		console.log("?");
 		var url = "file/get_contents";
 				
 		if (filetype == "url"){
@@ -259,34 +259,33 @@ org.goorm.core.edit.prototype = {
 		this.interval = window.setInterval(function () { if(i<100) { statusbar.progressbar.set('value', i+=10); } else { window.clearInterval(self.interval); } }, 100);
 		
 		statusbar.start();
-		
-		$.ajax({
-			url: url,			
-			type: "get",
-			data: "path=workspace/"+path,
-			success: function(data) {
-				self.editor.setValue(data);
-				
-				self.collaboration.init(self.target,self);
-				if(core.flag.collaboration_on == true){
-					self.collaboration.set_edit_on();
-				}
-				statusbar.progressbar.set('value', 100);
-				
-				if(self.interval) {
-					window.clearInterval(self.interval);
-				}
-				
-				self.editor.clearHistory();
-				
-				statusbar.stop();
-				
-			  	var window_manager = core.module.layout.workspace.window_manager;
-				
-			  	window_manager.window[window_manager.active_window].set_saved();
-			  
-				window_manager.tab[window_manager.active_window].set_saved();
+
+		var postdata = {
+			path: "workspace/"+filepath+"/"+filename	
+		};
+		console.log(postdata);
+		$.get(url, postdata, function (data) {
+			self.editor.setValue(data);
+			
+			self.collaboration.init(self.target,self);
+			if(core.flag.collaboration_on == true){
+				self.collaboration.set_edit_on();
 			}
+			statusbar.progressbar.set('value', 100);
+			
+			if(self.interval) {
+				window.clearInterval(self.interval);
+			}
+			
+			self.editor.clearHistory();
+			
+			statusbar.stop();
+			
+		  	var window_manager = core.module.layout.workspace.window_manager;
+			
+		  	window_manager.window[window_manager.active_window].set_saved();
+		  
+			window_manager.tab[window_manager.active_window].set_saved();
 		});
 	},
 	
