@@ -16,12 +16,15 @@ org.goorm.core.collaboration.communication = function () {
   	this.is_chat_on = null;
   	this.timer = null;
   	
+  	this.socket = null;
 };
 
 org.goorm.core.collaboration.communication.prototype = {
 
 	init: function (target) {
 		var self = this;
+		
+		this.target = target;
 		
 		/*
 		this.project_id = project_id;
@@ -69,44 +72,52 @@ org.goorm.core.collaboration.communication.prototype = {
 		
 		*/
 		
-		$("#" + target).append("<div class='chatting_user_container'>User </div>");		
-		$("#" + target).append("<div class='chatting_message_container'></div>");
-		$("#" + target).append("<div class='chatting_message_input_container'><input id='input_chat_message' value='Chatting Message' style='width:90%;' /></div>");		
+		this.socket = io.connect();
+ 		
+		$("#" + target).append("<div class='communication_user_container'>User </div>");
+		$("#" + target).append("<div class='communication_message_container'></div>");
+		$("#" + target).append("<div class='communication_message_input_container'><input id='input_chat_message' value='Chatting Message' style='width:90%;' /></div>");		
 		
-		$("#" + target + " #input_chat_message").keypress(function(ev){
-			if((ev.keyCode || ev.which) == 13){
-				ev.preventDefault();
+		$("#" + target + " #input_chat_message").keypress(function(evt){
+			if((evt.keyCode || evt.which) == 13){
+				evt.preventDefault();
 				
 				//message encoding to UTF-8
 				var encodedMsg = encodeURIComponent($(this).val());
-				if(self.is_chat_on==1 && self.socket.readyState == 1){
-					self.socket.send('{"channel": "chat", "action":"sendchat", "identifier": "'+ self.project_id +'", "message":"' + encodedMsg + '"}');
-				} else {
+				
+				if (self.socket.socket.connected) {
+					self.socket.emit("message", '{"channel": "communication", "action":"send_message", "user":"' + core.user.first_name + "_" + core.user.last_name + '", "workspace": "'+ core.status.current_project_name +'", "message":"' + encodedMsg + '"}');
+				} 
+				else {
 					alert.show("Collaboration server is not opened!");
-
-					$(".is_chat_on").html("Chat Off");
-					$("a[action=chat_on_off]").find("img").removeClass("toolbar_buttonPressed");
-	
-					$("a[action=chat_on_off]").each(function(i) {
-						if($(this).attr("status") == "enable") {
-							$(this).parent().hide();
-						} else if($(this).attr("status") == "disable") {
-							$(this).parent().show();
-						}
-					});
 				}
+
 				$(this).val("");
 			}
 		});
-		
 		
 		$(core).bind("layout_resized", function () {
 			var layout_right_height = $(".yui-layout-unit-right").find(".yui-layout-wrap").height() - 25;
 			$("#goorm_inner_layout_right").find(".communication_message_container").height(layout_right_height - 182);
 		});
 		
-		
-		//core.module.layout.resize_all();
+ 		this.socket.on("communication_message", function (data) {
+ 			console.log(core.status.selected_file);
+ 			console.log(core.status.current_project_name);
+ 			
+ 			data = decodeURIComponent(data);
+ 			$("#" + self.target).find(".communication_message_container").append("<div>" + data + "</div>");
+ 			$("#" + self.target).find(".communication_message_container").scrollTop(parseInt($("#" + self.target).find(".communication_message_container").height()));
+ 		});
+ 		
+ 		this.socket.on("communication_someone_joined", function (data) {
+ 			console.log(data);
+ 			$("#" + self.target).find(".communication_message_container").append("<div>" + data + " joined this workspace!</div>");
+ 		});
+	},
+	
+	join: function () {
+		this.socket.emit("message", '{"channel": "workspace", "action":"join_workspace", "user":"' + core.user.first_name + "_" + core.user.last_name + '", "workspace": "'+ core.status.current_project_name +'", "message":"Nice to fuck you"}');
 	},
 	
 	resize: function () {
@@ -114,42 +125,7 @@ org.goorm.core.collaboration.communication.prototype = {
 	},
 	
 	set_chat_on: function () {
-		/*
-		var self = this;
-		//this.socket = new WebSocket('ws://goorm.org:8090');
- 		this.socket = new WebSocket(core.dialog.preference.ini['collaboration_server_url']+":"+core.dialog.preference.ini['collaboration_server_port']);
-
- 		if(core.user.last_name != null && core.user.first_name != null){
-			this.userName = encodeURIComponent(core.user.last_name+" "+core.user.first_name);
-		}
-		else{
-			this.userName = encodeURIComponent(localStorage['collaboration_nickname']);
-		}
 		
- 		this.start_listening();
- 		this.socket.onopen = function(){
- 			self.is_chat_on = 1;
- 		 	this.send('{"channel": "chat","action":"init", "identifier": "'+ self.project_id +'",'+ '"message":"init","user":"'+self.userName+'"}');
- 		};
- 		this.socket.onclose = function(){
- 			if(self.is_chat_on!=1){
- 		 		core.chat_on = false;
- 		 		self.is_chat_on = 0;
- 		 		
-	 			$(".is_chat_on").html("Chat Off");
-				$("a[action=chat_on_off]").find("img").removeClass("toolbar_buttonPressed");
-
-				$("a[action=chat_on_off]").each(function(i) {
-					if($(this).attr("status") == "enable") {
-						$(this).parent().hide();
-					} else if($(this).attr("status") == "disable") {
-						$(this).parent().show();
-					}
-				});
-	 			alert.show("Collaboration server is not opened!");
- 		 	}
- 		};
- 		*/
 	},
 	
 	set_chat_off: function () {

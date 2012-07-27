@@ -1,15 +1,12 @@
 module.exports = {
-	projects: [],
+	workspaces: [],
 	
-	subscribe: function () {
+	join: function (socket, msg_obj) {
+		socket.join(msg_obj.workspace);
+		socket.set('workspace', msg_obj.workspace);
 		
-	},
-	
-	publish: function () {
+		//workspaces.push({name:msg_obj.workspace, :msg_obj.});
 		
-	},
-	
-	snapshot: function () {
-		
+		socket.broadcast.emit("communication_someone_joined", msg_obj.user);
 	}
 };

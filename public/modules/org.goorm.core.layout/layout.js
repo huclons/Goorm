@@ -362,7 +362,6 @@ org.goorm.core.layout.prototype = {
 		//$("#communication").append("<iframe src='http://localhost:8001/?room=11' width=99% height=300>");
 		this.communication = new org.goorm.core.collaboration.communication();
 		this.communication.init("communication");
-		this.communication.set_chat_on();
 	},
 	
 	detach_communication: function() {
