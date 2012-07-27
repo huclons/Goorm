@@ -2,7 +2,7 @@
 	font-size:11px;
 }
 
-#communication .chatting_user_container {
+#communication .communication_user_container {
 	background-color: #FAFAFA;
 	height:100px; 
 	border-bottom:1px #CCC solid; 
@@ -10,14 +10,14 @@
 	overflow: auto;
 }
 
-#communication .chatting_message_container {
+#communication .communication_message_container {
 	height:200px; 
 	border-bottom:1px #CCC solid; 
 	padding:5px;
 	overflow: auto;
 }
 
-#communication .chatting_message_input_container {
+#communication .communication_message_input_container {
 	height:50px; 
 	padding:5px;
 	background-color:#EFEFEF; 

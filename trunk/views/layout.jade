@@ -299,16 +299,28 @@ html
 			
 				//goorm initialize
 				core.init("goorm");
-				var email="<?=$email?>";
-				var first_name="<?=$first_name?>";
-				var last_name="<?=$last_name?>";
-			
+				
+				var email = "";
+				var first_name = "";
+				var last_name = "";
+				
+				for (var i=0; i < Math.random() * 4 + 2; i++) {
+					first_name += String.fromCharCode(97 + Math.round(Math.random() * 25));
+				}
+				
+				for (var j=0; j < Math.random() * 4 + 2; j++) {
+					last_name += String.fromCharCode(97 + Math.round(Math.random() * 25));
+				}
+				
+				core.user.email = email;
+				core.user.first_name = first_name;
+				core.user.last_name = last_name;
+				
+				
 				//console.log("initialized!");
 				$(core).bind("goorm_load_complete", function () {
 					console.log("goormIDE Load Complete");
-					core.email = email;
-					core.user.first_name = first_name;
-					core.user.last_name = last_name;
+
 				});
 				
 				core.module.layout.inner_bottom_tabview.selectTab(2);
