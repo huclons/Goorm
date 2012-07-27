@@ -39,7 +39,7 @@ org.goorm.core.file.rename.prototype = {
 						var filetype = window_manager.window[window_manager.active_window].filetype;
 						
 						window_manager.window[window_manager.active_window].close();
-						window_manager.open(postdata.selected_filepath, postdata.input_filename, filetype);						
+						window_manager.open(received_data.path, received_data.file, filetype);						
 					}
 					
 					core.module.layout.project_explorer.refresh();
@@ -107,19 +107,31 @@ org.goorm.core.file.rename.prototype = {
 			this.dialog.panel.show();
 		}
 		else {	
-			for (var i = 0; i < core.module.layout.workspace.window_manager.index; i++) {
-				if(core.module.layout.workspace.window_manager.window[i].alive) {
+			var window_manager = core.module.layout.workspace.window_manager;
+			
+			for (var i = 0; i < window_manager.index; i++) {
+				if(window_manager.window[i].alive) {
 					self.is_alive_window = true;
 				}
 			}
-		
+
+
 			if(self.is_alive_window) {
-				$("#input_rename_new_filename").attr("value", core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].filename);
-				$("#input_rename_old_filepath").attr("value", core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].filepath);
-				$("#input_rename_old_filename").attr("value", core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].filename);
-				
-				this.dialog.panel.show();
+				$("#input_rename_new_filename").attr("value", window_manager.window[window_manager.active_window].filename);
+				$("#input_rename_old_filepath").attr("value", window_manager.window[window_manager.active_window].filepath);
+				$("#input_rename_old_filename").attr("value", window_manager.window[window_manager.active_window].filename);
 			}
+			else {
+				var temp_path = core.status.selected_file
+				var temp_name = temp_path.split("/").pop();
+				temp_path = temp_path.replace(temp_name, "");
+				
+				$("#input_rename_new_filename").attr("value", temp_name);
+				$("#input_rename_old_filepath").attr("value", temp_path);
+				$("#input_rename_old_filename").attr("value", temp_name);
+			}
+			
+			this.dialog.panel.show();
 		}
 	}	
 };

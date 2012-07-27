@@ -327,9 +327,12 @@ module.exports = {
 		data.message = "process done";
 				
 		if (query.ori_path != null && query.ori_name != null && query.dst_name != null) {
-			var path = __path+"workspace"+query.ori_path
+			var path = __path+"workspace/"+query.ori_path
 			fs.rename(path+query.ori_name, path+query.dst_name, function (err) {
-				console.log(err);
+
+				data.path = query.ori_path;
+				data.file = query.dst_name;
+
 				evt.emit("file_do_rename", data);
 			});
 		}
