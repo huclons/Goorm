@@ -25,15 +25,15 @@ org.goorm.core.file.rename.prototype = {
 			}
 		
 			var postdata = {
-				selected_filepath: $("#input_rename_old_filepath").attr("value"),
-				selected_filename: $("#input_rename_old_filename").attr("value"),
-				input_filename: $("#input_rename_new_filename").attr("value")
+				ori_path: $("#input_rename_old_filepath").attr("value"),
+				ori_name: $("#input_rename_old_filename").attr("value"),
+				dst_name: $("#input_rename_new_filename").attr("value")
 			};
 									
-			$.post("module/org.goorm.core.file/file.rename.php", postdata, function (data) {
-				var received_data = eval("("+data+")");
+			$.get("file/rename", postdata, function (data) {
+				var received_data = data;
 								
-				if(received_data.errCode==0) {
+				if(received_data.err_code==0) {
 					if(self.is_alive_window) {
 						var window_manager = core.module.layout.workspace.window_manager;
 						var filetype = window_manager.window[window_manager.active_window].filetype;
@@ -45,7 +45,8 @@ org.goorm.core.file.rename.prototype = {
 					core.module.layout.project_explorer.refresh();
 				}
 				else {
-					alert.show(core.module.localization.msg["alertError"] + received_data.message);
+					//alert.show(core.module.localization.msg["alertError"] + received_data.message);
+					alert.show(received_data.message);
 				}
 			});
 			this.hide(); 

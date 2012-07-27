@@ -72,7 +72,13 @@ exports.project.do_import = function(req, res){
 };
 
 exports.project.do_export = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	
+	evt.on("project_do_export", function (data) {
+		res.json(data);
+	});
+	
+	g_project.do_export(evt);
 };
 
 exports.project.do_clean = function(req, res){
@@ -132,7 +138,6 @@ exports.file.do_new_untitled_text_file = function(req, res){
 	});
 
 	g_file.do_new_untitled_text_file(req.query, evt);
-
 };
 
 exports.file.do_load = function(req, res){
@@ -144,7 +149,14 @@ exports.file.do_save = function(req, res){
 };
 
 exports.file.do_delete = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	console.log(req.query);
+	evt.on("file_do_delete", function (data) {
+		console.log(data);
+		res.json(data);
+	});
+
+	g_file.do_delete(req.query, evt);
 };
 
 
@@ -161,7 +173,14 @@ exports.file.get_url_contents = function(req, res){
 };
 
 exports.file.put_contents = function(req, res){
-	res.send(null);
+
+	var evt = new EventEmitter();
+
+	evt.on("file_put_contents", function (data) {
+		res.json(data);
+	});
+
+	g_file.put_contents(req.query, evt);
 };
 
 exports.file.get_nodes = function(req, res){
@@ -187,7 +206,6 @@ exports.file.get_dir_nodes = function(req, res){
 	var evt = new EventEmitter();
 	var path = req.query.path;
 	
-	console.log(path);
 	res.setHeader("Content-Type", "application/json");
 	
 	evt.on("got_dir_nodes", function (data) {
@@ -216,7 +234,14 @@ exports.file.do_move = function(req, res){
 };
 
 exports.file.do_rename = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	console.log(req.query);
+	evt.on("file_do_rename", function (data) {
+		console.log(data);
+		res.json(data);
+	});
+
+	g_file.do_rename(req.query, evt);
 };
 
 exports.file.get_property = function(req, res){
