@@ -1,8 +1,7 @@
 var fs = require('fs');
-
 var walk = require('walk');
-
 var EventEmitter = require("events").EventEmitter;
+var rimraf = require('rimraf');
 
 var root_dir = "";
 
@@ -109,6 +108,26 @@ module.exports = {
 			data.message = "Invalid query";
 			evt.emit("file_do_new_untitled_text_file", data);
 		}
+	},
+	
+	put_contents: function (query, evt) {
+
+		var data = {};
+
+		fs.writeFile(__path+'/workspace/'+query.path, query.data, function(err) {
+			if (err!=null) {
+				data.err_code = 10;
+				data.message = "Can not save";
+	
+				evt.emit("file_put_contents", data);
+			}
+			else {
+				data.err_code = 0;
+				data.message = "saved";
+	
+				evt.emit("file_put_contents", data);
+			}
+		});		
 	},
 		
 	get_nodes: function (path, evt) {
@@ -268,4 +287,63 @@ module.exports = {
 			return null;
 		}
 	},
+	
+	do_delete: function (query, evt) {
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+		
+		if (query.file_path != null) {
+			rimraf(__path+"workspace/"+query.file_path, function(err) {
+				if (err!=null) {
+					data.err_code = 20;
+					data.message = "Can not delete file";
+					
+					evt.emit("file_do_delete", data);
+				}
+				else {
+					//success
+					evt.emit("file_do_delete", data);
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalide query";
+			
+			evt.emit("file_do_delete", data);
+		}		
+/*
+		rimraf(__path+query.path, function(err) {
+		evt.emit("project_do_delete", err);			
+		});
+*/
+		
+	},
+	
+	do_rename: function (query, evt) {
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+				
+		if (query.ori_path != null && query.ori_name != null && query.dst_name != null) {
+			var path = __path+"workspace"+query.ori_path
+			fs.rename(path+query.ori_name, path+query.dst_name, function (err) {
+				console.log(err);
+				evt.emit("file_do_rename", data);
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalide query";
+			
+			evt.emit("file_do_rename", data);
+		}		
+/*
+		rimraf(__path+query.path, function(err) {
+		evt.emit("project_do_delete", err);			
+		});
+*/
+		
+	}
 };

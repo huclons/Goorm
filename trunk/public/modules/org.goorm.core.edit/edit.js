@@ -52,7 +52,6 @@ org.goorm.core.edit.prototype = {
 				
 		$(target).append("<textarea class='code_editor'>Loading Data...</textarea>");
 		//$(target).append("<textarea class='clipboardBuffer'></textarea>");
-		console.log("fuck");
 		
 		this.editor = CodeMirror.fromTextArea($(target).find(".code_editor")[0], {
 			lineNumbers: true,
@@ -237,7 +236,7 @@ org.goorm.core.edit.prototype = {
 	
 	load: function (filepath, filename, filetype) {
 		var self = this;
-		console.log("?");
+
 		var url = "file/get_contents";
 				
 		if (filetype == "url"){
@@ -250,10 +249,6 @@ org.goorm.core.edit.prototype = {
 		this.filepath = filepath;
 		this.filename = filename;
 		this.filetype = filetype;
-
-		console.log(filepath);
-		console.log(filename);
-		console.log(filetype);
 		
 		var i = 0;
 		this.interval = window.setInterval(function () { if(i<100) { statusbar.progressbar.set('value', i+=10); } else { window.clearInterval(self.interval); } }, 100);
@@ -263,7 +258,7 @@ org.goorm.core.edit.prototype = {
 		var postdata = {
 			path: "workspace/"+filepath+"/"+filename	
 		};
-		console.log(postdata);
+
 		$.get(url, postdata, function (data) {
 			self.editor.setValue(data);
 			
@@ -293,37 +288,38 @@ org.goorm.core.edit.prototype = {
 		
 		var self = this;
 		
-		var url = "put_file_contents";
+		var url = "file/put_contents";
 		var path = this.filepath + "/" + this.filename;
 		
 		var data = this.editor.getValue();
-				
-		$.ajax({
-			url: url,			
-			type: "POST",
-			data: { path: path, data: data },
-			success: function(data) {
+		
+		
+		var send_data = {
+			path: path,
+			data: data
+		};
 
-				if(core.flag.collaboration_on == true){
-					self.collaboration.socket.send('{"channel": "edit","action":"autoSaved", "identifier":"'+self.collaboration.identifier+'", "message":""}');
-				}
-			  
-			  	var date = new Date();
-			  	var time = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-				
-				m.s("Save Complete! (" + time + ")", "editor");
-			  
-			  	var window_manager = core.module.layout.workspace.window_manager;
-			  
-			  	window_manager.window[window_manager.active_window].set_saved();
-			  
-				window_manager.tab[window_manager.active_window].set_saved();
-				
-				if (option=="close") {
-					window_manager.window[window_manager.active_window].close();
-				}
+		$.get(url, send_data, function (data) {
+			if(core.flag.collaboration_on == true){
+				self.collaboration.socket.send('{"channel": "edit","action":"autoSaved", "identifier":"'+self.collaboration.identifier+'", "message":""}');
+			}
+		  
+		  	var date = new Date();
+		  	var time = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+			
+			m.s("Save Complete! (" + time + ")", "editor");
+		  
+		  	var window_manager = core.module.layout.workspace.window_manager;
+		  console.log(self.target);
+		  	window_manager.window[window_manager.active_window].set_saved();
+		  
+			window_manager.tab[window_manager.active_window].set_saved();
+			
+			if (option=="close") {
+				window_manager.window[window_manager.active_window].close();
 			}
 		});
+
 	},
 
 	save_as: function (filepath, filename, filetype) {

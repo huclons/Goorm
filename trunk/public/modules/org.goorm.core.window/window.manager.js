@@ -277,6 +277,7 @@ org.goorm.core.window.manager.prototype = {
 	},
 	
 	save_all: function() {
+
 		for (var i = 0; i < this.index; i++) {
 			if(this.window[i].alive) {
 				if (this.window[i].designer) {
@@ -285,6 +286,10 @@ org.goorm.core.window.manager.prototype = {
 				else if (this.window[i].editor) {
 					this.window[i].editor.save();
 				}
+				
+				var window_manager = core.module.layout.workspace.window_manager;
+				window_manager.window[i].set_saved();
+				window_manager.tab[i].set_saved();
 			}
 		}
 	},

@@ -2,6 +2,7 @@ var fs = require('fs');
 var walk = require('walk');
 var rimraf = require('rimraf');
 var EventEmitter = require("events").EventEmitter;
+var zlib = require('zlib');
 
 var projects = [];
 
@@ -102,6 +103,14 @@ module.exports = {
 		});
 */
 		
+	},
+	
+	do_export: function (evt) {
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";	
+		
+		evt.emit("project_do_export", data);
 	},
 	
 	get_list: function (evt) {

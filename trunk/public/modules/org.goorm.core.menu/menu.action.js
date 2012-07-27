@@ -98,7 +98,8 @@ org.goorm.core.menu.action.prototype = {
 			var window_manager = core.module.layout.workspace.window_manager;
 
 			if (window_manager.active_window<0) {
-				alert.show(core.module.localization.msg.alert_file_not_opened);
+				//alert.show(core.module.localization.msg.alert_file_not_opened);
+				alert.show("file not opened");
 			}
 			else {
 				if(window_manager.window[window_manager.active_window].designer != undefined) {
@@ -111,7 +112,7 @@ org.goorm.core.menu.action.prototype = {
 
 		$("a[action=save_all_file]").unbind("click");
 		$("a[action=save_all_file]").click(function() {
-			core.module.layout.workspace.window_manager.saveAll();
+			core.module.layout.workspace.window_manager.save_all();
 		});
 
 		$("a[action=save_as_file]").unbind("click");
@@ -139,11 +140,11 @@ org.goorm.core.menu.action.prototype = {
 					no_text : "No",
 					yes : function() {
 						var postdata = {
-							filename : core.status.selected_file
+							file_path : core.status.selected_file
 						};
 	
-						$.get("file/do_delete", postdata, function(data) {
-							c.m("delete: " + core.status.selected_file);
+						$.get("file/delete", postdata, function(data) {
+							m.s("delete: " + core.status.selected_file);
 							core.module.layout.project_explorer.refresh();
 						});
 					},
