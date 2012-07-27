@@ -310,7 +310,7 @@ org.goorm.core.edit.prototype = {
 			m.s("Save Complete! (" + time + ")", "editor");
 		  
 		  	var window_manager = core.module.layout.workspace.window_manager;
-		  console.log(self.target);
+
 		  	window_manager.window[window_manager.active_window].set_saved();
 		  
 			window_manager.tab[window_manager.active_window].set_saved();

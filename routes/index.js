@@ -150,9 +150,8 @@ exports.file.do_save = function(req, res){
 
 exports.file.do_delete = function(req, res){
 	var evt = new EventEmitter();
-	console.log(req.query);
+
 	evt.on("file_do_delete", function (data) {
-		console.log(data);
 		res.json(data);
 	});
 
@@ -235,9 +234,8 @@ exports.file.do_move = function(req, res){
 
 exports.file.do_rename = function(req, res){
 	var evt = new EventEmitter();
-	console.log(req.query);
+
 	evt.on("file_do_rename", function (data) {
-		console.log(data);
 		res.json(data);
 	});
 
