@@ -9,7 +9,7 @@ org.goorm.core.file._new = function () {
 	this.buttons = null;
 	this.treeview = null;
 	this.current_path = null;
-	this.is_new_anyway = null;
+	this.is_new_anyway = false;
 };
 
 org.goorm.core.file._new.prototype = {
@@ -25,74 +25,44 @@ org.goorm.core.file._new.prototype = {
 			var temp_filepath = $("#file_new_input_location_path").val();
 			var temp_filename = $("#file_new_input_filename").val();
 
-			$.ajax({
-				url: "file/get_contents",			
-				type: "GET",
-				data: { path: "workspace/"+$("#file_new_input_location_path").val()+"/"+$("#file_new_input_filename").attr("value")},
-				success: function(data) {
-					if (data!=0 && !self.is_new_anyway) {
-						confirmation.init({
-							title: core.module.localization.msg["confirmationNewTitle"], 
-							message: core.module.localization.msg["confirmationNewMessage"],
-							yes_text: core.module.localization.msg["confirmation_yes"],
-							no_text: core.module.localization.msg["confirmation_no"],
-							yes: function () {
-								self.is_new_anyway = true;
-								handle_ok();
-							}, no: function () {
-							}
-						});
-						
-						confirmation.panel.show();
-						return false;
-					}
-
-					var postdata = {
-						current_project_path: $("#file_new_input_location_path").val(),
-						input_filename: $("#file_new_input_filename").attr("value"),
-						input_filetype: $("#fileNewInputFileType").attr("value")
-					};
-		
-					$.post("file/new", postdata, function (data) {
-		
-						var received_data = eval("("+data+")");
-		
-						if(received_data.errCode==0) {
-						
-							var window_manager = core.module.layout.workspace.window_manager;
-							
-							temp_filepath = "../../project/"+temp_filepath+"/";
-							temp_filepath = temp_filepath.replace("///", "/");
-							temp_filepath = temp_filepath.replace("//", "/");
-							
-							for (var i = 0; i < window_manager.index; i++) {
-								var window_filename = window_manager.window[i].filename;
-								var window_filepath = window_manager.window[i].filepath;
-								window_filepath = window_filepath + "/";
-								window_filepath = window_filepath.replace("//", "/");
-								
-								if( window_manager.window[i].alive && window_filename == temp_filename && window_filepath == temp_filepath) {
-									window_manager.window[i].close();
-								}
-							}
-						
-							var temp_type = postdata.input_filename;
-							temp_type = temp_type.split(".");
-							temp_type = temp_type[1];
-							
-							core.module.layout.workspace.window_manager.open(temp_filepath, temp_filename, temp_type);
-							core.module.layout.project_explorer.refresh();
+			var postdata = {
+				new_anyway: self.is_new_anyway,
+				path: temp_filepath+"/"+temp_filename
+				
+			};
+			
+			$.get("file/new", postdata, function (data) {
+			console.log(data);
+				if (data.err_code == 99) {
+				console.log("??");
+					confirmation.init({
+/*
+						title: core.module.localization.msg["confirmationNewTitle"], 
+						message: core.module.localization.msg["confirmationNewMessage"],
+						yes_text: core.module.localization.msg["confirmation_yes"],
+						no_text: core.module.localization.msg["confirmation_no"],
+*/
+						title: "Confirmation", 
+						message: "Exist file. Do you want to make anyway?",
+						yes_text: "yes",
+						no_text: "no",
+						yes: function () {
+							self.is_new_anyway = true;
+							handle_ok();
+						}, no: function () {
 						}
-						else {
-							alert.show(core.module.localization.msg["alertError"] + received_data.message);
-						}
-						
-						core.module.layout.project_explorer.refresh();
-						self.dialog.panel.hide();
 					});
+					console.log("!!");
+					confirmation.panel.show();
+				}
+				else if (data.err_code == 0) {
+					self.dialog.panel.hide();
+					core.module.layout.project_explorer.refresh();
+				}
+				else {
+					alert.show(data.message);
 				}
 			});
-
 		};
 
 		var handle_cancel = function() { 
@@ -151,86 +121,42 @@ org.goorm.core.file._new.prototype = {
 			$("#file_new_input_location_path").val(this.current_path);
 		}
 	
-		var postdata = {
-			kind: "project",
-			project_name: this.current_path,
-			folder_only: "true"
-		};
-		
-		this.add_directories(postdata);
-		
-		var postdata = {
-			kind: "project",
-			project_name: this.current_path,
-			folder_only: "false"
-		};
-				
-		this.add_file_items(postdata);
+		this.add_directories();
+
+		this.add_file_items();
 	
 		$("#file_new_input_filename").val("");
 	
 		this.dialog.panel.show();
 	},
 	
-	add_directories: function(postdata) {		
+	add_directories: function() {		
 		var self = this;
 
-		$.get("file/get_nodes", postdata, function (data) {
+		var postdata = {
+			path: this.current_path
+		};
 
-			var sort_project_treeview = function (sorting_data) { 				
-				s.quick_sort(sorting_data);
-				
-				for(i=0; i<sorting_data.length; i++) {
-					if(sorting_data[i].children) {
-						s.quick_sort(sorting_data[i].children);
-					}
-				}
-			};
-
-			var sorting_data = eval(data);
+		$.get("file/get_dir_nodes", postdata, function (data) {
+			console.log(data);
 			
-			sort_project_treeview(sorting_data);
-			
-			var new_data = new Array();
-
-			for(var name in sorting_data) {
-				if(sorting_data[name].cls=="folder") {
-					new_data.push(sorting_data[name]);
-				}
-			}
-
-			self.treeview = new YAHOO.widget.TreeView("file_new_treeview", new_data);
+			self.treeview = new YAHOO.widget.TreeView("file_new_treeview", data);
 
 			self.treeview.subscribe("clickEvent", function(nodedata) {	
-				if(nodedata.node.data.cls == "folder") {
-					var filename = nodedata.node.data.filename;
-					var filetype = nodedata.node.data.filetype;
-					var filepath = nodedata.node.data.parentLabel;
+				if(nodedata.node.data.cls == "dir") {
 
-					var dir = filepath + "/" + filename;
-					dir = dir.replace(/\.\.\/\.\.\/project\/\//, "");
-					dir = dir.replace(/\.\.\/\.\.\/project\//, "");
-					dir = "/" + dir;
-					dir = dir.replace(/\/\/\//, "/");
-					dir = dir.replace(/\/\//, "/");
-						
-					self.current_path = dir;
+					self.current_path = nodedata.node.data.parent_label + nodedata.node.data.name;
 
 					$("#file_new_input_location_path").attr("value", self.current_path);
 
-					var postdata = {
-						kind: "project",
-						project_name: self.current_path,
-						folder_only: "false"
-					};
-					self.add_file_items(postdata);
+					self.add_file_items();
 				}
 				
 				return false;				
 			});
 			
 			self.treeview.subscribe("dblClickEvent", function(nodedata) {	
-				if(nodedata.node.data.cls == "folder") {
+				if(nodedata.node.data.cls == "dir") {
 					if (nodedata.node.expanded) {
 						nodedata.node.collapse();
 					}
@@ -284,40 +210,40 @@ org.goorm.core.file._new.prototype = {
 		});	
 	},
 	
-	add_file_items: function (postdata) {
+	add_file_items: function () {
 	
 		$("#file_new_dialog_center").empty();
 	
 		var self = this;
 		
+		var postdata = {
+			path: this.current_path
+		};
+		
 		$.get("file/get_nodes", postdata, function (data) {
-			
-			var sort_project_treeview = function (sorting_data) { 				
-				s.quick_sort(sorting_data);
-			};
 
-			var sorting_data = eval(data);
-			
-			sort_project_treeview(sorting_data);
-
-			for(var name in sorting_data) {
+			for(var idx in data) {
 				var icon_str = "";
-				if(sorting_data[name].cls=="folder") {
+				if(data[idx].cls=="dir") {
 					icon_str += "<div class='folder_item'";
+					icon_str +=" filename='"+data[idx].name+"' filepath='"+data[idx].parent_label+"'>";
+					icon_str += "<img src='images/org.goorm.core.file/folder.png'>";					
 				}
 				else {
 					icon_str += "<div class='file_item'";
+					icon_str +=" filename='"+data[idx].filename+"' filetype='"+data[idx].filetype+"' filepath='"+data[idx].parent_label+"'>";
+					icon_str += "<img src='images/org.goorm.core.file/file.png'>";					
 				}
 				
-				icon_str +=" filename='"+sorting_data[name].filename+"' filetype='"+sorting_data[name].filetype+"' filepath='"+sorting_data[name].parentLabel+"'>";
-				if(sorting_data[name].cls=="folder") {
-					icon_str += "<img src='images/org.goorm.core.file/folder.png'>";
+				icon_str += "<div style='word-break:break-all; width:60px; line-height:12px; margin-left:5px; margin-right:5px; margin-bottom:5px;'>";
+				
+				if(data[idx].cls=="dir") {
+					icon_str += data[idx].name;				
 				}
 				else {
-					icon_str += "<img src='images/org.goorm.core.file/file.png'>";
+					icon_str += data[idx].filename;
 				}
-				icon_str += "<div style='word-break:break-all; width:60px; line-height:12px; margin-left:5px; margin-right:5px; margin-bottom:5px;'>";
-				icon_str += sorting_data[name].filename;
+				
 				icon_str += "</div>";
 				icon_str += "</div>";
 				
@@ -329,13 +255,7 @@ org.goorm.core.file._new.prototype = {
 				self.current_path = self.current_path+"/"+$(this).attr("filename");
 				$("#file_new_input_location_path").val(self.current_path);
 
-				var postdata = {
-					kind: "project",
-					project_name: self.current_path,
-					folder_only: "false"
-				};
-
-				self.add_file_items(postdata);
+				self.add_file_items();
 				self.expand_directory($(this).attr("filename"));
 			});
 			

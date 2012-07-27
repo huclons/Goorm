@@ -27,6 +27,7 @@ org.goorm.core.window.panel = function () {
 	this.alive = null;
 	this.is_first_maximize = null;
 	this.is_saved = null;
+	this.project = null;
 };
 
 org.goorm.core.window.panel.prototype = {
@@ -42,6 +43,8 @@ org.goorm.core.window.panel.prototype = {
 		this.filepath = filepath;
 		this.filename = filename;
 		this.filetype = filetype;
+		
+		this.project = core.status.current_project_path;
 		
 		this.alive = true;
 		this.is_first_maximize = true;

@@ -18,7 +18,8 @@ org.goorm.core.file._export.prototype = {
 		
 		var handle_ok = function() {
 			if($("#file_export_project_name_read").attr("value")=="") {
-				alert.show(core.module.localization.msg["alertFileNotSelect"]);
+				//alert.show(core.module.localization.msg["alertFileNotSelect"]);
+				alert.show("Not Selected");
 				return false;
 			}
 

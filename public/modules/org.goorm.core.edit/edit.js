@@ -255,8 +255,17 @@ org.goorm.core.edit.prototype = {
 		
 		statusbar.start();
 
+		var temp_path = "";
+		
+		if (filetype == "url") {
+			temp_path = filepath;
+		}
+		else {
+			temp_path = "workspace/"+filepath+"/"+filename;
+		}
+
 		var postdata = {
-			path: "workspace/"+filepath+"/"+filename	
+			path: temp_path
 		};
 
 		$.get(url, postdata, function (data) {
