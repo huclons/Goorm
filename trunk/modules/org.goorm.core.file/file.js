@@ -2,6 +2,7 @@ var fs = require('fs');
 var walk = require('walk');
 var EventEmitter = require("events").EventEmitter;
 var rimraf = require('rimraf');
+var http = require('http');
 
 var root_dir = "";
 
@@ -10,8 +11,41 @@ module.exports = {
 	
 	},
 	
-	do_new: function (path, evt) {
+	do_new: function (query, evt) {
+		var self = this;
 		
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+		
+		if ( query.path!=null && query.new_anyway ) {
+			fs.exists(__path+'workspace/'+query.path, function(exists) {
+
+				if (exists && query.new_anyway=="false") {
+					data.err_code = 99;
+					data.message = "exist file";
+					evt.emit("file_do_new", data);					
+				}
+				else {
+					fs.writeFile(__path+'workspace/'+query.path, "", function(err) {
+						if (err!=null) {
+							data.err_code = 40;
+							data.message = "Can not make project file";
+							
+							evt.emit("file_do_new", data);
+						}
+						else {	
+							evt.emit("file_do_new", data);
+						}
+					});
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalid query";
+			evt.emit("file_do_new", data);
+		}
 	},
 	
 	do_new_folder: function (query, evt) {
@@ -43,7 +77,8 @@ module.exports = {
 								data.err_code = 30;
 								data.message = "Cannot make directory";
 		
-								evt.emit("file_do_new_folder", data);							}
+								evt.emit("file_do_new_folder", data);
+							}
 							else {
 								evt.emit("file_do_new_folder", data);
 							}
@@ -138,7 +173,7 @@ module.exports = {
 		var nodes = [];
 		
 		root_dir = path.replace(__path + "workspace/", "") + "/";
-		
+
 		evt_dir.on("got_dir_nodes_for_get_nodes", function (dirs) {
 			var options = {
 				followLinks: false
@@ -152,6 +187,7 @@ module.exports = {
 					node.root = root.replace(__path + "workspace/", "") + "/";
 					node.filename = file_stats[i].name;
 					node.parent_label = node.root;
+					node.project_path = root_dir;
 					node.cls = "file";
 					node.expanded = false;
 					node.sortkey = 1 + node.filename;
@@ -176,7 +212,7 @@ module.exports = {
 			
 			walker.on("end", function () {
 				tree = self.make_dir_tree(root_dir, dirs);
-				tree = self.make_file_tree(tree, nodes);
+				tree = self.make_file_tree(tree, nodes);				
 				evt.emit("got_nodes", tree);
 			});
 		
@@ -220,7 +256,24 @@ module.exports = {
 		
 		walker.on("end", function () {
 			tree = self.make_dir_tree(root_dir, dirs);
-			evt.emit("got_dir_nodes", tree);
+			
+			// root directory for get_dir_nodes only
+			var dir_tree = {};
+			dir_tree.root = "";
+			dir_tree.name = "/"+root_dir.replace(/\//g, "");
+			dir_tree.parent_label = dir_tree.root;
+			dir_tree.cls = "dir";
+			dir_tree.expanded = true;
+			dir_tree.sortkey = 0 + dir_tree.name;
+			dir_tree.type = "html";
+			dir_tree.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
+						+ "<img src=images/icons/filetype/folder.filetype.png class=\"directory_icon file\" />"
+						+ dir_tree.name
+						+ "<div class=\"fullpath\" style=\"display:none;\">" + dir_tree.root + dir_tree.name + "</div>"
+					 + "</div>";
+			dir_tree.children = tree;
+			
+			evt.emit("got_dir_nodes", dir_tree);
 			evt.emit("got_dir_nodes_for_get_nodes", dirs);
 		});
 	},
@@ -250,7 +303,7 @@ module.exports = {
 		if (tree != undefined) {
 			var marked = [];
 
-			//fucking root			
+			// files on root
 			for (var j=0; j<files.length; j++) {
 				if (files[j].root == root_dir) {
 					marked.push(j);
@@ -348,5 +401,22 @@ module.exports = {
 		});
 */
 		
+	},
+	
+	get_url_contents: function (path, evt) {//file_get_url_contents
+		var data = "";
+
+		http.get(path, function(res) {
+			res.on("data", function(chunk) {
+				data += chunk;
+			});
+			
+			res.on("end", function() {
+				evt.emit("file_get_url_contents", data);
+			});
+		}).on("error", function(e) {
+			data = "Got error: " + e.message;
+			evt.emit("file_get_url_contents", data);
+		});
 	}
 };

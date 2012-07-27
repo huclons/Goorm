@@ -117,7 +117,13 @@ exports.file = function(req, res){
 };
 
 exports.file.do_new = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	
+	evt.on("file_do_new", function (data) {
+		res.json(data);
+	});
+
+	g_file.do_new(req.query, evt);
 };
 
 exports.file.do_new_folder = function(req, res){
@@ -168,7 +174,13 @@ exports.file.get_contents = function(req, res){
 };
 
 exports.file.get_url_contents = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+
+	evt.on("file_get_url_contents", function (data) {
+		res.json(data);
+	});
+
+	g_file.get_url_contents(req.query.path, evt);
 };
 
 exports.file.put_contents = function(req, res){
