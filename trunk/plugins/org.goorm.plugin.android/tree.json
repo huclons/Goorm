@@ -1,0 +1,20 @@
+{
+	"label" : "Android",
+	"tab" : [
+				{	"label" : "Info",
+					"html"	: "configs/preferences/org.goorm.core/system.info.html",
+					"classname" : "org.goorm.core.preferences.info"
+				},
+				{
+					"label" : "Libraries",
+					"html"	: "configs/preferences/org.goorm.core/system.libraries.html"
+				},
+				{
+					"label" : "Animations",
+					"html"	: "configs/preferences/org.goorm.core/system.animations.html"
+				}
+			],
+	"child" : [
+		{ "label" : "test" } 
+	]
+}

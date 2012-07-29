@@ -147,8 +147,8 @@ org.goorm.core.dialog.prototype = {
 
 				self.panel.setBody(data);
 				
-				if ( typeof self.success == "function" )
-					//self.success();			
+				if ($.isFunction(self.success))
+					self.success();
 				
 				if (!appendded) {
 					

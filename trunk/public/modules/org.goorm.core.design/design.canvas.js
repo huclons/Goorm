@@ -935,7 +935,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				$(self.objects).each(function (i) {
 				
 					if (self.snap_to_grid) {
-						var unit = parseInt(core.dialog.preference.preference["preference.designer.grid_unit"]);
+						var unit = parseInt(core.preference["preference.designer.grid_unit"]);
 						
 						if (this.properties.sx % unit < unit / 4) {
 							this.properties.sx -= this.properties.sx % unit;
@@ -1290,7 +1290,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		}
 		this.toolbar.toggle_preview();
 		
-		if(core.dialog.preference.preference["preference.designer.show_grid"]=="true") {
+		if(core.preference["preference.designer.show_grid"]=="true") {
 			this.toolbar.is_grid_on = false;
 		}
 		else {
@@ -1298,7 +1298,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		}
 		this.toolbar.toggle_grid();
 		
-		if(core.dialog.preference.preference["preference.designer.show_ruler"]=="true") {
+		if(core.preference["preference.designer.show_ruler"]=="true") {
 			this.toolbar.is_ruler_on = false;
 		}
 		else {
@@ -1306,7 +1306,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		}
 		this.toolbar.toggle_ruler();
 		
-		if(core.dialog.preference.preference["preference.designer.snap_to_grid"]=="true") {
+		if(core.preference["preference.designer.snap_to_grid"]=="true") {
 			this.snap_to_grid = false;
 		}
 		else {
@@ -1314,11 +1314,11 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		}
 		this.toolbar.toggle_snap_to_grid();
 		
-		this.toolbar.change_grid_unit(core.dialog.preference.preference["preference.designer.grid_unit"]);
+		this.toolbar.change_grid_unit(core.preference["preference.designer.grid_unit"]);
 		
-		this.toolbar.change_grid_opacity(core.dialog.preference.preference["preference.designer.grid_opacity"]);
+		this.toolbar.change_grid_opacity(core.preference["preference.designer.grid_opacity"]);
 		
-		this.toolbar.change_ruler_unit(core.dialog.preference.preference["preference.designer.ruler_unit"]);
+		this.toolbar.change_ruler_unit(core.preference["preference.designer.ruler_unit"]);
 		
 	},
 

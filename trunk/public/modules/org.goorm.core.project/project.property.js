@@ -100,7 +100,7 @@ org.goorm.core.project.property.prototype = {
 				for (var i=0;i < core.module.plugin_manager.list.length; i++){
 										
 					var plugin_name=core.module.plugin_manager.list[i].plugin_name;
-					self.manager.xml_parser('plugins/' + plugin_name + '/config.xml');
+					//self.manager.xml_parser('plugins/' + plugin_name + '/config.xml');
 					plugin_name = $(self.manager.xml).find("plugin").attr("name");
 				
 					self.plugin[plugin_name] = new self.manager.plugin(core.module.plugin_manager.list[i].plugin_name);

@@ -169,7 +169,7 @@ org.goorm.core.collaboration.edit.prototype = {
 		
 		
 		//Client Socket Methods
- 		this.socket = new WebSocket(core.dialog.preference.ini['collaboration_server_url']+":"+core.dialog.preference.ini['collaboration_server_port']);
+ 		this.socket = new WebSocket(core.preference['collaboration_server_url']+":"+core.preference['collaboration_server_port']);
  		
  		this.socket.onopen = function(){
  			self.status=1;

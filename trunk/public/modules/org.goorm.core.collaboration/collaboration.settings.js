@@ -58,11 +58,10 @@ org.goorm.core.collaboration.settings.prototype = {
 		var handle_ok = function() { 
 			localStorage['collaboration_nickname'] = $("#dialog_collaboration_settings #collaboration_nickname").val();
 			
-			core.dialog.preference.ini['collaboration_server_url'] = $("#dialog_collaboration_settings #collaboration_server_url").val();
-			core.dialog.preference.ini['collaboration_server_port'] = $("#dialog_collaboration_settings #collaboration_server_port").val();
+			core.preference['collaboration_server_url'] = $("#dialog_collaboration_settings #collaboration_server_url").val();
+			core.preference['collaboration_server_port'] = $("#dialog_collaboration_settings #collaboration_server_port").val();
 			
-			var str = JSON.stringify(core.dialog.preference.ini);
-			core.dialog.preference.manager.ini_maker(str);
+			core.preference.save();
 			
 			this.hide(); 
 		};
@@ -105,8 +104,8 @@ org.goorm.core.collaboration.settings.prototype = {
 	 * @method show 
 	 **/
 	show: function () {
-		$("#dialog_collaboration_settings #collaboration_server_url").val(core.dialog.preference.ini['collaboration_server_url']);
-		$("#dialog_collaboration_settings #collaboration_server_port").val(core.dialog.preference.ini['collaboration_server_port']);
+		$("#dialog_collaboration_settings #collaboration_server_url").val(core.preference['collaboration_server_url']);
+		$("#dialog_collaboration_settings #collaboration_server_port").val(core.preference['collaboration_server_port']);
 		
 		if(core.user.last_name != null && core.user.first_name != null){
 			$("#dialog_collaboration_settings #collaboration_nickname").val(core.user.last_name+" "+core.user.first_name).attr("readonly","readonly");

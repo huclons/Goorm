@@ -87,31 +87,31 @@ org.goorm.core.help.check_for_updates.prototype = {
 						// Get plugin version
 						for (var name in core.dialog.preference.plugin){
 							var plugin = core.dialog.preference.plugin[name];
-							$.ajax({
-								url: url,		
-								type: "POST",
-								data: "path="+plugin.url+"/config.xml",
-								success: function(data) {					
-								    var xml = $.parseXML(data);
-								    var official_version =  $(xml).find("version").text();
-								    var official_url =  $(xml).find("url").text();
-								    
-								    if(official_version != plugin.version && official_version){
-								    	$("#div_check_for_update").append(
-								    		"&lt;Plugin&gt; " + name
-							    			+ "("+plugin.version+") : new version "
-											+"<span style='color:red;'>"+official_version+"</span><br>"
-											+"<a href="+official_url+">"+official_url+"</a><br>"
-								    	);
-								    }
-								    index++;
-								    
-								    if(index == numberOfPlugins){
-								    	$(self).trigger("cursorLoadingComplete");
-								    }
-								}
-								, error: function(xhr, status, error) {alert.show(core.module.localization.msg["alertError"] + error);}
-							});
+//							$.ajax({
+//								url: url,		
+//								type: "POST",
+//								data: "path="+plugin.url+"/config.xml",
+//								success: function(data) {					
+//								    var xml = $.parseXML(data);
+//								    var official_version =  $(xml).find("version").text();
+//								    var official_url =  $(xml).find("url").text();
+//								    
+//								    if(official_version != plugin.version && official_version){
+//								    	$("#div_check_for_update").append(
+//								    		"&lt;Plugin&gt; " + name
+//							    			+ "("+plugin.version+") : new version "
+//											+"<span style='color:red;'>"+official_version+"</span><br>"
+//											+"<a href="+official_url+">"+official_url+"</a><br>"
+//								    	);
+//								    }
+//								    index++;
+//								    
+//								    if(index == numberOfPlugins){
+//								    	$(self).trigger("cursorLoadingComplete");
+//								    }
+//								}
+//								, error: function(xhr, status, error) {alert.show(core.module.localization.msg["alertError"] + error);}
+//							});
 						}
 					}
 					, error: function(xhr, status, error) {alert.show(core.module.localization.msg["alertError"] + error); }

@@ -309,13 +309,13 @@ org.goorm.core.menu.action.prototype = {
 		$("a[action=use_clipboard]").unbind("click");
 		$("a[action=use_clipboard]").click(function() {
 			
-			if(core.dialog.preference.preference['preference.editor.use_clipboard'] == "true") {
+			if(core.preference['preference.editor.use_clipboard'] == "true") {
 				$(this).find("img").removeClass("toolbar_buttonPressed");
-				core.dialog.preference.preference['preference.editor.use_clipboard'] = "false";
+				core.preference['preference.editor.use_clipboard'] = "false";
 				localStorage['preference.editor.use_clipboard'] = "false";
 			} else {
 				$(this).find("img").addClass("toolbar_buttonPressed");
-				core.dialog.preference.preference['preference.editor.use_clipboard'] = "true";
+				core.preference['preference.editor.use_clipboard'] = "true";
 				localStorage['preference.editor.use_clipboard'] = "true";
 			}
 

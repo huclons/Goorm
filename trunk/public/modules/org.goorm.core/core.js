@@ -54,7 +54,7 @@ org.goorm.core = function() {
 		fn: null,
 		loading_bar: null,
 		dictionary: null
-	}
+	};
 		
 	this.container = "";
 	this.skin_name = "";
@@ -128,6 +128,8 @@ org.goorm.core = function() {
 	this.server_language = null;
 	
 	this.plugins = [];
+	
+	this.preference = null;
 };
 
 org.goorm.core.prototype = {
@@ -136,7 +138,7 @@ org.goorm.core.prototype = {
 		this.start();
 		
 		var self = this;
-		this.filetypes = $.makeArray();
+		this.filetypes = [];
 		
 		
 		$(this).bind("layout_loaded", function () {
@@ -154,10 +156,6 @@ org.goorm.core.prototype = {
 			
 			this.module.plugin_manager.load(0);
 			
-			//Preference
-			//this.dialogPreference = new org.goorm.core.preference();
-			//this.dialogPreference.init();
-
 			this.main();
 		});
 		
@@ -241,6 +239,10 @@ org.goorm.core.prototype = {
 		
 		//Search Tab
 		this.module.search = new org.goorm.core.search.message();		
+		
+		//Preference
+		this.module.preference = new org.goorm.core.preference();
+		this.module.preference.init();
 		
 		//Plugin Loading Aspects
 		this.module.plugin_manager = new org.goorm.plugin.manager();
@@ -350,8 +352,8 @@ org.goorm.core.prototype = {
 		this.dialog.find_and_replace = new org.goorm.core.edit.find_and_replace();
 		this.dialog.find_and_replace.init();
 		
-		//this.dialog.preference = new org.goorm.core.preference();
-		//this.dialog.preference.init();
+		this.dialog.preference = this.module.preference;
+		this.dialog.preference.init_dialog();
 		
 		this.dialog.project_property = new org.goorm.core.project.property();
 		this.dialog.project_property.init();
@@ -502,7 +504,7 @@ org.goorm.core.prototype = {
 			return true;
 		}
 		else {
-			return false
+			return false;
 		}
 	},
 

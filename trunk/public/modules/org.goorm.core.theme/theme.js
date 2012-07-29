@@ -51,7 +51,7 @@ org.goorm.core.theme.prototype = {
 		
 		self.set_on();
 		
-		self.current_theme = core.dialog.preference.preference["preference.theme.current_theme"];
+		self.current_theme = core.preference["preference.theme.current_theme"];
 		self.button_theme_selector = new YAHOO.widget.Button("button_theme_selector", {  
 			type: "menu",  
 			menu: "button_theme_selectorMenu" 
@@ -334,7 +334,7 @@ org.goorm.core.theme.prototype = {
 					/////////
 					//(self.button_theme_selector).getMenu().subscribe("render", self.button_theme_menu_renderer, sorting_data[i].filename);	
 					
-					if(core.dialog.preference.preference["preference.theme.current_theme"]==sorting_data[i].filename) {
+					if(core.preference["preference.theme.current_theme"]==sorting_data[i].filename) {
 						dir = "configs/themes/"+sorting_data[i].filename+"/"+sorting_data[i].filename+".json";						
 						$.ajax({
 							url : dir,
