@@ -125,31 +125,31 @@ org.goorm.core.help.checkForUpdates.prototype = {
 						// Get plugin version
 						for (var name in core.dialogPreference.plugin){
 							var plugin = core.dialogPreference.plugin[name];
-							$.ajax({
-								url: url,		
-								type: "POST",
-								data: "path="+plugin.url+"/config.xml",
-								success: function(data) {					
-								    var xml = $.parseXML(data);
-								    var officialVersion =  $(xml).find("version").text();
-								    var officialUrl =  $(xml).find("url").text();
-								    
-								    if(officialVersion != plugin.version && officialVersion){
-								    	$("#divCheckForUpdate").append(
-								    		"&lt;Plugin&gt; " + name
-							    			+ "("+plugin.version+") : new version "
-											+"<span style='color:red;'>"+officialVersion+"</span><br>"
-											+"<a href="+officialUrl+">"+officialUrl+"</a><br>"
-								    	);
-								    }
-								    index++;
-								    
-								    if(index == numberOfPlugins){
-								    	$(self).trigger("cursorLoadingComplete");
-								    }
-								}
-								, error: function(xhr, status, error) {alert.show(core.localization.msg["alertError"] + error);}
-							});
+//							$.ajax({
+//								url: url,		
+//								type: "POST",
+//								data: "path="+plugin.url+"/config.xml",
+//								success: function(data) {					
+//								    var xml = $.parseXML(data);
+//								    var officialVersion =  $(xml).find("version").text();
+//								    var officialUrl =  $(xml).find("url").text();
+//								    
+//								    if(officialVersion != plugin.version && officialVersion){
+//								    	$("#divCheckForUpdate").append(
+//								    		"&lt;Plugin&gt; " + name
+//							    			+ "("+plugin.version+") : new version "
+//											+"<span style='color:red;'>"+officialVersion+"</span><br>"
+//											+"<a href="+officialUrl+">"+officialUrl+"</a><br>"
+//								    	);
+//								    }
+//								    index++;
+//								    
+//								    if(index == numberOfPlugins){
+//								    	$(self).trigger("cursorLoadingComplete");
+//								    }
+//								}
+//								, error: function(xhr, status, error) {alert.show(core.localization.msg["alertError"] + error);}
+//							});
 						}
 					}
 					, error: function(xhr, status, error) {alert.show(core.localization.msg["alertError"] + error); }

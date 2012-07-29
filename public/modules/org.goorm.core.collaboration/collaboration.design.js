@@ -167,7 +167,7 @@ org.goorm.core.collaboration.design.prototype = {
 				
 		//Client Socket Initializing
  		//this.socket = new WebSocket('ws://goorm.org:8090');
- 		this.socket = new WebSocket(core.dialog.preference.ini['collaboration_server_url']+":"+core.dialog.preference.ini['collaboration_server_port']);
+ 		this.socket = new WebSocket(core.preference['collaboration_server_url']+":"+core.preference['collaboration_server_port']);
  		 		
  		this.diffWorker = new Worker('module/org.goorm.core.collaboration/collaboration.design.worker.diff.js');
  		this.patchWorker = new Worker('module/org.goorm.core.collaboration/collaboration.design.worker.patch.js');

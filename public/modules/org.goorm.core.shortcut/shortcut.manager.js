@@ -258,7 +258,7 @@ org.goorm.core.shortcut.manager.prototype = {
 				return false;	
 			}
 			else {
-				if(core.dialog.preference.preference['preference.editor.use_clipboard']=="false"){
+				if(core.preference['preference.editor.use_clipboard']=="false"){
 					$("a[action=do_cut]").trigger("click");
 					e.stopPropagation();
 					e.preventDefault();
@@ -280,7 +280,7 @@ org.goorm.core.shortcut.manager.prototype = {
 				return false;	
 			}
 			else {
-				if(core.dialog.preference.preference['preference.editor.use_clipboard']=="false"){
+				if(core.preference['preference.editor.use_clipboard']=="false"){
 					$("a[action=do_copy]").trigger("click");
 					e.stopPropagation();
 					e.preventDefault();

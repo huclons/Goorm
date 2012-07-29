@@ -13,122 +13,181 @@ org.goorm.core.preference.manager = function () {
 org.goorm.core.preference.manager.prototype = {
 	init: function (option) {
 		var self = this;
-		this.preferences = $.makeArray();
+		this.preferences = [];
 	},
-
-	add_treeview: function (treeview, xml){
-		
-		$(xml).find("plugin").find("tree").each(function(){
-			$(this).find("item").each(function(){
-				var tmpnode2 = new YAHOO.widget.TextNode($(this).attr("label"), treeview, false);
-			});
+	
+	// get default preference file
+	get_default_file: function (xml, callback) {
+		$.getJSON(xml, function(json){
+			if ($.isFunction(callback)) {
+				callback(json);
+			}
 		});
 	},
-
-	create_treeview: function (xml) {
-		if ($(xml).find("tree").length > 0) {
-			var treeview = new YAHOO.widget.TreeView("preference_treeview");
-			
-			$(xml).find("tree").each(function(){
-				$(this).find("root").each(function(){
-					var tmpnode = new YAHOO.widget.TextNode($(this).attr("label"), treeview.getRoot(), $(this).attr("expanded"));
-					$(this).find("item").each(function(){
-						var tmpnode2 = new YAHOO.widget.TextNode($(this).attr("label"), tmpnode, false);
-					});
-				});
+	
+	// add treeview node revursively
+	add_treeview: function (parent, json){
+		var self = this;
+		var label = json.label;
+		var tmpnode = new YAHOO.widget.TextNode(label, parent, json.expanded);
+		if ($.isArray(json.child)) {
+			$.each(json.child, function(index, object){
+				self.add_treeview(tmpnode, object);
 			});
-			treeview.render();
-			this.treeview = treeview;
-		}	
+		}
 	},
 
-	create_tabview: function (xml) {
-		
+	// create treeview structure
+	create_treeview: function (json) {
 		var self = this;
-		var tabview = null;
-		$(xml).find("tree").each(function(){
-			
-			if ($(this).find("item").length > 0){
-				$(this).find("item").each(function(){
-					if ($(this).find("tab").length > 0) {
-						var label=$(this).attr("label");
-						label = label.replace(/[/#. ]/g,"");
-						$("#preference_tabview").append("<div id='" + label + "' style='display:none'></div>");
-						tabview = new YAHOO.widget.TabView(label);
-						
-						$(this).find("tab").each(function(){
-							
-							if($(this).attr("src")){
-								var url = $(this).attr("src");
-								var label = $(this).attr("label");
-								var classname = $(this).attr("classname");
-								$.ajax({
-									type: "GET",
-									dataType: "html",
-									async: false,
-									url: url,
-									success: function(data) {
-										var tab = new YAHOO.widget.Tab({ 
-										    label: label, 
-										    content: data, 
-										});
-										tabview.addTab(tab);
-										
-										if(classname) {
-											eval("self.preferences.push("+"new "+classname+"())");
-											eval("self.preferences[self.preferences.length-1].init()");
-										}
-									}
-								});
-							}
-							
-						});
+		var treeview = new YAHOO.widget.TreeView("preference_treeview");
+		
+		var core = new YAHOO.widget.TextNode(json.core.label, treeview.getRoot(), json.core.expanded);
+		var plugin = new YAHOO.widget.TextNode(json.plugin.label, treeview.getRoot(), false);
+		
+		// add subtrees
+		$.each(json.core.child, function(index, object){
+			self.add_treeview(core, object);
+		});
+		
+		treeview.render();
+		this.treeview = treeview;
+	},
 	
-						tabview.set('activeIndex', 0);
-						//tabview.appendTo("preference_tabview");
-					}
-					else {
-						var content="";
-						if($(this).attr("src")){
-							var label = $(this).attr("label");
-							label = label.replace(/[/#. ]/g,"");
-							var url = $(this).attr("src");
-							$.ajax({
-								type: "GET",
-								dataType: "html",
-								url: url,
-								success: function(data) {
-									content=data;
-									$("#preference_tabview").append("<div class='yui-content' id='"+label+"' style='display:none'>"+content+"</div>");
-								}
-							});
-						}
-					}
-				});
-			}
-			
-			
-			$(this).find("root").each(function(){
-				
-				if($(this).attr("src")){
-						
-					var url = $(this).attr("src");
-					var label = $(this).attr("label");
-					label = label.replace(/[/#. ]/g,"");
+	// add tabview node reculsively
+	add_tabview: function(json){
+		var self = this;
+		var label = json.label;
+		label = label.replace(/[/#. ]/g,"");
+		
+		$("#preference_tabview").append("<div id='" + label + "' style='display:none'></div>");
+		var tabview = new YAHOO.widget.TabView(label);
+		if ($.isArray(json.tab)) {
+			// 각각의 탭을 추가한다.
+			$.each(json.tab, function(index, object){
+				if(!$.isEmptyObject(object.html)){
+					var url = object.html;
+					var label = object.label;
+					var classname = object.classname;
 					$.ajax({
 						type: "GET",
 						dataType: "html",
+						async: false,
 						url: url,
 						success: function(data) {
-							$("#preference_tabview").append("<div class='yui-content' id='"+label+"' style='display:none'>"+data+"</div>");
+							var tab = new YAHOO.widget.Tab({ 
+							    label: label, 
+							    content: data 
+							});
+							tabview.addTab(tab);
+							
+//							if(classname) {
+//								eval("self.preferences.push("+"new "+classname+"())");
+//								eval("self.preferences[self.preferences.length-1].init()");
+//							}
 						}
 					});
 				}
 			});
-		});
-		
+			
+			tabview.set('activeIndex', 0);
+		}
 	},
 	
+	// create treeview structure
+	create_tabview: function (json) {
+		
+		var self = this;
+		var tabview = null;
+		$.each(json.core.child, function(index, object) {
+			self.add_tabview(object);
+		});
+		
+//		$(xml).find("tree").each(function(){
+//			
+//			if ($(this).find("item").length > 0){
+//				$(this).find("item").each(function(){
+//					if ($(this).find("tab").length > 0) {
+//						
+//						var label=$(this).attr("label");
+//						label = label.replace(/[/#. ]/g,"");
+//						$("#preference_tabview").append("<div id='" + label + "' style='display:none'></div>");
+//						tabview = new YAHOO.widget.TabView(label);
+//						
+//						$(this).find("tab").each(function(){
+//							
+//							if($(this).attr("src")){
+//								var url = $(this).attr("src");
+//								var label = $(this).attr("label");
+//								var classname = $(this).attr("classname");
+//								$.ajax({
+//									type: "GET",
+//									dataType: "html",
+//									async: false,
+//									url: url,
+//									success: function(data) {
+//										var tab = new YAHOO.widget.Tab({ 
+//										    label: label, 
+//										    content: data, 
+//										});
+//										tabview.addTab(tab);
+//										
+//										if(classname) {
+//											eval("self.preferences.push("+"new "+classname+"())");
+//											eval("self.preferences[self.preferences.length-1].init()");
+//										}
+//									}
+//								});
+//							}
+//							
+//						});
+//	
+//						tabview.set('activeIndex', 0);
+//						//tabview.appendTo("preference_tabview");
+//					}
+//					else {
+//						var content="";
+//						if($(this).attr("src")){
+//							var label = $(this).attr("label");
+//							label = label.replace(/[/#. ]/g,"");
+//							var url = $(this).attr("src");
+//							$.ajax({
+//								type: "GET",
+//								dataType: "html",
+//								url: url,
+//								success: function(data) {
+//									content=data;
+//									$("#preference_tabview").append("<div class='yui-content' id='"+label+"' style='display:none'>"+content+"</div>");
+//								}
+//							});
+//						}
+//					}
+//				});
+//			}
+//			
+//			
+//			$(this).find("root").each(function(){
+//				
+//				if($(this).attr("src")){
+//						
+//					var url = $(this).attr("src");
+//					var label = $(this).attr("label");
+//					label = label.replace(/[/#. ]/g,"");
+//					$.ajax({
+//						type: "GET",
+//						dataType: "html",
+//						url: url,
+//						success: function(data) {
+//							$("#preference_tabview").append("<div class='yui-content' id='"+label+"' style='display:none'>"+data+"</div>");
+//						}
+//					});
+//				}
+//			});
+//		});
+//		
+	},
+	
+	/*
 	xml_parser: function (url) {
 		var self=this;
 		$.ajax({
@@ -172,7 +231,7 @@ org.goorm.core.preference.manager.prototype = {
 			}
 		});
 	},
-	
+	*/
 	unserialize : function(data){
 	    // Takes a string representation of variable and recreates it  
 	    // 
@@ -305,69 +364,6 @@ org.goorm.core.preference.manager.prototype = {
 		this.url = null;
 		this.preference = new Object();
 		this.ini = new Object();
-	},
-	
-	validate: function(input,option){
-		var valid=1;
-		switch (option){
-			case "required" : {
-				if(!$(input).val().match(/[^.*]/)) {
-					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateRequired"]);
-				     valid=0;
-				}
-				break;
-			}
-			case "alpha" : {
-				if(!$(input).val().match(/^[a-z ._-]+$/i)) {
-					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateAlpha"]);
-				     valid=0;
-				}
-				break;
-			}
-			case "alphanum" : {
-				if(!$(input).val().match(/^[a-z0-9 ._-]+$/i)) {
-					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateAlphaNum"]);
-				     valid=0;
-				}
-				break;
-			}
-			case "digit" : {
-				if(!$(input).val().match(/^[-+]?[0-9]+$/)) {
-					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateDigit"]);
-				     valid=0;
-				}
-				break;
-			}
-			case "nodigit" : {
-				if(!$(input).val().match( /^[^0-9]+$/)) {
-					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateNoDigit"]);
-				     valid=0;
-				}
-				break;
-			}
-			case "number" : {
-				if(!$(input).val().match(/^[-+]?\d*\.?\d+$/)) {
-					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateNum"]);
-				     valid=0;
-				}
-				break;
-			}
-			case "email" : {
-				if(!$(input).val().match(/^([a-zA-Z0-9_\.\-\+%])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/)) {
-					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateEmail"]);
-				     valid=0;
-				}
-				break;
-			}
-			case "url" : {
-				if(!$(input).val().match(/^(http|https|ftp)\:\/\/[a-z0-9\-\.]+\.[a-z]{2,3}(:[a-z0-9]*)?\/?([a-z0-9\-\._\?\,\'\/\\\+&amp;%\$#\=~])*$/i)) {
-					alert.show($(input).attr("name")+core.module.localization.msg["alertValidateUrl"]);
-				     valid=0;
-				}
-				break;
-			}
-		}
-		return valid;
 	}
 
 };

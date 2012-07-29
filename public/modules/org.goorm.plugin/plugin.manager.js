@@ -109,7 +109,9 @@ org.goorm.plugin.manager.prototype = {
 					self.load(index);
 
 					$(core).trigger("goorm_loading");
-				});	
+				});
+				
+				core.module.preference.load_preference('/' + plugin_name + '/preference.json');
 			}
 		}
 		// else {

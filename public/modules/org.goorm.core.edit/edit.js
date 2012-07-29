@@ -46,8 +46,6 @@ org.goorm.core.edit.prototype = {
 		this.target = target;
 		this.title = title;
 		
-		//this.preference = core.dialog.preference.preference;
-				
 		this.timestamp = new Date().getTime();
 				
 		$(target).append("<textarea class='code_editor'>Loading Data...</textarea>");
