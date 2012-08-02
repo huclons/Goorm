@@ -11,28 +11,31 @@ org.goorm.core.preference.info.prototype = {
 		var self = this;
 		$.ajax({
 			type: 'get', 
-			dataType: "xml",
-			url: "configs/server.xml", 
-			data: "arg=L", 
-			success: function(xml) {
-				$("#server_osV").append($(xml).find("OS").attr("version"));
-				$("#apache_version").append($(xml).find("Apache").attr("version"));
-				$("#php_version").append($(xml).find("PHP").attr("version"));
-				$("#redis_version").append($(xml).find("Redis").attr("version"));
-				$("#nodeV").append($(xml).find("Node").attr("version"));
+			dataType: "json",
+			url: "configs/server.json", 
+			success: function(json) {
+				$("#server_os").append(json.OS_version);
+				$("#apache_version").append(json.Apache_version);
+				$("#php_version").append(json.PHP_version);
+				$("#redis_version").append(json.Redis_version);
+				$("#node_version").append(json.Node_version);
 			}
 		});
 		
 		$.ajax({
 			type: 'get', 
-			dataType: "xml",
-			url: "configs/goorm.xml", 
-			data: "arg=L", 
-			success: function(xml) {
-				$("#core_version").append($(xml).find("version").text());
-				$("#yui_version").append($(xml).find("YUI").attr("version"));
-				$("#jquery_version").append($(xml).find("jQuery").attr("version"));
-				$("#codemirror_version").append($(xml).find("CodeMirror").attr("version"));
+			dataType: "json",
+			url: "configs/goorm.json", 
+			success: function(json) {
+				$("#core_version").append(json.version);
+				$.each(json.lib, function(index, lib){
+					var version = lib.version;
+					switch(lib.name) {
+					case "YUI" : $("#yui_version").append(version);break;
+					case "jQuery" : $("#jquery_version").append(version);break;
+					case "CodeMirror" : $("#codemirror_version").append(version);break;
+					}
+				});
 			}
 		});
 		
