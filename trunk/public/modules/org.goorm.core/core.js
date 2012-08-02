@@ -359,10 +359,10 @@ org.goorm.core.prototype = {
 		this.dialog.project_property.init();
 		
 		this.dialog.join_project = new org.goorm.core.collaboration.join();
-		this.dialog.join_project.init();
+		//this.dialog.join_project.init();
 		
 		this.dialog.collaboration_settings = new org.goorm.core.collaboration.settings();
-		this.dialog.collaboration_settings.init();
+		//this.dialog.collaboration_settings.init();
 		
 		this.dialog.help_contents = new org.goorm.core.help.contents();
 		this.dialog.help_contents.init();

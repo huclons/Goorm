@@ -41,7 +41,8 @@ org.goorm.core.edit.prototype = {
 		
 		var enter_key = false; // onChange can't get enter_key
 		
-		this.collaboration = new org.goorm.core.collaboration.edit();
+		this.collaboration = new org.goorm.core.collaboration.editing();
+
 		
 		this.target = target;
 		this.title = title;
@@ -96,7 +97,7 @@ org.goorm.core.edit.prototype = {
 						var ev = e;
 						
 						if(enter_key == true) {
-							var line=self.editor.getLine(ev.to.line);
+							var line = self.editor.getLine(ev.to.line);
 
 							ev.text[0]="\n";
 							ev.from.line = self.fromCh.line;
@@ -125,13 +126,10 @@ org.goorm.core.edit.prototype = {
 							
 							enter_key = false;
 						}
-						
-						
-						//self.editor.getCursor();
-						
-						if(core.flag.collaboration_on == true){
+						else {
 							self.collaboration.update_change(ev);
 						}
+						//self.editor.getCursor();
 					}
 				}
 				else{
@@ -168,6 +166,10 @@ org.goorm.core.edit.prototype = {
 		
 		//this.collaboration.set_editor(this.editor);
 		this.set_dictionary();
+		
+		this.collaboration.init(this);
+		this.collaboration.set_editor(this.editor);
+		
 		
 		//this.set_option();
 		
@@ -269,10 +271,16 @@ org.goorm.core.edit.prototype = {
 		$.get(url, postdata, function (data) {
 			self.editor.setValue(data);
 			
-			self.collaboration.init(self.target,self);
+			//self.collaboration.init(self.target,self);
+			
+			/*
 			if(core.flag.collaboration_on == true){
 				self.collaboration.set_edit_on();
 			}
+			*/
+			
+			self.collaboration.set_filepath();
+			
 			statusbar.progressbar.set('value', 100);
 			
 			if(self.interval) {
