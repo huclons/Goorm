@@ -1,12 +1,8 @@
 module.exports = {
-	workspaces: [],
-	
-	join: function (socket, msg_obj) {
-		socket.join(msg_obj.workspace);
-		socket.set('workspace', msg_obj.workspace);
+	join: function (socket, msg) {
+		socket.join(msg.workspace);
+		socket.set('workspace', msg.workspace);
 		
-		//workspaces.push({name:msg_obj.workspace, :msg_obj.});
-		
-		socket.broadcast.emit("communication_someone_joined", msg_obj.user);
+		socket.broadcast.emit("communication_someone_joined", msg.user);
 	}
 };
