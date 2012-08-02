@@ -60,6 +60,7 @@ org.goorm.core.preference.prototype = {
 		});
 	},
 	
+	// load from localStorage
 	load: function() {
 		$.each(core.preference, function(key, value){
 			if(!$.isEmptyObject(localStorage[key])){
@@ -367,6 +368,9 @@ org.goorm.core.preference.prototype = {
 //				});
 //				*/
 //
+				var info = new org.goorm.core.preference.info();
+				info.init();
+				
 				$(core).trigger("preference_loading_complete");
 				console.log("preference dialog loaded");
 			}
