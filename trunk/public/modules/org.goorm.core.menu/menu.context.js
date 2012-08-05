@@ -17,7 +17,7 @@ org.goorm.core.menu.context.prototype = {
 		this.target = target;
 		
 		if (name == "none") {
-			$(trigger).bind("context_menu", function(e) {
+			$(trigger).bind("contextMenu", function(e) {
 				return false;
 			});
 		}
@@ -31,7 +31,7 @@ org.goorm.core.menu.context.prototype = {
 			$.ajax({
 				url: url,			
 				type: "GET",
-				data: "path="+path,
+				data: "path=public/" + path,
 				success: function(data) {
 					if(fingerprint != null && fingerprint != "") {
 						while (data.indexOf("[{@FINGERPRINT}]") != -1) {
@@ -43,6 +43,11 @@ org.goorm.core.menu.context.prototype = {
 					self.name=name;
 					$("#goorm_menu_container").find("div[id='" + name + "']").remove();
 					$("#goorm_menu_container").append(data);
+					
+					$(trigger).bind("contextmenu", function(e) {
+						e.preventDefault();
+						return false;
+					});
 					
 					self.menu = new YAHOO.widget.ContextMenu( 
 						name,  

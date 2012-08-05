@@ -16,6 +16,7 @@
 	float:left;
 	width:64px;
 	height:64px;
+	margin-right:8px;
 }
 
 .project_wizard_first_button .project_type_title {

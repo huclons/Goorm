@@ -185,6 +185,10 @@ org.goorm.core.prototype = {
 			$("input").bind("blur", function () {
 				self.status.focus_on_inputbox = false;
 			});
+			
+			$(document).bind("contextmenu", function(e) {
+				e.preventDefault();
+			});
 
 			//console.log($(".yui-layout-unit-left").find(".yui-layout-wrap").html());
 			
@@ -268,11 +272,6 @@ org.goorm.core.prototype = {
 		this.env.websocket_support = this.test_web_socket();
 		
 		$('.goorm_version').html("goorm IDE " + this.version);
-		
-		$(document).bind("context_menu", function(e) {
-			e.preventDefault();
-		});
-		
 		
 		this.module.layout = new org.goorm.core.layout();
 		this.module.layout.init(container);
@@ -440,12 +439,12 @@ org.goorm.core.prototype = {
 		
 		
 		$("#loading_panel_container").css('display', "none");
-		$("#loading_panel_container").width(660);
-		$("#loading_panel_container").height(400);
+		$("#loading_panel_container").width(640);
+		$("#loading_panel_container").height(480);
 		$("#loading_panel_container").css('position', "absolute");
 		$("#loading_panel_container").css('z-index', 1000);		
-		$("#loading_panel_container").css('left', $(window).width()/2-300);
-		$("#loading_panel_container").css('top', $(window).height()/2-200);
+		$("#loading_panel_container").css('left', $(window).width()/2-320);
+		$("#loading_panel_container").css('top', $(window).height()/2-240);
 		$("#loading_panel_container").fadeIn(2000);
 	},
 

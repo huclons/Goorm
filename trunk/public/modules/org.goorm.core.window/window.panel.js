@@ -61,7 +61,7 @@ org.goorm.core.window.panel.prototype = {
 				width: parseInt($("#" + self.workspace_container).width()/2),
 				height: parseInt($("#" + self.workspace_container).height()/2), 
 				visible: true, 
-				underlay: "none",
+				underlay: "shadow",
 				close: false,
 				autofillheight: "body",
 				draggable: true,
