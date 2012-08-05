@@ -30,7 +30,7 @@ org.goorm.core.collaboration.communication.prototype = {
  		
 		$("#" + target).append("<div class='communication_user_container'>User </div>");
 		$("#" + target).append("<div class='communication_message_container'></div>");
-		$("#" + target).append("<div class='communication_message_input_container'><input id='input_chat_message' value='Chatting Message' style='width:90%;' /></div>");		
+		$("#" + target).append("<div class='communication_message_input_container'><input id='input_chat_message' placeholder='Type your meessage...' style='width:90%;' /></div>");		
 		
 		$("#" + target + " #input_chat_message").keypress(function(evt){
 			if((evt.keyCode || evt.which) == 13){
