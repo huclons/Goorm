@@ -40,7 +40,7 @@ org.goorm.core.window.manager.prototype = {
 
 		//$("#" + container).append("");
 
-		$("#" + container).append("<div id='" + container + "_window_list'><div style='float:right'><div class='window_list window_button'></div></div><div class='tab_max_buttons' style='float:right;'><div class='max_maximize window_button'></div> <div class='max_close window_button'></div></div><div class='tab_scroll' style='float:right;'><div class='tab_list_left window_button'></div> <div class='tab_list_right window_button'></div></div></div>");
+		$("#" + container).append("<div id='" + container + "_window_list'><div class='tab_max_buttons' style='float:right;'><div class='max_maximize window_button'></div> <div class='max_close window_button'></div></div><div class='tab_scroll' style='float:right;'><div class='tab_list_left window_button'></div><div class='window_list window_button'></div><div class='tab_list_right window_button'></div></div></div>");
 		
 		$(".max_maximize").click(function (e) {
 			self.cascade();
@@ -116,12 +116,12 @@ org.goorm.core.window.manager.prototype = {
 			
 		});
 				
-		$("#" + container + "window_list").find(".window_list").click(function () {
+		$("#" + container + "_window_list").find(".window_list").click(function () {
 			self.list_menu.show();
 			
 			$("#window_list_menu").css("z-index", 5);
-			$("#window_list_menu").css("left", $("#" + container + "window_list").find(".window_list").offset().left - $("#window_list_menu").width() + 10);
-			$("#window_list_menu").css("top", $("#" + container + "window_list").find(".window_list").offset().top + 10);	
+			$("#window_list_menu").css("left", $("#" + container + "_window_list").find(".window_list").offset().left - $("#window_list_menu").width() + 10);
+			$("#window_list_menu").css("top", $("#" + container + "_window_list").find(".window_list").offset().top + 10);	
 		
 			return false;
 		});

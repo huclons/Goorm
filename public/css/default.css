@@ -29,6 +29,13 @@ body {
 input {
 	border:1px solid #ccc;
 	padding:1px;
+	
+	padding-left: 10px;
+	padding-right: 10px;
+	
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;	
 }
 
 .yui-skin-sam {
@@ -260,17 +267,33 @@ YUI BUTTON STYLE CUSTOMIZATION
 .yui-skin-sam .yui-button {
 	color: #000;
 	font-size: 11px !important;
-	-moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    border-radius: 8px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;
 	padding-left:8px;
 	padding-right:8px;
-	background-image:url(../images/org.goorm.core/button_bg.png);
+	
+	background-image: -o-linear-gradient(top, rgb(245,245,245) 30%, rgb(210,210,210) 90%);
+	background-image: -moz-linear-gradient(top, rgb(245,245,245) 30%, rgb(210,210,210) 90%);
+	background-image: -webkit-gradient(linear, left top, left top, color-stop(0.30, rgb(245,245,245)), color-stop(0.90, rgb(210,210,210)));
+	background-image: -webkit-linear-gradient(top, rgb(245,245,245) 30%, rgb(210,210,210) 90%);
+	background-image: -ms-linear-gradient(top, rgb(245,245,245) 30%, rgb(210,210,210) 90%);
+	background-image: linear-gradient(top, rgb(245,245,245) 30%, rgb(210,210,210) 90%);
+	
 	border-color: #666 !important;
 	border-width: 1px;
 	border-style: solid;
-	height:20px;
+	height:22px;
+	
+	-moz-box-shadow: 0px 0px 2px 0px #aaa;
+	-webkit-box-shadow: 0px 0px 2px 0px #aaa;
+	 box-shadow: 0px 0px 2px 0px  #aaa;
+}
+
+.yui-skin-sam .yui-button button {
+	font-family: Verdana, Arial, 굴림체, 굴림;
+	font-size: 100%;
 }
 
 .yui-skin-sam .yui-button span {
@@ -327,6 +350,15 @@ YUI MENU STYLE CUSTOMIZATION
 .yui-skin-sam .yuimenubaritem .yuimenubaritemlabel {
 	font-size: 11px;
 	font-family: Verdana, Arial, 굴림체, 굴림;
+}
+
+.yui-skin-sam .yuimenubaritem .yuimenubaritemlabel-selected {
+	background-image: -o-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image: -moz-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image: -webkit-gradient(linear, left bottom, left bottom, color-stop(0.1, rgb(200,200,200)), color-stop(0.9, rgb(150,150,150)));
+	background-image: -webkit-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image: -ms-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image: linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 }
 
 .yui-skin-sam .yuimenubaritemlabel {
@@ -404,9 +436,13 @@ YUI LAYOUT STYLE CUSTOMIZATION
 
 .yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-bd {
 	border: none;
-	/*
-	border-top:#666 1px solid;
-	*/
+	
+	background-image: -o-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: -moz-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: -webkit-gradient(linear, left top, left top, color-stop(0.24, rgb(220,220,220)), color-stop(0.62, rgb(170,170,170)));
+	background-image: -webkit-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: -ms-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image: linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
 }
 
 .yui-skin-sam .yui-layout .yui-layout-unit div.yui-layout-hd h2 {
@@ -596,6 +632,10 @@ YUI TAB STYLE CUSTOMIZATION
 	background-image: -webkit-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 	background-image: -ms-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 	background-image: linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	
+	-moz-box-shadow: inset 0px 1px 8px -2px #333;
+	-webkit-box-shadow: inset 0px 1px 8px -2px #333;
+	 box-shadow: inset 0px 1px 8px -2px #333;
 }
 
 
@@ -612,10 +652,6 @@ YUI TAB STYLE CUSTOMIZATION
 	padding-right: 10px;
 }
 
-.yui-skin-sam .yui-navset .yui-nav .selected a {
-	border-right: 1px #ccc solid;
-}
-
 .yui-skin-sam .yui-navset .yui-nav .selected,
 .yui-skin-sam .yui-navset .yui-navset-top .yui-nav .selected {
 	margin: 0px;
@@ -625,6 +661,20 @@ YUI TAB STYLE CUSTOMIZATION
 /**************************************************************************
 YUI PANEL STYLE CUSTOMIZATION
 **************************************************************************/
+.yui-skin-sam .yui-panel-container {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.yui-skin-sam .yui-panel {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;
+}
+
 .yui-skin-sam .container-close {
 	top:5px;
 	width: 12px;
@@ -633,6 +683,34 @@ YUI PANEL STYLE CUSTOMIZATION
 	background: url(../images/icons/context/closebutton.png) no-repeat 0 0px;
 	background-position: 2px 2px;
 	background-color: #FFF;
+}
+
+.yui-skin-sam .yui-panel .hd, .yui-skin-sam .yui-panel .bd, .yui-skin-sam .yui-panel .ft {
+	border-left-color: #444;
+	border-right-color: #444;
+}
+
+.yui-skin-sam .yui-panel {
+	border-top: 1px solid #444;
+}
+
+.yui-skin-sam .yui-panel .ft {
+	border-bottom: 1px solid #444;
+}
+
+.yui-skin-sam .yui-panel .bd {
+	border-top: 1px solid #666;
+}
+
+.yui-skin-sam .yui-panel .ft {
+	margin-right: -1px;
+}
+	
+.yui-skin-sam .underlay {
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-khtml-border-radius: 9px;
+	border-radius: 9px;
 }
 
 .yui-skin-sam .container-close:hover {
@@ -645,4 +723,17 @@ YUI PANEL STYLE CUSTOMIZATION
 
 .yui-skin-sam .yui-panel .hd {
 	font-weight: normal;
+	
+	background:none;
+	background-color: none;	
+	background-image: none;
+	
+	background-image: -o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image: -webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	
+	border-bottom: solid 1px #BBB;
 }

@@ -29,7 +29,7 @@ org.goorm.core.window.tab.prototype = {
 		
 		this.title = title;
 		
-		this.tab = new YAHOO.widget.Tab({ label: "<span class='tabtitle' style='float:left'>" + this.title + "</span> <div class='close tab_close_button'></div>", content: "" });
+		this.tab = new YAHOO.widget.Tab({ label: "<span class='tabtitle' style='float:left'>" + this.title + "</span> <div class='window_buttons'><div class='close tab_close_button window_button'></div></div>", content: "" });
 
 		
 		this.tabview.addTab(this.tab);
