@@ -43,7 +43,6 @@ org.goorm.plugin.manager.prototype = {
 				*/
 				
 				//statusbar.stop();
-				
 				$(core).trigger("plugin_loaded");
 				
 				//$(core).trigger("goorm_loading");
@@ -107,7 +106,7 @@ org.goorm.plugin.manager.prototype = {
 
 					index++;
 					self.load(index);
-
+					
 					$(core).trigger("goorm_loading");
 				});
 				
