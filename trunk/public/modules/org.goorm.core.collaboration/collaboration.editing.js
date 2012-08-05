@@ -41,7 +41,7 @@ org.goorm.core.collaboration.editing.prototype = {
  		
  		this.user = core.user.first_name + "_" + core.user.last_name;
 
-		var check_for_updates = function() {			
+		var check_for_updates = function() {
 			while(self.task_queue.length > 0 && self.updating_process_running == false) {
 				var current_update = self.task_queue.shift(); 
 				
@@ -53,7 +53,6 @@ org.goorm.core.collaboration.editing.prototype = {
  		
  		this.timer = window.setInterval(check_for_updates, 500);
  		this.set_collaboration_data("!refresh");
- 		
  		
 		this.socket.on("editing_message", function (data) {
  			if(!data) {
@@ -69,10 +68,19 @@ org.goorm.core.collaboration.editing.prototype = {
 					case "change":
 						self.task_queue.push(received_msg);
 						break;
+					case "cursor":
+						self.task_queue.push(received_msg);
+						break;
 					default:
 						
 				}
 			}
+		});
+		
+		this.socket.on("editing_someone_leaved", function (name) {
+			console.log(name + " leaved...");
+			$(self.target).find(".CodeMirror-scroll").find(".user_name_" + name).remove();
+			$(self.target).find(".CodeMirror-scroll").find(".user_cursor_" + name).remove();
 		});
 		
 		$(this.target).find("[id='collaboration.editing']").keydown(function(evt) {
@@ -85,6 +93,17 @@ org.goorm.core.collaboration.editing.prototype = {
 				}
 			} 
 		});
+		
+		setInterval(function() {
+			$(self.target).find(".CodeMirror-scroll").find(".user_cursor").each(function (i) {
+				if ($(this).css('visibility') == 'hidden') {
+					$(this).css('visibility', 'visible');
+				} else {
+					$(this).css('visibility', 'hidden');
+				}
+			});
+		}, 600);
+		
 	},
 
 	set_editor: function(editor){
@@ -111,7 +130,20 @@ org.goorm.core.collaboration.editing.prototype = {
 				return false;
 			}
 		}
-
+	},
+	
+	update_cursor: function(data){
+		var self = this;
+		if(this.socket != null){
+			if (self.socket.socket.connected) {
+				data.user = core.user.first_name + "_" + core.user.last_name;
+				self.socket.emit("message", '{"channel": "editing", "action":"cursor", "user":"' + core.user.first_name + "_" + core.user.last_name + '", "workspace": "'+ core.status.current_project_name +'", "filepath":"' + self.filepath + '", "message":' + JSON.stringify(data) + '}');
+			}
+			else {
+				alert.show("Collaboration server is disconnected!");
+				return false;
+			}
+		}
 	},
 
 	apply_update: function(action, update){
@@ -119,9 +151,28 @@ org.goorm.core.collaboration.editing.prototype = {
 			case "change":
 				this.change(update);
 				break;
+			case "cursor":
+				this.set_cursor(update);
+				break;
 			default:
 				console.log("invalid update");
 		};
+	},
+	
+	set_cursor: function(message) {
+		if ($(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).length > 0) {
+			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("top", (parseInt(message.line) * 13 - 8));
+			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("left", (parseInt(message.ch) * 7 + 34));
+			
+			$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("top", (parseInt(message.line) * 13 + 5));
+			$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("left", (parseInt(message.ch) * 7 + 32));
+		}
+		else {
+			$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_name_" + message.user + " user_name' style='top:" + (parseInt(message.line) * 13 - 8) + "px; left:" + (parseInt(message.ch) * 7 + 34) + "px;'>" + message.user + "</div>");
+			$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_cursor_" + message.user + " user_cursor' style='top:" + (parseInt(message.line) * 13 + 5) + "px; left:" + (parseInt(message.ch) * 7 + 32) + "px;'></div>");
+		}
+		
+		this.updating_process_running = false;
 	},
 	
 	change: function(message){

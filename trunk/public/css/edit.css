@@ -26,3 +26,30 @@ version: 3.0.0
 .CodeMirror, .CodeMirror-gutter {
 	height:100%;
 }
+
+.window_container .user_name {
+	font-family: Consolas, Monotype;
+	position: absolute;
+	z-index: 10;
+	border: 1px solid #bbb !important;
+	font-size: 7px;
+	letter-spacing: 1px;
+	background-color: #eee;
+	padding: 1px;
+	padding-left:4px;
+	padding-right:4px;
+	opacity:0.8;
+	
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;		
+}
+
+.window_container .user_cursor {
+	position: absolute;
+	z-index: 10;
+	width:0px;
+	height: 13px;
+	border-left: 1px solid red !important;
+	opacity:0.8;
+}

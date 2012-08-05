@@ -50,6 +50,20 @@ module.exports = {
 					drawing.msg(socket, msg_obj);
 				}
 			});
+			
+			socket.on('leave', function (raw_msg) {
+				var msg_obj = JSON.parse(raw_msg);
+				
+				var channel = "";
+
+				if(msg_obj["channel"] != undefined) {
+					channel = msg_obj["channel"];
+				}
+				
+				if (channel == "workspace") {
+					workspace.leave(socket, msg_obj);
+				}
+			});
 		}); 
 		
 		io.sockets.on('close', function (socket) {

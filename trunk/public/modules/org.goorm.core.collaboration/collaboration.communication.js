@@ -68,10 +68,24 @@ org.goorm.core.collaboration.communication.prototype = {
  			console.log(data);
  			$("#" + self.target).find(".communication_message_container").append("<div>" + data + " joined this workspace!</div>");
  		});
+ 		
+ 		this.socket.on('disconnect', function() {
+ 			console.log("!");
+ 			self.leave();
+ 		});
+ 		
+ 		$(window).unload(function() {
+ 			console.log("!");
+ 			self.leave();
+ 		});
 	},
 	
 	join: function () {
-		this.socket.emit("join", '{"channel": "workspace", "action":"join_workspace", "user":"' + core.user.first_name + "_" + core.user.last_name + '", "workspace": "'+ core.status.current_project_name +'", "message":"Nice to fuck you"}');
+		this.socket.emit("join", '{"channel": "workspace", "action":"join_workspace", "user":"' + core.user.first_name + "_" + core.user.last_name + '", "workspace": "'+ core.status.current_project_name +'", "message":"hello"}');
+	},
+	
+	leave: function () {
+		this.socket.emit("leave", '{"channel": "workspace", "action":"leave_workspace", "user":"' + core.user.first_name + "_" + core.user.last_name + '", "workspace": "'+ core.status.current_project_name +'", "message":"goodbye"}');
 	},
 	
 	resize: function () {

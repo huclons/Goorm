@@ -149,6 +149,11 @@ org.goorm.core.edit.prototype = {
 				}
 				
 				$(self.target).parent().parent().find(".ft").find(".editor_message").html("Line: " + (parseInt(self.editor.getCursor().line) + 1) + " | Col: " + self.editor.getCursor().ch);
+				
+				self.collaboration.update_cursor({
+					line: self.editor.getCursor().line,
+					ch: self.editor.getCursor().ch
+				});
 			},
 			onFocus: function () {
 				core.status.focus_on_editor = true;
