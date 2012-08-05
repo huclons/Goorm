@@ -343,20 +343,12 @@ org.goorm.core.preference.prototype = {
 						$("#grid_opacity_slider_value_text").text((self.grid_opacity_slider.getRealValue()*100)+"%");
 					});
 					
-					// set Apply, restore_default Button
-					$("#preference_tabview").find(".apply").each(function(i){
-						$(this).attr("id","applyBt_"+i);
-						new YAHOO.widget.Button("applyBt_"+i,{onclick:{fn:function(){
-							self.apply($("#preference_tabview #applyBt_"+i).parents(".yui-navset").attr("id"));
-						}}});
-					});
+					var info = new org.goorm.core.preference.info();
+					info.init();
 					
-					$("#preference_tabview").find(".restore_default").each(function(i){
-						$(this).attr("id","restore_defaultBt_"+i);
-						new YAHOO.widget.Button("restore_defaultBt_"+i,{onclick:{fn:function(){
-							self.restore_default($("#preference_tabview #restore_defaultBt_"+i).parents(".yui-navset").attr("id"));
-						}}});
-					});
+					$(core).trigger("preference_loading_complete");
+					console.log("preference dialog loaded");
+					
 				});
 				
 //				// set username, password for svn
@@ -368,18 +360,34 @@ org.goorm.core.preference.prototype = {
 //				});
 //				*/
 //
-				var info = new org.goorm.core.preference.info();
-				info.init();
-				
-				$(core).trigger("preference_loading_complete");
-				console.log("preference dialog loaded");
 			}
 		});
 		
+		var set_dialog_button = function(){
+			// set Apply, restore_default Button
+			$("#preference_tabview").find(".apply").each(function(i){
+				$(this).attr("id","applyBt_"+i);
+				new YAHOO.widget.Button("applyBt_"+i,{onclick:{fn:function(){
+					self.apply($("#preference_tabview #applyBt_"+i).parents(".yui-navset").attr("id"));
+				}}});
+			});
+			
+			$("#preference_tabview").find(".restore_default").each(function(i){
+				$(this).attr("id","restore_defaultBt_"+i);
+				new YAHOO.widget.Button("restore_defaultBt_"+i,{onclick:{fn:function(){
+					self.restore_default($("#preference_tabview #restore_defaultBt_"+i).parents(".yui-navset").attr("id"));
+				}}});
+			});
+		};
+		
 		var load_plugin_tree = function(){
-			var plugin_node = null;
-			// Plugin setting
-			$.each(core.module.plugin_manager.plugins, function(plugin_name, plugin){
+			var plugin_node = null,
+				plugin_list = core.module.plugin_manager.list,
+			    plugin_count = plugin_list.length;
+				
+			// load plugin tree.json
+			$.each(core.module.plugin_manager.list, function(index, plugin){
+				var plugin_name = plugin.name;
 				$.getJSON("/" + plugin_name + "/tree.json", function(json){
 					if (plugin_node === null) {
 						plugin_node = self.manager.treeview.getNodeByProperty("label", "Plugin");
@@ -388,9 +396,13 @@ org.goorm.core.preference.prototype = {
 						// construct basic tree structure
 						self.manager.add_treeview(plugin_node, json);
 						self.manager.add_tabview(json)
-						
 						self.manager.treeview.render();
 						self.manager.treeview.expandAll();
+					}
+				}).complete(function(){
+					if(--plugin_count == 0) {
+						// when all plugin tree loaded, render dialog buttons.
+						set_dialog_button();
 					}
 				});
 				

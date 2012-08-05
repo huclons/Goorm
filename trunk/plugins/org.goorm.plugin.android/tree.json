@@ -13,8 +13,5 @@
 					"label" : "Animations",
 					"html"	: "configs/preferences/org.goorm.core/system.animations.html"
 				}
-			],
-	"child" : [
-		{ "label" : "test" } 
-	]
+			]
 }
