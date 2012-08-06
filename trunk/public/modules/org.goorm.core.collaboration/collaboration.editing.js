@@ -161,34 +161,41 @@ org.goorm.core.collaboration.editing.prototype = {
 	},
 	
 	set_cursor: function(message) {
-		if ($(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).length > 0) {
-			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("top", (parseInt(message.line) * 13 - 8));
-			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("left", (parseInt(message.ch) * 7 + 84));
+		if (message.user != core.user.first_name + "_" + core.user.last_name) {
+			var coords = this.editor.charCoords({line:message.line, ch:message.ch});
+			var top = parseInt(coords.y) - parseInt($(this.target).find(".CodeMirror-scroll").offset().top);
+			var left = parseInt(coords.x) - parseInt($(this.target).find(".CodeMirror-scroll").offset().left);
 			
-			$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("top", (parseInt(message.line) * 13 + 5));
-			$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("left", (parseInt(message.ch) * 7 + 79));
+			if ($(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).length > 0) {
+				$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("top", top - 8);
+				$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("left", left + 5);
+				
+				$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("top", top);
+				$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("left", left);
+			}
+			else {
+				$(this.target).find(".CodeMirror-scroll").prepend("<span class='user_name_" + message.user + " user_name' style='top:" + (top - 8) + "px; left:" + (left + 5) + "px;'>" + message.user + "</span>");
+				$(this.target).find(".CodeMirror-scroll").prepend("<span class='user_cursor_" + message.user + " user_cursor' style='top:" + top + "px; left:" + left + "px;'></span>");
+				
+				var red = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
+				var green = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
+				var blue = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
+				
+				var light_red = (red + 90 >= 255)? 255 : red + 90;
+				var light_green = (red + 90 >= 255)? 255 : green + 90;
+				var light_blue = (red + 90 >= 255)? 255 : blue + 90;
+				
+				var color = '#' + red.toString(16) + green.toString(16) + blue.toString(16);
+				var light_color = '#' + light_red.toString(16) + light_green.toString(16) + light_blue.toString(16);
+				
+				$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("background-color", light_color);
+				$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("border-color", color);
+				$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("color", color);
+				
+				$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("border-color", color);
+			}
 		}
-		else {
-			$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_name_" + message.user + " user_name' style='top:" + (parseInt(message.line) * 13 - 8) + "px; left:" + (parseInt(message.ch) * 7 + 84) + "px;'>" + message.user + "</div>");
-			$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_cursor_" + message.user + " user_cursor' style='top:" + (parseInt(message.line) * 13 + 5) + "px; left:" + (parseInt(message.ch) * 7 + 79) + "px;'></div>");
-			
-			var red = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
-			var green = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
-			var blue = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
-			
-			var light_red = (red + 90 >= 255)? 255 : red + 90;
-			var light_green = (red + 90 >= 255)? 255 : green + 90;
-			var light_blue = (red + 90 >= 255)? 255 : blue + 90;
-			
-			var color = '#' + red.toString(16) + green.toString(16) + blue.toString(16);
-			var light_color = '#' + light_red.toString(16) + light_green.toString(16) + light_blue.toString(16);
-			
-			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("background-color", light_color);
-			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("border-color", color);
-			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("color", color);
-			$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("border-color", color);
-		}
-		
+
 		this.updating_process_running = false;
 	},
 	
@@ -205,6 +212,7 @@ org.goorm.core.collaboration.editing.prototype = {
 		}
 		this.editor.replaceRange(textStr, message.from, message.to);
 		
+		/*
 		var color = $(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("color");
 		var width = (message.from.ch - message.to.ch) * 13;
 		var height = (message.from.line - message.from.line) * 7;
@@ -214,7 +222,7 @@ org.goorm.core.collaboration.editing.prototype = {
 		$(this.target).find(".CodeMirror-scroll").find(".user_modifying_" + message.user).hide("fast", function () {
 			$(this.target).find(".CodeMirror-scroll").find(".user_modifying_" + message.user).remove();
 		});
-		
+		*/
 		
 		this.updating_process_running = false;
 	},
