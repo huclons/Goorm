@@ -106,6 +106,7 @@ org.goorm.core.file.move.prototype = {
 	show: function (context) {
 	
 		var self = this;
+		self.treeview = self.dialog_explorer.init("#file_move", false);
 
 		if (context) {
 			var filename = (core.status.selected_file.split("/")).pop();
@@ -127,9 +128,7 @@ org.goorm.core.file.move.prototype = {
 				if( window_manager.window[i].alive && window_filename == filename && window_filepath == filepath) {
 					self.is_alive_window = true;
 				}
-			}
-			
-			this.dialog.panel.show();
+			}			
 		}
 		else {	
 			var window_manager = core.module.layout.workspace.window_manager;
@@ -150,16 +149,13 @@ org.goorm.core.file.move.prototype = {
 				var temp_path = core.status.selected_file
 				var temp_name = temp_path.split("/").pop();
 				temp_path = temp_path.replace(temp_name, "");
-				
+
 				$("#file_move_ori_file").attr("value", temp_name);
 				$("#file_move_ori_path").attr("value", temp_path);
 				$("#file_move_target_name").attr("value", temp_name);
-			}
-			
-			this.dialog.panel.show();
+			}			
 		}
 	
-		self.treeview = self.dialog_explorer.init("#file_move", false);
 		this.dialog.panel.show();
 		
 	}
