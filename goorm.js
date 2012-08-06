@@ -83,6 +83,9 @@ goorm.get('/preference/ini_maker', routes.preference.ini_maker);
 goorm.get('/theme/save', routes.theme.save);
 goorm.get('/theme/get_list', routes.theme.get_list);
 
+//for download
+goorm.get('/download', routes.download);
+
 goorm.listen(9999, function(){
   console.log("goorm IDE server listening on port %d in %s mode", goorm.address().port, goorm.settings.env);
 });

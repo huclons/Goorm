@@ -6,7 +6,7 @@
 	<div style="width:100%; height:20px; overflow:auto; font-size:11px;">
     	<div style="float:left;">
         	<span localization_key='common_location'>Location : </span>
-            <input type="text" id="file_new_input_location_path" style="width:600px; height:15px;" readonly="readonly" />
+            <input type="text" id="file_new_location_path" style="width:560px; height:15px;" readonly="readonly" />
         </div>
         <div style="float:right;">
         	<span localization_key='common_target'>Target : </span>
@@ -17,16 +17,16 @@
     </div>
 	<div id="file_new_dialog_middle" style="width:780px; height:275px; margin-top:8px; font-size:11px;">
 		<div id="file_new_dialog_left" class="dialogs_left">
-			<div id="file_new_treeview" class='directory_treeview dialogs_left_inner'></div>
+			<div id="file_new_dir_tree" class='directory_treeview dialogs_left_inner'></div>
 		</div>
-		<div id="file_new_dialog_center" class="dialog_center"></div>
+		<div id="file_new_files" class="dialog_center"></div>
     </div>
 	<div style="width:100%; height:50px; margin-top:8px; font-size:11px;">
 		<div style="width:780px; height:70px; margin-left:4px; margin-top:2px;">
 			<table>
                 <tr style="line-height:1.8em;">
                     <td style="width:70px"><span localization_key='common_filename'>File Name</span></td>
-                    <td style="text-align:right;"><input type"text" id="file_new_input_filename" style="width:700px; height:15px"/></td>
+                    <td style="text-align:right;"><input type"text" id="file_new_target_name" style="width:680px; height:15px"/></td>
                 </tr>	
                 <tr style="line-height:1.8em;">
                     <td style="width:70px; padding-top:5px;"><span localization_key='common_filetype'>File Type</span></td>
@@ -43,28 +43,4 @@
 			</table>
 		</div>
     </div>    
-<!--
-	<div style="width:100%; height:210px; border:1px solid #999; background-color:#fff; margin-top:8px; overflow:auto; font-size:11px;">
-	    <div id="file_new_treeview"></div>
-    </div>
-	<div style="width:100%; height:50px; border:1px solid #999; margin-top:8px; font-size:11px;">
-		<div style="width:550px; height:70px; margin-left:4px; margin-top:2px;">
-			<table>
-                <tr style="line-height:1.8em;">
-                    <td style="width:70px">File Name</td>
-                    <td><input type"text" id="input_filename" style="width:350px; height:20px"/></td>
-                </tr>	
-                <tr style="line-height:1.8em;">
-                    <td style="width:70px">File Type</td>
-                    <td>
-                        <select id='input_filetype' style="width:405px; height:20px;">
-                            <option value='' selected>All Files (*.*)</option>
-                            <option value='m'>Objective-C (*.m)</option>
-                        </select>
-                    </td>
-                </tr>
-			</table>
-		</div>
-    </div>    
--->
 </div>
