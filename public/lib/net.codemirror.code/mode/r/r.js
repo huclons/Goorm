@@ -98,7 +98,7 @@ CodeMirror.defineMode("r", function(config) {
     startState: function(base) {
       return {tokenize: tokenBase,
               ctx: {type: "top",
-                    indent: -config.indent_unit,
+                    indent: -config.indentUnit,
                     align: false},
               indent: 0,
               afterIdent: false};
@@ -131,9 +131,9 @@ CodeMirror.defineMode("r", function(config) {
       if (state.tokenize != tokenBase) return 0;
       var firstChar = textAfter && textAfter.charAt(0), ctx = state.ctx,
           closing = firstChar == ctx.type;
-      if (ctx.type == "block") return ctx.indent + (firstChar == "{" ? 0 : config.indent_unit);
+      if (ctx.type == "block") return ctx.indent + (firstChar == "{" ? 0 : config.indentUnit);
       else if (ctx.align) return ctx.column + (closing ? 0 : 1);
-      else return ctx.indent + (closing ? 0 : config.indent_unit);
+      else return ctx.indent + (closing ? 0 : config.indentUnit);
     }
   };
 });

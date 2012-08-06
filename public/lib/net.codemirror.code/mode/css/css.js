@@ -1,5 +1,5 @@
 CodeMirror.defineMode("css", function(config) {
-  var indent_unit = config.indent_unit, type;
+  var indentUnit = config.indentUnit, type;
   function ret(style, tp) {type = tp; return style;}
 
   function tokenBase(stream, state) {
@@ -92,7 +92,7 @@ CodeMirror.defineMode("css", function(config) {
       var style = state.tokenize(stream, state);
 
       var context = state.stack[state.stack.length-1];
-      if (type == "hash" && context == "rule") style = "atom";
+      if (type == "hash" && context != "rule") style = "string-2";
       else if (style == "variable") {
         if (context == "rule") style = "number";
         else if (!context || context == "@media{") style = "tag";
@@ -114,7 +114,7 @@ CodeMirror.defineMode("css", function(config) {
       var n = state.stack.length;
       if (/^\}/.test(textAfter))
         n -= state.stack[state.stack.length-1] == "rule" ? 2 : 1;
-      return state.baseIndent + n * indent_unit;
+      return state.baseIndent + n * indentUnit;
     },
 
     electricChars: "}"

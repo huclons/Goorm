@@ -52,8 +52,11 @@ org.goorm.core.edit.prototype = {
 		$(target).append("<textarea class='code_editor'>Loading Data...</textarea>");
 		//$(target).append("<textarea class='clipboardBuffer'></textarea>");
 		
+		var fold_func = CodeMirror.newFoldFunction(CodeMirror.braceRangeFinder);
+		
 		this.editor = CodeMirror.fromTextArea($(target).find(".code_editor")[0], {
 			lineNumbers: true,
+			lineWrapping: true,
 			matchBrackets: true,
 			onKeyEvent: function(i, e) {			
 				
@@ -143,10 +146,12 @@ org.goorm.core.edit.prototype = {
 			  	window_manager.tab[window_manager.active_window].set_modified();
 			},
 			onCursorActivity: function () {
+				/*
 				if (self.highlight_current_cursor_line) {
 					self.editor.setLineClass(self.highlighted_line, null);
 					self.highlighted_line = self.editor.setLineClass(self.editor.getCursor().line, "active_line");
 				}
+				*/
 				
 				$(self.target).parent().parent().find(".ft").find(".editor_message").html("Line: " + (parseInt(self.editor.getCursor().line) + 1) + " | Col: " + self.editor.getCursor().ch);
 				
@@ -154,20 +159,42 @@ org.goorm.core.edit.prototype = {
 					line: self.editor.getCursor().line,
 					ch: self.editor.getCursor().ch
 				});
+				
+				self.editor.matchHighlight("CodeMirror-matchhighlight");
 			},
 			onFocus: function () {
 				core.status.focus_on_editor = true;
 			},
 			onBlur: function () {
-				core.status.focus_on_editor = false;				
+				core.status.focus_on_editor = false;
+			},
+			onGutterClick: function(cm, n) {
+				var info = cm.lineInfo(n);
+				
+				if (info.markerText) {
+					cm.clearMarker(n);
+				}
+				else {
+					cm.setMarker(n, "<span class='breakpoint'>●</span> %N%");
+				}
+				
+				fold_func(cm, n);
+			},
+			onUpdate: function () {
+				self.set_foldable();
+			},
+			extraKeys: {
+				"Ctrl-Q": function(cm) {
+					fold_func(cm, cm.getCursor().line);
+				}
 			}
 		});
 		
-		
+		/*
 		if (this.highlight_current_cursor_line) {
 			this.highlighted_line = this.editor.setLineClass(0, "active_line");
 		}
-		
+		*/
 		
 		//this.collaboration.set_editor(this.editor);
 		this.set_dictionary();
@@ -211,6 +238,21 @@ org.goorm.core.edit.prototype = {
 		});
 	},
 	
+	set_foldable: function () {
+		var self = this;
+		
+		if (this.editor) {
+			$(this.target).find(".CodeMirror-gutter-text").find("pre").find(".folding_icon_minus").remove();
+			
+			$(this.target).find(".CodeMirror-gutter-text").find("pre").each(function (i) {
+				if (self.editor.getLine(i).indexOf("{") > -1) {
+					$(this).prepend("<div class='folding_icon_minus'></div>");
+				}
+			});
+		}
+		//fold_func(cm, n);
+	},
+	
 	resize_all: function () {
 
 	},	
@@ -229,11 +271,11 @@ org.goorm.core.edit.prototype = {
 		//////////////////////////////////////////////////////////////
 		//Edit Settings
 		//////////////////////////////////////////////////////////////
-		this.editor.setOption("indent_unit", this.indent_unit);
-		this.editor.setOption("indent_with_tabs", this.indent_with_tabs);
+		this.editor.setOption("indentUnit", this.indent_unit);
+		this.editor.setOption("indentWithTabs", this.indent_with_tabs);
 		this.editor.setOption("tabMode", this.tab_mode);		
 		this.editor.setOption("enterMode", this.enter_mode);
-		this.editor.setOption("show_line_numbers", this.show_line_numbers);
+		this.editor.setOption("showLineNumbers", this.show_line_numbers);
 		this.editor.setOption("firstLineNumber", this.first_line_number);
 		this.editor.setOption("undoDepth", this.undo_depth);
 		this.editor.setOption("theme", this.theme);
@@ -256,7 +298,14 @@ org.goorm.core.edit.prototype = {
 		this.filetype = filetype;
 		
 		var i = 0;
-		this.interval = window.setInterval(function () { if(i<100) { statusbar.progressbar.set('value', i+=10); } else { window.clearInterval(self.interval); } }, 100);
+		this.interval = window.setInterval(function () {
+			if (i<100) { 
+				statusbar.progressbar.set('value', i+=10);
+			} 
+			else {
+				window.clearInterval(self.interval);
+			}
+		}, 100);
 		
 		statusbar.start();
 
@@ -293,6 +342,8 @@ org.goorm.core.edit.prototype = {
 			}
 			
 			self.editor.clearHistory();
+			
+			self.set_foldable();
 			
 			statusbar.stop();
 			
