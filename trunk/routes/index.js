@@ -51,7 +51,6 @@ exports.project.do_delete = function(req, res){
 	var evt = new EventEmitter();
 	
 	evt.on("project_do_delete", function (data) {
-		console.log(data);
 		res.json(data);
 	});
 
@@ -199,7 +198,7 @@ exports.file.get_nodes = function(req, res){
 	var evt = new EventEmitter();
 	var path = req.query.path;
 	path = path.replace(/\/\//g, "/");
-	console.log("get_nodes : "+path);
+
 	res.setHeader("Content-Type", "application/json");
 	
 	evt.on("got_nodes", function (data) {
@@ -219,7 +218,7 @@ exports.file.get_dir_nodes = function(req, res){
 	var evt = new EventEmitter();
 	var path = req.query.path;
 	path = path.replace(/\/\//g, "/");
-	console.log("get_nodes : "+path);
+
 	res.setHeader("Content-Type", "application/json");
 	
 	evt.on("got_dir_nodes", function (data) {
@@ -246,7 +245,7 @@ exports.file.do_exort = function(req, res){
 
 exports.file.do_move = function(req, res){
 	var evt = new EventEmitter();
-	console.log(req.query);
+
 	evt.on("file_do_move", function (data) {
 		res.json(data);
 	});
@@ -340,7 +339,6 @@ exports.theme.get_list = function(req, res){
 exports.download = function(req, res) {
 	// test code
 	res.download(__path+'public/gc1.iso', 'gc1.iso', function(err) {
-		console.log("1");
 		
 		rimraf(__path+'public/gc1.iso', function(err) {
 			if (err!=null) {
