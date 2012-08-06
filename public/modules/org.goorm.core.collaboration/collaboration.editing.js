@@ -202,27 +202,46 @@ org.goorm.core.collaboration.editing.prototype = {
 	change: function(message){
 		var self = this;
 		
-		var textStr = "";
-		
-		for(var i=0; i < message.text.length; i++){
-			if(i != 0 ){
-				textStr+="\n";
+		if (message.user != core.user.first_name + "_" + core.user.last_name) {
+			var textStr = "";
+			
+			for(var i=0; i < message.text.length; i++){
+				if(i != 0 ){
+					textStr+="\n";
+				}
+				textStr += message.text[i];
 			}
-			textStr += message.text[i];
+			this.editor.replaceRange(textStr, message.from, message.to);
+
+			/*
+			var from_coords = this.editor.charCoords({line:message.from.line, ch:message.from.ch});
+			var from_top = parseInt(from_coords.y) - parseInt($(this.target).find(".CodeMirror-scroll").offset().top);
+			var from_left = parseInt(from_coords.x) - parseInt($(this.target).find(".CodeMirror-scroll").offset().left);
+			
+			var to_coords = this.editor.charCoords({line:message.to.line, ch:message.to.ch});
+			var to_top = parseInt(to_coords.y) - parseInt($(this.target).find(".CodeMirror-scroll").offset().top);
+			var to_left = parseInt(to_coords.x) - parseInt($(this.target).find(".CodeMirror-scroll").offset().left);
+			
+			var color = $(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("color");
+			var width = from_left - to_left;
+			var height = from_top - to_top;
+			
+			console.log("--------------------------------------");
+			console.log(from_top);
+			console.log(from_left);
+			console.log(to_top);
+			console.log(to_left);
+			console.log(color);
+			console.log(width);
+			console.log(height);
+			
+			$(this.target).find(".CodeMirror-scroll").prepend("<span class='user_modifying_" + message.user + " user_modifying' style='top:" + from_top + "px; left:" + from_left + "px; width:" + width + "px; height:" + height + "px; background-color: " + color  +";'></span>");
+			
+			$(this.target).find(".CodeMirror-scroll").find(".user_modifying_" + message.user).hide("fast", function () {
+				$(self.target).find(".CodeMirror-scroll").find(".user_modifying_" + message.user).remove();
+			});
+			*/
 		}
-		this.editor.replaceRange(textStr, message.from, message.to);
-		
-		/*
-		var color = $(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("color");
-		var width = (message.from.ch - message.to.ch) * 13;
-		var height = (message.from.line - message.from.line) * 7;
-		
-		$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_modifying_" + message.user + "' style='top:" + (parseInt(message.from.line) * 13 + 5) + "px; left:" + (parseInt(message.from.ch) * 7 + 32) + "px; width:" + width + "px; height:" + height + "px;'></div>");
-		
-		$(this.target).find(".CodeMirror-scroll").find(".user_modifying_" + message.user).hide("fast", function () {
-			$(this.target).find(".CodeMirror-scroll").find(".user_modifying_" + message.user).remove();
-		});
-		*/
 		
 		this.updating_process_running = false;
 	},

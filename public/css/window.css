@@ -295,6 +295,11 @@ version: 3.0.0
 	-khtml-border-bottom-left-radius: 6px;
 	border-bottom-left-radius: 6px;
 	
+	-moz-border-bottom-right-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+	-khtml-border-bottom-right-radius: 6px;
+	border-bottom-right-radius: 6px;	
+		
 	background:none;
 	background-color: none;	
 	background-image: none;

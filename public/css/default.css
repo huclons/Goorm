@@ -391,6 +391,44 @@ YUI MENU STYLE CUSTOMIZATION
 	text-align:left;
 }
 
+/**************************************************************************
+YUI PROGRESSBAR STYLE CUSTOMIZATION
+**************************************************************************/
+.yui-skin-sam .yui-pb-rtl, .yui-skin-sam .yui-pb-ltr {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;
+	
+	-moz-box-shadow: 0px 0px 2px 1px #fff;
+	-webkit-box-shadow: 0px 0px 2px 1px #fff;
+	 box-shadow: 0px 0px 2px 1px  #fff;
+}
+
+.yui-skin-sam .yui-pb-ltr .yui-pb-bar, .yui-skin-sam .yui-pb-rtl .yui-pb-bar {
+	background-image: -o-linear-gradient(top, rgb(91,199,255) 50%, rgb(0,144,255) 90%);
+	background-image: -moz-linear-gradient(top, rgb(91,199,255) 50%, rgb(0,144,255) 90%);
+	background-image: -webkit-gradient(linear, left top, left top, color-stop(0.50, rgb(91,199,255)), color-stop(0.90, rgb(0,144,255)));
+	background-image: -webkit-linear-gradient(top, rgb(91,199,255) 50%, rgb(0,144,255) 90%);
+	background-image: -ms-linear-gradient(top, rgb(91,199,255) 50%, rgb(0,144,255) 90%);
+	background-image: linear-gradient(top, rgb(91,199,255) 50%, rgb(0,144,255) 90%);
+	
+	-moz-box-shadow: inset 0px 0px 4px -1px #333;
+	-webkit-box-shadow: inset 0px 0px 4px -1px #333;
+	 box-shadow: inset 0px 0px 4px -1px  #333;
+	 
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;	 
+}
+
+.yui-skin-sam .yui-pb-mask {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;	 
+}
 
 /**************************************************************************
 YUI LAYOUT STYLE CUSTOMIZATION

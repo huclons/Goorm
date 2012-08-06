@@ -434,7 +434,7 @@ org.goorm.core.layout.prototype = {
 		var layout_right_height = $(".yui-layout-unit-right").find(".yui-layout-wrap").height() - 25;
 		$("#goorm_inner_layout_right").find(".yui-content").height(layout_right_height);
 		
-		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 20;
+		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 26;
 		$("#goorm_inner_layout_bottom").find(".yui-content").height(layout_bottom_height);
 		
 		var layout_center_height = $(".yui-layout-unit-center").find(".yui-layout-unit-center").find(".yui-layout-wrap").height();
