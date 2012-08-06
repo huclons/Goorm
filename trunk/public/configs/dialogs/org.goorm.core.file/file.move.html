@@ -6,7 +6,7 @@
 	<div style="width:100%; height:20px; overflow:auto; font-size:11px;">
     	<div style="float:left;">
         	<span localization_key='common_location'>Location : </span>
-            <input type="text" id="file_move_input_location_path" style="width:600px; height:15px;" readonly="readonly" />
+            <input type="text" id="file_move_location_path" style="width:560px; height:15px;" readonly="readonly" />
         </div>
         <div style="float:right;">
         	<span localization_key='common_type'>Type : </span> 
@@ -17,9 +17,9 @@
     </div>
 	<div id="move_dialog_middle" style="width:780px; height:275px; margin-top:8px; font-size:11px;">
 		<div id="move_dialog_left" class="dialogs_left">
-			<div id="file_move_treeview" class='directory_treeview dialogs_left_inner'></div>
+			<div id="file_move_dir_tree" class='directory_treeview dialogs_left_inner'></div>
 		</div>
-		<div id="move_dialog_center" class="dialog_center"></div>
+		<div id="file_move_files" class="dialog_center"></div>
     </div>
 	<div style="width:100%; height:50px; margin-top:8px; font-size:11px;">
 		<div style="width:780px; height:70px; margin-left:4px; margin-top:2px;">
@@ -27,29 +27,16 @@
                 <tr style="line-height:1.8em;">
                     <td style="width:70px"><span localization_key='common_filename'>File Name</span></td>
                     <td style="text-align:right;">
-							<input type="hidden" id="input_move_old_filepath" style="width:350px; height:20px"/>
-							<input type="hidden" id="input_move_old_filename" style="width:350px; height:20px"/>
-	                    	<input type"text" id="file_move_input_filename" style="width:700px; height:15px"/>
+							<input type="hidden" id="file_move_ori_path" style="width:350px; height:20px"/>
+							<input type="hidden" id="file_move_ori_file" style="width:350px; height:20px"/>
+	                    	<input type="text" id="file_move_target_name" style="width:680px; height:15px"/>
                     </td>
                 </tr>	
                 <tr style="line-height:1.8em;">
                     <td style="width:70px; padding-top:5px;"><span localization_key='common_filetype'>File Type</span></td>
                     <td style="padding-top:5px; text-align:right;">
-                        <select id='file_move_project_type' style="width:705px; height:20px;">
+                        <select id='file_move_project_type' style="width:700px; height:20px;">
                             <option value='0' selected>All Files (*.*)</option>
-                        	<option value='c'>C (*.c)</option>
-                        	<option value='cpp'>C++ (*.cpp)</option>
-                        	<option value='css'>CSS (*.css)</option>
-                        	<option value='html'>Html (*.html)</option>
-                        	<option value='java'>Java (*.java)</option>
-                        	<option value='js'>JavaScript (*.js)</option>
-                        	<option value='jsp'>JSP (*.jsp)</option>
-                        	<option value='h'>Objective-C (*.h)</option>
-                            <option value='m'>Objective-C (*.m)</option>
-                        	<option value='php'>PHP (*.php)</option>
-                        	<option value='txt'>Text (*.txt)</option>
-                        	<option value='uml'>UML (*.uml)</option>
-                        	<option value='ui'>UI (*.ui)</option>
                         </select>
                     </td>
                 </tr>

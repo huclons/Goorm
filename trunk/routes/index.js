@@ -1,4 +1,5 @@
 var fs = require("fs");
+var rimraf = require('rimraf');
 
 //var g_env = require("../configs/env.js");
 
@@ -197,7 +198,8 @@ exports.file.put_contents = function(req, res){
 exports.file.get_nodes = function(req, res){
 	var evt = new EventEmitter();
 	var path = req.query.path;
-	
+	path = path.replace(/\/\//g, "/");
+	console.log("get_nodes : "+path);
 	res.setHeader("Content-Type", "application/json");
 	
 	evt.on("got_nodes", function (data) {
@@ -216,11 +218,13 @@ exports.file.get_nodes = function(req, res){
 exports.file.get_dir_nodes = function(req, res){
 	var evt = new EventEmitter();
 	var path = req.query.path;
-	
+	path = path.replace(/\/\//g, "/");
+	console.log("get_nodes : "+path);
 	res.setHeader("Content-Type", "application/json");
 	
 	evt.on("got_dir_nodes", function (data) {
 		try {
+			//console.log(JSON.stringify(data));
 			res.send(JSON.stringify(data));
 			res.end();
 		}
@@ -241,7 +245,13 @@ exports.file.do_exort = function(req, res){
 };
 
 exports.file.do_move = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	console.log(req.query);
+	evt.on("file_do_move", function (data) {
+		res.json(data);
+	});
+
+	g_file.do_move(req.query, evt);
 };
 
 exports.file.do_rename = function(req, res){
@@ -321,4 +331,27 @@ exports.theme.save = function(req, res){
 
 exports.theme.get_list = function(req, res){
 	res.send(null);
+};
+
+/*
+ * Download
+ */
+ 
+exports.download = function(req, res) {
+	// test code
+	res.download(__path+'public/gc1.iso', 'gc1.iso', function(err) {
+		console.log("1");
+		
+		rimraf(__path+'public/gc1.iso', function(err) {
+			if (err!=null) {
+			}
+			else {
+				console.log("good");
+			}
+		});
+
+		
+	}, function (err) {
+		console.log("2");
+	});
 };

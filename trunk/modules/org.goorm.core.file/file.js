@@ -56,34 +56,26 @@ module.exports = {
 		data.message = "process done";
 
 		if ( query.current_path!=null && query.folder_name!=null ) {
-
-			fs.readdir(__path+'workspace/'+query.current_path, function(err, files) {
-				if (err!=null) {
-					data.err_code = 10;
-					data.message = "Server can not response";
+			fs.exists(__path+'workspace/'+query.path, function(exists) {
+				if (exists) {
+					data.err_code = 20;
+					data.message = "Exist folder";
 
 					evt.emit("file_do_new_folder", data);
 				}
 				else {
-					if (files.hasObject(query.folder_name)) {
-						data.err_code = 20;
-						data.message = "Exist folder";
-
-						evt.emit("file_do_new_folder", data);
-					}
-					else {
-						fs.mkdir(__path+'workspace/'+query.current_path+'/'+query.folder_name, '0777', function(err) {
-							if (err!=null) {
-								data.err_code = 30;
-								data.message = "Cannot make directory";
-		
-								evt.emit("file_do_new_folder", data);
-							}
-							else {
-								evt.emit("file_do_new_folder", data);
-							}
-						});
-					}					
+					fs.mkdir(__path+'workspace/'+query.current_path+'/'+query.folder_name, '0777', function(err) {
+					console.log(err);
+						if (err!=null) {
+							data.err_code = 30;
+							data.message = "Cannot make directory";
+	
+							evt.emit("file_do_new_folder", data);
+						}
+						else {
+							evt.emit("file_do_new_folder", data);
+						}
+					});
 				}
 			});
 		}
@@ -260,15 +252,21 @@ module.exports = {
 			// root directory for get_dir_nodes only
 			var dir_tree = {};
 			dir_tree.root = "";
-			dir_tree.name = "/"+root_dir.replace(/\//g, "");
+			dir_tree.name = root_dir.replace(/\//g, "");
 			dir_tree.parent_label = dir_tree.root;
 			dir_tree.cls = "dir";
 			dir_tree.expanded = true;
 			dir_tree.sortkey = 0 + dir_tree.name;
 			dir_tree.type = "html";
+
+			var temp_label = dir_tree.name;
+			if (dir_tree.name=="") {
+				temp_label="workspace";
+			}
+
 			dir_tree.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
 						+ "<img src=images/icons/filetype/folder.filetype.png class=\"directory_icon file\" />"
-						+ dir_tree.name
+						+ temp_label
 						+ "<div class=\"fullpath\" style=\"display:none;\">" + dir_tree.root + dir_tree.name + "</div>"
 					 + "</div>";
 			dir_tree.children = tree;
@@ -380,7 +378,7 @@ module.exports = {
 		data.message = "process done";
 				
 		if (query.ori_path != null && query.ori_name != null && query.dst_name != null) {
-			var path = __path+"workspace/"+query.ori_path
+			var path = __path+"workspace/"+query.ori_path;
 			fs.rename(path+query.ori_name, path+query.dst_name, function (err) {
 
 				data.path = query.ori_path;
@@ -394,14 +392,41 @@ module.exports = {
 			data.message = "Invalide query";
 			
 			evt.emit("file_do_rename", data);
-		}		
-/*
-		rimraf(__path+query.path, function(err) {
-		evt.emit("project_do_delete", err);			
-		});
-*/
-		
+		}				
 	},
+	
+	do_move: function (query, evt) {
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+		console.log(query);
+		if (query.ori_path != null && query.ori_file != null && query.dst_path != null && query.dst_file != null) {
+			var ori_full = __path+"workspace/"+query.ori_path+"/"+query.ori_file;
+			var dst_full = __path+"workspace/"+query.dst_path+"/"+query.dst_file;
+			fs.rename(ori_full, dst_full, function (err) {
+
+				if (err!=null) {
+					data.err_code = 20;
+					data.message = "Can not move file";
+					
+					evt.emit("file_do_move", data);
+				}
+				else {
+					
+					data.path = query.dst_path;
+					data.file = query.dst_name;
+	
+					evt.emit("file_do_move", data);
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalide query";
+			
+			evt.emit("file_do_move", data);
+		}				
+	},	
 	
 	get_url_contents: function (path, evt) {//file_get_url_contents
 		var data = "";
