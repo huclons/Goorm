@@ -170,6 +170,22 @@ org.goorm.core.collaboration.editing.prototype = {
 		else {
 			$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_name_" + message.user + " user_name' style='top:" + (parseInt(message.line) * 13 - 8) + "px; left:" + (parseInt(message.ch) * 7 + 34) + "px;'>" + message.user + "</div>");
 			$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_cursor_" + message.user + " user_cursor' style='top:" + (parseInt(message.line) * 13 + 5) + "px; left:" + (parseInt(message.ch) * 7 + 32) + "px;'></div>");
+			
+			var red = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
+			var green = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
+			var blue = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
+			
+			var light_red = (red + 90 >= 255)? 255 : red + 90;
+			var light_green = (red + 90 >= 255)? 255 : green + 90;
+			var light_blue = (red + 90 >= 255)? 255 : blue + 90;
+			
+			var color = '#' + red.toString(16) + green.toString(16) + blue.toString(16);
+			var light_color = '#' + light_red.toString(16) + light_green.toString(16) + light_blue.toString(16);
+			
+			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("background-color", light_color);
+			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("border-color", color);
+			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("color", color);
+			$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("border-color", color);
 		}
 		
 		this.updating_process_running = false;
