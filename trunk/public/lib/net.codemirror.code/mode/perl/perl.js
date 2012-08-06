@@ -1,4 +1,4 @@
-// CodeMirror2 mode/perl/perl.js (text/x-perl) beta 0.09 (2011-10-15)
+// CodeMirror2 mode/perl/perl.js (text/x-perl) beta 0.10 (2011-11-08)
 // This is a part of CodeMirror from https://github.com/sabaca/CodeMirror_mode_perl (mail@sabaca.com)
 CodeMirror.defineMode("perl",function(config,parserConfig){
 	// http://perldoc.perl.org
@@ -324,7 +324,7 @@ CodeMirror.defineMode("perl",function(config,parserConfig){
 		hex				:1,	// - convert a string to a hexadecimal number
 		'import'			:1,	// - patch a module's namespace into your own
 		index				:1,	// - find a substring within a string
-		int				:1,	// - get the integer portion of a number
+		'int'				:1,	// - get the integer portion of a number
 		ioctl				:1,	// - system-dependent device control system call
 		'join'				:1,	// - join a list into a string using a separator
 		keys				:1,	// - retrieve list of indices from a hash
@@ -665,7 +665,10 @@ CodeMirror.defineMode("perl",function(config,parserConfig){
 		if(ch=="`"){
 			return tokenChain(stream,state,[ch],"variable-2")}
 		if(ch=="/"){
-			return tokenChain(stream,state,[ch],RXstyle,RXmodifiers)}
+			if(!/~\s*$/.test(stream.prefix()))
+				return "operator";
+			else
+				return tokenChain(stream,state,[ch],RXstyle,RXmodifiers)}
 		if(ch=="$"){
 			var p=stream.pos;
 			if(stream.eatWhile(/\d/)||stream.eat("{")&&stream.eatWhile(/\d/)&&stream.eat("}"))
@@ -782,8 +785,11 @@ CodeMirror.StringStream.prototype.look=function(c){
 
 // return a part of prefix of current stream from current position
 CodeMirror.StringStream.prototype.prefix=function(c){
-	var x=this.pos-c;
-	return this.string.substr((x>=0?x:0),c)};
+	if(c){
+		var x=this.pos-c;
+		return this.string.substr((x>=0?x:0),c)}
+	else{
+		return this.string.substr(0,this.pos-1)}};
 
 // return a part of suffix of current stream from current position
 CodeMirror.StringStream.prototype.suffix=function(c){

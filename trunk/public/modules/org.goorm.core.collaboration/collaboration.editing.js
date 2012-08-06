@@ -118,6 +118,7 @@ org.goorm.core.collaboration.editing.prototype = {
 		var self = this;
 		if(this.socket != null){
 			if (self.socket.socket.connected) {
+				data.user = core.user.first_name + "_" + core.user.last_name;
 				self.socket.emit("message", '{"channel": "editing", "action":"change", "user":"' + core.user.first_name + "_" + core.user.last_name + '", "workspace": "'+ core.status.current_project_name +'", "filepath":"' + self.filepath + '", "message":' + JSON.stringify(data) + '}');
 				
 				clearTimeout(this.auto_save_timer);
@@ -162,14 +163,14 @@ org.goorm.core.collaboration.editing.prototype = {
 	set_cursor: function(message) {
 		if ($(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).length > 0) {
 			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("top", (parseInt(message.line) * 13 - 8));
-			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("left", (parseInt(message.ch) * 7 + 34));
+			$(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("left", (parseInt(message.ch) * 7 + 84));
 			
 			$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("top", (parseInt(message.line) * 13 + 5));
-			$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("left", (parseInt(message.ch) * 7 + 32));
+			$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + message.user).css("left", (parseInt(message.ch) * 7 + 79));
 		}
 		else {
-			$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_name_" + message.user + " user_name' style='top:" + (parseInt(message.line) * 13 - 8) + "px; left:" + (parseInt(message.ch) * 7 + 34) + "px;'>" + message.user + "</div>");
-			$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_cursor_" + message.user + " user_cursor' style='top:" + (parseInt(message.line) * 13 + 5) + "px; left:" + (parseInt(message.ch) * 7 + 32) + "px;'></div>");
+			$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_name_" + message.user + " user_name' style='top:" + (parseInt(message.line) * 13 - 8) + "px; left:" + (parseInt(message.ch) * 7 + 84) + "px;'>" + message.user + "</div>");
+			$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_cursor_" + message.user + " user_cursor' style='top:" + (parseInt(message.line) * 13 + 5) + "px; left:" + (parseInt(message.ch) * 7 + 79) + "px;'></div>");
 			
 			var red = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
 			var green = Math.floor(Math.random()*206) - Math.floor(Math.random()*30);
@@ -192,6 +193,8 @@ org.goorm.core.collaboration.editing.prototype = {
 	},
 	
 	change: function(message){
+		var self = this;
+		
 		var textStr = "";
 		
 		for(var i=0; i < message.text.length; i++){
@@ -201,6 +204,17 @@ org.goorm.core.collaboration.editing.prototype = {
 			textStr += message.text[i];
 		}
 		this.editor.replaceRange(textStr, message.from, message.to);
+		
+		var color = $(this.target).find(".CodeMirror-scroll").find(".user_name_" + message.user).css("color");
+		var width = (message.from.ch - message.to.ch) * 13;
+		var height = (message.from.line - message.from.line) * 7;
+		
+		$(this.target).find(".CodeMirror-scroll").prepend("<div class='user_modifying_" + message.user + "' style='top:" + (parseInt(message.from.line) * 13 + 5) + "px; left:" + (parseInt(message.from.ch) * 7 + 32) + "px; width:" + width + "px; height:" + height + "px;'></div>");
+		
+		$(this.target).find(".CodeMirror-scroll").find(".user_modifying_" + message.user).hide("fast", function () {
+			$(this.target).find(".CodeMirror-scroll").find(".user_modifying_" + message.user).remove();
+		});
+		
 		
 		this.updating_process_running = false;
 	},

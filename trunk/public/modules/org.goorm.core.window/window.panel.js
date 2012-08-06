@@ -95,6 +95,9 @@ org.goorm.core.window.panel.prototype = {
 			
 			var mode = core.filetypes[this.inArray(this.filetype)].mode;
 			
+			//for Test
+			mode = "javascript";
+			
 			this.editor = new org.goorm.core.edit();
 			this.editor.init($("#"+container).find(".window_container"));
 			this.editor.load(this.filepath, this.filename, this.filetype);
@@ -142,11 +145,11 @@ org.goorm.core.window.panel.prototype = {
 			this.editor = new org.goorm.core.edit();
 			
 			this.editor.init($("#"+container).find(".window_container"));
-			
-
-			
+						
 			this.editor.load(this.filepath, this.filename, this.filetype);
-			this.editor.set_mode("text\/html");
+			
+			var mode = "javascript";
+			this.editor.set_mode(mode);
 		}
 		
 		this.set_footer(); //native function to call the this.panel.setFooter()		

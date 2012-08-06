@@ -288,15 +288,12 @@ version: 3.0.0
 	padding: 3px 6px;
 	height: 17px;
 	
+	border-top-width: 0px;
+	
 	-moz-border-bottom-left-radius: 6px;
 	-webkit-border-bottom-left-radius: 6px;
 	-khtml-border-bottom-left-radius: 6px;
 	border-bottom-left-radius: 6px;
-	
-	-moz-border-bottom-right-radius: 6px;
-	-webkit-border-bottom-right-radius: 6px;
-	-khtml-border-bottom-right-radius: 6px;
-	border-bottom-right-radius: 6px;	
 	
 	background:none;
 	background-color: none;	

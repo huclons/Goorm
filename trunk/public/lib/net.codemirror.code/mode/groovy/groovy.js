@@ -25,7 +25,7 @@ CodeMirror.defineMode("groovy", function(config, parserConfig) {
     }
     if (/\d/.test(ch)) {
       stream.eatWhile(/[\w\.]/);
-      if (stream.eat(/eE/)) { stream.eat(/+\-/); stream.eatWhile(/\d/); }
+      if (stream.eat(/eE/)) { stream.eat(/\+\-/); stream.eatWhile(/\d/); }
       return "number";
     }
     if (ch == "/") {
@@ -50,7 +50,7 @@ CodeMirror.defineMode("groovy", function(config, parserConfig) {
       return "operator";
     }
     stream.eatWhile(/[\w\$_]/);
-    if (ch == "@") return "meta";
+    if (ch == "@") { stream.eatWhile(/[\w\$_\.]/); return "meta"; }
     if (state.lastToken == ".") return "property";
     if (stream.eat(":")) { curPunc = "proplabel"; return "property"; }
     var cur = stream.current();
@@ -59,7 +59,7 @@ CodeMirror.defineMode("groovy", function(config, parserConfig) {
       if (blockKeywords.propertyIsEnumerable(cur)) curPunc = "newstatement";
       return "keyword";
     }
-    return "word";
+    return "variable";
   }
   tokenBase.isBase = true;
 
@@ -147,7 +147,7 @@ CodeMirror.defineMode("groovy", function(config, parserConfig) {
     startState: function(basecolumn) {
       return {
         tokenize: [tokenBase],
-        context: new Context((basecolumn || 0) - config.indent_unit, 0, "top", false),
+        context: new Context((basecolumn || 0) - config.indentUnit, 0, "top", false),
         indented: 0,
         startOfLine: true,
         lastToken: null
@@ -198,9 +198,9 @@ CodeMirror.defineMode("groovy", function(config, parserConfig) {
       var firstChar = textAfter && textAfter.charAt(0), ctx = state.context;
       if (ctx.type == "statement" && !expectExpression(state.lastToken)) ctx = ctx.prev;
       var closing = firstChar == ctx.type;
-      if (ctx.type == "statement") return ctx.indented + (firstChar == "{" ? 0 : config.indent_unit);
+      if (ctx.type == "statement") return ctx.indented + (firstChar == "{" ? 0 : config.indentUnit);
       else if (ctx.align) return ctx.column + (closing ? 0 : 1);
-      else return ctx.indented + (closing ? 0 : config.indent_unit);
+      else return ctx.indented + (closing ? 0 : config.indentUnit);
     },
 
     electricChars: "{}"
