@@ -393,7 +393,6 @@ org.goorm.core.file.saveAs.prototype = {
 	},
 	
 	refreshAll: function() {
-		console.log("refreshAll");
 	
 		this.currentPath = "/"+core.currentProjectPath;
 

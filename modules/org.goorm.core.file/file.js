@@ -65,7 +65,7 @@ module.exports = {
 				}
 				else {
 					fs.mkdir(__path+'workspace/'+query.current_path+'/'+query.folder_name, '0777', function(err) {
-					console.log(err);
+
 						if (err!=null) {
 							data.err_code = 30;
 							data.message = "Cannot make directory";
@@ -399,7 +399,7 @@ module.exports = {
 		var data = {};
 		data.err_code = 0;
 		data.message = "process done";
-		console.log(query);
+
 		if (query.ori_path != null && query.ori_file != null && query.dst_path != null && query.dst_file != null) {
 			var ori_full = __path+"workspace/"+query.ori_path+"/"+query.ori_file;
 			var dst_full = __path+"workspace/"+query.dst_path+"/"+query.dst_file;
