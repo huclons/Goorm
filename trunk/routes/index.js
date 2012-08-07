@@ -267,6 +267,26 @@ exports.file.get_property = function(req, res){
 	res.send(null);
 };
 
+exports.file.do_export = function(req, res){
+	var evt = new EventEmitter();
+
+	evt.on("file_do_export", function (data) {
+		res.json(data);
+	});
+
+	g_file.do_export(req.query, evt);
+};
+
+exports.file.do_import = function(req, res){
+	var evt = new EventEmitter();
+
+	evt.on("file_do_import", function (data) {
+		res.json(data);
+	});
+
+	g_file.do_import(req.query, evt);
+};
+
 
 /*
  * API : Terminal
@@ -337,19 +357,19 @@ exports.theme.get_list = function(req, res){
  */
  
 exports.download = function(req, res) {
-	// test code
-	res.download(__path+'public/gc1.iso', 'gc1.iso', function(err) {
+	
+	res.download(__path+'temp_files/'+req.query.file, function(err) {
 		
-		rimraf(__path+'public/gc1.iso', function(err) {
+		rimraf(__path+'temp_files/'+req.query.file, function(err) {
 			if (err!=null) {
 			}
 			else {
-				console.log("good");
+				// download and remove complete
 			}
 		});
 
 		
 	}, function (err) {
-		console.log("2");
+		// ...
 	});
 };

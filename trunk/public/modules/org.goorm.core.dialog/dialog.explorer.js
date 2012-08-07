@@ -204,18 +204,32 @@ org.goorm.core.dialog.explorer.prototype = {
 			});	
 
 			if (self.files=="#file_open_files") {
-				$("#file_open_files").find(".file_item").dblclick(function() {
+				$(self.files).find(".file_item").dblclick(function() {
 					core.module.layout.workspace.window_manager.open($(this).attr("filepath"), $(this).attr("filename"), $(this).attr("filetype"));
 					core.dialog.open_file.dialog.panel.hide();
 				});
 		
-				$("#file_open_files").find(".file_item").click(function() {
+				$(self.files).find(".file_item").click(function() {
 				
 					$(self.files).find(".file_item").removeClass("selected_item");
 					$(self.files).find(".folder_item").removeClass("selected_item");
 					$(this).addClass("selected_item");				
 				
-					$("#file_open_target_name").attr("value", $(this).attr("filename"));
+					$(self.target_name).attr("value", $(this).attr("filename"));
+					
+					self.filename = $(this).attr("filename");
+					self.filetype = $(this).attr("filetype");
+					self.filepath = $(this).attr("filepath");
+				});
+			}
+			else if (self.files=="#file_export_files") {		
+				$(self.files).find(".file_item").click(function() {
+				
+					$(self.files).find(".file_item").removeClass("selected_item");
+					$(self.files).find(".folder_item").removeClass("selected_item");
+					$(this).addClass("selected_item");				
+				
+					$(self.target_name).attr("value", $(this).attr("filename"));
 					
 					self.filename = $(this).attr("filename");
 					self.filetype = $(this).attr("filetype");

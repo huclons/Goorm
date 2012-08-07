@@ -426,7 +426,17 @@ module.exports = {
 			
 			evt.emit("file_do_move", data);
 		}				
-	},	
+	},
+	
+	do_export: function (query, evt) {
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+		
+		console.log(query);
+		
+		evt.emit("file_do_export", data);
+	},
 	
 	get_url_contents: function (path, evt) {//file_get_url_contents
 		var data = "";
