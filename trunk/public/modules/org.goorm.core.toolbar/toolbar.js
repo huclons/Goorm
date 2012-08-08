@@ -29,7 +29,7 @@ org.goorm.core.toolbar.prototype = {
 		} 
 		else {
 		*/
-			this.order = new Array("org.goorm.core.file", "org.goorm.core.edit", "org.goorm.core.project", "org.goorm.core.window", "org.goorm.core.design", "org.goorm.core.collaboration");
+			this.order = new Array("org.goorm.core.file", "org.goorm.core.edit", "org.goorm.core.project", "org.goorm.core.window", "org.goorm.core.design");
 			
 			var str="";
 			for(var i=0; i < this.order.length; i++){
@@ -43,7 +43,7 @@ org.goorm.core.toolbar.prototype = {
 			this.add("public/configs/toolbars/org.goorm.core.project/project.toolbar.html","org.goorm.core.project","goorm_main_toolbar");
 			this.add("public/configs/toolbars/org.goorm.core.window/window.toolbar.html","org.goorm.core.window","goorm_main_toolbar");
 			this.add("public/configs/toolbars/org.goorm.core.design/design.toolbar.html","org.goorm.core.design","goorm_main_toolbar");
-			this.add("public/configs/toolbars/org.goorm.core.collaboration/collaboration.toolbar.html","org.goorm.core.collaboration","goorm_main_toolbar");
+			//this.add("public/configs/toolbars/org.goorm.core.collaboration/collaboration.toolbar.html","org.goorm.core.collaboration","goorm_main_toolbar");
 		//}
 		
 		$(this).bind("toolbarLoaded", function () {

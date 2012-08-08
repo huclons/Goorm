@@ -1,6 +1,6 @@
 module.exports = {	
 	join: function (socket, msg) asd{
-		socket.join(msg.asdasasd);
+		socket.join(msg.asdasasd);asdfs
 		socket.set('workspace',dfdfdfdfdf msg.workspace);as
   sdddfdfdfdfdf
 asdfasdsdsdsdsdsdsdsdfasdfasdfsdfasdfasdfasdfasasasdf
