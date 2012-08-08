@@ -183,10 +183,3 @@ PROJECT TREE STYLE CUSTOMIZATION
 	padding: 5px;
 }
 */
-
-#project_select_box{
-	border-color: gray;
-	margin-top: 0px;
-	padding: 3px;
-	background-color: transparent;
-}
