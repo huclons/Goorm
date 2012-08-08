@@ -20,8 +20,8 @@ org.goorm.core.project.explorer.prototype = {
 		
 		var self = this;
 
-		$("#project_explorer").prepend("<div id='project_selector' style='height:27px; padding-left:5px; padding-right:5px; padding-top:5px; background-color:#eee; border-bottom:1px solid #ddd; font-size:10px; overflow:hidden; text-align:center;'></div>");
-		$("#project_selector").append("<select id='project_select_box'></select>")
+		$("#project_explorer").prepend("<div id='project_selector' style='height:27px; padding-left:5px; padding-right:5px; padding-top:5px; background-color:#eee; border-bottom:1px solid #ddd; text-align:center;'></div>");
+		$("#project_selector").append("<label class='selectbox'><select id='project_select_box'></select></label>")
 
 		$("#project_select_box").change(function() {
 			self.on_project_selectbox_change($(this).val());

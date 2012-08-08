@@ -1,31 +1,57 @@
 <div style="font-size:11px; margin-top:10px;">
 
-    <fieldset style="padding:10px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;">
-        <legend> <b>Designer Configuration</b> </legend> 
+    <fieldset>
+        <legend>Designer Configuration</legend> 
         <div style="width:100%; height:22px;">
-            <div style="float:left;" class="checkbox_div"><label for="show_grid"><input name="preference.designer.show_grid" type="checkbox" id="show_grid" class="checkbox_margin" /> Show Grid</label></div>
+            <div style="float:left;" class="checkbox_div">
+            	<span class="checkbox">
+            		<input name="preference.designer.show_grid" id="preference.designer.show_grid" type="checkbox" id="show_grid" class="checkbox_margin" />
+            		<label data-on="" data-off=""></label>
+        		</span>
+            	<label for="preference.designer.show_grid">Show Grid</label>
+            </div>
         </div>
         <div style="width:100%; height:22px;">
-            <div style="float:left;" class="checkbox_div"><label for="show_ruler"><input name="preference.designer.show_ruler" type="checkbox" id="show_ruler" class="checkbox_margin" /> Show Ruler</label></div>
+            <div style="float:left;" class="checkbox_div">
+            	<span class="checkbox">
+            		<input name="preference.designer.show_ruler" id="preference.designer.show_ruler" type="checkbox" id="show_ruler" class="checkbox_margin" />
+            		<label data-on="" data-off=""></label>
+        		</span>
+            	<label for="preference.designer.show_ruler">Show Ruler</label>
+            </div>
         </div>        
         <div style="width:100%; height:22px;">
-            <div style="float:left;" class="checkbox_div"><label for="show_preview"><input name="preference.designer.show_preview" type="checkbox" id="show_preview" class="checkbox_margin" /> Show Preview</label></div>            
+            <div style="float:left;" class="checkbox_div">
+            	<span class="checkbox">
+            		<input name="preference.designer.show_preview" id="preference.designer.show_preview" type="checkbox" id="show_preview" class="checkbox_margin" />
+            		<label data-on="" data-off=""></label>
+        		</span>
+            	<label for="preference.designer.show_preview">Show Preview</label>
+            </div>
         </div>
     </fieldset>
     
-	<fieldset style="padding:10px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;">
-        <legend> <b>Grid Setting</b> </legend> 
+	<fieldset>
+        <legend>Grid Setting</legend> 
         <div style="width:100%; height:22px;">
             Grid Unit:
-	    		<select name="preference.designer.grid_unit">
-	    			<option value="5">5px</option>
-	    			<option value="10">10px</option>
-	    			<option value="20">20px</option>
-	    			<option value="30">30px</option>
-	    		</select>
+            	<label class="selectbox"> 
+		    		<select name="preference.designer.grid_unit">
+		    			<option value="5">5px</option>
+		    			<option value="10">10px</option>
+		    			<option value="20">20px</option>
+		    			<option value="30">30px</option>
+		    		</select>
+	    		</label>
         </div>
         <div style="width:100%; height:22px;">
-        	<div style="float:left;" class="checkbox_div"><label for="snap_to_grid"><input name="preference.designer.snap_to_grid" type="checkbox" id="snap_to_grid" class="checkbox_margin" /> Snap to Grid</label></div>
+        	<div style="float:left;" class="checkbox_div">
+        		<span class="checkbox">
+        			<input name="preference.designer.snap_to_grid" id="preference.designer.snap_to_grid" type="checkbox" id="snap_to_grid" class="checkbox_margin" />
+        			<label data-on="" data-off=""></label>
+        		</span>
+        		<label for="preference.designer.snap_to_grid">Snap to Grid</label>
+        	</div>
         </div>
         <div style="width:100%; height:22px;">
             <div style="float:left;">Opacity: </div>
@@ -36,15 +62,17 @@
         </div>        
     </fieldset>
     
-    <fieldset style="padding:10px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;">
-        <legend> <b>Ruler Setting</b> </legend> 
+    <fieldset>
+        <legend>Ruler Setting</legend> 
         <div style="width:100%; height:22px;">
             Ruler Unit: 
-	    		<select name="preference.designer.ruler_unit">
-	    			<option value="px">px</option>
-	    			<option value="cm">cm</option>
-	    			<option value="inch">inch</option>
-	    		</select>
+	            <label class="selectbox"> 
+		    		<select name="preference.designer.ruler_unit">
+		    			<option value="px">px</option>
+		    			<option value="cm">cm</option>
+		    			<option value="inch">inch</option>
+		    		</select>
+		    	</label>
         </div>
     </fieldset>
 
