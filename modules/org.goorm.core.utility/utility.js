@@ -34,6 +34,15 @@ Array.prototype.contains = function (element) {
 	return false;
 };
 
+Array.prototype.inArray = function (element) {
+	for (var i = 0; i < this.length; i++) {
+		if (this[i] == element) {
+			return i;
+		}
+	}
+	return -1;
+};
+
 Array.prototype.shuffle=function() {
 	var i=this.length,j,t;
 	while(i--) {

@@ -7,12 +7,26 @@ module.exports = {
 		
 		io.set('log level', 0);
 		io.sockets.on('connection', function (socket) {
+			
+			
 			var term = pty.spawn('bash', [], {
 				name: 'xterm-color',
 				cols: 80,
 				rows: 30,
 				cwd: process.env.HOME,
 				env: process.env
+			});
+			
+			socket.on('communication_someone_joined', function (msg) {
+				msg = JSON.parse(msg);
+				
+				socket.join(msg.workspace);
+			});
+			
+			socket.on('communication_someone_leaved', function (msg) {
+				msg = JSON.parse(msg);
+				
+				socket.leave(msg.workspace);
 			});
 
 			socket.on('pty_execute_command', function (command) {

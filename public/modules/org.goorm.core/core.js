@@ -196,9 +196,6 @@ org.goorm.core.prototype = {
 
 			self.module.action.init();
 			
-			
-			self.module.layout.communication.join();
-			
 			self.end_loading();
 			
 			var goorm_loading_end_time = new Date().getTime(); 

@@ -56,17 +56,25 @@ org.goorm.core.collaboration.communication.prototype = {
 		});
 		
  		this.socket.on("communication_message", function (data) {
- 			console.log(core.status.selected_file);
- 			console.log(core.status.current_project_name);
- 			
  			data = decodeURIComponent(data);
  			$("#" + self.target).find(".communication_message_container").append("<div>" + data + "</div>");
  			$("#" + self.target).find(".communication_message_container").scrollTop(parseInt($("#" + self.target).find(".communication_message_container").height()));
  		});
  		
  		this.socket.on("communication_someone_joined", function (data) {
- 			console.log(data);
- 			$("#" + self.target).find(".communication_message_container").append("<div>" + data + " joined this workspace!</div>");
+ 			data = JSON.parse(data);
+ 			
+ 			$("#" + self.target).find(".communication_message_container").append("<div>" + data.user + " joined this workspace!</div>");
+ 			
+ 			$("#" + self.target).find(".communication_user_container").html(data.list.join("<br />"));
+ 		});
+ 		
+ 		this.socket.on("communication_someone_leaved", function (data) {
+ 			data = JSON.parse(data);
+ 			
+ 			$("#" + self.target).find(".communication_message_container").append("<div>" + data.user + " leaved this workspace!</div>");
+ 			
+ 			$("#" + self.target).find(".communication_user_container").html(data.list.join("<br />"));
  		});
  		
  		this.socket.on('disconnect', function() {
@@ -80,12 +88,19 @@ org.goorm.core.collaboration.communication.prototype = {
  		});
 	},
 	
+	clear: function () {
+		console.log("!");
+		$("#" + this.target).find(".communication_user_container").empty();
+		$("#" + this.target).find(".communication_message_container").empty();
+	},
+	
 	join: function () {
 		this.socket.emit("join", '{"channel": "workspace", "action":"join_workspace", "user":"' + core.user.first_name + "_" + core.user.last_name + '", "workspace": "'+ core.status.current_project_name +'", "message":"hello"}');
 	},
 	
 	leave: function () {
 		this.socket.emit("leave", '{"channel": "workspace", "action":"leave_workspace", "user":"' + core.user.first_name + "_" + core.user.last_name + '", "workspace": "'+ core.status.current_project_name +'", "message":"goodbye"}');
+		this.clear();
 	},
 	
 	resize: function () {

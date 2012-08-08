@@ -16,7 +16,7 @@ module.exports = {
 		io.sockets.on('connection', function (socket) {
 			socket.on('join', function (raw_msg) {
 				var msg_obj = JSON.parse(raw_msg);
-				
+
 				var channel = "";
 				
 				if(msg_obj["channel"] != undefined) {
