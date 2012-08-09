@@ -29,5 +29,10 @@ module.exports = {
 		
 		walker.on("end", function () {
 		});
+	},
+	
+	do_new: function (req, res) {
+		var plugin = require("../../plugins/"+req.plugin+"/modules/");
+		plugin.do_new(req, res);
 	}
 };

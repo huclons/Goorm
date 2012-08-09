@@ -103,6 +103,14 @@ org.goorm.core.project._new.prototype = {
 					if(data.err_code==0) {
 						core.dialog.open_project.open(data.project_author+"_"+data.project_name, data.project_name, data.project_type);
 
+						/*
+						 * for plugin, moyara 12.8.6
+						 */
+						core.status.current_project_path = data.project_author+"_"+data.project_name;
+						core.status.current_project_name = data.project_name;
+						core.status.current_project_type = data.project_type;
+						core.module.plugin_manager.new_project(senddata);
+						
 /*	작성필요
 						core.dialog.open_project.open(core.status.current_project_path, core.status.current_project_name, core.status.current_project_type);
 						

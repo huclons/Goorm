@@ -108,6 +108,16 @@ exports.plugin.get_list = function(req, res){
 	g_plugin.get_list(evt);
 };
 
+exports.plugin.do_new = function(req, res){
+//	var evt = new EventEmitter();
+//	
+//	evt.on("plugin_new", function (data) {
+//		res.json(data);
+//	});
+
+	g_plugin.do_new(req.query, res);
+};
+
 /*
  * API : File System
  */

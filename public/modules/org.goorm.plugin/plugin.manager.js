@@ -118,14 +118,25 @@ org.goorm.plugin.manager.prototype = {
 		// }
 	},
 
-	new_project: function (project_name, project_author, project_type, project_detailed_type, project_path, postdata){
-		if(project_type == "goorm") {
+	new_project: function (data){
+		/* data = 
+		   { 
+			project_type,
+			project_detailed_type,
+			project_author,
+			project_name,
+			project_about,
+			use_collaboration
+		   }
+		*/
+		
+		if(data.project_type == "goorm") {
 		
 		}
 		else {
-			if(eval("typeof this.plugins['org.goorm.plugin."+project_type+"'].new_project") == "function") {				
-				eval("this.plugins['org.goorm.plugin."+project_type+"'].new_project(project_name, project_author, project_type, project_detailed_type, project_path, postdata)");
-				core.dialog.project_property.set_project_information();
+			if($.isFunction(this.plugins["org.goorm.plugin."+data.project_type].new_project)) {
+				this.plugins["org.goorm.plugin."+data.project_type].new_project(data);
+//				core.dialog.project_property.set_project_information();
 			}
 		}
 	}
