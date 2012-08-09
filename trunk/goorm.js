@@ -52,6 +52,7 @@ goorm.get('/project/get_property', routes.project.get_property);
 //for plugin
 goorm.get('/plugin/get_list', routes.plugin.get_list);
 goorm.get('/plugin/install', routes.plugin.install);
+goorm.get('/plugin/new', routes.plugin.do_new);
 
 //for filesystem
 goorm.get('/file/new', routes.file.do_new);

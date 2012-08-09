@@ -17,14 +17,12 @@ org.goorm.plugin.cpp = function () {
 
 org.goorm.plugin.cpp.prototype = {
 	init: function () {
-		//this.addProjectItem();
+		this.addProjectItem();
 		
 		this.mainmenu = core.module.layout.mainmenu;
 		
-		//this.preference = core.dialogPreference.plugin['c'].preference;
-		
-		//this.debugger = new org.uizard.core.debug();
-		//this.debug_message = new org.uizard.core.debug.message();
+		//this.debugger = new org.goorm.core.debug();
+		//this.debug_message = new org.goorm.core.debug.message();
 		
 		this.cErrorFilter = /[A-Za-z]* error: [A-Za-z0-9 '",:_\\\/\.\+\-\*\#\@]*/;
 		this.cWarningFilter = /[A-Za-z]* warning: [A-Za-z0-9 '",:_\\\/\.\+\-\*\#\@]*/;
@@ -33,6 +31,15 @@ org.goorm.plugin.cpp.prototype = {
 		this.add_mainmenu();
 		
 		//core.dictionary.loadDictionary("plugins/org.uizard.plugin.c/dictionary.json");
+	},
+	
+	addProjectItem: function () {
+		$("div[id='project_new']").find(".project_types").append("<div class='project_wizard_first_button' project-type='cp'><div class='project_type_icon'><img src='/org.goorm.plugin.cpp/images/cpp.png' class='project_icon' /></div><div class='project_type_title'>C/C++ Project</div><div class='project_type_description'>C/C++ Project using GNU Compiler Collection</div></div>");
+		
+		$("div[id='project_new']").find(".project_items").append("<div class='project_wizard_second_button all cp' description='  Create New Project for C' projecttype='cpp'><img src='/org.goorm.plugin.cpp/images/cpp_console.png' class='project_item_icon' /><br /><a>C/C++ Console Project</a></div>");
+		
+		$(".project_dialog_type").append("<option value='c'>C/C++ Projects</option>");
+		
 	},
 	
 	add_mainmenu: function () {
@@ -48,6 +55,27 @@ org.goorm.plugin.cpp.prototype = {
 			core.dialog.new_project.show();
 			$(".project_wizard_first_button[project-type=cpp]").trigger("click");
 			$("#project_new").find(".project_types").scrollTop($(".project_wizard_first_button[project-type=cpp]").position().top - 100);
+		});
+	},
+	
+	new_project: function(data) {
+		/* data = 
+		   { 
+			project_type,
+			project_detailed_type,
+			project_author,
+			project_name,
+			project_about,
+			use_collaboration
+		   }
+		*/
+		var send_data = {
+				"plugin" : "org.goorm.plugin."+data.project_type,
+				"data" : data
+		};
+		
+		$.get('/plugin/new', send_data, function(result){
+			core.module.layout.project_explorer.refresh();
 		});
 	}
 };
