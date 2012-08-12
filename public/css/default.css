@@ -437,7 +437,7 @@ label:hover {
 }
 
 #terminal {
-	font-family: Consolas, Monotype;
+	font-family: Consolas, Monaco, monospace, Monotype;
 	font-size:11px;
 	background-color: black;
 	color: white;
@@ -445,7 +445,7 @@ label:hover {
 }
 
 #terminal #prompt_input {
-	font-family: Consolas, Monotype;
+	font-family: Consolas, Monaco, monospace, Monotype;
 	font-size:11px;
 	background-color: black;
 	border:0px;
@@ -458,6 +458,15 @@ label:hover {
 
 #terminal .stdout {
 	font-size:11px;
+}
+
+#terminal pre {
+	background-color: transparent;
+	padding: 0px;
+	font-family: Consolas, Monaco, monospace, Monotype;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
 }
 
 #project_selector {

@@ -53,11 +53,13 @@ org.goorm.core.window.panel.prototype = {
 			this.type = "codemirror_editor";
 			this.filename = filepath;
 		}
+		
+		var window_count = core.module.layout.workspace.window_manager.window_list.length;
 				
 		this.panel = new YAHOO.widget.Panel(
 			container, { 
-				x: $(".yui-layout-unit-center").position().left + 5, 
-				y: $(".yui-layout-unit-center").position().top + 30, 
+				x: $(".yui-layout-unit-center").position().left + 5 + window_count * 24, 
+				y: $(".yui-layout-unit-center").position().top + 30 + window_count * 24, 
 				width: parseInt($("#" + self.workspace_container).width()/2),
 				height: parseInt($("#" + self.workspace_container).height()/2), 
 				visible: true, 
@@ -84,11 +86,13 @@ org.goorm.core.window.panel.prototype = {
 		//this.filename = filename;
 		this.left = $("#"+container).css("left");
 		this.top = $("#"+container).css("top");
-		this.width = parseInt($("#" + self.workspace_container).width()/2);
-		this.height = parseInt($("#" + self.workspace_container).height()/2);
+		this.width = parseInt($("#" + self.workspace_container).width()/1.3);
+		this.height = parseInt($("#" + self.workspace_container).height()/1.5);
+
 		$("#" + this.container).width(this.width);
 		$("#" + this.container).height(this.height);
 		
+				
 		// Due to file type, create proper tool.
 		if (editor == "Editor") {
 			this.type = "Editor";
@@ -387,7 +391,7 @@ org.goorm.core.window.panel.prototype = {
 		
 		if(this.is_saved) {
 			this.alive = false;
-			delete core.module.layout.workspace.window_manager.window_list.windows[this.filepath+this.filename];
+			//delete core.module.layout.workspace.window_manager.window_list.windows[this.filepath+this.filename];
 
 			this.filename = null;
 			this.filetype = null;

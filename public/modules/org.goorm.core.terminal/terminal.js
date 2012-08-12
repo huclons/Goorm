@@ -17,7 +17,7 @@ org.goorm.core.terminal = function () {
 		{key: '32', css: 'color:#88FF88;'},
 		{key: '33', css: 'color:yellow;'},
 		{key: '34', css: 'color:#8888FF;'},
-		{key: '35', css: 'color:purple;'},
+		{key: '35', css: 'color:#FF33FF;'},
 		{key: '36', css: 'color:cyan;'},
 		{key: '37', css: 'color:white;'},
 		{key: '01', css: 'font-weight:bold;'},
@@ -27,12 +27,12 @@ org.goorm.core.terminal = function () {
 		{key: '42', css: 'background-color:#88FF88;'},
 		{key: '43', css: 'background-color:yellow;'},
 		{key: '44', css: 'background-color:#8888FF;'},
-		{key: '45', css: 'background-color:purple;'},
+		{key: '45', css: 'background-color:#FF33FF;'},
 		{key: '46', css: 'background-color:cyan;'},
 		{key: '47', css: 'background-color:white;'},
 	];
-	this.ansi_color_code_regexp = /\[([0-9][0-9];?)*m/;
-	this.bash_text_reset = /\[0*m/;
+	this.ansi_color_code_regexp = /\[([0-9][0-9];?)* ?m/g;
+	this.bash_text_reset = /\[0*m/g;
 	
 	this.user = "";
 	this.server = "";
@@ -111,14 +111,21 @@ org.goorm.core.terminal.prototype = {
 			$(self.target).find("#prompt_input").focus();
 		});
 		
+		var temp_stdout = "";
+		
 		this.socket.on("pty_command_result", function (data) {
 			var stdout = data.stdout;
-
-			stdout = self.transform_bash_to_html(stdout);
-
-			$(self.target).find("#results").append(stdout);
 			
-			$(self.target).find("#prompt_input").appendTo("#results");
+			temp_stdout += stdout;
+
+			if (stdout.indexOf('\n') > -1 || stdout.indexOf('$') > -1) {
+				temp_stdout = self.transform_bash_to_html(temp_stdout);
+				$(self.target).find("#results").append(temp_stdout);
+				
+				temp_stdout = "";
+			}
+			
+			$(self.target).find("#prompt_input").appendTo("#results pre:last");
 			
 			$(self.target).find("#prompt_input").val("");
 			$(self.target).find("#prompt_input").focus();
@@ -160,7 +167,6 @@ org.goorm.core.terminal.prototype = {
 				data[i] = this.set_prompt(data[i]);
 			}
 			else {
-			
 				var words = data[i].split(this.bash_text_reset);
 				
 				var new_words = '';
@@ -171,6 +177,10 @@ org.goorm.core.terminal.prototype = {
 				*/
 				
 				for (var j=0; j<words.length; j++) {
+				
+					var spaces = "";
+					
+					//console.log(words[j] + " / " + this.ansi_color_code_regexp.test(words[j]));
 					if (this.ansi_color_code_regexp.test(words[j])) {
 						var ansi_color_code = words[j].match(this.ansi_color_code_regexp);
 						
@@ -181,12 +191,14 @@ org.goorm.core.terminal.prototype = {
 								new_word += this.ansi_color_codes[k].css;
 							}
 						}
+
+						var word = words[j].replace(this.ansi_color_code_regexp, '');//.split(' ');
 						
-						var word = words[j].replace(this.ansi_color_code_regexp, '').split(' ');
+						//var value = word.pop();
+						//spaces = word.join('&nbsp;');
 						
-						var value = word.pop();
-						var spaces = word.join('&nbsp;');
-						
+						var value = word.split(' ').join('&nbsp;');
+						//console.log(value);
 						new_word += "'>" + value + "</span>" + '&nbsp;';
 						
 						/*
@@ -195,10 +207,16 @@ org.goorm.core.terminal.prototype = {
 						}
 						*/
 						
-						words[j] = spaces + new_word;
+
 						
-						//console.log(words[j]);
+						//words[j] = spaces + new_word;
+						
+						words[j] = new_word;
 					} 
+					
+					console.log(words[j]);
+						
+					words[j] = words[j].split('\t').join('&#9;');
 				}
 				
 				
@@ -211,13 +229,13 @@ org.goorm.core.terminal.prototype = {
 				}
 				*/
 				
-				data[i] = new_words;
+				data[i] = "<pre>" + new_words.replace(this.ansi_color_code_regexp, '') + "</pre>";
 			}
 		}
 		
 		this.prompt_length = data[data.length - 1].length;
 		
-		data = data.join("<br />");
+		data = data.join("");
 		
 		return data;
 	},
