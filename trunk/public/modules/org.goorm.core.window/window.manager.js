@@ -30,9 +30,7 @@ org.goorm.core.window.manager.prototype = {
 		this.window_list_menu = $.makeArray();
 		this.workspace_container = container;
 		
-		this.window_list = new Object();
-		this.window_list.active_window=0;
-		this.window_list.windows = new Object();
+		this.window_list = [];
 		
 		/*
 		this.panel.setHeader("<div style='overflow:auto' class='titlebar'><div style='float:left'>"+this.title+"</div><div style='width:40px; text-align:right; float:right'><img src='images/icons/context/minimizebutton.png' class='minimize button' /> <img src='images/icons/context/maximizebutton.png' class='maximize button' /> <img src='images/icons/context/closebutton.png' class='close button' /></div></div>");
@@ -132,13 +130,13 @@ org.goorm.core.window.manager.prototype = {
 				var count = 0;
 				var active = 0;
 				
-				for(var id in temp_window_list.windows){
-					var file_id = temp_window_list.windows[id];
-					self.open(file_id.filepath, file_id.filename, file_id.filetype, file_id.editor);
-					if(temp_window_list.active_window == id) 
-						active = count;
-					else count++;
-				}
+				$(temp_window_list).each(function (i) {
+					self.open(this.filepath, this.filename, this.filetype, this.editor);
+					
+					//if(temp_window_list.active_window == id) 
+					//	active = count;	
+					//else count++;
+				});
 				
 				//self.window[active].activate();
 				//ajax호출때문에 먼저 activate가 되버림.
@@ -155,12 +153,14 @@ org.goorm.core.window.manager.prototype = {
 		}
 		else {
 			this.add(filepath, filename, filetype, editor);
-			var file_id = filepath+filename;
-			this.window_list.windows[file_id] = new Object();
-			this.window_list.windows[file_id].filepath = filepath;
-			this.window_list.windows[file_id].filename = filename;
-			this.window_list.windows[file_id].filetype = filetype;
-			this.window_list.windows[file_id].editor = editor;
+
+			this.window_list.push({
+				filepath: filepath,
+				filename: filename,
+				filetype: filetype,
+				editor: editor
+			});
+
 			localStorage["window_list"] = JSON.stringify(this.window_list);
 		}
 		
@@ -460,8 +460,8 @@ org.goorm.core.window.manager.prototype = {
 		});
 		
 		$(this.window).each(function (i) {
-			this.isSaved = true;
-			this.tab.isSaved = true;
+			this.is_saved = true;
+			this.tab.is_saved = true;
 			this.close();
 		});
 				

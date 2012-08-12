@@ -30,10 +30,12 @@ version: 3.0.0
 
 .CodeMirror-gutter {
 	width: 40px;
+	line-height: 18px;
 }
 
 .CodeMirror-lines {
 	margin-left: 12px;
+	line-height: 18px;
 }
 
 .CodeMirror-gutter .breakpoint {
