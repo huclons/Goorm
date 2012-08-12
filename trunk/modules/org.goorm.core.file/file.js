@@ -433,9 +433,47 @@ module.exports = {
 		data.err_code = 0;
 		data.message = "process done";
 		
-		console.log(query);
-		
-		evt.emit("file_do_export", data);
+		if ( query.user!=null && query.path!=null && query.file!=null ) {
+			fs.exists(__path+'temp_files/'+query.user, function(exists) {
+				if (exists) {
+				}
+				else {
+					fs.mkdir(__path+'temp_files/'+query.user, '0777', function(err) {
+
+						if (err!=null) {
+							data.err_code = 30;
+							data.message = "Cannot make directory";
+	
+							evt.emit("file_do_export", data);
+						}
+						else {
+							fs.readFile(__path + 'workspace/'+query.path+'/'+query.file, "utf8", function(err, contents) {
+								if (err!=null) {
+									data.err_code = 40;
+									data.message = "Cannot find target file";
+			
+									evt.emit("file_do_export", data);
+								}
+								else {
+									fs.writeFile(__path+'temp_files/'+query.user+'/'+query.file, contents, function(err) {
+										if (err!=null) {
+											data.err_code = 10;
+											data.message = "Can not save";
+								
+											evt.emit("file_do_export", data);
+										}
+										else {
+											data.path = query.user+'/'+query.file;
+											evt.emit("file_do_export", data);
+										}
+									});		
+								}
+							});
+						}
+					});
+				}
+			});
+		}
 	},
 	
 	get_url_contents: function (path, evt) {//file_get_url_contents

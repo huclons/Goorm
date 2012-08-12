@@ -27,6 +27,7 @@ org.goorm.core.file._export.prototype = {
 			}
 
 			var postdata = {
+				user: core.user.first_name+"_"+core.user.last_name,
 				path: data.path,
 				file: data.name
 			};
@@ -34,6 +35,12 @@ org.goorm.core.file._export.prototype = {
 			$.get("file/export", postdata, function (data) {
 				if (data.err_code == 0) {
 					self.dialog.panel.hide();
+					
+					var downloaddata = {
+						file: data.path	
+					};
+					
+					location.href = "download/?file="+data.path;
 				}
 				else {
 					alert.show(data.message);
