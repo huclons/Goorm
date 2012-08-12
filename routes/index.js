@@ -78,7 +78,7 @@ exports.project.do_export = function(req, res){
 		res.json(data);
 	});
 	
-	g_project.do_export(evt);
+	g_project.do_export(req.query, evt);
 };
 
 exports.project.do_clean = function(req, res){

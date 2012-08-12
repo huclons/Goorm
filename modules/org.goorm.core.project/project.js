@@ -2,7 +2,7 @@ var fs = require('fs');
 var walk = require('walk');
 var rimraf = require('rimraf');
 var EventEmitter = require("events").EventEmitter;
-var zlib = require('zlib');
+var spawn = require("child_process").spawn;
 
 var projects = [];
 
@@ -105,12 +105,43 @@ module.exports = {
 		
 	},
 	
-	do_export: function (evt) {
+	do_export: function (query, evt) {
 		var data = {};
 		data.err_code = 0;
 		data.message = "process done";	
-		
-		evt.emit("project_do_export", data);
+
+		if ( query.user!=null && query.project_path!=null && query.project_name!=null ) {
+			fs.mkdir(__path+'temp_files/'+query.user, '0777', function(err) {
+				if (err==null || err.errno == 47) {		//errno 47 is exist folder error
+					var tar = spawn('zip', ['-r', __path+"temp_files/"+query.user+"/"+query.project_name+".zip", "workspace/"+query.project_path]);
+			
+					tar.on('exit', function (code) {
+						if (code==0) {
+							data.path = query.user+'/'+query.project_name+".zip";
+							evt.emit("project_do_export", data);
+						}
+						else {
+							data.err_code = 20;
+							data.message = "Cannot make zip file";
+							
+							evt.emit("project_do_export", data);
+						}
+					});
+				}
+				else {
+					data.err_code = 30;
+					data.message = "Cannot make directory";
+
+					evt.emit("project_do_export", data);
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalide query";
+			
+			evt.emit("project_do_export", data);			
+		}
 	},
 	
 	get_list: function (evt) {
