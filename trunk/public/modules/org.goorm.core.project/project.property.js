@@ -169,7 +169,7 @@ org.goorm.core.project.property.prototype = {
 							$("#"+core.module.plugin_manager.plugins[value].name+"_toolset").css("display", "block");
 						}
 						
-						toolbox_button_menu.set("label", core.module.plugin_manager.plugins[value].toolbox_name);
+						//toolbox_button_menu.set("label", core.module.plugin_manager.plugins[value].toolbox_name);
 						break;
 					}
 				}

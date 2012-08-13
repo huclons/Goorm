@@ -38,15 +38,23 @@ org.goorm.core.window.manager.prototype = {
 
 		//$("#" + container).append("");
 
-		$("#" + container).append("<div id='" + container + "_window_list'><div class='tab_max_buttons' style='float:right;'><div class='max_maximize window_button'></div> <div class='max_close window_button'></div></div><div class='tab_scroll' style='float:right;'><div class='tab_list_left window_button'></div><div class='window_list window_button'></div><div class='tab_list_right window_button'></div></div></div>");
+		$("#" + container).append("<div id='" + container + "_window_list'><div class='tab_max_buttons' style='float:right;'><div class='unmaximize_all window_button'></div> <div class='max_close window_button'></div></div><div class='tab_scroll' style='float:right;'><div class='tab_list_left window_button'></div><div class='window_list window_button'></div><div class='tab_list_right window_button'></div></div></div>");
 		
-		$(".max_maximize").click(function (e) {
-			self.cascade();
+		$(".unmaximize_all").click(function (e) {
+			//self.cascade();
+			
+			$(self.window).each(function (i) {
+				console.log("unmaximize!: " + i);
+				this.maximize();
+			});
+			
 			e.preventDefault();
 			e.stopPropagation();
 			return false;
 		});
-		$(".tab_max_buttons").css("display", "none");
+		
+		$(".tab_max_buttons").hide();
+		
 		$(".max_close").click(function () {
 			self.window[self.active_window].close();
 		});
@@ -152,6 +160,14 @@ org.goorm.core.window.manager.prototype = {
 			this.window[i].activate();
 		}
 		else {
+			//for test
+			if (filetype == "uml") {
+				editor = "Designer";
+			}
+			else {
+				editor = "Editor";
+			}
+		
 			this.add(filepath, filename, filetype, editor);
 
 			this.window_list.push({
@@ -233,6 +249,13 @@ org.goorm.core.window.manager.prototype = {
 			if(self.active_window!=-1) {
 				self.window[self.active_window].maximize(true);
 			}
+		});
+	},
+	
+	maximize_all: function () {
+		$(this.window).each(function (i) {
+			console.log("maximize!: " + i);
+			this.maximize();
 		});
 	},
 	
@@ -341,7 +364,8 @@ org.goorm.core.window.manager.prototype = {
 		}
 		
 		this.is_maxmizedd = false;
-		$(".tab_max_buttons").css("display", "none");
+		
+		$(".tab_max_buttons").hide();
 		
 		//this.window[this.active_window].activate();
 	},

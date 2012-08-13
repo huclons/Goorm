@@ -59,7 +59,7 @@ org.goorm.core.dialog.confirmation.prototype = {
 			"panelContainer_" + this.title, { 
 				width: '400px',
 				visible: false, 
-				underlay: "shadow",
+				underlay: "none",
 				close: true,
 				draggable: true,
 				text: this.message,

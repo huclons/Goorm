@@ -26,6 +26,7 @@ goorm.configure(function(){
   goorm.use(goorm.router);
   goorm.use(express.static(__dirname + '/public'));
   goorm.use(express.static(__dirname + '/plugins'));
+  goorm.use(express.static(__dirname + '/stencils'));
 });
 
 goorm.configure('development', function(){
@@ -92,10 +93,7 @@ goorm.listen(9999, function(){
   console.log("goorm IDE server listening on port %d in %s mode", goorm.address().port, goorm.settings.env);
 });
 
-
 var io = socketio.listen(goorm);
 
 g_terminal.start(io);
 g_collaboration.start(io);
-
-
