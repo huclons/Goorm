@@ -450,6 +450,10 @@ label:hover {
 	background-color: black;
 	border:0px;
 	color:white;
+	padding: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	border-radius: 0px;
 }
 
 #terminal #prompt_input:focus {
@@ -463,6 +467,7 @@ label:hover {
 #terminal pre {
 	background-color: transparent;
 	padding: 0px;
+	line-height: 14px;
 	font-family: Consolas, Monaco, monospace, Monotype;
 	-moz-border-radius: 0px;
 	-webkit-border-radius: 0px;

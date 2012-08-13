@@ -61,7 +61,7 @@ org.goorm.core.terminal.prototype = {
 		
 		//$(target).find("#prompt").html("<span id='prompt_user'>" + this.user+ "</span>@<span id='prompt_server'>" + this.server + "</span>:<span id='prompt_path'>" + this.path + "</span>$ <input id='prompt_input' />");
 		
-		self.socket.emit("pty_execute_command", "");
+		//self.socket.emit("pty_execute_command", "");
 		
 		$(target).find("#prompt_input").keydown(function (event) {
 			if (event.keyCode == '13') {
@@ -78,6 +78,8 @@ org.goorm.core.terminal.prototype = {
 				
 				self.history.push(command);
 				self.history_count = self.history.length - 1;
+				
+
 			}
 			else if (event.keyCode == '40') { //Down Arrow
 				if (self.history_count < self.history.length - 1) {
@@ -157,8 +159,7 @@ org.goorm.core.terminal.prototype = {
 		return this.user + "@" + this.server + ":" + this.path + "$ ";
 	},
 	
-	transform_bash_to_html: function (data) {
-		
+	transform_bash_to_html: function (data) {		
 		data = data.split("\n");
 		
 		for (var i=0; i<data.length; i++) {
@@ -213,8 +214,6 @@ org.goorm.core.terminal.prototype = {
 						
 						words[j] = new_word;
 					} 
-					
-					console.log(words[j]);
 						
 					words[j] = words[j].split('\t').join('&#9;');
 				}
@@ -229,12 +228,20 @@ org.goorm.core.terminal.prototype = {
 				}
 				*/
 				
-				data[i] = "<pre>" + new_words.replace(this.ansi_color_code_regexp, '') + "</pre>";
+				data[i] = new_words.replace(this.ansi_color_code_regexp, '');
+				
+				if (data[i].replace(/ */g, "") != "\r") {
+				//	if (data[i].indexOf("&#9;") > -1) {
+						data[i] = "<pre>" + data[i] + "</pre>";
+				//	}
+				}
 			}
+
+
 		}
 		
 		this.prompt_length = data[data.length - 1].length;
-		
+
 		data = data.join("");
 		
 		return data;
