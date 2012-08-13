@@ -428,6 +428,34 @@ module.exports = {
 		}				
 	},
 	
+	do_import: function (query, file, evt) {
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";	
+
+		if (query.file_import_location_path!=null && file!=null) {
+
+			fs.rename(file.path, __path+"workspace/"+query.file_import_location_path+"/"+file.name, function (err) {
+				if (err==null) {
+					evt.emit("file_do_import", data);
+				}
+				else {
+					data.err_code = 20;
+					data.message = "Cannot extract zip file";
+					
+					evt.emit("file_do_import", data);
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalide query";
+			
+			evt.emit("file_do_import", data);			
+		}
+	},
+
+	
 	do_export: function (query, evt) {
 		var data = {};
 		data.err_code = 0;

@@ -292,7 +292,7 @@ exports.file.do_import = function(req, res){
 		res.json(data);
 	});
 
-	g_file.do_import(req.query, evt);
+	g_file.do_import(req.body, req.files.file, evt);
 };
 
 

@@ -24,7 +24,7 @@ org.goorm.core.project._import.prototype = {
 			}
 		
 			$("#project_import_location").val(self.current_path);
-			statusbar.start();
+			core.module.loading_bar.start("Import processing...");
 			$('#project_import_my_form').submit();
 		};
 
@@ -62,7 +62,7 @@ org.goorm.core.project._import.prototype = {
 					target: "#project_import_upload_output",
 					success: function(data) {
 						self.dialog.panel.hide();
-						statusbar.stop();
+						core.module.loading_bar.stop();
 						if (data.err_code==0) {
 							notice.show(data.message);
 							core.module.layout.project_explorer.refresh();
