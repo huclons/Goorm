@@ -111,33 +111,18 @@ org.goorm.core.project._new.prototype = {
 						core.status.current_project_type = data.project_type;
 						core.module.plugin_manager.new_project(senddata);
 						
-/*	작성필요
-						core.dialog.open_project.open(core.status.current_project_path, core.status.current_project_name, core.status.current_project_type);
 						
-						if(!$("#check_project_new_import").is(":checked")) {
-							
-							var input_project_type = $("#input_project_type").attr("value");
-							var input_project_detailed_type = $("#input_project_detailed_type").attr("value");
-							var input_project_author = $("#input_project_author").attr("value");
-
-							core.module.plugin_manager.new_project(core.status.current_project_name, senddata.input_project_author, senddata.input_project_type, senddata.input_project_detailed_type, core.status.current_project_path);
-						}
-						else {
-							//여기서 전용 로딩중을 알림
+						// new project with import						
+						if($("#check_project_new_import").is(":checked")) {
 							core.module.loading_bar.start("Import processing...");
+							console.log(core.status.current_project_path);
+							$("#project_new_location").val(core.status.current_project_path);
 							$('#project_new_import_form').submit();
 						}
-*/
 						
-						// core.module.layout.project_explorer.refresh();
-						// core.module.layout.refresh_console();
-						// core.dialog.project_property.refresh_toolbox();
-						// $("a[action=show_properties]").removeClass('yuimenuitemlabel-disabled');
-						// $("a[action=show_properties]").parent().removeClass('yuimenuitem-disabled');
-						// var str = core.status.current_project_path;
-						// str.replace(".","");
-						// str.replace("#","");
-// 						
+						
+/*	작성필요
+*/
 						// core.module.layout.show_chat(str);
 					}
 					else {
@@ -177,14 +162,29 @@ org.goorm.core.project._new.prototype = {
 						core.module.layout.refresh_console();
 						core.dialog.project_property.refresh_toolbox();
 						core.module.loading_bar.stop();
-						//여기서 전용 로딩중을 뺌
 					}
 				}
 	            //$('#project_new_import_form').ajaxForm(form_options);
-				
+
+				var form_options = {
+					target: "#project_new_import_upload_output",
+					success: function(data) {
+						self.dialog.panel.hide();
+						core.module.loading_bar.stop();
+						if (data.err_code==0) {
+							notice.show(data.message);
+							core.module.layout.project_explorer.refresh();
+						}
+						else {
+							alert.show(data.message);
+						}
+						//notice.show(core.module.localization.msg["noticeProjectImportDone"]);
+						
+					}
+				}
+	            $('#project_new_import_form').ajaxForm(form_options);
+
 				$('#project_new_import_form').submit(function() { 
-				    // submit the form 
-				    $(this).ajaxSubmit(); 
 				    // return false to prevent normal browser submit and page navigation 
 				    return false; 
 				});
