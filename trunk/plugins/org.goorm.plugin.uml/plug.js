@@ -7,7 +7,7 @@
 org.goorm.plugin.uml = function () {
 	this.name = "uml";
 	this.filetypes = "uml|ui";
-	this.toolboxName = "";
+	this.toolbox_name = "";
 	this.stencil_css = "org.goorm.stencil.uml/stencil.uml.css";
 	this.window_manager = null;
 	this.mainmenu = null;
@@ -30,7 +30,7 @@ org.goorm.plugin.uml.prototype = {
 			async :false,
 			url: "org.goorm.plugin.uml/config.xml",
 			success: function(xml) {
-				self.toolboxName = $(xml).find("toolbox").attr("name");
+				self.toolbox_name = $(xml).find("toolbox").attr("name");
 
 				self.add_toolbox();
 			},
@@ -129,28 +129,28 @@ org.goorm.plugin.uml.prototype = {
 	},
 
 	add_new_other_filelist: function () {
-		var val =	"<div id='selector_uml' value='umlClassDiagram' class='selectDiv' url='org.goorm.plugin.web/template/template.uml.uml' style='height:16px;'>" +
+		var val =	"<div id='selector_uml' value='uml_class_diagram' class='selectDiv' url='org.goorm.plugin.web/template/template.uml.uml' style='height:16px;'>" +
 					"<div style='float:left; width:20px; height:16px;'>" +
 					"<img src='config/image/icons/filetype/uml.filetype.png' />" + 
 					"</div>" +
 					"<div style='float:left; padding-top:2px; padding-left:2px;'>UML Class Diagram</div>" +
 					"</div>" +
 					"</div>";
-		val 	+=	"<div id='selector_uml' value='umlStateDiagram' class='selectDiv' url='org.goorm.plugin.web/template/template.uml.uml' style='height:16px;'>" +
+		val 	+=	"<div id='selector_uml' value='uml_state_diagram' class='selectDiv' url='org.goorm.plugin.web/template/template.uml.uml' style='height:16px;'>" +
 					"<div style='float:left; width:20px; height:16px;'>" +
 					"<img src='config/image/icons/filetype/uml.filetype.png' />" + 
 					"</div>" +
 					"<div style='float:left; padding-top:2px; padding-left:2px;'>UML State Diagram</div>" +
 					"</div>" +
 					"</div>";
-		val 	+=	"<div id='selector_uml' value='umlSequenceDiagram' class='selectDiv' url='org.goorm.plugin.web/template/template.uml.uml' style='height:16px;'>" +
+		val 	+=	"<div id='selector_uml' value='uml_sequence_diagram' class='selectDiv' url='org.goorm.plugin.web/template/template.uml.uml' style='height:16px;'>" +
 					"<div style='float:left; width:20px; height:16px;'>" +
 					"<img src='config/image/icons/filetype/uml.filetype.png' />" + 
 					"</div>" +
 					"<div style='float:left; padding-top:2px; padding-left:2px;'>UML Sequence Diagram</div>" +
 					"</div>" +
 					"</div>";
-		val 	+=	"<div id='selector_uml' value='umlUsecaseDiagram' class='selectDiv' url='org.goorm.plugin.web/template/template.uml.uml' style='height:16px;'>" +
+		val 	+=	"<div id='selector_uml' value='uml_usecase_diagram' class='selectDiv' url='org.goorm.plugin.web/template/template.uml.uml' style='height:16px;'>" +
 					"<div style='float:left; width:20px; height:16px;'>" +
 					"<img src='config/image/icons/filetype/uml.filetype.png' />" + 
 					"</div>" +
@@ -159,7 +159,7 @@ org.goorm.plugin.uml.prototype = {
 					"</div>";
 					
 					
-		$("#newOtherFileList").append(val);			
+		$("#new_other_file_list").append(val);			
 	},
 	
 	add_context_menu: function () {
@@ -169,156 +169,156 @@ org.goorm.plugin.uml.prototype = {
 	add_toolbox: function () {
 		var self = this;
 
-		$("#toolBoxSelectBoxDummy").append("<option value='"+self.name+"'>"+self.toolboxName+"</option>");
+		$("#toolbox_selectbox_dummy").append("<option value='"+self.name+"'>"+self.toolbox_name+"</option>");
 		
-		$("#toolBox").append("<div id='uml_toolset' class='toolsets'><div id='toolUML_title' class='toolTitle'>UML Tool</div></div>");
+		$("#toolbox").append("<div id='uml_toolset' class='toolsets'><div id='tool_uml_title' class='tool_title'>UML Tool</div></div>");
 		
 		
 		//Title : General		
-		$("#uml_toolset").append("<div id='toolUML_general' class='toolCategory categoryIcon'>General</div>");
+		$("#uml_toolset").append("<div id='too_uml_general' class='tool_category category_icon'>General</div>");
 		
 		//General Tool : Label
-		$("#uml_toolset").append("<a href='#' action='addUMLGeneral_Label'><div id='toolUML_General_Label' class='toolItem itemIconSquare'>Label</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_general_label'><div id='too_uml_general_Label' class='tool_item item_icon_square'>Label</div></a>");
 		
 		//General Tool : Note
-		$("#uml_toolset").append("<a href='#' action='addUMLGeneral_Note'><div id='toolUML_General_Note' class='toolItem itemIconSquare'>Note</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_general_node'><div id='too_uml_general_Note' class='tool_item item_icon_square'>Note</div></a>");
 		
 		//General Tool : Package
-		$("#uml_toolset").append("<a href='#' action='addUMLGeneral_Package'><div id='toolUML_General_Package' class='toolItem itemIconSquare'>Package</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_general_package'><div id='too_uml_general_Package' class='tool_item item_icon_square'>Package</div></a>");
 		
 		
 		
 		//Title : Class Diagram		
-		$("#uml_toolset").append("<div id='toolUML_classDiagram' class='toolCategory categoryIcon'>Class Diagram</div>");
+		$("#uml_toolset").append("<div id='tool_uml_class_diagram' class='tool_category category_icon'>Class Diagram</div>");
 		
 		//Class Diagram Tool : Class
-		$("#uml_toolset").append("<a href='#' action='addUMLClassDiagram_Class'><div id='toolUML_ClassDiagram_Class' class='toolItem itemIconSquare'>Class</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_class_diagram_class'><div id='tool_uml_class_diagram_Class' class='tool_item item_icon_square'>Class</div></a>");
 		
 		//Class Diagram Tool : Package
-		$("#uml_toolset").append("<a href='#' action='addUMLClassDiagram_Package'><div id='toolUML_ClassDiagram_Package' class='toolItem itemIconSquare'>Package</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_class_diagram_package'><div id='tool_uml_class_diagram_Package' class='tool_item item_icon_square'>Package</div></a>");
 		
 		//Class Diagram Tool : Association
-		$("#uml_toolset").append("<a href='#' action='addUMLClassDiagram_Association'><div id='toolUML_ClassDiagram_Association' class='toolItem itemIconLine'>Association</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_class_diagram_association'><div id='tool_uml_class_diagram_Association' class='tool_item item_icon_line'>Association</div></a>");
 		
 		//Class Diagram Tool : Inheritance
-		$("#uml_toolset").append("<a href='#' action='addUMLClassDiagram_Inheritance'><div id='toolUML_ClassDiagram_Inheritance' class='toolItem itemIconLine'>Inheritance</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_class_diagram_inheritance'><div id='tool_uml_class_diagram_Inheritance' class='tool_item item_icon_line'>Inheritance</div></a>");
 		
 		//Class Diagram Tool : Aggregation
-		$("#uml_toolset").append("<a href='#' action='addUMLClassDiagram_Aggregation'><div id='toolUML_ClassDiagram_Aggregation' class='toolItem itemIconLine'>Aggregation</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_class_diagram_aggregation'><div id='tool_uml_class_diagram_Aggregation' class='tool_item item_icon_line'>Aggregation</div></a>");
 		
 		//Class Diagram Tool : Composition
-		$("#uml_toolset").append("<a href='#' action='addUMLClassDiagram_Composition'><div id='toolUML_ClassDiagram_Composition' class='toolItem itemIconLine'>Composition</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_class_diagram_composition'><div id='tool_uml_class_diagram_Composition' class='tool_item item_icon_line'>Composition</div></a>");
 		
 		//Class Diagram Tool : Interface
-		$("#uml_toolset").append("<a href='#' action='addUMLClassDiagram_Interface'><div id='toolUML_ClassDiagram_Interface' class='toolItem itemIconLine'>Interface</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_class_diagram_interface'><div id='tool_uml_class_diagram_interface' class='tool_item item_icon_line'>Interface</div></a>");
 		
 		
 		
 		//Title : Component Diagram
-		$("#uml_toolset").append("<div id='toolUML_componentDiagram' class='toolCategory categoryIcon'>Component Diagram</div>");
+		$("#uml_toolset").append("<div id='tool_uml_component_diagram' class='tool_category category_icon'>Component Diagram</div>");
 		
 		//Component Diagram Tool : Component
-		$("#uml_toolset").append("<a href='#' action='addUMLComponentDiagram_Component'><div id='toolUML_ComponentDiagram_Component' class='toolItem itemIconSquare'>Component</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_component_diagram_component'><div id='tool_uml_ComponentDiagram_Component' class='tool_item item_icon_square'>Component</div></a>");
 		
 		//Component Diagram Tool : Node
-		$("#uml_toolset").append("<a href='#' action='addUMLComponentDiagram_Node'><div id='toolUML_ComponentDiagram_Node' class='toolItem itemIconSquare'>Node</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_component_diagram_node'><div id='tool_uml_ComponentDiagram_Node' class='tool_item item_icon_square'>Node</div></a>");
 		
 		//Component Diagram Tool : Artifact
-		$("#uml_toolset").append("<a href='#' action='addUMLComponentDiagram_Artifact'><div id='toolUML_ComponentDiagram_Artifact' class='toolItem itemIconSquare'>Artifact</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_component_diagram_artifact'><div id='tool_uml_ComponentDiagram_Artifact' class='tool_item item_icon_square'>Artifact</div></a>");
 				
 		
 		
 		//Title : State Diagram		
-		$("#uml_toolset").append("<div id='toolUML_stateDiagram' class='toolCategory categoryIcon'>State Diagram</div>");
+		$("#uml_toolset").append("<div id='tool_uml_state_diagram' class='tool_category category_icon'>State Diagram</div>");
 		
 		//State Diagram Tool : State
-		$("#uml_toolset").append("<a href='#' action='addUMLStateDiagram_State'><div id='toolUML_StateDiagram_State' class='toolItem itemIconSquare'>State</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_state_diagram_state'><div id='tool_uml_state_diagram_state' class='tool_item item_icon_square'>State</div></a>");
 		
 		//State Diagram Tool : Start
-		$("#uml_toolset").append("<a href='#' action='addUMLStateDiagram_Start'><div id='toolUML_StateDiagram_Start' class='toolItem itemIconSquare'>Start</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_state_diagram_start'><div id='tool_uml_state_diagram_start' class='tool_item item_icon_square'>Start</div></a>");
 		
 		//State Diagram Tool : End
-		$("#uml_toolset").append("<a href='#' action='addUMLStateDiagram_End'><div id='toolUML_StateDiagram_End' class='toolItem itemIconSquare'>End</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_state_diagram_end'><div id='tool_uml_state_diagram_end' class='tool_item item_icon_square'>End</div></a>");
 		
 		//State Diagram Tool : Transition
-		$("#uml_toolset").append("<a href='#' action='addUMLStateDiagram_Transition'><div id='toolUML_ClassDiagram_Interface' class='toolItem itemIconLine'>Transition</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_state_diagram_transition'><div id='tool_uml_class_diagram_interface' class='tool_item item_icon_line'>Transition</div></a>");
 		
 		
 		
 		//Title : Sequence Diagram		
-		$("#uml_toolset").append("<div id='toolUML_sequenceDiagram' class='toolCategory categoryIcon'>Sequence Diagram</div>");
+		$("#uml_toolset").append("<div id='tool_uml_sequence_diagram' class='tool_category category_icon'>Sequence Diagram</div>");
 		
 		//Sequence Diagram Tool : Timeline
-		$("#uml_toolset").append("<a href='#' action='addUMLSequenceDiagram_Timeline'><div id='toolUML_SequenceDiagram_Timeline' class='toolItem itemIconSquare'>Timeline</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_sequence_diagram_timeline'><div id='tool_uml_sequence_diagram_timeline' class='tool_item item_icon_square'>Timeline</div></a>");
 		
 		//Sequence Diagram Tool : Actor
-		$("#uml_toolset").append("<a href='#' action='addUMLSequenceDiagram_Actor'><div id='toolUML_SequenceDiagram_Actor' class='toolItem itemIconSquare'>Actor</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_sequence_diagram_Actor'><div id='tool_uml_sequence_diagram_actor' class='tool_item item_icon_square'>Actor</div></a>");
 		
 		//Sequence Diagram Tool : Sequence
-		$("#uml_toolset").append("<a href='#' action='addUMLSequenceDiagram_Sequence'><div id='toolUML_SequenceDiagram_Sequence' class='toolItem itemIconSquare'>Sequence</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_sequence_diagram_sequence'><div id='tool_uml_sequence_diagram_sequence' class='tool_item item_icon_square'>Sequence</div></a>");
 		
 		//Sequence Diagram Tool : Initialize
-		$("#uml_toolset").append("<a href='#' action='addUMLSequenceDiagram_Initialize'><div id='toolUML_SequenceDiagram_Initialize' class='toolItem itemIconLine'>Initialize</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_sequence_diagram_initialize'><div id='tool_uml_sequence_diagram_initialize' class='tool_item item_icon_line'>Initialize</div></a>");
 		
 		//Sequence Diagram Tool : Return
-		$("#uml_toolset").append("<a href='#' action='addUMLSequenceDiagram_Return'><div id='toolUML_SequenceDiagram_Return' class='toolItem itemIconLine'>Return</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_sequence_diagram_return'><div id='tool_uml_sequence_diagram_return' class='tool_item item_icon_line'>Return</div></a>");
 		
 		//Sequence Diagram Tool : Asynchronous
-		$("#uml_toolset").append("<a href='#' action='addUMLSequenceDiagram_Asynchronous'><div id='toolUML_SequenceDiagram_Asynchronous' class='toolItem itemIconLine'>Asynchronous</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_sequence_diagram_asynchronous'><div id='tool_uml_sequence_diagram_asynchronous' class='tool_item item_icon_line'>Asynchronous</div></a>");
 		
 		//Sequence Diagram Tool : Synchronous
-		$("#uml_toolset").append("<a href='#' action='addUMLSequenceDiagram_Synchronous'><div id='toolUML_SequenceDiagram_Synchronous' class='toolItem itemIconLine'>Synchronous</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_sequence_diagram_synchronous'><div id='tool_uml_sequence_diagram_synchronous' class='tool_item item_icon_line'>Synchronous</div></a>");
 		
 		
 		
 		//Title : Activity Diagram		
-		$("#uml_toolset").append("<div id='toolUML_activityDiagram' class='toolCategory categoryIcon'>Activity Diagram</div>");
+		$("#uml_toolset").append("<div id='tool_uml_activity_diagram' class='tool_category category_icon'>Activity Diagram</div>");
 		
 		//Activity Diagram Tool : Start
-		$("#uml_toolset").append("<a href='#' action='addUMLActivityDiagram_Start'><div id='toolUML_ActivityDiagram_Start' class='toolItem itemIconSquare'>Start</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_activity_diagram_start'><div id='tool_uml_activity_diagram_start' class='tool_item item_icon_square'>Start</div></a>");
 		
 		//Activity Diagram Tool : End
-		$("#uml_toolset").append("<a href='#' action='addUMLActivityDiagram_End'><div id='toolUML_ActivityDiagram_End' class='toolItem itemIconSquare'>End</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_activity_diagram_end'><div id='tool_uml_activity_diagram_end' class='tool_item item_icon_square'>End</div></a>");
 
 		//Activity Diagram Tool : Activity
-		$("#uml_toolset").append("<a href='#' action='addUMLActivityDiagram_Activity'><div id='toolUML_ActivityDiagram_End' class='toolItem itemIconSquare'>Activity</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_activity_diagram_activity'><div id='tool_uml_activity_diagram_end' class='tool_item item_icon_square'>Activity</div></a>");
 		
 		//Activity Diagram Tool : Parallel_Vertical
-		$("#uml_toolset").append("<a href='#' action='addUMLActivityDiagram_ParallelVertical'><div id='toolUML_ActivityDiagram_ParallelVertical' class='toolItem itemIconSquare'>Parallel(Vertical)</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_activity_diagram_parallel_vertical'><div id='tool_uml_activity_diagram_ParallelVertical' class='tool_item item_icon_square'>Parallel(Vertical)</div></a>");
 		
 		//Activity Diagram Tool : Parallel_Horizontal
-		$("#uml_toolset").append("<a href='#' action='addUMLActivityDiagram_ParallelHorizontal'><div id='toolUML_ActivityDiagram_ParallelHorizontal' class='toolItem itemIconSquare'>Parallel(Horizontal)</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_activity_diagram_parallel_horizontal'><div id='tool_uml_activity_diagram_parallel_horizontal' class='tool_item item_icon_square'>Parallel(Horizontal)</div></a>");
 		
 		//Activity Diagram Tool : ControlFlow
-		$("#uml_toolset").append("<a href='#' action='addUMLActivityDiagram_ControlFlow'><div id='toolUML_ActivityDiagram_ControlFlow' class='toolItem itemIconLine'>ControlFlow</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_activity_diagram_control_flow'><div id='tool_uml_activity_diagram_control_flow' class='tool_item item_icon_line'>ControlFlow</div></a>");
 		
 		
 		
 		//Title : Usecase Diagram		
-		$("#uml_toolset").append("<div id='toolUML_usecaseDiagram' class='toolCategory categoryIcon'>Use Case Diagram</div>");
+		$("#uml_toolset").append("<div id='tool_uml_usecase_diagram' class='tool_category category_icon'>Use Case Diagram</div>");
 		
 		//Usecsae Diagram Tool : Usecase
-		$("#uml_toolset").append("<a href='#' action='addUMLUsecaseDiagram_Usecase'><div id='toolUML_UsecaseDiagram_Usecase' class='toolItem itemIconSquare'>Use case</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_usecase_diagram_usecase'><div id='tool_uml_usecase_diagram_usecase' class='tool_item item_icon_square'>Use case</div></a>");
 		
 		//Usecsae Diagram Tool : Usecase_round
-		$("#uml_toolset").append("<a href='#' action='addUMLUsecaseDiagram_Usecase_round'><div id='toolUML_UsecaseDiagram_Usecase_round' class='toolItem itemIconSquare'>Use case(round)</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_usecase_diagram_usecase_round'><div id='tool_uml_usecase_diagram_usecase_round' class='tool_item item_icon_square'>Use case(round)</div></a>");
 		
 		//Usecsae Diagram Tool : Extends
-		$("#uml_toolset").append("<a href='#' action='addUMLUsecaseDiagram_Extends'><div id='toolUML_UsecaseDiagram_Extends' class='toolItem itemIconLine'>Extends</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_usecase_diagram_extends'><div id='tool_uml_usecase_diagram_extends' class='tool_item item_icon_line'>Extends</div></a>");
 		
 		//Usecsae Diagram Tool : Includes
-		$("#uml_toolset").append("<a href='#' action='addUMLUsecaseDiagram_Includes'><div id='toolUML_UsecaseDiagram_Includes' class='toolItem itemIconLine'>Includes</div></a>");
+		$("#uml_toolset").append("<a href='#' action='add_uml_usecase_diagram_includes'><div id='tool_uml_usecase_diagram_includes' class='tool_item item_icon_line'>Includes</div></a>");
 		
 		
 		
 		//Add Fuctions
 		//Genral : Label
-		$("a[action=addUMLGeneral_Label]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/general.label";
-			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+		$("a[action=add_uml_general_label]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/general.label";
+			console.log(self.window_manager.window[self.window_manager.active_window]);
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -326,12 +326,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Genral : Note
-		$("a[action=addUMLGeneral_Note]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/general.note";
+		$("a[action=add_uml_general_node]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/general.note";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -339,12 +339,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Genral : Package
-		$("a[action=addUMLGeneral_Package]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/general.package";
+		$("a[action=add_uml_general_package]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/general.package";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -354,12 +354,12 @@ org.goorm.plugin.uml.prototype = {
 		
 		
 		//Class Diagram : Class
-		$("a[action=addUMLClassDiagram_Class]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/classdiagram.class";
+		$("a[action=add_uml_class_diagram_class]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/classdiagram.class";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -367,12 +367,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Class Diagram : Packabe
-		$("a[action=addUMLClassDiagram_Package]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/classdiagram.package";
+		$("a[action=add_uml_class_diagram_package]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/classdiagram.package";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -380,13 +380,13 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Class Diagram : Association
-		$("a[action=addUMLClassDiagram_Association]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/classdiagram.association";
+		$("a[action=add_uml_class_diagram_association]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/classdiagram.association";
 			//classdiagram.association
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -394,13 +394,13 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Class Diagram : Inheritance
-		$("a[action=addUMLClassDiagram_Inheritance]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/classdiagram.inheritance";
+		$("a[action=add_uml_class_diagram_inheritance]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/classdiagram.inheritance";
 			//classdiagram.inheritance
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -408,13 +408,13 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Class Diagram : Aggregation
-		$("a[action=addUMLClassDiagram_Aggregation]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/classdiagram.aggregation";
+		$("a[action=add_uml_class_diagram_aggregation]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/classdiagram.aggregation";
 			//classdiagram.aggregation
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -422,13 +422,13 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Class Diagram : Composition
-		$("a[action=addUMLClassDiagram_Composition]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/classdiagram.composition";
+		$("a[action=add_uml_class_diagram_composition]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/classdiagram.composition";
 			//classdiagram.composition
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -436,13 +436,13 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Class Diagram : Interface
-		$("a[action=addUMLClassDiagram_Interface]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/classdiagram.interface";
+		$("a[action=add_uml_class_diagram_interface]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/classdiagram.interface";
 			//classdiagram.interface
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter, {dashed:true});	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter, {dashed:true});	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -452,12 +452,12 @@ org.goorm.plugin.uml.prototype = {
 		
 		
 		//Component Diagram : Component
-		$("a[action=addUMLComponentDiagram_Component]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/componentdiagram.component";
+		$("a[action=add_uml_component_diagram_component]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/componentdiagram.component";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -465,12 +465,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Component Diagram : Node
-		$("a[action=addUMLComponentDiagram_Node]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/componentdiagram.node";
+		$("a[action=add_uml_component_diagram_node]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/componentdiagram.node";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -478,12 +478,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Component Diagram : Artifact
-		$("a[action=addUMLComponentDiagram_Artifact]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/componentdiagram.artifact";
+		$("a[action=add_uml_component_diagram_artifact]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/componentdiagram.artifact";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -493,12 +493,12 @@ org.goorm.plugin.uml.prototype = {
 
 
 		//State Diagram : State
-		$("a[action=addUMLStateDiagram_State]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/statediagram.state";
+		$("a[action=add_uml_state_diagram_state]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/statediagram.state";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -506,12 +506,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//State Diagram : Start		
-		$("a[action=addUMLStateDiagram_Start]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/statediagram.start";
+		$("a[action=add_uml_state_diagram_start]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/statediagram.start";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -519,12 +519,12 @@ org.goorm.plugin.uml.prototype = {
 		});
 		
 		//State Diagram : End
-		$("a[action=addUMLStateDiagram_End]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/statediagram.end";
+		$("a[action=add_uml_state_diagram_end]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/statediagram.end";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -532,12 +532,12 @@ org.goorm.plugin.uml.prototype = {
 		});
 		
 		//State Diagram : Transition
-		$("a[action=addUMLStateDiagram_Transition]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/statediagram.transition";
+		$("a[action=add_uml_state_diagram_transition]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/statediagram.transition";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -547,12 +547,12 @@ org.goorm.plugin.uml.prototype = {
 	
 		
 		//Sequence Diagram : Timeline
-		$("a[action=addUMLSequenceDiagram_Timeline]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/sequencediagram.timeline";
+		$("a[action=add_uml_sequence_diagram_timeline]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/sequencediagram.timeline";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -560,12 +560,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Sequence Diagram : Actor
-		$("a[action=addUMLSequenceDiagram_Actor]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/sequencediagram.actor";
+		$("a[action=add_uml_sequence_diagram_Actor]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/sequencediagram.actor";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter, {proportion:[2,3]});	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter, {proportion:[2,3]});	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -573,12 +573,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Sequence Diagram : Actor
-		$("a[action=addUMLSequenceDiagram_Sequence]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/sequencediagram.sequence";
+		$("a[action=add_uml_sequence_diagram_sequence]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/sequencediagram.sequence";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -586,13 +586,13 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Sequence Diagram : Initialize
-		$("a[action=addUMLSequenceDiagram_Initialize]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/sequencediagram.initialize";
+		$("a[action=add_uml_sequence_diagram_initialize]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/sequencediagram.initialize";
 			//sequencediagram.initialize
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter, {dashed:true});	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter, {dashed:true});	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -600,13 +600,13 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Sequence Diagram : Return
-		$("a[action=addUMLSequenceDiagram_Return]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/sequencediagram.return";
+		$("a[action=add_uml_sequence_diagram_return]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/sequencediagram.return";
 			//sequencediagram.return
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter, {dashed:true});	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter, {dashed:true});	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -614,13 +614,13 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Sequence Diagram : Asynchronous
-		$("a[action=addUMLSequenceDiagram_Asynchronous]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/sequencediagram.asynchronous";
+		$("a[action=add_uml_sequence_diagram_asynchronous]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/sequencediagram.asynchronous";
 			//sequencediagram.asynchronous
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -628,13 +628,13 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Sequence Diagram : Synchronous
-		$("a[action=addUMLSequenceDiagram_Synchronous]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/sequencediagram.synchronous";
+		$("a[action=add_uml_sequence_diagram_synchronous]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/sequencediagram.synchronous";
 			//sequencediagram.synchronous
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -644,12 +644,12 @@ org.goorm.plugin.uml.prototype = {
 		
 		
 		//Activity diagram : Start
-		$("a[action=addUMLActivityDiagram_Start]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/activitydiagram.start";
+		$("a[action=add_uml_activity_diagram_start]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/activitydiagram.start";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -657,12 +657,12 @@ org.goorm.plugin.uml.prototype = {
 		});
 		
 		//Activity diagram : End
-		$("a[action=addUMLActivityDiagram_End]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/activitydiagram.end";
+		$("a[action=add_uml_activity_diagram_end]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/activitydiagram.end";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -670,12 +670,12 @@ org.goorm.plugin.uml.prototype = {
 		});
 		
 		//Activity diagram : Activity
-		$("a[action=addUMLActivityDiagram_Activity]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/activitydiagram.activity";
+		$("a[action=add_uml_activity_diagram_activity]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/activitydiagram.activity";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -683,12 +683,12 @@ org.goorm.plugin.uml.prototype = {
 		});
 		
 		//Activity diagram : Parallel_Vertical
-		$("a[action=addUMLActivityDiagram_ParallelVertical]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/activitydiagram.parallel_vertical";
+		$("a[action=add_uml_activity_diagram_parallel_vertical]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/activitydiagram.parallel_vertical";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -696,12 +696,12 @@ org.goorm.plugin.uml.prototype = {
 		});
 		
 		//Activity diagram : Parallel_Horizontal
-		$("a[action=addUMLActivityDiagram_ParallelHorizontal]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/activitydiagram.parallel_horizontal";
+		$("a[action=add_uml_activity_diagram_parallel_horizontal]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/activitydiagram.parallel_horizontal";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -709,12 +709,12 @@ org.goorm.plugin.uml.prototype = {
 		});
 		
 		//Activity Diagram : ControlFlow
-		$("a[action=addUMLActivityDiagram_ControlFlow]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/activitydiagram.controlflow";
+		$("a[action=add_uml_activity_diagram_control_flow]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/activitydiagram.controlflow";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -722,12 +722,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Usecase Diagram : Usecase(box)
-		$("a[action=addUMLUsecaseDiagram_Usecase]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/usecasediagram.usecase";
+		$("a[action=add_uml_usecase_diagram_usecase]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/usecasediagram.usecase";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -735,12 +735,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Usecase Diagram : Usecase(round)
-		$("a[action=addUMLUsecaseDiagram_Usecase_round]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/usecasediagram.usecase_round";
+		$("a[action=add_uml_usecase_diagram_usecase_round]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/usecasediagram.usecase_round";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("square", shapeAdapter);	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("square");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square", shape_adapter);	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -748,12 +748,12 @@ org.goorm.plugin.uml.prototype = {
 		});
 		
 		//Usecase Diagram : Extends
-		$("a[action=addUMLUsecaseDiagram_Extends]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/usecasediagram.extends";
+		$("a[action=add_uml_usecase_diagram_extends]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/usecasediagram.extends";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter, {dashed:true});	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter, {dashed:true});	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -761,12 +761,12 @@ org.goorm.plugin.uml.prototype = {
 		});	
 		
 		//Usecase Diagram : Includes
-		$("a[action=addUMLUsecaseDiagram_Includes]").click(function () {
-			var shapeAdapter = "org.goorm.stencil.uml/usecasediagram.includes";
+		$("a[action=add_uml_usecase_diagram_includes]").click(function () {
+			var shape_adapter = "org.goorm.stencil.uml/usecasediagram.includes";
 			
-			if (self.window_manager.window[self.window_manager.activeWindow].designer) {
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.add("line", shapeAdapter, {dashed:true});	
-				self.window_manager.window[self.window_manager.activeWindow].designer.canvas.setDrawingMode("line");
+			if (self.window_manager.window[self.window_manager.active_window].designer) {
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.add("line", shape_adapter, {dashed:true});	
+				self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("line");
 			}
 			else {
 				m.er("Active window does not have a desginer!", "plugin: design.uml");
@@ -775,21 +775,21 @@ org.goorm.plugin.uml.prototype = {
 		
 	},
 	
-	refreshToolBox: function(){
+	refreshtoolbox: function(){
 
 		$("#uml_toolset").css("display", "block");
 		$("#uml_toolset").children().each(function(){
 			$(this).css("display","none");
 		});
 		
-		$("#uml_toolset #toolUML_general").css("display","block")
+		$("#uml_toolset #too_uml_general").css("display","block")
 			.next().css("display","block")
 			.next().css("display","block")
 			.next().css("display","block");
 			
 		switch (core.dialogProjectProperty.property['DETAILEDTYPE']){
 			case "Class Diagram" :
-				$("#uml_toolset #toolUML_classDiagram").css("display","block")
+				$("#uml_toolset #tool_uml_class_diagram").css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")
@@ -799,14 +799,14 @@ org.goorm.plugin.uml.prototype = {
 					.next().css("display","block");
 				break;
 			case "State Diagram" :
-				$("#uml_toolset #toolUML_stateDiagram").css("display","block")
+				$("#uml_toolset #tool_uml_state_diagram").css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")
 					.next().css("display","block");
 				break; 
 			case "Sequence Diagram" :
-				$("#uml_toolset #toolUML_sequenceDiagram").css("display","block")
+				$("#uml_toolset #tool_uml_sequence_diagram").css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")
@@ -816,13 +816,13 @@ org.goorm.plugin.uml.prototype = {
 					.next().css("display","block");
 				break;
 			case "Component Diagram" :
-				$("#uml_toolset #toolUML_componentDiagram").css("display","block")
+				$("#uml_toolset #tool_uml_componentDiagram").css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")
 					.next().css("display","block");
 				break;
 			case "Activity Diagram" :
-				$("#uml_toolset #toolUML_activityDiagram").css("display","block")
+				$("#uml_toolset #tool_uml_activity_diagram").css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")
@@ -831,7 +831,7 @@ org.goorm.plugin.uml.prototype = {
 					.next().css("display","block");
 				break; 
 			case "UseCase Diagram" :
-				$("#uml_toolset #toolUML_usecaseDiagram").css("display","block")
+				$("#uml_toolset #tool_uml_usecase_diagram").css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")
 					.next().css("display","block")

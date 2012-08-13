@@ -25,11 +25,11 @@ context.fill();
 
 context.restore();
 
-var length = parseInt(Math.sqrt((this.properties.ex-tempSX)*(this.properties.ex-tempSX)+(this.properties.ey-tempSY)*(this.properties.ey-tempSY)));
-var radian = Math.acos((this.properties.ex-tempSX)/length);
+var length = parseInt(Math.sqrt((this.properties.ex-temp_sx)*(this.properties.ex-temp_sx)+(this.properties.ey-temp_sy)*(this.properties.ey-temp_sy)));
+var radian = Math.acos((this.properties.ex-temp_sx)/length);
 var minus = 1;
  
-if (this.properties.ey < tempSY) {
+if (this.properties.ey < temp_sy) {
 	minus = -1;
 }
 

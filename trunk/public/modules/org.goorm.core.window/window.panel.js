@@ -28,6 +28,7 @@ org.goorm.core.window.panel = function () {
 	this.is_first_maximize = null;
 	this.is_saved = null;
 	this.project = null;
+	this.index = 0;
 };
 
 org.goorm.core.window.panel.prototype = {
@@ -110,7 +111,6 @@ org.goorm.core.window.panel.prototype = {
 		else if (editor == "Designer") {
 			this.type = "Designer";
 			this.designer = new org.goorm.core.design();
-			
 			this.designer.init($("#"+container).find(".window_container")[0], this.title);
 			this.designer.load(this.filepath, this.filename, this.filetype);
 		}
@@ -499,15 +499,13 @@ org.goorm.core.window.panel.prototype = {
 	},	
 	
 	activate: function() {
-	
-
 		if(core.module.layout.workspace.window_manager.is_maximized) {
 			//this.status = "";
 			//this.maximize(false, true);
 		}
-	
+		
+		core.module.layout.workspace.window_manager.active_window = this.index;
 
-	
 		$("#"+this.workspace_container).find(".activated").each(function(i) {
 			$(this).removeClass("activated");
 		});
@@ -522,12 +520,13 @@ org.goorm.core.window.panel.prototype = {
 
 		//core.dialog.project_property.refresh_toolbox();
 		
-		core.module.layout.workspace.window_manager.window_list.active_window = this.filepath + this.filename;
+		//core.module.layout.workspace.window_manager.window_list.active_window = this.filepath + this.filename;
 		
 		localStorage["window_list"] = JSON.stringify(core.module.layout.workspace.window_manager.window_list);
 		
 		this.tab.activate();
-		core.dialog.project_property.refresh_toolbox();
+		
+		//core.dialog.project_property.refresh_toolbox();
 	},
 	
 	set_header: function(contents) {
@@ -559,7 +558,6 @@ org.goorm.core.window.panel.prototype = {
 	},
 	
 	on_resize: function () {
-		this.active_window = i;
 					
 		if(this.status != "maximized") {		
 			//this.width = this.panel.cfg.get_property("width");

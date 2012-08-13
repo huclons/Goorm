@@ -142,7 +142,6 @@ org.goorm.core.edit.prototype = {
 			  	var window_manager = core.module.layout.workspace.window_manager;
 			  
 			  	window_manager.window[window_manager.active_window].set_modified();
-			  
 			  	window_manager.tab[window_manager.active_window].set_modified();
 			},
 			onCursorActivity: function () {
