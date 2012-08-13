@@ -229,6 +229,8 @@ org.goorm.core.window.manager.prototype = {
 			this.tab[this.index].connect(this.window[this.index]);
 			
 			this.active_window = this.index;
+			this.window[this.index].index = this.index;
+			
 			this.window[this.index].activate();				
 			this.tab[this.index].activate();
 			

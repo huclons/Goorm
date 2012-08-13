@@ -1,4 +1,4 @@
-var length = parseInt(Math.sqrt((tempEX-this.properties.sx)*(tempSX-this.properties.sx)+(tempEY-this.properties.sy)*(tempEY-this.properties.sy)));
+var length = parseInt(Math.sqrt((tempEX-this.properties.sx)*(temp_sx-this.properties.sx)+(tempEY-this.properties.sy)*(tempEY-this.properties.sy)));
 var radian = Math.acos((tempEX-this.properties.sx)/length);
 
 var minus = 1;

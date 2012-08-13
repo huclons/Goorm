@@ -112,12 +112,16 @@ org.goorm.core.stencil.prototype = {
 		var url = "file/get_contents";
 		
 		if (this.type == "square") {
+		
+			console.log(this.shape);
 			
 			$.ajax({
 				url: url,			
-				type: "POST",
-				data: "path=../../stencil/"+this.shape+".json",
+				type: "GET",
+				data: "path=stencils/"+this.shape+".json",
 				success: function(data) {
+					console.log(data);
+					
 					self.properties = eval("(" + data + ")");
 
 					if (typeof callback == "function") {
@@ -130,8 +134,8 @@ org.goorm.core.stencil.prototype = {
 			
 			$.ajax({
 				url: url,			
-				type: "POST",
-				data: "path=../../stencil/"+this.shape+".html",
+				type: "GET",
+				data: "path=stencils/"+this.shape+".html",
 				success: function(data) {
 					self.data = data;
 					$(self.container).find("#"+"stencil_" + self.timestamp).html(data);
@@ -147,8 +151,8 @@ org.goorm.core.stencil.prototype = {
 		else if (this.type == "line") {
 			$.ajax({
 				url: url,			
-				type: "POST",
-				data: "path=../../stencil/"+this.shape+".js",
+				type: "GET",
+				data: "path=stencils/"+this.shape+".js",
 				success: function(data) {
 					//$(self.container).find("#"+"stencil_" + self.timestamp).html(data);
 					self.javascript = data;

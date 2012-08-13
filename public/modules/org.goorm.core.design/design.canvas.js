@@ -102,7 +102,7 @@ org.goorm.core.design.canvas.prototype = {
 		
 		this.collaboration = new org.goorm.core.collaboration.design();
 		
-		$(document).bind("lineStencilCodeLoaded", function () {
+		$(document).bind("line_stencil_code_loaded", function () {
 			self.draw();
 		});
 		
@@ -896,10 +896,12 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 					properties.ey = self.objects[self.is_adding].properties.ey;
 					
 					//Register the undo function
+					/*
 					self.undo_manager.register(
 						self, self.remove, [self.objects.length-1], 'Remove Item',
 						self, self.add, [self.objects[self.is_adding].type, self.objects[self.is_adding].shape_name, self.objects[self.is_adding].option, properties], 'Create Item'
 					);
+					*/
 					self.is_adding = -1;
 				}
 
@@ -1226,10 +1228,12 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 						self.object_manager.set(self.objects[this]);
 					});
 					
+					/*
 					self.undo_manager.register(
 						self, self.set_properties2, [self.selected_index.slice(0), self.copied_objects_undo], 'Undo Item',
 						self, self.set_properties2, [self.selected_index.slice(0), self.copied_objects_redo], 'Redo Item'
 					);
+					*/
 					
 					self.is_modifying = false;
 				}
@@ -2846,11 +2850,11 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 	},
 	
 	undo: function () { 
-		this.undo_manager.undo();
+		//this.undo_manager.undo();
 	},
 	
 	redo: function () { 
-		this.undo_manager.redo();
+		//this.undo_manager.redo();
 	},
 	
 	remove: function (index) { 
@@ -2861,11 +2865,13 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		properties.sy = self.objects[index].properties.sy;
 		properties.ex = self.objects[index].properties.ex;
 		properties.ey = self.objects[index].properties.ey;
-				
+		
+		/*		
 		self.undo_manager.register(
 			self, self.add, [self.objects[index].type, self.objects[index].shape_name, self.objects[index].option, properties], 'Create Item',
 			self, self.remove, [self.objects.length-1], 'Remove Item'
 		);
+		*/
 	
 		this.objects[index].remove();
 		

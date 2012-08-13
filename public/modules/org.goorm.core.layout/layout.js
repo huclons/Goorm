@@ -230,16 +230,14 @@ org.goorm.core.layout.prototype = {
 		target.addTab(this.tab_toolbox);		
 		
 		//close button click event assign
-		/*
+		
 		$(this.tab_toolbox.get("labelEl")).find(".close").click(function() {
 			self.detach_toolbox();
 			
 			return false;
 		});
-		*/
 
 		//For Test Codes
-		/*
 		$("#toolbox").append("<div id='toolLine' style='cursor:pointer; width:100%; height:20px; border-bottom:1px solid #ccc;'>Line Tool</div>");
 		$("#toolbox").append("<div id='toolSquare' style='cursor:pointer; width:100%; height:20px; border-bottom:1px solid #ccc;'>Square Tool</div>");
 		
@@ -250,8 +248,7 @@ org.goorm.core.layout.prototype = {
 		$("#toolSquare").click(function () {
 			self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square");	
 			self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");		
-		});
-		*/		
+		});	
 	},
 	
 	detach_toolbox: function() {
