@@ -20,7 +20,8 @@ global.__path = __dirname+"/";
 goorm.configure(function(){
   goorm.set('views', __dirname + '/views');
   goorm.set('view engine', 'jade');
-  goorm.use(express.bodyParser());
+/*   goorm.use(express.bodyParser()); */
+  goorm.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/temp_files' }));
   goorm.use(express.methodOverride());
   goorm.use(goorm.router);
   goorm.use(express.static(__dirname + '/public'));
@@ -44,7 +45,7 @@ goorm.get('/project/load', routes.project.do_load);
 goorm.get('/project/save', routes.project.do_save);
 goorm.get('/project/delete', routes.project.do_delete);
 goorm.get('/project/get_list', routes.project.get_list);
-goorm.get('/project/import', routes.project.do_import);
+goorm.post('/project/import', routes.project.do_import);
 goorm.get('/project/export', routes.project.do_export);
 goorm.get('/project/clean', routes.project.do_clean);
 goorm.get('/project/get_property', routes.project.get_property);
@@ -66,7 +67,7 @@ goorm.get('/file/get_url_contents', routes.file.get_url_contents);
 goorm.get('/file/put_contents', routes.file.put_contents);
 goorm.get('/file/get_nodes', routes.file.get_nodes);
 goorm.get('/file/get_dir_nodes', routes.file.get_dir_nodes);
-goorm.get('/file/import', routes.file.do_import);
+goorm.post('/file/import', routes.file.do_import);
 goorm.get('/file/export', routes.file.do_export);
 goorm.get('/file/move', routes.file.do_move);
 goorm.get('/file/rename', routes.file.do_rename);
@@ -84,7 +85,7 @@ goorm.get('/preference/ini_maker', routes.preference.ini_maker);
 goorm.get('/theme/save', routes.theme.save);
 goorm.get('/theme/get_list', routes.theme.get_list);
 
-//for download
+//for download and upload
 goorm.get('/download', routes.download);
 
 goorm.listen(9999, function(){

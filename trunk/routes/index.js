@@ -68,7 +68,13 @@ exports.project.get_list = function(req, res){
 };
 
 exports.project.do_import = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+
+	evt.on("project_do_import", function (data) {
+		res.json(data);
+	});
+
+	g_project.do_import(req.body, req.files.file, evt);
 };
 
 exports.project.do_export = function(req, res){
@@ -245,14 +251,6 @@ exports.file.get_dir_nodes = function(req, res){
 	g_file.get_dir_nodes(__path + 'workspace/' + path, evt);
 };
 
-exports.file.do_import = function(req, res){
-	res.send(null);
-};
-
-exports.file.do_exort = function(req, res){
-	res.send(null);
-};
-
 exports.file.do_move = function(req, res){
 	var evt = new EventEmitter();
 
@@ -363,7 +361,7 @@ exports.theme.get_list = function(req, res){
 };
 
 /*
- * Download
+ * Download and Upload
  */
  
 exports.download = function(req, res) {
