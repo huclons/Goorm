@@ -85,86 +85,6 @@ textarea {
 	border-radius: 8px;	
 }
 
-select {
-	padding: 1px;
-	
-	padding-left: 5px;
-	padding-right: 5px;
-	
-    margin: 0;
-    
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;	
-    
-	background: none;
-	background-color: #fff;	
-	background-image: none;
-	
-    color:#333;
-    
-    -moz-box-shadow: inset -1px -1px 2px 0px #ccc;
-	-webkit-box-shadow: inset -1px -1px 2px 0px #ccc;
-	 box-shadow: inset -1px -1px 2px 0px #ccc;	
-    
-    border:1px solid #999;
-    outline:none;
-    display: inline-block;
-    
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    appearance:none;
-    
-    cursor:pointer;
-}
-
-select:after {
-	-moz-box-shadow: inset 0px 0px 1px 0px #999;
-	-webkit-box-shadow: inset 0px 0px 1px 0px #999;
-	 box-shadow: inset 0px 0px 1px 0px #999;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    select {
-    	padding-right:18px;
-    }
-}
-
-label.selectbox {
-	position:relative;
-	font-size: 11px;
-}
-
-label.selectbox:after {
-    content:'▼';
-    font:10px "Consolas", monospace;
-    color:#666;
-
-    right:8px; 
-    top:2px;
-    padding-left:4px;
-    margin-left:2px;
-    
-    border-left:1px solid #ddd;
-    position:absolute;
-    pointer-events:none;
-}
-
-label.selectbox:before {
-    content:'';
-    
-    right:10px;
-    
-    top:2px;
-    
-    width:11px;
-    height:11px;
-    
-    position:absolute;
-    pointer-events:none;
-    display:block;
-}​
-
 label {
 	cursor: pointer;
 }
@@ -972,6 +892,10 @@ YUI PANEL STYLE CUSTOMIZATION
 	-khtml-border-radius: 6px;
 	border-radius: 6px;
 	
+	-moz-box-shadow: 0px 2px 7px 0px #333;
+	-webkit-box-shadow: 0px 2px 7px 0px #333;
+	box-shadow: 0px 2px 7px 0px #333;
+	 
 	border: 0px solid #444;
 	border-top: 1px solid #444;
 }
@@ -1016,13 +940,6 @@ YUI PANEL STYLE CUSTOMIZATION
 
 .yui-skin-sam .yui-panel .ft {
 	margin-right: -1px;
-}
-	
-.yui-skin-sam .underlay {
-	-moz-border-radius: 9px;
-	-webkit-border-radius: 9px;
-	-khtml-border-radius: 9px;
-	border-radius: 9px;
 }
 
 .yui-skin-sam .yui-panel .hd {

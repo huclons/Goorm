@@ -63,7 +63,7 @@ org.goorm.core.window.panel.prototype = {
 				width: parseInt($("#" + self.workspace_container).width()/2),
 				height: parseInt($("#" + self.workspace_container).height()/2), 
 				visible: true, 
-				underlay: "shadow",
+				underlay: "none",
 				close: false,
 				autofillheight: "body",
 				draggable: true,
@@ -97,7 +97,7 @@ org.goorm.core.window.panel.prototype = {
 		if (editor == "Editor") {
 			this.type = "Editor";
 			
-			var mode = core.filetypes[this.inArray(this.filetype)].mode;
+			//var mode = core.filetypes[this.inArray(this.filetype)].mode;
 			
 			//for Test
 			mode = "javascript";
@@ -109,8 +109,8 @@ org.goorm.core.window.panel.prototype = {
 		}
 		else if (editor == "Designer") {
 			this.type = "Designer";
-			
 			this.designer = new org.goorm.core.design();
+			
 			this.designer.init($("#"+container).find(".window_container")[0], this.title);
 			this.designer.load(this.filepath, this.filename, this.filetype);
 		}
@@ -159,7 +159,6 @@ org.goorm.core.window.panel.prototype = {
 		this.set_footer(); //native function to call the this.panel.setFooter()		
 		
 		this.resize_all();
-		
 		
 		
 		this.context_menu = new org.goorm.core.menu.context();
@@ -255,7 +254,7 @@ org.goorm.core.window.panel.prototype = {
 
 		//maxmize button click event assign
 		$("#"+container).find(".maximize").click(function() {
-			self.maximize();
+			core.module.layout.workspace.window_manager.maximize_all();
 			
 			return false;
 		});
@@ -308,8 +307,18 @@ org.goorm.core.window.panel.prototype = {
 		var self = this;
 		
 		if(this.status != "maximized" || force) {
+			console.log("maximize! : " + this.filename);
+		
 			this.left = $("#" + this.container + "_c").offset().left;
 			this.top = $("#" + this.container + "_c").offset().top;
+			this.width = $("#" + this.container + "_c").width();
+			this.height = $("#" + this.container + "_c").height();
+			
+			
+			console.log(this.left);
+			console.log(this.top);
+			console.log(this.width);
+			console.log(this.height);
 			
 			if(this.is_first_maximize == true) {
 				this.is_first_maximize = false;
@@ -324,24 +333,31 @@ org.goorm.core.window.panel.prototype = {
 			$("#" + this.container + "_c").width($("#" + this.workspace_container).width());
 			$("#" + this.container + "_c").height($("#" + this.workspace_container).height());
 			
+			$("#" + this.container).width($("#" + this.workspace_container).width());
+			$("#" + this.container).height($("#" + this.workspace_container).height());
+			
             this.panel.cfg.setProperty("width", $("#" + this.workspace_container).width() + "px");
             this.panel.cfg.setProperty("height", $("#" + this.workspace_container).height()+ "px");
 			
 			this.status = "maximized";
 			core.module.layout.workspace.window_manager.is_maximized = true;
-			$(".tab_max_buttons").css("display", "block");
+			$(".tab_max_buttons").show();
 			
 			this.resize.lock();
 			
+			/*
 			$("#" + this.container + "_c").find(".yui-resize-handle").each(function (i) {
 				if ($(this).parent().attr("id") == self.container + "_c") {
 									
 					$(this).hide();
 				}
 			});
+			*/
 		}
 		else {
-			$("#" + this.container + "_c").offset({left:self.left, top:self.top});
+			console.log("unmaximize! : " + this.filename);
+		
+			$("#" + this.container + "_c").offset({left:this.left, top:this.top});
 			$("#" + this.container + "_c").width(this.width);
 			$("#" + this.container + "_c").height(this.height);
 			
@@ -352,12 +368,21 @@ org.goorm.core.window.panel.prototype = {
             this.panel.cfg.setProperty("height", this.height - 3 + "px");
 			
 			this.status = null;
+			
+			console.log(this.left);
+			console.log(this.top);
+			console.log(this.width);
+			console.log(this.height);
+			
 			core.module.layout.workspace.window_manager.is_maximized = false;
-			$(".tab_max_buttons").css("display", "none");
+			
+			$(".tab_max_buttons").hide();
 			
 			this.resize.unlock();
 			
+			/*
 			$("#" + this.container + "_c").find(".yui-resize-handle").show();
+			*/
 		}
 		
 		this.resize_all();
@@ -477,8 +502,8 @@ org.goorm.core.window.panel.prototype = {
 	
 
 		if(core.module.layout.workspace.window_manager.is_maximized) {
-			this.status = "";
-			this.maximize(false, true);
+			//this.status = "";
+			//this.maximize(false, true);
 		}
 	
 
@@ -498,6 +523,7 @@ org.goorm.core.window.panel.prototype = {
 		//core.dialog.project_property.refresh_toolbox();
 		
 		core.module.layout.workspace.window_manager.window_list.active_window = this.filepath + this.filename;
+		
 		localStorage["window_list"] = JSON.stringify(core.module.layout.workspace.window_manager.window_list);
 		
 		this.tab.activate();
@@ -535,10 +561,11 @@ org.goorm.core.window.panel.prototype = {
 	on_resize: function () {
 		this.active_window = i;
 					
-		if(this.panel.status != "maximized") {		
-			this.width = this.panel.cfg.get_property("width");
-			this.height = this.panel.cfg.get_property("height");
+		if(this.status != "maximized") {		
+			//this.width = this.panel.cfg.get_property("width");
+			//this.height = this.panel.cfg.get_property("height");
 		}
+		
 		var window_content_height = $("#filewindow"+i+"_c").height() - 47;
 		$("#filewindow"+i+"_c").find(".yui-content").height(window_content_height);
 		

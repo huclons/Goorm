@@ -74,26 +74,32 @@ org.goorm.core.design.canvas.prototype = {
 		
 		this.is_shift_pressed = false;
 		
+		
+		
 		this.object_manager = new org.goorm.core.object.manager();
 		this.object_manager.init("", this);
+
 		
 		//object_explorer Initialization
 		this.object_explorer = new org.goorm.core.design.canvas.object_explorer();
 		this.object_explorer.init(this);
 
+
 		//Toolbar Initialization		
 		this.toolbar = new org.goorm.core.design.canvas.toolbar();
 		this.toolbar.init(this);
+
 		
 		//preview Initialization		
-		this.preview = new org.goorm.core.design.canvas.preview();
-		this.preview.init($(target).parent().find(".design.preview_container")[0], width, height, 0.1, this);
+		//this.preview = new org.goorm.core.design.canvas.preview();
+		//this.preview.init($(target).parent().find(".design.preview_container")[0], width, height, 0.1, this);
 
+		
 		//Blocking Context Menus for Empty Space		
 		var empty_context_menu = new org.goorm.core.menu.context();
 		empty_context_menu.init("", "none", $(target).find(".design.preview_container"), "");
 
-
+		
 		this.collaboration = new org.goorm.core.collaboration.design();
 		
 		$(document).bind("lineStencilCodeLoaded", function () {
@@ -115,7 +121,7 @@ org.goorm.core.design.canvas.prototype = {
 			var width = $("#" + self.dialog.container_id).find(".design_canvas_setting").find(".canvas_width").val();
 			var height = $("#" + self.dialog.container_id).find(".design_canvas_setting").find(".canvas_height").val();
 			
-			self.setSize(width, height);
+			self.set_size(width, height);
 			
 			self.preview.scale=(self.preview_slider.get_real_value()/100).toFixed(2);
 			self.preview.set_size("change");
@@ -162,19 +168,21 @@ org.goorm.core.design.canvas.prototype = {
 					$("#preview_slider_value").append(self.preview_slider.get_real_value());
 				});
 				
-				self.preview_slider.setValue(parseInt((self.preview.scale-0.1)*400));
+				//self.preview_slider.setValue(parseInt((self.preview.scale-0.1)*400));
 			}
 		});
 		this.dialog = this.dialog.dialog;		
-				
+
 		//Set Undo Manager
-		this.undo_manager = new undo_manager();
+		//this.undo_manager = new undo_manager();
+		
 		
 		
 		this.selected_index = $.makeArray();
-		
+
 		//Set canvas size
-		this.setSize(width, height);
+		this.set_size(width, height);
+
 				
 		//Set Context Menu
 		this.context_menu = new org.goorm.core.menu.context();
@@ -199,6 +207,7 @@ org.goorm.core.design.canvas.prototype = {
 				self.dialog.panel.show();
 			});				
 		});
+
 				
 		$(target).find(".canvas").find("canvas").dblclick(function (e) {
 			var parent_offset = $(this).parent().offset(); 
@@ -311,7 +320,8 @@ org.goorm.core.design.canvas.prototype = {
 			});
 			$(self.target).find(".canvas").find(".grid").find(".selection").remove();
 		});
-				
+		
+
 		//Set Mouse Down Event in Canvas
 		$(target).find(".canvas").find("canvas").mousedown(function (e) {
 			if (e.which == 1 || e.which == 3) {
@@ -472,6 +482,7 @@ org.goorm.core.design.canvas.prototype = {
 			}
 			
 		});
+
 		
 		//Mouse Move Event in Canvas
 		$(target).find(".canvas").find("canvas").mousemove(function (e) {
@@ -833,7 +844,6 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			
 			$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
 		});
-		
 		
 		
 		//Set Mouse Up Event in Canvas
@@ -1235,6 +1245,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			//refresh Object
 			self.object_explorer.refresh();
 		});
+	
 		
 		/*
 		
@@ -1277,10 +1288,11 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		
 		*/
 		
-		this.preview.set_size();
-		this.preview.setup();
+		//this.preview.set_size();
+		//this.preview.setup();
+
 		
-		
+		/*
 		
 		if(core.dialog.preference.preference["preference.designer.show_preview"]=="true") {
 			this.toolbar.is_preview_on = false;
@@ -1312,6 +1324,9 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		else {
 			this.snap_to_grid = true;
 		}
+		*/
+		
+		/*
 		this.toolbar.toggle_snap_to_grid();
 		
 		this.toolbar.change_grid_unit(core.preference["preference.designer.grid_unit"]);
@@ -1319,7 +1334,8 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		this.toolbar.change_grid_opacity(core.preference["preference.designer.grid_opacity"]);
 		
 		this.toolbar.change_ruler_unit(core.preference["preference.designer.ruler_unit"]);
-		
+		*/
+
 	},
 
 	is_hovered : function (x, y, object, callback) {
@@ -1441,7 +1457,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		}
 	},
 	
-	setSize: function (width, height, indicator_top_fake) {
+	set_size: function (width, height, indicator_top_fake) {
 		//Set width, height properties
 		this.width = parseInt(width);
 		this.height = parseInt(height);
@@ -1474,10 +1490,10 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		$(this.target).find(".dummyspace").width(this.width + 90);
 		$(this.target).find(".dummyspace").height(this.height + 100);
 		
-		this.preview.set_size("change", indicator_top_fake);
+		//this.preview.set_size("change", indicator_top_fake);
 	},
 	
-	setSkin: function (imgsrc, width, height) {
+	set_skin: function (imgsrc, width, height) {
 		//Set width, height properties
 		this.skin_width = parseInt(width);
 		this.skin_height = parseInt(height);
@@ -2032,12 +2048,13 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				}
 			});
 		}
-		this.preview.draw();
+		
+		//this.preview.draw();
 	},
 	
-	set_cursor: function (cursorType) {
+	set_cursor: function (cursor_type) {
 		//Set the cursor in cavas layer
-		$(this.target).find(".canvas").css("cursor", cursorType);
+		$(this.target).find(".canvas").css("cursor", cursor_type);
 	},
 	
 	set_drawing_mode: function (mode) {

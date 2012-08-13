@@ -34,24 +34,16 @@ org.goorm.core.design.prototype = {
 		//Ruler Initialization		
 		this.ruler = new org.goorm.core.design.ruler();
 		this.ruler.init($(target), "10", "px", this.title);
-		
 				
 		//Canvas Initialization		
 		this.canvas = new org.goorm.core.design.canvas();
 		this.canvas.init($(target).find(".canvas_container"), 800, 1000, this.title, this);
 
-
+		
 
 		//Blocking Context Menus for Empty Space		
 		var empty_context_menu = new org.goorm.core.menu.context();
 		empty_context_menu.init("", "none", $(target).find(".canvas_container"), "");
-		
-		
-		
-		
-		
-		
-		
 		
 		
 				
@@ -155,14 +147,15 @@ org.goorm.core.design.prototype = {
 	save_as: function (filepath, filename, filetype) {
 	},
 	
-	resize_all: function () {		
+	resize_all: function () {
+	
 		if(this.canvas.toolbar.is_ruler_on) {
 			$(this.container).find(".canvas_container").width($(this.container).parent().width() - 14);
-			$(this.container).find(".canvas_container").height($(this.container).parent().height() - 14 - 36);
+			$(this.container).find(".canvas_container").height($(this.container).parent().height() - 14 - 35);
 		}
 		else {
 			$(this.container).find(".canvas_container").width($(this.container).parent().width());
-			$(this.container).find(".canvas_container").height($(this.container).parent().height() - 36);
+			$(this.container).find(".canvas_container").height($(this.container).parent().height() - 35);
 		}
 
 		$(this.container).find(".ruler_x").width($(this.container).find(".canvas_container").width());
@@ -225,7 +218,7 @@ org.goorm.core.design.prototype = {
 			$(this.container).find(".canvas_container").find(".canvas").css("margin-top", this.margin_top);	
 		}
 		
-		this.canvas.preview.set_size();
+		//this.canvas.preview.set_size();
 	},
 	
 	get_source: function (objects) {

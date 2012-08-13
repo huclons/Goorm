@@ -227,6 +227,10 @@ version: 3.0.0
 
 #goorm_inner_layout_center #workspace{
 	background-color:#999;
+	
+	-moz-box-shadow: inset 0px 28px 10px 0px #333;
+	-webkit-box-shadow: inset 0px 28px 10px 0px #333;
+	 box-shadow: inset 0px 28px 10px 0px #333;	
 }
 
 #workspace .yui-panel .hd {
@@ -430,7 +434,7 @@ version: 3.0.0
 	background-repeat: no-repeat;
 }
 
-#workspace .max_maximize.window_button{
+#workspace .unmaximize_all.window_button{
 	width: 8px; 
 	height: 8px;
 	float:left;

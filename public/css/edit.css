@@ -30,12 +30,11 @@ version: 3.0.0
 
 .CodeMirror-gutter {
 	width: 40px;
-	line-height: 18px;
+	padding-top: 1px;
 }
 
 .CodeMirror-lines {
 	margin-left: 12px;
-	line-height: 18px;
 }
 
 .CodeMirror-gutter .breakpoint {
@@ -111,7 +110,10 @@ version: 3.0.0
 }
 
 .CodeMirror {
-	border-top: 1px solid black; border-bottom: 1px solid black;
+	border-top: 1px solid #333;
+	border-bottom: 1px solid #333;
+	font-size:11px;
+	line-height:15px;
 }
 	  
 span.CodeMirror-matchhighlight {

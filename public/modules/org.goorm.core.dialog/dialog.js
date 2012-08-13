@@ -67,7 +67,7 @@ org.goorm.core.dialog.prototype = {
 				width: self.width+'px',
 				height: self.height+'px', 
 				visible: false, 
-				underlay: "shadow",
+				underlay: "none",
 				close: true,
 				autofillheight: "body",
 				draggable: true,

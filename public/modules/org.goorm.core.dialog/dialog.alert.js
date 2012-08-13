@@ -43,7 +43,7 @@ org.goorm.core.dialog.alert.prototype = {
 				width: '300px',
 				height: '160px',
 				visible: false, 
-				underlay: "shadow",
+				underlay: "none",
 				close: true,
 				draggable: true,
 				modal: true,

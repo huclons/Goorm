@@ -13,6 +13,7 @@ version: 3.0.0
 	position: relative;
 	overflow: auto;
 	background-color:#999;
+	border-bottom: 1px solid #666;
 }
 
 .design.preview_container .bd {
@@ -181,7 +182,7 @@ version: 3.0.0
 	width:14px;
 	height:14px;
 	z-index: 4;
-	background-image: url(images/org.goorm.core.design/ruler.png);	
+	background-image: url(/images/org.goorm.core.design/ruler.png);	
 }
 
 .window_container .ruler_x {
@@ -191,7 +192,7 @@ version: 3.0.0
 	height:13px;
 	border-bottom:1px solid #333;
 	z-index: 3;
-	background-image: url(images/org.goorm.core.design/ruler_px_x.png);
+	background-image: url(/images/org.goorm.core.design/ruler_px_x.png);
 }
 
 .window_container .ruler_y {
@@ -200,8 +201,9 @@ version: 3.0.0
 	top:51px;
 	width:13px;	
 	border-right:1px solid #333;	
+	border-bottom: 1px solid #666;
 	z-index: 3;	
-	background-image: url(images/org.goorm.core.design/ruler_px_y.png);
+	background-image: url(/images/org.goorm.core.design/ruler_px_y.png);
 }
 
 .canvas_container {
@@ -230,7 +232,7 @@ version: 3.0.0
 }
 
 .canvas_container .canvas .grid {
-	background-image:url(images/org.goorm.core.design/grid_10px.png);
+	background-image:url(/images/org.goorm.core.design/grid_10px.png);
 	-moz-opacity:.30; filter:alpha(opacity=30); opacity:.30;
 	width:100%;
 	height:100%;
