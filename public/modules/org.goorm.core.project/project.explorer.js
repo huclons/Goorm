@@ -177,7 +177,7 @@ org.goorm.core.project.explorer.prototype = {
 		var max_num = parseInt($("#project_selector").width()/8);
 
 		
-		for(var project_idx in self.project_data) {
+		for(var project_idx=0; project_idx<self.project_data.length; project_idx++) {
 			var temp_name = self.project_data[project_idx].name;
 
 			if(temp_name.length > max_num) {
