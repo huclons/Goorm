@@ -149,9 +149,10 @@ module.exports = {
 		if ( query.user!=null && query.project_path!=null && query.project_name!=null ) {
 				
 			fs.mkdir(__path+"temp_files/"+query.user, '0777', function(err) {
+
 				if (err==null || err.errno == 47) {		//errno 47 is exist folder error
 
-					var command = exec("cd workspace; zip -r ../temp_files/"+query.user+"/"+query.project_name+".zip ."+query.project_path, function (error, stdout, stderr) {
+					var command = exec("cd workspace; zip -r ../temp_files/"+query.user+"/"+query.project_name+".zip ./"+query.project_path, function (error, stdout, stderr) {
 						if (error == null) {
 							data.path = query.user+'/'+query.project_name+".zip";
 							evt.emit("project_do_export", data);

@@ -7,8 +7,7 @@
 org.goorm.core.project._import = function () {
 	this.dialog = null;
 	this.buttons = null;
-	this.treeview = null;
-	this.current_path = null;
+	this.project_list = null;	
 };
 
 org.goorm.core.project._import.prototype = {
@@ -23,7 +22,6 @@ org.goorm.core.project._import.prototype = {
 				return false;
 			}
 		
-			$("#project_import_location").val(self.current_path);
 			core.module.loading_bar.start("Import processing...");
 			$('#project_import_my_form').submit();
 		};
@@ -87,85 +85,11 @@ org.goorm.core.project._import.prototype = {
 		});
 		this.dialog = this.dialog.dialog;
 		
-		//this.dialog.panel.setBody("AA");
+		this.project_list = new org.goorm.core.project.list;
 	},
 	
 	show: function () {
-		this.add_project_list();
-		$("#project_import_location").val("");
-		$("#div_project_information").empty();
-		$("#project_import").find("#project_import_dialog_left").scrollTop(0);
+		this.project_list.init("#project_import");
 		this.dialog.panel.show();
-	},
-	
-	add_project_list: function () {
-		$("#project_import_project_list").empty();
-			
-		$.get("project/get_list", null, function (data) {
-						
-			var sorting_data = data;
-						
-			for(var project_idx in sorting_data) {
-				var icon_str = "";
-				icon_str += "<div id='selector_" + sorting_data[project_idx].contents.name + "' value='" + project_idx + "' class='selector_project' type='"+sorting_data[project_idx].contents.type+"'>";
-				icon_str += "<div style='padding-left:65px; padding-top:20px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis'>";
-				icon_str += sorting_data[project_idx].contents.name;
-				icon_str += "</div>";
-				icon_str += "</div>";
-
-				$("#project_import_project_list").append(icon_str);
-			}
-			
-			$(".selector_project").click(function() {
-				$(".selector_project").removeClass("selected_button");
-				$(this).addClass("selected_button");
-				
-				var idx = $(this).attr("value");
-				
-				$("#div_project_path").attr("value", sorting_data[idx].name);
-				$("#project_import_location").attr("value", "/" + sorting_data[idx].name);
-
-				$("#div_project_information").empty();
-				$("#div_project_information").append("<b>Project Type : </b>");
-				$("#div_project_information").append(sorting_data[idx].contents.type+"<br/>");
-				$("#div_project_information").append("<b>Project detailed Type : </b>");
-				$("#div_project_information").append(sorting_data[idx].contents.detailedtype+"<br/>");
-				$("#div_project_information").append("<b>Project Author : </b>");
-				$("#div_project_information").append(sorting_data[idx].contents.author+"<br/>");
-				$("#div_project_information").append("<b>Project Name : </b>");
-				$("#div_project_information").append(sorting_data[idx].contents.name+"<br/>");
-				$("#div_project_information").append("<b>Project About : </b>");
-				$("#div_project_information").append(sorting_data[idx].contents.about+"<br/>");
-				$("#div_project_information").append("<b>Project Date : </b>");
-				$("#div_project_information").append(sorting_data[idx].contents.date+"<br/>");
-				
-				$("#div_project_name").attr("value", sorting_data[idx].contents.name);
-				$("#div_project_type").attr("value", sorting_data[idx].contents.type);
-			});
-		});
-	},
-	
-	add_project_item: function() {
-		$("#project_import").find("#project_import_type").append("<option value='All'>All Project</option>");
-		$("#project_import").find("#project_import_type").append("<option value='goorm'>goorm Project</option>");
-		
-		$("#project_import_type").change(function() {
-			var type = $("#project_import_type option:selected").val();
-			if(type=="All") {
-				$("#project_import").find(".selector_project").each(function() {
-					$(this).show();
-				});
-			}
-			else {
-				$("#project_import").find(".selector_project").each(function() {
-					if($(this).attr("type")==type) {
-						$(this).show();
-					}
-					else {
-						$(this).hide();
-					}
-				});
-			}
-		});
 	}
 };
