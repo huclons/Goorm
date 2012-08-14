@@ -77,7 +77,7 @@ org.goorm.core.dialog.explorer.prototype = {
 			self.treeview = new YAHOO.widget.TreeView(self.dir_tree_ori, data);
 
 			self.treeview.subscribe("clickEvent", function(nodedata) {	
-			
+				console.log("click!!");
 				if(nodedata.node.data.cls == "dir") {
 
 					self.current_path = (nodedata.node.data.parent_label + nodedata.node.data.name).replace("//", "/");
