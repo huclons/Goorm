@@ -96,7 +96,7 @@
 			".yui-skin-sam .yui-resize .yui-resize-handle-br":{"background-image":"url(http://yui.yahooapis.com/2.9.0/build/resize/assets/skins/sam/layout_sprite.png)"},
 			".yui-skin-sam .yui-resize .yui-resize-handle-tl":{"background-image":"url(http://yui.yahooapis.com/2.9.0/build/resize/assets/skins/sam/layout_sprite.png)"},
 			".yui-skin-sam .yui-resize .yui-resize-handle-tr":{"background-image":"url(http://yui.yahooapis.com/2.9.0/build/resize/assets/skins/sam/layout_sprite.png)"},
-			"#project_select_box":{"border":"1px solid","background-image":"url(../config/image/org.uizard.core/button_bg.png)","-moz-border-radius":"8px","-webkit-border-radius":"8px","-khtml-border-radius":"8px","border-radius":"8px"},
+			"#project_selectbox":{"border":"1px solid","background-image":"url(../config/image/org.uizard.core/button_bg.png)","-moz-border-radius":"8px","-webkit-border-radius":"8px","-khtml-border-radius":"8px","border-radius":"8px"},
 			".yui-skin-sam .yuimenu .bd":{"background-color":"#f6f6f6","-moz-border-radius":"0px","-webkit-border-radius":"0px","-khtml-border-radius":"0px","border-radius":"0px"},
 			".yui-menu-shadow":{"-moz-border-radius":"0px","-webkit-border-radius":"0px","-khtml-border-radius":"0px","border-radius":"0px"},
 			"#uizardDialogContainer .hd":{"text-align":"left"},

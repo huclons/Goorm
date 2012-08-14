@@ -394,9 +394,16 @@ label:hover {
 	border-radius: 0px;
 }
 
-#project_selector {
+#project_selector, #toolbox_selector {
 	overflow:hidden;
 	font-size: 12px;
+	height:27px;
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:5px;
+	background-color:#eee;
+	border-bottom:1px solid #ddd;
+	text-align:center;
 }
 
 #startpage_container {

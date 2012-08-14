@@ -170,7 +170,7 @@ PROJECT TREE STYLE CUSTOMIZATION
 	border:1px solid #AAA;
 }
 
-#project_select_box-button {
+#project_selectbox-button {
 	width: 98px;
 	text-overflow:ellipsis;
 	overflow:hidden;
@@ -178,7 +178,7 @@ PROJECT TREE STYLE CUSTOMIZATION
 }
 
 /*original
-#project_select_box{
+#project_selectbox{
 	margin-top:3px;
 	padding: 5px;
 }

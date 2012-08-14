@@ -227,15 +227,7 @@ org.goorm.core.layout.prototype = {
 		this.tab_toolbox = new YAHOO.widget.Tab({ label: "Tool Box", content: "<div id='toolbox'></div>" });
 
 		//attaching tab element
-		target.addTab(this.tab_toolbox);		
-		
-		//close button click event assign
-		
-		$(this.tab_toolbox.get("labelEl")).find(".close").click(function() {
-			self.detach_toolbox();
-			
-			return false;
-		});
+		target.addTab(this.tab_toolbox);
 
 		//For Test Codes
 		$("#toolbox").append("<div id='toolLine' style='cursor:pointer; width:100%; height:20px; border-bottom:1px solid #ccc;'>Line Tool</div>");
@@ -423,9 +415,12 @@ org.goorm.core.layout.prototype = {
 		$("#goorm_left").find("#project_treeview").height(layout_left_height-35);
 		
 		var project_selector_width = $(".yui-layout-unit-left").find(".yui-layout-wrap").find("#project_selector").width();
-		$("#goorm_left").find("#project_select_box").width(project_selector_width-19);
-		$("#goorm_left").find("#project_select_box").next().width(project_selector_width-10);
-		$("#goorm_left").find("#project_select_box").find("button").width(project_selector_width-18);
+		$("#goorm_left").find("#project_selectbox").width(project_selector_width-19);
+		$("#goorm_left").find("#project_selectbox").next().width(project_selector_width-10);
+		//$("#goorm_left").find("#project_selectbox").find("button").width(project_selector_width-18);
+		
+		$("#goorm_left").find("#toolbox_selectbox").width(project_selector_width-19);
+		$("#goorm_left").find("#toolbox_selectbox").next().width(project_selector_width-10);
 		
 		
 		var layout_right_height = $(".yui-layout-unit-right").find(".yui-layout-wrap").height() - 25;

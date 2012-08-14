@@ -20,16 +20,16 @@ org.goorm.core.project.explorer.prototype = {
 		
 		var self = this;
 
-		$("#project_explorer").prepend("<div id='project_selector' style='height:27px; padding-left:5px; padding-right:5px; padding-top:5px; background-color:#eee; border-bottom:1px solid #ddd; text-align:center;'></div>");
-		$("#project_selector").append("<label class='selectbox'><select id='project_select_box'></select></label>")
+		$("#project_explorer").prepend("<div id='project_selector'></div>");
+		$("#project_selector").append("<label class='selectbox'><select id='project_selectbox'></select></label>")
 
-		$("#project_select_box").change(function() {
+		$("#project_selectbox").change(function() {
 			self.on_project_selectbox_change($(this).val());
 		});
 
 		$.get("project/get_list", "", function (data) {
 			self.project_data = data
-			self.make_project_select_box();
+			self.make_project_selectbox();
 		});
 		
 		$("#project_explorer").append("<div id='project_treeview' style='overflow-x:hidden'></div>");
@@ -109,7 +109,7 @@ org.goorm.core.project.explorer.prototype = {
 			
 		$.get("project/get_list", "", function (data) {
 			self.project_data = data		
-			self.make_project_select_box();			
+			self.make_project_selectbox();			
 		});
 
 		var temp_project_path = core.status.current_project_path;
@@ -167,12 +167,12 @@ org.goorm.core.project.explorer.prototype = {
 		});
 	},
 	
-	make_project_select_box: function() {
+	make_project_selectbox: function() {
 		var self = this;
 
-		$("#project_select_box").empty();
+		$("#project_selectbox").empty();
 		
-		$("#project_select_box").append("<option value='' selected>Select Project</option>");
+		$("#project_selectbox").append("<option value='' selected>Select Project</option>");
 		
 		var max_num = parseInt($("#project_selector").width()/8);
 		
@@ -185,10 +185,10 @@ org.goorm.core.project.explorer.prototype = {
 			}			
 
 			if (self.project_data[project_idx].name == core.status.current_project_path) {
-				$("#project_select_box").append("<option value='"+project_idx+"' selected>"+temp_name+"</option>");
+				$("#project_selectbox").append("<option value='"+project_idx+"' selected>"+temp_name+"</option>");
 			}
 			else {
-				$("#project_select_box").append("<option value='"+project_idx+"'>"+temp_name+"</option>");
+				$("#project_selectbox").append("<option value='"+project_idx+"'>"+temp_name+"</option>");
 			}
 		}
 	},

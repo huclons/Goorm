@@ -249,7 +249,7 @@ org.goorm.core.terminal.prototype = {
 	
 	resize_all: function () {
 		var layout_bottom_width = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").width() - 20;
-		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 40;
+		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 36;
 		var target_height = $(this.target).find("#results").height() + 20;
 		var prompt_width = (this.prompt_length + 2) * 9;
 		
