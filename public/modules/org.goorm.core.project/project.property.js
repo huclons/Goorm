@@ -133,7 +133,7 @@ org.goorm.core.project.property.prototype = {
 	
 	refresh_toolbox: function () {
 
-		$(".toolsets").css("display", "none");
+		$(".toolsets").hide();
 		
 		var active_file_type = null;
 		
@@ -152,7 +152,7 @@ org.goorm.core.project.property.prototype = {
 							if(toolbox_button_menu)
 								toolbox_button_menu.set("label", core.module.plugin_manager.plugins[value].toolbox_name);
 					}else{
-						$("#"+core.status.current_project_type.toLowerCase()+"_toolset").css("display", "block");
+						$("#"+core.status.current_project_type.toLowerCase()+"_toolset").show();
 					}
 					
 					break;
@@ -166,7 +166,7 @@ org.goorm.core.project.property.prototype = {
 						if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.module.plugin_manager.plugins[value].name].refresh_toolbox) {				
 							core.module.plugin_manager.plugins["org.goorm.plugin."+core.module.plugin_manager.plugins[value].name].refresh_toolbox();
 						}else{
-							$("#"+core.module.plugin_manager.plugins[value].name+"_toolset").css("display", "block");
+							$("#"+core.module.plugin_manager.plugins[value].name+"_toolset").show();
 						}
 						
 						//toolbox_button_menu.set("label", core.module.plugin_manager.plugins[value].toolbox_name);

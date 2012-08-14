@@ -191,10 +191,10 @@ org.goorm.core.project._new.prototype = {
 				
 				$("#check_project_new_import").click(function() {
 					if($(this).is(":checked")) {
-						$("#project_new_import_div").css("display", "block");
+						$("#project_new_import_div").show();
 					}
 					else {
-						$("#project_new_import_div").css("display", "none");
+						$("#project_new_import_div").hide();
 					}
 				});
 				
@@ -221,8 +221,8 @@ org.goorm.core.project._new.prototype = {
 			$(".project_wizard_first_button").removeClass("selected_button");
 			$(this).addClass("selected_button");
 						
-			$(".all").css("display", "none");
-			$("."+$(this).attr("project-type")).css("display", "block");
+			$(".all").hide();
+			$("."+$(this).attr("project-type")).show();
 		});
 		
 		$(".project_wizard_second_button").click(function () {
@@ -242,10 +242,10 @@ org.goorm.core.project._new.prototype = {
 			var self = this;
 			$("#new_projectExpansionContainer").children().each(function (i) {
 				if ($(this).attr("expansion") == $(self).attr("expansion")) {
-					$(this).css("display", "block");
+					$(this).show();
 				}
 				else {
-					$(this).css("display", "none");
+					$(this).hide();
 				}
 			});
 		});

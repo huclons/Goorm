@@ -24,13 +24,17 @@ version: 3.0.0
 }
 
 .CodeMirror, .CodeMirror-gutter {
-	font-family: Consolas, Monotype;
+	font-family: Consolas, Monaco, monospace, Monotype;
+	font-size:11px;
+	line-height:15px;
 	height:100%;
 }
 
 .CodeMirror-gutter {
 	width: 40px;
 	padding-top: 1px;
+	font-size: 10px;
+	color: #444;
 }
 
 .CodeMirror-lines {
@@ -48,7 +52,7 @@ version: 3.0.0
 	left: 42px;
 	width: 12px;
 	height: 12px;
-	background: transparent url(../images/icons/context/bullet_plus.png) no-repeat 2px 4px;
+	background: transparent url(../images/icons/context/bullet_plus.png) no-repeat 2px 3px;
 	cursor: pointer;
 }
 
@@ -57,7 +61,7 @@ version: 3.0.0
 	left: 42px;
 	width: 12px;
 	height: 12px;
-	background: transparent url(../images/icons/context/bullet_minus.png) no-repeat 2px 4px;
+	background: transparent url(../images/icons/context/bullet_minus.png) no-repeat 2px 3px;
 	cursor: pointer;
 }
 
@@ -112,8 +116,6 @@ version: 3.0.0
 .CodeMirror {
 	border-top: 1px solid #333;
 	border-bottom: 1px solid #333;
-	font-size:11px;
-	line-height:15px;
 }
 	  
 span.CodeMirror-matchhighlight {

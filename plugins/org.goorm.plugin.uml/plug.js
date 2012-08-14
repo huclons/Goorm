@@ -777,7 +777,7 @@ org.goorm.plugin.uml.prototype = {
 	
 	refreshtoolbox: function(){
 
-		$("#uml_toolset").css("display", "block");
+		$("#uml_toolset").show();
 		$("#uml_toolset").children().each(function(){
 			$(this).css("display","none");
 		});

@@ -179,12 +179,12 @@ org.goorm.core.design.canvas.toolbar.prototype = {
 		var self = this;
 		if (self.is_grid_on) {
 			self.is_grid_on = false;
-			$(self.target).find(".grid").css("display", "none");
+			$(self.target).find(".grid").hide();
 			$(self.target).find(".design_toolbar_container").find("img[action='gridOnOff']").removeClass("toolbar_buttonPressed");
 		}
 		else {
 			self.is_grid_on = true;
-			$(self.target).find(".grid").css("display", "block");
+			$(self.target).find(".grid").show();
 			$(self.target).find(".design_toolbar_container").find("img[action='gridOnOff']").addClass("toolbar_buttonPressed");
 		}
 	},

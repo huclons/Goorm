@@ -233,16 +233,16 @@ org.goorm.core.project.open.prototype = {
 			var type = $("#project_open_type option:selected").val();
 			if(type=="All") {
 				$("div[id='project.open']").find(".selector_project").each(function() {
-					$(this).css("display", "block");
+					$(this).show();
 				});
 			}
 			else {
 				$("div[id='project.open']").find(".selector_project").each(function() {
 					if($(this).attr("type")==type) {
-						$(this).css("display", "block");
+						$(this).show();
 					}
 					else {
-						$(this).css("display", "none");
+						$(this).hide();
 					}
 				});
 			}

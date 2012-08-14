@@ -73,11 +73,11 @@ org.goorm.core.dialog.wizard.prototype = {
 			if (self.step < self.total_step) {
 				self.show_previous_button(true);
 			
-				$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").css("display", "none");
+				$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").hide();
 			
 				if ($("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']")) {
 					self.step++;
-					$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").css("display", "block");
+					$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").show();
 					if (self.step == self.total_step) {
 						self.show_next_button(false);
 					}	
@@ -88,14 +88,14 @@ org.goorm.core.dialog.wizard.prototype = {
 		var handle_prev = function() { 
 			if (1 < self.step) {
 				self.show_next_button(true);
-				$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").css("display", "none");			
+				$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").hide();			
 				self.step--;
 				
 				if (self.step == 1) {
 					self.show_previous_button(false);
 				}
 				
-				$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").css("display", "block");		
+				$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").show();		
 			}
 		};
 
@@ -229,9 +229,9 @@ org.goorm.core.dialog.wizard.prototype = {
 		var self = this;
 		self.step=1;
 		$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step").each(function (i){
-			$(this).css("display", "none");
+			$(this).hide();
 			if(i==0) {
-				$(this).css("display", "block");
+				$(this).show();
 			}
 		});
 		self.show_previous_button(false);
