@@ -55,7 +55,7 @@ org.goorm.core.window.panel.prototype = {
 			this.filename = filepath;
 		}
 		
-		var window_count = core.module.layout.workspace.window_manager.window_list.length;
+		var window_count = core.module.layout.workspace.window_manager.window.length;
 				
 		this.panel = new YAHOO.widget.Panel(
 			container, { 
@@ -171,9 +171,7 @@ org.goorm.core.window.panel.prototype = {
 			status: false,
 			proxy: false, 
 		});
-		
-		
-		
+
 		this.resize.on("startResize", function(args) {
 			if (this.cfg.get_property("constraintoviewport")) { 
 				var D = YAHOO.util.Dom; 
@@ -189,7 +187,7 @@ org.goorm.core.window.panel.prototype = {
 				self.resize.set("maxHeight", null); 
 			} 
 			
-			self.on_start_resize();
+			self.activate();
 		}, this.panel, true);
 		
 		this.resize.on("resize", function(args) {
@@ -203,14 +201,14 @@ org.goorm.core.window.panel.prototype = {
             	this.cfg.setProperty("height", panel_height + "px");
 			}
 			
-			self.resize_all()
-			
-			self.on_resize();	
+			self.resize_all();
 		}, this.panel, true);
 		
 		this.resize.on("endResize", function(args) {
+			self.width = $("#" + self.container + "_c").width();
+			self.height = $("#" + self.container + "_c").height();
+		
 			self.resize_all();
-
 		}, this.panel, true);
 		
 		
@@ -235,12 +233,18 @@ org.goorm.core.window.panel.prototype = {
 		
 		//title bar mousedown event assign
 		$("#"+container).find("#"+container+"_h").find(".titlebar").mousedown(function() {
-			self.titlebar_click();
+			self.activate();
+		});
+		
+		//title bar mouseup event assign
+		$("#"+container).find("#"+container+"_h").find(".titlebar").mouseup(function() {
+			self.left = $("#" + self.container + "_c").offset().left;
+			self.top = $("#" + self.container + "_c").offset().top;
 		});
 		
 		//title bar dbl click event assign
 		$("#"+container).find("#"+container+"_h").find(".titlebar").dblclick(function() {
-			self.titlebar_dblclick();
+			core.module.layout.workspace.window_manager.maximize_all();
 			
 			return false;
 		});
@@ -284,10 +288,6 @@ org.goorm.core.window.panel.prototype = {
 		this.activate();
 	},
 	
-	titlebar_dblclick: function() {
-		this.maximize();
-	},
-	
 	set_modified: function() {
 	 	var titlebar = $("#" + this.container).find(".titlebar").find("div:first").html();
 	  	titlebar = titlebar.replace(" *", "");
@@ -303,82 +303,51 @@ org.goorm.core.window.panel.prototype = {
 	  	this.is_saved = true;
 	},
 	
-	maximize: function (force, inactivate) {
-		var self = this;
+	maximize: function () {
+		console.log("maximize! : " + this.filename);
+	
+		this.left = $("#" + this.container + "_c").offset().left;
+		this.top = $("#" + this.container + "_c").offset().top;
+		this.width = $("#" + this.container + "_c").width();
+		this.height = $("#" + this.container + "_c").height();
 		
-		if(this.status != "maximized" || force) {
-			this.left = $("#" + this.container + "_c").offset().left;
-			this.top = $("#" + this.container + "_c").offset().top;
-			this.width = $("#" + this.container + "_c").width();
-			this.height = $("#" + this.container + "_c").height();
-			
-			if(this.is_first_maximize == true) {
-				this.is_first_maximize = false;
-			}
-			//else {
-			//	this.width = $("#" + this.container + "_c").width();
-			//	this.height = $("#" + this.container + "_c").height();
-			//}
-			
-			//$("#" + this.container + "_c").offset({left:$("#" + this.workspace_container).offset().left - 1, top:$("#" + this.workspace_container).offset().top + 24});
-			$("#" + this.container + "_c").offset({left:$("#" + this.workspace_container).offset().left - 1, top:$("#" + this.workspace_container).offset().top});
-			$("#" + this.container + "_c").width($("#" + this.workspace_container).width());
-			$("#" + this.container + "_c").height($("#" + this.workspace_container).height());
-			
-			$("#" + this.container).width($("#" + this.workspace_container).width());
-			$("#" + this.container).height($("#" + this.workspace_container).height());
-			
-            this.panel.cfg.setProperty("width", $("#" + this.workspace_container).width() + "px");
-            this.panel.cfg.setProperty("height", $("#" + this.workspace_container).height()+ "px");
-			
-			this.status = "maximized";
-			core.module.layout.workspace.window_manager.is_maximized = true;
-			$(".tab_max_buttons").show();
-			
-			this.resize.lock();
-			
-			/*
-			$("#" + this.container + "_c").find(".yui-resize-handle").each(function (i) {
-				if ($(this).parent().attr("id") == self.container + "_c") {
-									
-					$(this).hide();
-				}
-			});
-			*/
-		}
-		else {
-			console.log("unmaximize! : " + this.filename);
+		$("#" + this.container + "_c").offset({left:$("#" + this.workspace_container).offset().left - 1, top:$("#" + this.workspace_container).offset().top});
+		$("#" + this.container + "_c").width($("#" + this.workspace_container).width());
+		$("#" + this.container + "_c").height($("#" + this.workspace_container).height());
 		
-			$("#" + this.container + "_c").offset({left:this.left, top:this.top});
-			$("#" + this.container + "_c").width(this.width);
-			$("#" + this.container + "_c").height(this.height);
-			
-			$("#" + this.container).width(this.width);
-			$("#" + this.container).height(this.height);
-			
-			this.panel.cfg.setProperty("width", this.width + "px");
-            this.panel.cfg.setProperty("height", this.height - 3 + "px");
-			
-			this.status = null;
-			
-			core.module.layout.workspace.window_manager.is_maximized = false;
-			
-			$(".tab_max_buttons").hide();
-			
-			this.resize.unlock();
-			
-			/*
-			$("#" + this.container + "_c").find(".yui-resize-handle").show();
-			*/
-		}
+		$("#" + this.container).width($("#" + this.workspace_container).width());
+		$("#" + this.container).height($("#" + this.workspace_container).height());
 		
+        this.panel.cfg.setProperty("width", $("#" + this.workspace_container).width() + "px");
+        this.panel.cfg.setProperty("height", $("#" + this.workspace_container).height()+ "px");
+		
+		this.status = "maximized";
+
+		$(".tab_max_buttons").show();
+		
+		this.resize.lock();
 		this.resize_all();
+	},
+	
+	unmaximize: function () {
+		console.log("unmaximize! : " + this.filename);
+	
+		$("#" + this.container + "_c").offset({left:this.left, top:this.top});
+		$("#" + this.container + "_c").width(this.width);
+		$("#" + this.container + "_c").height(this.height);
 		
-		/*
-		if (!inactivate || inactivate == undefined) {
-			this.activate();
-		}
-		*/
+		$("#" + this.container).width(this.width);
+		$("#" + this.container).height(this.height);
+		
+		this.panel.cfg.setProperty("width", this.width + "px");
+        this.panel.cfg.setProperty("height", this.height - 3 + "px");
+		
+		this.status = null;
+		
+		$(".tab_max_buttons").hide();
+		
+		this.resize.unlock();
+		this.resize_all();
 	},	
 
 	minimize: function () {
@@ -430,6 +399,7 @@ org.goorm.core.window.panel.prototype = {
 */
 			
 		
+/*
 			for (var i = core.module.layout.workspace.window_manager.index-1; i > -1; i--) {
 				var cnt = 0;
 				if(core.module.layout.workspace.window_manager.window[i].alive) {
@@ -443,8 +413,7 @@ org.goorm.core.window.panel.prototype = {
 					$(".tab_max_buttons").hide();
 				}
 			}
-			
-			localStorage["window_list"] = JSON.stringify(core.module.layout.workspace.window_manager.window_list);
+*/
 			
 			/*
 			if (core.module.layout.workspace.window_manager.window.length > 0) {
@@ -457,6 +426,7 @@ org.goorm.core.window.panel.prototype = {
 			*/
 			
 			core.module.layout.workspace.window_manager.window.remove(this.index, this.index);
+			core.module.layout.workspace.window_manager.index--;
 			delete this;
 		}
 		else {
@@ -489,11 +459,6 @@ org.goorm.core.window.panel.prototype = {
 	},	
 	
 	activate: function() {
-		if(core.module.layout.workspace.window_manager.is_maximized) {
-			//this.status = "";
-			//this.maximize(false, true);
-		}
-		
 		core.module.layout.workspace.window_manager.active_window = this.index;
 
 		$("#"+this.workspace_container).find(".activated").each(function(i) {
@@ -509,10 +474,6 @@ org.goorm.core.window.panel.prototype = {
 		$("#" + this.container).parent().css("z-index", "3");	
 
 		//core.dialog.project_property.refresh_toolbox();
-		
-		//core.module.layout.workspace.window_manager.window_list.active_window = this.filepath + this.filename;
-		
-		localStorage["window_list"] = JSON.stringify(core.module.layout.workspace.window_manager.window_list);
 		
 		this.tab.activate();
 		
@@ -538,24 +499,13 @@ org.goorm.core.window.panel.prototype = {
 			this.panel.setFooter("<div class='editor_message'>Line: 0 | Col: 0</div>");
 		}
 	},
-	
-	on_start_resize: function () {
-		this.activate();
-	},
-	
-	on_drag: function () {
-
-	},
-	
+		
 	on_resize: function () {
 					
-		if(this.status != "maximized") {		
+		//if(this.status != "maximized") {		
 			//this.width = this.panel.cfg.get_property("width");
 			//this.height = this.panel.cfg.get_property("height");
-		}
-		
-		var window_content_height = $("#filewindow"+i+"_c").height() - 47;
-		$("#filewindow"+i+"_c").find(".yui-content").height(window_content_height);
+		//}
 		
 		/*
 		if($("#code_editor_filewindow"+i+"Container").get(0)) {

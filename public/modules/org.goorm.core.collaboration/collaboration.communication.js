@@ -78,18 +78,15 @@ org.goorm.core.collaboration.communication.prototype = {
  		});
  		
  		this.socket.on('disconnect', function() {
- 			console.log("!");
  			self.leave();
  		});
  		
  		$(window).unload(function() {
- 			console.log("!");
  			self.leave();
  		});
 	},
 	
 	clear: function () {
-		console.log("!");
 		$("#" + this.target).find(".communication_user_container").empty();
 		$("#" + this.target).find(".communication_message_container").empty();
 	},
