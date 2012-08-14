@@ -436,12 +436,6 @@ org.goorm.core.layout.prototype = {
 		
 		var layout_center_height = $(".yui-layout-unit-center").find(".yui-layout-unit-center").find(".yui-layout-wrap").height();
 		$("#goorm_inner_layout_center").find("#workspace").height(layout_center_height);
-		
-		/*
-		if (core.module.layout.workspace.window_manager.is_maximized) {
-			$(document).trigger("maximize_resize");
-		}
-		*/
 
 		$(".dummyspace").css("z-index", 0);
 		

@@ -31,22 +31,13 @@ org.goorm.core.window.manager.prototype = {
 		this.workspace_container = container;
 		
 		this.window_list = [];
-		
-		/*
-		this.panel.setHeader("<div style='overflow:auto' class='titlebar'><div style='float:left'>"+this.title+"</div><div style='width:40px; text-align:right; float:right'><img src='images/icons/context/minimizebutton.png' class='minimize button' /> <img src='images/icons/context/maximizebutton.png' class='maximize button' /> <img src='images/icons/context/closebutton.png' class='close button' /></div></div>");
-*/
-
-		//$("#" + container).append("");
 
 		$("#" + container).append("<div id='" + container + "_window_list'><div class='tab_max_buttons' style='float:right;'><div class='unmaximize_all window_button'></div> <div class='maximized_close window_button'></div></div><div class='tab_scroll' style='float:right;'><div class='tab_list_left window_button'></div><div class='window_list window_button'></div><div class='tab_list_right window_button'></div></div></div>");
 		
 		$(".unmaximize_all").click(function (e) {
 			//self.cascade();
 			
-			$(self.window).each(function (i) {
-				console.log("unmaximize!: " + i);
-				this.maximize();
-			});
+			self.unmaximize_all();
 			
 			e.preventDefault();
 			e.stopPropagation();
@@ -84,23 +75,6 @@ org.goorm.core.window.manager.prototype = {
 		
 		this.context_menu[1] = new org.goorm.core.menu.context();
 		this.context_menu[1].init("configs/menu/org.goorm.core.window/window.manager.tabview.html", "window.manager.tabview", container + "_window_list");
-				
-		//testCode
-		/*
-		$("#" + container + "window_list").dblclick(function() {
-			self.add("designer"); //type : designer or editor
-		});
-		*/
-		
-		/*
-		$("#workspace").append("<button id='addwindow_button'>add a window</button>");
-		
-		var self = this;
-		$("#addwindow_button").click(function() {
-			self.add();
-			m.s("added a window", "window manager");
-		});
-		*/
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
 		// window events
@@ -133,23 +107,89 @@ org.goorm.core.window.manager.prototype = {
 		});
 		
 		$(core).bind("goorm_load_complete", function () {
-			if(!$.isEmptyObject(localStorage["window_list"])){
-				var temp_window_list = $.parseJSON(localStorage["window_list"]);
+			if(!$.isEmptyObject(localStorage["workspace_window"])){
+				var temp_window_list = $.parseJSON(localStorage["workspace_window"]);
 				var count = 0;
 				var active = 0;
 				
 				$(temp_window_list).each(function (i) {
 					self.open(this.filepath, this.filename, this.filetype, this.editor);
 					
-					//if(temp_window_list.active_window == id) 
-					//	active = count;	
-					//else count++;
+					//TODO: sort by index
+					
+					//TODO: arrange windows with each position and size
+					var current_window = self.window[self.index-1];
+					
+					current_window.left = this.left;
+					current_window.top = this.top;
+					current_window.width = this.width;
+					current_window.height = this.height;
+					current_window.status = this.status;
+					
+					if (this.status == "maximized") {						
+						$("#" + current_window.container + "_c").offset({left:$("#" + current_window.workspace_container).offset().left - 1, top:$("#" + self.workspace_container).offset().top});
+						$("#" + current_window.container + "_c").width($("#" + self.workspace_container).width());
+						$("#" + current_window.container + "_c").height($("#" + self.workspace_container).height());
+						
+						$("#" + current_window.container).width($("#" + self.workspace_container).width());
+						$("#" + current_window.container).height($("#" + self.workspace_container).height());
+						
+			            current_window.panel.cfg.setProperty("width", $("#" + self.workspace_container).width() + "px");
+			            current_window.panel.cfg.setProperty("height", $("#" + self.workspace_container).height()+ "px");
+						
+						$(".tab_max_buttons").show();
+						
+						current_window.resize.lock();
+					}
+					else {
+						$("#" + current_window.container + "_c").offset({left:this.left, top:this.top});
+						$("#" + current_window.container + "_c").width(this.width);
+						$("#" + current_window.container + "_c").height(this.height);
+						
+						$("#" + current_window.container).width(this.width);
+						$("#" + current_window.container).height(this.height);
+						
+						current_window.panel.cfg.setProperty("width", this.width + "px");
+			            current_window.panel.cfg.setProperty("height", this.height - 3 + "px");
+						
+						current_window.status = null;
+						
+						$(".tab_max_buttons").hide();
+			
+						current_window.resize.unlock();
+					}
+					
+					current_window.resize_all();
 				});
-				
-				//self.window[active].activate();
-				//ajax호출때문에 먼저 activate가 되버림.
 			}
 		});
+		
+		$(window).unload(function () {
+			self.save_workspace();
+		});
+	},
+	
+	save_workspace: function() {
+		console.log("save_workspace");
+	
+		var window_data = [];
+		
+		$(this.window).each(function (i) {
+			window_data.push({
+				filepath: this.filepath,
+				filename: this.filename,
+				filetype: this.filetype,
+				editor: this.type,
+				left: this.left,
+				top: this.top,
+				width: this.width,
+				height: this.height,
+				index: this.index,
+				status: this.status
+			});
+		});
+
+		localStorage["workspace_window"] = JSON.stringify(window_data);
 	},
 
 	open: function(filepath, filename, filetype, editor) {
@@ -169,15 +209,6 @@ org.goorm.core.window.manager.prototype = {
 			}
 		
 			this.add(filepath, filename, filetype, editor);
-
-			this.window_list.push({
-				filepath: filepath,
-				filename: filename,
-				filetype: filetype,
-				editor: editor
-			});
-
-			localStorage["window_list"] = JSON.stringify(this.window_list);
 		}
 		
 	},
@@ -213,8 +244,7 @@ org.goorm.core.window.manager.prototype = {
 		else {
 			var self = this;
 			this.active_window = this.index;
-			
-			
+
 			var title = filename;
 
 			$("#"+this.workspace_container).append("<div id='filewindow"+this.index+"'></div>");
@@ -233,31 +263,22 @@ org.goorm.core.window.manager.prototype = {
 			
 			this.window[this.index].activate();				
 			this.tab[this.index].activate();
-			
-			//For Test			
-			//this.window[this.index].maximize();
-			
-			
+
 			this.index++;
-			
-			/*
-			if(!this.is_maxmizedd){
-				this.cascade();
-			}
-			*/
 		}
-		
-		$(document).bind("maximize_resize", function() {
-			if(self.active_window!=-1) {
-				self.window[self.active_window].maximize(true);
-			}
-		});
 	},
 	
 	maximize_all: function () {
 		$(this.window).each(function (i) {
 			console.log("maximize!: " + i);
 			this.maximize();
+		});
+	},
+	
+	unmaximize_all: function () {
+		$(this.window).each(function (i) {
+			console.log("unmaximize!: " + i);
+			this.unmaximize();
 		});
 	},
 	
@@ -312,7 +333,7 @@ org.goorm.core.window.manager.prototype = {
 					this.window[i].editor.save();
 				}
 				
-				var window_manager = core.module.layout.workspace.window_manager;
+				var window_manager = core.module.layout.workspace_window_manager;
 				window_manager.window[i].set_saved();
 				window_manager.tab[i].set_saved();
 			}

@@ -151,11 +151,11 @@ org.goorm.core.design.prototype = {
 	
 		if(this.canvas.toolbar.is_ruler_on) {
 			$(this.container).find(".canvas_container").width($(this.container).parent().width() - 14);
-			$(this.container).find(".canvas_container").height($(this.container).parent().height() - 14 - 35);
+			$(this.container).find(".canvas_container").height($(this.container).parent().height() - 14 - 36);
 		}
 		else {
 			$(this.container).find(".canvas_container").width($(this.container).parent().width());
-			$(this.container).find(".canvas_container").height($(this.container).parent().height() - 35);
+			$(this.container).find(".canvas_container").height($(this.container).parent().height() - 36);
 		}
 
 		$(this.container).find(".ruler_x").width($(this.container).find(".canvas_container").width());
