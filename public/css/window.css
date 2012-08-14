@@ -228,9 +228,9 @@ version: 3.0.0
 #goorm_inner_layout_center #workspace{
 	background-color:#999;
 	
-	-moz-box-shadow: inset 0px 28px 10px 0px #333;
-	-webkit-box-shadow: inset 0px 28px 10px 0px #333;
-	 box-shadow: inset 0px 28px 10px 0px #333;	
+	-moz-box-shadow: inset 0px 28px 10px 0px #444;
+	-webkit-box-shadow: inset 0px 28px 10px 0px #444;
+	 box-shadow: inset 0px 28px 10px 0px #444;	
 }
 
 #workspace .yui-panel .hd {

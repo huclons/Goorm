@@ -13,8 +13,8 @@
 					file_new_ios_project: { value: "iOS 프로젝트"},
 					file_new_android_project: { value: "Android 프로젝트"},
 					file_new_uml_project: { value: "UML 프로젝트"},
-					file_new_uizard_plugin_project: { value: "UIzard 플러그인 프로젝트"},
-					file_new_uizard_customization_project: { value: "UIzard Customization 프로젝트"},
+					file_new_uizard_plugin_project: { value: "goorm 플러그인 프로젝트"},
+					file_new_uizard_customization_project: { value: "goorm Customization 프로젝트"},
 					file_new_file: { value: "파일"},
 					file_new_folder: { value: "폴더"},
 					file_new_untitled_text_file: { value: "텍스트 파일"},
@@ -166,7 +166,7 @@
 			help_tips_and_tricks: { value: "Tips and Tricks..."},
 			help_check_for_updates: { value: "업데이트 확인"},
 			help_bug_report: { value: "버그 리포트 전송"},
-			help_about_uizard_3: { value: "UIzard 3 대하여"}
+			help_about_uizard_3: { value: "goorm 3 대하여"}
 		}
 	},
 	

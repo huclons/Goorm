@@ -18,7 +18,7 @@ org.goorm.core.layout.workspace.prototype = {
 		//attaching window manager
 		this.attach_window_manager('workspace');
 		
-		$("#workspace").click(function (e) {
+		$("#workspace").mousedown(function (e) {
 			$("#workspace").find(".hd").each(function(i) {
 				$(this).removeClass("activated");
 			});
