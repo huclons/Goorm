@@ -54,7 +54,7 @@ org.goorm.core.project.list.prototype = {
 		var self = this;
 
 		$.get("project/get_list", null, function (data) {
-						
+			console.log(data);
 			var sorting_data = data;
 						
 			for(var project_idx in sorting_data) {

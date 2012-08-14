@@ -175,6 +175,7 @@ org.goorm.core.project.explorer.prototype = {
 		$("#project_selectbox").append("<option value='' selected>Select Project</option>");
 		
 		var max_num = parseInt($("#project_selector").width()/8);
+
 		
 		for(var project_idx in self.project_data) {
 			var temp_name = self.project_data[project_idx].name;
