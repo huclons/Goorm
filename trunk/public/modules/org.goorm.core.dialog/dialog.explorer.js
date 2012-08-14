@@ -159,7 +159,7 @@ org.goorm.core.dialog.explorer.prototype = {
 		
 		$.get("file/get_nodes", postdata, function (data) {
 
-			for(var idx in data) {
+		for(var idx=0; idx<data.length; idx++) {
 				var icon_str = "";
 				if(data[idx].cls=="dir") {
 					icon_str += "<div class='folder_item'";
