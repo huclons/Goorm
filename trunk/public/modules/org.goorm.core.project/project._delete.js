@@ -150,16 +150,16 @@ org.goorm.core.project._delete.prototype = {
 			var type = $("#project_delete_type option:selected").val();
 			if(type=="All") {
 				$("div[id='project.delete']").find(".selector_project").each(function() {
-					$(this).css("display", "block");
+					$(this).show();
 				});
 			}
 			else {
 				$("div[id='project.delete']").find(".selector_project").each(function() {
 					if($(this).attr("type")==type) {
-						$(this).css("display", "block");
+						$(this).show();
 					}
 					else {
-						$(this).css("display", "none");
+						$(this).hide();
 					}
 				});
 			}

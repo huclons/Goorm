@@ -157,7 +157,7 @@ org.goorm.core.stencil.prototype = {
 					//$(self.container).find("#"+"stencil_" + self.timestamp).html(data);
 					self.javascript = data;
 					
-					$(document).trigger("lineStencilCodeLoaded");
+					$(document).trigger("line_stencil_code_loaded");
 				}
 			});
 		}

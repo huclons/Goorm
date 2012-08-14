@@ -153,16 +153,16 @@ org.goorm.core.project._import.prototype = {
 			var type = $("#project_import_type option:selected").val();
 			if(type=="All") {
 				$("#project_import").find(".selector_project").each(function() {
-					$(this).css("display", "block");
+					$(this).show();
 				});
 			}
 			else {
 				$("#project_import").find(".selector_project").each(function() {
 					if($(this).attr("type")==type) {
-						$(this).css("display", "block");
+						$(this).show();
 					}
 					else {
-						$(this).css("display", "none");
+						$(this).hide();
 					}
 				});
 			}

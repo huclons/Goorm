@@ -42,18 +42,18 @@ org.goorm.core.design.ruler.prototype = {
 		var self = this;
 		
 		if(value) {
-			$(this.target).find(".ruler").css("display", "block");
-			$(this.target).find(".ruler_x").css("display", "block");
-			$(this.target).find(".ruler_y").css("display", "block");
+			$(this.target).find(".ruler").show();
+			$(this.target).find(".ruler_x").show();
+			$(this.target).find(".ruler_y").show();
 			$(this.target).find(".canvas_container").css("left", "14px");
 			$(this.target).find(".canvas_container").css("top", "14px");
 			$(this.target).find(".canvas_container").width($(self.target).find(".canvas_container").width()-14);
 			$(this.target).find(".canvas_container").height($(self.target).find(".canvas_container").height()-14);
 		}
 		else {
-			$(this.target).find(".ruler").css("display", "none");
-			$(this.target).find(".ruler_x").css("display", "none");
-			$(this.target).find(".ruler_y").css("display", "none");
+			$(this.target).find(".ruler").hide();
+			$(this.target).find(".ruler_x").hide();
+			$(this.target).find(".ruler_y").hide();
 			$(this.target).find(".canvas_container").css("left", "0");
 			$(this.target).find(".canvas_container").css("top", "0");
 			$(this.target).find(".canvas_container").width($(self.target).find(".canvas_container").width()+14);

@@ -38,7 +38,7 @@ org.goorm.core.window.manager.prototype = {
 
 		//$("#" + container).append("");
 
-		$("#" + container).append("<div id='" + container + "_window_list'><div class='tab_max_buttons' style='float:right;'><div class='unmaximize_all window_button'></div> <div class='max_close window_button'></div></div><div class='tab_scroll' style='float:right;'><div class='tab_list_left window_button'></div><div class='window_list window_button'></div><div class='tab_list_right window_button'></div></div></div>");
+		$("#" + container).append("<div id='" + container + "_window_list'><div class='tab_max_buttons' style='float:right;'><div class='unmaximize_all window_button'></div> <div class='maximized_close window_button'></div></div><div class='tab_scroll' style='float:right;'><div class='tab_list_left window_button'></div><div class='window_list window_button'></div><div class='tab_list_right window_button'></div></div></div>");
 		
 		$(".unmaximize_all").click(function (e) {
 			//self.cascade();
@@ -55,7 +55,7 @@ org.goorm.core.window.manager.prototype = {
 		
 		$(".tab_max_buttons").hide();
 		
-		$(".max_close").click(function () {
+		$(".maximized_close").click(function () {
 			self.window[self.active_window].close();
 		});
 		
@@ -67,7 +67,7 @@ org.goorm.core.window.manager.prototype = {
 		});
 		$(".tab_list_right").click(function () {
 			if(self.tab_scroll_index<self.index-1) {
-				$("#workspace_window_list").find("li").eq(self.tab_scroll_index).css("display", "none");
+				$("#workspace_window_list").find("li").eq(self.tab_scroll_index).hide();
 				self.tab_scroll_index++;
 			}
 		});
@@ -415,7 +415,7 @@ org.goorm.core.window.manager.prototype = {
 		
 				
 		this.is_maxmizedd = false;
-		$(".tab_max_buttons").css("display", "none");
+		$(".tab_max_buttons").hide();
 	},
 	
 	tile_horizontally: function() {
@@ -461,7 +461,7 @@ org.goorm.core.window.manager.prototype = {
 		}
 			
 		this.is_maxmizedd = false;
-		$(".tab_max_buttons").css("display", "none");
+		$(".tab_max_buttons").hide();
 	},
 	
 	count_alive_windows: function() {
@@ -480,12 +480,6 @@ org.goorm.core.window.manager.prototype = {
 		var self = this;
 		
 		$(this.window).each(function (i) {
-			if (this == undefined) {
-				self.window.splice(self.window.indexOf(i), 1);
-			}
-		});
-		
-		$(this.window).each(function (i) {
 			this.is_saved = true;
 			this.tab.is_saved = true;
 			this.close();
@@ -494,8 +488,6 @@ org.goorm.core.window.manager.prototype = {
 		this.index = 0;
 		this.active_window = -1;
 		
-		this.window = null;
-		delete this.window;
-		this.window = $.makeArray();		
+		this.window.remove(0, this.window.length-1);	
 	}
 };

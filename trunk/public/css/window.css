@@ -444,7 +444,7 @@ version: 3.0.0
 	background-repeat: no-repeat;
 }
 
-#workspace .max_close.window_button{
+#workspace .maximized_close.window_button{
 	width: 8px; 
 	height: 8px;
 	float:right;
