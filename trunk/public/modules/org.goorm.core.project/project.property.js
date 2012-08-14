@@ -140,9 +140,9 @@ org.goorm.core.project.property.prototype = {
 		if (core.module.layout.workspace.window_manager.active_window > -1) {
 			active_file_type = core.module.layout.workspace.window_manager.window[core.module.layout.workspace.window_manager.active_window].filetype;
 		}
-		
-		var toolbox_button_menu = core.module.plugin_manager.toolbox_selector;
-		
+
+
+
 		if(core.status.current_project_type) {
 			for (var value in core.module.plugin_manager.plugins) {
 				if ("org.goorm.plugin." + core.status.current_project_type.toLowerCase() == value) {

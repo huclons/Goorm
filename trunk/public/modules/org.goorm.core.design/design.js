@@ -55,7 +55,7 @@ org.goorm.core.design.prototype = {
 		var self = this;
 		
 		var url = "file/get_contents";
-		var path = filepath + "/" + filename;
+		var path = "workspace/" + filepath + "/" + filename;
 		
 		this.filepath = filepath;
 		this.filename = filename;
@@ -77,7 +77,6 @@ org.goorm.core.design.prototype = {
 				var objects;
 				
 				if (data) {
-
 					filedata = eval("(" + data + ")");
 					self.canvas.load(filedata.objects);
 					
@@ -89,12 +88,6 @@ org.goorm.core.design.prototype = {
 					self.canvas.preview.real_height = filedata.canvas_height;
 					self.canvas.preview.set_size();
 */
-				}
-				
-				self.canvas.collaboration.init(self.canvas);
-				
-				if(core.collaboration_draw_on == true){
-					self.canvas.collaboration.start_listening();
 				}
 
 				statusbar.progressbar.set('value', 100);
@@ -111,7 +104,7 @@ org.goorm.core.design.prototype = {
 	save: function () {
 		var self = this;
 		
-		var url = "put_file_contents";
+		var url = "file/put_contents";
 		var path = this.filepath + "/" + this.filename;
 		
 		var object_data = this.get_source(this.canvas.objects);
@@ -135,10 +128,6 @@ org.goorm.core.design.prototype = {
 				//self.canvas.objects = eval(data);
 				//self.canvas.draw();
 
-				if (self.canvas.collaboration.socket != null) {
-					self.canvas.collaboration.socket.send('{"channel": "design","action":"autoSaved", "identifier":"'+self.canvas.collaboration.identifier+'", "message":""}');
-				}
-				
 				m.s("Save complete! (" + self.filename + ")", "org.goorm.core.design");
 			}
 		});

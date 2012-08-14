@@ -7,7 +7,7 @@
 org.goorm.plugin.uml = function () {
 	this.name = "uml";
 	this.filetypes = "uml|ui";
-	this.toolbox_name = "";
+	this.toolbox_name = "UML 2.0";
 	this.stencil_css = "org.goorm.stencil.uml/stencil.uml.css";
 	this.window_manager = null;
 	this.mainmenu = null;
@@ -55,8 +55,6 @@ org.goorm.plugin.uml.prototype = {
 		
 		//Add Context Menu
 		this.add_context_menu();
-		
-		console.log("uml designer...");
 	},
 	
 	new_project : function(project_name, project_author, project_type, project_detailed_type, project_path) {
@@ -104,8 +102,6 @@ org.goorm.plugin.uml.prototype = {
 		$("div[id='project_new']").find(".project_items").append("<div class='project_wizard_second_button all umlp' description='  Create New UML Project for UseCase Diagram' project_type='uml'><img src='org.goorm.plugin.uml/images/state_diagram.png' class='project_item_icon' /><br /><a>UseCase Diagram</a></div>");	
 	
 		$(".project_dialog_type").append("<option value='UML'>UML Project</option>");
-		
-		console.log("add_project_item...");
 	},
 	
 	add_toolbar: function () {
@@ -169,7 +165,8 @@ org.goorm.plugin.uml.prototype = {
 	add_toolbox: function () {
 		var self = this;
 
-		$("#toolbox_selectbox_dummy").append("<option value='"+self.name+"'>"+self.toolbox_name+"</option>");
+		$("#toolbox_selectbox").append("<option value='"+self.name+"'>" + self.toolbox_name + "</option>");
+		console.log(self.toolbox_name);
 		
 		$("#toolbox").append("<div id='uml_toolset' class='toolsets'><div id='tool_uml_title' class='tool_title'>UML Tool</div></div>");
 		

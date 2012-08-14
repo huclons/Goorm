@@ -264,9 +264,11 @@ org.goorm.core.design.canvas.prototype = {
 								$(this).find("input").bind('keypress', function(e) {
 									var code = (e.keyCode ? e.keyCode : e.which);
 									if (code == 13) {
-										tValue = $(this).val();
+										var value = $(this).val();
 										
-										eval("shape_properties." + $(this).parent().attr("class") + "='" + tValue + "';");
+										console.log(shape_properties);
+										
+										eval("shape_properties." + $(this).parent().attr("class") + "='" + value + "';");
 
 										$(selected_object_key).empty();
 										$(selected_object_key).append(tValue);
@@ -842,7 +844,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				self.draw();
 			}
 			
-			$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
+			//$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
 		});
 		
 		
@@ -1626,7 +1628,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		});
 
 		
-		$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
+		//$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
 	},
 	
 	deselect: function () {
@@ -2240,7 +2242,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		
 //		m.s("you selected " + index + " item", "canvas");
 		
-		$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
+		//$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
 	},
 	
 	deselect_item: function (index) {
@@ -2261,7 +2263,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 //		m.er("you deselected " + index + " item", "canvas");		
 
 
-		$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
+		//$(".designer_message").html("Focus Index: " + this.focus + " / selected_index: " + this.selected_index);
 	},
 	
 	hover_item: function (index) { 

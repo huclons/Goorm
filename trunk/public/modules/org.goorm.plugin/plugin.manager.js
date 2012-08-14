@@ -57,14 +57,15 @@ org.goorm.plugin.manager.prototype = {
 		
 		if (index == this.list.length && this.list.length != 0) {
 		
-			$("#toolboxSelectBoxDummy").prepend("<option value='all'>ALL</option>");
+			$("#toolbox_selectbox").prepend("<option value='all'>ALL</option>");
 			
+/*
 			self.toolbox_selector = new YAHOO.widget.Button({ 
 					id: "toolboxSelectBox", 
 					name: "toolboxSelectBox",
 					label: "Select Tool",
 					type: "menu",  
-					menu: "toolboxSelectBoxDummy", 
+					menu: "toolbox_selectbox", 
 					container: "toolbox_selector"
 			});
 
@@ -86,14 +87,18 @@ org.goorm.plugin.manager.prototype = {
 			};
 
 			self.toolbox_selector.getMenu().subscribe("click", toolboxClick);
+*/
 
 			return false;
 		}
 		else if(this.list.length != 0){
 			if (index == 0) {
-				$("#toolbox").empty();
-				$("#toolbox").prepend("<div id='toolbox_selector' style='height:22px; background-color:#eee; border-bottom:1px solid #ddd; padding:5px; font-size:10px;'><div style='float:left; padding-top:4px; padding-right:4px; font-weight:bold;'>Tool</div></div>");
-				$("#toolbox_selector").append("<select id='toolboxSelectBoxDummy' name='toolboxSelectBoxDummy' style='width:100%;'></select>");
+				$("#toolbox").html("<div id='toolbox_selector'></div>");
+				$("#toolbox_selector").append("<select id='toolbox_selectbox' name='toolbox_selectbox' style='width:100%;'></select>");
+				
+				$("#toolbox_selector").change(function () {
+					$("#" + $("#toolbox_selector option:selected").val() + "_toolset").show();
+				});
 			}
 			
 			var plugin_name = this.list[index].name;

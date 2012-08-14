@@ -95,7 +95,7 @@
 			".yui-skin-sam .yui-resize .yui-resize-handle-tl":{"background-image":"none"},
 			".yui-skin-sam .yui-resize .yui-resize-handle-tr":{"background-image":"none"},
 			"#workspace .window_container":{"margin-top":"-1px"},
-			"#project_select_box":{"border":"none","background-image":"none","-moz-border-radius":"0px","-webkit-border-radius":"0px","-khtml-border-radius":"0px","border-radius":"0px"},
+			"#project_selectbox":{"border":"none","background-image":"none","-moz-border-radius":"0px","-webkit-border-radius":"0px","-khtml-border-radius":"0px","border-radius":"0px"},
 			".yui-skin-sam .yuimenu .bd":{"background-color":"white","-moz-border-radius":"8px","-webkit-border-radius":"8px","-khtml-border-radius":"8px","border-radius":"8px"},
 			".yui-menu-shadow":{"-moz-border-radius":"8px","-webkit-border-radius":"8px","-khtml-border-radius":"8px","border-radius":"8px"},
 			"#uizardDialogContainer .hd":{"text-align":"left"},

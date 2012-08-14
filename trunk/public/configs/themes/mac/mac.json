@@ -98,7 +98,7 @@
 			".yui-skin-sam .yui-resize .yui-resize-handle-tl":{"background-image":"none"},
 			".yui-skin-sam .yui-resize .yui-resize-handle-tr":{"background-image":"none"},
 			"#workspace .window_container":{"margin-top":"0px"},
-			"#project_select_box":{"border":"1px solid","background-image":"url(../config/image/org.uizard.core/button_bg.png)","-moz-border-radius":"8px","-webkit-border-radius":"8px","-khtml-border-radius":"8px","border-radius":"8px"},
+			"#project_selectbox":{"border":"1px solid","background-image":"url(../config/image/org.uizard.core/button_bg.png)","-moz-border-radius":"8px","-webkit-border-radius":"8px","-khtml-border-radius":"8px","border-radius":"8px"},
 			".yui-skin-sam .yuimenu .bd":{"background-color":"#ffffff","-moz-border-radius":"0px","-webkit-border-radius":"0px","-khtml-border-radius":"0px","border-radius":"0px","-moz-border-radius-bottomright":"5px","-moz-border-radius-bottomleft":"5px","-webkit-bottom-right-border-radius":"5px","-webkit-bottom-left-border-radius":"5px","-khtml-border-radius-bottomleft":"5px","-khtml-border-radius-bottomright":"5px","border-bottom-right-radius":"5px","border-bottom-left-radius":"5px"},
 			".yui-menu-shadow":{"-moz-border-radius":"0px","-webkit-border-radius":"0px","-khtml-border-radius":"0px","border-radius":"0px","-moz-border-radius-bottomright":"5px","-moz-border-radius-bottomleft":"5px","-webkit-bottom-right-border-radius":"5px","-webkit-bottom-left-border-radius":"5px","-khtml-border-radius-bottomleft":"5px","-khtml-border-radius-bottomright":"5px","border-bottom-right-radius":"5px","border-bottom-left-radius":"5px"},
 			"#uizardDialogContainer .hd":{"text-align":"center"},
