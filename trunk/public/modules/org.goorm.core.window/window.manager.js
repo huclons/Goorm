@@ -13,7 +13,6 @@ org.goorm.core.window.manager = function () {
 	this.workspace_container = null;
 	this.window_list_container = null;
 	this.index = 0;
-	this.tab_scroll_index = 0;
 	this.window_tabview = null;
 	this.active_window = -1;
 	this.is_maxmizedd = true;
@@ -51,15 +50,15 @@ org.goorm.core.window.manager.prototype = {
 		});
 		
 		$(".tab_list_left").click(function () {
-			if(self.tab_scroll_index>0) {
-				self.tab_scroll_index--;
-				$("#workspace_window_list").find("li").eq(self.tab_scroll_index).css("display", "inline-block");
+			if(self.active_window>0) {
+				self.active_window--;
+				self.window[self.active_window].activate();
 			}
 		});
 		$(".tab_list_right").click(function () {
-			if(self.tab_scroll_index<self.index-1) {
-				$("#workspace_window_list").find("li").eq(self.tab_scroll_index).hide();
-				self.tab_scroll_index++;
+			if(self.active_window < self.index-1) {
+				self.active_window++;
+				self.window[self.active_window].activate();
 			}
 		});
 		

@@ -33,15 +33,16 @@ org.goorm.core.window.tab.prototype = {
 
 		
 		this.tabview.addTab(this.tab);
-		
 		this.tabview.selectTab(this.tabview.getTabIndex(this.tab));
-
-		//For window list menu
-		var activate_dummy = function () {
-			self.activate();
-		};
 		
-		this.menuitem = new YAHOO.widget.MenuItem("window_list_menu", {text: this.title, onclick: {fn: activate_dummy}});
+		this.menuitem = new YAHOO.widget.MenuItem("window_list_menu", {
+			text: this.title, 
+			onclick: {
+				fn: function () {
+					self.activate();
+				}
+			}
+		});
 		
 		this.list_menu.addItem(this.menuitem);
 		this.list_menu.render();
@@ -195,6 +196,7 @@ org.goorm.core.window.tab.prototype = {
 		$(this.menuitem.element).addClass("yuimenuitem-checked");	
 		core.module.toolbar.switch_state(this.window.type);
 		this.window.show();
+		
 		if (!$("#" + this.window.container).find(".hd").hasClass("activated")) {
 			for (var i = 0; i < core.module.layout.workspace.window_manager.index; i++) {
 				if(core.module.layout.workspace.window_manager.window[i].alive && core.module.layout.workspace.window_manager.window[i]==this.window ) {

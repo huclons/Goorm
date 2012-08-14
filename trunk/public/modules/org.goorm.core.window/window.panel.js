@@ -461,6 +461,7 @@ org.goorm.core.window.panel.prototype = {
 	activate: function() {
 		core.module.layout.workspace.window_manager.active_window = this.index;
 
+		//core.dialog.project_property.refresh_toolbox();
 		$("#"+this.workspace_container).find(".activated").each(function(i) {
 			$(this).removeClass("activated");
 		});
@@ -469,14 +470,10 @@ org.goorm.core.window.panel.prototype = {
 			$(this).css("z-index", "2");
 		});
 		
-		
-		$("#" + this.container).find(".hd").addClass("activated");	
-		$("#" + this.container).parent().css("z-index", "3");	
-
-		//core.dialog.project_property.refresh_toolbox();
+		$("#" + this.container).find(".hd").addClass("activated");
+		$("#" + this.container).parent().css("z-index", "3");
 		
 		this.tab.activate();
-		
 		//core.dialog.project_property.refresh_toolbox();
 	},
 	

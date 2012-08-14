@@ -13,8 +13,8 @@
 					file_new_ios_project: { value: "iOS Project"},
 					file_new_android_project: { value: "Android Project"},
 					file_new_uml_project: { value: "UML Project"},
-					file_new_uizard_plugin_project: { value: "UIzard Plugin Project"},
-					file_new_uizard_customization_project: { value: "UIzard Customization Project"},
+					file_new_uizard_plugin_project: { value: "goorm Plugin Project"},
+					file_new_uizard_customization_project: { value: "goorm Customization Project"},
 					file_new_file: { value: "File"},
 					file_new_folder: { value: "Folder"},
 					file_new_untitled_text_file: { value: "Untitled Text File"},
@@ -168,7 +168,7 @@
 			help_check_for_updates: { value: "Check for Updates"},
 			help_install_new_plugin: { value: "Install New Plugin..."},
 			help_bug_report: { value: "Send Bug Report"},
-			help_about_uizard_3: { value: "About UIzard 3"}
+			help_about_uizard_3: { value: "About goorm 3"}
 		}
 	},
 	
