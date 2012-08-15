@@ -1,15 +1,6 @@
 module.exports = {
-	files: [],
-	
-	subscribe: function () {
-		
-	},
-	
-	publish: function () {
-		
-	},
-	
-	snapshot: function () {
-		
+	msg: function (socket, msg) {
+		console.log(msg);
+		socket.broadcast.to(msg.workspace).emit("composing_message", JSON.stringify(msg));
 	}
 };

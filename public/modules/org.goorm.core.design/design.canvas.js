@@ -100,7 +100,8 @@ org.goorm.core.design.canvas.prototype = {
 		empty_context_menu.init("", "none", $(target).find(".design.preview_container"), "");
 
 		
-		this.collaboration = new org.goorm.core.collaboration.design();
+		this.collaboration = new org.goorm.core.collaboration.composing();
+		this.collaboration.init(this);
 		
 		$(document).bind("line_stencil_code_loaded", function () {
 			self.draw();
@@ -882,16 +883,18 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 					}
 					
 					$(self.target).find(".canvas").find(".grid").find(".selection").remove();
-						
-					
 					
 					self.sx = 0;
 					self.sy = 0;
 					self.ex = 0;
 					self.ey = 0;
 				}
-				else if (self.is_adding>-1) {
+				else if (self.is_adding > -1 && self.objects[self.is_adding] != undefined) {
 					var properties = new Object();
+					
+					console.log(self.objects);
+					console.log(self.is_adding);
+					
 					properties.sx = self.objects[self.is_adding].properties.sx;
 					properties.sy = self.objects[self.is_adding].properties.sy;
 					properties.ex = self.objects[self.is_adding].properties.ex;
@@ -1244,6 +1247,8 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				
 				//self.deselect();
 				//self.object_manager.unset();
+				
+				$(self.collaboration).trigger("modify", [self.objects[self.hovered_index]]);
 			}
 			
 			this.focus = -1;
@@ -1449,19 +1454,6 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		}
 		}	
 	},
-
-	set_collaboration_on: function () {
-		this.collaboration.init(this);
-		this.collaboration.start_listening();
-	},
-	
-	set_collaboration_off: function () {		
-		if(this.collaboration) {
-			this.collaboration.stop_listening();
-			//this.collaboration = null;
-					
-		}
-	},
 	
 	set_size: function (width, height, indicator_top_fake) {
 		//Set width, height properties
@@ -1556,6 +1548,8 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 
 			//Refresh the Object Explorer (for Testing)
 			self.object_explorer.refresh();
+			
+			$(this.collaboration).trigger("add", [self.objects[self.objects.length-1]]);
 		}
 	},
 	
@@ -1665,10 +1659,6 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		$(this.objects).each(function (i) {			
 			this.properties.focus = false;	
 		});
-	},
-		
-	resize: function () {
-					
 	},
 	
 	draw: function () {
@@ -2403,6 +2393,8 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 			}
 
 		}
+		
+		$(this.collaboration).trigger("modify", [this.objects[index]]);
 	},
 	
 	bring_forward: function (object) {
@@ -2710,6 +2702,8 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		var self = this;
 
 		$(this.selected_index).each(function (i) {
+			$(self.collaboration).trigger("remove", [self.objects[this].properties.id]);
+			
 			self.objects[this].remove();
 		});
 	},
@@ -2880,6 +2874,8 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		delete this.objects[index];
 		
 		this.draw();
+		
+
 	},
 
 	set_properties: function (target, source) {

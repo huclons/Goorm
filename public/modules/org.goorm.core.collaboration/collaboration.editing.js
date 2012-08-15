@@ -133,7 +133,7 @@ org.goorm.core.collaboration.editing.prototype = {
 		}
 	},
 	
-	update_cursor: function(data){
+	update_cursor: function(data) {
 		var self = this;
 		if(this.socket != null){
 			if (self.socket.socket.connected) {

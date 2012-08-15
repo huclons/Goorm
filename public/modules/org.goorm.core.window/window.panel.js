@@ -304,8 +304,6 @@ org.goorm.core.window.panel.prototype = {
 	},
 	
 	maximize: function () {
-		console.log("maximize! : " + this.filename);
-	
 		this.left = $("#" + this.container + "_c").offset().left;
 		this.top = $("#" + this.container + "_c").offset().top;
 		this.width = $("#" + this.container + "_c").width();
