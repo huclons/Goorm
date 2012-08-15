@@ -7,8 +7,7 @@
 org.goorm.plugin.cpp = function () {
 	this.name = "c";
 	this.mainmenu = null;
-	this.debug = null;
-	this.debug_message = null;
+	this.debug_con = null;
 	this.build_options = null;
 	this.build_source = null;
 	this.build_target = null;
@@ -77,5 +76,37 @@ org.goorm.plugin.cpp.prototype = {
 		$.get('/plugin/new', send_data, function(result){
 			core.module.layout.project_explorer.refresh();
 		});
+	},
+	
+	run: function(path) {
+		console.log(path);
+	},
+	
+	debug: function (path) {
+		var self = this;
+		var send_data = {
+				"plugin" : "org.goorm.plugin.cpp",
+				"path" : path,
+				"mode" : "init"
+		};
+		
+		if(!this.debug_con) {
+			this.debug_con = io.connect();
+		}
+		this.debug_con.removeAllListeners("debug_response");
+		this.debug_con.on('debug_response', function (data) {
+			console.log(data);
+			$("#debug").append("<div>"+data+"</div>");
+			
+			if(data == "ready") {
+				self.debug_con.emit("debug", {
+					"plugin" : "org.goorm.plugin.cpp",
+					"path" : path,
+					"mode" : "run"
+				});
+			}
+		});
+		$("#debug").empty();
+		this.debug_con.emit("debug", send_data);
 	}
 };

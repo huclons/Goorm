@@ -10,6 +10,7 @@ var express = require('express')
 var goorm = module.exports = express.createServer();
 var g_terminal = require("./modules/org.goorm.core.terminal/terminal");
 var g_collaboration = require("./modules/org.goorm.core.collaboration/collaboration");
+var g_debug = require("./modules/org.goorm.plugin/plugin");
 var g_utility = require("./modules/org.goorm.core.utility/utility");
 
 global.__path = __dirname+"/";
@@ -55,6 +56,7 @@ goorm.get('/project/get_property', routes.project.get_property);
 goorm.get('/plugin/get_list', routes.plugin.get_list);
 goorm.get('/plugin/install', routes.plugin.install);
 goorm.get('/plugin/new', routes.plugin.do_new);
+goorm.get('/plugin/debug', routes.plugin.debug);
 
 //for filesystem
 goorm.get('/file/new', routes.file.do_new);
@@ -97,3 +99,4 @@ var io = socketio.listen(goorm);
 
 g_terminal.start(io);
 g_collaboration.start(io);
+g_debug.debug_server(io);

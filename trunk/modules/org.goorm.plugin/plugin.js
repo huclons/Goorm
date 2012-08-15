@@ -34,5 +34,32 @@ module.exports = {
 	do_new: function (req, res) {
 		var plugin = require("../../plugins/"+req.plugin+"/modules/");
 		plugin.do_new(req, res);
+	},
+	
+	debug_server: function (io) {
+		var self = this;
+		console.log("debug server started");
+		io.set('log level', 0);
+		io.sockets.on('connection', function (socket) {
+			var plugin = null;
+			var evt = new EventEmitter();
+			
+			console.log("debug server connected");
+			
+			evt.on("response", function (data) {
+				console.log(data);
+				socket.emit("debug_response", data);
+			});
+			
+			socket.on('debug', function (msg) {
+				if(msg.mode == "init") {
+					if(plugin !== null) {
+						plugin.debug({"mode":"close"}, evt);
+					}
+					plugin = require("../../plugins/"+msg.plugin+"/modules/");
+				}
+				plugin.debug(msg, evt);
+			});
+		});
 	}
 };

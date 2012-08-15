@@ -1,5 +1,5 @@
-var common = require(__path+"plugins/org.goorm.plugin.cpp/modules/common.js");
-var EventEmitter = require("events").EventEmitter;
+var common = require(__path+"plugins/org.goorm.plugin.java/modules/common.js");
+var EventEmitter = require("events").EventEmitter
 
 module.exports = {
 	do_new: function(req, res) {
