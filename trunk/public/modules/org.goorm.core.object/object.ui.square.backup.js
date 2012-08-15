@@ -33,7 +33,7 @@ org.goorm.core.object.ui.square.prototype = {
 		this.timestamp = new Date().getTime(); //For distinguishing objects, using the timestamp
 		this.container = "objectContainer_" + this.timestamp; //object presentation container
 		
-		this.connector = $.makeArray();
+		this.connector = [];
 		this.connector['n'] = null;
 		this.connector['e'] = null;
 		this.connector['s'] = null;

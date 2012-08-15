@@ -70,7 +70,7 @@ $("#add").click(function () {
 $("#del").click(function () {
 	$(".filetype_contents").find(".filetype_list").children().each(function() {
 		if ($(this).attr("id") == $(".filetype_contents").find(".file_extension").val()){
-			var temp = $.makeArray();
+			var temp = [];
 			for (var i = 0; i < core.filetypes.length; i++) {
 				if (core.filetypes[i].file_extension != $(this).attr("id")) {
 					temp.push(core.filetypes[i]);

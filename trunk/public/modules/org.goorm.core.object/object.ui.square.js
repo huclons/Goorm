@@ -38,7 +38,7 @@ org.goorm.core.object.ui.square.prototype = {
 		this.target = target;
 		this.timestamp = new Date().getTime();
 		
-		this.connector = $.makeArray();
+		this.connector = [];
 		this.connector['tl'] = null;
 		this.connector['t'] = null;
 		this.connector['tr'] = null;

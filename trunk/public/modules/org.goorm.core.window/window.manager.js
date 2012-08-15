@@ -23,10 +23,10 @@ org.goorm.core.window.manager.prototype = {
 	init: function(container) {
 		var self = this;
 		
-		this.window = $.makeArray();
-		this.tab = $.makeArray();
-		this.context_menu = $.makeArray();
-		this.window_list_menu = $.makeArray();
+		this.window = [];
+		this.tab = [];
+		this.context_menu = [];
+		this.window_list_menu = [];
 		this.workspace_container = container;
 		
 		this.window_list = [];
@@ -215,7 +215,7 @@ org.goorm.core.window.manager.prototype = {
 	is_opened: function (filepath, filename) {
 		var self = this;
 		var window_index = -1;
-		var empty_windows = $.makeArray();
+		var empty_windows = [];
 		
 		$(this.window).each(function (i) {
 			if (this.filepath == null && this.filename == null) {
