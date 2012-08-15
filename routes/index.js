@@ -115,15 +115,20 @@ exports.plugin.get_list = function(req, res){
 };
 
 exports.plugin.do_new = function(req, res){
-//	var evt = new EventEmitter();
-//	
-//	evt.on("plugin_new", function (data) {
-//		res.json(data);
-//	});
-
 	g_plugin.do_new(req.query, res);
 };
 
+exports.plugin.generate = function(req, res){
+	g_plugin.generate(req.query, res);
+};
+
+exports.plugin.build = function(req, res){
+	g_plugin.build(req.query, res);
+};
+
+exports.plugin.clean = function(req, res){
+	g_plugin.clean(req.query, res);
+};
 /*
  * API : File System
  */
