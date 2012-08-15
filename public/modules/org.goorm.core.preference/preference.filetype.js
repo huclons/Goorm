@@ -55,7 +55,7 @@ org.goorm.core.preference.filetype.prototype = {
 		// This part find file type is viewing in filetype detail view from filetype list and remove it.
 		$(".filetype_contents").find(".filetype_list").children().each(function() {
 			if ($(this).attr("class") == $(".filetype_contents").find(".file_extension").val()){
-				var temp = $.makeArray();
+				var temp = [];
 				for (var i = 0; i < core.filetypes.length; i++) {
 					if (core.filetypes[i].file_extension != $(this).attr("class")) {
 						

@@ -379,7 +379,7 @@ org.goorm.core.edit.findReplace.prototype = {
 		core.mainLayout.innerBottomTabView.selectTab(3);
 		core.searchTab.clean();
 
-		var searchedWords = $.makeArray();
+		var searchedWords = [];
 
 		this.unmark();
 		// search all matched words and set background of them yellow

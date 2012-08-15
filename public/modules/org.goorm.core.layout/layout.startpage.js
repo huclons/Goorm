@@ -12,7 +12,7 @@ org.goorm.core.layout.startpage.prototype = {
 	init: function (target) {
 		var self = this;
 		
-		this.pushbutton = $.makeArray();
+		this.pushbutton = [];
 		 
 		$("#" + target).append("<div id='startpage_container'>abcde</div>");
 		

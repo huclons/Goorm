@@ -36,7 +36,7 @@ org.goorm.core.object.ui.selection.prototype = {
 		this.target = target;
 		this.timestamp = new Date().getTime();
 		
-		this.connector = $.makeArray();
+		this.connector = [];
 		this.connector['head'] = null;
 		this.connector['tail'] = null;
 		
