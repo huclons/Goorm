@@ -86,8 +86,6 @@ org.goorm.core.project.open.prototype = {
 
 		core.dialog.project_property.refresh_toolbox();
 		core.module.layout.project_explorer.refresh();
-
-		$(document).trigger('onOpenProject');
 		
 		core.module.layout.communication.join();
 	}

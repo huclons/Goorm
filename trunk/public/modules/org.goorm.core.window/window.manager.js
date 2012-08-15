@@ -269,14 +269,12 @@ org.goorm.core.window.manager.prototype = {
 	
 	maximize_all: function () {
 		$(this.window).each(function (i) {
-			console.log("maximize!: " + i);
 			this.maximize();
 		});
 	},
 	
 	unmaximize_all: function () {
 		$(this.window).each(function (i) {
-			console.log("unmaximize!: " + i);
 			this.unmaximize();
 		});
 	},

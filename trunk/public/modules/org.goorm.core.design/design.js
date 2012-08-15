@@ -24,7 +24,7 @@ org.goorm.core.design.prototype = {
 		this.target = target;
 		
 		this.margin_top = 200;
-				
+		
 		$(target).append("<div class='canvas_container'></div>");
 		
 		
@@ -45,8 +45,6 @@ org.goorm.core.design.prototype = {
 		var empty_context_menu = new org.goorm.core.menu.context();
 		empty_context_menu.init("", "none", $(target).find(".canvas_container"), "");
 		
-		
-				
 		//for Test
 		//this.set_collaboration_on();		
 	},
@@ -80,6 +78,8 @@ org.goorm.core.design.prototype = {
 					filedata = eval("(" + data + ")");
 					self.canvas.load(filedata.objects);
 					
+					
+					self.canvas.collaboration.set_filepath();
 /* why?
 					self.canvas.setSize(parseInt(filedata.canvas_width), parseInt(filedata.canvas_height));
 					self.resize_all();
