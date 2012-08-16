@@ -519,5 +519,47 @@ module.exports = {
 			data = "Got error: " + e.message;
 			evt.emit("file_get_url_contents", data);
 		});
+	},
+	
+	get_property: function (query, evt) {
+
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+
+		if ( query.path!=null ) {
+			
+			fs.stat(__path+"workspace/"+query.path, function (err, stats) {
+				if ( err == null ) {
+				
+					var temp_path = query.path.split("/");
+					var path = "";
+					for (var i=0; i<temp_path.length-1; i++) {
+						path += temp_path[i]+"/"
+					}
+				
+					data.filename = temp_path[temp_path.length-1];
+					data.filetype = temp_path[temp_path.length-1].split(".")[1];
+					data.path = path;
+					data.size = stats.size;
+					data.atime = stats.atime;
+					data.mtime = stats.mtime;
+					
+					evt.emit("file_get_property", data);
+				}
+				else {
+					data.err_code = 20;
+					data.message = "Can not find target file";
+					
+					evt.emit("file_get_property", data);
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalide query";
+
+			evt.emit("file_get_property", data);			
+		}				
 	}
 };
