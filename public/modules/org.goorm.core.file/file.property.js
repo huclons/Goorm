@@ -47,34 +47,36 @@ org.goorm.core.file.property.prototype = {
 	},
 
 	show: function () {
-		if(core.status.selected_file != null){
-			this.dialog.panel.show();
-			var filename = (core.status.selected_file.split("/")).pop();
-			var fileType = (filename.split(".")).pop();
-			var fileLocation = core.status.selected_file.split("../../project/").pop();
-			var url = "file/get_property";
-			
-			$.ajax({
-				url: url,		
-				type: "POST",
-				data: "path="+core.status.selected_file,
-				async:false,
-				success: function(data) {
-					var stat = YAHOO.lang.JSON.parse(data);
-					if(stat['dir']) fileType="dir";
-					if(stat['size']==null) stat['size']=0;
-					$("#property_file_contents #filename").html(filename);
-					$("#property_file_contents #fileType").html(fileType);
-					$("#property_file_contents #fileLocation").html(fileLocation);
-					$("#property_file_contents #fileSize").html(stat['size']+" byte");
-					$("#property_file_contents #aTime").html(stat['atime']);
-					$("#property_file_contents #mTime").html(stat['mtime']);
+		var self = this;
+		
+		if(core.status.selected_file != null){			
+			var postdata = {
+				path: core.status.selected_file
+			};
+
+			$.get("file/get_property", postdata, function (data) {
+				if (data.err_code==0) {
+					$("#property_file_contents #filename").html(data.filename);
+					$("#property_file_contents #fileType").html(data.filetype);
+					$("#property_file_contents #fileLocation").html(data.path);
+					$("#property_file_contents #fileSize").html(data.size+" byte");
+					$("#property_file_contents #aTime").html(data.atime);
+					$("#property_file_contents #mTime").html(data.mtime);
+					self.dialog.panel.show();
 				}
-				, error: function(xhr, status, error) {alert.show(core.module.localization.msg["alertError"] + error);}
-			});
+				else {
+					$("#property_file_contents #filename").html("");
+					$("#property_file_contents #fileType").html("");
+					$("#property_file_contents #fileLocation").html("");
+					$("#property_file_contents #fileSize").html("");
+					$("#property_file_contents #aTime").html("");
+					$("#property_file_contents #mTime").html("");
+					alert.show(data.message);
+				}
+			});			
 		}
 		else {
-			alert.show(core.module.localization.msg["alertFileNotSelect"]);
+			alert.show("Not Selected");
 		}
 	}	
 };

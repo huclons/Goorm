@@ -277,7 +277,13 @@ exports.file.do_rename = function(req, res){
 };
 
 exports.file.get_property = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+
+	evt.on("file_get_property", function (data) {
+		res.json(data);
+	});
+
+	g_file.get_property(req.query, evt);
 };
 
 exports.file.do_export = function(req, res){
