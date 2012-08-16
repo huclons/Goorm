@@ -36,9 +36,9 @@ org.goorm.core.preference.prototype = {
 //		this.manager.xml_parser("configs/preferences/default.xml");
 //		this.xml=this.manager.xml;
 //		
-//		this.plugin = new Object();
+//		this.plugin = {};
 //		
-//		this.preference = new Object();
+//		this.preference = {};
 //		
 //		this.get_preference(this.xml);
 //		

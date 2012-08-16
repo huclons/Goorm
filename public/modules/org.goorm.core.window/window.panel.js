@@ -304,10 +304,18 @@ org.goorm.core.window.panel.prototype = {
 	},
 	
 	maximize: function () {
-		this.left = $("#" + this.container + "_c").offset().left;
-		this.top = $("#" + this.container + "_c").offset().top;
-		this.width = $("#" + this.container + "_c").width();
-		this.height = $("#" + this.container + "_c").height();
+		if (this.left == 0) {
+			this.left = $("#" + this.container + "_c").offset().left;
+		}
+		if (this.top == 0) {
+			this.top = $("#" + this.container + "_c").offset().top;
+		}
+		if (this.width == 0) {
+			this.width = $("#" + this.container + "_c").width();
+		}
+		if (this.height == 0) {
+			this.height = $("#" + this.container + "_c").height();
+		}
 		
 		$("#" + this.container + "_c").offset({left:$("#" + this.workspace_container).offset().left - 1, top:$("#" + this.workspace_container).offset().top});
 		$("#" + this.container + "_c").width($("#" + this.workspace_container).width());
@@ -315,6 +323,8 @@ org.goorm.core.window.panel.prototype = {
 		
 		$("#" + this.container).width($("#" + this.workspace_container).width());
 		$("#" + this.container).height($("#" + this.workspace_container).height());
+		
+		$("#" + this.container).find(".ft").addClass("maximized_ft");
 		
         this.panel.cfg.setProperty("width", $("#" + this.workspace_container).width() + "px");
         this.panel.cfg.setProperty("height", $("#" + this.workspace_container).height()+ "px");
@@ -328,14 +338,14 @@ org.goorm.core.window.panel.prototype = {
 	},
 	
 	unmaximize: function () {
-		console.log("unmaximize! : " + this.filename);
-	
 		$("#" + this.container + "_c").offset({left:this.left, top:this.top});
 		$("#" + this.container + "_c").width(this.width);
 		$("#" + this.container + "_c").height(this.height);
 		
 		$("#" + this.container).width(this.width);
 		$("#" + this.container).height(this.height);
+		
+		$("#" + this.container).find(".ft").removeClass("maximized_ft");
 		
 		this.panel.cfg.setProperty("width", this.width + "px");
         this.panel.cfg.setProperty("height", this.height - 3 + "px");
@@ -346,6 +356,11 @@ org.goorm.core.window.panel.prototype = {
 		
 		this.resize.unlock();
 		this.resize_all();
+		
+		this.left = 0;
+		this.top = 0;
+		this.width = 0;
+		this.height = 0;
 	},	
 
 	minimize: function () {

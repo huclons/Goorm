@@ -362,8 +362,8 @@ org.goorm.core.preference.manager.prototype = {
 		this.xml = null;
 		this.version = null;
 		this.url = null;
-		this.preference = new Object();
-		this.ini = new Object();
+		this.preference = {};
+		this.ini = {};
 	}
 
 };

@@ -267,7 +267,7 @@ org.goorm.core.project.property.manager.prototype = {
 	plugin: function (plugin_name) {
 		this.plugin_name = null;
 		this.xml = null;
-		this.property = new Object();
+		this.property = {};
 	},
 	
 	validate: function(input,option){

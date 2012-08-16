@@ -64,10 +64,10 @@ org.goorm.core.design.canvas.prototype = {
 		this.title = title;
 		this.parent = parent;
 		
-		this.objects = $.makeArray();
-		this.copied_objects = $.makeArray();
-		this.copied_objects_undo = $.makeArray();
-		this.copied_objects_redo = $.makeArray();
+		this.objects = [];
+		this.copied_objects = [];
+		this.copied_objects_undo = [];
+		this.copied_objects_redo = [];
 		
 		this.is_adding = -1;
 		this.is_modifying = false;
@@ -179,7 +179,7 @@ org.goorm.core.design.canvas.prototype = {
 		
 		
 		
-		this.selected_index = $.makeArray();
+		this.selected_index = [];
 
 		//Set canvas size
 		this.set_size(width, height);
@@ -403,7 +403,7 @@ org.goorm.core.design.canvas.prototype = {
 					
 						self.is_hovered(x, y, this, function() {
 							if (self.selected_index.length <= 1 && !self.is_shift_pressed) {
-								self.selected_index = $.makeArray();
+								self.selected_index = [];
 							}
 							
 							if (self.hovered_index == i) {
@@ -441,7 +441,7 @@ org.goorm.core.design.canvas.prototype = {
 						
 						if ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy - 5 <= y && y <= ey + 5) || (ey - 5 <= y && y <= sy + 5) ) ) {
 							if (self.selected_index.length <= 1 && !self.is_shift_pressed) {
-								self.selected_index = $.makeArray();
+								self.selected_index = [];
 							}
 							
 							if (self.hovered_index == i) {
@@ -562,10 +562,10 @@ org.goorm.core.design.canvas.prototype = {
 					if (this.shape && this.properties.is_dragging && !this.properties.is_drawing_finished) {
 						if(!self.is_modifying && self.is_adding<0) {
 							delete self.copied_objects_undo;
-							self.copied_objects_undo = $.makeArray();
+							self.copied_objects_undo = [];
 							
 							$(self.selected_index).each(function (i) {
-								var properties = new Object();
+								var properties = {};
 								properties.sx = self.objects[this].properties.sx;
 								properties.sy = self.objects[this].properties.sy;
 								properties.ex = self.objects[this].properties.ex;
@@ -890,7 +890,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 					self.ey = 0;
 				}
 				else if (self.is_adding > -1 && self.objects[self.is_adding] != undefined) {
-					var properties = new Object();
+					var properties = {};
 					
 					console.log(self.objects);
 					console.log(self.is_adding);
@@ -1218,10 +1218,10 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 				// register undo_manager in modify
 				if(self.is_modifying) {
 					delete self.copied_objects_redo;
-					self.copied_objects_redo = $.makeArray();
+					self.copied_objects_redo = [];
 					
 					$(self.selected_index).each(function (i) {
-						var properties = new Object();
+						var properties = {};
 						properties.sx = self.objects[this].properties.sx;
 						properties.sy = self.objects[this].properties.sy;
 						properties.ex = self.objects[this].properties.ex;
@@ -2712,7 +2712,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		var self = this;
 		
 		delete this.copied_objects;
-		this.copied_objects = $.makeArray();
+		this.copied_objects = [];
 		
 		$(this.selected_index).each(function (i) {
 			self.copied_objects.push(self.clone(self.objects[this]));
@@ -2725,7 +2725,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		var self = this;
 		
 		delete this.copied_objects;
-		this.copied_objects = $.makeArray();
+		this.copied_objects = [];
 		
 		$(this.selected_index).each(function (i) {
 			self.copied_objects.push(self.clone(self.objects[this]));
@@ -2772,7 +2772,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 		
 		//for reloading phase
 		delete this.objects;
-		this.objects = $.makeArray();
+		this.objects = [];
 		
 		$(this.target).find(".canvas").find(".shapes").empty();
 		
@@ -2856,7 +2856,7 @@ if  ( ( (sx - 5 <= x && x <= ex + 5) || (ex - 5 <= x && x <= sx + 5) ) && ( (sy 
 	remove: function (index) { 
 		var self = this;
 		
-		var properties = new Object();
+		var properties = {};
 		properties.sx = self.objects[index].properties.sx;
 		properties.sy = self.objects[index].properties.sy;
 		properties.ex = self.objects[index].properties.ex;

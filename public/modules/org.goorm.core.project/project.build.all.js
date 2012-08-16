@@ -16,7 +16,7 @@ org.goorm.core.project.build.all.prototype = {
 		var self = this;
 				
 		var handle_open = function() {
-			var obj = new Object(); 
+			var obj = {}; 
 			$("#build_all_list input[type=hidden]").each(function(){
 				var status = $(this).parent().find(".buildStatus");
 				obj[$(this).attr("name")] = status;

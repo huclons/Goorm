@@ -241,7 +241,7 @@ org.goorm.core.object.ui.prototype = {
 /*
 		//Register the undo function
 		
-		var properties = new Object();
+		var properties = {};
 		properties.sx = this.properties.sx;
 		properties.sy = this.properties.sy;
 		properties.ex = this.properties.ex;

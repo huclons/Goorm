@@ -57,22 +57,13 @@ org.goorm.core.layout.prototype = {
 				parent: self.layout,
 				units:
 				[
-					{ position: 'right', width: 350, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, proxy:false, gutter: '0px 0px 0px 0px', collapse: !ENV_COLLAPSE_RIGHT },
-					{ position: 'bottom', height: 200, body: container+'_inner_layout_bottom', animate: false, proxy:false, scroll: false, resize: true, gutter: '0px 0px 0px 0px', collapse: !ENV_COLLAPSE_BOTTOM },
+					{ position: 'right', width: 350, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, proxy:false, gutter: '0px 0px 0px 0px', collapse: true },
+					{ position: 'bottom', height: 200, body: container+'_inner_layout_bottom', animate: false, proxy:false, scroll: false, resize: true, gutter: '0px 0px 0px 0px', collapse: true },
 					{ position: 'center', body: container+'_inner_layout_center', scroll: false }
 				]
 			});
 			
 			self.inner_layout.render();
-
-			
-			if (ENV_COLLAPSE_BOTTOM) {
-				self.inner_layout.getUnitByPosition("bottom").collapse();
-			}
-			
-			if (ENV_COLLAPSE_RIGHT) {
-				self.inner_layout.getUnitByPosition("right").collapse();
-			}			
 		});
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
@@ -145,11 +136,25 @@ org.goorm.core.layout.prototype = {
 		// Final
 		//////////////////////////////////////////////////////////////////////////////////////////
 		
+		this.layout.on("render", function () {
+			if (localStorage['layout_left_collapse'] == "true") {
+				self.layout.getUnitByPosition("left").collapse();
+			}
+			
+			if (localStorage['layout_right_collapse'] == "true") {
+				self.inner_layout.getUnitByPosition("right").collapse();
+			}
+			
+			if (localStorage['layout_bottom_collapse'] == "true") {
+				self.inner_layout.getUnitByPosition("bottom").collapse();
+			}
+		});
+		
 		this.layout.render();		
 		
 		$(window).resize(function(){
 			self.resize_all();
-			self.layout.getUnitByPosition("top").set("height",$("#goorm_mainmenu").height()+$("#goorm_main_toolbar").height()+7);
+			self.layout.getUnitByPosition("top").set("height", $("#goorm_mainmenu").height() + $("#goorm_main_toolbar").height() + 7);
 			
 			$(core).trigger("layout_resized");
 		});
@@ -166,6 +171,30 @@ org.goorm.core.layout.prototype = {
 		//this.layout.getUnitByPosition("top").set("height",$("#goorm_mainmenu").height()+$("#goorm_main_toolbar").height()+5);
 		
 		$(core).trigger("layout_loaded");
+		
+		this.layout.getUnitByPosition("left").on("collapse", function() {
+			localStorage['layout_left_collapse'] = true;
+		});
+		
+		this.layout.getUnitByPosition("left").on("expand", function() {
+			localStorage['layout_left_collapse'] = false;
+		});
+		
+		this.inner_layout.getUnitByPosition("right").on("collapse", function() {
+			localStorage['layout_right_collapse'] = true;
+		});
+		
+		this.inner_layout.getUnitByPosition("right").on("expand", function() {
+			localStorage['layout_right_collapse'] = false;
+		});
+		
+		this.inner_layout.getUnitByPosition("bottom").on("collapse", function() {
+			localStorage['layout_bottom_collapse'] = true;
+		});
+		
+		this.inner_layout.getUnitByPosition("bottom").on("expand", function() {
+			localStorage['layout_bottom_collapse'] = false;
+		});
 	},
 
 	attach_mainmenu: function(container) {

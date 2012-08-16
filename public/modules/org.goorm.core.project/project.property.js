@@ -21,8 +21,8 @@ org.goorm.core.project.property.prototype = {
 		this.manager.xml_parser("configs/project/property/default.xml");
 		this.xml=this.manager.xml;
 		
-		this.property = new Object();
-		this.plugin = new Object();
+		this.property = {};
+		this.plugin = {};
 		
 		this.dialog = new org.goorm.core.project.property.dialog();
 		
@@ -179,7 +179,7 @@ org.goorm.core.project.property.prototype = {
 	
 	set_project_information: function () {
 		var self=this;
-		this.property = new Object();
+		this.property = {};
 		this.get_property(this.xml);			
 			
 		// Get the contents of project.xml and put them into repective HTML elements
@@ -224,7 +224,7 @@ org.goorm.core.project.property.prototype = {
 					}
 
 					else {
-						self.plugin[name].property = new Object();
+						self.plugin[name].property = {};
 					}
 				}
 				

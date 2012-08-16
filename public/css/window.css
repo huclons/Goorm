@@ -316,6 +316,18 @@ version: 3.0.0
 	background-image: linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);		
 }
 
+#workspace .yui-panel .maximized_ft {
+	-moz-border-bottom-left-radius: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	-khtml-border-bottom-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	
+	-moz-border-bottom-right-radius: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-khtml-border-bottom-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
 #workspace .yui-resize-handle-inner-t {
 	background-image: none;
 }

@@ -70,7 +70,7 @@ org.goorm.core.design.prototype = {
 			data: "path="+path,
 			success: function(data) {
 				//self.editor.setValue(data);
-				//self.canvas.objects = $.makeArray();
+				//self.canvas.objects = [];
 				//self.canvas.objects = eval(data);
 				var objects;
 				
@@ -124,7 +124,7 @@ org.goorm.core.design.prototype = {
 			type: "GET",
 			data: { path: path, data: filedata },
 			success: function(data) {
-				//self.canvas.objects = $.makeArray();
+				//self.canvas.objects = [];
 				//self.canvas.objects = eval(data);
 				//self.canvas.draw();
 
