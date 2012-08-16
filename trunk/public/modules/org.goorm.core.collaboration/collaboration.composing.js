@@ -145,7 +145,7 @@ org.goorm.core.collaboration.composing.prototype = {
 			if (object != null && object != undefined) {
 				object.properties.status = "none";
 				
-				var inner_node = $.makeArray();
+				var inner_node = [];
 				
 				$(object.properties.inner_node).each(function(){
 					inner_node.push({x:object.x, y:object.y});
@@ -377,7 +377,7 @@ org.goorm.core.collaboration.composing.prototype = {
 		
 		//console.log(source.properties.inner_node);
 		
-		target.properties.inner_node = $.makeArray();
+		target.properties.inner_node = [];
 		
 		$(source.properties.inner_node).each(function() {
 			target.properties.inner_node.push({x:this.x, y:this.y});

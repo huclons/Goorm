@@ -93,7 +93,7 @@ org.goorm.core.project.explorer.prototype = {
 		self.set_context_menu();
 		
 		$(core).bind("goorm_load_complete",function(){
-			self.current_project = new Object();
+			self.current_project = {};
 			
 			if(!$.isEmptyObject(localStorage["current_project"])){
 				self.current_project = $.parseJSON(localStorage["current_project"]);

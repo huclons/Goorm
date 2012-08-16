@@ -45,7 +45,7 @@ org.goorm.core.object.ui.line.prototype = {
 		this.dashed = dashed;
 		this.timestamp = new Date().getTime();
 		
-		this.connector = $.makeArray();
+		this.connector = [];
 		this.connector['head'] = null;
 		this.connector['tail'] = null;
 		
@@ -59,7 +59,7 @@ org.goorm.core.object.ui.line.prototype = {
 		this.width = 0;
 		this.height = 0;
 		
-		this.inner_node = $.makeArray();
+		this.inner_node = [];
 
 		//Set Mouse Down Event in Canvas
 		$(target).find("canvas").mousedown(function (e) {

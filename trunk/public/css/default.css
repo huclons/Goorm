@@ -701,16 +701,34 @@ YUI LAYOUT STYLE CUSTOMIZATION
 .yui-skin-sam .yui-layout .yui-layout-clip-left {
 	border:0px;
 	border-right:1px solid #666;
+	
+	background-image: -o-linear-gradient(right, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -moz-linear-gradient(right, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -webkit-linear-gradient(right, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -ms-linear-gradient(right, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: linear-gradient(right, rgb(240,240,240) 10%, rgb(200,200,200) 90%);	
 }
 
 .yui-skin-sam .yui-layout .yui-layout-clip-bottom {
 	border:0px;
 	border-top:1px solid #666;
+	
+	background-image: -o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);	
 }
 
 .yui-skin-sam .yui-layout .yui-layout-clip-right {
 	border:0px;	
 	border-left:1px solid #666;
+	
+	background-image: -o-linear-gradient(left, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -moz-linear-gradient(left, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -webkit-linear-gradient(left, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: -ms-linear-gradient(left, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image: linear-gradient(left, rgb(240,240,240) 10%, rgb(200,200,200) 90%);	
 }
 
 .yui-skin-sam .yui-layout .yui-layout-hd {
@@ -779,6 +797,9 @@ YUI TAB STYLE CUSTOMIZATION
 	padding-left:0px;
 	padding-right:0px;
 	padding-top:0px;
+	
+	height:24px;
+	overflow: hidden;
 	
 	background-image: -o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
 	background-image: -moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);

@@ -100,12 +100,22 @@ org.goorm.core.terminal.prototype = {
 				
 				var command = $(this).val();
 				
-				self.socket.emit("pty_execute_command", command + '\t');
+				self.socket.emit("pty_execute_command", command + '\x09');
 			}
 			else if ((event.keyCode == '99' || event.keyCode == '67') && event.ctrlKey) { //Ctrl + C
 				event.preventDefault();
 				
-				self.socket.emit("pty_execute_command", '^C');
+				self.socket.emit("pty_execute_command", '\x03');
+			}
+			else if ((event.keyCode == '120' || event.keyCode == '88') && event.ctrlKey) { //Ctrl + X
+				event.preventDefault();
+				
+				self.socket.emit("pty_execute_command", '\x18');
+			}
+			else if ((event.keyCode == '122' || event.keyCode == '90') && event.ctrlKey) { //Ctrl + Z
+				event.preventDefault();
+				
+				self.socket.emit("pty_execute_command", '\x1A');
 			}
 		});
 		
@@ -121,6 +131,7 @@ org.goorm.core.terminal.prototype = {
 			temp_stdout += stdout;
 
 			if (stdout.indexOf('\n') > -1 || stdout.indexOf('$') > -1) {
+				temp_stdout = temp_stdout.replace('[H', '').replace('[2J', '');
 				temp_stdout = self.transform_bash_to_html(temp_stdout);
 				$(self.target).find("#results").append(temp_stdout);
 				
@@ -133,6 +144,16 @@ org.goorm.core.terminal.prototype = {
 			$(self.target).find("#prompt_input").focus();
 			
 			$(self.target).parent().parent().scrollTop(parseInt($(self.target).height()));
+			
+			if (stdout.indexOf('[2J') > -1) {
+				var pre_count = $(self.target).find("#results pre").length;
+				
+				$(self.target).find("#results pre").each(function (i) {
+					if (pre_count - 1 > i) {
+						$(this).remove();
+					}
+				});
+			}
 			
 			self.resize_all();
 		});
