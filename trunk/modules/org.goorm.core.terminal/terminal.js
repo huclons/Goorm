@@ -35,7 +35,7 @@ module.exports = {
 			
 			socket.on('change_project_dir', function (project_path) {
 				term.write("cd " + global.__path + "workspace/" + project_path  + "\r");
-				term.write("clear\r");
+				//term.write("clear\r");
 			});
 			
 			term.on('data', function (data) {
