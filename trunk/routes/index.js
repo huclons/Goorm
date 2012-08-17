@@ -378,8 +378,6 @@ exports.theme.get_list = function(req, res){
 	
 	g_theme.get_list(evt);
 
-
-
 };
 
 /*

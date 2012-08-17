@@ -53,7 +53,8 @@ org.goorm.core = function() {
 		device: null,
 		fn: null,
 		loading_bar: null,
-		dictionary: null
+		dictionary: null,
+		theme: null
 	};
 		
 	this.container = "";
@@ -98,7 +99,7 @@ org.goorm.core = function() {
 		help_install_new_plugin: null,
 		help_about: null,
 		help_bug_report: null,
-		
+		theme: null,
 		loaded_count:0		
 	};
 	
@@ -272,6 +273,11 @@ org.goorm.core.prototype = {
 		
 		this.module.layout = new org.goorm.core.layout();
 		this.module.layout.init(container);
+
+		//theme
+		this.module.preference = new org.goorm.core.theme();
+		this.module.preference.init();
+
 	},
 	
 	main: function() {
