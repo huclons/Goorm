@@ -554,7 +554,6 @@ YUI MENU STYLE CUSTOMIZATION
 }
 
 #goorm_top .yuimenuitem .yuimenuitemlabel {
-	width:200px;
 	height:18px;
 	padding-left:26px;
 	padding-top:2px;
@@ -563,14 +562,16 @@ YUI MENU STYLE CUSTOMIZATION
 }
 
 .yui-skin-sam .yuimenuitem .helptext {
-	color:#AAA;
-	text-align:right;
+	font-size: 90%;
+	color: #AAA;
+	padding-left: 40px;
+	text-align: right;
 }
 
 .yui-skin-sam .yuimenu h6 {
-	font-weight:normal;
-	font-size:11px;
-	padding:3px 10px 0;
+	font-weight: normal;
+	font-size: 11px;
+	padding: 3px 5px 0;
 	text-align:left;
 }
 

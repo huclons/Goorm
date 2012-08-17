@@ -24,7 +24,7 @@ version: 3.0.0
 }
 
 .CodeMirror, .CodeMirror-gutter {
-	font-family: Consolas, Monaco, monospace, Monotype;
+	font-family: Droid Sans Mono, Consolas, Monaco, monospace, Monotype;
 	font-size:11px;
 	line-height:15px;
 	height:100%;
@@ -80,7 +80,7 @@ version: 3.0.0
 */
 
 .window_container .user_name {
-	font-family: Consolas, Monotype;
+	font-family: Droid Sans Mono, Consolas, Monotype;
 	position: absolute;
 	z-index: 10;
 	border: 1px solid #bbb !important;

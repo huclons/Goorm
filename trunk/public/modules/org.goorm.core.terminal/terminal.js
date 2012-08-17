@@ -166,7 +166,6 @@ org.goorm.core.terminal.prototype = {
 	},
 	
 	change_project_dir: function () {
-		console.log(core.status.current_project_name);
 		this.socket.emit("change_project_dir", core.status.current_project_path);
 	},
 	
