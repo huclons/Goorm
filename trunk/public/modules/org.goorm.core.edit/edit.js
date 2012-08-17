@@ -190,7 +190,7 @@ org.goorm.core.edit.prototype = {
 							lexical_indented: token.state.lexical.indented,
 							lexical_prev_type: token.state.lexical.prev.type,
 							lexical_prev_column: token.state.lexical.prev.column,
-							lexical_prev_indented: token.state.lexical.prev.indente
+							lexical_prev_indented: token.state.lexical.prev.indented
 						});
 					}
 					
