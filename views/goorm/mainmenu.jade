@@ -155,6 +155,19 @@
            em.helptext Ctrl + Shift + G
         ul
          li.yuimenuitem
+          a.yuimenuitemlabel(action='auto_formatting', localization_key='edit_auto_formatting', style='')
+           | Auto Formatting
+           em.helptext Alt + ?
+         li.yuimenuitem
+          a.yuimenuitemlabel(action='comment_selected', localization_key='edit_comment_selected', style='')
+           | Comment Selected
+           em.helptext Alt + ?
+         li.yuimenuitem
+          a.yuimenuitemlabel(action='uncomment_selected', localization_key='edit_uncomment_selected', style='')
+           | Uncomment Selected
+           em.helptext Alt + ?
+        ul
+         li.yuimenuitem
           a.yuimenuitemlabel(action='preference', localization_key='edit_preference', style='background-image: url(configs/toolbars/org.goorm.core.edit/image/preference.png);')
            | Preference
            em.helptext Alt + P
@@ -314,7 +327,7 @@
               em.helptext Shift + Alt + 4
             li.yuimenuitem
              a.yuimenuitemlabel(action='right_chat_show', localization_key='window_right_layout_toggle_chat')
-              | Show Chat
+              | Show Communication
               em.helptext Shift + Alt + 5
            h6.first-of-type(localization_key='window_bottom_layout') Bottom Layout
            ul
@@ -324,7 +337,7 @@
               em.helptext Shift + Alt + B
             li.yuimenuitem
              a.yuimenuitemlabel(action='bottom_message_show', localization_key='window_bottom_layout_toggle_messages')
-              | Show Messages
+              | Show Message
               em.helptext Shift + Alt + 6
             li.yuimenuitem
              a.yuimenuitemlabel(action='bottom_debug_show', localization_key='window_bottom_layout_debug')
@@ -332,7 +345,7 @@
               em.helptext Shift + Alt + 7
             li.yuimenuitem
              a.yuimenuitemlabel(action='bottom_console_show', localization_key='window_bottom_layout_console')
-              | Show Console
+              | Show Terminal
               em.helptext Shift + Alt + 8
             li.yuimenuitem
              a.yuimenuitemlabel(action='bottom_search_show', localization_key='window_bottom_layout_search')

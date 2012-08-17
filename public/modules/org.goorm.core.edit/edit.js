@@ -163,6 +163,47 @@ org.goorm.core.edit.prototype = {
 			},
 			onFocus: function () {
 				core.status.focus_on_editor = true;
+				
+				var tree = [];
+
+				var index = 1;
+				var inspecting = true;
+				var total_line = self.editor.lineCount();
+				
+				var position = self.editor.posFromIndex(index);
+				var token = self.editor.getTokenAt(position);
+				
+				console.log(token);
+				
+				while (inspecting) {
+					if (token.className != null) {
+						tree.push({
+							line: position.line,
+							start: token.start,
+							end: token.end,
+							type: token.className,
+							string: token.string,
+							indented: token.state.indented,
+							kwAllowed: token.state.kwAllowed,
+							lexical_type: token.state.lexical.type,
+							lexical_column: token.state.lexical.column,
+							lexical_indented: token.state.lexical.indented,
+							lexical_prev_type: token.state.lexical.prev.type,
+							lexical_prev_column: token.state.lexical.prev.column,
+							lexical_prev_indented: token.state.lexical.prev.indente
+						});
+					}
+					
+					index += (token.end - token.start) + 1;
+					position = self.editor.posFromIndex(index);
+					token = self.editor.getTokenAt(position);
+					
+					if (position.line == total_line - 1 && position.ch == token.end) {
+						inspecting = false;
+					}
+				}
+				
+				console.log(tree);
 			},
 			onBlur: function () {
 				core.status.focus_on_editor = false;

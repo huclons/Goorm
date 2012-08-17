@@ -218,6 +218,10 @@ org.goorm.core.window.manager.prototype = {
 			}
 		
 			this.add(filepath, filename, filetype, editor);
+			
+			if (this.maximized) {
+				this.window[this.window.length - 1].maximize();
+			}
 		}
 		
 	},
