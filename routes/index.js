@@ -368,7 +368,18 @@ exports.theme.save = function(req, res){
 };
 
 exports.theme.get_list = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	
+	evt.on("theme_get_list", function (data) {
+/* 		res.json(data[1].contents.title); */
+		res.json(data);
+
+	});
+	
+	g_theme.get_list(evt);
+
+
+
 };
 
 /*
