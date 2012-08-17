@@ -54,10 +54,7 @@ module.exports = {
 	},
 	
 	exec: function (term, command) {
-		if (command.indexOf(/cd */) > -1) {
-			//do nothing...
-		}
-		else if (command.indexOf('\t') > -1) { //TAB
+		if (command.indexOf('\t') > -1) { //TAB
 			term.write(command);
 		}
 		else {
