@@ -99,7 +99,6 @@ org.goorm.core = function() {
 		help_install_new_plugin: null,
 		help_about: null,
 		help_bug_report: null,
-		theme: null,
 		loaded_count:0		
 	};
 	
@@ -275,8 +274,8 @@ org.goorm.core.prototype = {
 		this.module.layout.init(container);
 
 		//theme
-		this.module.preference = new org.goorm.core.theme();
-		this.module.preference.init();
+		this.module.theme = new org.goorm.core.theme();
+		this.module.theme.init();
 
 	},
 	

@@ -10,7 +10,7 @@ org.goorm.core.theme = function () {
 org.goorm.core.theme.prototype = {
 
 	init: function () {
- 
+		console.log("hello theme");
 	},
 	
 
