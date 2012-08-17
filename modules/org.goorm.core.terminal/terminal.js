@@ -32,7 +32,11 @@ module.exports = {
 			socket.on('pty_execute_command', function (command) {
 				self.exec(term, command);
 			});
-
+			
+			socket.on('change_project_dir', function (project_path) {
+				term.write("cd " + global.__path + "workspace/" + project_path  + "\r");
+				term.write("clear\r");
+			});
 			
 			term.on('data', function (data) {
 				var result = {};
@@ -42,13 +46,18 @@ module.exports = {
 				
 				socket.emit("pty_command_result", result);
 			});
+			
+			
 		});
 		
 		
 	},
 	
 	exec: function (term, command) {
-		if (command.indexOf('\t') > -1) { //TAB
+		if (command.indexOf(/cd */) > -1) {
+			//do nothing...
+		}
+		else if (command.indexOf('\t') > -1) { //TAB
 			term.write(command);
 		}
 		else {

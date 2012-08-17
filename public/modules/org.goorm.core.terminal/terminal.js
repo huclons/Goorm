@@ -165,6 +165,15 @@ org.goorm.core.terminal.prototype = {
 		this.resize_all();
 	},
 	
+	change_project_dir: function () {
+		console.log(core.status.current_project_name);
+		this.socket.emit("change_project_dir", core.status.current_project_path);
+	},
+	
+	send_command: function (command) {
+		this.socket.emit("pty_execute_command", command);
+	},
+	
 	set_prompt: function (data) {
 		data = data.replace(']0;', '');
 		data = data.split('[')[0];
