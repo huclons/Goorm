@@ -41,7 +41,7 @@
 			},
 			{	"label" : "Theme",
 				"tab" : [
-					{	"label" : "Edit",
+					{	"label" : "Theme",
 						"html"	: "configs/preferences/org.goorm.core.theme/theme.edit.html",
 						"classname" : "org.goorm.core.theme"
 					}

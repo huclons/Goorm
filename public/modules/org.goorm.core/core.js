@@ -149,6 +149,8 @@ org.goorm.core.prototype = {
 		
 		$(this).bind("preference_load_complete", function () {
 			console.log("preference Loading Complete");
+
+			
 		});
 		
 		$(this).bind("plugin_loaded", function () {
@@ -213,6 +215,9 @@ org.goorm.core.prototype = {
 			m.s("Loading Time : " + (goorm_loading_end_time - goorm_loading_start_time) / 1000 + " sec.", "org.goorm.core");			
 			m.s("------------------------------------------------------------", "org.goorm.core");
 			
+			//theme
+			self.module.theme = new org.goorm.core.theme();
+			self.module.theme.init();
 		});	
 		
 		// init dictionary		
@@ -272,10 +277,6 @@ org.goorm.core.prototype = {
 		
 		this.module.layout = new org.goorm.core.layout();
 		this.module.layout.init(container);
-
-		//theme
-		this.module.theme = new org.goorm.core.theme();
-		this.module.theme.init();
 
 	},
 	
