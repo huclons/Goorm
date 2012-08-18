@@ -165,12 +165,12 @@ PROJECT TREE STYLE CUSTOMIZATION
  * of the node */
 #object_explorer .ygtvdepthcell { 
 	background: url(http://developer.yahoo.com/yui/examples/treeview/assets/img/folders/vline.gif) 0 0 no-repeat; 
-	width:32px; 
+	width:0px; 
 	height:22px; 
 }
 
 #object_explorer .ygtvblankdepthcell { 
-	width:32px; 
+	width:0px; 
 	height:22px; 
 }
 

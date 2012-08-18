@@ -54,6 +54,8 @@ org.goorm.core.edit.prototype = {
 		
 		var fold_func = CodeMirror.newFoldFunction(CodeMirror.braceRangeFinder);
 		
+		this.object_tree = new YAHOO.widget.TreeView("object_tree");
+		
 		this.editor = CodeMirror.fromTextArea($(target).find(".code_editor")[0], {
 			lineNumbers: true,
 			lineWrapping: true,
@@ -164,6 +166,13 @@ org.goorm.core.edit.prototype = {
 			onFocus: function () {
 				core.status.focus_on_editor = true;
 				
+				
+				delete self.object_tree;
+				self.object_tree = new YAHOO.widget.TreeView("object_tree");
+
+				var root = self.object_tree.getRoot();
+				
+				
 				var tree = [];
 
 				var index = 1;
@@ -173,28 +182,178 @@ org.goorm.core.edit.prototype = {
 				var position = self.editor.posFromIndex(index);
 				var token = self.editor.getTokenAt(position);
 				
-				console.log(token);
+				var inspecting_index = 0;
+				var inspecting_depth = 0;
+				
+				var current_parent = root;
+				var past_parent = root;
+				
+				//console.log(token);
+				
+				var nodes = [];
+				
+				/*
+				for (var i=0; i < total_line; i++) {
+					nodes[i] = new YAHOO.widget.HTMLNode("<div id='#object_" + i + "'>Line: " + i + "</div>", root, true);
+				}
+				*/
 				
 				while (inspecting) {
+				
+					/*
 					if (token.className != null) {
-						tree.push({
-							line: position.line,
-							start: token.start,
-							end: token.end,
-							type: token.className,
-							string: token.string,
-							indented: token.state.indented,
-							kwAllowed: token.state.kwAllowed,
-							lexical_type: token.state.lexical.type,
-							lexical_column: token.state.lexical.column,
-							lexical_indented: token.state.lexical.indented,
-							lexical_prev_type: token.state.lexical.prev.type,
-							lexical_prev_column: token.state.lexical.prev.column,
-							lexical_prev_indented: token.state.lexical.prev.indented
-						});
+						if (token.className == "function" || token.className == "variable" || token.className == "variable-2" || token.className == "property" || token.className == "atom" || token.className == "keyword" || token.className == "operator" || token.className == "regexp") {
+							tree.push({
+								line: position.line,
+								start: token.start,
+								end: token.end,
+								type: token.className,
+								string: token.string,
+								indented: token.state.indented,
+								kwAllowed: token.state.kwAllowed,
+								lexical_type: token.state.lexical.type,
+								lexical_column: token.state.lexical.column,
+								lexical_indented: token.state.lexical.indented,
+								lexical_prev_type: token.state.lexical.prev.type,
+								lexical_prev_column: token.state.lexical.prev.column,
+								lexical_prev_indented: token.state.lexical.prev.indented
+							});
+						}
+						
+						if (token.className == "function") {
+							console.log(token.className + ": " + token.string);
+						}
+						else if (token.className == "variable") {
+							console.log(token.className + ": " + token.string);
+						}
+						else if (token.className == "variable-2") {
+							console.log(token.className + ": " + token.string);
+						}
+						else if (token.className == "property") {
+							console.log(token.className + ": " + token.string);
+						}
+						
+						
+					}
+					*/
+					
+					//console.log("line:", position.line, token);
+					
+					if (token.string.replace(/ /g, "").replace(/\t/g, "").replace(/\n/g, "") != "" && token.className != "comment") {
+						if (token.className == null && (token.string == "=" || token.string == ":")) {
+							token.className = "assignment";
+						}
+						
+						//console.log(token.string);
+						
+						if (token.string.indexOf("{") > -1) {
+							token.className = "block_start";
+							
+							past_parent = current_parent;
+							current_parent = nodes[nodes.length - 1];
+							
+							inspecting_depth++;
+						}
+						else if (token.string.indexOf("}") > -1) {
+							token.className = "block_end";
+							
+							current_parent = past_parent;
+							
+							inspecting_depth--;
+						}
+						
+						if (token.string.indexOf("(") > -1) {
+							token.className = "bracket_start";
+						}
+						else if (token.string.indexOf(")") > -1) {
+							token.className = "bracket_end";
+						}
+						
+						if (token.className == null && token.string == "[") {
+							token.className = "square_bracket_start";
+						}
+						else if (token.className == null && token.string == "]") {
+							token.className = "square_bracket_end";
+						}
+						
+						if (token.className == null && token.string == ",") {
+							token.className = "comma";
+						}
+						
+						if (token.className == null && (token.string == "+" || token.string == "-" || token.string == "/" || token.string == "*" || token.string == "%" || token.string == "." || token.string == "++" || token.string == "--")) {
+							token.className = "operator";
+						}
+						
+						if (token.className == null && (token.string == "==" || token.string == "!=" || token.string == "!" || token.string == "===" || token.string == "&&" || token.string == "||")) {
+							token.className = "logical_operator";
+						}
+						
+						if (token.className == null && token.string == ";") {
+							token.className = "semicolon";
+						}
+						
+						/*
+						if (token.className == "property" || token.className == "assignment" || token.className == "keyword" || token.className == "atom" || token.className == "def" || token.className == "operator" || token.className == "logical_operator" || token.className == "string") {
+							if (nodes[nodes.length - 1].type != "variable" && nodes[nodes.length - 1].type != "variable-2" && nodes[nodes.length - 1].type != "property") {
+								nodes.push(new YAHOO.widget.HTMLNode("<div id='oe_object_" + nodes.length + "'>" + (position.line + 1) + ", " + inspecting_depth + ": " + token.className + ": " + token.string + "</div>", current_parent, true));
+								nodes[nodes.length - 1].type = token.className;
+							}
+							else {
+							
+								$("#oe_object_" + (nodes.length-1)).append("." + token.string);
+							}
+						}
+						*/
+						
+						if (token.className == "variable" || token.className == "variable-2" || token.className == "block_start") {
+							var string = token.string;
+							if (token.className == "block_start") {
+								string = "<span class='block_start'></span>";
+							}
+							
+							nodes.push(new YAHOO.widget.HTMLNode(string, current_parent, true));
+							nodes[nodes.length - 1].type = token.className;
+						}
+						
+						if (token.className == "property") {
+							nodes[nodes.length - 1].html += "." + token.string;
+							
+							//$("#oe_object_" + (nodes.length-1)).append("." + token.string);
+							
+							//console.log($("#object_explorer").html());
+						}
+						
+						if (token.className == "assignment") {
+							nodes[nodes.length - 1].html += " : ";
+						}
+						
+						if (token.className == "bracket_start") {
+							nodes[nodes.length - 1].html += "<span style='color:red;'> <- </span>";
+						}
+						
+						if (token.className == "keyword") {
+							nodes[nodes.length - 1].html += "<span style='color:purple;'>" + token.string + "</span>";
+						}
+						
+						if (token.className == "string") {
+							nodes[nodes.length - 1].html += "<span style='color:gray;'>" + token.string + "</span>";
+						}
+						
+						if (token.className == "atom") {
+							nodes[nodes.length - 1].html += "<span style='color:blue;'>" + token.string + "</span>";
+						}
+						
+						if (token.className == "def") {
+							nodes[nodes.length - 1].html += " <span style='color:darkgray;'>" + token.string + "</span>";
+						}
 					}
 					
-					index += (token.end - token.start) + 1;
+					index += (token.end - token.start);
+					
+					if (token.end - token.start == 0) {
+						index++;
+					}
+					
 					position = self.editor.posFromIndex(index);
 					token = self.editor.getTokenAt(position);
 					
@@ -203,7 +362,10 @@ org.goorm.core.edit.prototype = {
 					}
 				}
 				
-				console.log(tree);
+				
+				self.object_tree.render();
+				
+				//console.log(tree);
 			},
 			onBlur: function () {
 				core.status.focus_on_editor = false;

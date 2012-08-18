@@ -281,7 +281,7 @@ version: 3.0.0
 }
 
 #workspace .yui-panel .bd {
-	background-color: #fafafa;
+	background-color: #fff;
 	border-top: 1px solid #666;
 	padding: 0px;
 }
