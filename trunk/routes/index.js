@@ -363,7 +363,7 @@ exports.theme = function(req, res){
 	res.send(null);
 };
 
-exports.theme.save = function(req, res){
+exports.theme.do_save = function(req, res){
 	res.send(null);
 };
 

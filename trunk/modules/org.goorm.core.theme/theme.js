@@ -8,7 +8,7 @@ var themes = [];
 
 module.exports = {
 	init: function () {
-		console.log("init!!");	
+
 	},
 	
 	get_list: function (evt) {
