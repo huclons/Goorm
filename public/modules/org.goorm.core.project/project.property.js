@@ -180,6 +180,20 @@ org.goorm.core.project.property.prototype = {
 	set_project_information: function () {
 		var self=this;
 		this.property = {};
+		
+		var postdata = {
+			project_path: core.status.current_project_path
+		};
+							
+		$.get("project/get_property", postdata, function (data) {
+			if (data.err_code == 0) {
+				// need.... fucking
+			}
+			else {
+				alert.show(data.message);
+			}
+		});
+/*
 		this.get_property(this.xml);			
 			
 		// Get the contents of project.xml and put them into repective HTML elements
@@ -242,6 +256,7 @@ org.goorm.core.project.property.prototype = {
 				self.refresh_toolbox();
 			}
 		});
+*/
 	},
 	set_before: function(){
 		var self=this;

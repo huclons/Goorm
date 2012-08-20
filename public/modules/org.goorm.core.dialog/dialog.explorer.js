@@ -8,6 +8,7 @@ org.goorm.core.dialog.explorer = function () {
 	this.location_path = null;
 	this.dir_tree = null;
 	this.files = null;
+	this.file_type = null;
 	
 	this.treeview = null;	
 	
@@ -39,15 +40,18 @@ org.goorm.core.dialog.explorer.prototype = {
 		
 		self.is_dir_only = is_dir_only;
 		
+		self.file_type = context + "_file_type";
+		
 		if (self.is_dir_only) {
 			self.add_directories();
 		}
 		else {
 			self.add_directories();
 			self.add_file_items();
+			self.add_file_type_selector();
 		}
 		
-		return self.treeview;
+/* 		return self.treeview; */
 	},
 	
 	get_data: function() {
@@ -59,6 +63,7 @@ org.goorm.core.dialog.explorer.prototype = {
 			data.path="/";
 		}
 		data.name = $(self.target_name).val();
+		data.type = $(self.file_type).val();
 		
 		return data;	
 	},
@@ -77,7 +82,6 @@ org.goorm.core.dialog.explorer.prototype = {
 			self.treeview = new YAHOO.widget.TreeView(self.dir_tree_ori, data);
 
 			self.treeview.subscribe("clickEvent", function(nodedata) {	
-				console.log("click!!");
 				if(nodedata.node.data.cls == "dir") {
 
 					self.current_path = (nodedata.node.data.parent_label + nodedata.node.data.name).replace("//", "/");
@@ -244,5 +248,27 @@ org.goorm.core.dialog.explorer.prototype = {
 				});
 			}
 		});
-	}	
+	},
+	
+	add_file_type_selector: function () {
+		var self = this;
+
+		$(self.file_type+" option:eq(0)").attr("selected", "selected");
+		
+		$(self.file_type).change(function() {
+			$(self.files+" .file_item").show();
+		
+			if($(this).val()=="") {
+				$(self.files+" .file_item").show();
+			}
+			else {
+				$(self.files+" .file_item").each(function() {
+					if ($(this).attr("filetype")!=$(self.file_type).val()) {
+						$(this).hide();
+					}
+				});
+			}
+		});
+	}
+
 };

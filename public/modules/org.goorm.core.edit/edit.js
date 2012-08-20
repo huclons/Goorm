@@ -614,7 +614,10 @@ org.goorm.core.edit.prototype = {
 
 	},
 
-	save_as: function (filepath, filename, filetype) {
+	get_contents: function () {
+		var self = this;
+		
+		return self.editor.getValue();
 	},
 	
 	set_dictionary: function () {

@@ -7,7 +7,6 @@
 org.goorm.core.file._new.untitled_textfile = function () {
 	this.dialog = null;
 	this.buttons = null;
-	this.treeview = null;
 	this.dialog_explorer = null;
 };
 
@@ -75,7 +74,7 @@ org.goorm.core.file._new.untitled_textfile.prototype = {
 	show: function (context) {
 		var self = this;
 		
-		self.treeview = self.dialog_explorer.init("#text_new", true);
+		self.dialog_explorer.init("#text_new", true);
 
 		this.dialog.panel.show();
 	}

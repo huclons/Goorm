@@ -8,7 +8,6 @@ org.goorm.core.file._export = function () {
 	this.dialog = null;
 	this.buttons = null;
 	this.tabview = null;
-	this.treeview = null;
 	this.dialog_explorer = null;
 };
 
@@ -90,7 +89,7 @@ org.goorm.core.file._export.prototype = {
 	show: function () {
 		var self = this;
 			
-		self.treeview = self.dialog_explorer.init("#file_export", false);
+		self.dialog_explorer.init("#file_export", false);
 	
 		this.dialog.panel.show();
 	}

@@ -233,5 +233,30 @@ module.exports = {
 			}
 			evt_dir.emit("get_list");
 		});
+	},
+	
+	get_property: function (query, evt) {
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+
+		if (query.project_path != null) {
+			fs.readFile(__path+"workspace/"+query.project_path+"/project.json", 'utf-8', function (err, file_data) {
+				if (err==null) {
+					data.contents = JSON.parse(file_data);
+					evt.emit("get_property", data);
+				}
+				else {
+					data.err_code = 20;
+					data.message = "Can not read project file.";
+					evt.emit("get_property", data);
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalid query";
+			evt.emit("get_property", data);
+		}
 	}
 };

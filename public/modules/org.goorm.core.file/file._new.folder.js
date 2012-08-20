@@ -8,7 +8,6 @@ org.goorm.core.file._new.folder = function () {
 	this.dialog = null;
 	this.buttons = null;
 	this.dialog_explorer = null;
-	this.treeview = null;
 };
 
 org.goorm.core.file._new.folder.prototype = {
@@ -74,7 +73,7 @@ org.goorm.core.file._new.folder.prototype = {
 	show: function (context) {
 		var self = this;
 
-		self.treeview = self.dialog_explorer.init("#folder_new", true);
+		self.dialog_explorer.init("#folder_new", true);
 		
 		this.dialog.panel.show();
 	}

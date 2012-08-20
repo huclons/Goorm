@@ -19,7 +19,12 @@ module.exports = {
 		data.message = "process done";
 		
 		if ( query.path!=null && query.new_anyway ) {
-			fs.exists(__path+'workspace/'+query.path, function(exists) {
+			var path = query.path;
+			if(query.type!="") {
+				path += "."+query.type;
+			}
+			
+			fs.exists(__path+'workspace/'+path, function(exists) {
 
 				if (exists && query.new_anyway=="false") {
 					data.err_code = 99;
@@ -27,7 +32,7 @@ module.exports = {
 					evt.emit("file_do_new", data);					
 				}
 				else {
-					fs.writeFile(__path+'workspace/'+query.path, "", function(err) {
+					fs.writeFile(__path+'workspace/'+path, "", function(err) {
 						if (err!=null) {
 							data.err_code = 40;
 							data.message = "Can not make project file";
@@ -174,31 +179,34 @@ module.exports = {
 			var walker = walk.walk(path, options);
 			
 			walker.on("files", function (root, file_stats, next) {
-				for (var i=0; i < file_stats.length; i++) {
-					var node = {};
-					node.root = root.replace(__path + "workspace/", "") + "/";
-					node.filename = file_stats[i].name;
-					node.parent_label = node.root;
-					node.project_path = root_dir;
-					node.cls = "file";
-					node.expanded = false;
-					node.sortkey = 1 + node.filename;
-					node.type = "html";
-					
-					var extension = node.filename.split('.').pop();
-					if (extension == node.filename) {
-						extension = "etc";
+				if (root.indexOf("\/\.")==-1) {			
+					for (var i=0; i < file_stats.length; i++) {
+						if (file_stats[i].name.indexOf("\.") != 0 ) {
+							var node = {};
+							node.root = root.replace(__path + "workspace/", "") + "/";
+							node.filename = file_stats[i].name;
+							node.parent_label = node.root;
+							node.project_path = root_dir;
+							node.cls = "file";
+							node.expanded = false;
+							node.sortkey = 1 + node.filename;
+							node.type = "html";
+							
+							var extension = node.filename.split('.').pop();
+							if (extension == node.filename) {
+								extension = "etc";
+							}
+							node.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
+										+ "<img src=images/icons/filetype/" + extension + ".filetype.png class=\"directory_icon file\" />"
+										+ node.filename
+										+ "<div class=\"fullpath\" style=\"display:none;\">" + node.root + node.filename + "</div>"
+									  + "</div>";
+							node.children = [];
+							node.filetype = extension;
+							nodes.push(node);
+						}
 					}
-					node.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
-								+ "<img src=images/icons/filetype/" + extension + ".filetype.png class=\"directory_icon file\" />"
-								+ node.filename
-								+ "<div class=\"fullpath\" style=\"display:none;\">" + node.root + node.filename + "</div>"
-							  + "</div>";
-					node.children = [];
-					node.filetype = extension;
-					nodes.push(node);
 				}
-				
 				next();
 			});
 			
@@ -225,24 +233,27 @@ module.exports = {
 		var walker = walk.walk(path, options);
 		
 		walker.on("directories", function (root, dir_stats_array, next) {
-			for (var i=0; i < dir_stats_array.length; i++) {
-				var dir = {};
-				dir.root = root.replace(__path + "workspace/", "") + "/";
-				dir.name = dir_stats_array[i].name;
-				dir.parent_label = dir.root;
-				dir.cls = "dir";
-				dir.expanded = true;
-				dir.sortkey = 0 + dir.name;
-				dir.type = "html";
-				dir.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
-							+ "<img src=images/icons/filetype/folder.filetype.png class=\"directory_icon file\" />"
-							+ dir.name
-							+ "<div class=\"fullpath\" style=\"display:none;\">" + dir.root + dir.name + "</div>"
-						 + "</div>";
-				dir.children = [];
-				dirs.push(dir);
+			if (root.indexOf("\/\.")==-1) {
+				for (var i=0; i < dir_stats_array.length; i++) {
+					if (dir_stats_array[i].name.indexOf("\.") != 0 ) {				
+						var dir = {};
+						dir.root = root.replace(__path + "workspace/", "") + "/";
+						dir.name = dir_stats_array[i].name;
+						dir.parent_label = dir.root;
+						dir.cls = "dir";
+						dir.expanded = true;
+						dir.sortkey = 0 + dir.name;
+						dir.type = "html";
+						dir.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
+									+ "<img src=images/icons/filetype/folder.filetype.png class=\"directory_icon file\" />"
+									+ dir.name
+									+ "<div class=\"fullpath\" style=\"display:none;\">" + dir.root + dir.name + "</div>"
+								 + "</div>";
+						dir.children = [];
+						dirs.push(dir);
+					}
+				}
 			}
-			
 			next();
 		});
 		
@@ -561,5 +572,46 @@ module.exports = {
 
 			evt.emit("file_get_property", data);			
 		}				
-	}
+	},
+	
+	do_save_as: function (query, evt) {
+		var self = this;
+		
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+		
+		if ( query.path!=null && query.save_anyway ) {
+			var path = query.path;
+			if(query.type!="") {
+				path += "."+query.type;
+			}
+			
+			fs.exists(__path+'workspace/'+path, function(exists) {
+				if (exists && query.save_anyway=="false") {
+					data.err_code = 99;
+					data.message = "exist file";
+					evt.emit("file_do_save_as", data);					
+				}
+				else {
+					fs.writeFile(__path+'workspace/'+path, query.data, function(err) {
+						if (err!=null) {
+							data.err_code = 40;
+							data.message = "Can not save file";
+							
+							evt.emit("file_do_save_as", data);
+						}
+						else {	
+							evt.emit("file_do_save_as", data);
+						}
+					});
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalid query";
+			evt.emit("file_do_save_as", data);
+		}
+	},
 };

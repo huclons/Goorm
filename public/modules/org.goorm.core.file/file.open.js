@@ -7,7 +7,6 @@
 org.goorm.core.file.open = function () {
 	this.dialog = null;
 	this.buttons = null;
-	this.treeview = null;
 	this.filename = null;
 	this.filetype = null;
 	this.filepath = null;
@@ -90,7 +89,7 @@ org.goorm.core.file.open.prototype = {
 	
 		this.dialog.panel.show();
 		
-		self.treeview = self.dialog_explorer.init("#file_open", false);
+		self.dialog_explorer.init("#file_open", false);
 		
 	}
 };
