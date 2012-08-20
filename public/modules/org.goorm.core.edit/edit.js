@@ -42,6 +42,8 @@ org.goorm.core.edit.prototype = {
 		var enter_key = false; // onChange can't get enter_key
 		
 		this.collaboration = new org.goorm.core.collaboration.editing();
+		
+		this.preference = core.module.preference;
 
 		
 		this.target = target;
@@ -429,7 +431,7 @@ org.goorm.core.edit.prototype = {
 		});
 		
 		
-		$(document).bind("onPreferenceConfirm", function () {
+		$(document).bind("on_preference_confirmed", function () {
 			self.set_option();
 		});
 		
@@ -457,9 +459,9 @@ org.goorm.core.edit.prototype = {
 	
 	resize_all: function () {
 
-	},	
+	},
 
-	set_option:function(){
+	set_option: function() {
 		this.indent_unit = parseInt(this.preference["preference.editor.indent_unit"]);
 		this.indent_with_tabs = this.preference["preference.editor.indent_with_tabs"];
 		this.tab_mode = this.preference["preference.editor.tab_mode"];
@@ -473,14 +475,31 @@ org.goorm.core.edit.prototype = {
 		//////////////////////////////////////////////////////////////
 		//Edit Settings
 		//////////////////////////////////////////////////////////////
-		this.editor.setOption("indentUnit", this.indent_unit);
-		this.editor.setOption("indentWithTabs", this.indent_with_tabs);
-		this.editor.setOption("tabMode", this.tab_mode);		
-		this.editor.setOption("enterMode", this.enter_mode);
-		this.editor.setOption("showLineNumbers", this.show_line_numbers);
-		this.editor.setOption("firstLineNumber", this.first_line_number);
-		this.editor.setOption("undoDepth", this.undo_depth);
-		this.editor.setOption("theme", this.theme);
+		if (this.indent_unit != undefined) {
+			this.editor.setOption("indentUnit", this.indent_unit);
+		}
+		if (this.indent_with_tabs != undefined) {
+			this.editor.setOption("indentWithTabs", this.indent_with_tabs);
+		}
+		if (this.tab_mode != undefined) {
+			this.editor.setOption("tabMode", this.tab_mode);		
+		}
+		if (this.enter_mode != undefined) {
+			this.editor.setOption("enterMode", this.enter_mode);
+		}
+		if (this.show_line_numbers != undefined) {
+			this.editor.setOption("showLineNumbers", this.show_line_numbers);
+		}
+		if (this.first_line_number != undefined || this.first_line_number != NaN) {
+			console.log(this.preference["preference.editor.first_line_number"]);
+			this.editor.setOption("firstLineNumber", this.first_line_number);
+		}
+		if (this.undo_depth != undefined || this.undo_depth != NaN) {
+			this.editor.setOption("undoDepth", this.undo_depth);
+		}
+		if (this.theme != undefined) {
+			this.editor.setOption("theme", this.theme);
+		}
 	},
 	
 	load: function (filepath, filename, filetype) {
@@ -694,5 +713,24 @@ org.goorm.core.edit.prototype = {
 	
 	select_all: function () {
 		this.editor.setSelection({"line":0,"ch":0},{"line":this.editor.lineCount(),"ch":0});
-	}	
+	},
+	
+	get_selected_range: function () {
+		return { from: this.editor.getCursor(true), to: this.editor.getCursor(false) };
+	},
+	
+	auto_formatting: function () {
+		var range = this.get_selected_range();
+		this.editor.autoFormatRange(range.from, range.to);
+	},
+	
+	comment_selection: function () {
+		var range = this.get_selected_range();
+		this.editor.commentRange(true, range.from, range.to);
+	},
+	
+	uncomment_selection: function () {
+		var range = this.get_selected_range();
+		this.editor.commentRange(false, range.from, range.to);
+	}
 };

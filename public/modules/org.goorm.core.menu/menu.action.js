@@ -294,6 +294,39 @@ org.goorm.core.menu.action.prototype = {
 				core.dialog.find_and_replace.find("previous");
 			}
 		});
+		
+		$("a[action=auto_formatting]").unbind("click");
+		$("a[action=auto_formatting]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
+
+			if(window_manager.window[window_manager.active_window].designer) {
+				//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.auto_formatting();
+			}
+		});
+		
+		$("a[action=comment_selected]").unbind("click");
+		$("a[action=comment_selected]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
+
+			if(window_manager.window[window_manager.active_window].designer) {
+				//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.comment_selection();
+			}
+		});
+		
+		$("a[action=uncomment_selected]").unbind("click");
+		$("a[action=uncomment_selected]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
+
+			if(window_manager.window[window_manager.active_window].designer) {
+				//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.uncomment_selection();
+			}
+		});
 
 		$("a[action=select_all]").unbind("click");
 		$("a[action=select_all]").click(function() {

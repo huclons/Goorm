@@ -67,7 +67,6 @@ org.goorm.core.preference.prototype = {
 				core.preference[key] = localStorage[key];
 			}
 		});
-		console.log("preference from localStorage loaded");
 	},
 	
 	// save current preferences(core.preference) to localStorage or share.json
@@ -80,7 +79,6 @@ org.goorm.core.preference.prototype = {
 				localStorage[key] = value;
 			}
 		});
-		console.log("preference to localStorage saved");
 	},
 	
 	apply: function(id){
@@ -100,8 +98,7 @@ org.goorm.core.preference.prototype = {
 			
 //			self.get_preference(self.xml);
 //			self.get_plugin_preference();
-		$(document).trigger("onPreferenceConfirm");
-		console.log("onPreferenceConfirm fired");
+		$(document).trigger("on_preference_confirmed");
 		
 		$(core.module.layout.workspace.window_manager.window).each(function(i) {
 			if(this.alive && this.designer) {
