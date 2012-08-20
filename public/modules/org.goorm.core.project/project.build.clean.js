@@ -16,15 +16,39 @@ org.goorm.core.project.build.clean.prototype = {
 		var self = this;
 				
 		var handle_clean = function() { 
+			var project_array = [];
+			
 			$("#build_clean_list input[type=checkbox]").each(function(){
 				if($(this).is(":checked")){
-
+					project_array.push($(this).val());
+/*
 					if(core.module.plugin_manager.plugins["org.goorm.plugin."+$(this).attr("projectType")]!=undefined) {
 						core.module.plugin_manager.plugins["org.goorm.plugin."+$(this).attr("projectType")].clean($(this).attr("name"));
 					}
+*/
+					core.module.layout.project_explorer.refresh();
 				}
 			});
-			this.hide(); 
+			
+			// not selected, send
+			if (project_array.length==0) {
+				alert.show("Not Selected.");
+				return false;
+			}
+			else {
+				var postdata = {
+					project_list: project_array
+				};
+				
+				$.get("project/clean", postdata, function (data) {
+					if(data.err_code==0) {
+						self.dialog.panel.hide();
+					}
+					else {
+						alert.show(data.message);
+					}
+				});
+			}			
 		};
 
 		var handle_cancel = function() { 
@@ -75,36 +99,55 @@ org.goorm.core.project.build.clean.prototype = {
 	project_list: function () {
 		$("#build_clean_list").empty();
 	
-		$.post("project/get_list", "", function (data) {
+		$.get("project/get_list", null, function (data) {
 			
-			var sorting_data = eval(data);
+			console.log(data);
 			
-			for(var name in sorting_data) {
-				if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+sorting_data[name].type])) {
-					if(core.module.plugin_manager.plugins["org.goorm.plugin."+sorting_data[name].type].clean){
+			for(var i=0; i<data.length; i++) {
+				var icon_str = "";
+				icon_str += "<div style='height:18px;padding:2px;'>";
+				icon_str += "<span class='checkbox'><input type='checkbox' name='"+data[i].name+"' value='"+data[i].name+"'";
+
+				if (data[i].name == core.status.current_project_path) {
+					icon_str += "checked='checked'";
+				}
+				
+				icon_str += "id='claean_selector_" + data[i].name+"' class='claean_selectors'><label data-on data-off></label></span>";
+				
+				icon_str += "<label for='claean_selector_" + data[i].name+"' style='margin-left:4px;'>" + data[i].name + "</label>";
+				icon_str += "</div>";
+	
+				$("#build_clean_list").append(icon_str);				
+			}
+			
+						
+			
+/*
+				if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+data[name].type])) {
+					if(core.module.plugin_manager.plugins["org.goorm.plugin."+data[name].type].clean){
 						var icon_str = "";
-						icon_str += "<div id='claeanSelector_" + sorting_data[name].filename + "' value='" + sorting_data[name].filename + "' class='select_div' style='height:14px;'>";
+						icon_str += "<div id='claeanSelector_" + data[name].filename + "' value='" + data[name].filename + "' class='select_div' style='height:14px;'>";
 						icon_str += "<div style='float:left;'>";
-						icon_str += "<input type='checkbox' name='"+sorting_data[name].filename+"' project_path='"+sorting_data[name].author+"_"+sorting_data[name].name+"' project_name='"+sorting_data[name].name+"' projectType='"+sorting_data[name].type+"'";
+						icon_str += "<input type='checkbox' name='"+data[name].filename+"' project_path='"+data[name].author+"_"+data[name].name+"' project_name='"+data[name].name+"' projectType='"+data[name].type+"'";
 		
-						if (sorting_data[name].filename == core.status.current_project_path) {
+						if (data[name].filename == core.status.current_project_path) {
 							icon_str += "checked";
 						}
 						
 						icon_str += ">";
 						
 						icon_str += "</div>";
-						icon_str += "<div style='float:left; padding-top:1px; padding-left:5px;'>" + sorting_data[name].filename + "</div>";
+						icon_str += "<div style='float:left; padding-top:1px; padding-left:5px;'>" + data[name].filename + "</div>";
 						icon_str += "</div>";
 			
 						$("#build_clean_list").append(icon_str);
 						
-						$("#claeanSelector_" + sorting_data[name].filename).click(function () {
+						$("#claeanSelector_" + data[name].filename).click(function () {
 							$(this).find("input").attr("checked", !$(this).find("input").attr("checked"));
 						});
 					}
 				}
-			}
+*/
 		});
 	}
 };
