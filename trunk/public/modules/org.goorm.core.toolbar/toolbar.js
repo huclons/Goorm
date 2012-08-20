@@ -117,7 +117,7 @@ org.goorm.core.toolbar.prototype = {
 				$("a[action=use_clipboard]").find("img").addClass("toolbar_buttonPressed");
 			}
 			
-			$(document).bind("onPreferenceConfirm",function(){
+			$(document).bind("on_preference_confirmed",function(){
 				if(localStorage['preference.editor.use_clipboard'] == "true") {
 					$("a[action=use_clipboard]").find("img").addClass("toolbar_buttonPressed");
 				}else {

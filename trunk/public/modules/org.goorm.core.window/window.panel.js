@@ -304,16 +304,16 @@ org.goorm.core.window.panel.prototype = {
 	},
 	
 	maximize: function () {
-		if (this.left == 0) {
+		if (this.left == 0 || this.left == null) {
 			this.left = $("#" + this.container + "_c").offset().left;
 		}
-		if (this.top == 0) {
+		if (this.top == 0 || this.top == null) {
 			this.top = $("#" + this.container + "_c").offset().top;
 		}
-		if (this.width == 0) {
+		if (this.width == 0 || this.width == null) {
 			this.width = $("#" + this.container + "_c").width();
 		}
-		if (this.height == 0) {
+		if (this.height == 0 || this.height == null) {
 			this.height = $("#" + this.container + "_c").height();
 		}
 		
