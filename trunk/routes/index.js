@@ -92,7 +92,12 @@ exports.project.do_clean = function(req, res){
 };
 
 exports.project.get_property = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	evt.on("get_property", function (data) {
+		res.json(data);
+	});
+	
+	g_project.get_property(req.query, evt);
 };
 
 
@@ -171,8 +176,14 @@ exports.file.do_load = function(req, res){
 	res.send(null);
 };
 
-exports.file.do_save = function(req, res){
-	res.send(null);
+exports.file.do_save_as = function(req, res){
+	var evt = new EventEmitter();
+	
+	evt.on("file_do_save_as", function (data) {
+		res.json(data);
+	});
+
+	g_file.do_save_as(req.query, evt);
 };
 
 exports.file.do_delete = function(req, res){

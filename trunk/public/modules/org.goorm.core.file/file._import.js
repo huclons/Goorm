@@ -7,7 +7,6 @@
 org.goorm.core.file._import = function () {
 	this.dialog = null;
 	this.buttons = null;
-	this.treeview = null;
 	this.dialog_explorer = null;
 };
 
@@ -94,7 +93,7 @@ org.goorm.core.file._import.prototype = {
 		var self = this;
 		$("#upload_output").empty();
 		$("#file_import_file").val("");
-		self.treeview = self.dialog_explorer.init("#file_import", false);
+		self.dialog_explorer.init("#file_import", false);
 		this.dialog.panel.show();		
 	}
 };

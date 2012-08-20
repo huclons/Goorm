@@ -9,7 +9,6 @@ org.goorm.core.file._new = function () {
 	this.buttons = null;
 	this.is_new_anyway = false;
 	this.dialog_explorer = null;
-	this.treeview = null;
 };
 
 org.goorm.core.file._new.prototype = {
@@ -28,7 +27,8 @@ org.goorm.core.file._new.prototype = {
 
 			var postdata = {
 				new_anyway: self.is_new_anyway,
-				path: data.path+"/"+data.name
+				path: data.path+"/"+data.name,
+				type: data.type
 			};
 			
 			$.get("file/new", postdata, function (data) {
@@ -105,7 +105,7 @@ org.goorm.core.file._new.prototype = {
 	
 		this.is_new_anyway = false;
 	
-		self.treeview = self.dialog_explorer.init("#file_new", false);
+		self.dialog_explorer.init("#file_new", false);
 	
 		this.dialog.panel.show();
 	}	

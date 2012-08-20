@@ -52,6 +52,7 @@ goorm.get('/project/export', routes.project.do_export);
 goorm.get('/project/clean', routes.project.do_clean);
 goorm.get('/project/get_property', routes.project.get_property);
 
+
 //for plugin
 goorm.get('/plugin/get_list', routes.plugin.get_list);
 goorm.get('/plugin/install', routes.plugin.install);
@@ -64,6 +65,7 @@ goorm.get('/file/new_folder', routes.file.do_new_folder);
 goorm.get('/file/new_untitled_text_file', routes.file.do_new_untitled_text_file);
 goorm.get('/file/load', routes.file.do_load);
 goorm.get('/file/save', routes.file.do_save);
+goorm.get('/file/save_as', routes.file.do_save_as);
 goorm.get('/file/delete', routes.file.do_delete);
 goorm.get('/file/get_contents', routes.file.get_contents);
 goorm.get('/file/get_url_contents', routes.file.get_url_contents);

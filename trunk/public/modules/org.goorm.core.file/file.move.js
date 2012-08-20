@@ -7,7 +7,6 @@
 org.goorm.core.file.move = function () {
 	this.dialog = null;
 	this.buttons = null;
-	this.treeview = null;
 	this.dialog_explorer = null;
 };
 
@@ -106,7 +105,7 @@ org.goorm.core.file.move.prototype = {
 	show: function (context) {
 	
 		var self = this;
-		self.treeview = self.dialog_explorer.init("#file_move", false);
+		self.dialog_explorer.init("#file_move", false);
 
 		if (context) {
 			var filename = (core.status.selected_file.split("/")).pop();

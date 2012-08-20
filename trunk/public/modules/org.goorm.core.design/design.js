@@ -133,7 +133,22 @@ org.goorm.core.design.prototype = {
 		});
 	},
 	
-	save_as: function (filepath, filename, filetype) {
+	get_contents: function () {
+		var self = this;
+
+		var object_data = this.get_source(this.canvas.objects);
+		
+		var filedata = "{"
+			+ '"filename":' + '"' + this.filename + '",'
+			+ '"file_type":' + '"' + this.filetype + '",'
+			+ '"project_type":' + '"' + core.status.current_project_type + '",'
+			+ '"canvas_width":'  + '"' + this.canvas.width + '",'
+			+ '"canvas_height":' + '"' + this.canvas.height + '",'
+			+ '"last_modified_timestamp":' + '"' + new Date().getTime() + '",'
+			+ '"objects":' +  object_data
+		+ "}";
+
+		return filedata;
 	},
 	
 	resize_all: function () {
