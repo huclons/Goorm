@@ -108,5 +108,38 @@ org.goorm.plugin.cpp.prototype = {
 		});
 		$("#debug").empty();
 		this.debug_con.emit("debug", send_data);
+	},
+	
+	build: function (projectName, projectPath, callback) {
+		var self=this;
+		
+		this.path_project = "";
+
+		var buildOptions = "";
+//		var buildOptions = $("#buildConfiguration").find('[name=plugin\\.c\\.buildOptions]').val();		
+//		if(buildOptions == undefined){
+//			buildOptions = core.dialogPreference.preference['plugin.c.buildOptions'];
+//		}
+//		
+		var buildSource = "main.c";
+//		var buildSource = $("#buildConfiguration").find('[name=plugin\\.c\\.buildSource]').val();		
+//		if(buildSource == undefined){
+//			buildSource = core.dialogPreference.preference['plugin.c.buildSource'];
+//		}
+//		
+		var buildTarget = "main";
+//		var buildTarget = $("#buildConfiguration").find('[name=plugin\\.c\\.buildTarget]').val();		
+//		if(buildTarget == undefined){
+//			buildTarget = core.dialogPreference.preference['plugin.c.buildTarget'];
+//		}
+		
+		var cmd1 = "gcc "+buildSource+" -o "+this.path_project+buildTarget+" -Wall"+" "+ buildOptions;
+		console.log(cmd1);
+		core.module.layout.terminal.send_command(cmd1+'\r');
+		
+		if(callback) callback();
+	},
+	clean: function(){
+		console.log("cpp clean");
 	}
 };

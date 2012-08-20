@@ -72,7 +72,6 @@ org.goorm.core.project.build.project.prototype = {
 						}
 						
 						self.is_repeat = false;
-											
 						if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+$(list).attr("projectType")])) {
 							core.module.plugin_manager.plugins["org.goorm.plugin."+$(list).attr("projectType")].build($(list).attr("project_name"),$(list).attr("project_path"));
 						}
@@ -135,35 +134,33 @@ org.goorm.core.project.build.project.prototype = {
 	project_list: function () {
 		$("#build_project_list").empty();
 	
-		$.post("project/get_list", "", function (data) {
+		$.get("project/get_list", "", function (data) {
 			
-			var sorting_data = eval(data);
-			
-			for(var name in sorting_data) {
-				if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+sorting_data[name].type])) {
-					if(core.module.plugin_manager.plugins["org.goorm.plugin."+sorting_data[name].type].build){
-						
+			var list = eval(data);
+			$.each(list, function(index, project) {
+				if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+project.contents.type])) {
+					if(core.module.plugin_manager.plugins["org.goorm.plugin."+project.contents.type].build){
 						var temp = "";
-						temp += "<div id='selector_" + sorting_data[name].filename + "' value='" + sorting_data[name].filename + "' class='select_div' style='height:14px;'>";
+						temp += "<div id='selector_" + project.name + "' value='" + project.name + "' class='select_div' style='height:14px;'>";
 						temp += "<div style='float:left;'>";
-						temp += "<input type='checkbox' name='"+sorting_data[name].filename+"' project_path='"+sorting_data[name].author+"_"+sorting_data[name].name+"' project_name='"+sorting_data[name].name+"' projectType='"+sorting_data[name].type+"'";
+						temp += "<input type='checkbox' name='"+project.name+"' project_path='"+project.name+"' project_name='"+project.contents.name+"' projectType='"+project.contents.type+"'";
 						
-						if (sorting_data[name].filename == core.status.current_project_path) {
+						if (project.name == core.status.current_project_path) {
 							temp += "checked";
 						}
 						
 						temp += "></div> ";
-						temp += "<div style='float:left; padding-top:1px; padding-left:5px;'>" + sorting_data[name].filename + "</div>";
+						temp += "<div style='float:left; padding-top:1px; padding-left:5px;'>" + project.name + "</div>";
 						temp += "</div>";
 		
 						$("#build_project_list").append(temp);
 						
-						$("#selector_" + sorting_data[name].filename).click(function () {
+						$("#selector_" + project.name).click(function () {
 							$(this).find("input").attr("checked", !$(this).find("input").attr("checked"));
 						});
 					}
 				}
-			}		
+			});	
 		});
 	}
 };

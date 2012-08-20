@@ -21,11 +21,9 @@ org.goorm.core.project.build.clean.prototype = {
 			$("#build_clean_list input[type=checkbox]").each(function(){
 				if($(this).is(":checked")){
 					project_array.push($(this).val());
-/*
 					if(core.module.plugin_manager.plugins["org.goorm.plugin."+$(this).attr("projectType")]!=undefined) {
 						core.module.plugin_manager.plugins["org.goorm.plugin."+$(this).attr("projectType")].clean($(this).attr("name"));
 					}
-*/
 					core.module.layout.project_explorer.refresh();
 				}
 			});
@@ -101,12 +99,10 @@ org.goorm.core.project.build.clean.prototype = {
 	
 		$.get("project/get_list", null, function (data) {
 			
-			console.log(data);
-			
 			for(var i=0; i<data.length; i++) {
 				var icon_str = "";
 				icon_str += "<div style='height:18px;padding:2px;'>";
-				icon_str += "<span class='checkbox'><input type='checkbox' name='"+data[i].name+"' value='"+data[i].name+"'";
+				icon_str += "<span class='checkbox'><input type='checkbox' name='"+data[i].name+"' value='"+data[i].name+"' projectType='"+data[i].contents.type+"' ";
 
 				if (data[i].name == core.status.current_project_path) {
 					icon_str += "checked='checked'";
@@ -119,35 +115,6 @@ org.goorm.core.project.build.clean.prototype = {
 	
 				$("#build_clean_list").append(icon_str);				
 			}
-			
-						
-			
-/*
-				if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+data[name].type])) {
-					if(core.module.plugin_manager.plugins["org.goorm.plugin."+data[name].type].clean){
-						var icon_str = "";
-						icon_str += "<div id='claeanSelector_" + data[name].filename + "' value='" + data[name].filename + "' class='select_div' style='height:14px;'>";
-						icon_str += "<div style='float:left;'>";
-						icon_str += "<input type='checkbox' name='"+data[name].filename+"' project_path='"+data[name].author+"_"+data[name].name+"' project_name='"+data[name].name+"' projectType='"+data[name].type+"'";
-		
-						if (data[name].filename == core.status.current_project_path) {
-							icon_str += "checked";
-						}
-						
-						icon_str += ">";
-						
-						icon_str += "</div>";
-						icon_str += "<div style='float:left; padding-top:1px; padding-left:5px;'>" + data[name].filename + "</div>";
-						icon_str += "</div>";
-			
-						$("#build_clean_list").append(icon_str);
-						
-						$("#claeanSelector_" + data[name].filename).click(function () {
-							$(this).find("input").attr("checked", !$(this).find("input").attr("checked"));
-						});
-					}
-				}
-*/
 		});
 	}
 };

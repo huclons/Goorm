@@ -21,6 +21,7 @@ org.goorm.core.project.build.all.prototype = {
 				var status = $(this).parent().find(".buildStatus");
 				obj[$(this).attr("name")] = status;
 				status.html("<img src='./images/org.goorm.core.utility/loading.gif' width='16' height='16' align='top'>building");
+				console.log($(this).attr("name"));
 				core.module.plugin_manager.plugins["org.goorm.plugin."+$(this).attr("projectType")].build($(this).attr("name"),$(this).attr("project_path"),function(){
 					status.html("<img src='./images/org.goorm.core.dialog/dialog_notice.png' width='16' height='16' align='top'>complete");
 				});
@@ -58,24 +59,23 @@ org.goorm.core.project.build.all.prototype = {
 	project_list: function () {
 		$("#build_all_list").empty();
 			
-		$.post("project/get_list", "", function (data) {
+		$.get("project/get_list", "", function (data) {
 			
-			var sorting_data = eval(data);
-			
-			for(var name in sorting_data) {
-				if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+sorting_data[name].type])) {
-					if(core.module.plugin_manager.plugins["org.goorm.plugin."+sorting_data[name].type].build){
+			var list = eval(data);
+			$.each(list, function(index, project) {
+				if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+project.contents.type])) {
+					if(core.module.plugin_manager.plugins["org.goorm.plugin."+project.contents.type].build){
 						var icon_str = "";
-						icon_str += "<div id='selector_" + sorting_data[name].filename + "' value='" + sorting_data[name].filename + "'>";
-						icon_str += "<input type='hidden' name='"+sorting_data[name].filename+"' project_path='"+sorting_data[name].author+"_"+sorting_data[name].name+"' project_name='"+sorting_data[name].name+"' projectType='"+sorting_data[name].type+"'>";
-						icon_str += sorting_data[name].filename;
+						icon_str += "<div id='selector_" + project.name + "' value='" + project.name + "'>";
+						icon_str += "<input type='hidden' name='"+project.name+"' project_path='"+project.name+"' project_name='"+project.contents.name+"' projectType='"+project.contents.type+"'>";
+						icon_str += project.name;
 						icon_str += "<div style='float:right' class='buildStatus'></div>";
 						icon_str += "</div>";
 			
 						$("#build_all_list").append(icon_str);
 					}
 				}
-			}
+			});	
 		});
 	}
 };
