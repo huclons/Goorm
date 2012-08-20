@@ -258,5 +258,43 @@ module.exports = {
 			data.message = "Invalid query";
 			evt.emit("get_property", data);
 		}
+	},
+	
+	do_clean: function (query, evt) {
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+		
+		if (query.project_list != null) {
+			for(var i=0; i<query.project_list.length; i++) {
+				console.log(query.project_list[i]);
+				rimraf(__path+"workspace/"+query.project_list[i]+"/build", function(err) {
+/*
+					fs.mkdir(__path+"workspace/"+query.project_list[i]+"/build", '0777', function(err) {
+					});				
+*/
+/*
+					if (err!=null) {
+						data.err_code = 20;
+						data.message = "Can not delete project";
+						
+						evt.emit("project_do_clean", data);
+					}
+					else {
+						//success
+						console.log("??");
+						evt.emit("project_do_clean", data);
+					}
+*/
+				});
+			}
+			evt.emit("project_do_clean", data);
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalide query";
+			
+			evt.emit("project_do_clean", data);
+		}		
 	}
 };

@@ -88,7 +88,13 @@ exports.project.do_export = function(req, res){
 };
 
 exports.project.do_clean = function(req, res){
-	res.send(null);
+	var evt = new EventEmitter();
+	
+	evt.on("project_do_clean", function (data) {
+		res.json(data);
+	});
+	
+	g_project.do_clean(req.query, evt);
 };
 
 exports.project.get_property = function(req, res){

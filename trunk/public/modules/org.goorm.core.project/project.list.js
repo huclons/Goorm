@@ -57,7 +57,7 @@ org.goorm.core.project.list.prototype = {
 			console.log(data);
 			var sorting_data = data;
 						
-		for(var project_idx=0; project_idx<sorting_data.length; project_idx++) {
+			for(var project_idx=0; project_idx<sorting_data.length; project_idx++) {
 				var icon_str = "";
 				icon_str += "<div id='selector_" + sorting_data[project_idx].contents.name + "' value='" + project_idx + "' class='selector_project' type='"+sorting_data[project_idx].contents.type+"'>";
 				icon_str += "<div style='padding-left:65px; padding-top:20px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis'>";
