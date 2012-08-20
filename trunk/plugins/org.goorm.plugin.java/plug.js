@@ -109,5 +109,9 @@ org.goorm.plugin.java.prototype = {
 		});
 		$("#debug").empty();
 		this.debug_con.emit("debug", send_data);
+	},
+	
+	build: function(projectName, projectPath) {
+		console.log("build");
 	}
 };
