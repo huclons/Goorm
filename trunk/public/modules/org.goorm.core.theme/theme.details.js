@@ -7,23 +7,27 @@
 org.goorm.core.theme.details = function () {
 	this.dialog = null;
 	this.buttons = null;
+	this.manager = null;
 };
+
 
 org.goorm.core.theme.details.prototype = {
 	init: function () {
 		var self = this;
 				
-		var handle_delete = function() { 
+		var handle_apply = function() { 
 			this.hide(); 
 		};
 
 		var handle_cancel = function() { 
 			this.hide(); 
 		};
-		
-		this.buttons = [ {text:"Delete", handler:handle_delete, isDefault:true},
+
+		this.buttons = [ {text:"Save", handler:handle_apply, isDefault:true},
 						 {text:"Cancel",  handler:handle_cancel}]; 
-						 
+
+		this.manager = new org.goorm.core.theme.manager();
+		
 		this.dialog = new org.goorm.core.theme.details.dialog();
 		this.dialog.init({
 			title:"Theme Details", 
@@ -33,27 +37,34 @@ org.goorm.core.theme.details.prototype = {
 			modal:true,
 			buttons:this.buttons,
 			success: function () {
-				var resize = new YAHOO.util.Resize("project_delete_dialog_left", {
-		            handles: ['r'],
-		            minWidth: 250,
-		            maxWidth: 400
-		        });
-				
-		        resize.on('resize', function(ev) {
-					var width = $("#project_delete_dialog_middle").width();
-		            var w = ev.width;
-		            $("#project_delete_dialog_center").css('width', (width - w - 9) + 'px');
-		        });
+
+				$.getJSON("configs/dialogs/org.goorm.core.theme/tree.json", function(json){
+
+					// construct basic tree structure
+					self.manager.create_treeview(json);
+					self.manager.create_tabview(json);
+
+
+					// TreeView labelClick function
+					self.manager.treeview.subscribe("clickEvent", function(nodedata){
+						var label = nodedata.node.label;
+						label = label.replace(/[/#. ]/,"");
+						$("#theme_details_tabview > *").hide();
+						$("#theme_details_tabview #"+label).show();
+
+ 					});
+
+
+					
+				});
+
 			}
 		});
 		this.dialog = this.dialog.dialog;
-		
-		this.project_list = new org.goorm.core.project.list;		
 	},
 	
 	show: function () {
 		console.log("show!!!");
-		/* 		this.project_list.init("#project_delete"); */
 		this.dialog.panel.show();
 	}
 };
