@@ -54,7 +54,8 @@ org.goorm.core = function() {
 		fn: null,
 		loading_bar: null,
 		dictionary: null,
-		theme: null
+		theme: null,
+		theme_details: null
 	};
 		
 	this.container = "";
@@ -218,6 +219,10 @@ org.goorm.core.prototype = {
 			//theme
 			self.module.theme = new org.goorm.core.theme();
 			self.module.theme.init();
+/*
+			self.module.theme_details = new org.goorm.core.theme.details();
+			self.modile.theme_details.init();
+*/
 		});	
 		
 		// init dictionary		

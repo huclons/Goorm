@@ -87,9 +87,9 @@ goorm.get('/preference/ini_parser', routes.preference.ini_parser);
 goorm.get('/preference/ini_maker', routes.preference.ini_maker);
 
 //for theme
-goorm.get('/theme/save', routes.theme.save);
 goorm.get('/theme/get_list', routes.theme.get_list);
-
+goorm.get('/theme/get_contents', routes.theme.get_contents);
+goorm.get('/theme/put_contents', routes.theme.put_contents);
 //for download and upload
 goorm.get('/download', routes.download);
 
