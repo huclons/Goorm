@@ -375,12 +375,7 @@ exports.preference.ini_maker = function(req, res){
 /*
  * API : Theme
  */
-
 exports.theme = function(req, res){
-	res.send(null);
-};
-
-exports.theme.do_save = function(req, res){
 	res.send(null);
 };
 
@@ -390,11 +385,27 @@ exports.theme.get_list = function(req, res){
 	evt.on("theme_get_list", function (data) {
 /* 		res.json(data[1].contents.title); */
 		res.json(data);
-
 	});
 	
 	g_theme.get_list(evt);
 
+};
+exports.theme.get_contents = function(req, res){
+	var path = req.query.path;
+
+	fs.readFile(__path + path, "utf8", function(err, data) {
+		res.json(data);
+	});
+};
+exports.theme.put_contents = function(req, res){
+	var evt = new EventEmitter();
+
+	evt.on("theme_put_contents", function (data) {
+		res.json(data);
+	});
+
+	g_theme.put_contents(req.query, evt);
+	/* 	res.send(null); */
 };
 
 /*
