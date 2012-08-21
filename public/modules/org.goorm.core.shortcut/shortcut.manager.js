@@ -49,19 +49,6 @@ org.goorm.core.shortcut.manager.prototype = {
 				return false;				
 			}
 		});
-		
-		$("input").keydown(function (e) {
-			var ev = e || event;
-			
-		  	if (e.keyCode == 27 && e.keyCode == 13) {
-				$(document).trigger(e);
-				
-				e.stopPropagation();
-				e.preventDefault();
-				return false;
-			}
-		});
-			
 
 		//////////////////////////////////////////////////
 		//Main Menu Selection
