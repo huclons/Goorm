@@ -143,8 +143,6 @@ org.goorm.core.theme.prototype = {
 			}
 		}
 
-
-
 		$.ajax({
 			url: url,			
 			type: "GET",
@@ -153,13 +151,25 @@ org.goorm.core.theme.prototype = {
 				//self.canvas.objects = [];
 				//self.canvas.objects = eval(data);
 				//self.canvas.draw();
-				$("head").append("<link>");
-				var css_node = $("head").children(":last");
-				css_node.attr({
-					rel:  "stylesheet",
-					type: "text/css",
-					href: "/configs/themes/"+self.current_theme.name + "/" + self.current_theme.name+".css"
-				});
+
+				//apply theme
+				var css_node = $("link[kind='theme']");
+				if(css_node.length==0){
+					$("head").append("<link>");
+					css_node = $("head").children(":last");
+					css_node.attr({
+						rel:  "stylesheet",
+						type: "text/css",
+						href: "/configs/themes/"+self.current_theme.name + "/" + self.current_theme.name+".css",
+						kind: "theme"
+					});
+				}
+				else{
+					css_node.attr({
+						href: "/configs/themes/"+self.current_theme.name + "/" + self.current_theme.name+".css",
+						kind: "theme"
+					});
+				}
 
 				m.s("Save complete! (" + self.filename + ")", "org.goorm.core.theme");
 			}

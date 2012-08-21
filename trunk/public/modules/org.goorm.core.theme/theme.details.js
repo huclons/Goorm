@@ -27,9 +27,9 @@ org.goorm.core.theme.details.prototype = {
 		this.dialog = new org.goorm.core.theme.details.dialog();
 		this.dialog.init({
 			title:"Theme Details", 
-			path:"configs/dialogs/org.goorm.core.project/project._delete.html",
-			width:800,
-			height:500,
+			path:"configs/dialogs/org.goorm.core.theme/theme.details.html",
+			width:1000,
+			height:700,
 			modal:true,
 			buttons:this.buttons,
 			success: function () {

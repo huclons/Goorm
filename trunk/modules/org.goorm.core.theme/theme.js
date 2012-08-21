@@ -14,15 +14,13 @@ module.exports = {
 	get_list: function (evt) {
 		var self = this;
 		themes = [];
-		
+
 		var options = {
 			followLinks: false
 		};
-
 		var walker = walk.walk(__path+"public/configs/themes", options);
 		
 		walker.on("directories", function (root, dirStatsArray, next) {
-
 			var count = dirStatsArray.length;
 			if (root==__path+"public/configs/themes" ) {
 				var dir_count = 0;
@@ -39,8 +37,7 @@ module.exports = {
 					}
 				});
 				self.get_theme_info(dirStatsArray[dir_count], evt_dir);
-			}
-			
+			}			
 			next();
 		});
 		
@@ -63,7 +60,6 @@ module.exports = {
 	},
 	
 	put_contents: function (query, evt) {
-
 		var data = {};
 
 		fs.writeFile(__path+'public/configs/themes/'+query.path, query.data, function(err) {
@@ -79,7 +75,6 @@ module.exports = {
 	
 				evt.emit("theme_put_contents", data);
 			}
-		});		
+		});
 	},
-		
 };
