@@ -347,9 +347,15 @@ label:hover {
 }
 
 #debug {
-	margin:5px;
 	font-size:11px;
-	padding:2px;
+}
+
+#debug_left {
+	border-right: 1px solid #666;
+}
+
+#debug_right {
+
 }
 
 #debug .debugLine {
