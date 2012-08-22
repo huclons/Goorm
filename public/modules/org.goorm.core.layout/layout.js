@@ -35,13 +35,11 @@ org.goorm.core.layout.prototype = {
 			units:
 			[
 				{ position: 'top', height: 62,maxHeight:150, body: container+'_top', scroll: null, zIndex: 2, gutter: '0px 0px 0px 0px' },
-				{ position: 'left', width: 250, body: container+'_left', animate: false, proxy:false, scroll: false, zIndex: 1, resize: true, gutter: '0px 0px 0px 0px', collapse: true, minWidth: 200 },
+				{ position: 'left', width: 250, body: container+'_left', animate: false, scroll: false, zIndex: 1, resize: true, gutter: '0px 0px 0px 0px', collapse: true, minWidth: 200 },
 				{ position: 'center', body: container+'_center_inner_layout', scroll: false },
 				{ position: 'bottom', height:30, body: container+'_bottom', scroll: false, gutter: '0px 0px 0px 0px' }
 			]
 		});
-
-				
 
 		this.layout.on('render', function() {
 			//Set main menu
@@ -49,7 +47,6 @@ org.goorm.core.layout.prototype = {
 			
 			self.attach_toolbar(container + "_main_toolbar"); 
 			
-						
 			//Set nested inner layout
 			var el = self.layout.getUnitByPosition('center').get('wrap');
 			
@@ -57,13 +54,59 @@ org.goorm.core.layout.prototype = {
 				parent: self.layout,
 				units:
 				[
-					{ position: 'right', width: 350, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, proxy:false, gutter: '0px 0px 0px 0px', collapse: true },
-					{ position: 'bottom', height: 200, body: container+'_inner_layout_bottom', animate: false, proxy:false, scroll: false, resize: true, gutter: '0px 0px 0px 0px', collapse: true },
+					{ position: 'right', width: 350, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, gutter: '0px 0px 0px 0px', collapse: true },
+					{ position: 'bottom', height: 200, body: container+'_inner_layout_bottom', animate: false, scroll: false, resize: true, gutter: '0px 0px 0px 0px', collapse: true },
 					{ position: 'center', body: container+'_inner_layout_center', scroll: false }
 				]
 			});
-			
+
+			self.inner_layout.on('render', function() {
+				self.layout.getUnitByPosition("left").on("collapse", function() {
+					localStorage['layout_left_collapse'] = true;
+				});
+				
+				self.layout.getUnitByPosition("left").on("expand", function() {
+					localStorage['layout_left_collapse'] = false;
+				});
+				
+				self.inner_layout.getUnitByPosition("right").on("collapse", function() {
+					localStorage['layout_right_collapse'] = true;
+				});
+				
+				self.inner_layout.getUnitByPosition("right").on("expand", function() {
+					localStorage['layout_right_collapse'] = false;
+				});
+				
+				self.inner_layout.getUnitByPosition("bottom").on("collapse", function() {
+					localStorage['layout_bottom_collapse'] = true;
+				});
+				
+				self.inner_layout.getUnitByPosition("bottom").on("expand", function() {
+					localStorage['layout_bottom_collapse'] = false;
+				});
+				
+				self.inner_layout.getUnitByPosition('center').on("resize", self.resize_all);
+				
+				$(core).trigger("layout_loaded");
+			});
+
+			self.inner_layout.on("start_resize", function() {
+				$(".dummyspace").css("z-index", 999);
+			});
+
 			self.inner_layout.render();
+			
+			if (localStorage['layout_left_collapse'] == "true") {
+				self.layout.getUnitByPosition("left").collapse();
+			}
+			
+			if (localStorage['layout_right_collapse'] == "true") {
+				self.inner_layout.getUnitByPosition("right").collapse();
+			}
+			
+			if (localStorage['layout_bottom_collapse'] == "true") {
+				self.inner_layout.getUnitByPosition("bottom").collapse();
+			}
 		});
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
@@ -135,65 +178,15 @@ org.goorm.core.layout.prototype = {
 		//////////////////////////////////////////////////////////////////////////////////////////
 		// Final
 		//////////////////////////////////////////////////////////////////////////////////////////
+
+		this.layout.render();
 		
-		this.layout.on("render", function () {
-			if (localStorage['layout_left_collapse'] == "true") {
-				self.layout.getUnitByPosition("left").collapse();
-			}
-			
-			if (localStorage['layout_right_collapse'] == "true") {
-				self.inner_layout.getUnitByPosition("right").collapse();
-			}
-			
-			if (localStorage['layout_bottom_collapse'] == "true") {
-				self.inner_layout.getUnitByPosition("bottom").collapse();
-			}
-		});
-		
-		this.layout.render();		
 		
 		$(window).resize(function(){
 			self.resize_all();
 			self.layout.getUnitByPosition("top").set("height", $("#goorm_mainmenu").height() + $("#goorm_main_toolbar").height() + 7);
 			
 			$(core).trigger("layout_resized");
-		});
-
-		this.inner_layout.on("start_resize", function() {
-			$(".dummyspace").css("z-index", 999);
-		});
-
-		this.inner_layout.getUnitByPosition('center').on("resize", this.resize_all);
-		
-		
-		//this.resize_all();
-		//$(window).resize();
-		//this.layout.getUnitByPosition("top").set("height",$("#goorm_mainmenu").height()+$("#goorm_main_toolbar").height()+5);
-		
-		$(core).trigger("layout_loaded");
-		
-		this.layout.getUnitByPosition("left").on("collapse", function() {
-			localStorage['layout_left_collapse'] = true;
-		});
-		
-		this.layout.getUnitByPosition("left").on("expand", function() {
-			localStorage['layout_left_collapse'] = false;
-		});
-		
-		this.inner_layout.getUnitByPosition("right").on("collapse", function() {
-			localStorage['layout_right_collapse'] = true;
-		});
-		
-		this.inner_layout.getUnitByPosition("right").on("expand", function() {
-			localStorage['layout_right_collapse'] = false;
-		});
-		
-		this.inner_layout.getUnitByPosition("bottom").on("collapse", function() {
-			localStorage['layout_bottom_collapse'] = true;
-		});
-		
-		this.inner_layout.getUnitByPosition("bottom").on("expand", function() {
-			localStorage['layout_bottom_collapse'] = false;
 		});
 	},
 
@@ -210,15 +203,6 @@ org.goorm.core.layout.prototype = {
 
 		this.mainmenu.render();
 	
-	},
-
-	detach_mainmenu: function() {
-	},
-
-	show_mainmenu: function() {
-	},
-
-	hide_mainmenu: function() {
 	},
 	
 	attach_project_explorer: function(target) {
@@ -258,6 +242,7 @@ org.goorm.core.layout.prototype = {
 		//attaching tab element
 		target.addTab(this.tab_toolbox);
 
+/*
 		//For Test Codes
 		$("#toolbox").append("<div id='toolLine' style='cursor:pointer; width:100%; height:20px; border-bottom:1px solid #ccc;'>Line Tool</div>");
 		$("#toolbox").append("<div id='toolSquare' style='cursor:pointer; width:100%; height:20px; border-bottom:1px solid #ccc;'>Square Tool</div>");
@@ -270,6 +255,7 @@ org.goorm.core.layout.prototype = {
 			self.window_manager.window[self.window_manager.active_window].designer.canvas.add("square");	
 			self.window_manager.window[self.window_manager.active_window].designer.canvas.set_drawing_mode("square");		
 		});	
+*/
 	},
 	
 	detach_toolbox: function() {
@@ -278,24 +264,9 @@ org.goorm.core.layout.prototype = {
 		delete this;
 	},
 	
-	show_project_explorer: function() {
-	},
-	
-	hide_project_explorer: function() {
-	},
-	
 	attach_object_explorer: function(target) {
 		//attaching tab element
 		target.addTab(new YAHOO.widget.Tab({ label: "Object", content: "<div id='object_explorer'><div id='object_tree'></div></div>" }));
-	},
-	
-	detach_object_explorer: function() {
-	},
-	
-	show_object_explorer: function() {
-	},
-	
-	hide_object_explorer: function() {
 	},
 	
 	attach_properties: function(target) {
@@ -307,27 +278,9 @@ org.goorm.core.layout.prototype = {
 		this.table_properties = properties.init("properties");
 	},
 	
-	detach_properties: function() {
-	},
-	
-	show_properties: function() {
-	},
-	
-	hide_properties: function() {
-	},
-	
 	attach_message: function(target) {
 		//attaching tab element
 		target.addTab(new YAHOO.widget.Tab({ label: "Message", content: "<div id='message'></div>" }));
-	},
-	
-	detach_message: function() {
-	},
-	
-	show_message: function() {
-	},
-	
-	hide_message: function() {
 	},
 	
 	attach_toolbar: function(target) {
@@ -345,27 +298,12 @@ org.goorm.core.layout.prototype = {
 		$(core).trigger("context_menu_complete");
 	},
 	
-	detach_toolbar: function() {
-	},
-	
-	show_toolbar: function() {
-	},
-	
-	hideToolbar: function() {
-	},
-	
 	attach_debug: function(target) {
 		//attaching tab element
 		target.addTab(new YAHOO.widget.Tab({ label: "Debug", content: "<div id='debug'></div>" }));
-	},
-	
-	detach_debug: function() {
-	},
-	
-	show_debug: function() {
-	},
-	
-	hide_debug: function() {
+		
+		this.debug = new org.goorm.core.debug();
+		this.debug.init();
 	},
 	
 	attach_communication: function(target) {
@@ -382,15 +320,9 @@ org.goorm.core.layout.prototype = {
 		this.communication.init("communication");
 	},
 	
-	detach_communication: function() {
-	},
-	
 	show_communication: function(project_id) {
 		$(".layout_right_communication_tab").parent("div").attr("id",project_id);
 		this.communication.init(project_id);
-	},
-	
-	hide_communication: function() {
 	},
 	
 	attach_terminal: function(target) {
@@ -416,27 +348,6 @@ org.goorm.core.layout.prototype = {
 */
 	},
 	
-	detach_terminal: function() {
-	},
-	
-	show_terminal: function() {
-	},
-	
-	hide_terminal: function() {
-	},
-	
-	show_workspace: function() {
-	},
-	
-	hide_workspace: function() {
-	},
-	
-	show_window_manager: function() {
-	},
-	
-	hide_window_manager: function() {
-	},
-	
 	resize_all: function() {
 		var layout_left_height = $(".yui-layout-unit-left").find(".yui-layout-wrap").height() - 22;		
 		$("#goorm_left").find(".yui-content").height(layout_left_height);
@@ -458,7 +369,9 @@ org.goorm.core.layout.prototype = {
 		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 26;
 		$("#goorm_inner_layout_bottom").find(".yui-content").height(layout_bottom_height);
 		
-		var layout_center_height = $(".yui-layout-unit-center").find(".yui-layout-unit-center").find(".yui-layout-wrap").height();
+		console.log("layout_resized: " + layout_bottom_height);
+		
+		var layout_center_height = $("#workspace").parent().parent().height();
 		$("#goorm_inner_layout_center").find("#workspace").height(layout_center_height);
 
 		$(".dummyspace").css("z-index", 0);

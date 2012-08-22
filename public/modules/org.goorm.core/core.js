@@ -178,6 +178,10 @@ org.goorm.core.prototype = {
 				}
 			}
 		});
+		
+		$(core).bind("layout_loaded", function () {
+			self.module.layout.resize_all();
+		});
 
 		//Loading Ending
 		$(this).bind("goorm_load_complete", function () {
@@ -195,8 +199,6 @@ org.goorm.core.prototype = {
 
 			//console.log($(".yui-layout-unit-left").find(".yui-layout-wrap").html());
 			
-			self.module.layout.resize_all();
-
 			self.module.action.init();
 			
 			self.end_loading();

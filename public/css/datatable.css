@@ -47,6 +47,77 @@ YUI DATATABLE STYLE CUSTOMIZATION
 	background-color: #fff;
 }
 
+
+#debug_left table {
+	width:100%;
+    font-size: 11px;
+	border: none;
+	border-bottom: 1px solid #999;
+}
+
+#debug_left th {
+	height: 22px;
+}
+
+#debug_left .yui-dt-col-attribute {
+	width:100px;
+}
+
+#debug_left .yui-dt-editor {
+    text-align:left;
+    background-color:#FFFFFF;
+    border: 1px solid #ccc;
+	font-size: 11px;
+    padding:0px;
+	margin-left:-2px;
+	margin-top:3px;
+}
+
+#debug_left .yui-dt-liner {
+	overflow:hidden;
+	padding: 3px 6px;
+}
+
+#debug_left .yui-dt-odd {
+	background-color: #fff;
+}
+
+#debug_center table {
+	width:100%;
+    font-size: 11px;
+	border: none;
+	border-bottom: 1px solid #999;
+}
+
+#debug_center th {
+	height: 22px;
+}
+
+#debug_center .yui-dt-col-attribute {
+	width:100px;
+}
+
+#debug_center .yui-dt-editor {
+    text-align:left;
+    background-color:#FFFFFF;
+    border: 1px solid #ccc;
+	font-size: 11px;
+    padding:0px;
+	margin-left:-2px;
+	margin-top:3px;
+}
+
+#debug_center .yui-dt-liner {
+	overflow:hidden;
+	padding: 3px 6px;
+}
+
+#debug_center .yui-dt-odd {
+	background-color: #fff;
+}
+
+
+
 .yui-dt-editor {
 	padding:0px;
 	border:0px;
