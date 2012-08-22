@@ -8,7 +8,6 @@ org.goorm.core.theme = function () {
 	this.theme_data = null;
 	this.current_theme = null;
 	this.current_theme_contents = null;
-	this.current_theme_contents_position_array = [];
 	this.details_dialog = null;
 	
 };
@@ -112,11 +111,6 @@ org.goorm.core.theme.prototype = {
 			data: { path: path },
 			success: function(data) {
 				self.current_theme_contents = JSON.parse(data);
-				
-				for (var position in self.current_theme_contents){
-					self.current_theme_contents_position_array.push(position);
-				}
-				
 				self.apply_theme();
 			}
 		});
@@ -128,11 +122,10 @@ org.goorm.core.theme.prototype = {
 	
 	save_theme: function() { 
 		var self = this;
-		console.log("here!!!");
 		var url = "theme/put_contents";
 		var path = self.current_theme.name + "/" + self.current_theme.name+".css";
 		var filedata = "";
-		
+
 		for (var position in self.current_theme_contents){
 			for(var selector in self.current_theme_contents[position]){
 				filedata += selector + " {\n"
@@ -148,10 +141,6 @@ org.goorm.core.theme.prototype = {
 			type: "GET",
 			data: { path: path, data: filedata },
 			success: function(data) {
-				//self.canvas.objects = [];
-				//self.canvas.objects = eval(data);
-				//self.canvas.draw();
-
 				//apply theme
 				var css_node = $("link[kind='theme']");
 				if(css_node.length==0){
@@ -170,7 +159,6 @@ org.goorm.core.theme.prototype = {
 						kind: "theme"
 					});
 				}
-
 				m.s("Save complete! (" + self.filename + ")", "org.goorm.core.theme");
 			}
 		});
