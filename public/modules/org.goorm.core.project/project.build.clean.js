@@ -24,7 +24,6 @@ org.goorm.core.project.build.clean.prototype = {
 					if(core.module.plugin_manager.plugins["org.goorm.plugin."+$(this).attr("projectType")]!=undefined) {
 						core.module.plugin_manager.plugins["org.goorm.plugin."+$(this).attr("projectType")].clean($(this).attr("name"));
 					}
-					core.module.layout.project_explorer.refresh();
 				}
 			});
 			
@@ -40,6 +39,7 @@ org.goorm.core.project.build.clean.prototype = {
 				
 				$.get("project/clean", postdata, function (data) {
 					if(data.err_code==0) {
+						core.module.layout.project_explorer.refresh();
 						self.dialog.panel.hide();
 					}
 					else {

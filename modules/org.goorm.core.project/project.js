@@ -261,34 +261,29 @@ module.exports = {
 	},
 	
 	do_clean: function (query, evt) {
+		var self = this;
 		var data = {};
 		data.err_code = 0;
 		data.message = "process done";
-		
+		console.log(query.project_list);
 		if (query.project_list != null) {
-			for(var i=0; i<query.project_list.length; i++) {
-				console.log(query.project_list[i]);
-				rimraf(__path+"workspace/"+query.project_list[i]+"/build", function(err) {
-/*
-					fs.mkdir(__path+"workspace/"+query.project_list[i]+"/build", '0777', function(err) {
-					});				
-*/
-/*
-					if (err!=null) {
-						data.err_code = 20;
-						data.message = "Can not delete project";
-						
-						evt.emit("project_do_clean", data);
-					}
-					else {
-						//success
-						console.log("??");
-						evt.emit("project_do_clean", data);
-					}
-*/
-				});
-			}
-			evt.emit("project_do_clean", data);
+
+			var total_count = query.project_list.length;
+			var clean_count = 0;
+			var evt_clean = new EventEmitter();
+console.log(total_count+" "+clean_count);
+			evt_clean.on("do_delete_for_clean", function () {
+				
+				clean_count++;
+				if (clean_count<total_count) {
+					self.do_delete_for_clean(query.project_list[clean_count], evt_clean);						
+				}
+				else {
+					evt.emit("project_do_clean", data);
+				}
+			});
+			
+			self.do_delete_for_clean(query.project_list[clean_count], evt_clean);
 		}
 		else {
 			data.err_code = 10;
@@ -296,5 +291,13 @@ module.exports = {
 			
 			evt.emit("project_do_clean", data);
 		}		
+	},
+	
+	do_delete_for_clean: function (project_path, evt_clean) {
+		console.log(project_path+"pre");
+		rimraf(__path+"workspace/"+project_path+"/build", function(err) {
+			console.log(project_path+"post");
+			evt_clean.emit("do_delete_for_clean");
+		});
 	}
 };

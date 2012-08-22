@@ -18,9 +18,17 @@ org.goorm.core.file.rename.prototype = {
 		var self = this;
 		
 		var handle_ok = function() { 
-		
-			if ($("#input_rename_new_filename").attr("value")=="") {
-				alert.show(core.module.localization.msg["alertFileNameEmpty"]);
+			var ori_path = $("#input_rename_old_filepath").val();
+			var ori_name = $("#input_rename_old_filename").val();
+			var dst_name = $("#input_rename_new_filename").val();
+			
+			if (dst_name=="") {
+				//alert.show(core.module.localization.msg["alertFileNameEmpty"]);
+				alert.show("File name is empty");
+				return false;
+			}
+			else if (dst_name.indexOf(" ")!=-1) {
+				alert.show("Can not use space in file name");
 				return false;
 			}
 		
