@@ -18,16 +18,14 @@ org.goorm.core.theme.details.prototype = {
 		var handle_apply = function() { 
 			this.hide(); 
 		};
-
 		var handle_cancel = function() { 
 			this.hide(); 
 		};
-
 		this.buttons = [ {text:"Save", handler:handle_apply, isDefault:true},
 						 {text:"Cancel",  handler:handle_cancel}]; 
 
 		this.manager = new org.goorm.core.theme.manager();
-		
+
 		this.dialog = new org.goorm.core.theme.details.dialog();
 		this.dialog.init({
 			title:"Theme Details", 
@@ -37,13 +35,10 @@ org.goorm.core.theme.details.prototype = {
 			modal:true,
 			buttons:this.buttons,
 			success: function () {
-
 				$.getJSON("configs/dialogs/org.goorm.core.theme/tree.json", function(json){
-
 					// construct basic tree structure
 					self.manager.create_treeview(json);
 					self.manager.create_tabview(json);
-
 
 					// TreeView labelClick function
 					self.manager.treeview.subscribe("clickEvent", function(nodedata){
@@ -51,20 +46,14 @@ org.goorm.core.theme.details.prototype = {
 						label = label.replace(/[/#. ]/,"");
 						$("#theme_details_tabview > *").hide();
 						$("#theme_details_tabview #"+label).show();
-
  					});
-
-
-					
 				});
-
 			}
 		});
 		this.dialog = this.dialog.dialog;
 	},
-	
+
 	show: function () {
-		console.log("show!!!");
 		this.dialog.panel.show();
 	}
 };

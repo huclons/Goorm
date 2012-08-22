@@ -1,0 +1,68 @@
+{
+	"core" : {
+		"label" : "Theme Details",
+		"expanded" : true,
+		"child" : [
+			{	"label" : "System1",
+				"tab" : [
+					{	"label" : "Info",
+						"html"	: "configs/preferences/org.goorm.core/system.info.html",
+						"classname" : "org.goorm.core.preferences.info"
+					},
+					{
+						"label" : "Libraries",
+						"html"	: "configs/preferences/org.goorm.core/system.libraries.html"
+					},
+					{
+						"label" : "Animations",
+						"html"	: "configs/preferences/org.goorm.core/system.animations.html"
+					}
+				]
+			},
+			{	"label" : "Editor1",
+				"tab" : [
+					{	"label" : "Setting",
+						"html"	: "configs/preferences/org.goorm.core.edit/edit.setting.html"
+					},
+					{	"label" : "Theme",
+						"html"	: "configs/preferences/org.goorm.core.edit/edit.theme.html"
+					}
+				]
+			},
+			{	"label" : "Designer1",
+				"tab" : [
+					{	"label" : "Setting",
+						"html"	: "configs/preferences/org.goorm.core.design/design.setting.html"
+					},
+					{	"label" : "Theme",
+						"html"	: "configs/preferences/org.goorm.core.design/design.theme.html"
+					}
+				]
+			},
+			{	"label" : "Theme1",
+				"tab" : [
+					{	"label" : "Theme",
+						"html"	: "configs/preferences/org.goorm.core.theme/theme.edit.html",
+						"classname" : "org.goorm.core.theme"
+					}
+				]
+			},
+			{	"label" : "File Type1",
+				"tab" : [
+					{	"label" : "File Type",
+						"html"	: "configs/preferences/org.goorm.core/filetype.html",
+						"classname" : "org.goorm.core.preferences.filetype"
+					}
+				]
+			},
+			{	"label" : "Language1",
+				"tab" : [
+					{	"label" : "Language",
+						"html"	: "configs/preferences/org.goorm.core.localization/language.html",
+						"classname" : "org.goorm.core.preferences.language"
+					}
+				]
+			}
+		]
+	}
+}
