@@ -5,4 +5,4 @@ int main(int argc, char* argv[]) {
   printf("Hello, UIzard!\n");
   scanf("%d", &a);
   printf("%asdfsdafsadsadsdfasfsadfsdfsdfasdfffsadfsadfd\n", a);
-}
+}	

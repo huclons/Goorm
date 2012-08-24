@@ -1,554 +1,153 @@
-.yui-skin-sam {
-	background-image:none;
-	background-color:#f7f7f7;
-}
-.yui-skin-sam .yuimenubaritemlabel {
+.yui-skin-sam .yuimenubaritem .yuimenubaritemlabel {
+	font-family:Verdana, Arial, 굴림체, 굴림;
 	color:#000000;
 }
-.mainToolbar .toolbarPart {
-	border-color:#DDDDDD;
+.yui-skin-sam .yuimenubaritem .yuimenubaritemlabel-selected {
+	color:#000000;
+	background-image:-o-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-moz-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-webkit-gradient(linear, left bottom, left bottom, color-stop(0.1, rgb(200,200,200)), color-stop(0.9, rgb(150,150,150)));
+	background-image:-webkit-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-ms-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 }
 .yui-skin-sam .yuimenubar {
-	background-color:none;
-	background-image:none;
-}
-.mainToolbar .toolbarHandle {
-	margin-right:0px;
-	border-left:3px double #DDD;
-	background-image:none;
-}
-#workspace .yui-panel .hd {
-	background:url(http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/sprite.png) repeat-x 0 -200px;
-	border-bottom:0px;
-}
-#workspace .yui-panel .activated {
-	color:#ffffff;
-	background:url(../config/image/org.uizard.core.window/activeTitlebar.png);
-}
-#workspace .yui-panel {
-	background:url(http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/sprite.png) repeat-x 0 -200px;
-}
-#workspaceWindowList .yui-nav {
-	padding-top:3px;
-	padding-left:2px;
-	height:20px;
-	border-bottom:1px solid #999999;
-}
-#workspaceWindowList {
-	background-color:#999999;
-	border-bottom:none;
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-#workspaceWindowList li {
-	margin-top:0px;
-	margin-left:0px;
-}
-#workspaceWindowList a {
-	height:22px;
-}
-#uizardInnerLayoutCenter #workspace {
-	background-color:#bbb;
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-#uizardInnerLayoutCenter {
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-.yui-skin-sam .yui-navset .yui-nav .selected a em {
-	border-top:1px solid #ccc;
-	border-left:none;
-	border-right:none;
-	border-bottom:none;
-	padding-top:3px;
-	padding-bottom:3px;
-}
-.yui-skin-sam .yui-navset .yui-nav a em {
-	border-top:1px solid #A3A3A3;
-	border-left:none;
-	border-right:none;
-	border-bottom:none;
-	padding-top:2px;
-	padding-bottom:2px;
-}
-.yui-skin-sam .yui-navset .yui-nav a {
-	padding-left:0px;
-	padding-right:0px;
-	height:20px;
-	border-top:none;
-	border-left:1px solid #A3A3A3;
-	border-right:1px solid #A3A3A3;
-	border-bottom:none;
-	background-image:none;
-	background-color:#DDD;
-	color:#222;
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-.yui-skin-sam .yui-navset .yui-nav .selected a, .yui-skin-sam .yui-navset .yui-nav .selected a:focus, .yui-skin-sam .yui-navset .yui-nav .selected a:hover {
-	font-weight:bold;
-	padding-left:0px;
-	padding-right:0px;
-	height:23px;
-	background-image:none;
 	background:none;
-	background-color:white;
-	color:#666;
-	border-top:none;
-	border-left:1px solid #ccc;
-	border-right:1px solid #ccc;
-	border-bottom:none;
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-.yui-skin-sam .yui-navset .yui-nav a:hover, .yui-skin-sam .yui-navset .yui-nav a:focus {
-	padding-left:0px;
-	padding-right:0px;
-	height:20px;
-	border-color:#ccc;
-	background:#BFDAFF url(http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/sprite.png) repeat-x left -1300px;
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-#uizardLeft .yui-content {
-	background-color:#FFFFFF;
-}
-#projectExplorer {
-	background-color:#FFFFFF;
-}
-#uizardLeft .yui-nav {
-	padding-top:3px;
-	padding-left:2px;
 	background-image:none;
-	background-color:#F6F6F6;
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
+	background-position:center;
 }
-#uizardLeft .yui-nav li {
-	margin-top:0px;
-	margin-left:0px;
-}
-#uizardLeft {
-	border-left:none;
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-#uizardInnerLayoutRight .yui-nav {
-	padding-top:3px;
-	padding-left:2px;
-	background-image:none;
-	background-color:#F6F6F6;
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-#uizardInnerLayoutRight .yui-nav li {
-	margin-top:0px;
-	margin-left:0px;
-}
-#uizardInnerLayoutRight .yui-content {
-	padding-bottom:0px;
-	background-color:#fefefe;
-}
-#uizardInnerLayoutRight {
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-#uizardStatusbarMessage {
-	color:black;
-}
-#yui-gen15 {
-	background-image:none;
-	background-color:transparent;
-}
-#uizardInnerLayoutBottom .yui-content {
-	background-color:#fefefe;
-}
-#uizardInnerLayoutBottom .yui-nav {
-	padding-top:3px;
-	padding-left:2px;
-	background-image:none;
-	background-color:#f7f7f7;
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-#uizardInnerLayoutBottom .yui-nav li {
-	margin-top:0px;
-	margin-left:0px;
-}
-#uizardInnerLayoutBottom {
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-#uizardDialogContainer .yui-navset .yui-nav a em, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em {
-	padding-top:3px;
-	border-top:1px solid #ccc;
-}
-.yui-skin-sam .yui-navset .yui-nav a, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
-	border-width:0px 1px;
-}
-.yui-skin-sam .container-close:hover {
-	width:12px;
-	height:12px;
-	top:5px;
-	right:6px;
-	background:url(../config/image/icons/context/closebutton.png) no-repeat 0 0px;
-	background-position:2px 2px;
-	background-color:white;
-	border:1px solid #CCC;
-}
-.yui-skin-sam .container-close {
-	width:12px;
-	height:12px;
-	top:5px;
-	right:6px;
-	background:url(../config/image/icons/context/closebutton.png) no-repeat 0 0px;
-	background-position:2px 2px;
-	background-color:white;
-	border:1px solid #AAA;
-}
-.yui-skin-sam .yui-panel {
-	-moz-border-radius:0px;
-	-webkit-border-radius:0px;
-	-khtml-border-radius:0px;
-	border-radius:0px;
-}
-.yui-skin-sam .yui-panel .hd {
-	border-color:gray;
-	background:url(http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/sprite.png) repeat-x 0 -200px;
-	-moz-border-radius-topright:0px;
-	-moz-border-radius-topleft:0px;
-	-webkit-top-right-border-radius:0px;
-	-webkit-top-left-border-radius:0px;
-	-khtml-border-radius-topleft:0px;
-	-khtml-border-radius-topright:0px;
-	border-top-right-radius:0px;
-	border-top-left-radius:0px;
-}
-.yui-skin-sam .yui-panel .ft {
-	-moz-border-radius-bottomright:0px;
-	-moz-border-radius-bottomleft:0px;
-	-webkit-bottom-right-border-radius:0px;
-	-webkit-bottom-left-border-radius:0px;
-	-khtml-border-radius-bottomleft:0px;
-	-khtml-border-radius-bottomright:0px;
-	border-bottom-right-radius:0px;
-	border-bottom-left-radius:0px;
-}
-.yui-skin-sam .yui-panel-container .underlay {
-	-moz-border-radius:0px;
-	-webkit-border-radius:0px;
-	-khtml-border-radius:0px;
-	border-radius:0px;
-}
-.yui-picker-panel {
-	-moz-border-radius:0px;
-	-webkit-border-radius:0px;
-	-khtml-border-radius:0px;
-	border-radius:0px;
-}
-.yui-picker-panel .bd {
-	-moz-border-radius-bottomright:0px;
-	-moz-border-radius-bottomleft:0px;
-	-webkit-bottom-right-border-radius:0px;
-	-webkit-bottom-left-border-radius:0px;
-	-khtml-border-radius-bottomleft:0px;
-	-khtml-border-radius-bottomright:0px;
-	border-bottom-right-radius:0px;
-	border-bottom-left-radius:0px;
-}
-.yui-skin-sam .yui-button {
-	-moz-border-radius:8px;
-	-webkit-border-radius:8px;
-	-khtml-border-radius:8px;
-	border-radius:8px;
-}
-#workspace .minimize.windowButton {
-	width:8px;
-	height:8px;
-	margin:0px 3px 0px 0px;
-	padding:2px;
-	background-position:2px;
-	background-image:url(../config/image/icons/context/minimizebutton.png);
-}
-#workspace .maximize.windowButton {
-	width:8px;
-	height:8px;
-	margin:0px 3px 0px 0px;
-	padding:2px;
-	background-position:2px;
-	background-image:url(../config/image/icons/context/maximizebutton.png);
-}
-#workspace .close.windowButton {
-	width:8px;
-	height:8px;
-	margin:0px;
-	padding:2px;
-	background-position:2px;
-	background-image:url(../config/image/icons/context/closebutton.png);
-}
-#workspace .minimize.windowButton:hover {
-	background-image:url(../config/image/icons/context/minimizebutton.png);
-	background-color:#B3D4FF;
-}
-#workspace .maximize.windowButton:hover {
-	background-image:url(../config/image/icons/context/maximizebutton.png);
-	background-color:#B3D4FF;
-}
-#workspace .close.windowButton:hover {
-	background-image:url(../config/image/icons/context/closebutton.png);
-	background-color:#B3D4FF;
-}
-#workspace .maxmaximize.windowButton {
-	padding-right:2px;
-	background-image:url(../config/image/icons/context/maximizebutton.png);
-}
-#workspace .maxclose.windowButton {
-	padding-right:2px;
-	background-image:url(../config/image/icons/context/closebutton.png);
-}
-.tabCloseButton {
-	background-position:2px;
-	margin-top:0px;
-	width:8px;
-	height:8px;
-	padding:2px;
-	background-image:url(../config/image/icons/context/closebutton.png);
-}
-.tabCloseButton:hover {
-	background-color:#B3D4FF;
-	background-image:url(../config/image/icons/context/closebutton.png);
-}
-#workspace .tabListRight.windowButton {
-	background-position:2px;
-	width:12px;
-	height:12px;
-	padding:2px;
-	background-image:url(../config/image/icons/context/rightarr.gif);
-}
-#workspace .tabListRight.windowButton:active {
-	background-image:url(../config/image/icons/context/rightarr.gif);
-}
-#workspace .tabListLeft.windowButton {
-	background-position:2px;
-	width:12px;
-	height:12px;
-	padding:2px;
-	background-image:url(../config/image/icons/context/leftarr.gif);
-	margin-left:0px;
-}
-#workspace .tabListLeft.windowButton:active {
-	background-image:url(../config/image/icons/context/leftarr.gif);
-}
-#workspace .windowButtons {
-	margin-top:4px;
-	padding-top:2px;
-	background-color:#ffffff;
-	float:right;
-	margin-left:0px;
-}
-#workspace .tabScroll {
-	width:36px;
-	padding:0px 5px 0px 5px;
-	background-color:#ccc;
-}
-#workspace .tapMaxButtons {
-	background-color:#ccc;
-	padding-left:5px;
-	border-left:0px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	-khtml-border-radius:5px;
-	border-radius:5px;
-	width:28px;
-}
-.yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-hd .collapse {
-	background:url(../config/image/org.uizard.core.layout/collapse_down.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-hd .collapse:hover {
-	background:url(../config/image/org.uizard.core.layout/collapse_down.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-unit-right div.yui-layout-hd .collapse {
-	background:url(../config/image/org.uizard.core.layout/collapse_right.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-unit-right div.yui-layout-hd .collapse:hover {
-	background:url(../config/image/org.uizard.core.layout/collapse_right.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-unit-left div.yui-layout-hd .collapse {
-	background:url(../config/image/org.uizard.core.layout/collapse_left.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-unit-left div.yui-layout-hd .collapse:hover {
-	background:url(../config/image/org.uizard.core.layout/collapse_left.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-clip-left .collapse {
-	background:url(../config/image/org.uizard.core.layout/uncollapse_right.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-clip-left .collapse:hover {
-	background:url(../config/image/org.uizard.core.layout/uncollapse_right.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-clip-right .collapse {
-	background:url(../config/image/org.uizard.core.layout/uncollapse_left.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-clip-right .collapse:hover {
-	background:url(../config/image/org.uizard.core.layout/uncollapse_left.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-clip-bottom .collapse {
-	background:url(../config/image/org.uizard.core.layout/uncollapse_up.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-layout .yui-layout-clip-bottom .collapse:hover {
-	background:url(../config/image/org.uizard.core.layout/uncollapse_up.png) no-repeat 0px;
-	border:1px dotted #CCC;
-}
-.yui-skin-sam .yui-resize .yui-resize-handle-bl {
-	background-image:url(http://yui.yahooapis.com/2.9.0/build/resize/assets/skins/sam/layout_sprite.png);
-}
-.yui-skin-sam .yui-resize .yui-resize-handle-br {
-	background-image:url(http://yui.yahooapis.com/2.9.0/build/resize/assets/skins/sam/layout_sprite.png);
-}
-.yui-skin-sam .yui-resize .yui-resize-handle-tl {
-	background-image:url(http://yui.yahooapis.com/2.9.0/build/resize/assets/skins/sam/layout_sprite.png);
-}
-.yui-skin-sam .yui-resize .yui-resize-handle-tr {
-	background-image:url(http://yui.yahooapis.com/2.9.0/build/resize/assets/skins/sam/layout_sprite.png);
-}
-#projectSelectBox {
-	border:1px solid;
-	background-image:url(../config/image/org.uizard.core/button_bg.png);
-	-moz-border-radius:8px;
-	-webkit-border-radius:8px;
-	-khtml-border-radius:8px;
-	border-radius:8px;
-}
-.yui-skin-sam .yuimenu .bd {
-	background-color:#f6f6f6;
-	-moz-border-radius:0px;
-	-webkit-border-radius:0px;
-	-khtml-border-radius:0px;
-	border-radius:0px;
-}
-.yui-menu-shadow {
-	-moz-border-radius:0px;
-	-webkit-border-radius:0px;
-	-khtml-border-radius:0px;
-	border-radius:0px;
-}
-#uizardDialogContainer .hd {
-	text-align:left;
-}
-.mainToolbar .toolbarButton {
-	-moz-border-radius:0px;
-	-webkit-border-radius:0px;
-	-khtml-border-radius:0px;
-	border-radius:0px;
-}
-.mainToolbar .toolbarButton:hover {
+.main_toolbar .toolbar_button {
 	background:none;
-	background-color:#ffffff;
-	border-top:1px solid #eee;
-	border-left:1px solid #eee;
+	background-image:none;
+	background-position:center;
 }
-.mainToolbar .toolbarButton:active {
+.main_toolbar .toolbar_button:hover {
 	background:none;
-	background-color:#ffffff;
+	background-image:none;
+	background-position:center;
 }
-.mainToolbar .toolbarButtonPressed {
-	border:1px solid #fff;
-	border-top:1px solid #999;
-	border-left:1px solid #999;
-	margin-top:-2px;
-	padding-top:5px;
+.main_toolbar .toolbar_button:active {
 	background:none;
-	background-color:#ccc;
+	background-image:none;
+	background-position:center;
 }
-.yui-skin-sam .yuimenuitem .helptext {
-	color:#aaa;
+.yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd {
+	background-image:-o-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image:-moz-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.24, rgb(220,220,220)), color-stop(0.62, rgb(170,170,170)));
+	background-image:-webkit-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image:-ms-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image:linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
 }
-.yui-skin-sam .yuimenubaritem-selected {
-	background:url(http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/sprite.png) repeat-x 0 -1700px;
+#goorm_left.yui-navset .yui-nav {
+	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
 }
-.yui-skin-sam .yuimenuitem-hassubmenu {
-	background-image:url(http://yui.yahooapis.com/2.9.0/build/menu/assets/skins/sam/menuitem_submenuindicator.png);
+#goorm_left.yui-navset .yui-nav a:hover, #goorm_left.yui-navset .yui-nav a:focus {
+	background:#BFDAFF url(../../../lib/com.yahoo.developer.yui/build/assets/skins/sam/sprite.png) repeat-x left -1300px;
+}
+#goorm_left.yui-navset .yui-nav .selected a, #goorm_left.yui-navset .yui-nav .selected a:focus, #goorm_left.yui-navset .yui-nav .selected a:hover {
+	background:none;
+	background-image:-o-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-moz-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-webkit-gradient(linear, left bottom, left bottom, color-stop(0.1, rgb(200,200,200)), color-stop(0.9, rgb(150,150,150)));
+	background-image:-webkit-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-ms-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+}
+#goorm_left .yui-navset .yui-nav {
+	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+}
+#goorm_inner_layout_right.yui-navset .yui-nav {
+	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+}
+#goorm_inner_layout_right.yui-navset .yui-nav a:hover, #goorm_inner_layout_right.yui-navset .yui-nav a:focus {
+	background:#BFDAFF url(../../../lib/com.yahoo.developer.yui/build/assets/skins/sam/sprite.png) repeat-x left -1300px;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav .selected a, #goorm_inner_layout_right.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_right.yui-navset .yui-nav .selected a:hover {
+	background:none;
+	background-image:-o-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-moz-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-webkit-gradient(linear, left bottom, left bottom, color-stop(0.1, rgb(200,200,200)), color-stop(0.9, rgb(150,150,150)));
+	background-image:-webkit-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-ms-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+}
+#goorm_inner_layout_right.yui-navset .yui-nav {
+	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav {
+	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav a:hover, #goorm_inner_layout_bottom.yui-navset .yui-nav a:focus {
+	background:#BFDAFF url(../../../lib/com.yahoo.developer.yui/build/assets/skins/sam/sprite.png) repeat-x left -1300px;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav .selected a, #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a:hover {
+	background:none;
+	background-image:-o-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-moz-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-webkit-gradient(linear, left bottom, left bottom, color-stop(0.1, rgb(200,200,200)), color-stop(0.9, rgb(150,150,150)));
+	background-image:-webkit-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-ms-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav {
+	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+}
+#goorm_inner_layout_center.yui-navset .yui-nav {
+	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+}
+#goorm_inner_layout_center.yui-navset .yui-nav a:hover, #goorm_inner_layout_center.yui-navset .yui-nav a:focus {
+	background:#BFDAFF url(../../../lib/com.yahoo.developer.yui/build/assets/skins/sam/sprite.png) repeat-x left -1300px;
+}
+#goorm_inner_layout_center.yui-navset .yui-nav .selected a, #goorm_inner_layout_center.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_center.yui-navset .yui-nav .selected a:hover {
+	background:none;
+	background-image:-o-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-moz-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-webkit-gradient(linear, left bottom, left bottom, color-stop(0.1, rgb(200,200,200)), color-stop(0.9, rgb(150,150,150)));
+	background-image:-webkit-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:-ms-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+	background-image:linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
+}
+#goorm_inner_layout_center.yui-navset .yui-nav, #workspace_window_list {
+	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
+	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
 }

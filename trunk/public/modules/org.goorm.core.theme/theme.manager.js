@@ -30,11 +30,17 @@ org.goorm.core.theme.manager.prototype = {
 		var self = this;
 		var treeview = new YAHOO.widget.TreeView("theme_details_treeview");
 		
-		var core = new YAHOO.widget.TextNode(json.core.label, treeview.getRoot(), json.core.expanded);
+		var general = new YAHOO.widget.TextNode(json.general.label, treeview.getRoot(), json.general.expanded);
+		var dialog = new YAHOO.widget.TextNode(json.dialog.label, treeview.getRoot(), json.dialog.expanded);
 
 		// add subtrees
-		$.each(json.core.child, function(index, object){
-			self.add_treeview(core, object);
+		$.each(json.general.child, function(index, object){
+			self.add_treeview(general, object);
+		});
+
+		// add subtrees
+		$.each(json.dialog.child, function(index, object){
+			self.add_treeview(dialog, object);
 		});
 
 		treeview.render();
@@ -81,7 +87,11 @@ org.goorm.core.theme.manager.prototype = {
 	create_tabview: function (json) {
 		var self = this;
 		var tabview = null;
-		$.each(json.core.child, function(index, object) {
+
+		$.each(json.general.child, function(index, object) {
+			self.add_tabview(object);
+		});
+		$.each(json.dialog.child, function(index, object) {
 			self.add_tabview(object);
 		});
 	}

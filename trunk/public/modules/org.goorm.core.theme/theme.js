@@ -127,12 +127,43 @@ org.goorm.core.theme.prototype = {
 		var filedata = "";
 
 		for (var position in self.current_theme_contents){
-			for(var selector in self.current_theme_contents[position]){
-				filedata += selector + " {\n"
-				for(var property in self.current_theme_contents[position][selector]){
-					filedata += "\t" + property + ":" + self.current_theme_contents[position][selector][property] + ";\n"     
+			for(var element_name in self.current_theme_contents[position]){
+				if($.isArray(self.current_theme_contents[position][element_name])){
+					for(var anchor in self.current_theme_contents[position][element_name]){
+						for(var object in self.current_theme_contents[position][element_name][anchor]){
+							filedata += self.current_theme_contents[position][element_name][anchor][object].selector + " {\n";
+							for(var property in self.current_theme_contents[position][element_name][anchor][object].style){
+								// selector : self.current_theme_contents[position][element_name][anchor][object].selector;
+								// style : self.current_theme_contents[position][element_name][anchor][object].style;
+								// value : self.current_theme_contents[position][element_name][anchor][object].style[property];
+								if($.isArray(self.current_theme_contents[position][element_name][anchor][object].style[property])){
+									for(var style_array=0; style_array< self.current_theme_contents[position][element_name][anchor][object].style[property].length; style_array++){
+										filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name][anchor][object].style[property][style_array] + ";\n";
+									}
+								}
+								else{
+									filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name][anchor][object].style[property] + ";\n";
+								}
+							}
+							filedata += "}\n";
+						}
+					}
 				}
-				filedata += "}\n"  
+
+				else{
+						filedata += self.current_theme_contents[position][element_name].selector + " {\n";
+						for(var property in self.current_theme_contents[position][element_name].style){
+							if($.isArray(self.current_theme_contents[position][element_name].style[property])){
+								for(var style_array=0; style_array<self.current_theme_contents[position][element_name].style[property].length; style_array++){
+									filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name].style[property][style_array] + ";\n";	
+								}
+							}
+							else{
+								filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name].style[property] + ";\n";
+							}
+						}
+						filedata += "}\n";
+				}
 			}
 		}
 

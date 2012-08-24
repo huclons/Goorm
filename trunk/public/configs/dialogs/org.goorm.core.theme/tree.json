@@ -1,6 +1,6 @@
 {
-	"core" : {
-		"label" : "Theme Details",
+	"general" : {
+		"label" : "General",
 		"expanded" : true,
 		"child" : [
 			{	"label" : "System1",
@@ -63,6 +63,39 @@
 					}
 				]
 			}
+		]
+	},
+	"dialog" : {
+		"label" : "Dialog",
+		"expanded" : true,
+		"child" : [
+			{	"label" : "Syst5em",
+					"tab" : [
+						{	"label" : "Info",
+							"html"	: "configs/preferences/org.goorm.core/system.info.html",
+							"classname" : "org.goorm.core.preferences.info"
+						},
+						{
+							"label" : "Libraries",
+							"html"	: "configs/preferences/org.goorm.core/system.libraries.html"
+						},
+						{
+							"label" : "Animations",
+							"html"	: "configs/preferences/org.goorm.core/system.animations.html"
+						}
+					]
+			},
+			{	"label" : "Ed2itor",
+				"tab" : [
+					{	"label" : "Setting",
+						"html"	: "configs/preferences/org.goorm.core.edit/edit.setting.html"
+					},
+					{	"label" : "Theme",
+						"html"	: "configs/preferences/org.goorm.core.edit/edit.theme.html"
+					}
+				]
+			}
+			
 		]
 	}
 }
