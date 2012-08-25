@@ -1,0 +1,77 @@
+[
+	{
+		"keyword": "parseInt",
+		"type": "Function",
+		"description": "The parseInt() function parses a string and returns an integer.<br/><br/>The radix parameter is used to specify which numeral system to be used, for example, a radix of 16 (hexadecimal) indicates that the number in the string should be parsed from a hexadecimal number to a decimal number.<br/><br/>If the radix parameter is omitted, JavaScript assumes the following:<br/><br/>If the string begins with \"0x\", the radix is 16 (hexadecimal)<br/>If the string begins with \"0\", the radix is 8 (octal). This feature is deprecated<br/>If the string begins with any other value, the radix is 10 (decimal)"
+	},
+	{
+		"keyword": "2. abcefasdfd",
+		"type": "Function",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "3. abasdfcd",
+		"type": "Function",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "4. aasdbcd",
+		"type": "Function",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "5. abfcd",
+		"type": "Function",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "6. abasdcd",
+		"type": "Function",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "7. abcddfsdf",
+		"type": "",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "8. abcasdfsfffd",
+		"type": "",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "9. abcffsdfsdfsfdd",
+		"type": "",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "10. aasdbcd",
+		"type": "",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "11. abfcd",
+		"type": "",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "12. abasdcd",
+		"type": "",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "13. abcddfsdf",
+		"type": "",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "14. abcasdfsfffd",
+		"type": "",
+		"description": "asdfsafsafasfsfd"
+	},
+	{
+		"keyword": "15. abcffsdfsdfsfdd",
+		"type": "",
+		"description": "asdfsafsafasfsfd"
+	}
+]
