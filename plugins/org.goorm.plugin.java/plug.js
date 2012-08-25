@@ -80,7 +80,17 @@ org.goorm.plugin.java.prototype = {
 	},
 	
 	run: function(path) {
-		console.log(path);
+		var self=this;
+		
+		this.path_project = "";
+
+		var classpath = "src/project";
+		var classname = "HelloWorld";
+
+		var cmd1 = "java -cp "+classpath+" "+classname;
+		console.log(cmd1);
+		core.module.layout.terminal.send_command(cmd1+'\r');
+
 	},
 	
 	debug: function (path) {
@@ -111,7 +121,30 @@ org.goorm.plugin.java.prototype = {
 		this.debug_con.emit("debug", send_data);
 	},
 	
-	build: function(projectName, projectPath) {
-		console.log("build");
+	build: function (projectName, projectPath, callback) {
+		var self=this;
+		
+		this.path_project = "";
+
+		var buildOptions = "";
+//		var buildOptions = $("#buildConfiguration").find('[name=plugin\\.c\\.buildOptions]').val();		
+//		if(buildOptions == undefined){
+//			buildOptions = core.dialogPreference.preference['plugin.c.buildOptions'];
+//		}
+//		
+		var buildSource = "src/project/HelloWorld.java";
+//		var buildSource = $("#buildConfiguration").find('[name=plugin\\.c\\.buildSource]').val();		
+//		if(buildSource == undefined){
+//			buildSource = core.dialogPreference.preference['plugin.c.buildSource'];
+//		}
+//		
+		var cmd1 = "javac "+buildSource;
+		console.log(cmd1);
+		core.module.layout.terminal.send_command(cmd1+'\r');
+		
+		if(callback) callback();
+	},
+	clean: function(){
+		console.log("java clean");
 	}
 };

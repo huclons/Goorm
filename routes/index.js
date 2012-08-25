@@ -140,6 +140,11 @@ exports.plugin.build = function(req, res){
 exports.plugin.clean = function(req, res){
 	g_plugin.clean(req.query, res);
 };
+
+exports.plugin.run = function(req, res){
+	g_plugin.run(req.query, res);
+};
+
 /*
  * API : File System
  */

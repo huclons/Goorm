@@ -61,5 +61,10 @@ module.exports = {
 				plugin.debug(msg, evt);
 			});
 		});
+	},
+	
+	run: function (req, res) {
+		var plugin = require("../../plugins/"+req.plugin+"/modules/");
+		plugin.run(req, res);
 	}
 };

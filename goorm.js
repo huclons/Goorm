@@ -28,6 +28,7 @@ goorm.configure(function(){
   goorm.use(express.static(__dirname + '/public'));
   goorm.use(express.static(__dirname + '/plugins'));
   goorm.use(express.static(__dirname + '/stencils'));
+  goorm.use(express.static(__dirname + '/temp_files'));
 });
 
 goorm.configure('development', function(){
@@ -58,6 +59,7 @@ goorm.get('/plugin/get_list', routes.plugin.get_list);
 goorm.get('/plugin/install', routes.plugin.install);
 goorm.get('/plugin/new', routes.plugin.do_new);
 goorm.get('/plugin/debug', routes.plugin.debug);
+goorm.get('/plugin/run', routes.plugin.run);
 
 //for filesystem
 goorm.get('/file/new', routes.file.do_new);
