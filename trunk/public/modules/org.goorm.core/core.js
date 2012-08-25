@@ -167,7 +167,7 @@ org.goorm.core.prototype = {
 		$(this).bind("goorm_loading", function () {
 			if(self.loading_count < Object.keys(core.dialog).length - 5 + parseInt(core.module.plugin_manager.list.length)) {
 				self.loading_count++;
-				$("#goorm_loading_status_bar").width($("#goorm_loading_status_bar").width() + 636 / (Object.keys(core.dialog).length - 5 + parseInt(core.module.plugin_manager.list.length)));
+				$("#goorm_loading_status_bar").width($("#goorm_loading_status_bar").width() + 636 / (Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)));
 			}
 			else {
 				if(!self.load_complete_flag){
@@ -178,7 +178,7 @@ org.goorm.core.prototype = {
 			}
 		});
 		
-		$(core).bind("layout_loaded", function () {
+		$(this).bind("layout_loaded", function () {
 			self.module.layout.resize_all();
 		});
 
@@ -224,26 +224,26 @@ org.goorm.core.prototype = {
 			self.module.theme_details = new org.goorm.core.theme.details();
 			self.modile.theme_details.init();
 */
+
+			if (parseInt(localStorage['left_tabview_index']) >= 0)
+				core.module.layout.left_tabview.selectTab(parseInt(localStorage['left_tabview_index']));
+			
+			if (parseInt(localStorage['inner_bottom_tabview_index']) >= 0)
+				core.module.layout.inner_bottom_tabview.selectTab(parseInt(localStorage['inner_bottom_tabview_index']));
+			
+			if (parseInt(localStorage['inner_right_tabview_index']) >= 0)
+				core.module.layout.inner_right_tabview.selectTab(parseInt(localStorage['inner_right_tabview_index']));
 		});	
 		
-		// init dictionary		
-		//this.dictionary = new org.goorm.core.edit.dictionary();
-		//this.dictionary.init();
-		
-		/*
-		$.ajax({
-			type: 'get', 
-			dataType: "xml",
-			url: "config/server.xml", 
-			data: "arg=L", 
-			success: function(xml) {
-
-				self.server_theme = $(xml).find("Theme").text();
-
-				self.server_language = $(xml).find("Language").text();
-			}
+		$(window).unload(function () {
+			localStorage['left_tabview_index'] = core.module.layout.left_tabview._configs.activeIndex.value;
+			localStorage['inner_bottom_tabview_index'] = core.module.layout.inner_bottom_tabview._configs.activeIndex.value;
+			localStorage['inner_right_tabview_index'] = core.module.layout.inner_right_tabview._configs.activeIndex.value;
+			
+			localStorage['layout_left_width'] = core.module.layout.layout._units.left._configs.width.value;
+			localStorage['layout_right_width'] = core.module.layout.inner_layout._units.right._configs.width.value;
+			localStorage['layout_bottom_height'] = core.module.layout.inner_layout._units.bottom._configs.height.value;
 		});
-		*/					
 		
 		//Toolbar
 		this.module.toolbar = new org.goorm.core.toolbar();

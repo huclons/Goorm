@@ -30,12 +30,28 @@ org.goorm.core.layout.prototype = {
 		
 		var self = this;
 		
+		var left_width = 250;
+		var right_width = 350;
+		var bottom_height = 200;
+		
+		if (parseInt(localStorage['layout_left_width']) > 0) {
+			left_width = parseInt(localStorage['layout_left_width']);
+		}
+		
+		if (parseInt(localStorage['layout_right_width']) > 0) {
+			right_width = parseInt(localStorage['layout_right_width']);
+		}
+		
+		if (parseInt(localStorage['layout_bottom_height']) > 0) {
+			bottom_height = parseInt(localStorage['layout_bottom_height']);
+		}
+		
 		//Set layout
 		this.layout = new YAHOO.widget.Layout({
 			units:
 			[
-				{ position: 'top', height: 62,maxHeight:150, body: container+'_top', scroll: null, zIndex: 2, gutter: '0px 0px 0px 0px' },
-				{ position: 'left', width: 250, body: container+'_left', animate: false, scroll: false, zIndex: 1, resize: true, gutter: '0px 0px 0px 0px', collapse: true, minWidth: 200 },
+				{ position: 'top', height: 62, maxHeight:150, body: container+'_top', scroll: null, zIndex: 2, gutter: '0px 0px 0px 0px' },
+				{ position: 'left', width: left_width, body: container+'_left', animate: false, scroll: false, zIndex: 1, resize: true, gutter: '0px 0px 0px 0px', collapse: true, minWidth: 200 },
 				{ position: 'center', body: container+'_center_inner_layout', scroll: false },
 				{ position: 'bottom', height:30, body: container+'_bottom', scroll: false, gutter: '0px 0px 0px 0px' }
 			]
@@ -54,8 +70,8 @@ org.goorm.core.layout.prototype = {
 				parent: self.layout,
 				units:
 				[
-					{ position: 'right', width: 350, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, gutter: '0px 0px 0px 0px', collapse: true },
-					{ position: 'bottom', height: 200, body: container+'_inner_layout_bottom', animate: false, scroll: false, resize: true, gutter: '0px 0px 0px 0px', collapse: true },
+					{ position: 'right', width: right_width, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, gutter: '0px 0px 0px 0px', collapse: true },
+					{ position: 'bottom', height: bottom_height, body: container+'_inner_layout_bottom', animate: false, scroll: false, resize: true, gutter: '0px 0px 0px 0px', collapse: true },
 					{ position: 'center', body: container+'_inner_layout_center', scroll: false }
 				]
 			});

@@ -51,9 +51,6 @@ org.goorm.core.edit.prototype = {
 		this.preference = core.module.preference;
 		
 		this.dictionary = new org.goorm.core.edit.dictionary();
-		this.dictionary.init(this.target, this.editor, this.filetype);
-		
-
 		
 		this.timestamp = new Date().getTime();
 				
@@ -226,6 +223,10 @@ org.goorm.core.edit.prototype = {
 				
 				if (self.filetype == "js") {
 					self.analyze();
+				}
+				else {
+					delete self.object_tree;
+					$("#object_tree").empty();
 				}
 				//console.log(tree);
 			},
@@ -568,6 +569,8 @@ org.goorm.core.edit.prototype = {
 			self.editor.clearHistory();
 			
 			self.set_foldable();
+			
+			self.dictionary.init(self.target, self.editor, self.filetype);
 			
 			statusbar.stop();
 			
