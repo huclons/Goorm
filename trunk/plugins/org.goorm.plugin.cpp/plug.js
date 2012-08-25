@@ -79,7 +79,15 @@ org.goorm.plugin.cpp.prototype = {
 	},
 	
 	run: function(path) {
-		console.log(path);
+		var self=this;
+		
+		this.path_project = "";
+
+		var classname = "main";
+
+		var cmd1 = "./"+classname;
+		console.log(cmd1);
+		core.module.layout.terminal.send_command(cmd1+'\r');
 	},
 	
 	debug: function (path) {

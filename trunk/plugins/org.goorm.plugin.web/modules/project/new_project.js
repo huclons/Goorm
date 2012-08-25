@@ -1,7 +1,7 @@
 var fs = require('fs'),
 	walk = require('walk'),
 	emitter,
-	common = require(__path + "plugins/org.goorm.plugin.java/modules/common.js");
+	common = require(__path + "plugins/org.goorm.plugin.web/modules/common.js");
 
 module.exports = {
 	do_new : function(req, evt) {
@@ -31,9 +31,7 @@ module.exports = {
 		  // * name
 			var abs_path = (path+"/"+stat.name).replace(template,"");
 			fs.exists(workspace+abs_path, function(exists) {
-				if(!exists) {
-					fs.mkdirSync(workspace+abs_path);
-				}
+				fs.mkdirSync(workspace+abs_path);
 				next();
 			});
 			
