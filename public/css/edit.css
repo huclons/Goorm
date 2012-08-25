@@ -26,7 +26,8 @@ version: 3.0.0
 .window_container .dictionary_box {
 	position: absolute;
 	z-index: 99;
-	height: 100px;
+	height: 120px;
+	min-width: 100px;
 	
 	padding: 1px;
 	

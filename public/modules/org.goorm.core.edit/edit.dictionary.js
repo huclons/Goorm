@@ -18,109 +18,38 @@ org.goorm.core.edit.dictionary.prototype = {
 		
 		this.target = target;
 		
-		this.contents = [
-			{
-				keyword: "1. abcd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "2. abcefasdfd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "3. abasdfcd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "4. aasdbcd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "5. abfcd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "6. abasdcd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "7. abcddfsdf",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "8. abcasdfsfffd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "9. abcffsdfsdfsfdd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "10. aasdbcd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "11. abfcd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "12. abasdcd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "13. abcddfsdf",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "14. abcasdfsfffd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			},
-			{
-				keyword: "15. abcffsdfsdfsfdd",
-				type: "",
-				description: "asdfsafsafasfsfd"
-			}
-		];
+		this.contents = [];
 
 		$(this.target).append("<div class='dictionary_box'></div>");
 		$(this.target).find(".dictionary_box").hide();
 		
-		this.set(this.contents);
+		this.set(filetype);
 	},
 	
-	set: function (contents) {
+	set: function (filetype) {
 		var self = this;
 		
 		$(this.target).find(".dictionary_box").empty();
 		
-		$(contents).each(function (i) {
-			$(self.target).find(".dictionary_box").append("<div class='dictionary_element'>" + this.keyword + "</div>");
-		});
-		
-		
-		$(this.target).find(".dictionary_box .dictionary_element").hover(
-			function () {
-				$(self.target).find(".dictionary_box .hovered").removeClass("hovered");
-				$(this).addClass("hovered");
-			},
-			function () {
-				$(this).removeClass("hovered");
-			}
-		);
+		if (filetype != null) {
+			$.getJSON("configs/dictionary/" + filetype + ".json", function(data) {
+				self.contents = eval(data);
+			
+				$(self.contents).each(function (i) {
+					$(self.target).find(".dictionary_box").append("<div class='dictionary_element'>" + this.keyword + "</div>");
+				});
+	
+				$(self.target).find(".dictionary_box .dictionary_element").hover(
+					function () {
+						$(self.target).find(".dictionary_box .hovered").removeClass("hovered");
+						$(this).addClass("hovered");
+					},
+					function () {
+						$(this).removeClass("hovered");
+					}
+				);
+			});
+		}
 	},
 	
 	select: function (direction) {
@@ -162,6 +91,9 @@ org.goorm.core.edit.dictionary.prototype = {
 				this.index = 0;
 			}
 		}
+		
+		
+		console.log(this.index);
 	},
 	
 	show: function (cursor_pos) {
