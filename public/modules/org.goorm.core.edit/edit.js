@@ -31,23 +31,29 @@ org.goorm.core.edit = function () {
 	this.context_menu = null;
 	this.timestamp = null;	
 	this.fromCh = null;
-	this.toCh = null;	
+	this.toCh = null;
+	this.breakpoints = [];
 };
 
 org.goorm.core.edit.prototype = {
 	init: function (target, title) {
 		var self = this;
-		var dont_update_first = 0;
+		
+		this.target = target;
+		this.title = title;
+		
+		var dont_update_first = false;
 		
 		var enter_key = false; // onChange can't get enter_key
 		
 		this.collaboration = new org.goorm.core.collaboration.editing();
 		
 		this.preference = core.module.preference;
-
 		
-		this.target = target;
-		this.title = title;
+		this.dictionary = new org.goorm.core.edit.dictionary();
+		this.dictionary.init(this.target, this.editor, this.filetype);
+		
+
 		
 		this.timestamp = new Date().getTime();
 				
@@ -61,15 +67,9 @@ org.goorm.core.edit.prototype = {
 		this.editor = CodeMirror.fromTextArea($(target).find(".code_editor")[0], {
 			lineNumbers: true,
 			lineWrapping: true,
+			wordWrap: true,
 			matchBrackets: true,
 			onKeyEvent: function(i, e) {			
-				
-				// Hook into ctrl-space
-				if (e.keyCode == 32 && (e.ctrlKey || e.metaKey) && !e.altKey) {
-					e.stopPropagation();
-					e.preventDefault();
-					return core.module.dictionary.start_complete(self.editor, self.target, self.filetype);
-				}
 				
 				if(e.type == "keydown" && e.keyIdentifier == "Enter"){
 					enter_key = true;
@@ -79,7 +79,6 @@ org.goorm.core.edit.prototype = {
 				}
 				
 				if (e.ctrlKey || e.metaKey || e.altKey) {
-					
 					if ( e.keyCode != 67 && e.keyCode != 86 && e.keyCode != 88 ) {
 											
 						var evt = $.Event('keydown');
@@ -94,6 +93,29 @@ org.goorm.core.edit.prototype = {
 						
 						e.stopPropagation();
 						e.preventDefault();
+						return false;
+					}
+				}
+				
+				if ($(self.target).find(".dictionary_box").css("display") == "block") {
+					if (e.type == "keydown" && e.keyCode == 38) {
+						self.dictionary.select(1);
+					
+						CodeMirror.e_stop(e);
+					
+						e.stopPropagation();
+						e.preventDefault();
+						
+						return false;
+					}
+					else if (e.type == "keydown" && e.keyCode == 40) {
+						self.dictionary.select(-1);
+					
+						CodeMirror.e_stop(e);
+					
+						e.stopPropagation();
+						e.preventDefault();
+						
 						return false;
 					}
 				}
@@ -140,7 +162,7 @@ org.goorm.core.edit.prototype = {
 					}
 				}
 				else{
-					dont_update_first=1;
+					dont_update_first = true;
 				}
 			  
 			  	var window_manager = core.module.layout.workspace.window_manager;
@@ -156,6 +178,12 @@ org.goorm.core.edit.prototype = {
 				}
 				*/
 				
+				//self.editor.getCursor().line;
+				
+				//$("#" + self.target + " .CodeMirror-gutter-text pre .current_line").removeClass("current_line");
+				$(self.target).find(".CodeMirror-gutter-text pre").removeClass("current_line");
+				$(self.target).find(".CodeMirror-gutter-text pre:nth-child(" + (self.editor.getCursor().line + 1) + ")").addClass("current_line");
+				
 				$(self.target).parent().parent().find(".ft").find(".editor_message").html("Line: " + (parseInt(self.editor.getCursor().line) + 1) + " | Col: " + self.editor.getCursor().ch);
 				
 				self.collaboration.update_cursor({
@@ -168,205 +196,7 @@ org.goorm.core.edit.prototype = {
 			onFocus: function () {
 				core.status.focus_on_editor = true;
 				
-				
-				delete self.object_tree;
-				self.object_tree = new YAHOO.widget.TreeView("object_tree");
-
-				var root = self.object_tree.getRoot();
-				
-				
-				var tree = [];
-
-				var index = 1;
-				var inspecting = true;
-				var total_line = self.editor.lineCount();
-				
-				var position = self.editor.posFromIndex(index);
-				var token = self.editor.getTokenAt(position);
-				
-				var inspecting_index = 0;
-				var inspecting_depth = 0;
-				
-				var current_parent = root;
-				var past_parent = root;
-				
-				//console.log(token);
-				
-				var nodes = [];
-				
-				/*
-				for (var i=0; i < total_line; i++) {
-					nodes[i] = new YAHOO.widget.HTMLNode("<div id='#object_" + i + "'>Line: " + i + "</div>", root, true);
-				}
-				*/
-				
-				while (inspecting) {
-				
-					/*
-					if (token.className != null) {
-						if (token.className == "function" || token.className == "variable" || token.className == "variable-2" || token.className == "property" || token.className == "atom" || token.className == "keyword" || token.className == "operator" || token.className == "regexp") {
-							tree.push({
-								line: position.line,
-								start: token.start,
-								end: token.end,
-								type: token.className,
-								string: token.string,
-								indented: token.state.indented,
-								kwAllowed: token.state.kwAllowed,
-								lexical_type: token.state.lexical.type,
-								lexical_column: token.state.lexical.column,
-								lexical_indented: token.state.lexical.indented,
-								lexical_prev_type: token.state.lexical.prev.type,
-								lexical_prev_column: token.state.lexical.prev.column,
-								lexical_prev_indented: token.state.lexical.prev.indented
-							});
-						}
-						
-						if (token.className == "function") {
-							console.log(token.className + ": " + token.string);
-						}
-						else if (token.className == "variable") {
-							console.log(token.className + ": " + token.string);
-						}
-						else if (token.className == "variable-2") {
-							console.log(token.className + ": " + token.string);
-						}
-						else if (token.className == "property") {
-							console.log(token.className + ": " + token.string);
-						}
-						
-						
-					}
-					*/
-					
-					//console.log("line:", position.line, token);
-					
-					if (token.string.replace(/ /g, "").replace(/\t/g, "").replace(/\n/g, "") != "" && token.className != "comment") {
-						if (token.className == null && (token.string == "=" || token.string == ":")) {
-							token.className = "assignment";
-						}
-						
-						//console.log(token.string);
-						
-						if (token.string.indexOf("{") > -1) {
-							token.className = "block_start";
-							
-							past_parent = current_parent;
-							current_parent = nodes[nodes.length - 1];
-							
-							inspecting_depth++;
-						}
-						else if (token.string.indexOf("}") > -1) {
-							token.className = "block_end";
-							
-							current_parent = past_parent;
-							
-							inspecting_depth--;
-						}
-						
-						if (token.string.indexOf("(") > -1) {
-							token.className = "bracket_start";
-						}
-						else if (token.string.indexOf(")") > -1) {
-							token.className = "bracket_end";
-						}
-						
-						if (token.className == null && token.string == "[") {
-							token.className = "square_bracket_start";
-						}
-						else if (token.className == null && token.string == "]") {
-							token.className = "square_bracket_end";
-						}
-						
-						if (token.className == null && token.string == ",") {
-							token.className = "comma";
-						}
-						
-						if (token.className == null && (token.string == "+" || token.string == "-" || token.string == "/" || token.string == "*" || token.string == "%" || token.string == "." || token.string == "++" || token.string == "--")) {
-							token.className = "operator";
-						}
-						
-						if (token.className == null && (token.string == "==" || token.string == "!=" || token.string == "!" || token.string == "===" || token.string == "&&" || token.string == "||")) {
-							token.className = "logical_operator";
-						}
-						
-						if (token.className == null && token.string == ";") {
-							token.className = "semicolon";
-						}
-						
-						/*
-						if (token.className == "property" || token.className == "assignment" || token.className == "keyword" || token.className == "atom" || token.className == "def" || token.className == "operator" || token.className == "logical_operator" || token.className == "string") {
-							if (nodes[nodes.length - 1].type != "variable" && nodes[nodes.length - 1].type != "variable-2" && nodes[nodes.length - 1].type != "property") {
-								nodes.push(new YAHOO.widget.HTMLNode("<div id='oe_object_" + nodes.length + "'>" + (position.line + 1) + ", " + inspecting_depth + ": " + token.className + ": " + token.string + "</div>", current_parent, true));
-								nodes[nodes.length - 1].type = token.className;
-							}
-							else {
-							
-								$("#oe_object_" + (nodes.length-1)).append("." + token.string);
-							}
-						}
-						*/
-						
-						if (token.className == "variable" || token.className == "variable-2" || token.className == "block_start") {
-							var string = token.string;
-							if (token.className == "block_start") {
-								string = "<span class='block_start'></span>";
-							}
-							
-							nodes.push(new YAHOO.widget.HTMLNode(string, current_parent, true));
-							nodes[nodes.length - 1].type = token.className;
-						}
-						
-						if (token.className == "property") {
-							nodes[nodes.length - 1].html += "." + token.string;
-							
-							//$("#oe_object_" + (nodes.length-1)).append("." + token.string);
-							
-							//console.log($("#object_explorer").html());
-						}
-						
-						if (token.className == "assignment") {
-							nodes[nodes.length - 1].html += " : ";
-						}
-						
-						if (token.className == "bracket_start") {
-							nodes[nodes.length - 1].html += "<span style='color:red;'> <- </span>";
-						}
-						
-						if (token.className == "keyword") {
-							nodes[nodes.length - 1].html += "<span style='color:purple;'>" + token.string + "</span>";
-						}
-						
-						if (token.className == "string") {
-							nodes[nodes.length - 1].html += "<span style='color:gray;'>" + token.string + "</span>";
-						}
-						
-						if (token.className == "atom") {
-							nodes[nodes.length - 1].html += "<span style='color:blue;'>" + token.string + "</span>";
-						}
-						
-						if (token.className == "def") {
-							nodes[nodes.length - 1].html += " <span style='color:darkgray;'>" + token.string + "</span>";
-						}
-					}
-					
-					index += (token.end - token.start);
-					
-					if (token.end - token.start == 0) {
-						index++;
-					}
-					
-					position = self.editor.posFromIndex(index);
-					token = self.editor.getTokenAt(position);
-					
-					if (position.line == total_line - 1 && position.ch == token.end) {
-						inspecting = false;
-					}
-				}
-				
-				
-				self.object_tree.render();
-				
+				self.analyze();
 				//console.log(tree);
 			},
 			onBlur: function () {
@@ -375,11 +205,18 @@ org.goorm.core.edit.prototype = {
 			onGutterClick: function(cm, n) {
 				var info = cm.lineInfo(n);
 				
-				if (info.markerText) {
-					cm.clearMarker(n);
+				if ($(self.target).find(".CodeMirror-gutter-text pre:eq(" + n + ")").find(".breakpoint").length > 0) {
+					$(self.target).find(".CodeMirror-gutter-text pre:eq(" + n + ")").find(".breakpoint").remove();
+					
+					self.breakpoints = self.breakpoints.unique();
+					var index = self.breakpoints.inArray(n);
+					self.breakpoints.remove(index, index);
 				}
 				else {
-					cm.setMarker(n, "<span class='breakpoint'>●</span> %N%");
+					$(self.target).find(".CodeMirror-gutter-text pre:eq(" + n + ")").prepend("<span class='breakpoint'>●</span>");
+					
+					self.breakpoints = self.breakpoints.unique();
+					self.breakpoints.push(n);
 				}
 				
 				fold_func(cm, n);
@@ -390,8 +227,21 @@ org.goorm.core.edit.prototype = {
 			extraKeys: {
 				"Ctrl-Q": function(cm) {
 					fold_func(cm, cm.getCursor().line);
+				},
+				"'>'": function(cm) { 
+					cm.closeTag(cm, '>');
+				},
+				"'/'": function(cm) {
+					cm.closeTag(cm, '/'); 
+				},
+				"Ctrl-Space": function(cm) {
+					var cursor_pos = self.editor.cursorCoords(true, "local");
+					self.dictionary.show(cursor_pos);
+				},
+				"Esc": function (cm) {
+					self.dictionary.hide();
 				}
-			}
+			},
 		});
 		
 		/*
@@ -435,6 +285,10 @@ org.goorm.core.edit.prototype = {
 			self.set_option();
 		});
 		
+		$(this.target).click(function () {
+			self.dictionary.hide();
+		});
+		
 		
 		this.context_menu = new org.goorm.core.menu.context();
 		this.context_menu.init("configs/menu/org.goorm.core.edit/edit.context.html", "edit.context", this.target, this.timestamp, null, function () {
@@ -459,6 +313,143 @@ org.goorm.core.edit.prototype = {
 	
 	resize_all: function () {
 
+	},
+	
+	analyze: function () {
+		var self = this;
+		
+		delete self.object_tree;
+		self.object_tree = new YAHOO.widget.TreeView("object_tree");
+
+		var root = self.object_tree.getRoot();
+		
+		var tree = [];
+
+		var index = 1;
+		var inspecting = true;
+		var total_line = self.editor.lineCount();
+		
+		var position = self.editor.posFromIndex(index);
+		var token = self.editor.getTokenAt(position);
+		
+		var inspecting_index = 0;
+		var inspecting_depth = 0;
+		
+		var current_parent = root;
+		var past_parent = root;
+		
+		var nodes = [];
+		
+		while (inspecting) {
+			
+			if (token.string.replace(/ /g, "").replace(/\t/g, "").replace(/\n/g, "") != "" && token.className != "comment") {
+				if (token.className == null && (token.string == "=" || token.string == ":")) {
+					token.className = "assignment";
+				}
+				
+				//console.log(token.string);
+				
+				if (token.string.indexOf("{") > -1) {
+					token.className = "block_start";
+					
+					past_parent = current_parent;
+					current_parent = nodes[nodes.length - 1];
+					
+					inspecting_depth++;
+				}
+				else if (token.string.indexOf("}") > -1) {
+					token.className = "block_end";
+					
+					current_parent = past_parent;
+					
+					inspecting_depth--;
+				}
+				
+				if (token.string.indexOf("(") > -1) {
+					token.className = "bracket_start";
+				}
+				else if (token.string.indexOf(")") > -1) {
+					token.className = "bracket_end";
+				}
+				
+				if (token.className == null && token.string == "[") {
+					token.className = "square_bracket_start";
+				}
+				else if (token.className == null && token.string == "]") {
+					token.className = "square_bracket_end";
+				}
+				
+				if (token.className == null && token.string == ",") {
+					token.className = "comma";
+				}
+				
+				if (token.className == null && (token.string == "+" || token.string == "-" || token.string == "/" || token.string == "*" || token.string == "%" || token.string == "." || token.string == "++" || token.string == "--")) {
+					token.className = "operator";
+				}
+				
+				if (token.className == null && (token.string == "==" || token.string == "!=" || token.string == "!" || token.string == "===" || token.string == "&&" || token.string == "||")) {
+					token.className = "logical_operator";
+				}
+				
+				if (token.className == null && token.string == ";") {
+					token.className = "semicolon";
+				}
+				
+				if (token.className == "variable" || token.className == "variable-2" || token.className == "block_start") {
+					var string = token.string;
+					if (token.className == "block_start") {
+						string = "<span class='block_start'></span>";
+					}
+					
+					nodes.push(new YAHOO.widget.HTMLNode(string, current_parent, true));
+					nodes[nodes.length - 1].type = token.className;
+				}
+				
+				if (token.className == "property") {
+					nodes[nodes.length - 1].html += "." + token.string;
+				}
+				
+				if (token.className == "assignment") {
+					nodes[nodes.length - 1].html += " : ";
+				}
+				
+				if (token.className == "bracket_start") {
+					nodes[nodes.length - 1].html += "<span style='color:red;'> <- </span>";
+				}
+				
+				if (token.className == "keyword") {
+					nodes[nodes.length - 1].html += "<span style='color:purple;'>" + token.string + "</span>";
+				}
+				
+				if (token.className == "string") {
+					nodes[nodes.length - 1].html += "<span style='color:gray;'>" + token.string + "</span>";
+				}
+				
+				if (token.className == "atom") {
+					nodes[nodes.length - 1].html += "<span style='color:blue;'>" + token.string + "</span>";
+				}
+				
+				if (token.className == "def") {
+					nodes[nodes.length - 1].html += " <span style='color:darkgray;'>" + token.string + "</span>";
+				}
+			}
+			
+			index += (token.end - token.start);
+			
+			if (token.end - token.start == 0) {
+				index++;
+			}
+			
+			position = self.editor.posFromIndex(index);
+			token = self.editor.getTokenAt(position);
+			
+			if (position.line == total_line - 1 && position.ch == token.end) {
+				inspecting = false;
+			}
+		}
+		
+		
+		self.object_tree.render();
 	},
 
 	set_option: function() {

@@ -53,7 +53,6 @@ org.goorm.core = function() {
 		device: null,
 		fn: null,
 		loading_bar: null,
-		dictionary: null,
 		theme: null,
 		theme_details: null
 	};
