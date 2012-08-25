@@ -369,7 +369,7 @@ org.goorm.core.layout.prototype = {
 		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 26;
 		$("#goorm_inner_layout_bottom").find(".yui-content").height(layout_bottom_height);
 		
-		console.log("layout_resized: " + layout_bottom_height);
+		//console.log("layout_resized: " + layout_bottom_height);
 		
 		var layout_center_height = $("#workspace").parent().parent().height();
 		$("#goorm_inner_layout_center").find("#workspace").height(layout_center_height);
