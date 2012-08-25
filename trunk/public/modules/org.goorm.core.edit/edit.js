@@ -69,7 +69,57 @@ org.goorm.core.edit.prototype = {
 			lineWrapping: true,
 			wordWrap: true,
 			matchBrackets: true,
-			onKeyEvent: function(i, e) {			
+			extraKeys: {
+				"Ctrl-Q": function(cm) {
+					fold_func(cm, cm.getCursor().line);
+				},
+				"'>'": function(cm) { 
+					cm.closeTag(cm, '>');
+				},
+				"'/'": function(cm) {
+					cm.closeTag(cm, '/'); 
+				},
+				"Ctrl-Space": function(cm) {
+					var cursor_pos = self.editor.cursorCoords(true, "local");
+					self.dictionary.show(cursor_pos);
+				},
+				"Esc": function (cm) {
+					self.dictionary.hide();
+				},
+				"Up": function (cm) {
+					if ($(self.target).find(".dictionary_box").css("display") == "block") {
+						self.dictionary.select(1);
+					}
+					else {
+						var cursor = self.editor.getCursor(true);
+						if (cursor.line > 0) {
+							cursor.line--;
+						}
+						self.editor.setCursor(cursor);
+					}
+				},
+				"Down": function (cm) {
+					if ($(self.target).find(".dictionary_box").css("display") == "block") {
+						self.dictionary.select(-1);
+					}
+					else {
+						var cursor = self.editor.getCursor(true);
+						cursor.line++;
+						self.editor.setCursor(cursor);
+					}
+				},
+				"Enter": function (cm) {
+					if ($(self.target).find(".dictionary_box").css("display") == "block") {
+						var string = self.dictionary.contents[self.dictionary.index].keyword;
+						var from = self.editor.getCursor(true);
+						var to = self.editor.getCursor(false);
+						
+						self.dictionary.hide();
+						self.editor.replaceRange(string, from, to);
+					}
+				}
+			},
+			onKeyEvent: function(i, e) {
 				
 				if(e.type == "keydown" && e.keyIdentifier == "Enter"){
 					enter_key = true;
@@ -97,28 +147,6 @@ org.goorm.core.edit.prototype = {
 					}
 				}
 				
-				if ($(self.target).find(".dictionary_box").css("display") == "block") {
-					if (e.type == "keydown" && e.keyCode == 38) {
-						self.dictionary.select(1);
-					
-						CodeMirror.e_stop(e);
-					
-						e.stopPropagation();
-						e.preventDefault();
-						
-						return false;
-					}
-					else if (e.type == "keydown" && e.keyCode == 40) {
-						self.dictionary.select(-1);
-					
-						CodeMirror.e_stop(e);
-					
-						e.stopPropagation();
-						e.preventDefault();
-						
-						return false;
-					}
-				}
 			},
 			onChange: function(i, e){
 				if(dont_update_first){
@@ -196,7 +224,9 @@ org.goorm.core.edit.prototype = {
 			onFocus: function () {
 				core.status.focus_on_editor = true;
 				
-				self.analyze();
+				if (self.filetype == "js") {
+					self.analyze();
+				}
 				//console.log(tree);
 			},
 			onBlur: function () {
@@ -223,25 +253,7 @@ org.goorm.core.edit.prototype = {
 			},
 			onUpdate: function () {
 				self.set_foldable();
-			},
-			extraKeys: {
-				"Ctrl-Q": function(cm) {
-					fold_func(cm, cm.getCursor().line);
-				},
-				"'>'": function(cm) { 
-					cm.closeTag(cm, '>');
-				},
-				"'/'": function(cm) {
-					cm.closeTag(cm, '/'); 
-				},
-				"Ctrl-Space": function(cm) {
-					var cursor_pos = self.editor.cursorCoords(true, "local");
-					self.dictionary.show(cursor_pos);
-				},
-				"Esc": function (cm) {
-					self.dictionary.hide();
-				}
-			},
+			}
 		});
 		
 		/*

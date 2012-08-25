@@ -343,6 +343,9 @@ org.goorm.core.preference.prototype = {
 					var info = new org.goorm.core.preference.info();
 					info.init();
 					
+					var filetype = new org.goorm.core.preference.filetype();
+					filetype.init();
+					
 					$(core).trigger("preference_loading_complete");
 					console.log("preference dialog loaded");
 					

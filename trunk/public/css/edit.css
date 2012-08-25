@@ -62,6 +62,8 @@ version: 3.0.0
 }
 
 .window_container .dictionary_element {
+	height: 18px;
+	overflow-y: hidden;
 	padding: 1px;
 	padding-left: 20px;
 	padding-right:5px;
