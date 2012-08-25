@@ -23,6 +23,55 @@ version: 3.0.0
 	background: #FFC !important;
 }
 
+.window_container .dictionary_box {
+	position: absolute;
+	z-index: 99;
+	height: 100px;
+	
+	padding: 1px;
+	
+	font-size: 11px;
+	
+	overflow: auto;
+
+	border: 1px solid #666;
+	background-color: white;
+	
+	-moz-box-shadow: 0px 1px 4px 0px #333;
+	-webkit-box-shadow: 0px 1px 4px 0px #333;
+	box-shadow: 0px 1px 4px 0px #333;
+}
+
+.window_container .dictionary_desc {
+	position: absolute;
+	z-index: 99;
+	height: 100px;
+	
+	padding: 1px;
+	
+	font-size: 11px;
+	
+	overflow: auto;
+	
+	border: 1px solid #666;
+	background-color: #ffe;
+	
+	-moz-box-shadow: 0px 1px 4px 0px #333;
+	-webkit-box-shadow: 0px 1px 4px 0px #333;
+	box-shadow: 0px 1px 4px 0px #333;
+}
+
+.window_container .dictionary_element {
+	padding: 1px;
+	padding-left: 20px;
+	padding-right:5px;
+	cursor: pointer;
+}
+
+.window_container .hovered {
+	background-color: #B3D4FF;
+}
+
 .CodeMirror, .CodeMirror-gutter {
 	font-family: Droid Sans Mono, Consolas, Monaco, monospace, Monotype;
 	font-size:11px;
@@ -35,6 +84,10 @@ version: 3.0.0
 	padding-top: 1px;
 	font-size: 10px;
 	color: #444;
+}
+
+.CodeMirror-gutter .current_line {
+	color: #000;
 }
 
 .CodeMirror-lines {

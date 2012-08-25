@@ -59,6 +59,14 @@ YUI DATATABLE STYLE CUSTOMIZATION
 	height: 22px;
 }
 
+#debug_left th:last-child {
+	border-right-width: 0px;
+}
+
+#debug_left td:last-child {
+	border-right-width: 0px;
+}
+
 #debug_left .yui-dt-col-attribute {
 	width:100px;
 }
@@ -91,6 +99,14 @@ YUI DATATABLE STYLE CUSTOMIZATION
 
 #debug_center th {
 	height: 22px;
+}
+
+#debug_center th:last-child {
+	border-right-width: 0px;
+}
+
+#debug_center td:last-child {
+	border-right-width: 0px;
 }
 
 #debug_center .yui-dt-col-attribute {

@@ -26,6 +26,14 @@ PROJECT TREE STYLE CUSTOMIZATION
 	float:left;
 }
 
+.directory_treeview .node {
+	height:22px; 
+	line-height: 16px; 
+	padding-right:4px; 
+	overflow:hidden; 
+	white-space:nowrap;
+}
+
 .ygtvhtml {
 	font-size:11px;
 }

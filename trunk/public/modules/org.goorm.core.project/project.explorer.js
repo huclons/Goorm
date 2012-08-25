@@ -17,7 +17,6 @@ org.goorm.core.project.explorer = function () {
 
 org.goorm.core.project.explorer.prototype = {
 	init: function () {
-		
 		var self = this;
 
 		$("#project_explorer").prepend("<div id='project_selector'></div>");
@@ -89,9 +88,6 @@ org.goorm.core.project.explorer.prototype = {
 			}			
 		});
 		
-		//for test
-		self.set_context_menu();
-		
 		$(core).bind("goorm_load_complete",function(){
 			self.current_project = {};
 			
@@ -131,7 +127,6 @@ org.goorm.core.project.explorer.prototype = {
 			};
 
 			$.get("file/get_nodes", postdata, function (data) {
-							
 				var sorting_data = eval(data);
 				
 				self.sort_project_treeview(sorting_data);	

@@ -196,7 +196,7 @@ module.exports = {
 							if (extension == node.filename) {
 								extension = "etc";
 							}
-							node.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
+							node.html = "<div class='node'>" 
 										+ "<img src=images/icons/filetype/" + extension + ".filetype.png class=\"directory_icon file\" />"
 										+ node.filename
 										+ "<div class=\"fullpath\" style=\"display:none;\">" + node.root + node.filename + "</div>"
@@ -244,7 +244,7 @@ module.exports = {
 						dir.expanded = true;
 						dir.sortkey = 0 + dir.name;
 						dir.type = "html";
-						dir.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
+						dir.html = "<div class='node'>" 
 									+ "<img src=images/icons/filetype/folder.filetype.png class=\"directory_icon file\" />"
 									+ dir.name
 									+ "<div class=\"fullpath\" style=\"display:none;\">" + dir.root + dir.name + "</div>"
@@ -275,7 +275,7 @@ module.exports = {
 				temp_label="workspace";
 			}
 
-			dir_tree.html = "<div style=\'height:22px; line-height:11px; padding-right:4px; overflow:hidden; white-space:nowrap;\'>" 
+			dir_tree.html = "<div class='node'>" 
 						+ "<img src=images/icons/filetype/folder.filetype.png class=\"directory_icon file\" />"
 						+ temp_label
 						+ "<div class=\"fullpath\" style=\"display:none;\">" + dir_tree.root + dir_tree.name + "</div>"
