@@ -5,8 +5,9 @@
  **/
 
 org.goorm.core.edit.dictionary = function () {
-	this.dictionary_list = null;	
-
+	this.dictionary_list = null;
+	this.contents = [];
+	this.index = 0;
 };
 
 org.goorm.core.edit.dictionary.prototype = {
@@ -17,9 +18,7 @@ org.goorm.core.edit.dictionary.prototype = {
 		
 		this.target = target;
 		
-		this.contents = {};
-		
-		this.contents.js = [
+		this.contents = [
 			{
 				keyword: "1. abcd",
 				type: "",
@@ -96,17 +95,11 @@ org.goorm.core.edit.dictionary.prototype = {
 				description: "asdfsafsafasfsfd"
 			}
 		];
-		
-		this.contents.cpp = [
-		];
-		
-		this.contents.xml = [
-		];
 
 		$(this.target).append("<div class='dictionary_box'></div>");
 		$(this.target).find(".dictionary_box").hide();
 		
-		this.set(this.contents.js);
+		this.set(this.contents);
 	},
 	
 	set: function (contents) {
@@ -139,18 +132,16 @@ org.goorm.core.edit.dictionary.prototype = {
 
 				temp_el.prev().addClass("hovered");
 				temp_el.removeClass("hovered");
-				
-				console.log(temp_el.prev().position());
-				
-/*
-				if (temp_el.prev().position().top < $(this.target).find(".dictionary_box").height()) {
-					$(this.target).find(".dictionary_box").scrollTop(temp_el.prev().position().top);
+
+				if (this.index > 0) {
+					this.index--;
 				}
-*/
-				$(this.target).find(".dictionary_box").scrollTop(temp_el.prev().position().top + temp_el.prev().height() - $(this.target).find(".dictionary_box").height());
+				
+				$(this.target).find(".dictionary_box").scrollTop(($(this.target).find(".dictionary_box .hovered").height() - 2) * this.index);
 			}
 			else {
 				$(this.target).find(".dictionary_box .dictionary_element:first").addClass("hovered");
+				this.index = 0;
 			}
 		}
 		else if (direction == -1) {
@@ -160,14 +151,15 @@ org.goorm.core.edit.dictionary.prototype = {
 				temp_el.next().addClass("hovered");
 				temp_el.removeClass("hovered");
 				
-				console.log(temp_el.next().position());
+				if (this.index < this.contents.length - 1) {
+					this.index++;
+				}
 				
-				//if (temp_el.next().position().top > $(this.target).find(".dictionary_box").height()) {
-					$(this.target).find(".dictionary_box").scrollTop(temp_el.next().position().top + temp_el.next().height() - $(this.target).find(".dictionary_box").height());
-				//}
+				$(this.target).find(".dictionary_box").scrollTop(($(this.target).find(".dictionary_box .hovered").height() - 2) * this.index);
 			}
 			else {
 				$(this.target).find(".dictionary_box .dictionary_element:first").addClass("hovered");
+				this.index = 0;
 			}
 		}
 	},
@@ -183,6 +175,8 @@ org.goorm.core.edit.dictionary.prototype = {
 		
 		$(this.target).find(".dictionary_box .hovered").removeClass("hovered");
 		$(this.target).find(".dictionary_box .dictionary_element:first").addClass("hovered");
+		
+		this.index = 0;
 	},
 	
 	hide: function () {
