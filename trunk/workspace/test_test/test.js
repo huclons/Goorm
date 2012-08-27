@@ -4,10 +4,10 @@
   <script>
   function test(c){
     for (var i = 0; i < 10; i++){
-      process("a.b();c = null;", 300);
-    }
+      process("a.b();c = null;", 300);pars
   }
   </script>
+    }
     <table><tr><td>test 1</td></tr><tr><td>test 2</td></tr></table>
       <script> function test() {
         return 1;

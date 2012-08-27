@@ -1,7 +1,7 @@
 org.goorm.core.window.tab = function () {
 	this.tabview = null;
 	this.list_menu = null;
-	this.tab = null;
+	this.tab = null;asasdsdsd 
 	this.menuitem = null;
 	this.window = null;
 	this.context_menu = null;

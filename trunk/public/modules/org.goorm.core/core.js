@@ -149,8 +149,6 @@ org.goorm.core.prototype = {
 		
 		$(this).bind("preference_load_complete", function () {
 			console.log("preference Loading Complete");
-
-			
 		});
 		
 		$(this).bind("plugin_loaded", function () {
@@ -165,9 +163,9 @@ org.goorm.core.prototype = {
 		
 		//Loading Animation
 		$(this).bind("goorm_loading", function () {
-			if(self.loading_count < Object.keys(core.dialog).length - 5 + parseInt(core.module.plugin_manager.list.length)) {
+			if(self.loading_count < Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)) {
 				self.loading_count++;
-				$("#goorm_loading_status_bar").width($("#goorm_loading_status_bar").width() + 636 / (Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)));
+				$("#goorm_loading_status_bar").width($("#goorm_loading_status_bar").width() + 638 / (Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)));
 			}
 			else {
 				if(!self.load_complete_flag){
