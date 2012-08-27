@@ -18,7 +18,7 @@ org.goorm.core.theme.prototype = {
 		var self = this;
 		
 		this.details_dialog = new org.goorm.core.theme.details();
-		this.details_dialog.init();
+		this.details_dialog.init(this);
 		
 		$.get("theme/get_list", "", function (data) {
 			self.theme_data = data
@@ -31,11 +31,11 @@ org.goorm.core.theme.prototype = {
 		$("#theme_selectbox").change(function() {
 			if($(this).val() == -1){
 				self.create_new_theme();
-				self.details_dialog.show();
 			}
 			else{
 				self.on_theme_selectbox_change($(this).val());
 				self.get_theme_contents($(this).val());
+				self.details_dialog.show();
 				
 
 			}
@@ -151,18 +151,18 @@ org.goorm.core.theme.prototype = {
 				}
 
 				else{
-						filedata += self.current_theme_contents[position][element_name].selector + " {\n";
-						for(var property in self.current_theme_contents[position][element_name].style){
-							if($.isArray(self.current_theme_contents[position][element_name].style[property])){
-								for(var style_array=0; style_array<self.current_theme_contents[position][element_name].style[property].length; style_array++){
-									filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name].style[property][style_array] + ";\n";	
-								}
-							}
-							else{
-								filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name].style[property] + ";\n";
+					filedata += self.current_theme_contents[position][element_name].selector + " {\n";
+					for(var property in self.current_theme_contents[position][element_name].style){
+						if($.isArray(self.current_theme_contents[position][element_name].style[property])){
+							for(var style_array=0; style_array<self.current_theme_contents[position][element_name].style[property].length; style_array++){
+								filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name].style[property][style_array] + ";\n";	
 							}
 						}
-						filedata += "}\n";
+						else{
+							filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name].style[property] + ";\n";
+						}
+					}
+					filedata += "}\n";
 				}
 			}
 		}
