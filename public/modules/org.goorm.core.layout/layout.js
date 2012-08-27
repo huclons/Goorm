@@ -135,10 +135,8 @@ org.goorm.core.layout.prototype = {
 		//Project Explorer Tab
 		this.attach_project_explorer(this.left_tabview);
 		
+		//Tool Box
 		this.attach_toolbox(this.left_tabview);
-		
-		//Select first tab
-		this.left_tabview.selectTab(0);
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
 		// Right
@@ -153,11 +151,11 @@ org.goorm.core.layout.prototype = {
 		//Object Explorer Tab
 		this.attach_object_explorer(this.inner_right_tabview);
 		
-		//Chat Tab
+		//Communication Tab
 		this.attach_communication(this.inner_right_tabview);
 		
-		//Select first tab
-		this.inner_right_tabview.selectTab(0);		
+		//Slide Show Tab
+		this.attach_slide(this.inner_right_tabview);
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
 		// Bottom
@@ -177,9 +175,6 @@ org.goorm.core.layout.prototype = {
 		
 		//Search Tab
 		this.attach_search(this.inner_bottom_tabview);
-		
-		//Select first tab
-		this.inner_bottom_tabview.selectTab(0);		
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
 		// Center
@@ -339,6 +334,13 @@ org.goorm.core.layout.prototype = {
 	show_communication: function(project_id) {
 		$(".layout_right_communication_tab").parent("div").attr("id",project_id);
 		this.communication.init(project_id);
+	},
+	
+	attach_slide: function(target) {
+		//attaching tab element
+		target.addTab(new YAHOO.widget.Tab({ label: "Slide", content: "<div id='slide' class='layout_right_slide_tab'></div>" }));
+
+		
 	},
 	
 	attach_terminal: function(target) {
