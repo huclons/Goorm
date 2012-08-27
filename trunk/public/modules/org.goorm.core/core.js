@@ -161,15 +161,22 @@ org.goorm.core.prototype = {
 		
 		this.load_complete_flag = false;
 		
+		
+		var loading_width = $("#goorm_loading_status_bar").width();
+		var queue = $("#goorm_loading_status_bar").queue("fx");
+		
 		//Loading Animation
 		$(this).bind("goorm_loading", function () {
 			if(self.loading_count < Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)) {
 				self.loading_count++;
-				$("#goorm_loading_status_bar").width($("#goorm_loading_status_bar").width() + 638 / (Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length)));
+				
+				loading_width += 628 / (Object.keys(core.dialog).length - 4 + parseInt(core.module.plugin_manager.list.length));
+				$("#goorm_loading_status_bar").animate({width: loading_width}, 30);
 			}
 			else {
 				if(!self.load_complete_flag){
 					console.log("complete: " + self.loading_count);
+					
 					$(self).trigger("goorm_load_complete");
 					self.load_complete_flag = true;
 				}
@@ -197,8 +204,6 @@ org.goorm.core.prototype = {
 			//console.log($(".yui-layout-unit-left").find(".yui-layout-wrap").html());
 			
 			self.module.action.init();
-			
-			self.end_loading();
 			
 			var goorm_loading_end_time = new Date().getTime(); 
 			
@@ -231,6 +236,9 @@ org.goorm.core.prototype = {
 			
 			if (parseInt(localStorage['inner_right_tabview_index']) >= 0)
 				core.module.layout.inner_right_tabview.selectTab(parseInt(localStorage['inner_right_tabview_index']));
+				
+					
+			self.complete();
 		});	
 		
 		$(window).unload(function () {
@@ -431,11 +439,18 @@ org.goorm.core.prototype = {
 	start: function() {
 		$("#goorm_dialog_container").append("<div id='loading_panel_container'></div>");
 		$("#goorm_dialog_container").append("<div id='loading_background'></div>");
-		$("#loading_panel_container").append("<div id='main_loading_image' style='background-image:url(images/loading.png); width:640px; height:480px; position:relative;'><div id='goorm_loading_status_bar' style='left:2px; top:414px; position:absolute; width:7px; height:10px; background-color:#000; filter:alpha(opacity=50); opacity:0.5;'></div></div>");
-		$("#loading_panel_container").append("<div style='top:10px; left:10px; width:620px; position:absolute; text-align:left; filter:alpha(opacity=50); opacity:0.5;'><font style='font-size:11px; color:#000;'>Developer : Sung-tae Ryu, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park, Noori Kim, Byuongwoong Ahn, Eungwi Jo.</font></div>");
-		$("#loading_panel_container").append("<div id='loading_message' style='top:345px; left:215px; position:absolute; text-align:left; font-size:10px; color:#fff;'></div>");
-
-
+		$("#loading_panel_container").append("<div id='main_loading_image'><div id='goorm_loading_status_bar'></div></div>");
+		$("#loading_panel_container").append("<div id='developers'>Developer : Sung-tae Ryu, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park, Noori Kim, Byuongwoong Ahn, Eungwi Jo.</div>");
+		$("#loading_panel_container").append("<div id='loading_message'></div>");
+		$("#loading_panel_container").append("<div id='login_box_bg'></div>");
+		$("#loading_panel_container").append("<div id='login_box'></div>");
+		
+		$("#login_box").append("<input id='goorm_id' name='goorm_id' placeholder='username' />");
+		$("#login_box").append("<input id='goorm_pw' name='goorm_pw' placeholder='password' />");
+		$("#login_box").append("<input type='button' id='goorm_login_button' value='Login' />");
+		
+		this.login_button =  new YAHOO.widget.Button("goorm_login_button", { onclick: { fn: this.login } });
+		
 		$("#loading_background").css('position', "absolute");
 		$("#loading_background").width($(window).width());
 		$("#loading_background").height($(window).height());
@@ -454,11 +469,24 @@ org.goorm.core.prototype = {
 		$("#loading_panel_container").css('top', $(window).height()/2-240);
 		$("#loading_panel_container").fadeIn(2000);
 	},
+	
+	login: function () {
+		$("#loading_background").fadeOut(1000);
+		$("#loading_panel_container").fadeOut(1000);
+	},
 
-	end_loading: function() {
+	complete: function() {
 		$("#goorm").show();
+		
+		$("#goorm_loading_status_bar").fadeOut(1000);
+		
+		$("#login_box_bg").delay(1250).fadeIn(1500);
+		$("#login_box").delay(1500).fadeIn(2000);
+		
+		$("#goorm_id").focus();
+		
 		$("#loading_background").delay(1000).fadeOut(1000);
-		$("#loading_panel_container").delay(1000).fadeOut(1000);
+		$("#loading_panel_container").delay(1500).fadeOut(1000);
 						
 		this.dialog.project_property.refresh_toolbox();
 	},
