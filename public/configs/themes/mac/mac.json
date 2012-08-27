@@ -1,9 +1,9 @@
 {
-	"Top,Menubar":{
+	"Top":{
 		"Text Menu":[
 			{
 				"Normal":{
-					"selector":".yui-skin-sam .yuimenubaritem .yuimenubaritemlabel",
+					"selector":"#goorm_top .yuimenubaritem .yuimenubaritemlabel",
 					"style":{
 						"font-family":"Verdana, Arial, 굴림체, 굴림",
 						"color":"#000000"
@@ -11,7 +11,7 @@
 				}
 			},{
 				"Selected":{
-					"selector":".yui-skin-sam .yuimenubaritem .yuimenubaritemlabel-selected",
+					"selector":"#goorm_top .yuimenubaritem .yuimenubaritemlabel-selected",
 					"style":{
 						"color":"#000000",	
 						"background-image":[
@@ -27,7 +27,7 @@
 			}
 		],
 		"Text Menubar Background":{
-			"selector":".yui-skin-sam .yuimenubar",
+			"selector":"#goorm_top .yuimenubar",
 			"style":{
 				"background":"none",
 				"background-image":"none",
@@ -37,7 +37,7 @@
 		"Toolbar":[
 			{
 				"Normal":{
-					"selector":".main_toolbar .toolbar_button",
+					"selector":"#goorm_top .main_toolbar .toolbar_button",
 					"style":{
 						"background":"none",
 						"background-image":"none",
@@ -46,7 +46,7 @@
 				}
 			},{
 				"Hover":{
-					"selector":".main_toolbar .toolbar_button:hover",
+					"selector":"#goorm_top .main_toolbar .toolbar_button:hover",
 					"style":{
 						"background":"none",
 						"background-image":"none",
@@ -55,7 +55,7 @@
 				}
 			},{
 				"Select":{
-					"selector":".main_toolbar .toolbar_button:active",
+					"selector":"#goorm_top .main_toolbar .toolbar_button:active",
 					"style":{
 						"background":"none",
 						"background-image":"none",
@@ -64,7 +64,7 @@
 				}
 			}
 		],
-		"Top Menubar Background":{
+		"Toolbar Menubar Background":{
 			"selector":".yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd",
 			"style":{
 				"background-image":[
@@ -78,7 +78,7 @@
 			}
 		}
 	},
-	"Left,Project Explorer":{
+	"Left":{
 		"Tab Menu":[
 			{ 
 				"Normal":{
@@ -132,7 +132,7 @@
 			}
 		}
 	},
-	"Right,Properties":{
+	"Right":{
 		"Tab Menu":[
 			{ 
 				"Normal":{
@@ -186,7 +186,7 @@
 			}
 		}
 	},
-	"Bottom, Terminal":{
+	"Bottom":{
 		"Tab Menu":[
 			{ 
 				"Normal":{
@@ -240,7 +240,7 @@
 			}
 		}
 	},
-	"Center, Workspace":{
+	"Center":{
 		"Tab Menu":[
 			{ 
 				"Normal":{

@@ -8,13 +8,15 @@ org.goorm.core.theme.details = function () {
 	this.dialog = null;
 	this.buttons = null;
 	this.manager = null;
+	this.parent = null;
 };
 
 
 org.goorm.core.theme.details.prototype = {
-	init: function () {
+	init: function (parent) {
 		var self = this;
-				
+		self.parent = parent;
+
 		var handle_apply = function() { 
 			this.hide(); 
 		};
@@ -55,5 +57,6 @@ org.goorm.core.theme.details.prototype = {
 
 	show: function () {
 		this.dialog.panel.show();
+		console.log(this.parent);
 	}
 };

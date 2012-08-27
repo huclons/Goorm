@@ -3,63 +3,65 @@
 		"label" : "General",
 		"expanded" : true,
 		"child" : [
-			{	"label" : "System1",
+			{	"label" : "Top",
 				"tab" : [
-					{	"label" : "Info",
+					{	"label" : "Text Menu",
 						"html"	: "configs/preferences/org.goorm.core/system.info.html",
 						"classname" : "org.goorm.core.preferences.info"
 					},
 					{
-						"label" : "Libraries",
+						"label" : "Text Menubar Background",
 						"html"	: "configs/preferences/org.goorm.core/system.libraries.html"
 					},
 					{
-						"label" : "Animations",
+						"label" : "Toolbar",
+						"html"	: "configs/preferences/org.goorm.core/system.animations.html"
+					},
+					{
+						"label" : "Toolbar Menubar Background",
 						"html"	: "configs/preferences/org.goorm.core/system.animations.html"
 					}
 				]
 			},
-			{	"label" : "Editor1",
+			{	"label" : "Left",
 				"tab" : [
-					{	"label" : "Setting",
+					{	"label" : "Tab Menu",
 						"html"	: "configs/preferences/org.goorm.core.edit/edit.setting.html"
 					},
-					{	"label" : "Theme",
+					{	"label" : "Tab Bar Background",
 						"html"	: "configs/preferences/org.goorm.core.edit/edit.theme.html"
 					}
 				]
 			},
-			{	"label" : "Designer1",
+			{	"label" : "Right",
 				"tab" : [
-					{	"label" : "Setting",
+					{	"label" : "Tab Menu",
 						"html"	: "configs/preferences/org.goorm.core.design/design.setting.html"
 					},
-					{	"label" : "Theme",
+					{	"label" : "Tab Bar Background",
 						"html"	: "configs/preferences/org.goorm.core.design/design.theme.html"
 					}
 				]
 			},
-			{	"label" : "Theme1",
+			{	"label" : "Bottom",
 				"tab" : [
-					{	"label" : "Theme",
+					{	"label" : "Tab Menu",
 						"html"	: "configs/preferences/org.goorm.core.theme/theme.edit.html",
 						"classname" : "org.goorm.core.theme"
+					},
+					{	"label" : "Tab Bar Background",
+						"html"	: "configs/preferences/org.goorm.core.design/design.theme.html"
 					}
 				]
 			},
-			{	"label" : "File Type1",
+			{	"label" : "Center",
 				"tab" : [
 					{	"label" : "File Type",
 						"html"	: "configs/preferences/org.goorm.core/filetype.html",
 						"classname" : "org.goorm.core.preferences.filetype"
-					}
-				]
-			},
-			{	"label" : "Language1",
-				"tab" : [
-					{	"label" : "Language",
-						"html"	: "configs/preferences/org.goorm.core.localization/language.html",
-						"classname" : "org.goorm.core.preferences.language"
+					},
+					{	"label" : "Tab Bar Background",
+						"html"	: "configs/preferences/org.goorm.core.design/design.theme.html"
 					}
 				]
 			}
@@ -69,7 +71,7 @@
 		"label" : "Dialog",
 		"expanded" : true,
 		"child" : [
-			{	"label" : "Syst5em",
+			{	"label" : "test1",
 					"tab" : [
 						{	"label" : "Info",
 							"html"	: "configs/preferences/org.goorm.core/system.info.html",
@@ -85,7 +87,7 @@
 						}
 					]
 			},
-			{	"label" : "Ed2itor",
+			{	"label" : "test2",
 				"tab" : [
 					{	"label" : "Setting",
 						"html"	: "configs/preferences/org.goorm.core.edit/edit.setting.html"
