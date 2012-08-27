@@ -77,46 +77,29 @@ org.goorm.core.edit.prototype = {
 					cm.closeTag(cm, '/'); 
 				},
 				"Ctrl-Space": function(cm) {
-					var cursor_pos = self.editor.cursorCoords(true, "local");
+					var cursor = cm.getCursor();
+					var token = cm.getTokenAt(cursor);
+				
+					var cursor_pos = cm.charCoords({line:cursor.line, ch:token.start}, "local");
+					//cursor_pos.ch = cm.getTokenAt(cm.getCursor()).start;
+					
+					self.dictionary.search(token.string);
 					self.dictionary.show(cursor_pos);
-				},
-				"Esc": function (cm) {
-					self.dictionary.hide();
-				},
-				"Up": function (cm) {
-					if ($(self.target).find(".dictionary_box").css("display") == "block") {
-						self.dictionary.select(1);
-					}
-					else {
-						var cursor = self.editor.getCursor(true);
-						if (cursor.line > 0) {
-							cursor.line--;
-						}
-						self.editor.setCursor(cursor);
-					}
-				},
-				"Down": function (cm) {
-					if ($(self.target).find(".dictionary_box").css("display") == "block") {
-						self.dictionary.select(-1);
-					}
-					else {
-						var cursor = self.editor.getCursor(true);
-						cursor.line++;
-						self.editor.setCursor(cursor);
-					}
-				},
-				"Enter": function (cm) {
-					if ($(self.target).find(".dictionary_box").css("display") == "block") {
-						var string = self.dictionary.contents[self.dictionary.index].keyword;
-						var from = self.editor.getCursor(true);
-						var to = self.editor.getCursor(false);
-						
-						self.dictionary.hide();
-						self.editor.replaceRange(string, from, to);
-					}
 				}
 			},
 			onKeyEvent: function(i, e) {
+				if ($(self.target).find(".dictionary_box").css("display") == "block" && e.type == "keyup" && e.keyCode != 8 && e.keyCode != 32) {
+					console.log(e.keyCode);
+					
+					var cursor = self.editor.getCursor();
+					var token = self.editor.getTokenAt(cursor);
+				
+					var cursor_pos = self.editor.charCoords({line:cursor.line, ch:token.start}, "local");
+					//cursor_pos.ch = cm.getTokenAt(cm.getCursor()).start;
+					
+					self.dictionary.search(token.string);
+					self.dictionary.show(cursor_pos);
+				}
 				
 				if(e.type == "keydown" && e.keyIdentifier == "Enter"){
 					enter_key = true;
@@ -222,7 +205,7 @@ org.goorm.core.edit.prototype = {
 				core.status.focus_on_editor = true;
 				
 				if (self.filetype == "js") {
-					self.analyze();
+					//self.analyze();
 				}
 				else {
 					delete self.object_tree;

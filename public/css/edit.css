@@ -26,14 +26,9 @@ version: 3.0.0
 .window_container .dictionary_box {
 	position: absolute;
 	z-index: 99;
-	height: 120px;
+	height: 140px;
 	min-width: 100px;
-	
-	padding: 1px;
-	
-	font-size: 11px;
-	
-	overflow: auto;
+
 
 	border: 1px solid #666;
 	background-color: white;
@@ -41,6 +36,23 @@ version: 3.0.0
 	-moz-box-shadow: 0px 1px 4px 0px #333;
 	-webkit-box-shadow: 0px 1px 4px 0px #333;
 	box-shadow: 0px 1px 4px 0px #333;
+}
+
+.window_container .dictionary_list {
+	position: relative;
+	
+	height: 138px;
+	min-width: 100px;
+	
+	padding: 1px;
+	
+	font-size: 11px;
+	
+	overflow: auto;
+}
+
+.window_container .dictionary_box:focus {
+	outline: none;
 }
 
 .window_container .dictionary_desc {
@@ -64,10 +76,10 @@ version: 3.0.0
 
 .window_container .dictionary_element {
 	height: 18px;
-	overflow-y: hidden;
+	overflow: hidden;
 	padding: 1px;
 	padding-left: 20px;
-	padding-right:5px;
+	padding-right:20px;
 	cursor: pointer;
 }
 
