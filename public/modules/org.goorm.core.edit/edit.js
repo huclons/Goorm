@@ -292,6 +292,15 @@ org.goorm.core.edit.prototype = {
 		});
 	},
 	
+	highlight_line: function (line) {
+		$(this.target).find(".CodeMirror-lines div:first div:last pre").removeClass("highlight");
+		$(this.target).find(".CodeMirror-lines div:first div:last pre:nth-child(" + line + ")").addClass("highlight");
+	},
+	
+	clear_highlight: function () {
+		$(this.target).find(".CodeMirror-lines div:first div:last pre").removeClass("highlight");
+	},
+	
 	set_foldable: function () {
 		var self = this;
 		
