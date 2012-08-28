@@ -109,6 +109,10 @@ version: 3.0.0
 	margin-left: 12px;
 }
 
+.CodeMirror-lines .highlight {
+	background-color: #FFFF99;
+}
+
 .CodeMirror-gutter .breakpoint {
 	color: #900;
 	font-size:8px;
