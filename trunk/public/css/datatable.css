@@ -138,12 +138,24 @@ YUI DATATABLE STYLE CUSTOMIZATION
 	padding:0px;
 	border:0px;
 	background-color: transparent;
-	margin-top:-1px;
+	margin-top:2px;
 }
 
 .yui-dt-editor input {
 	border:0px;
 	font-size:11px;
-	padding:4px;
-	text-decoration:underline;
+	padding:1px;
+	margin-left:5px;
+/*
+
+	background-color: transparent;
+	
+*/
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;	
+}
+
+.yui-dt-editor input:focus {
+	outline: none;
 }
