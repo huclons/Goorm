@@ -464,15 +464,6 @@ org.goorm.core.menu.action.prototype = {
 			}
 		});
 
-		$("a[action=debug]").unbind("click");
-		$("a[action=debug]").click(function() {
-			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
-			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
-				core.module.layout.inner_bottom_tabview.selectTab(1);
-				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].debug(core.status.current_project_path);
-			}
-		});
-
 		$("a[action=remote_run]").unbind("click");
 		$("a[action=remote_run]").click(function() {
 
@@ -548,6 +539,84 @@ org.goorm.core.menu.action.prototype = {
 		$("a[action=show_properties]").click(function() {
 			core.dialog.project_property.show();
 		});
+		
+		//////////////////////////////////////////////////
+		//Main Menu : Debug
+		//////////////////////////////////////////////////
+		$("a[action=debug]").unbind("click");
+		$("a[action=debug]").click(function() {
+			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
+			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
+				core.module.layout.inner_bottom_tabview.selectTab(1);
+				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].debug(core.status.current_project_path);
+			}
+		});
+		
+		$("a[action=debug_continue]").unbind("click");
+		$("a[action=debug_continue]").click(function() {
+			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
+			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
+				core.module.layout.inner_bottom_tabview.selectTab(1);
+				var cmd = {
+						mode : "continue",
+						project_path : core.status.current_project_path
+				}
+				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].debug_cmd(cmd);
+			}
+		});
+		
+		$("a[action=debug_terminate]").unbind("click");
+		$("a[action=debug_terminate]").click(function() {
+			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
+			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
+				core.module.layout.inner_bottom_tabview.selectTab(1);
+				var cmd = {
+						mode : "terminate",
+						project_path : core.status.current_project_path
+				}
+				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].debug_cmd(cmd);
+			}
+		});
+		
+		$("a[action=debug_step_over]").unbind("click");
+		$("a[action=debug_step_over]").click(function() {
+			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
+			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
+				core.module.layout.inner_bottom_tabview.selectTab(1);
+				var cmd = {
+						mode : "step_over",
+						project_path : core.status.current_project_path
+				}
+				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].debug_cmd(cmd);
+			}
+		});
+		
+		$("a[action=debug_step_in]").unbind("click");
+		$("a[action=debug_step_in]").click(function() {
+			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
+			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
+				core.module.layout.inner_bottom_tabview.selectTab(1);
+				var cmd = {
+						mode : "step_in",
+						project_path : core.status.current_project_path
+				}
+				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].debug_cmd(cmd);
+			}
+		});
+		
+		$("a[action=debug_step_out]").unbind("click");
+		$("a[action=debug_step_out]").click(function() {
+			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
+			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
+				core.module.layout.inner_bottom_tabview.selectTab(1);
+				var cmd = {
+						mode : "step_out",
+						project_path : core.status.current_project_path
+				}
+				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].debug_cmd(cmd);
+			}
+		});
+		
 		//////////////////////////////////////////////////
 		//Main Menu : Collaboration
 		//////////////////////////////////////////////////

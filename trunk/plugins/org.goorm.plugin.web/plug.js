@@ -91,8 +91,6 @@ org.goorm.plugin.web.prototype = {
 			if(result.code == 200){
 				//success 
 				if(result.run_path) {
-					console.log(result.run_path);
-					console.log(window.open);
 					window.open('.'+result.run_path+'/index.html', 'goormWeb');
 				}
 			}
