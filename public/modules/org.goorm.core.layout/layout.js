@@ -320,6 +320,7 @@ org.goorm.core.layout.prototype = {
 		
 		this.debug = new org.goorm.core.debug();
 		this.debug.init();
+		core.module.debug = this.debug;
 	},
 	
 	attach_communication: function(target) {

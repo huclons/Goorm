@@ -8,7 +8,7 @@ module.exports = {
 		var workspace = __path + "workspace/" + req.data.project_path;
 		var target_path = common.run_path + req.data.project_path;
 		var run_path = target_path.split("temp_files").pop();
-		console.log(run_path);
+		console.log("runProject "+run_path);
 		
 		if(!fs.existsSync(__path+"temp_files")) {
 			fs.mkdirSync(__path+"temp_files");

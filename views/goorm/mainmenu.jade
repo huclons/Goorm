@@ -217,10 +217,6 @@
            | Run
            em.helptext Ctrl + F5
          li.yuimenuitem
-          a.yuimenuitemlabel(action='debug', localization_key='project_debug', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
-           | Debug
-           em.helptext F7
-         li.yuimenuitem
           a.yuimenuitemlabel(action='remote_run', localization_key='project_remote_run') Remote Run
         ul
          li.yuimenuitem
@@ -251,6 +247,31 @@
         ul
          li.yuimenuitem.yuimenuitem-disabled
           a.yuimenuitemlabel.yuimenuitemlabel-disabled(action='show_properties', localization_key='project_properties') Properties
+    li.yuimenubaritem
+     a.yuimenubaritemlabel(href='#Debug', localization_key='debug') Debug 
+     #Debug.yuimenu
+      .bd
+        ul
+         li.yuimenuitem
+          a.yuimenuitemlabel(action='debug', localization_key='project_debug', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+           | Debug Start
+           em.helptext F7
+         li.yuimenuitem
+          a.yuimenuitemlabel(action='debug_continue', localization_key='project_debug', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+           | Continue
+         li.yuimenuitem
+          a.yuimenuitemlabel(action='debug_terminate', localization_key='project_debug', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+           | Terminate
+        ul
+         li.yuimenuitem
+          a.yuimenuitemlabel(action='debug_step_over', localization_key='debug_step_over', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+           | Step over
+         li.yuimenuitem
+          a.yuimenuitemlabel(action='debug_step_in', localization_key='debug_step_in', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+           | Step into
+         li.yuimenuitem
+          a.yuimenuitemlabel(action='debug_step_out', localization_key='debug_step_out', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+           | Step out  
     //-li.yuimenubaritem
      //-a.yuimenubaritemlabel(href='#Collaboration', localization_key='collaboration') Collaboration 
      //-#Collaboration.yuimenu
