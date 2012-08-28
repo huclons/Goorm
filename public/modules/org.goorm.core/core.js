@@ -245,10 +245,6 @@ org.goorm.core.prototype = {
 			localStorage['left_tabview_index'] = core.module.layout.left_tabview._configs.activeIndex.value;
 			localStorage['inner_bottom_tabview_index'] = core.module.layout.inner_bottom_tabview._configs.activeIndex.value;
 			localStorage['inner_right_tabview_index'] = core.module.layout.inner_right_tabview._configs.activeIndex.value;
-			
-			localStorage['layout_left_width'] = core.module.layout.layout._units.left._configs.width.value;
-			localStorage['layout_right_width'] = core.module.layout.inner_layout._units.right._configs.width.value;
-			localStorage['layout_bottom_height'] = core.module.layout.inner_layout._units.bottom._configs.height.value;
 		});
 		
 		//Toolbar

@@ -18,6 +18,15 @@ org.goorm.core.debug.prototype = {
 
 	init: function () {
 		var self = this;
+		
+		var textbox_cell_editor = new YAHOO.widget.TextboxCellEditor({disableBtns:true});
+		
+		var highlight_editable_cell = function (object) { 
+			var cell = object.target; 
+			if(YAHOO.util.Dom.hasClass(cell, "yui-dt-editable")) { 
+				this.highlightCell(cell); 
+			} 
+		};
 
 		$(core).bind("layout_loaded", function () {
 			var el = core.module.layout.inner_layout.getUnitByPosition('bottom').get('wrap');
@@ -32,9 +41,7 @@ org.goorm.core.debug.prototype = {
 			
 			var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 26;
 			var layout_bottom_width = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").width();
-			
-			console.log(layout_bottom_width);
-			
+
 			$("#debug").height(layout_bottom_height);
 			
 			self.layout = new YAHOO.widget.Layout("debug", {
@@ -48,8 +55,6 @@ org.goorm.core.debug.prototype = {
 
 			self.layout.on("render", function () {
 				$("#goorm_inner_layout_bottom").find(".yui-content").height(layout_bottom_height);
-				
-				console.log(layout_bottom_height);
 				
 				$("#debug_left").css("height", layout_bottom_height);
 				$("#debug_center").css("height", layout_bottom_height);
@@ -77,13 +82,12 @@ org.goorm.core.debug.prototype = {
 				
 				
 				self.table_thread = new YAHOO.widget.DataTable("debug_left", table_thread_column_definition, table_thread_data_properties);
+				self.table_thread.set("MSG_EMPTY", "N/A");
 				self.table_thread.render();
 				
-				
-
 				var table_variable_column_definition = [
 					{key:"variable", label:"Variable", sortable:false },
-					{key:"value", label:"Value", sortable:false},
+					{key:"value", label:"Value", sortable:false, editor: textbox_cell_editor},
 					{key:"summary", label:"Summary", sortable:false}
 				];
 				
@@ -93,10 +97,20 @@ org.goorm.core.debug.prototype = {
 					fields: ["variable","value","summary"] 
 				};
 				
-				
 				self.table_variable = new YAHOO.widget.DataTable("debug_center", table_variable_column_definition, table_variable_data_properties);
+				self.table_variable.set("MSG_EMPTY", "N/A");
 				self.table_variable.render();
-
+				
+				//self.table_variable.subscribe("cellClickEvent", self.show_cell_editor);
+				self.table_variable.subscribe("cellClickEvent", self.table_variable.onEventShowCellEditor);
+				self.table_variable.subscribe("cellMouseoutEvent", self.table_variable.onEventUnhighlightCell);
+				self.table_variable.subscribe("cellMouseoverEvent", highlight_editable_cell);
+				self.table_variable.subscribe("editorShowEvent", self.editor_show);
+				self.table_variable.subscribe("editorSaveEvent", self.variable_edit_complete);
+				
+				self.table_variable.addRow({variable:"test", value:"1234", summary:"description..."}, 0);
+				
+				console.log(self.table_variable.onEventShowCellEditor);
 			});
 
 			$(core).bind("layout_resized", function () {
@@ -108,9 +122,50 @@ org.goorm.core.debug.prototype = {
 			});
 			
 			self.layout.render();
-
 		});
-	}
+	},
+	
+	editor_show: function () {
+		$(".yui-dt-editor input").width($(".yui-dt-editor input").width() - 13);
+	},
+	
+	variable_edit_complete: function (object) {
+		var variable = $(object.editor.getTdEl()).parent().find(".yui-dt-col-variable").find(".yui-dt-liner").html();
+		var value = object.newData;
+		
+		console.log(variable + ": " + value);
+		
+		//TODO
+		
+		this.variable_refresh();
+	},
+	
+	variable_refresh: function () {
+		var self = this;
+		var index = 0;
+		/*
+		this.table_variable.deleteRows(0, $("#"+this.target).find("table").find("tbody").find("tr").size());
+		
+		
+		if (this.object) {
+			$(this.object.properties.attribute_list).each(function (i) {
+				var value = eval("self.object.properties." + this);
+				self.table.addRow({attribute: this, value: value}, i);
+				index = i;
+			});
+			
+			if (this.object.shape != null && this.object.shape.properties != null) {
+				
+				$.each(this.object.shape.properties, function (key, state) {
+					index++;
+					//var value = eval("self.object.properties."+this);
+					
+					self.table.addRow({attribute: key, value: state}, index);
+				});
+			}
+		}
+		*/
+	},
 
 	/*
 
