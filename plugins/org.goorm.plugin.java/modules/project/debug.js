@@ -65,7 +65,8 @@ module.exports = {
 					jdb.stdin.write("clear "+remains[i]+"\n");
 				}
 			}
-			jdb.stdin.write("clear\n");
+			// testcode
+//			jdb.stdin.write("clear\n");
 		}
 		else if (req.mode == "continue") {
 			jdb.stdin.write("cont\n");
@@ -79,7 +80,7 @@ module.exports = {
 		else if (req.mode == "step_in") {
 			jdb.stdin.write("step\n");
 		}
-		else if (req.mode == "step_over") {
+		else if (req.mode == "step_out") {
 			jdb.stdin.write("step up\n");
 		}
 		else if (req.mode == "set_value") {
