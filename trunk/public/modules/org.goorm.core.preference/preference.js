@@ -14,7 +14,7 @@ org.goorm.core.preference = function () {
 	this.ini = null;
 	this.plugin = null;
 	this.preference = null;
-	this.firstShow = false;
+	this.firstShow = true;
 	this.grid_opacity_slider = null;	
 	this.preference_default = null;
 };
@@ -230,9 +230,9 @@ org.goorm.core.preference.prototype = {
 		var self=this;
 		this.dialog.panel.show();
 		this.set_before();
-		if(!this.firstShow){
+		if(this.firstShow){
 			$("#preference_tabview #System").show();
-			this.firstShow=true;
+			this.firstShow=false;
 		}
 	},
 
@@ -276,7 +276,6 @@ org.goorm.core.preference.prototype = {
 	
 	init_dialog: function () {
 		var self = this;
-		
 		var handle_ok = function() {
 			self.apply();
 			self.save();

@@ -2,16 +2,16 @@
 	"label" : "Android",
 	"tab" : [
 				{	"label" : "Info",
-					"html"	: "configs/preferences/org.goorm.core/system.info.html",
+					"html"	: "",
 					"classname" : "org.goorm.core.preferences.info"
 				},
 				{
 					"label" : "Libraries",
-					"html"	: "configs/preferences/org.goorm.core/system.libraries.html"
+					"html"	: ""
 				},
 				{
 					"label" : "Animations",
-					"html"	: "configs/preferences/org.goorm.core/system.animations.html"
+					"html"	: ""
 				}
 			]
 }

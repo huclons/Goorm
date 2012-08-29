@@ -12,10 +12,30 @@ module.exports = {
 		if(gdb !== null) gdb.kill('SIGHUP');
 		
 		gdb = spawn('gdb', [workspace+"/main"]);
-		
+		gdb.started = false;
+		gdb.command = false;
 		gdb.stdout.setEncoding('utf8');
 		gdb.stdout.on('data', function (data) {
-			evt.emit('response', data);
+			if(/[\. ]*done/.test(data)) {
+				if(gdb.started===false) {
+					evt.emit('response', "Ready:");
+				}
+				gdb.command = true;
+			}
+			else if (gdb.command===true && /\(gdb\)/.test(data)) {
+				setTimeout(function(){
+					gdb.stdin.write("where\n");
+					evt.emit('response', "Where:");
+				}, 100);
+				setTimeout(function(){
+					gdb.stdin.write("info locals\n");
+					evt.emit('response', "Local variables:");
+				}, 200);
+				gdb.command = false;
+			}
+			else {
+				evt.emit('response', data);
+			}
 		});
 
 		gdb.stderr.setEncoding('utf8');
@@ -25,13 +45,16 @@ module.exports = {
 
 		gdb.on('exit', function (code) {
 			evt.emit('response', "exited");
-			gdb.killed=true;
+			gdb.started = false;
+			gdb.command = false;
+//			gdb.killed=true;
 		});
 	},
 	
 	debug: function(req, evt) {
 		if(req.mode == "init_run") {
 			gdb.stdin.write("run\n");
+			gdb.started=true;
 		}
 		else if(req.mode == "set_breakpoints") {
 			var filename = req.filename;
@@ -67,12 +90,7 @@ module.exports = {
 		else if (req.mode == "set_value") {
 			gdb.stdin.write("p "+req.variable+"="+req.value+"\n");
 		}
-		setTimeout(function(){
-			if(!gdb.killed){
-				gdb.stdin.write("info locals\n");
-				evt.emit('response', "Local variables:");
-			}
-		}, 700);
+		gdb.command = true;
 	},
 	
 	close: function() {
