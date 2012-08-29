@@ -12,7 +12,7 @@ org.goorm.plugin.java = function () {
 	this.build_target = null;
 	this.build_file_type = "o";
 	this.debug_con = null;
-	this.debug_buffer = false;
+	this.debug_buffer = 0;
 	this.current_debug_project = null;
 };
 
@@ -99,11 +99,6 @@ org.goorm.plugin.java.prototype = {
 		var self = this;
 		var table_variable = core.module.debug.table_variable;
 		var debug_module = core.module.debug;
-		var send_data = {
-				"plugin" : "org.goorm.plugin.java",
-				"path" : path,
-				"mode" : "init"
-		};
 		
 		if(this.debug_con === null) {
 			this.debug_con = io.connect();
@@ -112,7 +107,9 @@ org.goorm.plugin.java.prototype = {
 		this.debug_con.removeAllListeners("debug_response");
 		this.debug_con.on('debug_response', function (data) {
 			console.log(data);
-			var regex = /Local variables:/;
+			var regex_locals = /Local variables:/;
+			var regex_where = /Where:/;
+			var regex_ready = /Ready:/;
 			
 			if(data == "exited") {
 			// 커넥션 끊겼을시 처리
@@ -122,9 +119,49 @@ org.goorm.plugin.java.prototype = {
 				table_variable.initializeTable();
 				table_variable.refreshView();
 			}
-			else if(regex.test(data) || self.debug_buffer === true) {
+			else if(regex_ready.test(data)){
+				self.debug_cmd({
+					"mode":"init",
+					"project_path":path
+				});
+			}
+			else if(regex_where.test(data) || self.debug_buffer == 1) {
+			// 현재라인 처리하는 부분.
+				var regex_end = /main\[[\d]\]/;
+				var lines = data.split('\n');
+				$.each(lines, function(i, line){
+					if(line == '') return;
+					
+					if(regex_end.test(line)) {
+						// 현재 라인 세팅 완료
+						self.debug_buffer = 0;
+					}
+					else if(self.debug_buffer == 1) {
+						// 현재 라인 처리
+						var regex = /\[\d\].*\((.*):([\d]*)\)/;
+						if(regex.test(line)) {
+							var match = line.match(regex);
+							var filename = match[1];
+							var line_number = match[2];
+							
+							var windows = core.module.layout.workspace.window_manager.window;
+							for (var i in windows) {
+								var window = windows[i];
+								if (window.project == self.current_debug_project 
+										&& window.filename == filename) {
+									window.editor.highlight_line(line_number);
+								}
+							}
+						}
+					}
+					else if(regex_where.test(line)) {
+						// 현재 라인 시작
+						self.debug_buffer = 1;
+					}
+				});
+			}
+			else if(regex_locals.test(data) || self.debug_buffer == 2) {
 			// Local variable 값을 처리하는 부분.
-				var variables = null;
 				var regex_end = /main\[[\d]\]/;
 				var lines = data.split('\n');
 				$.each(lines, function(i, line){
@@ -132,17 +169,17 @@ org.goorm.plugin.java.prototype = {
 					
 					if(regex_end.test(line)) {
 						// local variable 세팅 완료
-						self.debug_buffer = false;
+						self.debug_buffer = 0;
 						table_variable.refreshView();
 					}
-					else if(self.debug_buffer === true) {
+					else if(self.debug_buffer == 2) {
 						// local variable 추가
 						var variable = line.split(' = ');
 						table_variable.addRow({"variable":variable[0].trim(),"value":variable[1].trim()});
 					}
-					else if(regex.test(line)) {
+					else if(regex_locals.test(line)) {
 						// local variable 시작
-						self.debug_buffer = true;
+						self.debug_buffer = 2;
 						table_variable.initializeTable();
 					}
 				});
@@ -168,13 +205,13 @@ org.goorm.plugin.java.prototype = {
 		table_variable.initializeTable();
 		table_variable.refreshView();
 		
+		// debug start!
+		var send_data = {
+				"plugin" : "org.goorm.plugin.java",
+				"path" : path,
+				"mode" : "init"
+		};
 		this.debug_con.emit("debug", send_data);
-		setTimeout(function(){
-			self.debug_cmd({
-					"mode":"init",
-					"project_path":path
-			});
-		}, 2000);
 	},
 	
 	/*
@@ -185,7 +222,7 @@ org.goorm.plugin.java.prototype = {
 		 * cmd = { mode, project_path }
 		 */
 		var self=this;
-		if(!this.debug_con) {
+		if(this.debug_con === null) {
 			console.log("no connection!");
 			return ;
 		}

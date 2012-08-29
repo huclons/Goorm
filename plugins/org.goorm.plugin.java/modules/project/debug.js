@@ -12,10 +12,27 @@ module.exports = {
 		if(jdb !== null) jdb.kill('SIGHUP');
 		
 		jdb = spawn('jdb', ["-classpath", workspace+"/src/project/", "HelloWorld"]);
-		
+		jdb.started=false;
+		jdb.command = false;
 		jdb.stdout.setEncoding('utf8');
 		jdb.stdout.on('data', function (data) {
-			evt.emit('response', data);
+			if(jdb.started===false && data.trim() == ">") {
+				evt.emit('response', "Ready:");
+				jdb.started=true;
+			}
+			else if (jdb.command===true && /main\[1\]/.test(data)) {
+				if(!jdb.killed) {
+					jdb.stdin.write("locals\n");
+					setTimeout(function(){
+						evt.emit('response', "Where:");
+						jdb.stdin.write("where\n");
+					}, 100);
+				}
+				jdb.command = false;
+			}
+			else {
+				evt.emit('response', data);
+			}
 		});
 
 		jdb.stderr.setEncoding('utf8');
@@ -26,6 +43,8 @@ module.exports = {
 		jdb.on('exit', function (code) {
 			evt.emit('response', "exited");
 			jdb.killed=true;
+			jdb.started=false;
+			jdb.command = false;
 		});
 		
 		jdb.breakpoints = [];
@@ -65,6 +84,7 @@ module.exports = {
 					jdb.stdin.write("clear "+remains[i]+"\n");
 				}
 			}
+			return ;
 			// testcode
 //			jdb.stdin.write("clear\n");
 		}
@@ -86,12 +106,7 @@ module.exports = {
 		else if (req.mode == "set_value") {
 			jdb.stdin.write("set "+req.variable+"="+req.value+"\n");
 		}
-		
-		setTimeout(function(){
-			if(!jdb.killed)
-				jdb.stdin.write("locals\n");
-		}, 700);
-		
+		jdb.command = true;
 	},
 	
 	close: function() {
