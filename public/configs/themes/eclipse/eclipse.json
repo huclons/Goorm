@@ -35,7 +35,7 @@
 	"top-toolbar-hover":{
 		"selector":"#goorm_top .main_toolbar .toolbar_button:hover",
 		"style":{
-			"background":"none"
+			"background":"#eee"
 		}
 	},
 	"top-toolbar-selected":{
@@ -55,7 +55,8 @@
 				"-webkit-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%)",
 				"-ms-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%)",
 				"linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%)"
-			]
+			],
+			"box-shadow":"inset 0px -4px 10px 0px #EEE"
 		}
 	},
 	"left-tabmenu-normal":{
@@ -217,7 +218,8 @@
 	"center-background":{
 		"selector":"#goorm_inner_layout_center #workspace",
 		"style":{
-			"background":"#ACB5BD"
+			"background":"#ACB5BD",
+			"box-shadow":"inset 0px 26px 10px 0px #eee"
 		}
 	}
 }
