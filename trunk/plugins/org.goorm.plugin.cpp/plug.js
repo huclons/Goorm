@@ -92,6 +92,8 @@ org.goorm.plugin.cpp.prototype = {
 	
 	debug: function (path) {
 		var self = this;
+		var table_variable = core.module.debug.table_variable;
+		var debug_module = core.module.debug;
 		var send_data = {
 				"plugin" : "org.goorm.plugin.cpp",
 				"path" : path,
@@ -100,22 +102,121 @@ org.goorm.plugin.cpp.prototype = {
 		
 		if(!this.debug_con) {
 			this.debug_con = io.connect();
+			this.current_debug_project = path;
 		}
 		this.debug_con.removeAllListeners("debug_response");
 		this.debug_con.on('debug_response', function (data) {
 			console.log(data);
-			$("#debug").append("<div>"+data+"</div>");
+			var regex = /Local variables:/;
 			
-			if(data == "ready") {
-				self.debug_con.emit("debug", {
-					"plugin" : "org.goorm.plugin.cpp",
-					"path" : path,
-					"mode" : "run"
+			if(data == "exited") {
+			// 커넥션 끊겼을시 처리
+//				self.debug_con.disconnect();
+				self.debug_con = null;
+				console.log("connection disconnect()");
+				table_variable.initializeTable();
+				table_variable.refreshView();
+			}
+			else if(regex.test(data) || self.debug_buffer === true) {
+			// Local variable 값을 처리하는 부분.
+				var variables = null;
+				var regex_end = /\(gdb\)/;
+				var lines = data.split('\n');
+				$.each(lines, function(i, line){
+					if(line == '') return;
+					
+					if(regex_end.test(line)) {
+						// local variable 세팅 완료
+						self.debug_buffer = false;
+						table_variable.refreshView();
+					}
+					else if(self.debug_buffer === true) {
+						// local variable 추가
+						var variable = line.split(' = ');
+						table_variable.addRow({"variable":variable[0].trim(),"value":variable[1].trim()});
+					}
+					else if(regex.test(line)) {
+						// local variable 시작
+						self.debug_buffer = true;
+						table_variable.initializeTable();
+					}
 				});
 			}
+			else {
+			}
 		});
-		$("#debug").empty();
+		
+		$(debug_module).off("value_changed");
+		$(debug_module).on("value_changed",function(e, data){
+			self.debug_cmd({
+				"mode":"set_value",
+				"project_path":path,
+				"variable":data.variable,
+				"value":data.value
+			});
+		});
+		
+		// debug탭 초기화
+		table_variable.initializeTable();
+		table_variable.refreshView();
+		
 		this.debug_con.emit("debug", send_data);
+		setTimeout(function(){
+			self.debug_cmd({
+					"mode":"init",
+					"project_path":path
+			});
+		}, 2000);
+	},
+	
+	/*
+	 * 디버깅 명령어 전송
+	 */
+	debug_cmd: function (cmd) {
+		/*
+		 * cmd = { mode, project_path }
+		 */
+		var self=this;
+		if(!this.debug_con) {
+			console.log("no connection!");
+			return ;
+		}
+		
+		var windows = core.module.layout.workspace.window_manager.window;
+		for (var i in windows) {
+			var window = windows[i];
+			if (window.project == this.current_debug_project) {
+				var filename = window.filename;
+				var breakpoints = window.editor.breakpoints;
+				if(breakpoints.length > 0){
+					self.debug_con.emit("debug", {
+						"plugin" : "org.goorm.plugin.cpp",
+						"mode" : "set_breakpoints",
+						"filename" : filename,
+						"breakpoints" : breakpoints
+					});
+				}
+			}
+		}
+		
+		var json = cmd;
+		json.plugin = "org.goorm.plugin.cpp";
+		switch (cmd.mode) {
+		case 'init':
+			json.mode = "init_run";
+			self.debug_con.emit("debug", json);
+			break;
+		case 'continue':
+		case 'terminate':
+		case 'step_over':
+		case 'step_in':
+		case 'step_out':
+		case 'set_value':
+			json.mode = cmd.mode;
+			self.debug_con.emit("debug", json);
+			break;
+		default : break;
+		}
 	},
 	
 	build: function (projectName, projectPath, callback) {
@@ -123,7 +224,7 @@ org.goorm.plugin.cpp.prototype = {
 		
 		this.path_project = "";
 
-		var buildOptions = "";
+		var buildOptions = "-g";
 //		var buildOptions = $("#buildConfiguration").find('[name=plugin\\.c\\.buildOptions]').val();		
 //		if(buildOptions == undefined){
 //			buildOptions = core.dialogPreference.preference['plugin.c.buildOptions'];

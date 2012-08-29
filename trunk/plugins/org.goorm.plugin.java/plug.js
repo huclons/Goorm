@@ -216,25 +216,10 @@ org.goorm.plugin.java.prototype = {
 			self.debug_con.emit("debug", json);
 			break;
 		case 'continue':
-			json.mode = cmd.mode;
-			self.debug_con.emit("debug", json);
-			break;
 		case 'terminate':
-			json.mode = cmd.mode;
-			self.debug_con.emit("debug", json);
-			break;
 		case 'step_over':
-			json.mode = cmd.mode;
-			self.debug_con.emit("debug", json);
-			break;
 		case 'step_in':
-			json.mode = cmd.mode;
-			self.debug_con.emit("debug", json);
-			break;
 		case 'step_out':
-			json.mode = cmd.mode;
-			self.debug_con.emit("debug", json);
-			break;
 		case 'set_value':
 			json.mode = cmd.mode;
 			self.debug_con.emit("debug", json);

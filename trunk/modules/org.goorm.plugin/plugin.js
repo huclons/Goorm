@@ -58,7 +58,9 @@ module.exports = {
 					}
 					plugin = require("../../plugins/"+msg.plugin+"/modules/");
 				}
-				plugin.debug(msg, evt);
+				if(plugin !== null) {
+					plugin.debug(msg, evt);
+				}
 			});
 		});
 	},
