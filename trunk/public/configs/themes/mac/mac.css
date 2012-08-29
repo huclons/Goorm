@@ -31,7 +31,7 @@
 	background-image:none;
 	background-position:center;
 }
-#goorm_top .yui-layout .yui-layout-unit-top div.yui-layout-bd {
+.yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd {
 	background-image:-o-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
 	background-image:-moz-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
 	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.24, rgb(220,220,220)), color-stop(0.62, rgb(170,170,170)));

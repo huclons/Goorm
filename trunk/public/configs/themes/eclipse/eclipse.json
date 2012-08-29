@@ -1,8 +1,8 @@
 {
-	"Top":{
-		"Text Menu":[
+	"top":{
+		"textmenu":[
 			{
-				"Normal":{
+				"normal":{
 					"selector":"#goorm_top .yuimenubaritem .yuimenubaritemlabel",
 					"style":{
 						"font-family":"Verdana, Arial, 굴림체, 굴림",
@@ -10,7 +10,7 @@
 					}
 				}
 			},{
-				"Selected":{
+				"selected":{
 					"selector":"#goorm_top .yuimenubaritem .yuimenubaritemlabel-selected",
 					"style":{
 						"color":"#000000",	
@@ -26,7 +26,7 @@
 				}
 			}
 		],
-		"Text Menubar Background":{
+		"textmenubarbackground":{
 			"selector":"#goorm_top .yuimenubar",
 			"style":{
 				"background":"none",
@@ -34,9 +34,9 @@
 				"background-position":"center"
 			}
 		},
-		"Toolbar":[
+		"toolbar":[
 			{
-				"Normal":{
+				"normal":{
 					"selector":"#goorm_top .main_toolbar .toolbar_button",
 					"style":{
 						"background":"none",
@@ -45,7 +45,7 @@
 					}
 				}
 			},{
-				"Hover":{
+				"hover":{
 					"selector":"#goorm_top .main_toolbar .toolbar_button:hover",
 					"style":{
 						"background":"none",
@@ -54,7 +54,7 @@
 					}
 				}
 			},{
-				"Select":{
+				"select":{
 					"selector":"#goorm_top .main_toolbar .toolbar_button:active",
 					"style":{
 						"background":"none",
@@ -64,7 +64,7 @@
 				}
 			}
 		],
-		"Toolbar Menubar Background":{
+		"toolbarmenubarbackground":{
 			"selector":".yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd",
 			"style":{
 				"background-image":[
@@ -78,10 +78,10 @@
 			}
 		}
 	},
-	"Left":{
-		"Tab Menu":[
+	"left":{
+		"tabmenu":[
 			{ 
-				"Normal":{
+				"normal":{
 					"selector":"#goorm_left.yui-navset .yui-nav",
 					"style":{
 						"background-image":[
@@ -95,14 +95,14 @@
 					}
 				}
 			},{
-				"Tab Menu Hover":{
+				"hover":{
 					"selector":"#goorm_left.yui-navset .yui-nav a:hover, #goorm_left.yui-navset .yui-nav a:focus",
 					"style":{
 						"background":"#BFDAFF url(../../../lib/com.yahoo.developer.yui/build/assets/skins/sam/sprite.png) repeat-x left -1300px"
 					}
 				}
 			},{
-				"Tab Menu Selected":{
+				"selected":{
 					"selector":"#goorm_left.yui-navset .yui-nav .selected a, #goorm_left.yui-navset .yui-nav .selected a:focus, #goorm_left.yui-navset .yui-nav .selected a:hover",
 					"style":{
 						"background":"none",
@@ -118,7 +118,7 @@
 				}
 			}
 		],
-		"Tab Bar Background":{
+		"tabbarbackground":{
 			"selector":"#goorm_left .yui-navset .yui-nav",
 			"style":{
 				"background-image":[
@@ -132,10 +132,10 @@
 			}
 		}
 	},
-	"Right":{
-		"Tab Menu":[
+	"right":{
+		"tabmenu":[
 			{ 
-				"Normal":{
+				"normal":{
 					"selector":"#goorm_inner_layout_right.yui-navset .yui-nav",
 					"style":{
 						"background-image":[
@@ -149,14 +149,14 @@
 					}
 				}
 			},{
-				"Tab Menu Hover":{
+				"hover":{
 					"selector":"#goorm_inner_layout_right.yui-navset .yui-nav a:hover, #goorm_inner_layout_right.yui-navset .yui-nav a:focus",
 					"style":{
 						"background":"#BFDAFF url(../../../lib/com.yahoo.developer.yui/build/assets/skins/sam/sprite.png) repeat-x left -1300px"
 					}
 				}
 			},{
-				"Tab Menu Selected":{
+				"selected":{
 					"selector":"#goorm_inner_layout_right.yui-navset .yui-nav .selected a, #goorm_inner_layout_right.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_right.yui-navset .yui-nav .selected a:hover",
 					"style":{
 						"background":"none",
@@ -172,7 +172,7 @@
 				}
 			}
 		],
-		"Tab Bar Background":{
+		"tabbarbackground":{
 			"selector":"#goorm_inner_layout_right.yui-navset .yui-nav",
 			"style":{
 				"background-image":[
@@ -186,10 +186,10 @@
 			}
 		}
 	},
-	"Bottom":{
-		"Tab Menu":[
+	"bottom":{
+		"tabmenu":[
 			{ 
-				"Normal":{
+				"normal":{
 					"selector":"#goorm_inner_layout_bottom.yui-navset .yui-nav",
 					"style":{
 						"background-image":[
@@ -203,14 +203,14 @@
 					}
 				}
 			},{
-				"Tab Menu Hover":{
+				"hover":{
 					"selector":"#goorm_inner_layout_bottom.yui-navset .yui-nav a:hover, #goorm_inner_layout_bottom.yui-navset .yui-nav a:focus",
 					"style":{
 						"background":"#BFDAFF url(../../../lib/com.yahoo.developer.yui/build/assets/skins/sam/sprite.png) repeat-x left -1300px"
 					}
 				}
 			},{
-				"Tab Menu Selected":{
+				"selected":{
 					"selector":"#goorm_inner_layout_bottom.yui-navset .yui-nav .selected a, #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a:hover",
 					"style":{
 						"background":"none",
@@ -226,7 +226,7 @@
 				}
 			}
 		],
-		"Tab Bar Background":{
+		"tabbarbackground":{
 			"selector":"#goorm_inner_layout_bottom.yui-navset .yui-nav",
 			"style":{
 				"background-image":[
@@ -240,10 +240,10 @@
 			}
 		}
 	},
-	"Center":{
-		"Tab Menu":[
+	"center":{
+		"tabmenu":[
 			{ 
-				"Normal":{
+				"normal":{
 					"selector":"#goorm_inner_layout_center.yui-navset .yui-nav",
 					"style":{
 						"background-image":[
@@ -257,14 +257,14 @@
 					}
 				}
 			},{
-				"Tab Menu Hover":{
+				"hover":{
 					"selector":"#goorm_inner_layout_center.yui-navset .yui-nav a:hover, #goorm_inner_layout_center.yui-navset .yui-nav a:focus",
 					"style":{
 						"background":"#BFDAFF url(../../../lib/com.yahoo.developer.yui/build/assets/skins/sam/sprite.png) repeat-x left -1300px"
 					}
 				}
 			},{
-				"Tab Menu Selected":{
+				"selected":{
 					"selector":"#goorm_inner_layout_center.yui-navset .yui-nav .selected a, #goorm_inner_layout_center.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_center.yui-navset .yui-nav .selected a:hover",
 					"style":{
 						"background":"none",
@@ -280,7 +280,7 @@
 				}
 			}
 		],
-		"Tab Bar Background":{
+		"tabbarbackground":{
 			"selector":"#goorm_inner_layout_center.yui-navset .yui-nav, #workspace_window_list",
 			"style":{
 				"background-image":[
