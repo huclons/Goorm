@@ -1,6 +1,6 @@
 #goorm_top .yuimenubaritem .yuimenubaritemlabel {
 	font-family:Verdana, Arial, 굴림체, 굴림;
-	color:#000000;
+	color:white;
 }
 #goorm_top .yuimenubaritem .yuimenubaritemlabel-selected {
 	color:#000000;
@@ -12,32 +12,25 @@
 	background-image:linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 }
 #goorm_top .yuimenubar {
-	background:none;
-	background-image:none;
-	background-position:center;
+	background:#3f3f3f;
 }
 #goorm_top .main_toolbar .toolbar_button {
 	background:none;
-	background-image:none;
-	background-position:center;
 }
 #goorm_top .main_toolbar .toolbar_button:hover {
 	background:none;
-	background-image:none;
-	background-position:center;
 }
 #goorm_top .main_toolbar .toolbar_button:active {
 	background:none;
-	background-image:none;
-	background-position:center;
 }
 .yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd {
-	background-image:-o-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
-	background-image:-moz-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background:white;
+	background-image:-o-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%);
+	background-image:-moz-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%);
 	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.24, rgb(220,220,220)), color-stop(0.62, rgb(170,170,170)));
-	background-image:-webkit-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
-	background-image:-ms-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
-	background-image:linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 90%);
+	background-image:-webkit-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%);
+	background-image:-ms-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%);
+	background-image:linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%);
 }
 #goorm_left.yui-navset .yui-nav {
 	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
@@ -59,13 +52,8 @@
 	background-image:-ms-linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 	background-image:linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 }
-#goorm_left .yui-navset .yui-nav {
-	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
-	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+#goorm_left.yui-navset .yui-nav {
+	background:gray;
 }
 #goorm_inner_layout_right.yui-navset .yui-nav {
 	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
@@ -88,12 +76,7 @@
 	background-image:linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 }
 #goorm_inner_layout_right.yui-navset .yui-nav {
-	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
-	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background:gray;
 }
 #goorm_inner_layout_bottom.yui-navset .yui-nav {
 	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
@@ -116,12 +99,7 @@
 	background-image:linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 }
 #goorm_inner_layout_bottom.yui-navset .yui-nav {
-	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
-	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background:gray;
 }
 #goorm_inner_layout_center.yui-navset .yui-nav {
 	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
@@ -144,10 +122,8 @@
 	background-image:linear-gradient(bottom, rgb(200,200,200) 10%, rgb(150,150,150) 90%);
 }
 #goorm_inner_layout_center.yui-navset .yui-nav, #workspace_window_list {
-	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-moz-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-webkit-gradient(linear, left top, left top, color-stop(0.1, rgb(240,240,240)), color-stop(0.9, rgb(200,200,200)));
-	background-image:-webkit-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:-ms-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
-	background-image:linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
+	background:gray;
+}
+#goorm_inner_layout_center #workspace {
+	background:#ACB5BD;
 }

@@ -17,9 +17,6 @@ org.goorm.core.theme.prototype = {
 	init: function () {
 		var self = this;
 		
-		this.details_dialog = new org.goorm.core.theme.details();
-		this.details_dialog.init(this);
-		
 		$.get("theme/get_list", "", function (data) {
 			self.theme_data = data
 			self.make_theme_selectbox();
@@ -35,9 +32,6 @@ org.goorm.core.theme.prototype = {
 			else{
 				self.on_theme_selectbox_change($(this).val());
 				self.get_theme_contents($(this).val());
-				
-				
-
 			}
 		});
 	},
@@ -59,7 +53,7 @@ org.goorm.core.theme.prototype = {
 				temp_name += " …";
 			}
 
-			if (self.theme_data[theme_idx].name == core.preference["preference.theme.current_theme"]) {
+			if (theme_idx == core.preference["preference.theme.current_theme"]) {
 				// need to edit 
 				$("#theme_selectbox").append("<option value='"+theme_idx+"' selected>"+temp_name+"</option>");
 				self.current_theme = self.theme_data[theme_idx];
@@ -100,6 +94,8 @@ org.goorm.core.theme.prototype = {
 		$(".theme_info").append("<div>Version : "+temp_date+"</div>");
 		$(".theme_info").append("<div>Author : "+temp_author+"</div>");
 
+		self.get_theme_contents(theme_idx);
+
 	},
 	get_theme_contents: function(theme_idx) { 
 		var self = this;
@@ -115,6 +111,9 @@ org.goorm.core.theme.prototype = {
 				self.details_dialog.show();
 			}
 		});
+		
+		self.details_dialog = new org.goorm.core.theme.details();
+		self.details_dialog.init(this);
 	},
 	apply_theme: function() {
 		var self = this;
@@ -126,51 +125,22 @@ org.goorm.core.theme.prototype = {
 		var url = "theme/put_contents";
 		var path = self.current_theme.name + "/" + self.current_theme.name+".css";
 		var filedata = "";
-
-/*
-		for (var position in self.current_theme_data){
-			for(var element_name in self.current_theme_data[position]){
-				if($.isArray(self.current_theme_data[position][element_name])){
-					for(var object in self.current_theme_data[position][element_name]){
-						for(var anchor in self.current_theme_data[position][element_name][object]){
-							filedata += self.current_theme_data[position][element_name][object][anchor].selector + " {\n";
-							for(var property in self.current_theme_data[position][element_name][object][anchor].style){
-								// selector : self.current_theme_data[position][element_name][anchor][object].selector;
-								// style : self.current_theme_data[position][element_name][anchor][object].style;
-								// value : self.current_theme_data[position][element_name][anchor][object].style[property];
-								if($.isArray(self.current_theme_data[position][element_name][object][anchor].style[property])){
-									for(var style_array=0; style_array< self.current_theme_data[position][element_name][object][anchor].style[property].length; style_array++){
-										filedata += "\t" + property + ":" + self.current_theme_data[position][element_name][object][anchor].style[property][style_array] + ";\n";
-									}
-								}
-								else{
-									filedata += "\t" + property + ":" + self.current_theme_data[position][element_name][object][anchor].style[property] + ";\n";
-								}
-							}
-							filedata += "}\n";
-						}
+		
+		for(var element in self.current_theme_data){
+			filedata += self.current_theme_data[element].selector + " {\n";
+			for(var property in self.current_theme_data[element].style){
+				if($.isArray(self.current_theme_data[element].style[property])){
+					for(var style_cnt=0; style_cnt<self.current_theme_data[element].style[property].length; style_cnt++){
+						filedata += "\t" + property + ":" + self.current_theme_data[element].style[property][style_cnt] + ";\n";
 					}
 				}
-
 				else{
-					filedata += self.current_theme_data[position][element_name].selector + " {\n";
-					for(var property in self.current_theme_data[position][element_name].style){
-						if($.isArray(self.current_theme_data[position][element_name].style[property])){
-							for(var style_array=0; style_array<self.current_theme_data[position][element_name].style[property].length; style_array++){
-								filedata += "\t" + property + ":" + self.current_theme_data[position][element_name].style[property][style_array] + ";\n";	
-							}
-						}
-						else{
-							filedata += "\t" + property + ":" + self.current_theme_data[position][element_name].style[property] + ";\n";
-						}
-					}
-					filedata += "}\n";
+					filedata += "\t" + property + ":" + self.current_theme_data[element].style[property] + ";\n";					
 				}
 			}
+			filedata += "}\n";
 		}
-*/
 
-/*
 		$.ajax({
 			url: url,			
 			type: "GET",
@@ -197,8 +167,6 @@ org.goorm.core.theme.prototype = {
 				m.s("Save complete! (" + self.filename + ")", "org.goorm.core.theme");
 			}
 		});
-*/
-
 	},
 	//create new theme
 	create_new_theme: function() {

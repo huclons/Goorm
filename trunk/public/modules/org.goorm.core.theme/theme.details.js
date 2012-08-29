@@ -18,9 +18,11 @@ org.goorm.core.theme.details.prototype = {
 		self.parent = parent;
 
 		var handle_apply = function() { 
+			self.manager.delete_datatable();
 			this.hide(); 
 		};
 		var handle_cancel = function() { 
+			self.manager.delete_datatable();
 			this.hide(); 
 		};
 		this.buttons = [ {text:"Save", handler:handle_apply, isDefault:true},
@@ -42,7 +44,7 @@ org.goorm.core.theme.details.prototype = {
 					// construct basic tree structure
 					self.manager.create_treeview(json);
 					self.manager.create_tabview(json);
-
+					
 					// TreeView labelClick function
 					self.manager.treeview.subscribe("clickEvent", function(nodedata){
 						var label = nodedata.node.label;
@@ -57,7 +59,7 @@ org.goorm.core.theme.details.prototype = {
 	},
 
 	show: function () {
-		this.manager.create_datatable();
-		this.dialog.panel.show();
+/* 		this.manager.create_datatable(); */
+/* 		this.dialog.panel.show(); */
 	}
 };
