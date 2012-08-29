@@ -7,7 +7,7 @@
 org.goorm.core.theme = function () {
 	this.theme_data = null;
 	this.current_theme = null;
-	this.current_theme_contents = null;
+	this.current_theme_data = null;
 	this.details_dialog = null;
 	
 };
@@ -35,7 +35,7 @@ org.goorm.core.theme.prototype = {
 			else{
 				self.on_theme_selectbox_change($(this).val());
 				self.get_theme_contents($(this).val());
-				self.details_dialog.show();
+				
 				
 
 			}
@@ -110,8 +110,9 @@ org.goorm.core.theme.prototype = {
 			type: "GET",
 			data: { path: path },
 			success: function(data) {
-				self.current_theme_contents = JSON.parse(data);
+				self.current_theme_data = JSON.parse(data);
 				self.apply_theme();
+				self.details_dialog.show();
 			}
 		});
 	},
@@ -126,23 +127,23 @@ org.goorm.core.theme.prototype = {
 		var path = self.current_theme.name + "/" + self.current_theme.name+".css";
 		var filedata = "";
 
-		for (var position in self.current_theme_contents){
-			for(var element_name in self.current_theme_contents[position]){
-				if($.isArray(self.current_theme_contents[position][element_name])){
-					for(var anchor in self.current_theme_contents[position][element_name]){
-						for(var object in self.current_theme_contents[position][element_name][anchor]){
-							filedata += self.current_theme_contents[position][element_name][anchor][object].selector + " {\n";
-							for(var property in self.current_theme_contents[position][element_name][anchor][object].style){
-								// selector : self.current_theme_contents[position][element_name][anchor][object].selector;
-								// style : self.current_theme_contents[position][element_name][anchor][object].style;
-								// value : self.current_theme_contents[position][element_name][anchor][object].style[property];
-								if($.isArray(self.current_theme_contents[position][element_name][anchor][object].style[property])){
-									for(var style_array=0; style_array< self.current_theme_contents[position][element_name][anchor][object].style[property].length; style_array++){
-										filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name][anchor][object].style[property][style_array] + ";\n";
+		for (var position in self.current_theme_data){
+			for(var element_name in self.current_theme_data[position]){
+				if($.isArray(self.current_theme_data[position][element_name])){
+					for(var object in self.current_theme_data[position][element_name]){
+						for(var anchor in self.current_theme_data[position][element_name][object]){
+							filedata += self.current_theme_data[position][element_name][object][anchor].selector + " {\n";
+							for(var property in self.current_theme_data[position][element_name][object][anchor].style){
+								// selector : self.current_theme_data[position][element_name][anchor][object].selector;
+								// style : self.current_theme_data[position][element_name][anchor][object].style;
+								// value : self.current_theme_data[position][element_name][anchor][object].style[property];
+								if($.isArray(self.current_theme_data[position][element_name][object][anchor].style[property])){
+									for(var style_array=0; style_array< self.current_theme_data[position][element_name][object][anchor].style[property].length; style_array++){
+										filedata += "\t" + property + ":" + self.current_theme_data[position][element_name][object][anchor].style[property][style_array] + ";\n";
 									}
 								}
 								else{
-									filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name][anchor][object].style[property] + ";\n";
+									filedata += "\t" + property + ":" + self.current_theme_data[position][element_name][object][anchor].style[property] + ";\n";
 								}
 							}
 							filedata += "}\n";
@@ -151,15 +152,15 @@ org.goorm.core.theme.prototype = {
 				}
 
 				else{
-					filedata += self.current_theme_contents[position][element_name].selector + " {\n";
-					for(var property in self.current_theme_contents[position][element_name].style){
-						if($.isArray(self.current_theme_contents[position][element_name].style[property])){
-							for(var style_array=0; style_array<self.current_theme_contents[position][element_name].style[property].length; style_array++){
-								filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name].style[property][style_array] + ";\n";	
+					filedata += self.current_theme_data[position][element_name].selector + " {\n";
+					for(var property in self.current_theme_data[position][element_name].style){
+						if($.isArray(self.current_theme_data[position][element_name].style[property])){
+							for(var style_array=0; style_array<self.current_theme_data[position][element_name].style[property].length; style_array++){
+								filedata += "\t" + property + ":" + self.current_theme_data[position][element_name].style[property][style_array] + ";\n";	
 							}
 						}
 						else{
-							filedata += "\t" + property + ":" + self.current_theme_contents[position][element_name].style[property] + ";\n";
+							filedata += "\t" + property + ":" + self.current_theme_data[position][element_name].style[property] + ";\n";
 						}
 					}
 					filedata += "}\n";

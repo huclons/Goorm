@@ -6,62 +6,62 @@
 			{	"label" : "Top",
 				"tab" : [
 					{	"label" : "Text Menu",
-						"html"	: "configs/preferences/org.goorm.core/system.info.html",
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.top.textMenu.html",
 						"classname" : "org.goorm.core.preferences.info"
 					},
 					{
 						"label" : "Text Menubar Background",
-						"html"	: "configs/preferences/org.goorm.core/system.libraries.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.top.textMenubarBackground.html"
 					},
 					{
 						"label" : "Toolbar",
-						"html"	: "configs/preferences/org.goorm.core/system.animations.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.top.toolbar.html"
 					},
 					{
 						"label" : "Toolbar Menubar Background",
-						"html"	: "configs/preferences/org.goorm.core/system.animations.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.top.toolbarMenubarBackground.html"
 					}
 				]
 			},
 			{	"label" : "Left",
 				"tab" : [
 					{	"label" : "Tab Menu",
-						"html"	: "configs/preferences/org.goorm.core.edit/edit.setting.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.left.tabMenu.html"
 					},
 					{	"label" : "Tab Bar Background",
-						"html"	: "configs/preferences/org.goorm.core.edit/edit.theme.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.left.tabBarBackground.html"
 					}
 				]
 			},
 			{	"label" : "Right",
 				"tab" : [
 					{	"label" : "Tab Menu",
-						"html"	: "configs/preferences/org.goorm.core.design/design.setting.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.right.tabMenu.html"
 					},
 					{	"label" : "Tab Bar Background",
-						"html"	: "configs/preferences/org.goorm.core.design/design.theme.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.right.tabBarBackground.html"
 					}
 				]
 			},
 			{	"label" : "Bottom",
 				"tab" : [
 					{	"label" : "Tab Menu",
-						"html"	: "configs/preferences/org.goorm.core.theme/theme.edit.html",
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.bottom.tabMenu.html",
 						"classname" : "org.goorm.core.theme"
 					},
 					{	"label" : "Tab Bar Background",
-						"html"	: "configs/preferences/org.goorm.core.design/design.theme.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.bottom.tabBarBackground.html"
 					}
 				]
 			},
 			{	"label" : "Center",
 				"tab" : [
-					{	"label" : "File Type",
-						"html"	: "configs/preferences/org.goorm.core/filetype.html",
+					{	"label" : "Tab Menu",
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.center.tabMenu.html",
 						"classname" : "org.goorm.core.preferences.filetype"
 					},
 					{	"label" : "Tab Bar Background",
-						"html"	: "configs/preferences/org.goorm.core.design/design.theme.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.center.tabBarBackground.html"
 					}
 				]
 			}

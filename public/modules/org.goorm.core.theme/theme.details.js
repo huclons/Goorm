@@ -27,13 +27,14 @@ org.goorm.core.theme.details.prototype = {
 						 {text:"Cancel",  handler:handle_cancel}]; 
 
 		this.manager = new org.goorm.core.theme.manager();
+		this.manager.init(parent);
 
 		this.dialog = new org.goorm.core.theme.details.dialog();
 		this.dialog.init({
 			title:"Theme Details", 
 			path:"configs/dialogs/org.goorm.core.theme/theme.details.html",
 			width:1000,
-			height:700,
+			height:600,
 			modal:true,
 			buttons:this.buttons,
 			success: function () {
@@ -56,7 +57,7 @@ org.goorm.core.theme.details.prototype = {
 	},
 
 	show: function () {
+		this.manager.create_datatable();
 		this.dialog.panel.show();
-		console.log(this.parent);
 	}
 };
