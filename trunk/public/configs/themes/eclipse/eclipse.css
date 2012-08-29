@@ -18,7 +18,7 @@
 	background:none;
 }
 #goorm_top .main_toolbar .toolbar_button:hover {
-	background:none;
+	background:#eee;
 }
 #goorm_top .main_toolbar .toolbar_button:active {
 	background:none;
@@ -31,6 +31,7 @@
 	background-image:-webkit-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%);
 	background-image:-ms-linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%);
 	background-image:linear-gradient(top, rgb(220,220,220) 10%, rgb(170,170,170) 50%);
+	box-shadow:inset 0px -4px 10px 0px #EEE;
 }
 #goorm_left.yui-navset .yui-nav {
 	background-image:-o-linear-gradient(top, rgb(240,240,240) 10%, rgb(200,200,200) 90%);
@@ -126,4 +127,5 @@
 }
 #goorm_inner_layout_center #workspace {
 	background:#ACB5BD;
+	box-shadow:inset 0px 26px 10px 0px #eee;
 }
