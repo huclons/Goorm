@@ -183,7 +183,7 @@ org.goorm.core.preference.prototype = {
 		$(target).find("input").each(function(){
 			var value;
 			if($(this).attr("type") == "checkbox"){
-				value = ($(this).attr("checked") == true) ? true : false;
+				value = ($(this).attr("checked") == "checked") ? true : false;
 			}
 			else {
 				value = $(this).val();
@@ -204,9 +204,9 @@ org.goorm.core.preference.prototype = {
 		$("#preference_tabview").find("input").each(function(){
 			if(preference[$(this).attr("name")] !== null){
 				if($(this).attr("type") == "checkbox"){
-					if(preference[$(this).attr("name")] == true)
-						$(this).attr("checked",true);
-					else $(this).attr("checked",false);
+					if(preference[$(this).attr("name")] == "true")
+						$(this).attr("checked","checked");
+//					else $(this).attr("checked",);
 				}
 				else{
 					$(this).val(preference[$(this).attr("name")]);
