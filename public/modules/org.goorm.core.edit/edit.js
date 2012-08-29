@@ -48,7 +48,7 @@ org.goorm.core.edit.prototype = {
 		
 		this.collaboration = new org.goorm.core.collaboration.editing();
 		
-		this.preference = core.module.preference;
+		this.preference = core.preference;
 		
 		this.dictionary = new org.goorm.core.edit.dictionary();
 		
@@ -253,7 +253,7 @@ org.goorm.core.edit.prototype = {
 		this.collaboration.set_editor(this.editor);
 		
 		
-		//this.set_option();
+		this.set_option();
 		
 		
 		

@@ -29,6 +29,7 @@ org.goorm.core.preference.prototype = {
 		this.dialog = new org.goorm.core.preference.dialog();
 		
 		this.load_default();
+		
 		console.log("default Preference loaded");
 //		this.manager.ini_parser();
 //		this.ini = this.manager.ini;
@@ -51,6 +52,7 @@ org.goorm.core.preference.prototype = {
 			self.preference = json;
 			core.preference = json;
 			self.preference_default = json;
+			self.load();
 		});
 	},
 	
