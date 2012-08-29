@@ -127,6 +127,7 @@ org.goorm.core.theme.prototype = {
 		var path = self.current_theme.name + "/" + self.current_theme.name+".css";
 		var filedata = "";
 
+/*
 		for (var position in self.current_theme_data){
 			for(var element_name in self.current_theme_data[position]){
 				if($.isArray(self.current_theme_data[position][element_name])){
@@ -167,7 +168,9 @@ org.goorm.core.theme.prototype = {
 				}
 			}
 		}
+*/
 
+/*
 		$.ajax({
 			url: url,			
 			type: "GET",
@@ -194,6 +197,7 @@ org.goorm.core.theme.prototype = {
 				m.s("Save complete! (" + self.filename + ")", "org.goorm.core.theme");
 			}
 		});
+*/
 
 	},
 	//create new theme

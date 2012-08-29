@@ -34,7 +34,7 @@ org.goorm.core.theme.manager.prototype = {
 		var treeview = new YAHOO.widget.TreeView("theme_details_treeview");
 		
 		var general = new YAHOO.widget.TextNode(json.general.label, treeview.getRoot(), json.general.expanded);
-		var dialog = new YAHOO.widget.TextNode(json.dialog.label, treeview.getRoot(), json.dialog.expanded);
+/* 		var dialog = new YAHOO.widget.TextNode(json.dialog.label, treeview.getRoot(), json.dialog.expanded); */
 
 		// add subtrees
 		$.each(json.general.child, function(index, object){
@@ -42,9 +42,11 @@ org.goorm.core.theme.manager.prototype = {
 		});
 
 		// add subtrees
+/*
 		$.each(json.dialog.child, function(index, object){
 			self.add_treeview(dialog, object);
 		});
+*/
 
 		treeview.render();
 		this.treeview = treeview;
@@ -65,7 +67,9 @@ org.goorm.core.theme.manager.prototype = {
 				if(!$.isEmptyObject(object.html)){
 					var url = object.html;
 					var label = object.label;
-					var classname = object.classname;
+					var element = object.element;
+					var style = object.style;
+
 
 					$.ajax({
 						type: "GET",
@@ -74,10 +78,11 @@ org.goorm.core.theme.manager.prototype = {
 						url: url,
 						success: function(data) {
 							var tab = new YAHOO.widget.Tab({ 
-							    label: label, 
-							    content: data 
+								label: label, 
+								content: data
 							});
 							tabview.addTab(tab);
+							self.create_datatable(json);
 						}
 					});
 				}
@@ -94,15 +99,20 @@ org.goorm.core.theme.manager.prototype = {
 		$.each(json.general.child, function(index, object) {
 			self.add_tabview(object);
 		});
+/*
 		$.each(json.dialog.child, function(index, object) {
 			self.add_tabview(object);
 		});
+*/
 	},
 	test: function() { 
 		
 	 },
-	create_datatable: function() {
+	create_datatable: function(tree_data) {
 		var self = this;
+
+		console.log(tree_data);
+
 		self.table_variable_arrays = [];
 		var table_variable_column_definition = [
 			{key:"element", label:"Element", width:140}, 
@@ -121,9 +131,11 @@ org.goorm.core.theme.manager.prototype = {
 			}
 		};
 
+/*
 		for(var position in self.parent.current_theme_data){
 			for(var element_name in self.parent.current_theme_data[position]){
 				self.table_variable_arrays.push(new YAHOO.widget.DataTable(position+"-"+element_name, table_variable_column_definition, table_variable_data_properties));
+
 			}
 		}
 
@@ -132,10 +144,12 @@ org.goorm.core.theme.manager.prototype = {
 			self.table_variable_arrays[i].subscribe("cellMouseoutEvent", self.table_variable_arrays[i].onEventUnhighlightCell);
 			self.table_variable_arrays[i].subscribe("cellClickEvent", self.table_variable_arrays[i].onEventShowCellEditor);
 		}
+*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var element_cnt = 0;
 
+/*
+var element_cnt = 0;
 for (var position in self.parent.current_theme_data){
 	for(var element_name in self.parent.current_theme_data[position]){
 		var style_cnt = 0;
@@ -174,6 +188,7 @@ for (var position in self.parent.current_theme_data){
 		element_cnt++;
 	}
 }
+*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	}
