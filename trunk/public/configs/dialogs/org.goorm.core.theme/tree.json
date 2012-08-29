@@ -4,42 +4,41 @@
 		"expanded" : true,
 		"child" : [
 			{	"label" : "Top",
+				"position" : "top",
 				"tab" : [
 					{	"label" : "Text Menu",
-						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.top.textMenu.html",
-						"classname" : "org.goorm.core.preferences.info"
+						"html" : "configs/dialogs/org.goorm.core.theme/theme.details.top.textMenu.html",
+						"element" : "textmenu",
+						"style" : ["normal_font-family","normal_color","selected_color","selected_background-image","background_background"]
 					},
-					{
-						"label" : "Text Menubar Background",
-						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.top.textMenubarBackground.html"
-					},
-					{
-						"label" : "Toolbar",
-						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.top.toolbar.html"
-					},
-					{
-						"label" : "Toolbar Menubar Background",
-						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.top.toolbarMenubarBackground.html"
+					{	"label" : "Toolbar",
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.top.toolbar.html",
+						"element" : "toolbar",
+						"style"	: {
+							"toolbar":["normal_background","hover_background","selected_background","background_background_image"]
+						}
 					}
 				]
 			},
 			{	"label" : "Left",
 				"tab" : [
 					{	"label" : "Tab Menu",
-						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.left.tabMenu.html"
-					},
-					{	"label" : "Tab Bar Background",
-						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.left.tabBarBackground.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.left.tabMenu.html",
+						"element" : "tabmenu",
+						"style"	: {
+							"textmenu":["normal_background-image","hover_background","selected_background","selected_background-image","background_background-image"]
+						}
 					}
 				]
 			},
 			{	"label" : "Right",
 				"tab" : [
 					{	"label" : "Tab Menu",
-						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.right.tabMenu.html"
-					},
-					{	"label" : "Tab Bar Background",
-						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.right.tabBarBackground.html"
+						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.right.tabMenu.html",
+						"element" : "tabmenu",
+						"style"	: {
+							"textmenu":["normal_background-image","hover_background","selected_background","selected_background-image","background_background-image"]
+						}
 					}
 				]
 			},
@@ -47,10 +46,10 @@
 				"tab" : [
 					{	"label" : "Tab Menu",
 						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.bottom.tabMenu.html",
-						"classname" : "org.goorm.core.theme"
-					},
-					{	"label" : "Tab Bar Background",
-						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.bottom.tabBarBackground.html"
+						"element" : "tabmenu",
+						"style"	: {
+							"textmenu":["normal_background-image","hover_background","selected_background","selected_background-image","background_background-image"]
+						}
 					}
 				]
 			},
@@ -58,46 +57,13 @@
 				"tab" : [
 					{	"label" : "Tab Menu",
 						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.center.tabMenu.html",
-						"classname" : "org.goorm.core.preferences.filetype"
-					},
-					{	"label" : "Tab Bar Background",
-						"html"	: "configs/dialogs/org.goorm.core.theme/theme.details.center.tabBarBackground.html"
-					}
-				]
-			}
-		]
-	},
-	"dialog" : {
-		"label" : "Dialog",
-		"expanded" : true,
-		"child" : [
-			{	"label" : "test1",
-					"tab" : [
-						{	"label" : "Info",
-							"html"	: "configs/preferences/org.goorm.core/system.info.html",
-							"classname" : "org.goorm.core.preferences.info"
-						},
-						{
-							"label" : "Libraries",
-							"html"	: "configs/preferences/org.goorm.core/system.libraries.html"
-						},
-						{
-							"label" : "Animations",
-							"html"	: "configs/preferences/org.goorm.core/system.animations.html"
+						"element" : "tabmenu",
+						"style"	: {
+							"textmenu":["normal_background-image","hover_background","selected_background","selected_background-image","background_background-image"]
 						}
-					]
-			},
-			{	"label" : "test2",
-				"tab" : [
-					{	"label" : "Setting",
-						"html"	: "configs/preferences/org.goorm.core.edit/edit.setting.html"
-					},
-					{	"label" : "Theme",
-						"html"	: "configs/preferences/org.goorm.core.edit/edit.theme.html"
 					}
 				]
 			}
-			
 		]
 	}
 }
