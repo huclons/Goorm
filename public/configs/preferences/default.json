@@ -24,7 +24,7 @@
 	"preference.designer.grid_opacity" :	0.3,
 	"preference.designer.ruler_unit" :		"px",
 	
-	"preference.theme.current_theme" : 		"default",
+	"preference.theme.current_theme" : 		"0",
 	
 	"share" : [
 		"collaboration_server_url",

@@ -82,7 +82,7 @@ org.goorm.core.theme.manager.prototype = {
 								content: data
 							});
 							tabview.addTab(tab);
-							self.create_datatable(json);
+/* 							self.create_datatable(object); */
 						}
 					});
 				}
@@ -105,24 +105,24 @@ org.goorm.core.theme.manager.prototype = {
 		});
 */
 	},
-	test: function() { 
-		
-	 },
-	create_datatable: function(tree_data) {
+	subscribe_datatable: function() {
 		var self = this;
-
-		console.log(tree_data);
-
-		self.table_variable_arrays = [];
+		for(var i = 0; i < self.table_variable_arrays.length; i++){
+		}
+	},
+	
+	create_datatable: function(json) {
+		var self = this;
+		console.log(json);
+		
 		var table_variable_column_definition = [
-			{key:"element", label:"Element", width:140}, 
-			{key:"anchor", label:"Anchor", width:40}, 
 			{key:"property", label:"Property", width:100},
-			{key:"value", label:"Value", width:351, editor: new YAHOO.widget.TextboxCellEditor({disableBtns:true})}
+			{key:"value", label:"Value", width:351, editor: new YAHOO.widget.TextboxCellEditor({disableBtns:true})},
+			{key:"description", label:"Description", width:180}
 		];
 		var table_variable_data_properties = new YAHOO.util.DataSource();
 		table_variable_data_properties.responseSchema = {
-			fields: ["element","anchor","property","value"]
+			fields: ["property","value","description"]
 		};
 		var highlightEditableCell = function(oArgs) {
 			var elCell = oArgs.target;
@@ -131,66 +131,32 @@ org.goorm.core.theme.manager.prototype = {
 			}
 		};
 
-/*
-		for(var position in self.parent.current_theme_data){
-			for(var element_name in self.parent.current_theme_data[position]){
-				self.table_variable_arrays.push(new YAHOO.widget.DataTable(position+"-"+element_name, table_variable_column_definition, table_variable_data_properties));
+		self.table_variable_arrays.push(new YAHOO.widget.ScrollingDataTable(json.element, table_variable_column_definition, table_variable_data_properties, {width:"694px", height:"310px"}));
 
-			}
-		}
+		style_cnt = 0;
+		for(var i = 0; i < json.style.length; i++){
+			var delimiter = json.element+"-"+json.style[i];
+			var delimiter_arrays = delimiter.split("_");
 
-		for(var i=0; i<self.table_variable_arrays.length;i++){
-			self.table_variable_arrays[i].subscribe("cellMouseoverEvent", highlightEditableCell);
-			self.table_variable_arrays[i].subscribe("cellMouseoutEvent", self.table_variable_arrays[i].onEventUnhighlightCell);
-			self.table_variable_arrays[i].subscribe("cellClickEvent", self.table_variable_arrays[i].onEventShowCellEditor);
-		}
-*/
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-/*
-var element_cnt = 0;
-for (var position in self.parent.current_theme_data){
-	for(var element_name in self.parent.current_theme_data[position]){
-		var style_cnt = 0;
-		if($.isArray(self.parent.current_theme_data[position][element_name])){
-			for(var object in self.parent.current_theme_data[position][element_name]){
-				for(var anchor in self.parent.current_theme_data[position][element_name][object]){
-					for(var property in self.parent.current_theme_data[position][element_name][object][anchor].style){
-						// selector : self.parent.current_theme_data[position][element_name][anchor][object].selector;
-						// style : self.parent.current_theme_data[position][element_name][anchor][object].style;
-						// value : self.parent.current_theme_data[position][element_name][anchor][object].style[property];
-						if($.isArray(self.parent.current_theme_data[position][element_name][object][anchor].style[property])){
-							for(var style_array=0; style_array< self.parent.current_theme_data[position][element_name][object][anchor].style[property].length; style_array++){
-								self.table_variable_arrays[element_cnt].addRow({element:position+" "+element_name, anchor:anchor, property:property, value:self.parent.current_theme_data[position][element_name][object][anchor].style[property][style_array]}, style_cnt++);
-							}
-						}
-						else{
-							self.table_variable_arrays[element_cnt].addRow({element:position+" "+element_name, anchor:anchor, property:property, value:self.parent.current_theme_data[position][element_name][object][anchor].style[property]}, style_cnt++);
-						}
-					}
-				}
-			}
-		}
-
-		else{
-			for(var property in self.parent.current_theme_data[position][element_name].style){
-				if($.isArray(self.parent.current_theme_data[position][element_name].style[property])){
-					for(var style_array=0; style_array<self.parent.current_theme_data[position][element_name].style[property].length; style_array++){
-						self.table_variable_arrays[element_cnt].addRow({element:position+" "+element_name, property:property, value:self.parent.current_theme_data[position][element_name].style[property][style_array]}, style_cnt++);
+			for(var property in self.parent.current_theme_data[delimiter_arrays[0]].style){
+				if($.isArray(self.parent.current_theme_data[delimiter_arrays[0]].style[property])){
+					for(var style_cnt=0; style_cnt<self.parent.current_theme_data[delimiter_arrays[0]].style[property].length; style_cnt++){
+						self.table_variable_arrays[self.table_variable_arrays.length-1].addRow({property:property, value:self.parent.current_theme_data[delimiter_arrays[0]].style[property][style_cnt], description:json.description}, style_cnt++);
 					}
 				}
 				else{
-					self.table_variable_arrays[element_cnt].addRow({element:position+" "+element_name, property:property, value:self.parent.current_theme_data[position][element_name].style[property]}, style_cnt++);
+					self.table_variable_arrays[self.table_variable_arrays.length-1].addRow({property:property, value:self.parent.current_theme_data[delimiter_arrays[0]].style[property], description:json.description}, style_cnt++);
 				}
 			}
 		}
-		element_cnt++;
-	}
-}
-*/
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+		self.table_variable_arrays[self.table_variable_arrays.length-1].subscribe("cellMouseoverEvent", highlightEditableCell);
+		self.table_variable_arrays[self.table_variable_arrays.length-1].subscribe("cellMouseoutEvent", self.table_variable_arrays[self.table_variable_arrays.length-1].onEventUnhighlightCell);
+		self.table_variable_arrays[self.table_variable_arrays.length-1].subscribe("cellClickEvent", self.table_variable_arrays[self.table_variable_arrays.length-1].onEventShowCellEditor);
+	},
+	delete_datatable: function() {
+		var self = this;
+		console.log("123");
+/* 		self.table_variable_arrays[i].destroy(); */
 	}
 };
 
