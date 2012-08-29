@@ -226,12 +226,12 @@ label:hover {
 	left:10px; 
 	width:620px; 
 	position:absolute; 
-	text-align:left; 
-	filter:alpha(opacity=50); 
-	opacity:0.5;
+	text-align:left;  
 	
 	font-size:11px; 
-	color:#000;
+	color:#fff;
+	
+	text-shadow: 0px 1px 4px #000000;
 }
 
 #loading_message {
@@ -242,7 +242,6 @@ label:hover {
 	font-size:10px; 
 	color:#fff;
 }
-
 
 #login_box_bg {
 	position:absolute; 

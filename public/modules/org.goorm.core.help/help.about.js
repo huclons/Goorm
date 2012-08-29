@@ -24,10 +24,10 @@ org.goorm.core.help.about.prototype = {
 						 
 		this.dialog = new org.goorm.core.help.about.dialog();
 		this.dialog.init({
-			title:"About goorm 3", 
+			title:"About goorm",
 			path:"configs/dialogs/org.goorm.core.help/help.about.html",
-			width:620,
-			height:550,
+			width:650,
+			height:600,
 			modal:true,
 			buttons:this.buttons,
 			success: function () {
