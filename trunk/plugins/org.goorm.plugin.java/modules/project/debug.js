@@ -11,7 +11,7 @@ module.exports = {
 
 		if(jdb !== null) jdb.kill('SIGHUP');
 		
-		jdb = spawn('jdb', ["-classpath", workspace+"/src/project/", "HelloWorld"]);
+		jdb = spawn('jdb', ["-classpath", workspace+"/src/project/", "main"]);
 		jdb.started=false;
 		jdb.command = false;
 		jdb.stdout.setEncoding('utf8');

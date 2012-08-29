@@ -87,7 +87,7 @@ org.goorm.plugin.java.prototype = {
 		this.path_project = "";
 
 		var classpath = "src/project";
-		var classname = "HelloWorld";
+		var classname = "main";
 
 		var cmd1 = "java -cp "+classpath+" "+classname;
 		console.log(cmd1);
@@ -102,8 +102,9 @@ org.goorm.plugin.java.prototype = {
 		
 		if(this.debug_con === null) {
 			this.debug_con = io.connect();
-			this.current_debug_project = path;
 		}
+		this.current_debug_project = path;
+		
 		this.debug_con.removeAllListeners("debug_response");
 		this.debug_con.on('debug_response', function (data) {
 			console.log(data);
@@ -114,10 +115,18 @@ org.goorm.plugin.java.prototype = {
 			if(data == "exited") {
 			// 커넥션 끊겼을시 처리
 //				self.debug_con.disconnect();
-				self.debug_con = null;
+//				self.debug_con = null;
 				console.log("connection disconnect()");
 				table_variable.initializeTable();
 				table_variable.refreshView();
+				
+				// highlight 제거
+				var windows = core.module.layout.workspace.window_manager.window;
+				for (var i in windows) {
+					var window = windows[i];
+					if(window.editor.clear_highlight)
+						window.editor.clear_highlight();
+				}
 			}
 			else if(regex_ready.test(data)){
 				self.debug_cmd({
@@ -276,7 +285,7 @@ org.goorm.plugin.java.prototype = {
 //			buildOptions = core.dialogPreference.preference['plugin.c.buildOptions'];
 //		}
 //		
-		var buildSource = "src/project/HelloWorld.java";
+		var buildSource = "src/project/main.java";
 //		var buildSource = $("#buildConfiguration").find('[name=plugin\\.c\\.buildSource]').val();		
 //		if(buildSource == undefined){
 //			buildSource = core.dialogPreference.preference['plugin.c.buildSource'];
