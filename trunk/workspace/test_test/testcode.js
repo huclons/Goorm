@@ -12,9 +12,8 @@ org.goorm.core.window.tab = function () {
 org.goorm.core.window.tab.prototype = {
 	
 	init: function(container, title, tabview, list_menu) {
-		
-		
-		var self = this;
+		parseEdsdfs
+        var self = this;
 		 
 		this.is_saved = true;
 		
