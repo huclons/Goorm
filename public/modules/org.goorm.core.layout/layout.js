@@ -77,6 +77,14 @@ org.goorm.core.layout.prototype = {
 			});
 
 			self.inner_layout.on('render', function() {
+				self.layout.getUnitByPosition("left").on("endResize", function() {
+					localStorage['layout_left_width'] = core.module.layout.layout._units.left._configs.width.value;
+				});
+				
+				self.layout.getUnitByPosition("left").on("beforeCollapse", function() {
+					localStorage['layout_left_width'] = core.module.layout.layout._units.left._configs.width.value;
+				});
+				
 				self.layout.getUnitByPosition("left").on("collapse", function() {
 					localStorage['layout_left_collapse'] = true;
 				});
@@ -85,6 +93,14 @@ org.goorm.core.layout.prototype = {
 					localStorage['layout_left_collapse'] = false;
 					//core.module.layout.layout._units.left._configs.width.value = localStorage['layout_left_width'];
 				});
+
+				self.inner_layout.getUnitByPosition("right").on("endResize", function() {
+					localStorage['layout_right_width'] = core.module.layout.inner_layout._units.right._configs.width.value;
+				});
+				
+				self.inner_layout.getUnitByPosition("right").on("beforeCollapse", function() {
+					localStorage['layout_right_width'] = core.module.layout.inner_layout._units.right._configs.width.value;
+				});
 				
 				self.inner_layout.getUnitByPosition("right").on("collapse", function() {
 					localStorage['layout_right_collapse'] = true;
@@ -92,8 +108,14 @@ org.goorm.core.layout.prototype = {
 				
 				self.inner_layout.getUnitByPosition("right").on("expand", function() {
 					localStorage['layout_right_collapse'] = false;
-					//console.log(localStorage['layout_right_width']);
-					//core.module.layout.inner_layout._units.right._configs.width.value = localStorage['layout_right_width'];
+				});
+				
+				self.inner_layout.getUnitByPosition("bottom").on("endResize", function() {
+					localStorage['layout_bottom_height'] = core.module.layout.inner_layout._units.bottom._configs.height.value;
+				});
+				
+				self.inner_layout.getUnitByPosition("bottom").on("beforeCollapse", function() {
+					localStorage['layout_bottom_height'] = core.module.layout.inner_layout._units.bottom._configs.height.value;
 				});
 				
 				self.inner_layout.getUnitByPosition("bottom").on("collapse", function() {
@@ -397,20 +419,7 @@ org.goorm.core.layout.prototype = {
 		$("#goorm_inner_layout_center").find("#workspace").height(layout_center_height);
 
 		$(".dummyspace").css("z-index", 0);
-		
-		if (localStorage['layout_left_collapse'] != "true") {
-			localStorage['layout_left_width'] = core.module.layout.layout._units.left._configs.width.value;
-		}
-		
-		if (localStorage['layout_right_collapse'] != "true") {
-			localStorage['layout_right_width'] = core.module.layout.inner_layout._units.right._configs.width.value;
-		}
-		
-		if (localStorage['layout_bottom_collapse'] != "true") {
-			localStorage['layout_bottom_height'] = core.module.layout.inner_layout._units.bottom._configs.height.value;
-		}
-		
-		
+
 		
 		$(core).trigger("layout_resized");
 
