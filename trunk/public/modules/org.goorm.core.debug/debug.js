@@ -107,10 +107,6 @@ org.goorm.core.debug.prototype = {
 				self.table_variable.subscribe("cellMouseoverEvent", highlight_editable_cell);
 				self.table_variable.subscribe("editorShowEvent", self.editor_show);
 				self.table_variable.subscribe("editorSaveEvent", self.variable_edit_complete);
-				
-//				self.table_variable.addRow({variable:"test", value:"1234", summary:"description..."}, 0);
-				
-				console.log(self.table_variable.onEventShowCellEditor);
 			});
 
 			$(core).bind("layout_resized", function () {

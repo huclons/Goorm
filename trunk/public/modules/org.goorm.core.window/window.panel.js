@@ -13,7 +13,7 @@ org.goorm.core.window.panel = function () {
 	this.tab = null;
 	this.editor = null;
 	this.designer = null;
-	this.rule_editor = null;
+	this.terminal = null;
 	this.title = null;
 	this.type = null;
 	this.status = null;
@@ -111,12 +111,17 @@ org.goorm.core.window.panel.prototype = {
 			this.designer.init($("#"+container).find(".window_container")[0], this.title);
 			this.designer.load(this.filepath, this.filename, this.filetype);
 		}
-		else if (editor == "Rule_Editor") {
-			this.type = "Rule_Editor";
+		else if (editor == "Terminal") {
+			this.type = "Terminal";
 			
-			this.rule_editor = new org.goorm.core.rule.edit();
-			this.rule_editor.init($("#"+container).find(".window_container")[0], this.title);
-			this.rule_editor.load(this.filepath, this.filename, this.filetype);
+			this.title = "Terminal";
+			
+			this.terminal = new org.goorm.core.terminal();
+			this.terminal.init($("#"+container).find(".window_container")[0], this.filename, true);
+			
+			$("#"+container).find(".window_container").css("overflow", "auto");
+			
+			this.panel.setFooter("");
 		}	
 		else if (this.inArray(this.filetype) > -1) {
 			this.type = core.filetypes[this.inArray(this.filetype)].editor;
@@ -532,7 +537,7 @@ org.goorm.core.window.panel.prototype = {
 	},
 	
 	resize_all: function() {
-		var height = $("#"+this.container).find(".bd").height();
+		var height = $("#"+this.container).find(".bd").height() - 10;
 		$("#"+this.container).find(".window_container").height(height);
 			
 		if(this.type == "Editor") {

@@ -449,7 +449,7 @@ label:hover {
 	cursor: pointer;
 }
 
-#terminal {
+#terminal, .terminal {
 	font-family: Consolas, Monaco, monospace, Monotype;
 	font-size:11px;
 	background-color: black;
@@ -457,7 +457,7 @@ label:hover {
 	padding:5px;
 }
 
-#terminal #prompt_input {
+#terminal #prompt_input, .terminal .prompt_input {
 	font-family: Consolas, Monaco, monospace, Monotype;
 	font-size:11px;
 	background-color: black;
@@ -469,15 +469,15 @@ label:hover {
 	border-radius: 0px;
 }
 
-#terminal #prompt_input:focus {
+#terminal #prompt_input:focus, .terminal .prompt_input:focus {
 	outline: none;
 }
 
-#terminal .stdout {
+#terminal .stdout, .terminal .stdout {
 	font-size:11px;
 }
 
-#terminal pre {
+#terminal pre, .terminal pre {
 	background-color: transparent;
 	padding: 0px;
 	line-height: 14px;

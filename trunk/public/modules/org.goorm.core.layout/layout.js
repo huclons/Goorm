@@ -379,7 +379,7 @@ org.goorm.core.layout.prototype = {
 		//});
 		
 		this.terminal = new org.goorm.core.terminal();
-		this.terminal.init($("#terminal"));
+		this.terminal.init($("#terminal"), "default_terminal", false);
 	},
 	
 	attach_search: function(target) {

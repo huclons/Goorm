@@ -209,14 +209,6 @@ org.goorm.core.window.manager.prototype = {
 			this.window[i].activate();
 		}
 		else {
-			//for test
-			if (filetype == "uml") {
-				editor = "Designer";
-			}
-			else {
-				editor = "Editor";
-			}
-		
 			this.add(filepath, filename, filetype, editor);
 			
 			if (this.maximized) {
