@@ -18,11 +18,10 @@ org.goorm.core.theme.details.prototype = {
 		self.parent = parent;
 
 		var handle_apply = function() { 
-			self.manager.delete_datatable();
+			self.manager.update_json();
 			this.hide(); 
 		};
 		var handle_cancel = function() { 
-			self.manager.delete_datatable();
 			this.hide(); 
 		};
 		this.buttons = [ {text:"Save", handler:handle_apply, isDefault:true},
@@ -52,14 +51,17 @@ org.goorm.core.theme.details.prototype = {
 						$("#theme_details_tabview > *").hide();
 						$("#theme_details_tabview #"+label).show();
  					});
+
+					self.manager.create_datatable();
 				});
 			}
+
 		});
 		this.dialog = this.dialog.dialog;
 	},
 
 	show: function () {
-/* 		this.manager.create_datatable(); */
-/* 		this.dialog.panel.show(); */
+		this.manager.set_datatable();
+		this.dialog.panel.show();
 	}
 };

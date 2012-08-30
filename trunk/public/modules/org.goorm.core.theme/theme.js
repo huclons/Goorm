@@ -9,6 +9,8 @@ org.goorm.core.theme = function () {
 	this.current_theme = null;
 	this.current_theme_data = null;
 	this.details_dialog = null;
+	this.apply_theme_button = null;
+	this.details_button = null;
 	
 };
 
@@ -17,13 +19,30 @@ org.goorm.core.theme.prototype = {
 	init: function () {
 		var self = this;
 		
+		self.apply_theme_button = new YAHOO.widget.Button({  
+									label:"Theme Apply",  
+									id:"theme_apply_button",  
+									container:"buttons_for_theme" }); 
+
+		self.details_button = new YAHOO.widget.Button({  
+									label:"Details",  
+									id:"details_button",  
+									container:"wrap_selectbox" }); 
+
+		function on_theme_apply_button_click(p_oEvent) { 
+			self.apply_theme();
+		} 
+		function on_details_button_click(p_oEvent) { 
+			self.details_dialog.show();
+		} 
+		
+		self.apply_theme_button.on("click", on_theme_apply_button_click); 
+		self.details_button.on("click", on_details_button_click); 
+
 		$.get("theme/get_list", "", function (data) {
 			self.theme_data = data
 			self.make_theme_selectbox();
-		});		
-
-/* 		$("#project_explorer").prepend("<div id='project_selector'></div>"); */
-/* 		$("#project_selector").append("<label class='selectbox'><select id='project_selectbox'></select></label>") */
+		});
 
 		$("#theme_selectbox").change(function() {
 			if($(this).val() == -1){
@@ -41,7 +60,6 @@ org.goorm.core.theme.prototype = {
 		var self = this;
 		
 		$("#theme_selectbox").empty();
-/* 		$("#theme_selectbox").append("<option value='' selected>Select Project</option>"); */
 
 		var max_num = parseInt($("#theme_selectbox").width()/8);
 
@@ -64,7 +82,10 @@ org.goorm.core.theme.prototype = {
 			}
 		}
 		
-		$("#theme_selectbox").append("<option value='-1'>Create New Theme ...</option>");
+/* 		$("#theme_selectbox").append("<option value='-1'>Create New Theme ...</option>"); */
+
+		self.details_dialog = new org.goorm.core.theme.details();
+		self.details_dialog.init(self);
 	},
 
 	//select box change
@@ -94,6 +115,13 @@ org.goorm.core.theme.prototype = {
 		$(".theme_info").append("<div>Version : "+temp_date+"</div>");
 		$(".theme_info").append("<div>Author : "+temp_author+"</div>");
 
+		if(self.current_theme.contents.modifiable=="true"){
+			$("#"+self.details_button._configs.id.value).show();
+		}
+		else{
+			$("#"+self.details_button._configs.id.value).hide();
+		}
+
 		self.get_theme_contents(theme_idx);
 
 	},
@@ -107,20 +135,10 @@ org.goorm.core.theme.prototype = {
 			data: { path: path },
 			success: function(data) {
 				self.current_theme_data = JSON.parse(data);
-				self.apply_theme();
-				self.details_dialog.show();
 			}
 		});
-		
-		self.details_dialog = new org.goorm.core.theme.details();
-		self.details_dialog.init(this);
-	},
-	apply_theme: function() {
-		var self = this;
-		self.save_theme();
-	},
-	
-	save_theme: function() { 
+	},	
+	apply_theme: function() { 
 		var self = this;
 		var url = "theme/put_contents";
 		var path = self.current_theme.name + "/" + self.current_theme.name+".css";
@@ -167,6 +185,21 @@ org.goorm.core.theme.prototype = {
 				m.s("Save complete! (" + self.filename + ")", "org.goorm.core.theme");
 			}
 		});
+
+		path = self.current_theme.name + "/" + self.current_theme.name+".json";
+		filedata = JSON.stringify(self.current_theme_data,null,'\t');
+
+		$.ajax({
+			url: url,			
+			type: "GET",
+			data: { path: path, data: filedata },
+			success: function(data) {
+				//apply theme
+				console.log("save!!");
+				m.s("Save complete! (" + self.filename + ")", "org.goorm.core.theme");
+			}
+		});
+
 	},
 	//create new theme
 	create_new_theme: function() {
