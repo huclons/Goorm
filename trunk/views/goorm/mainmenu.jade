@@ -155,7 +155,7 @@
            em.helptext Ctrl + Shift + G
         ul
          li.yuimenuitem
-          a.yuimenuitemlabel(action='auto_formatting', localization_key='edit_auto_formatting', style='')
+          a.yuimenuitemlabel(action='auto_formatting', localization_key='edit_auto_formatting', style='background-image: url(configs/toolbars/org.goorm.core.edit/image/auto_formatting.png);')
            | Auto Formatting
            em.helptext Alt + ?
          li.yuimenuitem
@@ -253,24 +253,24 @@
       .bd
         ul
          li.yuimenuitem
-          a.yuimenuitemlabel(action='debug', localization_key='project_debug', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+          a.yuimenuitemlabel(action='debug', localization_key='project_debug', style='background-image: url(configs/toolbars/org.goorm.core.debug/image/debug.png);')
            | Debug Start
            em.helptext F7
          li.yuimenuitem
-          a.yuimenuitemlabel(action='debug_continue', localization_key='project_debug', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+          a.yuimenuitemlabel(action='debug_continue', localization_key='project_debug', style='background-image: url(configs/toolbars/org.goorm.core.debug/image/continue.png);')
            | Continue
          li.yuimenuitem
-          a.yuimenuitemlabel(action='debug_terminate', localization_key='project_debug', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+          a.yuimenuitemlabel(action='debug_terminate', localization_key='project_debug', style='background-image: url(configs/toolbars/org.goorm.core.debug/image/terminate.png);')
            | Terminate
         ul
          li.yuimenuitem
-          a.yuimenuitemlabel(action='debug_step_over', localization_key='debug_step_over', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+          a.yuimenuitemlabel(action='debug_step_over', localization_key='debug_step_over', style='background-image: url(configs/toolbars/org.goorm.core.debug/image/step_over.png);')
            | Step over
          li.yuimenuitem
-          a.yuimenuitemlabel(action='debug_step_in', localization_key='debug_step_in', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+          a.yuimenuitemlabel(action='debug_step_in', localization_key='debug_step_in', style='background-image: url(configs/toolbars/org.goorm.core.debug/image/step_into.png);')
            | Step into
          li.yuimenuitem
-          a.yuimenuitemlabel(action='debug_step_out', localization_key='debug_step_out', style='background-image: url(configs/toolbars/org.goorm.core.project/image/debug.png);')
+          a.yuimenuitemlabel(action='debug_step_out', localization_key='debug_step_out', style='background-image: url(configs/toolbars/org.goorm.core.debug/image/step_out.png);')
            | Step out  
     //-li.yuimenubaritem
      //-a.yuimenubaritemlabel(href='#Collaboration', localization_key='collaboration') Collaboration 
@@ -303,7 +303,12 @@
       .bd
        ul
         li.yuimenuitem
-         a.yuimenuitemlabel(action='new_main_window', localization_key='window_new_main_window') New Main Window
+         a.yuimenuitemlabel(action='new_main_window', localization_key='window_new_main_window')
+          | New Main Window
+        li.yuimenuitem
+         a.yuimenuitemlabel(action='new_terminal_window', localization_key='window_new_terminal_window', style='background-image: url(configs/toolbars/org.goorm.core.window/image/terminal.png);')
+          | New Terminal Window
+          em.helptext Shift + Alt + T
        ul
         li.yuimenuitem
          a.yuimenuitemlabel(action='previous_window', localization_key='window_previous_window')
