@@ -772,6 +772,13 @@ org.goorm.core.menu.action.prototype = {
 			core.new_main_window();
 		});
 
+		var terminal_count = 0;
+		$("a[action=new_terminal_window]").unbind("click");
+		$("a[action=new_terminal_window]").click(function() {
+			terminal_count++;
+			core.module.layout.workspace.window_manager.open("/", "terminal" + terminal_count, "terminal", "Terminal");
+		});
+
 		$("a[action=previous_window]").unbind("click");
 		$("a[action=previous_window]").click(function() {
 			core.module.layout.workspace.window_manager.previous_window();

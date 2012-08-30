@@ -7,45 +7,61 @@ module.exports = {
 		
 		io.set('log level', 0);
 		io.sockets.on('connection', function (socket) {
+			var term = [];
 			
-			
-			var term = pty.spawn('bash', [], {
-				name: 'xterm-color',
-				cols: 80,
-				rows: 30,
-				cwd: process.env.HOME,
-				env: process.env
-			});
-			
-			socket.on('communication_someone_joined', function (msg) {
+			socket.on('terminal_join', function (msg) {
 				msg = JSON.parse(msg);
 				
-				socket.join(msg.workspace);
+				socket.join(msg.workspace + '/' + msg.terminal_name);
+				
+				console.log(msg.workspace + '/' + msg.terminal_name);
+				
+				term.push(pty.spawn('bash', [], {
+					name: 'xterm-color',
+					cols: 80,
+					rows: 30,
+					cwd: process.env.HOME,
+					env: process.env
+				}));
+				
+				term[term.length-1].on('data', function (data) {
+					var result = {};
+					result.stdout = data;
+					result.terminal_name = msg.terminal_name;
+					//evt.emit("executed_command", result);
+					//console.log(data);
+					console.log("on data : " + msg.workspace + '/' + msg.terminal_name);
+					socket.emit("pty_command_result", JSON.stringify(result));
+					//io.sockets.in(msg.workspace + '/' + msg.terminal_name).emit("pty_command_result", result);
+				});
+				
+				console.log(term.length);
+				
+				socket.to().emit("terminal_index", term.length - 1);
 			});
 			
-			socket.on('communication_someone_leaved', function (msg) {
+			socket.on('terminal_leave', function (msg) {
 				msg = JSON.parse(msg);
 				
-				socket.leave(msg.workspace);
+				socket.leave(msg.workspace + '/' + msg.terminal_name);
 			});
 
-			socket.on('pty_execute_command', function (command) {
-				self.exec(term, command);
+			socket.on('pty_execute_command', function (msg) {
+				console.log(msg);
+				msg = JSON.parse(msg);
+				
+				self.exec(term[msg.index], msg.command);
 			});
 			
-			socket.on('change_project_dir', function (project_path) {
-				term.write("cd " + global.__path + "workspace/" + project_path  + "\r");
+			socket.on('change_project_dir', function (msg) {
+				console.log(msg);
+				msg = JSON.parse(msg);
+				
+				term[msg.index].write("cd " + global.__path + "workspace/" + msg.project_path  + "\r");
 				//term.write("clear\r");
 			});
 			
-			term.on('data', function (data) {
-				var result = {};
-				result.stdout = data; 
-				//evt.emit("executed_command", result);
-				//console.log(data);
-				
-				socket.emit("pty_command_result", result);
-			});
+
 			
 			
 		});

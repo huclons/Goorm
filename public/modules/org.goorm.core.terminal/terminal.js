@@ -41,19 +41,29 @@ org.goorm.core.terminal = function () {
 	this.prompt_length = 0;
 	
 	//this.timestamp = "";
+	
+	this.in_panel = false;
+	
+	this.terminal_name = "";
+	
+	this.index = -1;
 };
 
 org.goorm.core.terminal.prototype = {
-	init: function (target) {
+	init: function (target, terminal_name, in_panel) {
 		var self = this;
 		
 		this.target = target;
 		
 		this.socket = io.connect();
 		
+		this.in_panel = in_panel;
+		this.terminal_name = terminal_name;
+		
+		$(target).addClass('terminal');
 		$(target).append("<div id='welcome'>welcome to goorm terminal :)</div>");
 		$(target).append("<div id='results'></div>");
-		$(target).append("<span id='prompt'><input id='prompt_input' /></div></span>");
+		$(target).append("<span id='prompt'><input id='prompt_input' class='prompt_input' /></div></span>");
 		
 		self.timestamp = (new Date()).getTime();
 		//$(target).find("#results").append("<div id='result_" + self.timestamp + "'>");
@@ -67,19 +77,21 @@ org.goorm.core.terminal.prototype = {
 			if (event.keyCode == '13') {
 				event.preventDefault();
 
-				var command = $(this).val();
 				//self.exec(command);
 				
 				//self.timestamp = (new Date()).getTime();
 				//$(target).find("#results").append("<div id='result_" + self.timestamp + "'></div>");
 				//$(target).find("#result_" + self.timestamp).append("<span id='prompt_user'>" + self.user+ "</span>@<span id='prompt_server'>" + self.server + "</span>:<span id='prompt_path'>" + self.path + "</span>$ ");
 				
-				self.socket.emit("pty_execute_command", command);
+				var msg = {
+					index: self.index,
+					command: $(this).val()
+				};
 				
-				self.history.push(command);
+				self.socket.emit("pty_execute_command", JSON.stringify(msg));
+				
+				self.history.push(msg.command);
 				self.history_count = self.history.length - 1;
-				
-
 			}
 			else if (event.keyCode == '40') { //Down Arrow
 				if (self.history_count < self.history.length - 1) {
@@ -98,22 +110,40 @@ org.goorm.core.terminal.prototype = {
 			else if (event.keyCode == '9') { //Tab
 				event.preventDefault();
 				
-				var command = $(this).val();
+				var msg = {
+					index: self.index,
+					command: $(this).val() + '\x09'
+				};
 				
-				self.socket.emit("pty_execute_command", command + '\x09');
+				self.socket.emit("pty_execute_command", msg);
 			}
 			else if ((event.keyCode == '99' || event.keyCode == '67') && event.ctrlKey) { //Ctrl + C
 				event.preventDefault();
+				
+				var msg = {
+					index: self.index,
+					command: $(this).val() + '\x03'
+				};
 				
 				self.socket.emit("pty_execute_command", '\x03');
 			}
 			else if ((event.keyCode == '120' || event.keyCode == '88') && event.ctrlKey) { //Ctrl + X
 				event.preventDefault();
 				
+				var msg = {
+					index: self.index,
+					command: $(this).val() + '\x18'
+				};
+				
 				self.socket.emit("pty_execute_command", '\x18');
 			}
 			else if ((event.keyCode == '122' || event.keyCode == '90') && event.ctrlKey) { //Ctrl + Z
 				event.preventDefault();
+				
+				var msg = {
+					index: self.index,
+					command: $(this).val() + '\x1A'
+				};
 				
 				self.socket.emit("pty_execute_command", '\x1A');
 			}
@@ -125,48 +155,96 @@ org.goorm.core.terminal.prototype = {
 		
 		var temp_stdout = "";
 		
-		this.socket.on("pty_command_result", function (data) {
-			var stdout = data.stdout;
-			
-			temp_stdout += stdout;
-
-			if (stdout.indexOf('\n') > -1 || stdout.indexOf('$') > -1) {
-				temp_stdout = temp_stdout.replace('[H', '').replace('[2J', '');
-				temp_stdout = self.transform_bash_to_html(temp_stdout);
-				$(self.target).find("#results").append(temp_stdout);
-				
-				temp_stdout = "";
+		
+		this.socket.on("terminal_index", function (data) {
+			if (self.index == -1) {
+				console.log("terminal_index", data);
+				self.index = parseInt(data);
 			}
 			
-			$(self.target).find("#prompt_input").appendTo("#results pre:last");
-			
-			$(self.target).find("#prompt_input").val("");
-			$(self.target).find("#prompt_input").focus();
-			
-			$(self.target).parent().parent().scrollTop(parseInt($(self.target).height()));
-			
-			if (stdout.indexOf('[2J') > -1) {
-				var pre_count = $(self.target).find("#results pre").length;
-				
-				$(self.target).find("#results pre").each(function (i) {
-					if (pre_count - 1 > i) {
-						$(this).remove();
-					}
-				});
-			}
-			
-			self.resize_all();
+			$(self).trigger("got_index");
 		});
 		
-		$(core).bind("layout_resized", function () {
-			self.resize_all();
+		this.socket.on("pty_command_result", function (msg) {
+			msg = JSON.parse(msg);
+			
+			if (msg.terminal_name == self.terminal_name) {
+				var stdout = msg.stdout;
+				
+				temp_stdout += stdout;
+	
+				if (stdout.indexOf('\n') > -1 || stdout.indexOf('$') > -1) {
+					temp_stdout = temp_stdout.replace('[H', '').replace('[2J', '');
+					temp_stdout = self.transform_bash_to_html(temp_stdout);
+					$(self.target).find("#results").append(temp_stdout);
+					
+					temp_stdout = "";
+				}
+				
+				$(self.target).find("#prompt_input").appendTo($(self.target).find("#results pre:last"));
+				
+				$(self.target).find("#prompt_input").val("");
+				$(self.target).find("#prompt_input").focus();
+				
+				$(self.target).parent().parent().scrollTop(parseInt($(self.target).height()));
+				
+				if (stdout.indexOf('[2J') > -1) {
+					var pre_count = $(self.target).find("#results pre").length;
+					
+					$(self.target).find("#results pre").each(function (i) {
+						if (pre_count - 1 > i) {
+							$(this).remove();
+						}
+					});
+				}
+				
+				console.log(self.index, $(self.target).parent().parent().attr("class"));
+				
+				var from = (self.in_panel ? "panel" : "layout");
+				
+				self.resize_all(from);
+			}
 		});
+		
+		this.socket.emit("terminal_join", '{"workspace": "'+ core.status.current_project_name +'", "terminal_name":"' + this.terminal_name + '"}');
+		
+		$(core).bind("layout_resized", function () {
+			self.resize_all("layout");
+		});
+		
+		$(this.target).bind("panel_resize", function () {
+			self.resize_all("panel");
+		});
+		
+		$(this.target).bind("panel_close", function () {
+			self.socket.emit("terminal_leave", '{"workspace": "'+ core.status.current_project_name +'", "terminal_name":"' + self.terminal_name + '"}');
+		});
+		
 		
 		this.resize_all();
 	},
 	
 	change_project_dir: function () {
-		this.socket.emit("change_project_dir", core.status.current_project_path);
+		var self = this;
+		
+		if (this.index == -1) {
+			$(this).trigger("got_index", function () {
+				var msg = {
+					index: self.index,
+					project_path: core.status.current_project_path
+				};
+			
+				self.socket.emit("change_project_dir", JSON.stringify(msg));
+			});
+		}
+		else {
+			var msg = {
+				index: self.index,
+				project_path: core.status.current_project_path
+			};
+		
+			self.socket.emit("change_project_dir", JSON.stringify(msg));
+		}
 	},
 	
 	send_command: function (command) {
@@ -276,19 +354,36 @@ org.goorm.core.terminal.prototype = {
 		return data;
 	},
 	
-	resize_all: function () {
-		var layout_bottom_width = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").width() - 20;
-		var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 36;
-		var target_height = $(this.target).find("#results").height() + 20;
-		var prompt_width = (this.prompt_length + 2) * 9;
-		
-		$(this.target).find("#prompt_input").width(layout_bottom_width - prompt_width);
-		
-		if (target_height < layout_bottom_height) {
-			$(this.target).height(layout_bottom_height);
+	resize_all: function (from) {
+		if (self.in_panel && from == "panel") {
+			var panel_width = $(this.target).parent().width() - 20;
+			var panel_height = $(this.target).parent().height() - 50;
+			var target_height = $(this.target).find("#results").height() + 20;
+			var prompt_width = (this.prompt_length + 2) * 9;
+			
+			$(this.target).find("#prompt_input").width(panel_width - prompt_width);
+			
+			if (target_height < panel_height) {
+				$(this.target).height(panel_height);
+			}
+			else {
+				$(this.target).height(target_height);
+			}
 		}
-		else {
-			$(this.target).height(target_height);
+		else if (from == "layout") {
+			var layout_bottom_width = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").width() - 20;
+			var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 36;
+			var target_height = $(this.target).find("#results").height() + 20;
+			var prompt_width = (this.prompt_length + 2) * 9;
+			
+			$(this.target).find("#prompt_input").width(layout_bottom_width - prompt_width);
+			
+			if (target_height < layout_bottom_height) {
+				$(this.target).height(layout_bottom_height);
+			}
+			else {
+				$(this.target).height(target_height);
+			}
 		}
 	}
 };

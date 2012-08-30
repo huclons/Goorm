@@ -101,7 +101,7 @@ org.goorm.core.project._new.prototype = {
 
 				$.get("project/new", senddata, function (data) {
 					if(data.err_code==0) {
-						core.dialog.open_project.open(data.project_author+"_"+data.project_name, data.project_name, data.project_type);
+						
 
 						/*
 						 * for plugin, moyara 12.8.6
@@ -120,9 +120,7 @@ org.goorm.core.project._new.prototype = {
 							$('#project_new_import_form').submit();
 						}
 						
-						
-/*	작성필요
-*/
+						core.dialog.open_project.open(data.project_author+"_"+data.project_name, data.project_name, data.project_type);
 						// core.module.layout.show_chat(str);
 					}
 					else {
