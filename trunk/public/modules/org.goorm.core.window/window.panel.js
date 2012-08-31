@@ -537,7 +537,7 @@ org.goorm.core.window.panel.prototype = {
 	},
 	
 	resize_all: function() {
-		var height = $("#"+this.container).find(".bd").height() - 10;
+		var height = $("#"+this.container).find(".bd").height();
 		$("#"+this.container).find(".window_container").height(height);
 			
 		if(this.type == "Editor") {
@@ -549,13 +549,10 @@ org.goorm.core.window.panel.prototype = {
 			$("#"+this.container).find(".window_container").find(".CodeMirror-gutter").height(height);
 			
 		}
-		else if(this.type == "Rule_Editor") {
-			$("#"+this.container).find(".window_container").find(".CodeMirror").height(height);
-			$("#"+this.container).find(".window_container").find(".CodeMirror").find(".CodeMirror-scroll").css("height","100%");//height($("#"+this.container).height()-53);
-			$("#"+this.container).find(".window_container").find(".CodeMirror").find(".CodeMirror-scroll").children("div").height("100%");
-			$("#"+this.container).find(".window_container").find(".CodeMirror-gutter").height(height);
+		else if(this.type == "Terminal") {
+			$("#"+this.container).find(".window_container").height(height - 10);
 			
-			this.rule_editor.resize_all();
+			this.terminal.resize_all();
 		}
 		else if(this.type == "Designer") {
 			this.designer.resize_all();
