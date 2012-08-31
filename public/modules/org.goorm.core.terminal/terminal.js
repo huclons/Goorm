@@ -249,7 +249,12 @@ org.goorm.core.terminal.prototype = {
 	},
 	
 	send_command: function (command) {
-		this.socket.emit("pty_execute_command", command);
+		var msg = {
+			index: this.index,
+			command: command
+		};
+		
+		this.socket.emit("pty_execute_command", JSON.stringify(msg));
 	},
 	
 	set_prompt: function (data) {

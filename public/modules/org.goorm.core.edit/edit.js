@@ -290,6 +290,9 @@ org.goorm.core.edit.prototype = {
 		this.context_menu.init("configs/menu/org.goorm.core.edit/edit.context.html", "edit.context", this.target, this.timestamp, null, function () {
 			core.module.action.init();
 		});
+		
+		
+		this.highlight_line(5);
 	},
 	
 	highlight_line: function (line) {

@@ -28,7 +28,7 @@ PROJECT TREE STYLE CUSTOMIZATION
 
 .directory_treeview .node {
 	height:22px; 
-	line-height: 16px; 
+	line-height: 18px; 
 	padding-right:4px; 
 	overflow:hidden; 
 	white-space:nowrap;
