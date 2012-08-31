@@ -71,8 +71,8 @@ org.goorm.core.project.open.prototype = {
 	},
 	
 	open: function (current_project_path, current_project_name, current_project_type) {
+		console.log(current_project_type);
 		core.module.layout.communication.leave();
-		
 		core.status.current_project_path = current_project_path;
 		core.status.current_project_name = current_project_name;
 		core.status.current_project_type = current_project_type;
