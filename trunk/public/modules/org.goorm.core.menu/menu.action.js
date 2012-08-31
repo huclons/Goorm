@@ -466,7 +466,6 @@ org.goorm.core.menu.action.prototype = {
 
 		$("a[action=remote_run]").unbind("click");
 		$("a[action=remote_run]").click(function() {
-
 			if(core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] != undefined
 			&& !$(this).hasClass('yuimenuitemlabel-disabled')) {
 				// Android

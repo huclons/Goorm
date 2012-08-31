@@ -94,7 +94,7 @@ org.goorm.core.project.explorer.prototype = {
 			if(!$.isEmptyObject(localStorage["current_project"])){
 				self.current_project = $.parseJSON(localStorage["current_project"]);
 				if(self.current_project.current_project_name != ""){
-					core.dialog.open_project.open(self.current_project.current_project_path, self.current_project.current_project_name, self.current_project.current_projectType);
+					core.dialog.open_project.open(self.current_project.current_project_path, self.current_project.current_project_name, self.current_project.current_project_type);
 				}
 			}
 		});
@@ -191,7 +191,6 @@ org.goorm.core.project.explorer.prototype = {
 		
 	on_project_selectbox_change: function (project_idx) {
 		var self = this;
-
 		// need modify. NullA
 		if (project_idx!="") {
 			self.current_project.current_project_path =  self.project_data[project_idx].name;
