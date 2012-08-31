@@ -291,17 +291,28 @@ org.goorm.core.edit.prototype = {
 			core.module.action.init();
 		});
 		
-		
-		this.highlight_line(5);
+		$(this.target).find(".CodeMirror-lines div:first").append("<div class='highlight_line'></div>");
 	},
 	
 	highlight_line: function (line) {
+		//var cursor = this.editor.getCursor();
+		var cursor_pos = this.editor.charCoords({line:(line-1), ch:0}, "local");
+		
+		console.log(cursor_pos);
+		
+		$(this.target).find('.highlight_line').css("top", cursor_pos.y);
+		$(this.target).find('.highlight_line').show();
+		
+		
+/*
 		$(this.target).find(".CodeMirror-lines div:first div:last pre").removeClass("highlight");
 		$(this.target).find(".CodeMirror-lines div:first div:last pre:nth-child(" + line + ")").addClass("highlight");
+*/
 	},
 	
 	clear_highlight: function () {
-		$(this.target).find(".CodeMirror-lines div:first div:last pre").removeClass("highlight");
+		//$(this.target).find(".CodeMirror-lines div:first div:last pre").removeClass("highlight");
+		$(this.target).find('.highlight_line').hide();
 	},
 	
 	set_foldable: function () {
