@@ -76,6 +76,24 @@ org.goorm.core.theme.prototype = {
 				$("#theme_selectbox").append("<option value='"+theme_idx+"' selected>"+temp_name+"</option>");
 				self.current_theme = self.theme_data[theme_idx];
 				self.on_theme_selectbox_change(theme_idx);
+
+				var css_node = $("link[kind='theme']");
+				if(css_node.length==0){
+					$("head").append("<link>");
+					css_node = $("head").children(":last");
+					css_node.attr({
+						rel:  "stylesheet",
+						type: "text/css",
+						href: "/configs/themes/"+self.current_theme.name + "/" + self.current_theme.name+".css",
+						kind: "theme"
+					});
+				}
+				else{
+					css_node.attr({
+						href: "/configs/themes/"+self.current_theme.name + "/" + self.current_theme.name+".css",
+						kind: "theme"
+					});
+				}
 			}
 			else {
 				$("#theme_selectbox").append("<option value='"+theme_idx+"'>"+temp_name+"</option>");
@@ -123,7 +141,6 @@ org.goorm.core.theme.prototype = {
 		}
 
 		self.get_theme_contents(theme_idx);
-
 	},
 	get_theme_contents: function(theme_idx) { 
 		var self = this;
@@ -195,7 +212,6 @@ org.goorm.core.theme.prototype = {
 			data: { path: path, data: filedata },
 			success: function(data) {
 				//apply theme
-				console.log("save!!");
 				m.s("Save complete! (" + self.filename + ")", "org.goorm.core.theme");
 			}
 		});
