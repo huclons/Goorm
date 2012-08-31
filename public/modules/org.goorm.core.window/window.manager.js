@@ -207,6 +207,8 @@ org.goorm.core.window.manager.prototype = {
 		if(i >= 0) {
 			this.active_window = i;
 			this.window[i].activate();
+			
+			return this.window[i]
 		}
 		else {
 			this.add(filepath, filename, filetype, editor);
@@ -214,8 +216,22 @@ org.goorm.core.window.manager.prototype = {
 			if (this.maximized) {
 				this.window[this.window.length - 1].maximize();
 			}
+			
+			return this.window[this.window.length - 1];
 		}
 		
+	},
+	
+	find_by_filename: function (filepath, filename) {
+		var result = null;
+		
+		$(this.window).each(function (i) {
+			if (this.filepath == filepath && this.filename == filename) {
+				result = this;
+			}
+		});
+		
+		return result;
 	},
 	
 	is_opened: function (filepath, filename) {
@@ -518,4 +534,6 @@ org.goorm.core.window.manager.prototype = {
 		
 		this.window.remove(0, this.window.length-1);	
 	}
+	
+
 };
