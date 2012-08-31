@@ -47,6 +47,8 @@ org.goorm.core.terminal = function () {
 	this.terminal_name = "";
 	
 	this.index = -1;
+	
+	this.timestamp = null;
 };
 
 org.goorm.core.terminal.prototype = {
@@ -59,6 +61,7 @@ org.goorm.core.terminal.prototype = {
 		
 		this.in_panel = in_panel;
 		this.terminal_name = terminal_name;
+		this.timestamp = new Date();
 		
 		$(target).addClass('terminal');
 		$(target).append("<div id='welcome'>welcome to goorm terminal :)</div>");
@@ -156,13 +159,23 @@ org.goorm.core.terminal.prototype = {
 		var temp_stdout = "";
 		
 		
+		$(this).bind("got_index", function () {
+			var msg = {
+				index: self.index,
+				project_path: core.status.current_project_path
+			};
+		
+			self.socket.emit("change_project_dir", JSON.stringify(msg));
+		});
+		
 		this.socket.on("terminal_index", function (data) {
-			if (self.index == -1) {
-				console.log("terminal_index", data);
-				self.index = parseInt(data);
-			}
+			data = JSON.parse(data);
 			
-			$(self).trigger("got_index");
+			if (self.index == -1 && self.timestamp == data.timestamp) {
+				self.index = parseInt(data.index);
+				
+				$(self).trigger("got_index");
+			}
 		});
 		
 		this.socket.on("pty_command_result", function (msg) {
@@ -198,15 +211,13 @@ org.goorm.core.terminal.prototype = {
 					});
 				}
 				
-				console.log(self.index, $(self.target).parent().parent().attr("class"));
-				
 				var from = (self.in_panel ? "panel" : "layout");
 				
 				self.resize_all(from);
 			}
 		});
 		
-		this.socket.emit("terminal_join", '{"workspace": "'+ core.status.current_project_name +'", "terminal_name":"' + this.terminal_name + '"}');
+		this.socket.emit("terminal_join", '{"timestamp": "' + this.timestamp + '", "workspace": "'+ core.status.current_project_name +'", "terminal_name":"' + this.terminal_name + '"}');
 		
 		$(core).bind("layout_resized", function () {
 			self.resize_all("layout");
@@ -227,17 +238,7 @@ org.goorm.core.terminal.prototype = {
 	change_project_dir: function () {
 		var self = this;
 		
-		if (this.index == -1) {
-			$(this).trigger("got_index", function () {
-				var msg = {
-					index: self.index,
-					project_path: core.status.current_project_path
-				};
-			
-				self.socket.emit("change_project_dir", JSON.stringify(msg));
-			});
-		}
-		else {
+		if (this.index != -1) {
 			var msg = {
 				index: self.index,
 				project_path: core.status.current_project_path

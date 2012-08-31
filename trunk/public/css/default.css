@@ -1049,8 +1049,8 @@ YUI PANEL STYLE CUSTOMIZATION
 }
 
 .yui-skin-sam .yui-panel .hd, .yui-skin-sam .yui-panel .bd, .yui-skin-sam .yui-panel .ft {
-	border-left-color: #444;
-	border-right-color: #444;
+	border-left-color: #333;
+	border-right-color: #333;
 }
 
 .yui-skin-sam .yui-panel .ft {

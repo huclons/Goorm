@@ -37,7 +37,12 @@ module.exports = {
 				
 				console.log(term.length);
 				
-				socket.to().emit("terminal_index", term.length - 1);
+				var data = {
+					index: term.length - 1,
+					timestamp: msg.timestamp
+				};
+				
+				socket.to().emit("terminal_index", JSON.stringify(data));
 			});
 			
 			socket.on('terminal_leave', function (msg) {
@@ -65,8 +70,6 @@ module.exports = {
 			
 			
 		});
-		
-		
 	},
 	
 	exec: function (term, command) {
