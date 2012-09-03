@@ -29,7 +29,7 @@ org.goorm.core.terminal = function () {
 		{key: '44', css: 'background-color:#8888FF;'},
 		{key: '45', css: 'background-color:#FF33FF;'},
 		{key: '46', css: 'background-color:cyan;'},
-		{key: '47', css: 'background-color:white;'},
+		{key: '47', css: 'background-color:white;'}
 	];
 	this.ansi_color_code_regexp = /\[([0-9][0-9];?)* ?m/g;
 	this.bash_text_reset = /\[0*m/g;
@@ -178,15 +178,22 @@ org.goorm.core.terminal.prototype = {
 			}
 		});
 		
-		this.socket.on("pty_command_result", function (msg) {
-			msg = JSON.parse(msg);
+		var timeout = null;
+		var result = function (msg, mode) {
 			
 			if (msg.terminal_name == self.terminal_name) {
 				var stdout = msg.stdout;
-				
+//				console.log(stdout);
 				temp_stdout += stdout;
-	
-				if (stdout.indexOf('\n') > -1 || stdout.indexOf('$') > -1) {
+				
+				if (mode == 1 || /\n/.test(stdout) || stdout.indexOf('$') > -1) {
+					if(msg.terminal_name == "debug") {
+						var data = temp_stdout.split('\n');
+						$.each(data, function(i, d){
+							$(core.module.debug).trigger("terminal_msg", d);
+						});
+					}
+					
 					temp_stdout = temp_stdout.replace('[H', '').replace('[2J', '');
 					temp_stdout = self.transform_bash_to_html(temp_stdout);
 					$(self.target).find("#results").append(temp_stdout);
@@ -215,6 +222,16 @@ org.goorm.core.terminal.prototype = {
 				
 				self.resize_all(from);
 			}
+		}
+		
+		this.socket.on("pty_command_result", function(msg){
+			result(msg);
+			if(timeout) clearTimeout(timeout);
+			timeout = setTimeout(function(){
+				if(temp_stdout != "") {
+					result(msg, 1);
+				}
+			},500);
 		});
 		
 		this.socket.emit("terminal_join", '{"timestamp": "' + this.timestamp + '", "workspace": "'+ core.status.current_project_name +'", "terminal_name":"' + this.terminal_name + '"}');

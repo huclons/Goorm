@@ -12,8 +12,8 @@ org.goorm.plugin.cpp = function () {
 	this.build_target = null;
 	this.build_file_type = "o";
 	this.debug_con = null;
-	this.debug_buffer = 0;
 	this.current_debug_project = null;
+	this.terminal = null;
 };
 
 org.goorm.plugin.cpp.prototype = {
@@ -96,130 +96,145 @@ org.goorm.plugin.cpp.prototype = {
 		var self = this;
 		var table_variable = core.module.debug.table_variable;
 		var debug_module = core.module.debug;
-		
-		if(this.debug_con === null) {
-			this.debug_con = io.connect();
-		}
+		this.terminal = core.module.layout.workspace.window_manager.open("/", "debug", "terminal", "Terminal").terminal;
 		this.current_debug_project = path;
-		
-		this.debug_con.removeAllListeners("debug_response");
-		this.debug_con.on('debug_response', function (data) {
-			/*
-			 * debug_buffer : 0이면 버퍼링 사용x
-			 * 				  1이면 where 버퍼링
-			 * 				  2이면 local variable 버퍼링
-			 */
-			console.log(data);
-			var regex_locals = /Local variables:/;
-			var regex_where = /Where:/;
-			var regex_ready = /Ready:/;
-			
-			if(/Program exited normally/.test(data)) {
-			// 커넥션 끊겼을시 처리
-//				self.debug_con.disconnect();
-//				self.debug_con.socket.connected = false;
-//				console.log("connection disconnect()");
-				table_variable.initializeTable();
-				table_variable.refreshView();
-				
-				// highlight 제거
-				var windows = core.module.layout.workspace.window_manager.window;
-				for (var i in windows) {
-					var window = windows[i];
-					if(window.editor.clear_highlight)
-						window.editor.clear_highlight();
-				}
-			}
-			else if (regex_ready.test(data)) {
-				self.debug_cmd({
-					"mode":"init",
-					"project_path":path
-				});
-			}
-			else if(regex_where.test(data) || self.debug_buffer == 1) {
-			// 현재 라인 처리하는 부분.
-				var regex_end = /\(gdb\)/;
-				var lines = data.split('\n');
-				$.each(lines, function(i, line){
-					if(line == '') return;
-					
-					if(regex_end.test(line)) {
-						// 현재 라인 세팅 완료
-						self.debug_buffer = 0;
-					}
-					else if(self.debug_buffer == 1) {
-						// 현재 라인 처리
-						var regex = /#\d .* (.*):(\d+)/;
-						if(regex.test(line)) {
-							var match = line.match(regex);
-							var filename = match[1];
-							var line_number = match[2];
-							
-							var windows = core.module.layout.workspace.window_manager.window;
-							for (var i in windows) {
-								var window = windows[i];
-								if (window.project == self.current_debug_project 
-										&& window.filename == filename) {
-									window.editor.highlight_line(line_number);
-								}
-							}
-						}
-					}
-					else if(regex_where.test(line)) {
-						// 현재 라인 시작
-						self.debug_buffer = 1;
-					}
-				});
-			}
-			else if(regex_locals.test(data) || self.debug_buffer == 2) {
-			// Local variable 값을 처리하는 부분.
-				var regex_end = /\(gdb\)/;
-				var lines = data.split('\n');
-				$.each(lines, function(i, line){
-					if(line == '') return;
-					
-					if(regex_end.test(line)) {
-						// local variable 세팅 완료
-						self.debug_buffer = 0;
-						table_variable.refreshView();
-					}
-					else if(self.debug_buffer == 2) {
-						// local variable 추가
-						var variable = line.split(' = ');
-						table_variable.addRow({"variable":variable[0].trim(),"value":variable[1].trim()});
-					}
-					else if(regex_locals.test(line)) {
-						// local variable 시작
-						self.debug_buffer = 2;
-						table_variable.initializeTable();
-					}
-				});
-			}
-			else {
-			}
-		});
-		
-		$(debug_module).off("value_changed");
-		$(debug_module).on("value_changed",function(e, data){
-			self.debug_cmd({
-				"mode":"set_value",
-				"project_path":path,
-				"variable":data.variable,
-				"value":data.value
-			});
-		});
 		
 		// debug탭 초기화
 		table_variable.initializeTable();
 		table_variable.refreshView();
 		
-		// debug start!
+//		// debug start!
 		var send_data = {
 				"plugin" : "org.goorm.plugin.cpp",
 				"path" : path,
 				"mode" : "init"
 		};
-		this.debug_con.emit("debug", send_data);
+		this.debug_cmd(send_data);
+		
+		this.status_updated = false;
+		this.data_buffer = null;
+		this.debug_buffer = null;
+		this.timeouts = [];
+		if(this.started == true) {
+			this.started = false;
+			return;
+		}
+		this.started = false;
+		
+		
+		// command receive
+		$(core.module.debug).on("terminal_msg", function (e, data) {
+//			console.log(data);
+			
+			var regex_gdb = /\(gdb\)/;
+			var regex_where = /where/;
+			var regex_locals = /info locals/;
+			
+			if(/Program exited normally/.test(data)) {
+			// 커넥션 끊겼을시 처리
+				self.terminal.send_command("quit\r");
+				table_variable.initializeTable();
+				table_variable.refreshView();
+				
+				// timeout 제거
+				while(self.timeouts.length > 0) {
+					clearTimeout(self.timeouts.pop());
+				}
+				
+				// highlight 제거
+				var windows = core.module.layout.workspace.window_manager.window;
+				for (var i in windows) {
+					var window = windows[i];
+					if(window.editor)
+						window.editor.clear_highlight();
+				}
+			}
+			// gdb ready
+			else if(self.started === false && /[\. ]*done/.test(data)) {
+				self.debug_cmd({
+					"mode":"run",
+					"project_path":path
+				});
+				self.started = true;
+			}
+			
+			// 명령어가 실행된 뒤 현재라인과 변수를 불러온다.
+			else if (self.started === true && self.status_updated === false && regex_gdb.test(data)) {
+				var t1 = setTimeout(function(){
+				self.terminal.send_command("where\r");
+				}, 150);
+				
+				var t2 = setTimeout(function(){
+					self.terminal.send_command("info locals\r");
+				}, 300);
+				
+				self.timeouts.push(t1);
+				self.timeouts.push(t2);
+				self.status_updated = true;
+			}
+			
+			// gdb명령어가 실행되면 다음 gdb명령까지 데이터를 모은다.
+			if(regex_gdb.test(data)) {
+				if(self.debug_buffer != null) {
+//					console.log(self.debug_buffer);
+					// 현재 라인 처리하는 부분.
+					var lines = self.debug_buffer.split('\n');
+					var cmd = null;
+					$.each(lines, function(i, line){
+						if(line == '') return;
+						
+						if(regex_where.test(line)) {
+							// 현재 라인 시작
+							cmd = 1;
+						}
+						else if(cmd == 1) {
+							// 현재 라인 처리
+							var regex = /#\d .* (.*):(\d+)/;
+							if(regex.test(line)) {
+								var match = line.match(regex);
+								var filename = match[1];
+								var line_number = match[2];
+								
+								var windows = core.module.layout.workspace.window_manager.window;
+								for (var i in windows) {
+									var window = windows[i];
+									if (window.project == self.current_debug_project 
+											&& window.filename == filename) {
+										window.editor.highlight_line(line_number);
+									}
+								}
+							}
+						}
+						
+						if(regex_locals.test(line)) {
+							// local variable 시작
+							cmd = 2;
+							table_variable.initializeTable();
+						}
+						else if(cmd == 2) {
+							// local variable 추가
+							var variable = line.split(' = ');
+							if (variable.length == 2) {
+								table_variable.addRow({
+									"variable": variable[0].trim(),
+									"value": variable[1].trim()
+								});
+							}
+						}
+					});
+					table_variable.refreshView();
+				}
+				self.debug_buffer = data;
+			}
+			else {
+				self.debug_buffer += '\n'+data;
+			}
+		});
+		
+		$(debug_module).off("value_changed");
+		$(debug_module).on("value_changed",function(e, data){
+			self.terminal.send_command("p "+data.variable+"="+data.value+"\r");
+		});
 	},
 	
 	/*
@@ -230,46 +245,60 @@ org.goorm.plugin.cpp.prototype = {
 		 * cmd = { mode, project_path }
 		 */
 		var self=this;
-		if(this.debug_con === null) {
+		if(this.terminal === null) {
 			console.log("no connection!");
 			return ;
 		}
+		
+		this.status_updated = false;
 		
 		var windows = core.module.layout.workspace.window_manager.window;
 		for (var i in windows) {
 			var window = windows[i];
 			if (window.project == this.current_debug_project) {
 				var filename = window.filename;
+				
+				if(!window.editor) continue;				
 				var breakpoints = window.editor.breakpoints;
 				if(breakpoints.length > 0){
-					self.debug_con.emit("debug", {
-						"plugin" : "org.goorm.plugin.cpp",
-						"mode" : "set_breakpoints",
-						"filename" : filename,
-						"breakpoints" : breakpoints
-					});
+					self.terminal.send_command('clear\r');
+					
+					for(var i=0; i < breakpoints.length; i++) {
+						var breakpoint = breakpoints[i];
+						breakpoint += 1;
+						breakpoint = filename+":"+breakpoint;
+						self.terminal.send_command("break "+breakpoint+"\r");
+					}
+				}
+				else {
+					// no breakpoints
+					this.status_updated = true;
 				}
 			}
 		}
 		
-		var json = cmd;
-		json.plugin = "org.goorm.plugin.cpp";
 		switch (cmd.mode) {
 		case 'init':
-			json.mode = "init_run";
-			self.debug_con.emit("debug", json);
-			break;
+			self.terminal.send_command("gdb main\r"); break;
+		case 'run':
+			self.terminal.send_command("run\r"); break;
 		case 'continue':
+			self.terminal.send_command("continue\r"); break;
 		case 'terminate':
-		case 'step_over':
-		case 'step_in':
-		case 'step_out':
-		case 'set_value':
-			json.mode = cmd.mode;
-			self.debug_con.emit("debug", json);
+			self.terminal.send_command("quit\r"); 
+			table_variable.initializeTable();
+			table_variable.refreshView();
+			self.status_updated = true;
 			break;
+		case 'step_over':
+			self.terminal.send_command("next\r"); break;
+		case 'step_in':
+			self.terminal.send_command("step\r"); break;
+		case 'step_out':
+			self.terminal.send_command("finish\r"); break;
 		default : break;
 		}
+		
 	},
 	
 	build: function (projectName, projectPath, callback) {

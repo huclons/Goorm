@@ -21,19 +21,19 @@ module.exports = {
 		});
 		
 		new_project.do_new(req, evt);
-	},
-	
-	debug: function(req, evt) {
-		var debug = require(common.path+"modules/project/debug.js");
-		
-		if(req.mode == "init") {
-			debug.init(req, evt);
-		}
-		else if (req.mode == "close") {
-			debug.close();
-		}
-		else {
-			debug.debug(req, evt);
-		}
 	}
+	
+//	debug: function(req, evt) {
+//		var debug = require(common.path+"modules/project/debug.js");
+//		
+//		if(req.mode == "init") {
+//			debug.init(req, evt);
+//		}
+//		else if (req.mode == "close") {
+//			debug.close();
+//		}
+//		else {
+//			debug.debug(req, evt);
+//		}
+//	}
 };

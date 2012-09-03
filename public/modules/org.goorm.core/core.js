@@ -436,7 +436,7 @@ org.goorm.core.prototype = {
 		$("#goorm_dialog_container").append("<div id='loading_panel_container'></div>");
 		$("#goorm_dialog_container").append("<div id='loading_background'></div>");
 		$("#loading_panel_container").append("<div id='main_loading_image'><div id='goorm_loading_status_bar'></div></div>");
-		$("#loading_panel_container").append("<div id='developers'>Sung-tae Ryu, Noori Kim, Byuongwoong Ahn, Eungwi Jo, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park</div>");
+		$("#loading_panel_container").append("<div id='developers'>Sung-tae Ryu, Noori Kim, Byeong-ung Ahn, Eungwi Jo, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park</div>");
 		$("#loading_panel_container").append("<div id='loading_message'></div>");
 		$("#loading_panel_container").append("<div id='login_box_bg'></div>");
 		$("#loading_panel_container").append("<div id='login_box'></div>");
