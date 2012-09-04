@@ -195,6 +195,8 @@ org.goorm.core.terminal.prototype = {
 					}
 					
 					temp_stdout = temp_stdout.replace('[H', '').replace('[2J', '');
+					
+					temp_stdout = temp_stdout.replace(/\[\d[A-Z]/g, '');
 					temp_stdout = self.transform_bash_to_html(temp_stdout);
 					$(self.target).find("#results").append(temp_stdout);
 					
