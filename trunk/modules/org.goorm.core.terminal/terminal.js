@@ -14,7 +14,7 @@ module.exports = {
 				
 				socket.join(msg.workspace + '/' + msg.terminal_name);
 				
-				console.log(msg.workspace + '/' + msg.terminal_name);
+				console.log("Joined: " + msg.workspace + '/' + msg.terminal_name);
 				
 				term.push(pty.spawn('bash', [], {
 					name: 'xterm-color',
@@ -35,7 +35,7 @@ module.exports = {
 					//io.sockets.in(msg.workspace + '/' + msg.terminal_name).emit("pty_command_result", result);
 				});
 				
-				console.log(term.length);
+				console.log("Terminal Count: " + term.length);
 				
 				var data = {
 					index: term.length - 1,
@@ -52,6 +52,7 @@ module.exports = {
 			});
 
 			socket.on('pty_execute_command', function (msg) {
+				console.log("#execute command");
 				console.log(msg);
 				msg = JSON.parse(msg);
 				
@@ -73,11 +74,16 @@ module.exports = {
 	},
 	
 	exec: function (term, command) {
-		if (command.indexOf('\t') > -1) { //TAB
-			term.write(command);
+		if (term != undefined && term != null) {
+			if (command.indexOf('\t') > -1) { //TAB
+				term.write(command);
+			}
+			else {
+				term.write(command + ' \r');
+			}
 		}
 		else {
-			term.write(command + ' \r');
+			console.log("terminal object is empty...");
 		}
 	}
 };

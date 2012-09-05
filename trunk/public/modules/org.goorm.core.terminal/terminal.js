@@ -171,7 +171,11 @@ org.goorm.core.terminal.prototype = {
 		this.socket.on("terminal_index", function (data) {
 			data = JSON.parse(data);
 			
+			console.log("terminal_index!");
+			
 			if (self.index == -1 && self.timestamp == data.timestamp) {
+				console.log("set terminal index...");
+				
 				self.index = parseInt(data.index);
 				
 				$(self).trigger("got_index");
