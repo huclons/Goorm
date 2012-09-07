@@ -182,20 +182,22 @@ org.goorm.core.window.manager.prototype = {
 		console.log("save_workspace");
 	
 		var window_data = [];
-		
+		var self = this;
 		$(this.window).each(function (i) {
-			window_data.push({
-				filepath: this.filepath,
-				filename: this.filename,
-				filetype: this.filetype,
-				editor: this.type,
-				left: this.left,
-				top: this.top,
-				width: this.width,
-				height: this.height,
-				index: this.index,
-				status: this.status
-			});
+			if (self.window[i].alive) {
+				window_data.push({
+					filepath: this.filepath,
+					filename: this.filename,
+					filetype: this.filetype,
+					editor: this.type,
+					left: this.left,
+					top: this.top,
+					width: this.width,
+					height: this.height,
+					index: this.index,
+					status: this.status
+				});
+			}
 		});
 
 		localStorage["workspace_window"] = JSON.stringify(window_data);
