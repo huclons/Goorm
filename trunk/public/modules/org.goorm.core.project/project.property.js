@@ -18,10 +18,8 @@ org.goorm.core.project.property.prototype = {
 	init: function () { 
 		var self = this;
 		this.manager = new org.goorm.core.project.property.manager();
-/*
 		this.manager.xml_parser("configs/project/property/default.xml");
 		this.xml=this.manager.xml;
-*/
 		
 		this.property = {};
 		this.plugin = {};
@@ -30,7 +28,6 @@ org.goorm.core.project.property.prototype = {
 		
 		// Handler for OK button
 		var handle_ok = function() {
-/*
 			var valid = 1;
 			
 			// For input elements, validate values and put them into 'postdata'
@@ -77,14 +74,11 @@ org.goorm.core.project.property.prototype = {
 				self.save_project_xml();
 				this.hide();
 			}
-*/
 		};
 
 		var handle_cancel = function() { 
 			this.hide();
-/*
 			self.set_before(); 
-*/
 		};
 		
 		this.buttons = [ {text:"OK", handler:handle_ok, isDefault:true},
@@ -100,7 +94,6 @@ org.goorm.core.project.property.prototype = {
 			buttons:this.buttons,
 			success: function () {
 				// On the right side of dialog
-/*
 				self.manager.create_treeview(self.xml);
 
 				// Plugin setting
@@ -113,11 +106,9 @@ org.goorm.core.project.property.prototype = {
 					self.plugin[plugin_name] = new self.manager.plugin(core.module.plugin_manager.list[i].plugin_name);
 					self.plugin[plugin_name].xml = self.manager.xml;
 				}
-*/
 					
 				$("#property_tabview #Information").show();
 
-/*
 				// TreeView labelClick function
 				self.manager.treeview.subscribe("clickEvent", function(nodedata){
 					var label = nodedata.node.label;
@@ -126,7 +117,6 @@ org.goorm.core.project.property.prototype = {
 					$("#property_tabview").children().hide();
 					$("#property_tabview #property_"+label).show();
 				});
-*/
 			}
 		});
 		this.dialog = this.dialog.dialog;
