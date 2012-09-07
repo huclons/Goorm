@@ -169,18 +169,13 @@ org.goorm.core.terminal.prototype = {
 		});
 		
 		this.socket.on("on_change_project_dir", function (data) {
-			console.log("terminal","terminal ready");
 			$(self).trigger("terminal_ready");
 		});
 		
 		this.socket.on("terminal_index", function (data) {
 			data = JSON.parse(data);
 			
-			console.log("terminal_index!");
-			
 			if (self.index == -1 && self.timestamp == data.timestamp) {
-				console.log("set terminal index...");
-				
 				self.index = parseInt(data.index);
 				
 				$(self).trigger("got_index");
