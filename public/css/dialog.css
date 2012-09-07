@@ -143,6 +143,11 @@
 	background-color: #fff;
 }
 
+#file_new_other_dialog_middle {
+	border:1px solid #999;
+	background-color: #fff;
+}
+
 #folder_new_dialog_middle {
 	border:1px solid #999;
 	background-color: #fff;

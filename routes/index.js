@@ -173,6 +173,17 @@ exports.file.do_new_folder = function(req, res){
 	g_file.do_new_folder(req.query, evt);
 };
 
+exports.file.do_new_other = function(req, res){
+	var evt = new EventEmitter();
+	
+	evt.on("file_do_new_other", function (data) {
+		res.json(data);
+	});
+
+	g_file.do_new_other(req.query, evt);
+};
+
+
 exports.file.do_new_untitled_text_file = function(req, res){
 	var evt = new EventEmitter();
 
