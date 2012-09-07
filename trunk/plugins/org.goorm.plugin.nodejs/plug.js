@@ -173,6 +173,7 @@ org.goorm.plugin.nodejs.prototype = {
 					if(window.editor)
 						window.editor.clear_highlight();
 				}
+				flags.terminated = false;
 			}
 			else if (!flags.started && flags.connected && flags.prompt) {
 				console.log("nodejs","ready");
@@ -201,7 +202,7 @@ org.goorm.plugin.nodejs.prototype = {
 				flags.prompt = false;
 			}
 			
-			console.log(data);
+//			console.log(data);
 			
 			// ndb명령어가 실행되면 다음 ndb명령까지 데이터를 모은다.
 			if(regex_ndb.test(data)) {

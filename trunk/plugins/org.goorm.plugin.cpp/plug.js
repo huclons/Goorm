@@ -122,14 +122,16 @@ org.goorm.plugin.cpp.prototype = {
 		this.data_buffer = null;
 		this.debug_buffer = null;
 		this.timeouts = [];
-		if(this.started == true) {
-			this.started = false;
-			return;
-		}
-		this.started = false;
 		
+		var flags = {
+			"started" : 	false,
+			"terminated" : 	false,
+			"connected" :	false,
+			"prompt" :		false
+		}
 		
 		// command receive
+		$(core.module.debug).off("terminal_msg");
 		$(core.module.debug).on("terminal_msg", function (e, data) {
 //			console.log(data);
 			
@@ -138,13 +140,25 @@ org.goorm.plugin.cpp.prototype = {
 			var regex_locals = /info locals/;
 			
 			if(/Program exited normally/.test(data)) {
-			// 커넥션 끊겼을시 처리
+				flags.terminated = true;
+			}
+			// gdb ready
+			else if(/[\. ]*done/.test(data)) {
+				flags.connected = true;
+			}
+			// 명령어가 실행된 뒤 현재라인과 변수를 불러온다.
+			else if (regex_gdb.test(data)) {
+				flags.prompt = true;
+			}
+			
+			if (flags.terminated) {
+				// 커넥션 끊겼을시 처리
 				self.terminal.send_command("quit\r");
 				table_variable.initializeTable();
 				table_variable.refreshView();
 				
 				// timeout 제거
-				while(self.timeouts.length > 0) {
+				while (self.timeouts.length > 0) {
 					clearTimeout(self.timeouts.pop());
 				}
 				
@@ -152,21 +166,19 @@ org.goorm.plugin.cpp.prototype = {
 				var windows = core.module.layout.workspace.window_manager.window;
 				for (var i in windows) {
 					var window = windows[i];
-					if(window.editor)
+					if (window.editor) 
 						window.editor.clear_highlight();
 				}
+				flags.terminated = false;
 			}
-			// gdb ready
-			else if(self.started === false && /[\. ]*done/.test(data)) {
+			else if (!flags.started && flags.connected && flags.prompt) {
 				self.debug_cmd({
 					"mode":"run",
 					"project_path":path
 				});
-				self.started = true;
+				flags.started = true;
 			}
-			
-			// 명령어가 실행된 뒤 현재라인과 변수를 불러온다.
-			else if (self.started === true && self.status_updated === false && regex_gdb.test(data)) {
+			else if (flags.started && self.status_updated === false && flags.prompt) {
 				var t1 = setTimeout(function(){
 				self.terminal.send_command("where\r");
 				}, 150);
@@ -179,6 +191,8 @@ org.goorm.plugin.cpp.prototype = {
 				self.timeouts.push(t2);
 				self.status_updated = true;
 			}
+				
+			
 			
 			// gdb명령어가 실행되면 다음 gdb명령까지 데이터를 모은다.
 			if(regex_gdb.test(data)) {
