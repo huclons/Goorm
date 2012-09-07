@@ -142,6 +142,43 @@ module.exports = {
 		}
 	},
 	
+	do_new_other: function (query, evt) {
+		var self = this;
+		
+		var data = {};
+		data.err_code = 0;
+		data.message = "process done";
+
+		if ( query.current_path!=null && query.file_name!=null ) {
+			fs.exists(__path+'workspace/'+query.path, function(exists) {
+				if (exists) {
+					data.err_code = 20;
+					data.message = "Exist file";
+
+					evt.emit("file_do_new_other", data);
+				}
+				else {
+					fs.writeFile(__path+'workspace/'+query.current_path+'/'+query.file_name, "", function(err) {
+						if (err!=null) {
+							data.err_code = 40;
+							data.message = "Can not make file";
+							
+							evt.emit("file_do_new_other", data);
+						}
+						else {
+							evt.emit("file_do_new_other", data);
+						}
+					});
+				}
+			});
+		}
+		else {
+			data.err_code = 10;
+			data.message = "Invalid query";
+			evt.emit("file_do_new_other", data);
+		}
+	},
+	
 	put_contents: function (query, evt) {
 
 		var data = {};

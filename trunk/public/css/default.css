@@ -536,6 +536,11 @@ label:hover {
 	color:#FFF;
 }
 
+.selected_div {
+	background-color:#B3D4FF;
+	color:#FFF;
+}
+
 
 /**************************************************************************
 YUI BUTTON STYLE CUSTOMIZATION
