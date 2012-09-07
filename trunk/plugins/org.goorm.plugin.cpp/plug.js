@@ -109,7 +109,14 @@ org.goorm.plugin.cpp.prototype = {
 				"path" : path,
 				"mode" : "init"
 		};
-		this.debug_cmd(send_data);
+		if(this.terminal.index != -1) {
+			self.debug_cmd(send_data);
+		}
+		else {
+			$(this.terminal).one("terminal_ready", function(){
+				self.debug_cmd(send_data);
+			});
+		}
 		
 		this.status_updated = false;
 		this.data_buffer = null;
@@ -261,7 +268,7 @@ org.goorm.plugin.cpp.prototype = {
 				if(!window.editor) continue;				
 				var breakpoints = window.editor.breakpoints;
 				if(breakpoints.length > 0){
-					self.terminal.send_command('clear\r');
+//					self.terminal.send_command('clear\r');
 					
 					for(var i=0; i < breakpoints.length; i++) {
 						var breakpoint = breakpoints[i];

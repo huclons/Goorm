@@ -10,8 +10,8 @@ var express = require('express')
 var goorm = module.exports = express.createServer();
 var g_terminal = require("./modules/org.goorm.core.terminal/terminal");
 var g_collaboration = require("./modules/org.goorm.core.collaboration/collaboration");
-var g_debug = require("./modules/org.goorm.plugin/plugin");
 var g_utility = require("./modules/org.goorm.core.utility/utility");
+var g_port_manager = require("./modules/org.goorm.core.utility/utility.port_manager");
 
 global.__path = __dirname+"/";
 
@@ -103,4 +103,14 @@ var io = socketio.listen(goorm);
 
 g_terminal.start(io);
 g_collaboration.start(io);
-g_debug.debug_server(io);
+
+goorm.get('/alloc_port', function(req, res) {
+	// req : port, process_name
+	res.json(g_port_manager.alloc_port(req.query));
+});
+goorm.get('/remove_port', function(req, res) {
+	// req : port
+	res.json(g_port_manager.remove_port(req.query));
+});
+g_port_manager.alloc_port({ "port": 9999,
+	  "process_name": "goorm" });
