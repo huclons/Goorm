@@ -64,7 +64,7 @@ module.exports = {
 				msg = JSON.parse(msg);
 				
 				term[msg.index].write("cd " + global.__path + "workspace/" + msg.project_path  + "\r");
-				//term.write("clear\r");
+				socket.to().emit("on_change_project_dir", msg);
 			});
 			
 

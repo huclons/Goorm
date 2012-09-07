@@ -115,7 +115,14 @@ org.goorm.plugin.java.prototype = {
 				"path" : path,
 				"mode" : "init"
 		};
-		this.debug_cmd(send_data);
+		if(this.terminal.index != -1) {
+			self.debug_cmd(send_data);
+		}
+		else {
+			$(this.terminal).one("terminal_ready", function(){
+				self.debug_cmd(send_data);
+			});
+		}
 		
 		this.status_updated = false;
 		this.data_buffer = null;

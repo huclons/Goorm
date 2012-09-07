@@ -168,6 +168,11 @@ org.goorm.core.terminal.prototype = {
 			self.socket.emit("change_project_dir", JSON.stringify(msg));
 		});
 		
+		this.socket.on("on_change_project_dir", function (data) {
+			console.log("terminal","terminal ready");
+			$(self).trigger("terminal_ready");
+		});
+		
 		this.socket.on("terminal_index", function (data) {
 			data = JSON.parse(data);
 			

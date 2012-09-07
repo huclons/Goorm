@@ -113,35 +113,55 @@ org.goorm.plugin.nodejs.prototype = {
 				"path" : path,
 				"mode" : "init"
 		};
-		this.debug_cmd(send_data);
+		
+		if(this.terminal.index != -1) {
+			self.debug_cmd(send_data);
+		}
+		else {
+			$(this.terminal).one("terminal_ready", function(){
+				self.debug_cmd(send_data);
+			});
+		}
+		
 		this.debug_port = null;
 		this.status_updated = false;
-		this.data_buffer = null;
-		this.debug_buffer = null;
-		this.timeouts = [];
+		var debug_buffer = null;
+		var timeouts = [];
 
-		if(this.started == true) {
-			this.started = false;
-			return;
+		var flags = {
+			"started" : 	false,
+			"terminated" : 	false,
+			"connected" :	false,
+			"prompt" :		false
 		}
-		this.started = false;
-		
 		
 		// command receive
+		$(core.module.debug).off("terminal_msg");
 		$(core.module.debug).on("terminal_msg", function (e, data) {
 //			var regex_locals = /Local variables:/;
 			var regex_where = /backtrace/;
 			var regex_ndb = /debug>/;
-			console.log(data);
+			
 			if(/program terminated/.test(data)) {
-			// 커넥션 끊겼을시 처리
-				self.terminal.send_command("quit\r");
+				flags.terminated = true;
+			}
+			// ndb ready
+			else if(/connecting[\. ]*ok/.test(data)) {
+				flags.connected = true;
+			}
+			else if(regex_ndb.test(data)) {
+				flags.prompt = true;
+			}
+				
+			if(flags.terminated) {
+				// 커넥션 끊겼을시 처리
+//				self.terminal.send_command("quit\r");
 				table_variable.initializeTable();
 				table_variable.refreshView();
 				
 				// timeout 제거
-				while(self.timeouts.length > 0) {
-					clearTimeout(self.timeouts.pop());
+				while(timeouts.length > 0) {
+					clearTimeout(timeouts.pop());
 				}
 				
 				$.get("/remove_port", {"port":self.debug_port});
@@ -154,16 +174,18 @@ org.goorm.plugin.nodejs.prototype = {
 						window.editor.clear_highlight();
 				}
 			}
-			// ndb ready
-			else if(self.started === false && /connecting\.*ok/.test(data)) {
+			else if (!flags.started && flags.connected && flags.prompt) {
+				console.log("nodejs","ready");
 				self.debug_cmd({
 					"mode":"run",
 					"project_path":path
 				});
-				self.started = true;
+				flags.started = true;
+				flags.connected = false;
+				flags.prompt = false;
 			}
 			// 명령어가 실행된 뒤 현재라인과 변수를 불러온다.
-			else if (self.started === true && self.status_updated === false && regex_ndb.test(data)) {
+			else if (flags.started && self.status_updated === false && flags.prompt) {
 				self.terminal.send_command("backtrace\r");
 //				var t1 = setTimeout(function(){
 //					
@@ -173,17 +195,20 @@ org.goorm.plugin.nodejs.prototype = {
 //					self.terminal.send_command("locals\r");
 //				}, 200);
 				
-//				self.timeouts.push(t1);
-//				self.timeouts.push(t2);
+//				timeouts.push(t1);
+//				timeouts.push(t2);
 				self.status_updated = true;
+				flags.prompt = false;
 			}
+			
+			console.log(data);
 			
 			// ndb명령어가 실행되면 다음 ndb명령까지 데이터를 모은다.
 			if(regex_ndb.test(data)) {
-				if(self.debug_buffer != null) {
+				if(debug_buffer != null) {
 					
 					// 현재 라인 처리하는 부분.
-					var lines = self.debug_buffer.split('\n');
+					var lines = debug_buffer.split('\n');
 					var cmd = null;
 					$.each(lines, function(i, line){
 						if(line == '') return;
@@ -195,9 +220,10 @@ org.goorm.plugin.nodejs.prototype = {
 						}
 						else if(cmd == 1) {
 							// 현재 라인 처리
-							var regex = /#0 (.*):([\d]|):([\d]|)/;
+							var regex = /#0 (.*):([\d]+):([\d]+)/;
 							if(regex.test(line)) {
 								var match = line.match(regex);
+								console.log(match);
 								var filename = match[1];
 								var line_number = match[2];
 								
@@ -228,11 +254,11 @@ org.goorm.plugin.nodejs.prototype = {
 					});
 					table_variable.refreshView();
 				}
-				self.debug_buffer = data;
-//				console.log(2,self.debug_buffer);
+				debug_buffer = data;
+//				console.log(2,debug_buffer);
 			}
 			else {
-				self.debug_buffer += '\n'+data;
+				debug_buffer += '\n'+data;
 //				console.log(4,data);
 			}
 		});
@@ -258,76 +284,90 @@ org.goorm.plugin.nodejs.prototype = {
 		
 		this.status_updated = false;
 		
-		if(cmd.mode == "init") {
-			$.getJSON("/alloc_port", {"process_name":"node debug"}, function(result){
+		if (cmd.mode == "init") {
+			$.getJSON("/alloc_port", {
+				"process_name": "node debug"
+			}, function(result){
 				self.debug_port = result.port;
-				self.terminal.send_command("node debug --port="+result.port+" main.js\r");
+				self.terminal.send_command("node debug --port=" + result.port + " main.js\r");
 			})
 		}
-		
-		var windows = core.module.layout.workspace.window_manager.window;
-		for (var i=0; i < windows.length; i++) {
-			var window = windows[i];
-			var remains = [];
-
-			if (window.project == this.current_debug_project) {
-				var filename = window.filename;
+		else {
+			// set break points
+			var windows = core.module.layout.workspace.window_manager.window;
+			for (var i = 0; i < windows.length; i++) {
+				var window = windows[i];
+				var remains = [];
 				
-				if(window.editor === null) continue;				
-				var breakpoints = window.editor.breakpoints;
-				for(var j=0; j < self.breakpoints.length; j++) {
-					remains.push(self.breakpoints[j]);
-				}
-
-				if(breakpoints.length > 0){
-					for(var j=0; j < breakpoints.length; j++) {
-						var breakpoint = breakpoints[j];
-						breakpoint += 1;
-						breakpoint = "'"+filename+"', "+breakpoint;
-						var result = remains.inArray(breakpoint);
-						if(result == -1) {
-							self.terminal.send_command("setBreakpoint("+breakpoint+")\r");
-							self.breakpoints.push(breakpoint);
-						}
-						else {
-							remains.remove(result);
+				if (window.project == this.current_debug_project) {
+					var filename = window.filename;
+					
+					if (window.editor === null) 
+						continue;
+					var breakpoints = window.editor.breakpoints;
+					for (var j = 0; j < self.breakpoints.length; j++) {
+						remains.push(self.breakpoints[j]);
+					}
+					
+					if (breakpoints.length > 0) {
+						for (var j = 0; j < breakpoints.length; j++) {
+							var breakpoint = breakpoints[j];
+							breakpoint += 1;
+							breakpoint = "'" + filename + "', " + breakpoint;
+							var result = remains.inArray(breakpoint);
+							if (result == -1) {
+								console.log("nodejs", "setBreakpoint(" + breakpoint + ")");
+								self.terminal.send_command("setBreakpoint(" + breakpoint + ")\r");
+								self.breakpoints.push(breakpoint);
+							}
+							else {
+								remains.remove(result);
+							}
 						}
 					}
-				}
-				else {
-					// no breakpoints
-					this.status_updated = true;
-				}
-				
-				for(var j=0; j < remains.length; j++) {
-					var result = self.breakpoints.inArray(remains[j]);
-					if(result != -1) {
-						self.breakpoints.remove(result);
-						self.terminal.send_command("clearBreakpoint("+remains[j]+")\r");
+					else {
+						// no breakpoints
+//						this.status_updated = true;
+					}
+					
+					for (var j = 0; j < remains.length; j++) {
+						var result = self.breakpoints.inArray(remains[j]);
+						if (result != -1) {
+							self.breakpoints.remove(result);
+							self.terminal.send_command("clearBreakpoint(" + remains[j] + ")\r");
+						}
 					}
 				}
 			}
-		}
-		
-		switch (cmd.mode) {
-		case 'run':
-			self.terminal.send_command("run\r"); break;
-		case 'continue':
-			self.terminal.send_command("cont\r"); break;
-		case 'terminate':
-			self.terminal.send_command("quit\r"); 
-			table_variable.initializeTable();
-			table_variable.refreshView();
-			self.status_updated = true;
-			$.get("/remove_port", {"port":self.debug_port});
-			break;
-		case 'step_over':
-			self.terminal.send_command("next\r"); break;
-		case 'step_in':
-			self.terminal.send_command("step\r"); break;
-		case 'step_out':
-			self.terminal.send_command("out\r"); break;
-		default : break;
+			
+			switch (cmd.mode) {
+				case 'run':
+					//			self.terminal.send_command("run\r"); 
+					break;
+				case 'continue':
+					self.terminal.send_command("cont\r");
+					break;
+				case 'terminate':
+					self.terminal.send_command("quit\r");
+					table_variable.initializeTable();
+					table_variable.refreshView();
+					self.status_updated = true;
+					$.get("/remove_port", {
+						"port": self.debug_port
+					});
+					break;
+				case 'step_over':
+					self.terminal.send_command("next\r");
+					break;
+				case 'step_in':
+					self.terminal.send_command("step\r");
+					break;
+				case 'step_out':
+					self.terminal.send_command("out\r");
+					break;
+				default:
+					break;
+			}
 		}
 		
 	},
