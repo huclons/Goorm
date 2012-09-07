@@ -15,7 +15,12 @@ org.goorm.core.localization = function () {
 
 org.goorm.core.localization.prototype = {
 	init: function () {
-
+		var self = this;
+		var language = localStorage.getItem("language");
+		if(!language) language = "us";
+		$.getJSON("configs/languages/"+language+".msg.json", function(data){
+			self.msg=data;
+		});
 	},
 
 	change_language: function (language) {
@@ -39,63 +44,38 @@ org.goorm.core.localization.prototype = {
 		}
 		$("#language_button-button").text(current);
 
-		//Get a stencil and adapt it to div
-		var url = "file/get_contents";
+//		//Get a stencil and adapt it to div
+//		var url = "file/get_contents";
 		
-		$.ajax({
-			url: url,			
-			type: "GET",
-			data: "path=configs/language/"+language+".menu.json",
-			success: function(data) {
-
-				self.data1 = eval(data);
+		$.getJSON("configs/language/"+language+".menu.json", function(data){
+			self.data1 = data;
+		});
+		
+		$.getJSON("configs/language/"+language+".dialog.json", function(data){
+			self.data2 = data;
+		});
+		
+		$.getJSON("configs/language/"+language+".msg.json", function(data){
+			self.msg = data;
+			if (is_first && language=="kor") {
+				confirmation.init({
+					title: core.module.localization.msg["confirmationLanguageTitle"], 
+					message: core.module.localization.msg["confirmationLanguageMessage"],
+					yes_text: core.module.localization.msg["confirmation_yes"],
+					no_text: core.module.localization.msg["confirmation_no"],
+					yes: function () {
+						core.module.localization.change_language(language);
+						core.module.localization.before_language=language;
+					}, no: function () {
+						core.module.localization.change_language("us");
+						core.module.localization.before_language="us";
+					}
+				});
 				
-				self.apply(self.data1[0]);
+				confirmation.panel.show();
 			}
 		});
 
-		$.ajax({
-			url: url,			
-			type: "POST",
-			data: "path=configs/language/"+language+".dialog.json",
-			success: function(data) {
-				self.data2 = eval(data);
-				
-				self.apply(self.data2[0]);
-			}
-		});
-		
-		$.ajax({
-			url: url,			
-			type: "POST",
-			data: "path=configs/language/"+language+".msg.json",
-			success: function(data) {
-				self.data3 = eval(data);
-				delete self.msg;	
-				self.msg = new Array();
-				
-				self.apply_message(self.data3[0]);
-				
-				if (is_first && language=="kor") {
-					confirmation.init({
-						title: core.module.localization.msg["confirmationLanguageTitle"], 
-						message: core.module.localization.msg["confirmationLanguageMessage"],
-						yes_text: core.module.localization.msg["confirmation_yes"],
-						no_text: core.module.localization.msg["confirmation_no"],
-						yes: function () {
-							core.module.localization.change_language(language);
-							core.module.localization.before_language=language;
-						}, no: function () {
-							core.module.localization.change_language("us");
-							core.module.localization.before_language="us";
-						}
-					});
-					
-					confirmation.panel.show();
-				}
-			}
-		});
-		
 /*
 		$.getScript('config/language/' + language + '.msg.js', function () {
 
