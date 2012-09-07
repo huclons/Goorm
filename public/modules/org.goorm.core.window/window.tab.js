@@ -152,7 +152,6 @@ org.goorm.core.window.tab.prototype = {
 			
 			//core.module.layout.workspace.window_manager.window.splice(core.module.layout.workspace.window_manager.window.indexOf(this.tabview.getTabIndex(this.tab)), 1);
 					
-			
 			this.list_menu.removeItem(this.menuitem);
 			
 			this.context_menu.remove();
@@ -188,24 +187,26 @@ org.goorm.core.window.tab.prototype = {
 	activate: function() {
 		this.tabview.selectTab(this.tabview.getTabIndex(this.tab));
 		
-		
 		$("#window_list_menu").find(".yuimenuitem-checked").each(function(i) {
 			$(this).removeClass("yuimenuitem-checked");
 		});
 		
-		$(this.menuitem.element).addClass("yuimenuitem-checked");	
-		core.module.toolbar.switch_state(this.window.type);
-		this.window.show();
-		
-		if (!$("#" + this.window.container).find(".hd").hasClass("activated")) {
-			for (var i = 0; i < core.module.layout.workspace.window_manager.index; i++) {
-				if(core.module.layout.workspace.window_manager.window[i].alive && core.module.layout.workspace.window_manager.window[i]==this.window ) {
-					core.module.layout.workspace.window_manager.active_window = i;
-					break;
+		$(this.menuitem.element).addClass("yuimenuitem-checked");
+		if (this.window) {
+			core.module.toolbar.switch_state(this.window.type);
+			this.window.show();
+			
+			
+			if (!$("#" + this.window.container).find(".hd").hasClass("activated")) {
+				for (var i = 0; i < core.module.layout.workspace.window_manager.index; i++) {
+					if (core.module.layout.workspace.window_manager.window[i].alive && core.module.layout.workspace.window_manager.window[i] == this.window) {
+						core.module.layout.workspace.window_manager.active_window = i;
+						break;
+					}
 				}
+				
+				this.window.activate();
 			}
-
-			this.window.activate();
 		}
 	}
 };
