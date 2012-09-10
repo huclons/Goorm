@@ -70,6 +70,10 @@ org.goorm.core.edit.dictionary.prototype = {
 			
 			var from = {line:cursor.line, ch:token.start};
 			var to = {line:cursor.line, ch:token.end};
+			if(token.string == ".") {
+				from.ch += 1;
+				to.ch += 1;
+			}
 			
 			this.hide();
 			this.editor.replaceRange(string, from, to);

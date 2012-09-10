@@ -34,16 +34,14 @@ org.goorm.core.file._new.prototype = {
 			$.get("file/new", postdata, function (data) {
 				if (data.err_code == 99) {
 					confirmation.init({
-/*
 						title: core.module.localization.msg["confirmationNewTitle"], 
 						message: core.module.localization.msg["confirmationNewMessage"],
 						yes_text: core.module.localization.msg["confirmation_yes"],
 						no_text: core.module.localization.msg["confirmation_no"],
-*/
-						title: "Confirmation", 
-						message: "Exist file. Do you want to make anyway?",
-						yes_text: "yes",
-						no_text: "no",
+//						title: "Confirmation", 
+//						message: "Exist file. Do you want to make anyway?",
+//						yes_text: "yes",
+//						no_text: "no",
 						yes: function () {
 							self.is_new_anyway = true;
 							handle_ok();
