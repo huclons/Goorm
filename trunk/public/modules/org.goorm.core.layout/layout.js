@@ -181,6 +181,9 @@ org.goorm.core.layout.prototype = {
 		//Communication Tab
 		this.attach_communication(this.inner_right_tabview);
 		
+//		//Facebook Tab
+//		this.attach_facebook(this.inner_right_tabview);
+		
 		//Slide Show Tab
 		this.attach_slide(this.inner_right_tabview);
 		
@@ -364,11 +367,19 @@ org.goorm.core.layout.prototype = {
 		this.communication.init(project_id);
 	},
 	
-	attach_slide: function(target) {
+	attach_facebook: function(target) {
 		//attaching tab element
-		target.addTab(new YAHOO.widget.Tab({ label: "Slide", content: "<div id='slide' class='layout_right_slide_tab'></div>" }));
+		target.addTab(new YAHOO.widget.Tab({ label: "Facebook", content: "<div id='slide' class='layout_right_facebook_tab'><iframe src='http://www.facebook.com/pages' width='100%' height='100%' style='border:none; margin:none; padding:none;'/></div>" }));
 
 		
+	},
+	
+	attach_slide: function(target) {
+		//attaching tab element
+		target.addTab(new YAHOO.widget.Tab({ label: "Slide", content: "<div id='slide' class='layout_right_slide_tab'>Slide URL <input id='slide_url' type='text' value='http://www.slideshare.net/rohitbhargava/rohit-bhargava-invite-me-to-speak'/><button id='slideshare_presentation'>Presentation</button> <button id='slide_prev'>prev</button> <button id='slide_next'>next</button><iframe name='slideshare' src='http://localhost:9999/lib/slideshare/slide.html' width=100% height='90%' frameborder=0 marginwidth=0 marginheight=0 scrolling=no allowfullscreen> </iframe></div>" }));
+		this.slideshare = new org.goorm.core.collaboration.slideshare();
+		this.slideshare.init();
+				
 	},
 	
 	attach_terminal: function(target) {

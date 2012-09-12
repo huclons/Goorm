@@ -4,6 +4,7 @@ var communication = require('./collaboration.communication.js');
 var editing = require('./collaboration.editing.js');
 var composing = require('./collaboration.composing.js');
 var drawing = require('./collaboration.drawing.js');
+var slideshare = require('./collaboration.slideshare.js');
 
 
 module.exports = {
@@ -48,6 +49,9 @@ module.exports = {
 				}
 				else if (channel == "drawing") {
 					drawing.msg(socket, msg_obj);
+				}
+				else if (channel == "slideshare") {
+					slideshare.msg(socket, msg_obj);
 				}
 			});
 			

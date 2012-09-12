@@ -82,7 +82,7 @@ org.goorm.core.help.install_new_plugin.prototype = {
 						core.module.loading_bar.start("Loading, Please wait...");
 						
 						$.ajax({
-							type: "POST",
+							type: "get",
 							data: "path="+url,
 							url: "file/get_url_contents",
 							success: function(data) {
@@ -125,7 +125,7 @@ org.goorm.core.help.install_new_plugin.prototype = {
 //		var folderList = new Array();
 //		$.ajax({
 //			url: url,			
-//			type: "POST",
+//			type: "get",
 //			data: "path="+path,
 //			success: function(data) {
 //				
@@ -173,7 +173,7 @@ org.goorm.core.help.install_new_plugin.prototype = {
 			    
 			    $.ajax({
 					url: "plugin/install",			
-					type: "POST",
+					type: "get",
 					data: "path="+path,
 					//async:false,
 					success: function(data) {
