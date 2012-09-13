@@ -23,13 +23,12 @@ org.goorm.core.collaboration.slideshare.prototype = {
 			/*
 			 * data = {slide_url, page}
 			 */
-//			console.log(data);
 			
 			if(data.slide_url != self.current_slide_name) {
 				window.slideshare.loadPlayer(data.slide_url, data.page);
 				self.current_slide_name = data.slide_url;
 			}
-			if(window.slideshare.player) {
+			if(window.slideshare.player && window.slideshare.player.jumpTo) {
 				window.slideshare.player.jumpTo(data.page);
 			}
  		});
