@@ -444,6 +444,7 @@ org.goorm.core.prototype = {
 		$("#login_box").append("<input id='goorm_id' name='goorm_id' placeholder='username' />");
 		$("#login_box").append("<input id='goorm_pw' name='goorm_pw' placeholder='password' />");
 		$("#login_box").append("<input type='button' id='goorm_login_button' value='Login' />");
+		$("#login_box").after("<div id='login_message'></div>");
 		
 		this.login_button =  new YAHOO.widget.Button("goorm_login_button", { onclick: { fn: this.login } });
 		
@@ -453,7 +454,7 @@ org.goorm.core.prototype = {
 		$("#loading_background").css('left', 0);
 		$("#loading_background").css('top', 0);
 		$("#loading_background").css('z-index', 999);
-		$("#loading_background").css('background-color', "#EEE");		
+		$("#loading_background").css('background-color', "#EEE");
 		
 		
 		$("#loading_panel_container").css('display', "none");
@@ -467,22 +468,65 @@ org.goorm.core.prototype = {
 	},
 	
 	login: function () {
-		$("#loading_background").fadeOut(1000);
-		$("#loading_panel_container").fadeOut(1000);
+		var self = this;
+		var user_id = $("#goorm_id").val();
+		var user_pw = $("#goorm_pw").val();
+
+		$.ajax({
+			type: 'post', 
+			async: true, 
+			url: "/member/login", 
+			data: {id:user_id, pw:user_pw, auth_type:'password'}, 
+			success: function(data) {
+				//성공했으면 전역변수에 넣는다.
+				//cms.auth.info = data.info;
+				if(!data.err){
+					//아웃로그인 화면을 갱신한다.
+					//console.log(data);
+					core.user.first_name = data.info.id;
+					core.user.last_name = data.info.nick;
+
+					$("#login_message").empty();
+					$("#login_message").append("환영합니다. "+data.info.nick+" 님");
+					$("#login_message").fadeIn(500);
+
+				}else if(data.err.code==1){
+					$("#login_message").empty();
+					$("#login_message").append("비밀번호가 일치하지 않습니다.");
+					$("#login_message").fadeIn(500);
+				}else if(data.err.code==2){
+					$("#login_message").empty();
+					$("#login_message").append("구름 회원이 아닙니다.");
+					$("#login_message").fadeIn(500);
+				}else if(data.err.code==3){
+					$("#login_message").empty();
+					$("#login_message").append("아이디와 비밀번호를 입력하세요.");
+					$("#login_message").fadeIn(500);
+				}
+				$("#loading_background").delay(1000).fadeOut(1000);
+				$("#loading_panel_container").delay(1500).fadeOut(1000);
+			}, 
+			error: function(data, status, err) {	
+				console.log(status, err, '서버와의 통신이 실패했습니다.'); 
+			}
+		});
+
+
 	},
 
 	complete: function() {
+		$("#goorm").show();
 		$("#goorm").show();
 		
 		$("#goorm_loading_status_bar").fadeOut(1000);
 		
 		$("#login_box_bg").delay(1250).fadeIn(1500);
 		$("#login_box").delay(1500).fadeIn(2000);
+		$("#login_box").delay(1500).fadeIn(2000);
 		
-		$("#goorm_id").focus();
-		
-		$("#loading_background").delay(1000).fadeOut(1000);
-		$("#loading_panel_container").delay(1500).fadeOut(1000);
+
+/* 		$("#loading_background").delay(1000).fadeOut(1000); */
+/* 		$("#loading_panel_container").delay(1500).fadeOut(1000); */
 						
 		this.dialog.project_property.refresh_toolbox();
 	},
