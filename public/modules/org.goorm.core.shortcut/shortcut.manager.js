@@ -105,6 +105,9 @@ org.goorm.core.shortcut.manager.prototype = {
 
 		//Close
 		$(document).bind('keydown', 'Alt+X', function (e) {
+			var active_window = core.module.layout.workspace.window_manager.active_window;
+			core.module.layout.workspace.window_manager.window[active_window].close();
+
 			core.module.layout.mainmenu.blur();
 		
 			e.stopPropagation();

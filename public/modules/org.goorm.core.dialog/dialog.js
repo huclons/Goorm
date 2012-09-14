@@ -129,7 +129,7 @@ org.goorm.core.dialog.prototype = {
 						
 						this.hide = function(){};
 						this.handler();
-						
+												
 						core.status.keydown = true;
 					}
 				});

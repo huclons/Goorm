@@ -445,11 +445,11 @@ org.goorm.core.window.panel.prototype = {
 		}
 		else {
 			confirmation_save.init({
-				title: core.module.localization.msg["confirmation_save_title"], 
-				message: "\""+this.filename+"\" "+core.module.localization.msg["confirmation_save_message"],
-				yes_text: core.module.localization.msg["confirmation_yes"],
-				cancel_text: core.module.localization.msg["confirmation_cancel"],
-				no_text: core.module.localization.msg["confirmation_no"],
+				title: core.module.localization.msg["confirmationSaveTitle"].value, 
+				message: "\""+this.filename+"\" "+core.module.localization.msg["confirmationSaveMessage"].value,
+				yes_text: core.module.localization.msg["confirmationYes"].value,
+				cancel_text: core.module.localization.msg["confirmationCancel"].value,
+				no_text: core.module.localization.msg["confirmationNo"].value,
 				yes: function () {
 					self.editor.save("close");
 				}, cancel: function () {
@@ -473,7 +473,7 @@ org.goorm.core.window.panel.prototype = {
 	},	
 	
 	activate: function() {
-//		core.module.layout.workspace.window_manager.active_window = this.index;
+		core.module.layout.workspace.window_manager.active_window = this.index;
 
 		//core.dialog.project_property.refresh_toolbox();
 		$("#"+this.workspace_container).find(".activated").each(function(i) {
