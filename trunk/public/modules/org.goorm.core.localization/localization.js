@@ -59,10 +59,10 @@ org.goorm.core.localization.prototype = {
 			self.msg = data;
 			if (is_first && language=="kor") {
 				confirmation.init({
-					title: core.module.localization.msg["confirmationLanguageTitle"], 
-					message: core.module.localization.msg["confirmationLanguageMessage"],
-					yes_text: core.module.localization.msg["confirmation_yes"],
-					no_text: core.module.localization.msg["confirmation_no"],
+					title: core.module.localization.msg["confirmationLanguageTitle"].value, 
+					message: core.module.localization.msg["confirmationLanguageMessage"].value,
+					yes_text: core.module.localization.msg["confirmationYes"].value,
+					no_text: core.module.localization.msg["confirmationNo"].value,
 					yes: function () {
 						core.module.localization.change_language(language);
 						core.module.localization.before_language=language;

@@ -264,6 +264,8 @@ org.goorm.core.project.explorer.prototype = {
 				$("div[id='project.explorer']").css("top", e.clientY - offset);				
 			}
 			
+			core.status.selected_file = null;
+			
 			e.stopPropagation();
 			e.preventDefault();
 			return false;			

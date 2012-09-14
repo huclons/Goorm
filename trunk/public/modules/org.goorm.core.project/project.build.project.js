@@ -9,7 +9,8 @@ org.goorm.core.project.build.project = function () {
 	this.buttons = null;
 	this.button_select_all = null;	
 	this.button_deselect_all = null;
-	this.is_repeat = null
+	this.is_repeat = null;
+	this.is_onclick = false;
 };
 
 org.goorm.core.project.build.project.prototype = {
@@ -17,7 +18,7 @@ org.goorm.core.project.build.project.prototype = {
 	init: function () {
 		
 		var self = this;
-		
+
 		self.is_repeat = false;
 				
 		var handle_open = function() {
@@ -32,7 +33,11 @@ org.goorm.core.project.build.project.prototype = {
 
 					if ( !self.is_repeat ) {
 						$(window_manager.window).each(function (i) {
-							if( ("../../project/"+$(list).attr("project_path")) ==  this.filepath && !this.isSaved ) {
+							// if( ("../../project/"+$(list).attr("project_path")) ==  this.filepath && !this.isSaved ) {
+								// temp_filename = this.filename;
+								// did_save = true;
+								// target_window = i;
+														if( $(list).attr("project_path") + '/' ==  this.filepath && !this.isSaved ) {
 								temp_filename = this.filename;
 								did_save = true;
 								target_window = i;
@@ -40,14 +45,13 @@ org.goorm.core.project.build.project.prototype = {
 						});
 					}
 
-					if ( did_save && !self.is_repeat ) {
-
+					if ( !did_save && !self.is_repeat ) {
 						confirmation_save.init({
-							title: core.module.localization.msg["confirmation_save_title2"],
-							message: "\""+temp_filename+"\" "+core.module.localization.msg["confirmation_save_message2"],
-							yes_text: core.module.localization.msg["confirmation_yes"],
-							cancel_text: core.module.localization.msg["confirmation_cancel"],
-							no_text: core.module.localization.msg["confirmation_no"],
+							title: core.module.localization.msg["confirmationSaveTitle2"].value,
+							message: "\""+temp_filename+"\" "+core.module.localization.msg["confirmationSaveMessage2"].value,
+							yes_text: core.module.localization.msg["confirmationYes"].value,
+							cancel_text: core.module.localization.msg["confirmationCancel"].value,
+							no_text: core.module.localization.msg["confirmationNo"].value,
 							yes: function () {
 								self.is_repeat = true;							
 								window_manager.window[target_window].editor.save();
@@ -72,16 +76,24 @@ org.goorm.core.project.build.project.prototype = {
 						}
 						
 						self.is_repeat = false;
-						if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+$(list).attr("projectType")])) {
-							core.module.plugin_manager.plugins["org.goorm.plugin."+$(list).attr("projectType")].build($(list).attr("project_name"),$(list).attr("project_path"));
+						
+						if(!self.is_onclick){
+							if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+$(list).attr("projectType")])) {
+								core.module.plugin_manager.plugins["org.goorm.plugin."+$(list).attr("projectType")].build($(list).attr("project_name"),$(list).attr("project_path"));
+								self.is_onclick = true;
+								self.dialog.panel.hide();
+							}
+							else{
+								alert.show("Cannot find plugin to build project!");
+							}
 						}
-						else {
-							alert.show("Cannot find plugin to build project!");
+						else{
+							self.is_onclick = false;
 						}
 					}
 				}
 			});
-			this.hide(); 
+			this.hide();
 		};
 
 		var handle_cancel = function() { 
@@ -114,12 +126,13 @@ org.goorm.core.project.build.project.prototype = {
 		this.dialog = this.dialog.dialog;
 		
 		//this.dialog.panel.setBody("AA");
-		
-
 	},
 
 	show: function () {
+		var self = this;
+		
 		this.project_list();
+		self.is_onclick = false;
 		this.dialog.panel.show();
 	},
 
