@@ -399,7 +399,8 @@ org.goorm.core.terminal.prototype = {
 				$(this.target).height(target_height);
 			}
 		}
-		else if (from == "layout") {
+
+		else if (from == "layout" && this.terminal_name != "debug") {
 			var layout_bottom_width = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").width() - 20;
 			var layout_bottom_height = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").height() - 36;
 			var target_height = $(this.target).find("#results").height() + 20;
