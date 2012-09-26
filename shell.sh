@@ -1,10 +1,25 @@
-echo "goorm.js"
-uglifyjs -o goorm.min.js goorm.js
+rm -rf ./release
+mkdir ./release
+echo "copy files"
+cp -R `ls ./ | grep -v release | grep -v workspace` ./release
+mkdir ./release/workspace
+echo "done."
 
-rm -rf ./modules_min
-cp -rf ./modules ./modules_min
-for name in $(find ./modules_min/ -name "*.js" ); do
+echo "compress start!"
+echo "goorm.js"
+uglifyjs -o ./release/goorm.js ./release/goorm.js
+
+for name in $(find ./release/modules/ -name "*.js" ); do
     uglifyjs -o $name --overwrite $name
     echo $name
 done
 
+for name in $(find ./release/public/modules/ -name "*.js"); do
+    uglifyjs -o $name --overwrite $name
+    echo $name
+done
+
+for name in $(find ./release/plugins -name "*.js"); do
+    uglifyjs -o $name --overwrite $name
+    echo $name
+done
