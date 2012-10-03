@@ -1,5 +1,1 @@
-module.exports = {
-  init: function () {
-  	
-  }
-};
+module.exports={init:function(){}};

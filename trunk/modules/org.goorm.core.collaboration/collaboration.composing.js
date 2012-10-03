@@ -1,6 +1,1 @@
-module.exports = {
-	msg: function (socket, msg) {
-		console.log(msg);
-		socket.broadcast.to(msg.workspace).emit("composing_message", JSON.stringify(msg));
-	}
-};
+module.exports={msg:function(e,t){console.log(t),e.broadcast.to(t.workspace).emit("composing_message",JSON.stringify(t))}};
