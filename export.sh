@@ -1,5 +1,7 @@
 #!/bin/sh
 
+USAGE="./export.sh -t [git|release|zip|tar|npm] -v [goorm version] -r [current revision]"
+
 while getopts tvr: OPT; do
     case "$OPT" in
         t)
