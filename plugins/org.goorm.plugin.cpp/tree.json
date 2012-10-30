@@ -14,7 +14,7 @@
 		"label" : "Cpp",
 		"tab" :	[
 			{	"label" : "Cpp",
-				"html"	: "/org.goorm.plugin.cpp/preference.html"
+				"html"	: "/org.goorm.plugin.cpp/property.html"
 			}
 		]
 	}

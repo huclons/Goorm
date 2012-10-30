@@ -76,7 +76,10 @@ org.goorm.plugin.java.prototype = {
 		};
 		
 		$.get('/plugin/new', send_data, function(result){
-			core.module.layout.project_explorer.refresh();
+			// 가끔씩 제대로 refresh가 안됨.
+			setTimeout(function(){
+				core.module.layout.project_explorer.refresh();
+			}, 500);
 		});
 	},
 	
@@ -84,8 +87,6 @@ org.goorm.plugin.java.prototype = {
 		var self=this;
 		var property = core.property.plugins['org.goorm.plugin.java'];
 		
-		this.path_project = "";
-
 		var classpath = property['plugin.java.build_path'];
 		var classname = property['plugin.java.main'];
 
@@ -174,8 +175,6 @@ org.goorm.plugin.java.prototype = {
 				self.debug_get_status();
 			});
 			break;
-//		case 'run':
-//			self.terminal.send_command("run\r"); break;
 		case 'continue':
 			self.set_breakpoints();
 			self.terminal.send_command("cont\r", self.prompt, function(){
@@ -344,16 +343,11 @@ org.goorm.plugin.java.prototype = {
 	build: function (projectName, projectPath, callback) {
 		var self=this;
 		var property = core.property.plugins['org.goorm.plugin.java'];
-		this.path_project = "";
 
 		var buildOptions = " "+property['plugin.java.build_option'];
 		var buildPath = " -d "+property['plugin.java.build_path'];
 		var classPath = " -cp "+property['plugin.java.source_path'];
-//		var buildSource = $("#buildConfiguration").find('[name=plugin\\.c\\.buildSource]').val();		
-//		if(buildSource == undefined){
-//			buildSource = core.dialogPreference.preference['plugin.c.buildSource'];
-//		}
-//		
+
 		var cmd = 'find '+property['plugin.java.source_path']+' -name "*.java" -print > file.list';
 		var cmd1 = "javac"+classPath+buildPath+buildOptions+" @file.list";
 
@@ -364,10 +358,11 @@ org.goorm.plugin.java.prototype = {
 		});
 		if(callback) callback();
 	},
+	
 	clean: function(){
 		var property = core.property.plugins['org.goorm.plugin.java'];
-		console.log("java clean");
-		core.module.layout.terminal.send_command("rm -rf bin/* \r", null, function(){
+		var buildPath = property['plugin.java.build_path'];
+		core.module.layout.terminal.send_command("rm -rf "+buildPath+"* \r", null, function(){
 			core.module.layout.project_explorer.refresh();
 		});
 	}
