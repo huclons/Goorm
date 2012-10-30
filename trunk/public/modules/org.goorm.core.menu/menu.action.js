@@ -1021,8 +1021,9 @@ org.goorm.core.menu.action.prototype = {
 					var postdata = {
 						filename : core.status.selected_file
 					};
-					$.post("file/delete", postdata, function(data) {
-						c.m("delete: " + core.status.selected_file);
+					$.get("file/delete", postdata, function(data) {
+						console.log(data);
+						m.s("delete: " + core.status.selected_file);
 						core.module.layout.project_explorer.refresh();
 					});
 				},

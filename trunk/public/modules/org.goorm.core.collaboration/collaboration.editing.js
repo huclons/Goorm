@@ -212,7 +212,6 @@ org.goorm.core.collaboration.editing.prototype = {
 				}
 				textStr += message.text[i];
 			}
-			console.log("start" + textStr + "end");
 			this.editor.replaceRange(textStr, message.from, message.to);
 
 			if(message.next){
