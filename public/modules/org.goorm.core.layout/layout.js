@@ -221,13 +221,9 @@ org.goorm.core.layout.prototype = {
 		//////////////////////////////////////////////////////////////////////////////////////////
 
 		this.layout.render();
-		
-		
+	
 		$(window).resize(function(){
-			self.resize_all();
-			self.layout.getUnitByPosition("top").set("height", $("#goorm_mainmenu").height() + $("#goorm_main_toolbar").height() + 7);
-			
-			$(core).trigger("layout_resized");
+			self.refresh();
 		});
 	},
 
@@ -461,5 +457,14 @@ org.goorm.core.layout.prototype = {
 			}
 		});
 		*/
+	},
+	
+	refresh : function(){
+		var self = this;
+		
+		self.resize_all();
+		self.layout.getUnitByPosition("top").set("height", $("#goorm_mainmenu").height() + $("#goorm_main_toolbar").height() + 7);
+		
+		$(core).trigger("layout_resized");
 	}
 };

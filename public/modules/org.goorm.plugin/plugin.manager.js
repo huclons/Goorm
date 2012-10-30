@@ -113,8 +113,8 @@ org.goorm.plugin.manager.prototype = {
 					self.load(index);
 					
 					core.module.preference.manager.get_default_file('/' + plugin_name + '/preference.json', function(json){
+						core.preference.plugins[plugin_name] || (core.preference.plugins[plugin_name] = {})
 						$.extend(true, core.preference.plugins[plugin_name], json);
-						
 						// restore default를 위한 기본 preference데이터를 저장.
 						core.module.preference.preference_default.plugins[plugin_name] = {};
 						$.extend(true, core.module.preference.preference_default.plugins[plugin_name], json);

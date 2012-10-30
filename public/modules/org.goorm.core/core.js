@@ -21,7 +21,7 @@ org.goorm.core = function() {
 	};
 	
 	this.env = {
-		version: "1.0.1.r179",
+		version: "1.0.0.alpha",
 		browser: null,
 		browser_version: 0,
 		os: null,
@@ -244,6 +244,7 @@ org.goorm.core.prototype = {
 			else
 				core.module.layout.inner_right_tabview.selectTab(0);
 					
+			core.module.layout.refresh();
 			self.complete();
 		});	
 		
@@ -289,7 +290,9 @@ org.goorm.core.prototype = {
 		
 		this.env.touchable = this.is_touchable_device();
 		this.env.websocket_support = this.test_web_socket();
-
+		
+		$('.goorm_version').html("goorm IDE " + this.version);
+		
 		this.module.layout = new org.goorm.core.layout();
 		this.module.layout.init(container);
 
@@ -524,8 +527,6 @@ org.goorm.core.prototype = {
 	complete: function() {
 		$("#goorm").show();
 		$("#goorm").show();
-		
-		$('.goorm_version').html("goorm IDE " + this.env.version);
 		
 		$("#goorm_loading_status_bar").fadeOut(1000);
 		
