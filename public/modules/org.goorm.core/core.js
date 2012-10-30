@@ -21,7 +21,7 @@ org.goorm.core = function() {
 	};
 	
 	this.env = {
-		version: "1.0.0.alpha",
+		version: "1.0.2.r192.alpha",
 		browser: null,
 		browser_version: 0,
 		os: null,
