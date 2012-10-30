@@ -1,9 +1,2 @@
 *.DS_Store
 .svn*
-./workspace/*
-./temp_files/*
-./shell.sh
-./ignore_git.sh
-./ignore_svn.sh
-./.project
-./.project.edited

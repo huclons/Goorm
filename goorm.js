@@ -16,7 +16,6 @@ var g_port_manager = require("./modules/org.goorm.core.utility/utility.port_mana
 
 
 global.__path = __dirname+"/";
-
 // Configuration
 goorm.configure(function(){
   goorm.set('views', __dirname + '/views');
