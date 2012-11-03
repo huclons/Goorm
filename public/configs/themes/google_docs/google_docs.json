@@ -1,0 +1,657 @@
+{
+	"top-textmenu-normal": {
+		"selector": "#goorm_top .yuimenubaritem .yuimenubaritemlabel",
+		"description": "edit style of text menu : normal",
+		"style": {
+			"font-family": "Verdana, Arial, 굴림체, 굴림",
+			"color": "#000000",
+			"outline": "none"
+		}
+	},
+	"top-textmenu-selected": {
+		"selector": "#goorm_top .yuimenubaritem .yuimenubaritemlabel-selected",
+		"description": "edit style of text menu : selected",
+		"style": {
+			"color": "#000000",
+			"background": "#e5e5e5"
+		}
+	},
+	"top-textmenu-background": {
+		"selector": "#goorm_top .yuimenubar",
+		"description": "edit style of text menu background",
+		"style": {
+			"background": "white",
+			"border-bottom": "1px solid #e5e5e5"
+		}
+	},
+	"top-dropdownmenu-hover": {
+		"selector": ".yui-skin-sam .yuimenuitem-selected",
+		"description": "edit style of text menu background",
+		"style": {
+			"background": "#eeeeee"
+		}
+	},
+	"top-dropdownmenu-background": {
+		"selector": ".yui-skin-sam .yuimenu .bd",
+		"description": "Drop-down menu background",
+		"style": {
+			"background": "white",
+			"border-color": "#cccccc"
+		}
+	},
+	"top-toolbar-icon-new": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.new",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/new.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-open_project": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.open_project",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/open_project.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-open_file": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.open_file",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/open_file.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-save": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.save",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/save.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-save_as": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.save_as",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/save_as.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-import_file": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.import",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/import.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-export_file": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.export",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/export.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-print": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.print",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/print.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-undo": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.undo",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/undo.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-redo": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.redo",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/redo.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-cut": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.cut",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/cut.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-copy": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.copy",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/copy.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-paste": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.paste",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/paste.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-delete": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.delete",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/delete.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-run": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.run",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/run.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-debug": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.debug",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/debug.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-generate": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.generate",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/generate.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-build_project": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.build_project",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/build.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-build_clean": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.build_clean",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/clean.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-cascade": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.cascade",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/cascade.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-tile_vertically": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.tile_vertical",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/tile_vertical.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-tile_horizontally": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.tile_horizontal",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/tile_horizontal.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-align_left": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.align_left",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/align_left.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-align_right": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.align_right",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/align_right.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-align_top": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.align_top",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/align_top.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-align_bottom": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.align_bottom",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/align_bottom.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-align_horizontally_center": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.align_horizontally_center",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/align_horizontally_center.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-align_vertically_center": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.align_vertically_center",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/align_vertically_center.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-bring_to_front": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.bring_to_front",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/bring_to_front.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-send_to_back": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.send_to_back",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/send_to_back.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-bring_forward": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.bring_forward",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/bring_forward.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-send_backward": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.send_backward",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/send_backward.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-design_canvas_setting": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.design_canvas_setting",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/setting.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-normal": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "none"
+		}
+	},
+	"top-toolbar-hover": {
+		"selector": ".main_toolbar .toolbar_button:hover",
+		"description": "edit style of toolbar : hover",
+		"style": {
+			"background": "#f6f6f6",
+			"border-color": "#c6c6c6",
+			"border:": "1px solid #c6c6c6",
+			" -moz-box-shadow": "0px 1px 3px rgba(198, 198, 198, 0.6)",
+			"-webkit-box-shadow": "0px 1px 3px rgba(198, 198, 198, 0.6)",
+			"box-shadow": "0px 1px 3px rgba(198, 198, 198, 0.6)",
+			"-webkit-border-radius": "3px",
+			"-moz-border-radius": "3px",
+			"border-radius": "3px"
+		}
+	},
+	"top-toolbar-handle": {
+		"selector": ".main_toolbar .toolbar_handle",
+		"description": "edit style of toolbar icon group handle",
+		"style": {
+			"border-left": "1px solid #cccccc"
+		}
+	},
+	"top-toolbar-background": {
+		"selector": ".yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd",
+		"description": "edit style of toolbar background",
+		"style": {
+			"background": "#f5f5f5",
+			"border-color": "#cccccc",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none"
+		}
+	},
+	"top-select-menu1": {
+		"selector": ".yuimenuitem#yui-gen205 .yuimenuitemlabel",
+		"description": "hiy",
+		"style": {
+			"background-image": "url('images/new.png') !important"
+		}
+	},
+	"left-tabmenu-normal": {
+		"selector": "#goorm_left.yui-navset .yui-nav a",
+		"description": "edit style of tabmenu : normal",
+		"style": {
+			"border-color": "#e5e5e5",
+			"background": "#f5f5f5"
+		}
+	},
+	"left-tabmenu-border": {
+		"selector": "#goorm_left.yui-navset .yui-nav li",
+		"description": "edit style of tabmenu : normal",
+		"style": {
+			"border-color": "#e5e5e5"
+		}
+	},
+	"left-tabmenu-hover": {
+		"selector": "#goorm_left.yui-navset .yui-nav a:hover, #goorm_left.yui-navset .yui-nav a:focus",
+		"description": "edit style of tabmenu : hover",
+		"style": {
+			"background": "#dfdfdf",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none"
+		}
+	},
+	"left-tabmenu-selected": {
+		"selector": "#goorm_left.yui-navset .yui-nav .selected a, #goorm_left.yui-navset .yui-nav .selected a:focus, #goorm_left.yui-navset .yui-nav .selected a:hover",
+		"description": "edit style of tabmenu : selected",
+		"style": {
+			"background": "#ffffd1",
+			"text-shadow": "none",
+			"color": "black",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none"
+		}
+	},
+	"left-tabmenu-text": {
+		"selector": "#goorm_left.yui-navset .yui-nav .selected a em",
+		"description": "edit style of tabmenu : selected",
+		"style": {
+			"text-shadow": "none",
+			"color": "black"
+		}
+	},
+	"left-tabmenu-background": {
+		"selector": "#goorm_left.yui-navset .yui-nav",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "#f5f5f5",
+			"border-color": "#cccccc"
+		}
+	},
+	"left-project-view": {
+		"selector": ".directory_treeview .ygtvfocus",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background-color": "#f5f5f5"
+		}
+	},
+	"left-project-collapse": {
+		"selector": ".yui-skin-sam .yui-layout .yui-layout-unit-left div.yui-layout-hd .collapse",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "transparent url(images/collapse_left.png) no-repeat 0px 0px"
+		}
+	},
+	"left-project-uncollapse": {
+		"selector": ".yui-skin-sam .yui-layout .yui-layout-clip-left .collapse",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "transparent url(images/uncollapse_right.png) no-repeat 0px 0px"
+		}
+	},
+	"right-tabmenu-normal": {
+		"selector": "#goorm_inner_layout_right.yui-navset .yui-nav a",
+		"description": "edit style of tabmenu : normal",
+		"style": {
+			"border-color": "#e5e5e5",
+			"background": "#f5f5f5"
+		}
+	},
+	"right-tabmenu-border": {
+		"selector": "#goorm_inner_layout_right.yui-navset .yui-nav li",
+		"description": "edit style of tabmenu : normal",
+		"style": {
+			"border-color": "#e5e5e5"
+		}
+	},
+	"right-tabmenu-hover": {
+		"selector": "#goorm_inner_layout_right.yui-navset .yui-nav a:hover, #goorm_inner_layout_right.yui-navset .yui-nav a:focus",
+		"style": {
+			"background": "#dfdfdf",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none"
+		}
+	},
+	"right-tabmenu-selected": {
+		"selector": "#goorm_inner_layout_right.yui-navset .yui-nav .selected a, #goorm_inner_layout_right.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_right.yui-navset .yui-nav .selected a:hover",
+		"description": "edit style of tabmenu : selected",
+		"style": {
+			"background": "#ffffd1",
+			"text-shadow": "none",
+			"color": "black",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none"
+		}
+	},
+	"right-tabmenu-text": {
+		"selector": "#goorm_inner_layout_right.yui-navset .yui-nav .selected a em",
+		"description": "edit style of tabmenu : selected",
+		"style": {
+			"text-shadow": "none",
+			"color": "black"
+		}
+	},
+	"right-tabmenu-background": {
+		"selector": "#goorm_inner_layout_right.yui-navset .yui-nav",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "#f5f5f5",
+			"border-color": "#cccccc"
+		}
+	},
+	"right-project-collapse": {
+		"selector": ".yui-skin-sam .yui-layout .yui-layout-unit-right div.yui-layout-hd .collapse",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "transparent url(images/collapse_right.png) no-repeat 0px 0px"
+		}
+	},
+	"right-project-uncollapse": {
+		"selector": ".yui-skin-sam .yui-layout .yui-layout-clip-right .collapse",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "transparent url(images/uncollapse_left.png) no-repeat 0px 0px"
+		}
+	},
+	"bottom-tabmenu-normal": {
+		"selector": "#goorm_inner_layout_bottom.yui-navset .yui-nav a",
+		"description": "edit style of tabmenu : normal",
+		"style": {
+			"border-color": "#e5e5e5",
+			"background": "#f5f5f5"
+		}
+	},
+	"bottom-tabmenu-border": {
+		"selector": "#goorm_inner_layout_bottom.yui-navset .yui-nav li",
+		"description": "edit style of tabmenu : normal",
+		"style": {
+			"border-color": "#e5e5e5"
+		}
+	},
+	"bottom-tabmenu-hover": {
+		"selector": "#goorm_inner_layout_bottom.yui-navset .yui-nav a:hover, #goorm_inner_layout_bottom.yui-navset .yui-nav a:focus",
+		"description": "edit style of tabmenu : hover",
+		"style": {
+			"background": "#dfdfdf",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none"
+		}
+	},
+	"bottom-tabmenu-selected": {
+		"selector": "#goorm_inner_layout_bottom.yui-navset .yui-nav .selected a, #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a:hover",
+		"description": "edit style of tabmenu : selected",
+		"style": {
+			"background": "#ffffd1",
+			"text-shadow": "none",
+			"color": "black",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none"
+		}
+	},
+	"bottom-tabmenu-text": {
+		"selector": "#layout-doc #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a em",
+		"description": "edit style of tabmenu : selected",
+		"style": {
+			"text-shadow": "none",
+			"color": "black"
+		}
+	},
+	"bottom-tabmenu-background": {
+		"selector": "#goorm_inner_layout_bottom.yui-navset .yui-nav",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "#f5f5f5",
+			"border-color": "#cccccc"
+		}
+	},
+	"bottom-project-collapse": {
+		"selector": ".yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-hd .collapse",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "transparent url(images/collapse_down.png) no-repeat 0px 0px"
+		}
+	},
+	"bottom-project-uncollapse": {
+		"selector": ".yui-skin-sam .yui-layout .yui-layout-clip-bottom .collapse",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "transparent url(images/uncollapse_up.png) no-repeat 0px 0px"
+		}
+	},
+	"center-tabmenu-normal": {
+		"selector": "#layout-doc #workspace_window_list .yui-nav a",
+		"description": "edit style of tabmenu : normal",
+		"style": {
+			"border-color": "#e5e5e5",
+			"background": "#f5f5f5"
+		}
+	},
+	"center-tabmenu-border": {
+		"selector": "#layout-doc #workspace_window_list .yui-nav li",
+		"description": "edit style of tabmenu : normal",
+		"style": {
+			"border-color": "#e5e5e5"
+		}
+	},
+	"center-tabmenu-hover": {
+		"selector": "#layout-doc #workspace_window_list .yui-nav a:hover, #layout-doc #workspace_window_list .yui-nav a:focus",
+		"description": "edit style of tabmenu : hover",
+		"style": {
+			"background": "#dfdfdf",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none"
+		}
+	},
+	"center-tabmenu-selected": {
+		"selector": "#layout-doc #workspace_window_list .selected a, #layout-doc #workspace_window_list .selected a:focus, #layout-doc #workspace_window_list .selected a:hover",
+		"description": "edit style of tabmenu : selected",
+		"style": {
+			"background": "#ffffd1",
+			"text-shadow": "none",
+			"color": "black",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none"
+		}
+	},
+	"center-tabmenu-text": {
+		"selector": "#layout-doc #workspace_window_list .selected a em",
+		"description": "edit style of tabmenu : selected",
+		"style": {
+			"text-shadow": "none",
+			"color": "black"
+		}
+	},
+	"center-tabmenu-close_icon": {
+		"selector": "#workspace .tab_close_button.window_button",
+		"description": "edit style of tabmenu : selected",
+		"style": {
+			"background": "url('images/close.png') no-repeat center !important"
+		}
+	},
+	"center-tabmenu-close_button": {
+		"selector": "#workspace_window_list .window_buttons",
+		"description": "edit style of tabmenu : selected",
+		"style": {
+			"background": "none",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none",
+			"-webkit-border-radius": "3px",
+			"-moz-border-radius": "3px",
+			"border-radius": "3px",
+			"border": "none"
+		}
+	},
+	"center-tabmenu-background": {
+		"selector": "#goorm_inner_layout_center.yui-navset .yui-nav, #workspace_window_list",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "#f5f5f5",
+			"border-color": "#cccccc"
+		}
+	},
+	"center-workspace-background": {
+		"selector": "#goorm_inner_layout_center #workspace",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background-color": "#ebebeb",
+			" -moz-box-shadow": "inset 0px 27px 10px 0px rgba(0, 0, 0, 0.05)",
+			"-webkit-box-shadow": "inset 0px 27px 10px 0px rgba(0, 0, 0, 0.05)",
+			"box-shadow": "inset 0px 27px 10px 0px rgba(0, 0, 0, 0.05)"
+		}
+	},
+	"center-workspace-border": {
+		"selector": "#goorm_left,#goorm_inner_layout_right,#goorm_inner_layout_bottom",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"border-color": "#cccccc"
+		}
+	},
+	"general-button-normal": {
+		"selector": ".yui-skin-sam .yui-button",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"background": "#f4f4f4",
+			" -moz-box-shadow": "none",
+			"-webkit-box-shadow": "none",
+			"box-shadow": "none",
+			"-webkit-border-radius": "3px",
+			"-moz-border-radius": "3px",
+			"border-radius": "3px",
+			"border": "1px solid #d9d9d9 !important"
+		}
+	},
+	"general-default-background": {
+		"selector": ".yui-skin-sam .default",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"color": "white !imortant",
+			"background": "#4e8aff",
+			"border": "1px solid #3475f6 !important"
+		}
+	},
+	"general-default-text": {
+		"selector": ".yui-skin-sam .default button",
+		"description": "edit style of tabmenu background",
+		"style": {
+			"color": "white !important"
+		}
+	},
+	"general-button-hover": {
+		"selector": ".yui-skin-sam .yui-button:hover",
+		"description": "edit style of tabmenu background",
+		"style": {
+			" -moz-box-shadow": "0px 1px 3px rgba(198, 198, 198, 0.6)",
+			"-webkit-box-shadow": "0px 1px 3px rgba(198, 198, 198, 0.6)",
+			"box-shadow": "0px 1px 3px rgba(198, 198, 198, 0.6)"
+		}
+	}
+}
