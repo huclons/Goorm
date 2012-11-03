@@ -1,0 +1,328 @@
+#goorm_top .yuimenubaritem .yuimenubaritemlabel {
+	font-family:Verdana, Arial, 굴림체, 굴림;
+	color:#000000;
+	outline:none;
+}
+#goorm_top .yuimenubaritem .yuimenubaritemlabel-selected {
+	color:#000000;
+	background:#e5e5e5;
+}
+#goorm_top .yuimenubar {
+	background:white;
+	border-bottom:1px solid #e5e5e5;
+}
+.yui-skin-sam .yuimenuitem-selected {
+	background:#eeeeee;
+}
+.yui-skin-sam .yuimenu .bd {
+	background:white;
+	border-color:#cccccc;
+}
+#goorm_top .main_toolbar .toolbar_button.new {
+	background:url('images/new.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.open_project {
+	background:url('images/open_project.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.open_file {
+	background:url('images/open_file.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.save {
+	background:url('images/save.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.save_as {
+	background:url('images/save_as.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.import {
+	background:url('images/import.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.export {
+	background:url('images/export.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.print {
+	background:url('images/print.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.undo {
+	background:url('images/undo.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.redo {
+	background:url('images/redo.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.cut {
+	background:url('images/cut.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.copy {
+	background:url('images/copy.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.paste {
+	background:url('images/paste.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.delete {
+	background:url('images/delete.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.run {
+	background:url('images/run.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.debug {
+	background:url('images/debug.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.generate {
+	background:url('images/generate.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.build_project {
+	background:url('images/build.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.build_clean {
+	background:url('images/clean.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.cascade {
+	background:url('images/cascade.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.tile_vertical {
+	background:url('images/tile_vertical.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.tile_horizontal {
+	background:url('images/tile_horizontal.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_left {
+	background:url('images/align_left.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_right {
+	background:url('images/align_right.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_top {
+	background:url('images/align_top.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_bottom {
+	background:url('images/align_bottom.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_horizontally_center {
+	background:url('images/align_horizontally_center.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_vertically_center {
+	background:url('images/align_vertically_center.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.bring_to_front {
+	background:url('images/bring_to_front.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.send_to_back {
+	background:url('images/send_to_back.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.bring_forward {
+	background:url('images/bring_forward.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.send_backward {
+	background:url('images/send_backward.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.design_canvas_setting {
+	background:url('images/setting.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button {
+	background:none;
+}
+.main_toolbar .toolbar_button:hover {
+	background:#f6f6f6;
+	border-color:#c6c6c6;
+	border::1px solid #c6c6c6;
+	 -moz-box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+	-webkit-box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+	box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+.main_toolbar .toolbar_handle {
+	border-left:1px solid #cccccc;
+}
+.yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd {
+	background:#f5f5f5;
+	border-color:#cccccc;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+.yuimenuitem#yui-gen205 .yuimenuitemlabel {
+	background-image:url('images/new.png') !important;
+}
+#goorm_left.yui-navset .yui-nav a {
+	border-color:#e5e5e5;
+	background:#f5f5f5;
+}
+#goorm_left.yui-navset .yui-nav li {
+	border-color:#e5e5e5;
+}
+#goorm_left.yui-navset .yui-nav a:hover, #goorm_left.yui-navset .yui-nav a:focus {
+	background:#dfdfdf;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#goorm_left.yui-navset .yui-nav .selected a, #goorm_left.yui-navset .yui-nav .selected a:focus, #goorm_left.yui-navset .yui-nav .selected a:hover {
+	background:#ffffd1;
+	text-shadow:none;
+	color:black;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#goorm_left.yui-navset .yui-nav .selected a em {
+	text-shadow:none;
+	color:black;
+}
+#goorm_left.yui-navset .yui-nav {
+	background:#f5f5f5;
+	border-color:#cccccc;
+}
+.directory_treeview .ygtvfocus {
+	background-color:#f5f5f5;
+}
+.yui-skin-sam .yui-layout .yui-layout-unit-left div.yui-layout-hd .collapse {
+	background:transparent url(images/collapse_left.png) no-repeat 0px 0px;
+}
+.yui-skin-sam .yui-layout .yui-layout-clip-left .collapse {
+	background:transparent url(images/uncollapse_right.png) no-repeat 0px 0px;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav a {
+	border-color:#e5e5e5;
+	background:#f5f5f5;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav li {
+	border-color:#e5e5e5;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav a:hover, #goorm_inner_layout_right.yui-navset .yui-nav a:focus {
+	background:#dfdfdf;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav .selected a, #goorm_inner_layout_right.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_right.yui-navset .yui-nav .selected a:hover {
+	background:#ffffd1;
+	text-shadow:none;
+	color:black;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav .selected a em {
+	text-shadow:none;
+	color:black;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav {
+	background:#f5f5f5;
+	border-color:#cccccc;
+}
+.yui-skin-sam .yui-layout .yui-layout-unit-right div.yui-layout-hd .collapse {
+	background:transparent url(images/collapse_right.png) no-repeat 0px 0px;
+}
+.yui-skin-sam .yui-layout .yui-layout-clip-right .collapse {
+	background:transparent url(images/uncollapse_left.png) no-repeat 0px 0px;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav a {
+	border-color:#e5e5e5;
+	background:#f5f5f5;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav li {
+	border-color:#e5e5e5;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav a:hover, #goorm_inner_layout_bottom.yui-navset .yui-nav a:focus {
+	background:#dfdfdf;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav .selected a, #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a:hover {
+	background:#ffffd1;
+	text-shadow:none;
+	color:black;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#layout-doc #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a em {
+	text-shadow:none;
+	color:black;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav {
+	background:#f5f5f5;
+	border-color:#cccccc;
+}
+.yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-hd .collapse {
+	background:transparent url(images/collapse_down.png) no-repeat 0px 0px;
+}
+.yui-skin-sam .yui-layout .yui-layout-clip-bottom .collapse {
+	background:transparent url(images/uncollapse_up.png) no-repeat 0px 0px;
+}
+#layout-doc #workspace_window_list .yui-nav a {
+	border-color:#e5e5e5;
+	background:#f5f5f5;
+}
+#layout-doc #workspace_window_list .yui-nav li {
+	border-color:#e5e5e5;
+}
+#layout-doc #workspace_window_list .yui-nav a:hover, #layout-doc #workspace_window_list .yui-nav a:focus {
+	background:#dfdfdf;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#layout-doc #workspace_window_list .selected a, #layout-doc #workspace_window_list .selected a:focus, #layout-doc #workspace_window_list .selected a:hover {
+	background:#ffffd1;
+	text-shadow:none;
+	color:black;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#layout-doc #workspace_window_list .selected a em {
+	text-shadow:none;
+	color:black;
+}
+#workspace .tab_close_button.window_button {
+	background:url('images/close.png') no-repeat center !important;
+}
+#workspace_window_list .window_buttons {
+	background:none;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	border:none;
+}
+#goorm_inner_layout_center.yui-navset .yui-nav, #workspace_window_list {
+	background:#f5f5f5;
+	border-color:#cccccc;
+}
+#goorm_inner_layout_center #workspace {
+	background-color:#ebebeb;
+	 -moz-box-shadow:inset 0px 27px 10px 0px rgba(0, 0, 0, 0.05);
+	-webkit-box-shadow:inset 0px 27px 10px 0px rgba(0, 0, 0, 0.05);
+	box-shadow:inset 0px 27px 10px 0px rgba(0, 0, 0, 0.05);
+}
+#goorm_left,#goorm_inner_layout_right,#goorm_inner_layout_bottom {
+	border-color:#cccccc;
+}
+.yui-skin-sam .yui-button {
+	background:#f4f4f4;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	border:1px solid #d9d9d9 !important;
+}
+.yui-skin-sam .default {
+	color:white !imortant;
+	background:#4e8aff;
+	border:1px solid #3475f6 !important;
+}
+.yui-skin-sam .default button {
+	color:white !important;
+}
+.yui-skin-sam .yui-button:hover {
+	 -moz-box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+	-webkit-box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+	box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+}

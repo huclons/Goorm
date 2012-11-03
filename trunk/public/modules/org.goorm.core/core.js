@@ -1,7 +1,9 @@
 /**
- * @description <p>Copyright Sung-tae Ryu. All rights reserved.</p>
- * <p>Code licensed under the GPL v2 License:</p>
- * http://www.goorm.org/License
+ * Copyright Sung-tae Ryu. All rights reserved.
+ * Code licensed under the GPL v3 License:
+ * http://www.goorm.io/intro/License
+ * project_name : goormIDE
+ * version: 1.0.0
  **/
 
 var org = function() {
@@ -126,12 +128,13 @@ org.goorm.core = function() {
 	this.filetypes = null;
 
 	this.server_theme = null;
-	this.server_language = null;
+	this.server_language = 'client';	// language preperence priority
 	
 	this.plugins = [];
 	
 	this.preference = null;
 	this.property = null;
+	this.workspace = null;
 };
 
 org.goorm.core.prototype = {
@@ -141,7 +144,7 @@ org.goorm.core.prototype = {
 		
 		var self = this;
 		this.filetypes = [];
-		
+		this.workspace = {};
 		
 		$(this).bind("layout_loaded", function () {
 			console.log("layout Loaded");
@@ -443,7 +446,7 @@ org.goorm.core.prototype = {
 		$("#goorm_dialog_container").append("<div id='loading_panel_container'></div>");
 		$("#goorm_dialog_container").append("<div id='loading_background'></div>");
 		$("#loading_panel_container").append("<div id='main_loading_image'><div id='goorm_loading_status_bar'></div></div>");
-		$("#loading_panel_container").append("<div id='developers'>Sung-tae Ryu, Noori Kim, Byeong-ung Ahn, Eungwi Jo, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park</div>");
+		$("#loading_panel_container").append("<div id='developers'>Sung-tae Ryu, Noori Kim, Byeong-ung Ahn, Eungwi Jo, Nam You-Seok, Chonghyun Lee, Shinwook Gahng, Cheolhyun Park</div>");
 		$("#loading_panel_container").append("<div id='loading_message'></div>");
 		$("#loading_panel_container").append("<div id='login_box_bg'></div>");
 		$("#loading_panel_container").append("<div id='login_box'></div>");
