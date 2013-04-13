@@ -55,7 +55,10 @@ org.goorm.core.project.share = {
 		})
 
 		this.dialog = this.dialog.dialog;
-		this.socket = io.connect();
+
+		$(core).bind('goorm_login_complete', function(){
+			self.socket = io.connect();
+		})
 	},
 
 	show : function() {

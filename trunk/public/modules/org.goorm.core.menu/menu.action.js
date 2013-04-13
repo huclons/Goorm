@@ -11,6 +11,7 @@ org.goorm.core.menu.action = {
 		//////////////////////////////////////////////////
 		//Main Menu : File
 		//////////////////////////////////////////////////
+		var self = this;
 		$("a[action=new_project]").unbind("click");
 		$("a[action=new_project]").click(function() {
 			core.dialog.new_project.show();
@@ -55,20 +56,18 @@ org.goorm.core.menu.action = {
 
 		$("a[action=exit]").unbind("click");
 		$("a[action=exit]").click(function() {
-
 			confirmation.init({
 				title : core.module.localization.msg['confirmation_exit_title'],
 				message : core.module.localization.msg['confirmation_exit'],
 				yes_text : core.module.localization.msg['confirmation_yes'],
 				no_text : core.module.localization.msg['confirmation_no'],
 				yes : function() {
-						// localStorage['user'] = "";
-						// location.href = '/';
+					survey.init(function() {
 						core.module.layout.communication.leave();
-
 						window.open('','_self')
 						window.close();
-
+					});
+					survey.panel.show();
 				},
 				no : function() {
 
@@ -104,7 +103,7 @@ org.goorm.core.menu.action = {
 			if (window_manager.active_window<0) {
 				alert.show(core.module.localization.msg['alert_file_not_opened']);
 			}
-			else {
+			else if(window_manager.window[window_manager.active_window]){
 				if(window_manager.window[window_manager.active_window].designer != undefined) {
 					window_manager.window[window_manager.active_window].designer.save();
 				} else if(window_manager.window[window_manager.active_window].editor != undefined) {
@@ -174,6 +173,65 @@ org.goorm.core.menu.action = {
 			core.module.layout.project_explorer.refresh();
 		});
 
+		$("a[action=refresh_page]").unbind("click");
+		$("a[action=refresh_page]").click(function() {
+			var window_manager = core.module.layout.workspace.window_manager;
+			confirmation.init({
+				title: core.module.localization.msg["confirmation_title"], 
+				message: core.module.localization.msg["alert_refresh"],
+				yes_text: core.module.localization.msg["confirmation_yes"],
+				no_text: core.module.localization.msg["confirmation_no"],
+
+				yes: function () {
+
+					var confsave = function(ii) {
+						if( ii >= window_manager.window.length) {
+							window.location.replace("/");
+							return;
+						}
+
+						if(window_manager.window[ii].is_saved)confsave(ii+1);
+						else
+						{
+							confirmation_save.init({
+								// title: core.module.localization.msg["confirmation_save_title"], 
+								message: "\""+window_manager.window[ii].filepath+window_manager.window[ii].filename+"\" "+core.module.localization.msg["confirmation_save_message"],
+								yes_text: core.module.localization.msg["confirmation_yes"],
+								cancel_text: core.module.localization.msg["confirmation_cancel"],
+								no_text: core.module.localization.msg["confirmation_no"],
+
+								title: "Save...", 
+								// message: "<span localization_key='confirmation_save_message'> has been modified. Save changes?</span>",
+								// yes_text: "<span localization_key='yes'>Yes</span>",
+								// cancel_text: "<span localization_key='cancel'>Cancel</span>",
+								// no_text: "<span localization_key='no'>No</span>",
+								yes: function () {
+									window_manager.window[ii].editor.save();
+									confsave(ii+1);
+
+								}, cancel: function () {
+								}, no: function () {
+									confsave(ii+1);
+								}
+							});
+							
+							confirmation_save.panel.show();
+
+						}
+					};
+
+					confsave(0);
+
+					
+							
+					
+				},no: function () {}
+			});
+
+			confirmation.panel.show();
+		});
+
+
 		$("a[action=print]").unbind("click");
 		$("a[action=print]").click(function() {
 
@@ -208,10 +266,12 @@ org.goorm.core.menu.action = {
 		$("a[action=do_undo]").click(function() {
 			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(window_manager.window[window_manager.active_window].designer) {
-				window_manager.window[window_manager.active_window].designer.canvas.undo();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				window_manager.window[window_manager.active_window].editor.undo();
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					window_manager.window[window_manager.active_window].designer.canvas.undo();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					window_manager.window[window_manager.active_window].editor.undo();
+				}
 			}
 		});
 
@@ -219,66 +279,72 @@ org.goorm.core.menu.action = {
 		$("a[action=do_redo]").click(function() {
 			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(window_manager.window[window_manager.active_window].designer) {
-				window_manager.window[window_manager.active_window].designer.canvas.redo();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				window_manager.window[window_manager.active_window].editor.redo();
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					window_manager.window[window_manager.active_window].designer.canvas.redo();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					window_manager.window[window_manager.active_window].editor.redo();
+				}
 			}
 		});
 
 		$("a[action=do_cut]").unbind("click");
 		$("a[action=do_cut]").click(function() {
-			console.log("cut");
-			//core.dialog.preference.preference['preference.editor.use_clipboard'];
 			var window_manager = core.module.layout.workspace.window_manager;
-
-			if(window_manager.window[window_manager.active_window].designer) {
-				window_manager.window[window_manager.active_window].designer.canvas.cut();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				window_manager.window[window_manager.active_window].editor.cut();
+			
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					window_manager.window[window_manager.active_window].designer.canvas.cut();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					window_manager.window[window_manager.active_window].editor.cut();
+				}
 			}
 		});
 
 		$("a[action=do_copy]").unbind("click");
 		$("a[action=do_copy]").click(function() {
-			console.log("copy");
 			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(window_manager.window[window_manager.active_window].designer) {
-				window_manager.window[window_manager.active_window].designer.canvas.copy();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				window_manager.window[window_manager.active_window].editor.copy();
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					window_manager.window[window_manager.active_window].designer.canvas.copy();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					window_manager.window[window_manager.active_window].editor.copy();
+				}
 			}
 		});
 
 		$("a[action=do_paste]").unbind("click");
 		$("a[action=do_paste]").click(function() {
-
 			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(window_manager.window[window_manager.active_window].designer) {
-				window_manager.window[window_manager.active_window].designer.canvas.paste();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				if(core.env.os == "darwin"){
-					var key = '⌘V';
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					window_manager.window[window_manager.active_window].designer.canvas.paste();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					if(core.env.os == "darwin"){
+						var key = '⌘V';
+					}
+					else {
+						var key = "Ctrl+V";
+					}
+					alert.show("붙여넣기 작업은 '편집' 메뉴에서는 불가능하지만 '"+key+"' 키를 사용하면 가능합니다.");
+					return ;
+					window_manager.window[window_manager.active_window].editor.paste();
 				}
-				else {
-					var key = "Ctrl+V";
-				}
-				alert.show("붙여넣기 작업은 '편집' 메뉴에서는 불가능하지만 '"+key+"' 키를 사용하면 가능합니다.");
-				return ;
-				window_manager.window[window_manager.active_window].editor.paste();
 			}
 		});
 
 		$("a[action=do_delete]").unbind("click");
 		$("a[action=do_delete]").click(function() {
 			var window_manager = core.module.layout.workspace.window_manager;
-
-			if(window_manager.window[window_manager.active_window].designer) {
-				window_manager.window[window_manager.active_window].designer.canvas._delete();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				window_manager.window[window_manager.active_window].editor.do_delete();
+			
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					window_manager.window[window_manager.active_window].designer.canvas._delete();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					window_manager.window[window_manager.active_window].editor.do_delete();
+				}
 			}
 		});
 
@@ -294,13 +360,14 @@ org.goorm.core.menu.action = {
 
 		$("a[action=do_find_next]").unbind("click");
 		$("a[action=do_find_next]").click(function() {
-
 			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(window_manager.window[window_manager.active_window].designer) {
-				window_manager.window[window_manager.active_window].designer.canvas.do_delete();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				core.dialog.find_and_replace.find("next");
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					core.dialog.find_and_replace.find("next");
+				}
 			}
 		});
 
@@ -308,10 +375,12 @@ org.goorm.core.menu.action = {
 		$("a[action=do_find_previous]").click(function() {
 			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(window_manager.window[window_manager.active_window].designer) {
-				//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				core.dialog.find_and_replace.find("previous");
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					core.dialog.find_and_replace.find("previous");
+				}
 			}
 		});
 		
@@ -319,10 +388,12 @@ org.goorm.core.menu.action = {
 		$("a[action=auto_formatting]").click(function() {
 			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(window_manager.window[window_manager.active_window].designer) {
-				//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				window_manager.window[window_manager.active_window].editor.auto_formatting();
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					window_manager.window[window_manager.active_window].editor.auto_formatting();
+				}
 			}
 		});
 		
@@ -330,10 +401,12 @@ org.goorm.core.menu.action = {
 		$("a[action=comment_selected]").click(function() {
 			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(window_manager.window[window_manager.active_window].designer) {
-				//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				window_manager.window[window_manager.active_window].editor.comment_selection();
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					window_manager.window[window_manager.active_window].editor.comment_selection();
+				}
 			}
 		});
 		
@@ -341,10 +414,12 @@ org.goorm.core.menu.action = {
 		$("a[action=uncomment_selected]").click(function() {
 			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(window_manager.window[window_manager.active_window].designer) {
-				//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				window_manager.window[window_manager.active_window].editor.uncomment_selection();
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					window_manager.window[window_manager.active_window].editor.uncomment_selection();
+				}
 			}
 		});
 
@@ -352,10 +427,12 @@ org.goorm.core.menu.action = {
 		$("a[action=select_all]").click(function() {
 			var window_manager = core.module.layout.workspace.window_manager;
 
-			if(window_manager.window[window_manager.active_window].designer) {
-				window_manager.window[window_manager.active_window].designer.canvas.select_all();
-			} else if(window_manager.window[window_manager.active_window].editor) {
-				window_manager.window[window_manager.active_window].editor.select_all();
+			if(window_manager.window[window_manager.active_window]){
+				if(window_manager.window[window_manager.active_window].designer) {
+					window_manager.window[window_manager.active_window].designer.canvas.select_all();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					window_manager.window[window_manager.active_window].editor.select_all();
+				}
 			}
 		});
 		
@@ -384,10 +461,10 @@ org.goorm.core.menu.action = {
 			core.sharing_cursor = !core.sharing_cursor;
 			
 			if (core.sharing_cursor) {
-				$(this).find(".toolbar_button").addClass("toolbar_button_pressed");
+				$('#goorm_main_toolbar a[action=do_share_cursor]').find(".toolbar_button").addClass("toolbar_button_pressed");
 			}
 			else {
-				$(this).find(".toolbar_button").removeClass("toolbar_button_pressed");
+				$('#goorm_main_toolbar a[action=do_share_cursor]').find(".toolbar_button").removeClass("toolbar_button_pressed");
 			}
 			
 			$(".user_name").toggle();
@@ -899,11 +976,10 @@ org.goorm.core.menu.action = {
 			core.new_main_window();
 		});
 
-		var terminal_count = 0;
 		$("a[action=new_terminal_window]").unbind("click");
 		$("a[action=new_terminal_window]").click(function() {
-			terminal_count++;
-			core.module.layout.workspace.window_manager.open("/", "terminal" + terminal_count, "terminal", "Terminal");
+			core.module.layout.workspace.window_manager.terminal_count++;
+			core.module.layout.workspace.window_manager.open("/", "terminal" + core.module.layout.workspace.window_manager.terminal_count, "terminal", "Terminal");
 		});
 
 		$("a[action=previous_window]").unbind("click");
@@ -1041,43 +1117,6 @@ org.goorm.core.menu.action = {
 				core.module.layout.layout.getUnitByPosition("left").collapse();
 				core.module.layout.inner_layout.getUnitByPosition("right").collapse();
 				core.module.layout.inner_layout.getUnitByPosition("bottom").collapse();
-			}
-		});
-
-		$("a[action=slide_show_mode]").unbind("click");
-		$("a[action=slide_show_mode]").click(function() {
-			if(!core.module.layout.slideshare.slide_show_mode){
-
-				core.module.layout.slideshare.layout_temp_data = {
-					'left' : localStorage.layout_left_collapse,
-					'bottom' : localStorage.layout_bottom_collapse
-				}
-
-				core.module.layout.layout.getUnitByPosition("left").collapse();
-				core.module.layout.inner_layout.getUnitByPosition("bottom").collapse();
-
-				core.module.layout.slideshare.slide_show_mode = true
-
-				core.module.layout.inner_layout.getUnitByPosition("right").expand();
-				core.module.layout.inner_right_tabview.selectTab(1);
-
-				var window_width = $(window).width();
-				var window_height = $(window).height();
-
-				var right_width = window_width * ( window_width / (window_width + window_height) );
-				core.module.layout.inner_layout._units.right.set('width', right_width - 30);
-			}
-			else{
-				core.module.layout.slideshare.slide_show_mode = false
-
-				if(core.module.layout.slideshare.layout_temp_data){
-					if(core.module.layout.slideshare.layout_temp_data.left == 'false')
-						core.module.layout.layout.getUnitByPosition("left").expand();
-					if(core.module.layout.slideshare.layout_temp_data.bottom == 'false')
-						core.module.layout.inner_layout.getUnitByPosition("bottom").expand();
-				}
-
-				core.module.layout.inner_layout.getUnitByPosition("right").collapse();
 			}
 		});
 
@@ -1300,7 +1339,9 @@ org.goorm.core.menu.action = {
 						filename : core.status.selected_file
 					};
 					$.get("file/delete", postdata, function(data) {
-						console.log(data);
+						if(data.err_code == 20) {
+							alert.show(core.module.localization.msg[data.message]);
+						}
 						m.s("delete: " + core.status.selected_file);
 						core.module.layout.project_explorer.refresh();
 					});
@@ -1482,29 +1523,29 @@ org.goorm.core.menu.action = {
 			});
 		});
 
-		$("a[action=account_profile_context]").unbind("click");
-		$("a[action=account_profile_context]").click(function(e) {
-			var user = core.module.layout.communication.selected_user;
-			if(user){
-				core.module.auth.show_profile(user.id, user.type);
-			}
-		});
+		// $("a[action=account_profile_context]").unbind("click");
+		// $("a[action=account_profile_context]").click(function(e) {
+		// 	var user = core.module.layout.communication.selected_user;
+		// 	if(user){
+		// 		core.module.auth.show_profile(user.id, user.type);
+		// 	}
+		// });
 		
-		$("a[action=account_user_whisper]").unbind("click");
-		$("a[action=account_user_whisper]").click(function(e) {
-			var communication = core.module.layout.communication;
-			var user = communication.selected_user;
-			if(user){
-				var target_user = '{"user":"'+user.id+'", "nick":"'+user.nick+'", "type":"'+user.type+'"}';
+		// $("a[action=account_user_whisper]").unbind("click");
+		// $("a[action=account_user_whisper]").click(function(e) {
+		// 	var communication = core.module.layout.communication;
+		// 	var user = communication.selected_user;
+		// 	if(user){
+		// 		var target_user = '{"user":"'+user.id+'", "nick":"'+user.nick+'", "type":"'+user.type+'"}';
 				
-				communication.message_state = 'whisper';
-				communication.message_interface_data['whisper'] = {
-					'target_user' : target_user
-				}
-				$("#" + communication.target + " #input_chat_message").val('[@'+user.nick+'] ')
-				$("#" + communication.target + " #input_chat_message").focus();
-			}
-		});
+		// 		communication.message_state = 'whisper';
+		// 		communication.message_interface_data['whisper'] = {
+		// 			'target_user' : target_user
+		// 		}
+		// 		$("#" + communication.target + " #input_chat_message").val('[@'+user.nick+'] ')
+		// 		$("#" + communication.target + " #input_chat_message").focus();
+		// 	}
+		// });
 		
 		$("a[action=account_logout]").unbind("click");
 		$("a[action=account_logout]").click(function(e) {
@@ -1513,16 +1554,20 @@ org.goorm.core.menu.action = {
 				yes_text: core.module.localization.msg["confirmation_yes"],
 				no_text: core.module.localization.msg["confirmation_no"],
 				title: core.module.localization.msg["confirmation_title"], 
-
 				yes: function () {
-					var postdata = {
-						'id' : core.user.id,
-						'type' : core.user.type
-					}
-
-					$.post('/auth/logout', postdata, function(result){
-						if(result) location.href = '/';
-					})
+					survey.init(function() {
+						var postdata = {
+							'id' : core.user.id,
+							'type' : core.user.type
+						}
+						$.post('/auth/logout', postdata, function(result){												
+							if(result){
+								core.module.layout.communication.leave();
+								location.href = '/';
+							}
+						});
+					});
+					survey.panel.show();
 				}, no: function () {
 				}
 			});
@@ -1669,5 +1714,7 @@ org.goorm.core.menu.action = {
 				core.module.layout.slideshare.connecting();
 			}
 		});
+
+		$(core).trigger('goorm_menu_load_complete')
 	}
 }

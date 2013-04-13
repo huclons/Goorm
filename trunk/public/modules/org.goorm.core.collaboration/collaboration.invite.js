@@ -14,92 +14,96 @@ org.goorm.core.collaboration.invite = {
 	init : function(){
 		var self = this;
 
-		this.socket = io.connect();
-		this.socket.on('invitation_message', function(data){
-			var project_data = JSON.parse(data);
+		$(core).bind('goorm_login_complete', function(){
+			self.socket =    (org.goorm.core.collaboration.communication.socket == null) ? 
+							(org.goorm.core.collaboration.communication.socket = io.connect()) :
+			 				org.goorm.core.collaboration.communication.socket;
+			self.socket.on('invitation_message', function(data){
+				var project_data = JSON.parse(data);
 
-			function is_ok() {
-				// invitation list edit in target project
-				//
-				var pulldata = {
-					'project_path' : project_data.project_path,
-					'target_id' : core.user.id,
-					'target_type' : core.user.type
+				function is_ok() {
+					// invitation list edit in target project
+					//
+					var pulldata = {
+						'project_path' : project_data.project_path,
+						'target_id' : core.user.id,
+						'target_type' : core.user.type
+					}
+					$.post('/user/project/collaboration/invitation/pull', pulldata, function(data){});
+
+					// invitation answer to author
+					//
+					var senddata = {
+						'channel' : 'workspace',
+						'action' : 'invitation_answer',
+						'invite_answer_list' : [{
+							'id' : project_data.author_id,
+							'type' : project_data.author_type 
+						}],
+						'project_path' : project_data.project_path,
+						'project_name' : project_data.project_name,
+						'project_type' : project_data.project_type,
+						'user_id' : core.user.id,
+						"user_type" : core.user.type,
+						'state' : 'sure'
+					}
+					self.socket.emit("invite", JSON.stringify(senddata))
 				}
-				$.post('/user/project/collaboration/invitation/pull', pulldata, function(data){});
 
-				// invitation answer to author
-				//
-				var senddata = {
-					'channel' : 'workspace',
-					'action' : 'invitation_answer',
-					'invite_answer_list' : [{
-						'id' : project_data.author_id,
-						'type' : project_data.author_type 
-					}],
-					'project_path' : project_data.project_path,
-					'project_name' : project_data.project_name,
-					'project_type' : project_data.project_type,
-					'user_id' : core.user.id,
-					"user_type" : core.user.type,
-					'state' : 'sure'
+				function is_no() {
+					// invitation list edit in target project
+					//
+					var pulldata = {
+						'project_path' : project_data.project_path,
+						'target_id' : core.user.id,
+						'target_type' : core.user.type
+					}
+					$.post('/user/project/collaboration/invitation/pull', pulldata, function(data){});
+
+					// invitation answer to author
+					//
+					var senddata = {
+						'channel' : 'workspace',
+						'action' : 'invitation_answer',
+						'invite_answer_list' : [{
+							'id' : project_data.author_id,
+							'type' : project_data.author_type 
+						}],
+						'project_path' : project_data.project_path,
+						'project_name' : project_data.project_name,
+						'project_type' : project_data.project_type,
+						'user_id' : core.user.id,
+						"user_type" : core.user.type,
+						'state' : 'refused'
+					}
+					self.socket.emit("invite", JSON.stringify(senddata))
 				}
-				self.socket.emit("invite", JSON.stringify(senddata))
-			}
 
-			function is_no() {
-				// invitation list edit in target project
-				//
-				var pulldata = {
-					'project_path' : project_data.project_path,
-					'target_id' : core.user.id,
-					'target_type' : core.user.type
+				var message = {
+					'data' : {},
+					'fn' : function(){
+						self.init_dialog(project_data, is_ok, is_no);
+						core.module.auth.message.updating_process_running = false;
+					}
 				}
-				$.post('/user/project/collaboration/invitation/pull', pulldata, function(data){});
 
-				// invitation answer to author
-				//
-				var senddata = {
-					'channel' : 'workspace',
-					'action' : 'invitation_answer',
-					'invite_answer_list' : [{
-						'id' : project_data.author_id,
-						'type' : project_data.author_type 
-					}],
-					'project_path' : project_data.project_path,
-					'project_name' : project_data.project_name,
-					'project_type' : project_data.project_type,
-					'user_id' : core.user.id,
-					"user_type" : core.user.type,
-					'state' : 'refused'
+				core.module.auth.message.push(message);
+			})
+
+			self.socket.on('invitation_message_answer', function(data){
+				var project_data = JSON.parse(data);
+
+				var message = {
+					'data' : {},
+					'fn' : function(){
+						self.init_answer_dialog(project_data);
+						core.module.auth.message.updating_process_running = false;
+					}
 				}
-				self.socket.emit("invite", JSON.stringify(senddata))
-			}
 
-			var message = {
-				'data' : {},
-				'fn' : function(){
-					self.init_dialog(project_data, is_ok, is_no);
-					core.module.auth.message.updating_process_running = false;
-				}
-			}
-
-			core.module.auth.message.push(message);
+				core.module.auth.message.push(message);
+			});
 		})
-
-		this.socket.on('invitation_message_answer', function(data){
-			var project_data = JSON.parse(data);
-
-			var message = {
-				'data' : {},
-				'fn' : function(){
-					self.init_answer_dialog(project_data);
-					core.module.auth.message.updating_process_running = false;
-				}
-			}
-
-			core.module.auth.message.push(message);
-		});
 	},
 
 	// project_data
@@ -183,7 +187,7 @@ org.goorm.core.collaboration.invite = {
 			buttons = [{text:"<span localization_key='close'>Close</span>",  handler:handle_close}]
 		}
 
-		self.dialogs[self.index] = org.goorm.core.collaboration.invite.dialog;
+		self.dialogs[self.index] = org.goorm.core.collaboration.message.dialog;
 		self.dialogs[self.index].init({
 			localization_key:"title_invite_project",
 			title:"Invite Project", 
@@ -234,7 +238,7 @@ org.goorm.core.collaboration.invite = {
 
 		var buttons = [{text:"<span localization_key='close'>Close</span>",  handler:handle_close}]
 
-		self.dialogs[self.index] = org.goorm.core.collaboration.invite.dialog;
+		self.dialogs[self.index] = org.goorm.core.collaboration.message.dialog;
 		self.dialogs[self.index].init({
 			localization_key:"title_invitation_answer",
 			title:"Invitation Answer", 

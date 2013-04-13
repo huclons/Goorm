@@ -2,25 +2,15 @@
 var auth_m = require('./auth.manager.js');
 
 var google_manager = null;
-var twitter_manager = require('./plugin/twitter.js');
+var twitter_manager = null;
 var facebook_manager = null;
 var github_manager = null;
 
 var social = function(social_type){
 	this.social_type = social_type;
-	//this.api = eval( social_type + '_manager' );
-	this.init_data = eval( '__social_key.' + social_type );
 }
 
 social.prototype = {
-	load : function(userdata, method_type, api_root, data, callback){
-		this.init_data.accessToken = userdata.accessToken || null;
-		this.init_data.accessTokenSecret = userdata.accessTokenSecret || null;
-
-		this.api.init(this.init_data);
-		this.api.trigger(method_type, api_root, data, callback);
-	},
-
 	login : function(req, callback){
 		var self = this;
 		

@@ -73,7 +73,14 @@ org.goorm.core.preference = {
 					core.preference[key] = localStorage[key];
 				}
 				else {
-					core.preference[key] = JSON.parse(localStorage[key]);
+					// load plugin information
+					//
+					var plugins = JSON.parse(localStorage[key]);
+					$.each(plugins, function(name, plugin){
+						core.preference[key][name] = plugin;
+					});
+
+					// core.preference[key] = JSON.parse(localStorage[key]);
 				} 
 			}
 		});

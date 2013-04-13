@@ -10,7 +10,6 @@ org.goorm.core.auth = {
 	profile: null,
 	signup: null,
 	project: null,
-	find_info: null,
 
 	init: function () {
 		this.profile = org.goorm.core.auth.profile;
@@ -25,12 +24,15 @@ org.goorm.core.auth = {
 		this.message = org.goorm.core.collaboration.message;
 		this.message.init();
 
-		this.socket = io.connect();
-		this.socket.on('force_disconnect', function(){
-			notice.show(core.module.localization.msg['alert_force_logout']);
+		$(core).bind('goorm_login_complete', function(){
+			self.socket = io.connect();
+			self.socket.on('force_disconnect', function(){
+				notice.show(core.module.localization.msg['alert_force_logout']);
 
-			$('#panelContainer_Notice').find('.yui-button').one('click', function(){
-				location.href = '/';
+				$('#panelContainer_Notice').find('.yui-button').one('click', function(){
+					core.module.layout.communication.leave();
+					location.href = '/';
+				})
 			})
 		})
 	},
@@ -44,14 +46,10 @@ org.goorm.core.auth = {
 				core.user.name = data.name;
 				core.user.nick = data.nick || null;
 				core.user.type = data.type;
-				core.user.group = data.group || null;
-				core.user.uid = data.uid || null;
-				core.user.gid = data.gid && data.gid[0] || null;
-				core.user.student_id = data.student_id || null;
-				callback(true);
+				if(callback) callback(true);
 			}
 			else{
-				callback(false);
+				if(callback) callback(false);
 			}
 		});
 	},

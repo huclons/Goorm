@@ -57,6 +57,8 @@ org.goorm.core.collaboration.history = function () {
 	
 	//playback control
 	this.pause_flag = false;
+	this.play_flag = false;
+	this.is_selected_by_others = false;
 	this.timer = null;
 	this.btn_activated = false;
 };
@@ -66,6 +68,46 @@ org.goorm.core.collaboration.history.prototype = {
 		var layout_right_height = $(".yui-layout-unit-right").find(".yui-layout-wrap").height() - 25;
 		$("#history_container").height(layout_right_height - 90);
 	},
+	history_play : function () {
+		var self = this;
+ 		if (self.btn_activated == false) return;
+ 		self.play_flag = true;
+ 		if (self.selected_row_idx == -1) self.selected_row_idx = self.circular_queue.length;
+ 		var playback = function() {
+ 			clearTimeout(self.timer);
+ 			if(self.selected_row_idx == -1) return;
+ 			self.selected_row_idx--;
+ 			if(self.selected_row_idx == -1){
+ 				$("#history .history_header").click(); // "now" button click
+ 			} else {
+ 				var delay = (self.selected_snapshot!=null) ? self.selected_snapshot.delay * 1000 : 0;
+				var apply = function(ev){
+					if(ev.text.length == 0) ev.text.push("");
+					self.editor.replaceRange(ev.text.join("\n"), ev.from, ev.to);
+					if(ev.next) apply(ev.next);
+				}
+				//play start
+	 			self.timer = setTimeout(function(){
+					$(self.history_datatable.getTrEl(self.selected_row_idx)).click();
+					var snapshot = self.circular_queue[self.queue_front + ((self.circular_queue.length - 1 - self.selected_row_idx + self.QUEUE_MAX) % self.QUEUE_MAX)];
+					var j = 0;
+					//typing effect
+					self.timer = setInterval(function(){
+						apply(snapshot.buffer[j++]);
+						if (j == snapshot.buffer.length) {
+							//play next snapshot
+							clearTimeout(self.timer);
+							if(self.selected_row_idx==0)
+								self.timer = setTimeout(playback, Number($("#history_selectbox").attr("value")) + self.selected_snapshot.delay * 1000);
+							else
+								self.timer = setTimeout(playback, Number($("#history_selectbox").attr("value")));
+						}
+					}, Number($("#history_selectbox").attr("value")) / snapshot.buffer.length * 0.5);
+				}, delay);
+ 			}
+		}
+ 		self.timer = setTimeout(playback, Number($("#history_selectbox").attr("value")));
+	},
 	init: function(){
 		var self = this;
 		$(core).bind("layout_resized", self.resize);
@@ -73,7 +115,8 @@ org.goorm.core.collaboration.history.prototype = {
  			self.leave();
  		});
  		//$("#history").html("<div id='history_player_control'><select id='history_selectbox'><option value='200' selected localization_key='history_speed_veryfast'>Very Fast</option><option value='600' localization_key='history_speed_fast'>Fast</option><option value='1000' selected localization_key='history_speed_normal'>Normal</option><option value='1400' localization_key='history_speed_slow'>Slow</option><option value='1800' localization_key='history_speed_veryslow'>Very Slow</select><button id='btn_history_play'><img src='images/icons/context/play.png'></button><button id='btn_history_pause'><img src='images/icons/context/pause.png'></button><button id='btn_history_stop'><img src='images/icons/context/stop.png'></button></div><div class='history_item history_header history_selected' localization_key='now'>Now</div><div id='history_container'></div><div id='history_bottom' class='main_toolbar'><span localization_key='history_delay'>Delay(sec) </span><input type='text' id='txt_history_delay'/> <a tooltip='history_save' title='save'><div id='btn_history_save' class='toolbar_button save' style=\"background:url('configs/toolbars/org.goorm.core.file/image/save.png') no-repeat;background-position: center;\"></div></a><a tooltip='history_delete' title='delete'><div id='btn_history_delete' class='toolbar_button delete' style=\"background:url('configs/toolbars/org.goorm.core.edit/image/delete.png') no-repeat;background-position: center;\"></div></a></div>");
- 		$("#history").html("<div id='history_player_control'><select id='history_selectbox'><option value='200' selected localization_key='history_speed_veryfast'>Very Fast</option><option value='600' localization_key='history_speed_fast'>Fast</option><option value='1000' selected localization_key='history_speed_normal'>Normal</option><option value='1400' localization_key='history_speed_slow'>Slow</option><option value='1800' localization_key='history_speed_veryslow'>Very Slow</select><button id='btn_history_play'><img src='images/icons/context/play.png'></button><button id='btn_history_pause'><img src='images/icons/context/pause.png'></button><button id='btn_history_stop'><img src='images/icons/context/stop.png'></button></div><div class='history_item history_header history_selected' localization_key='now'>Now</div><div id='history_container'></div><div id='history_bottom' class='main_toolbar'><a tooltip='history_delete' title='delete'><div id='btn_history_delete' class='toolbar_button delete' style=\"background:url('configs/toolbars/org.goorm.core.edit/image/delete.png') no-repeat;background-position: center;\"></div></a></div>");
+ 		//$("#history").html("<div id='history_player_control'><select id='history_selectbox'><option value='200' selected localization_key='history_speed_veryfast'>Very Fast</option><option value='600' localization_key='history_speed_fast'>Fast</option><option value='1000' selected localization_key='history_speed_normal'>Normal</option><option value='1400' localization_key='history_speed_slow'>Slow</option><option value='1800' localization_key='history_speed_veryslow'>Very Slow</select><button id='btn_history_play'><img src='images/icons/context/play.png'></button><button id='btn_history_pause'><img src='images/icons/context/pause.png'></button><button id='btn_history_stop'><img src='images/icons/context/stop.png'></button></div><div class='history_item history_header history_selected' localization_key='now'>Now</div><div id='history_container'></div><div id='history_bottom' class='main_toolbar'><a tooltip='history_delete' title='delete'><div id='btn_history_delete' class='toolbar_button delete' style=\"background:url('configs/toolbars/org.goorm.core.edit/image/delete.png') no-repeat;background-position: center;\"></div></a></div>");
+ 		$("#history").html("<div id='history_player_control'><select id='history_selectbox'><option value='200' selected localization_key='history_speed_veryfast'>Very Fast</option><option value='600' localization_key='history_speed_fast'>Fast</option><option value='1000' selected localization_key='history_speed_normal'>Normal</option><option value='1400' localization_key='history_speed_slow'>Slow</option><option value='1800' localization_key='history_speed_veryslow'>Very Slow</select><button id='btn_history_play'><img src='images/icons/context/play.png'></button><button id='btn_history_pause'><img src='images/icons/context/pause.png'></button><button id='btn_history_stop'><img src='images/icons/context/stop.png'></button></div><div class='history_item history_header history_selected' localization_key='now'>Now</div><div id='history_container'></div><div id='history_bottom' class='main_toolbar'><a tooltip='history_rollback' title='rollback'><div id='btn_history_rollback' class='toolbar_button rollback' style=\"background:url('configs/toolbars/org.goorm.core.edit/image/undo.png') no-repeat;background-position: center;\"></div></a><a tooltip='history_delete' title='delete'><div id='btn_history_delete' class='toolbar_button delete' style=\"background:url('configs/toolbars/org.goorm.core.edit/image/delete.png') no-repeat;background-position: center;\"></div></a></div>");
  		
  		/**
  		* Playback Button Event Handlers
@@ -82,49 +125,27 @@ org.goorm.core.collaboration.history.prototype = {
  		new YAHOO.widget.Button("btn_history_play", {
  			onclick: {
  				fn:function(){
- 					if (self.btn_activated == false) return;
- 					if (self.selected_row_idx == -1) self.selected_row_idx = self.circular_queue.length;
- 					var playback = function() {
- 						clearTimeout(self.timer);
- 						if(self.selected_row_idx == -1) return;
- 						self.selected_row_idx--;
- 						if(self.selected_row_idx == -1){
- 							$("#history .history_header").click(); // "now" button click
- 						} else {
- 							var delay = (self.selected_snapshot!=null) ? self.selected_snapshot.delay * 1000 : 0;
-							var apply = function(ev){
-								if(ev.text.length == 0) ev.text.push("");
-								self.editor.replaceRange(ev.text.join("\n"), ev.from, ev.to);
-								if(ev.next) apply(ev.next);
-							}
-							//play start
-	 						self.timer = setTimeout(function(){
-		 						$(self.history_datatable.getTrEl(self.selected_row_idx)).click();
-								var snapshot = self.circular_queue[self.queue_front + ((self.circular_queue.length - 1 - self.selected_row_idx + self.QUEUE_MAX) % self.QUEUE_MAX)];
-								var j = 0;
-								//typing effect
-								self.timer = setInterval(function(){
-									apply(snapshot.buffer[j++]);
-									if (j == snapshot.buffer.length) {
-										//play next snapshot
-										clearTimeout(self.timer);
-										if(self.selected_row_idx==0)
-				 							self.timer = setTimeout(playback, Number($("#history_selectbox").attr("value")) + self.selected_snapshot.delay * 1000);
-				 						else
-				 							self.timer = setTimeout(playback, Number($("#history_selectbox").attr("value")));
-									}
-								}, Number($("#history_selectbox").attr("value")) / snapshot.buffer.length * 0.5);
-	 						}, delay);
- 						}
-					}
- 					self.timer = setTimeout(playback, Number($("#history_selectbox").attr("value")));
+ 					self.history_play();
+					self.socket.emit('message', JSON.stringify({
+						channel: 'history',
+						filepath: self.filename,
+						action: 'play',
+						user: core.user.id
+					}));
 				}
 			}
 		});
  		new YAHOO.widget.Button("btn_history_pause", {
  			onclick: {
  				fn:function(){
+ 					self.play_flag = false;
  					clearTimeout(self.timer);
+					self.socket.emit('message', JSON.stringify({
+						channel: 'history',
+						filepath: self.filename,
+						action: 'pause',
+						user: core.user.id
+					}));
 				}
 			}
 		});
@@ -137,6 +158,7 @@ org.goorm.core.collaboration.history.prototype = {
 				}
 			}
 		});
+		/** @deprecated
 		$("#btn_history_save").unbind('click');
 		$("#btn_history_save").bind('click', function () {
 			if (self.selected_row_idx == -1) return;
@@ -147,7 +169,7 @@ org.goorm.core.collaboration.history.prototype = {
 				index: self.selected_snapshot.index,
 				delay: Number ($('#txt_history_delay').attr('value'))
 			}));
-		});
+		});*/
 		$("#btn_history_delete").unbind('click');
 		$("#btn_history_delete").bind('click', function () {
 			if (self.selected_row_idx == -1) return;
@@ -158,6 +180,33 @@ org.goorm.core.collaboration.history.prototype = {
 				index: self.selected_snapshot.index
 			}));
 		});
+		$("#btn_history_rollback").unbind('click');
+		$("#btn_history_rollback").bind('click', function () {
+ 			if (self.btn_activated == false) return;
+			if (self.selected_row_idx == -1) return;
+			var current_code = self.editor.getValue();
+ 			self.selected_row_idx = -1;
+ 			$("#history .history_header").click(); // "now" button click
+ 			var last = self.editor.lineCount()-1;
+ 			self.editor.setSelection({line:0, ch:0}, {line:last, ch:self.editor.getLine(last).length});
+ 			self.editor.replaceSelection(current_code);
+			/*self.socket.emit('message', JSON.stringify({
+				channel: 'history',
+				filepath: self.filename,
+				action: 'rollback',
+				index: self.selected_snapshot.index
+			}));*/
+		});
+		
+		$("#history_selectbox").change(function() { 
+			self.socket.emit('message', JSON.stringify({
+				channel: 'history',
+				filepath: self.filename,
+				action: 'set_speed',
+				speed: $("#history_selectbox").val(),
+				user: core.user.id
+			}));
+	    }); 
 		
 		var history_column_defs = [
 		    { key: "committer", label: self.string_userid, sortable: false},
@@ -194,7 +243,6 @@ org.goorm.core.collaboration.history.prototype = {
 		* restores actions.
 		*/
 		var history_item_click_listener = function(oldest, latest){
-		
 			// initializes views
 			self.enable_now_button();
 			var div = $(this);
@@ -254,15 +302,29 @@ org.goorm.core.collaboration.history.prototype = {
 		
 		//attach event handler
 		self.history_datatable.subscribe("rowClickEvent", function(oArgs){
+			self.selected_row_idx = oArgs.target.rowIndex - 2;
+			
 			var target = oArgs.target,
 				record = this.getRecord(target);
 			var snapshot = record.getData();
-			history_item_click_listener(snapshot.oldest, snapshot.latest);
-			self.selected_row_idx = oArgs.target.rowIndex - 2;
 			self.selected_snapshot = snapshot;
-			$("#txt_history_delay").attr("value", snapshot.delay);
-			$("#txt_history_delay").attr("disabled", null);
+			
+			history_item_click_listener(snapshot.oldest, snapshot.latest);
+			//$("#txt_history_delay").attr("value", snapshot.delay);
+			//$("#txt_history_delay").attr("disabled", null);
 			self.history_datatable.onEventSelectRow(oArgs);
+			
+			if (self.is_selected_by_others) {
+				self.is_selected_by_others = false;
+			}else{
+				self.socket.emit('message', JSON.stringify({
+					channel: 'history',
+					action: 'select',
+					filepath: self.filename,
+					index: self.selected_row_idx,
+					user: core.user.id
+				}));
+			}
 		});
 		
 		self.history_datatable.subscribe("cellClickEvent",self.history_datatable.onEventEditCell);
@@ -277,7 +339,8 @@ org.goorm.core.collaboration.history.prototype = {
 				filepath: self.filename,
 				action: 'set_delay',
 				index: self.selected_snapshot.index,
-				delay: Number (oArgs.newData)
+				delay: Number (oArgs.newData),
+				user: core.user.id
 			}));
         }); 
 		
@@ -315,7 +378,11 @@ org.goorm.core.collaboration.history.prototype = {
 	deactivated: function () {
 		if(this.filename == "") return;
 		var self = this;
+		clearTimeout(self.timer);	//stop playback
+		this.socket.removeAllListeners("history_message");
+		self.leave();
  		self.selected_row_idx = -1;
+		self.filename = "";
  		$("#history .history_header").click(); // "now" button click
 		self.history_datatable.getRecordSet().reset();
 		self.history_datatable.render();
@@ -325,12 +392,8 @@ org.goorm.core.collaboration.history.prototype = {
 		$("#history .history_header").unbind('click');
 		$("#history_save").unbind('click');
 		$("#history_delete").unbind('click');
-		this.filename = "";
 		self._set_now_status();
-		this.socket.removeAllListeners("history_message");
-		clearTimeout(self.timer);	//stop playback
 		self.btn_activated = false;
-		self.leave();
 	},
 	
 	init_history: function(parent){
@@ -358,8 +421,15 @@ org.goorm.core.collaboration.history.prototype = {
 		 * Socket Message Event Handler
 		 */
 		this.socket = this.parent.collaboration.socket;
-		this.join();
+		//console.log("init history: " + this.filename);
 		this.socket.removeAllListeners("history_message");
+		this.socket.removeAllListeners("history_get_playinfo");
+		
+ 		this.socket.on("history_get_playinfo", function (data) {
+			//console.log('history_get_playinfo : ', data);
+			$('#history_selectbox').val(data.speed);
+			if (data.index != -1) $(self.history_datatable.getTrEl(data.index)).click();
+		});
  		this.socket.on("history_message", function (raw_data) {
 			var data = JSON.parse(raw_data);
  			if (data.action == 'snapshot') {
@@ -378,7 +448,7 @@ org.goorm.core.collaboration.history.prototype = {
  				/**
  				*	set_delay received
  				*/
-				if (data.filename != self.filename) return;
+				if (data.filename != self.filename || data.user == core.user.id) return;
 				for (var i = self.queue_front; i != self.queue_rear; i = (i+1) % self.QUEUE_MAX){
 					var unit = self.circular_queue[i];
 					if (unit.index == data.index){
@@ -405,6 +475,30 @@ org.goorm.core.collaboration.history.prototype = {
 				self.refresh_from_server(function(){
 					if (selected_idx_old != -1) $(self.history_datatable.getTrEl(selected_idx_old)).click();
 				});
+			/*} else if (data.action == 'rollback') {
+				if (data.filename != self.filename) return;
+ 				$("#history .history_header").click(); // "now" button click*/
+ 			} else if (data.action == 'set_speed') {
+ 				//console.log('set_speed', data);
+				if (data.filepath != self.filename || data.user == core.user.id) return;
+				$('#history_selectbox').val(data.speed);
+ 			} else if (data.action == 'play') {
+ 				if(data.user == core.user.id) return;
+ 				self.history_play();
+ 			} else if (data.action == 'pause') {
+ 				if(data.user == core.user.id) return;
+ 				self.play_flag = false;
+ 				clearTimeout(self.timer);
+ 			} else if (data.action == 'select') {
+ 				if(data.user == core.user.id) return;
+ 				//console.log('select event : ', data);
+				self.is_selected_by_others = true;
+				
+	 			if(data.index == -1){
+	 				$("#history .history_header").click(); // "now" button click
+	 			} else {
+	 				if(!self.play_flag) $(self.history_datatable.getTrEl(data.index)).click();
+ 				}
  			}
 		});
 		this.socket.removeAllListeners("disconnect");
@@ -413,7 +507,9 @@ org.goorm.core.collaboration.history.prototype = {
  		});
 		
 		self.resize();
-		self.refresh_from_server();
+		self.refresh_from_server(function(){
+			self.join();
+		});
 	},
 	
 	refresh_from_server: function (callback) {
@@ -484,6 +580,7 @@ org.goorm.core.collaboration.history.prototype = {
 		// Now button
 		$("#history .history_header").unbind("click");
 		$("#history .history_header").bind("click", function(){
+			self.play_flag = false;
 			self.selected_row_idx = -1;
 			if(self.btn_activated == false) return;
 			$('#history .history_selected').removeClass("history_selected");
@@ -502,6 +599,18 @@ org.goorm.core.collaboration.history.prototype = {
 			self.mode = "latest";
 			self._set_now_status();
 			clearTimeout(self.timer);	//stop playback
+			
+			if (self.is_selected_by_others) {
+				self.is_selected_by_others = false;
+			} else {
+				self.socket.emit('message', JSON.stringify({
+					channel: 'history',
+					action: 'select',
+					filepath: self.filename,
+					index: -1,
+					user: core.user.id
+				}));
+			}
 		});
 	},
 	
@@ -515,6 +624,7 @@ org.goorm.core.collaboration.history.prototype = {
 	// socket
 	join: function () {
 		if(core.user.id && this.socket){
+			//console.log("join : " + this.filename);
 			this.socket.emit("join", '{"channel": "filepath", "filename":"'+ this.filename +'", "user":"' + core.user.id + '", "sessionid":"' + this.socket.socket.sessionid + '"}');
 		}
 	},

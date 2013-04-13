@@ -62,10 +62,12 @@ PROJECT TREE STYLE CUSTOMIZATION
 
 /* first or middle sibling, no children */
 #object_explorer .ygtvtn { 
-	background: url(../images/org.goorm.core.layout/closed_folder_last.png) 0 0 no-repeat; 
+/*	background: url(../images/org.goorm.core.layout/closed_folder_last.png) 0 0 no-repeat; 
+	why!!!!!!!!!!!!!!!!!!!!!!
+
 	width:17px; 
 	height:22px; 
-}
+*/}
 
 
 /* first or middle sibling, collapsable */
@@ -110,10 +112,11 @@ PROJECT TREE STYLE CUSTOMIZATION
 
 /* last sibling, no children */
 #object_explorer .ygtvln { 
-	background: url(../images/org.goorm.core.layout/file_button_last.gif) 0 0 no-repeat; 
+/*	background: url(../images/org.goorm.core.layout/file_button_last.gif) 0 0 no-repeat; 
+
 	width:17px; 
 	height:22px; 
-}
+*/}
 
 /* Last sibling, collapsable */
 /*
@@ -200,4 +203,11 @@ PROJECT TREE STYLE CUSTOMIZATION
 #object_explorer .ygtvlabel, .ygtvlabel:link, .ygtvlabel:visited, .ygtvlabel:hover { 
 	margin-left:2px;
 	text-decoration: none;
+}
+
+
+#current_object_explorer{
+	background-color: #EEE;
+	height: 32px;
+	border-bottom: 1px solid #DDD;
 }

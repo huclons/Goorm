@@ -182,6 +182,7 @@ org.goorm.core.search = {
 		var self = this;
 
 		core.module.layout.inner_bottom_tabview.selectTab(2);
+		core.module.layout.inner_layout.getUnitByPosition("bottom").expand();
 		var window_manager = core.module.layout.workspace.window_manager;
 
 		if(data){

@@ -42,9 +42,13 @@ org.goorm.core.collaboration.composing.prototype = {
 		
 		this.predefinedColors = ["#FFCFEA", "#E8FF9C", "#FFCC91", "#42C0FF", "#A7FF9E", "#7DEFFF", "#BABDFF", "#FFD4EB", "#AAFF75", "#FF9EAB", "#DCFF91", "#8088FF"];
 		this.assignedColors = {};
-		
-		this.socket = io.connect();
- 		
+
+		$(core).bind('goorm_login_complete', function(){
+			self.socket =    (org.goorm.core.collaboration.communication.socket == null) ? 
+							(org.goorm.core.collaboration.communication.socket = io.connect()) :
+			 				org.goorm.core.collaboration.communication.socket;
+		})
+		 		
  		/* 		
  		this.diff_worker = new Worker('module/org.goorm.core.collaboration/collaboration.design.worker.diff.js');
  		this.patch_worker = new Worker('module/org.goorm.core.collaboration/collaboration.design.worker.patch.js');

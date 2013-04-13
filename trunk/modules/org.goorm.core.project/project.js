@@ -254,16 +254,57 @@ module.exports = {
 				owner_roots.push(owner_project_data[i].project_path);
 			}
 
-			var walker = walk.walk(__workspace+'/', options);
+			//exec("ls " + __workspace + " | grep "+author.author_id+"_",function(err, stdout, stderr){
+			exec("ls " + __workspace + " | grep _",function(err, stdout, stderr){
+				dirs = stdout.split('\n');
+				is_empty = false;
+				var dir_count = 0;
+
+				var evt_dir = new EventEmitter();
+
+				evt_dir.on("get_list", function (__projects) {
+
+					dir_count++;
+					if (dir_count<dirs.length-1) {
+						self.get_project_info(owner_roots, {name: dirs[dir_count]}, __projects, evt_dir);
+					}
+					else {
+						evt.emit("project_get_list", __projects);
+					}
+				});
+
+				self.get_project_info(owner_roots, {name: dirs[dir_count]}, projects, evt_dir);
+			});
+			/*fs.readdir(__workspace+'/',function(err,files){
+				is_empty = false;
+				var dir_count = 0;
+
+				var evt_dir = new EventEmitter();
+
+				evt_dir.on("get_list", function (__projects) {
+
+					dir_count++;
+					if (dir_count<files.length) {
+						self.get_project_info(owner_roots, {name: files[dir_count]}, __projects, evt_dir);
+					}
+					else {
+						evt.emit("project_get_list", __projects);
+					}
+				});
+
+				self.get_project_info(owner_roots, {name: files[dir_count]}, projects, evt_dir);
+			});*/
+			/*var walker = walk.walk(__workspace+'/', options);
 
 			walker.on("directories", function (root, dirStatsArray, next) {
 				is_empty = false;
+				//console.log(root, dirStatsArray, next);
 				if (root==__workspace+'/' ) {
 
 					var dir_count = 0;
 
 					var evt_dir = new EventEmitter();
-		
+
 					evt_dir.on("get_list", function (__projects) {
 
 						dir_count++;
@@ -277,15 +318,15 @@ module.exports = {
 
 					self.get_project_info(owner_roots, dirStatsArray[dir_count], projects, evt_dir);
 				}
-				
+				console.log(next);
 				next();
 			});
-			
+
 			walker.on("end", function () {
 				if (is_empty) {
 					evt.emit("project_get_list", projects);
 				}
-			});
+			});*/
 		});
 	},
 	
@@ -397,6 +438,17 @@ module.exports = {
 	do_delete_for_clean: function (project_path, evt_clean) {
 		rimraf(__workspace+'/'+project_path+"/build", function(err) {
 			evt_clean.emit("do_delete_for_clean");
+		});
+	},
+
+	move_file: function(data, res){
+		exec('mv '+__workspace+data.current_path+" "+__workspace+data.after_path,function(err, stdout, stderr){
+			if(err){
+				console.log(err, stdout, stderr);
+				res.json({flag: false});
+			}else{
+				res.json({flag: true});
+			}
 		});
 	}
 };

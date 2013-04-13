@@ -40,6 +40,10 @@ org.goorm.core.file._new.untitled_textfile = {
 					//core.module.layout.workspace.window_manager.open("../../project/"+$("#text_new_input_location_path").val(), received_data.filename, "txt");
 					core.module.layout.project_explorer.refresh();
 				}
+				else if(data.err_code == 20) {
+					alert.show(core.module.localization.msg[data.message]);
+
+				}
 				else {
 					alert.show(data.message);
 				}

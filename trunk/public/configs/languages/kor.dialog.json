@@ -481,6 +481,21 @@
              }
         }
     },
+            "dialog_assistant_msg_every": {
+                "value": "모든 학생에게 보냄"
+             },
+             "dialog_assistant_msg_specific": {
+                "value": "특정 학생에게 보냄"
+             },
+             "dialog_assistant_msg_content": {
+                "value": "메세지 내용 : "
+             },
+             "dialog_assistant_msg_student": {
+                "value": "보내기 선택 : "
+             },
+             "dialog_assistant_msg_recipient": {
+                "value": "학생 아이디 : "
+             },
     "dialog_preferences_preference" : {
         "value": "",
         "children": {

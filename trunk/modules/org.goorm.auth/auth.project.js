@@ -275,6 +275,10 @@ module.exports = {
 		});	
 	},
 
+	get_project_doc : function(){
+		return db.project;
+	},
+
 	g_exec : function(command, callback){
 		exec(command, function(err, stdout, stderr){
 			if(err){

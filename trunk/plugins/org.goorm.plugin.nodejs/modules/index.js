@@ -43,5 +43,9 @@ module.exports = {
 		else {
 			debug.debug(req, evt);
 		}
-	}
+	},
+
+	extend_function: function (req, res) {
+
+	}	
 };

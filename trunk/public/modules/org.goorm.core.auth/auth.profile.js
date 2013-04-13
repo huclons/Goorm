@@ -17,32 +17,41 @@ org.goorm.core.auth.profile = {
 		var self = this;
 				
 		var handle_settings = function() { 
+			$('#goorm_profile_container input').css('border','1px solid #ccc');
 			$('#goorm_profile_container').find('[name="profile_id_input"]').attr('disabled', 'disabled');
 			$('#goorm_profile_container').find('[name="profile_name_input"]').removeAttr('readonly');
+			$('#goorm_profile_container').find('[name="profile_name_input"]').css('background-color','white');
 			$('#goorm_profile_container').find('[name="profile_nickname_input"]').removeAttr('readonly');
+			$('#goorm_profile_container').find('[name="profile_nickname_input"]').css('background-color','white');
 			$('#goorm_profile_container').find('[name="profile_email_input"]').removeAttr('readonly');
+			$('#goorm_profile_container').find('[name="profile_email_input"]').css('background-color','white');
 			$('#goorm_profile_container').find('[name="profile_type_input"]').attr('disabled', 'disabled');
 			$('#goorm_profile_container').find('[name="profile_level_input"]').attr('disabled', 'disabled');
 			
 			$(self.dialog.buttons[0].htmlButton).hide();
 			$(self.dialog.buttons[2].htmlButton).hide();
 			$(self.dialog.buttons[1].htmlButton).show();
+			core.module.auth.profile.dialog.panel._aButtons[1].removeListener('click');
+			core.module.auth.profile.dialog.panel._aButtons[1].addListener('click', handle_modify);
 		};
 		var handle_settings_pw = function() {
 			
 			self.dialog.panel.cfg.setProperty('width', '360px');
-			self.dialog.panel.cfg.setProperty('height', '400px');
+			self.dialog.panel.cfg.setProperty('height', '300px');
 			var html_t = '';
-			html_t += "<span localization_key='dialog_goorm_profile_password' name='profile_pw_span' class='goorm_profile_span'> Password : </span>";
+			html_t += "<span localization_key='dialog_goorm_profile_password'name='profile_pw_span' class='goorm_profile_span'> Password : </span>";
 			html_t += "<input type='password' name='profile_pw_input' class='goorm_profile_input'>";
-			html_t += "<span localization_key='dialog_goorm_profile_password_confirm' name='profile_re_pw_span' class='goorm_profile_span'> Confirm pw : </span>";
+			html_t += "<span localization_key='dialog_goorm_profile_password_confirm' name='profile_re_pw_span'class='goorm_profile_span'> Confirm pw : </span>";
 			html_t += "<input type='password' name='profile_re_pw_input' class='goorm_profile_input'>";
 			$("#profile_content_container").append(html_t); 
-
+			$('#goorm_profile_container input').css('border','1px solid #ccc');
 			$('#goorm_profile_container').find('[name="profile_id_input"]').attr('disabled', 'disabled');
 			$('#goorm_profile_container').find('[name="profile_name_input"]').removeAttr('readonly');
+			$('#goorm_profile_container').find('[name="profile_name_input"]').css('background-color','white');
 			$('#goorm_profile_container').find('[name="profile_nickname_input"]').removeAttr('readonly');
+			$('#goorm_profile_container').find('[name="profile_nickname_input"]').css('background-color','white');
 			$('#goorm_profile_container').find('[name="profile_email_input"]').removeAttr('readonly');
+			$('#goorm_profile_container').find('[name="profile_email_input"]').css('background-color','white');
 			$('#goorm_profile_container').find('[name="profile_type_input"]').attr('disabled', 'disabled');
 			$('#goorm_profile_container').find('[name="profile_level_input"]').attr('disabled', 'disabled');
 			
@@ -58,12 +67,13 @@ org.goorm.core.auth.profile = {
 
 		var handle_modify = function() {
 			confirmation.init({
-				message: core.module.localization.msg["confirmation_modify_profile"],
+				message: core.module.localization.msg["confirmation_modify_profile"]+"<br>"+core.module.localization.msg['notice_refresh_goorm'],
 				yes_text: core.module.localization.msg["confirmation_yes"],
 				no_text: core.module.localization.msg["confirmation_no"],
 				title: core.module.localization.msg["confirmation_title"], 
 
 				yes: function () {
+					
 					var type = $('#goorm_profile_container').find('[name="profile_type_input"]').val();
 					if($('#goorm_profile_container').find('[name="profile_type_input"]').val() == 'Generic') type = 'password';
 					
@@ -77,7 +87,10 @@ org.goorm.core.auth.profile = {
 						core.status.focus_on_inputbox=false;
 					$.post('/user/set', postdata, function(result){
 						if(result.type == 'set'){
-							if(result.data) location.href = '/';
+							if(result.data) {
+								core.module.layout.communication.leave();
+								location.href = '/';
+							}
 							else{
 								
 							}
@@ -97,12 +110,13 @@ org.goorm.core.auth.profile = {
 		var handle_modify_pw = function() {
 
 			confirmation.init({
-				message: core.module.localization.msg["confirmation_modify_profile"],
+				message: core.module.localization.msg["confirmation_modify_profile"]+"<br>"+core.module.localization.msg['notice_refresh_goorm'],
 				yes_text: core.module.localization.msg["confirmation_yes"],
 				no_text: core.module.localization.msg["confirmation_no"],
 				title: core.module.localization.msg["confirmation_title"], 
 
 				yes: function () {
+					
 					var type = $('#goorm_profile_container').find('[name="profile_type_input"]').val();
 					if($('#goorm_profile_container').find('[name="profile_type_input"]').val() == 'Generic') type = 'password';
 					
@@ -118,7 +132,10 @@ org.goorm.core.auth.profile = {
 					
 					$.post('/user/set_pw', postdata, function(result){
 						if(result.type == 'set'){
-							if(result.data) location.href = '/';
+							if(result.data) {
+								core.module.layout.communication.leave()
+								location.href = '/';
+							}
 							else{
 								
 							}
@@ -138,8 +155,11 @@ org.goorm.core.auth.profile = {
 			var __self = this;
 			
 			$('#goorm_profile_container input').attr('readonly', 'readonly');
+			$('#goorm_profile_container input').css('background-color','#f2f2f2');
+			$('#goorm_profile_container input').css('border','1px solid #f2f2f2');
 			$('#goorm_profile_container input').removeAttr('disabled');
 			$('#goorm_profile_container').find('[name="profile_pw_span"]').remove();
+
 			$('#goorm_profile_container').find('[name="profile_re_pw_span"]').remove();
 			$('#goorm_profile_container').find('[name="profile_pw_input"]').remove();
 			$('#goorm_profile_container').find('[name="profile_re_pw_input"]').remove();
@@ -152,15 +172,18 @@ org.goorm.core.auth.profile = {
 				$(self.buttons[1].htmlButton).hide();
 	
 				__self.hide(); 
-				self.dialog.panel.cfg.setProperty('width', '330px');
-				self.dialog.panel.cfg.setProperty('height', '330px');
+				/*self.dialog.panel.cfg.setProperty('width', '330px');*/
+				/*if($("#profile_content_container").find("[name='profile_student_id_input']"))
+					self.dialog.panel.cfg.setProperty('height', '310px');
+				else*/
+					self.dialog.panel.cfg.setProperty('height', '225px');
 			});
 		};
 		
-		this.buttons = [ {text:"<span localization_key='account_modify'>Sett</span>", handler:handle_settings, isDefault:true},
-							{text:"<span localization_key='modify'>Modi</span>",  handler:handle_modify},
-							{text:"<span localization_key='modify_pw'>pw</span>",  handler:handle_settings_pw},
-							{text:"<span localization_key='close'>Clos</span>",  handler:handle_cancel}]; 
+		this.buttons = [ {text:"<span localization_key='account_modify'>Modify Account</span>", handler:handle_settings, isDefault:true},
+							{text:"<span localization_key='modify'>Modify</span>",  handler:handle_modify},
+							{text:"<span localization_key='modify_pw'>Password</span>",  handler:handle_settings_pw},
+							{text:"<span localization_key='close'>Close</span>",  handler:handle_cancel}]; 
 						 
 		this.dialog = org.goorm.core.auth.profile.dialog;
 		this.dialog.init({
@@ -168,14 +191,17 @@ org.goorm.core.auth.profile = {
 			title:"Profile", 
 			path:"configs/dialogs/org.goorm.core.auth/auth.profile.html",
 			width:330,
-			height:330,
+			height:225,
 			modal:true,
 			buttons:this.buttons,
 			success: function () {
 
 			}
+
 		});
 		this.dialog = this.dialog.dialog;
+		$('#goorm_profile_container').parent().css('height', '133px');
+		
 	},
 	
 	set_content : function(target_id, target_type){
@@ -251,7 +277,12 @@ org.goorm.core.auth.profile = {
 				$(self.buttons[2].htmlButton).hide();}
 			$(self.buttons[1].htmlButton).hide();	
 			self.set_content(target_id, target_type);
+			
+			$('#goorm_profile_container input').css('background-color','#f2f2f2');
+			$('#goorm_profile_container').parent().css('height', '133px');
+			$('#goorm_profile_container input').css('border','1px solid #f2f2f2');
 			self.dialog.panel.show();
+			
 		});
 	}
 }

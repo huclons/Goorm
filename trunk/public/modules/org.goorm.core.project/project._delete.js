@@ -60,8 +60,13 @@ org.goorm.core.project._delete = {
 					alert.show(core.module.localization['alert_cannot_project_delete']);
 				}
 				
-				core.module.layout.project_explorer.refresh();
-				core.dialog.project_property.refresh_toolbox();
+				if(core.status.current_project_path == "" || core.status.current_project_path == data.path){
+					core.module.layout.project_explorer.refresh();
+					core.dialog.project_property.refresh_toolbox();
+				}
+				else{
+					core.module.layout.project_explorer.refresh_project_selectbox();
+				}
 			});
 			
 			this.hide(); 

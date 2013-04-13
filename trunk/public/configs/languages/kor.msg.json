@@ -1,4 +1,7 @@
 {
+    "alert_refresh":{
+        "value":"재시작 하시겠습니까?"
+        },
     "alert_file_name_illegal": {
         "value": "파일명에 잘못된 값이 있습니다."
     },
@@ -7,6 +10,9 @@
     },
     "alert_filename_empty": {
         "value": "파일 이름이 비어 있습니다."
+    },
+    "alert_file_permission": {
+        "value": "파일을 수정할 권한이 없습니다."
     },
     "alert_file_not_select": {
         "value": "파일을 선택하지 않으셨습니다."
@@ -26,6 +32,9 @@
     "alert_find_pw_exist": {
         "value": "임시 비밀번호가 메일로 발송되었습니다."
     },
+    "alert_title_msg_send": {
+        "value": "메세지 보내기"
+    },
     "alert_project_not_selected": {
         "value": "프로젝트를 선택해주세요."
     },
@@ -36,7 +45,7 @@
         "value": "바이너리가 존재하지 않습니다.<br>프로젝트를 빌드 하시거나 경로설정을 확인하시기 바랍니다.<br>화면 하단의 터미널을 확인해주세요."
     },
     "alert_plugin_run_success": {
-        "value": "성공적으로 실행되었습니다."
+        "value": "성공적으로 실행되었습니다.<br>터미널을 확인하세요."
     },
     "alert_plugin_build_error": {
         "value": "빌드 실패!<br>터미널 메시지를 확인하세요."
@@ -44,11 +53,21 @@
     "alert_plugin_build_success": {
         "value": "성공적으로 빌드가 완료되었습니다.!"
     },
+    "alert_plugin_not_while_running": {
+        "value": "사용자가 만든 프로그램이 이미 실행 중입니다. <br>프로그램의 실행을 끝내고 시도하세요"
+    },
+    
     "alert_only_zip_allowed": {
         "value": "ZIP형식의 압축파일만 지원합니다."
     },
     "alert_project_not_opened": {
         "value": "해당 프로젝트는 오픈되어 있지 않습니다."
+    },
+    "alert_collaboration_communication_join": {
+        "value": "님이 현재 워크스페이스에 접속하셨습니다!"
+    },
+    "alert_collaboration_communication_leave": {
+        "value": "님이 현재 워크스페이스에서 나가셨습니다!"
     },
     "alert_filetype_same_name": {
         "value": "같은 확장자를 가진 파일 타입이 존재합니다."
@@ -68,11 +87,26 @@
     "alert_error": {
         "value": "에러 : "
     },
+    "alert_assistant_msg": {
+        "value": "조교님으로 부터 온 메세지입니다"
+    },
+    "alert_assistant_msg_recipient_blank": {
+        "value": "받는 학생 아이디를 확인해주세요"
+    },
+    "alert_assistant_msg_send_to_blank": {
+        "value": "보내기 종류를 선택해 주세요"
+    },
+    "notice_assistant_msg_success": {
+        "value": "메세지 전송 완료"
+    },
      "alert_deny_make_file_in_workspace_root" : {
         "value" : "workspace의 root에선 새로운 파일을 만들 수 없습니다."
     },
      "alert_deny_make_folder_in_workspace_root" : {
         "value" : "workspace의 root에선 새로운 폴더를 만들 수 없습니다."
+    },
+     "alert_deny_rename_folder_in_workspace_root" : {
+        "value" : "workspace의 root에선 폴더 이름을 변경할 수  없습니다."
     },
     "confirmation_yes": {
         "value": "네"
@@ -166,6 +200,9 @@
     },
     "alert_project_cannot_open": {
         "value": "프로젝트를 열 수 없습니다."
+    },
+    "notice_refresh_goorm": {
+        "value": "정보 변경이 완료된 후 새로고침됩니다"
     },
     "notice_project_import_done": {
         "value": "프로젝트 가져오기 완료"
@@ -412,5 +449,38 @@
     },
     "alert_login_not_service_account" : {
         "value" : "서비스 모드 계정이 아닙니다. 새로 회원가입을 해주십시오."
+    },
+    "survey_title" : {
+		"value" : "사용자 의견"
+    },
+    "survey_message" : {
+    	"value" : "구름을 사용하시는데 불편한 점은 없으셨나요? 불편하신 점이 있다면 의견을 보내주세요!"
+    },
+    "survey_send" : {
+    	"value" : "전송"
+	},
+    "survey_not_send" : {
+        "value" : "전송 안함"
+    },
+    "alert_run_fail" : {
+        "value" : "실행에 실패하셨습니다. 다시 시도해 주시기 바랍니다."
+    },
+    "dictionary_project_list" : {
+        "value" : "프로젝트 목록"
+    },
+    "dictionary_my_project" : {
+        "value" : "내 프로젝트"
+    },
+    "dictionary_collaboration_project" : {
+        "value" : "협업 프로젝트"
+    },
+    "dictionary_type" : {
+        "value" : "종류"
+    },
+    "dictionary_name" : {
+        "value" : "이름"
+    },
+    "dictionary_author" : {
+        "value" : "작성자"
     }
 }

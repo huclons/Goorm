@@ -95,7 +95,7 @@ org.goorm.plugin.jsp.prototype = {
 		$.get('/plugin/run', send_data, function(result){
 			if(result.code == 200){
 				//success 
-				window.open(run_path + path +'/'+main, 'goormjsp', 'width=600 height=400');
+				window.open(run_path + path +'/'+main, '_blank', 'width=600 height=400');
 			}
 			else{
 				//failure

@@ -65,16 +65,31 @@ db.info.findOne({}, function (err, old_info) {
 	}
 });
 
+
+
 /**
 *	Main
 */
 module.exports = {
+	playinfos: {},	// ['filename':{filename:?, speed:?, index:?}, ...]
+	
+	send_playinfo: function(socket, msg) {
+		var self = this;
+		for (var filename in self.playinfos) {
+			var playinfo = self.playinfos[filename];
+			if ((playinfo != undefined) && (playinfo.filename == msg.filename)) {
+				socket.emit("history_get_playinfo", playinfo);
+				break;
+			}
+		}
+		// if doesn't exist, just ignore request
+	},
+	
 	/* socket start */
 	join: function (socket, msg) {
 		if(msg.filename.slice(0,1)!="/") msg.filename = "/" + msg.filename;
 		socket.join("." + msg.filename);
 		socket.set('filename', msg.filename);
-		
 		// console.log("join".red, msg.filename);
 		
 		if(!files[msg.filename]){
@@ -104,7 +119,7 @@ module.exports = {
 	}
 	, msg: function(io, socket, msg) {
 		if (msg.filepath.slice(0,1) != "/") msg.filepath = "/" + msg.filepath;
-		if (msg.action!="change" || !files[msg.filepath]) return;
+		if ((msg.action != "change") || !files[msg.filepath]) return;
 		var self = this;
 		
 		if (files[msg.filepath].timer!=null) clearTimeout(files[msg.filepath].timer); // when continuing typing
@@ -129,8 +144,6 @@ module.exports = {
 				}
 				self.add_snapshot(snapshot, function (err) {
 					if (!err) {
-						//socket.broadcast.to("."+snapshot.filename).emit("history_message", JSON.stringify({action: 'snapshot', snapshot: snapshot}));
-						//socket.emit("history_message", JSON.stringify({action: 'snapshot', snapshot: snapshot}));
 						io.sockets.in("."+snapshot.filename).emit("history_message", JSON.stringify({action: 'snapshot', snapshot: snapshot}));
 						
 						files[msg.filepath].buffer = [];
@@ -157,8 +170,6 @@ module.exports = {
 						index: msg.index, 
 						delay: msg.delay
 					}
-					//socket.broadcast.to("."+msg.filepath).emit("history_message", JSON.stringify(history_message));
-					//socket.emit("history_message", JSON.stringify(history_message));
 					io.sockets.in("."+msg.filepath).emit("history_message", JSON.stringify(history_message));
 				} else console.log("history set_delay failed.".red);
 			});
@@ -207,15 +218,72 @@ module.exports = {
 						action: 'merge',
 						filename: msg.filepath
 					}
-					//socket.broadcast.to("."+msg.filepath).emit("history_message", JSON.stringify(history_message));
-					//socket.emit("history_message", JSON.stringify(history_message));
-					
 					io.sockets.in("."+msg.filepath).emit("history_message", JSON.stringify(history_message));
-					
 				} else console.log("history merge failed.".red);
 			});
-			
-			
+		/*} else if (msg.action == 'rollback') {
+			if (msg.filepath.slice(0,1) != "/") msg.filepath = "/" + msg.filepath;
+			db.snapshot
+			.find({filename: msg.filepath})
+			.select('filename index committer time buffer delay')
+			.sort('time')
+			.exec(function(err, snapshots){
+				if (!err) {
+					var buffer = null;
+					var committer = null;
+					for (var i=snapshots.length-1; i >= 0; i--) {
+						var snapshot = snapshots[i];
+						if (snapshot.index == msg.index) {
+							// delete target
+							buffer = snapshot.buffer;
+							committer = snapshot.committer;
+							snapshot.remove();
+						} else if (snapshot.index == (msg.index - 1 + QUEUE_MAX) % QUEUE_MAX) {
+							// merge target
+							committer.forEach(function (person) {
+								if (snapshot.committer.inArray(person) < 0) snapshot.committer.push(person);
+							});
+							snapshot.buffer = snapshot.buffer.concat(buffer);
+							//snapshot.index = (snapshot.index - 1 + QUEUE_MAX) % QUEUE_MAX;
+							snapshot.save();
+							break;
+						} else {
+							snapshot.index = (snapshot.index - 1 + QUEUE_MAX) % QUEUE_MAX;
+							snapshot.save();
+						}
+					}
+					db.queue.findOne({filename: msg.filepath}, function(err, queue) {
+						if (!err) {
+							queue.count--;
+							queue.rear = (queue.rear - 1 + QUEUE_MAX) % QUEUE_MAX;
+							queue.save();
+						} else console.log("history merge failed.".red);
+					});
+					var history_message = {
+						action: 'merge',
+						filename: msg.filepath
+					}
+					io.sockets.in("."+msg.filepath).emit("history_message", JSON.stringify(history_message));
+				} else console.log("history merge failed.".red);
+			});*/
+		} else if (msg.action == 'set_speed') {
+			io.sockets.in("."+msg.filepath).emit("history_message", JSON.stringify(msg));
+			self.validate_playinfo(msg.filepath);
+			self.playinfos[msg.filepath].speed = msg.speed;
+		} else if (msg.action == 'play') {
+			io.sockets.in("."+msg.filepath).emit("history_message", JSON.stringify(msg));
+		} else if (msg.action == 'pause') {
+			io.sockets.in("."+msg.filepath).emit("history_message", JSON.stringify(msg));
+		} else if (msg.action == 'select') {
+			io.sockets.in("."+msg.filepath).emit("history_message", JSON.stringify(msg));
+			self.validate_playinfo(msg.filepath);
+			self.playinfos[msg.filepath].index = msg.index;
+		}
+	}
+	
+	, validate_playinfo: function (filename) {
+		if (this.playinfos[filename] == undefined) {
+			this.playinfos[filename] = {filename:filename, speed:1000, index:-1};
 		}
 	}
 	

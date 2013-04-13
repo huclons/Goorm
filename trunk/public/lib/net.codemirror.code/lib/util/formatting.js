@@ -30,9 +30,26 @@
     }
   });
 
+  CodeMirror.extendMode("clike", {
+    commentStart: "/*",
+    commentEnd: "*/",
+    newlineAfterToken: function(type, content, textAfter) {
+
+    }
+  });
+
+  CodeMirror.extendMode("python", {
+    commentStart: "#",
+    commentEnd: "",
+    newlineAfterToken: function(type, content, textAfter) {
+
+    }
+  });
+
   // Comment/uncomment the specified range
   CodeMirror.defineExtension("commentRange", function (isComment, from, to) {
     var cm = this, curMode = CodeMirror.innerMode(cm.getMode(), cm.getTokenAt(from).state).mode;
+
     cm.operation(function() {
       if (isComment) { // Comment range
         cm.replaceRange(curMode.commentEnd, to);

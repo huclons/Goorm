@@ -76,8 +76,6 @@ org.goorm.plugin.java.prototype = {
 		*/
 		var send_data = {
 				"plugin" : "org.goorm.plugin.java",
-				"uid" : core.user.uid,
-				"gid" : core.user.gid,
 				"data" : data
 		};
 		

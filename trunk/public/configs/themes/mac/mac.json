@@ -71,6 +71,13 @@
 			"background-image": "url(images/open_project.png) !important"
 		}
 	},
+	"top-dropdownmenu-file-new_project": {
+		"selector": "[localization_key=file_new_project]",
+		"description": "edit style of text menu background",
+		"style": {
+			"background-image": "url(images/new_project.png) !important"
+		}
+	},
 	"top-dropdownmenu-file-open_file": {
 		"selector": "[localization_key=file_open_file]",
 		"description": "edit style of text menu background",
@@ -395,6 +402,13 @@
 		"description": "edit style of toolbar : normal",
 		"style": {
 			"background": "url('images/open_project.png') no-repeat center !important"
+		}
+	},
+	"top-toolbar-icon-new_project": {
+		"selector": "#goorm_top .main_toolbar .toolbar_button.new_project",
+		"description": "edit style of toolbar : normal",
+		"style": {
+			"background": "url('images/new_project.png') no-repeat center !important"
 		}
 	},
 	"top-toolbar-icon-open_file": {

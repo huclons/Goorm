@@ -25,7 +25,7 @@ org.goorm.core.localization = {
 		var self = this;
 		var is_first = false;
 		
-		if(language == null || language) language = "us";
+		if(language == null || language == "null" || !language) language = "us";
 
 		if ( (localStorage.getItem("language")=="null" || localStorage.getItem("language")==null) && core.server_language=="client") {
 			is_first = true;

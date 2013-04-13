@@ -133,7 +133,10 @@ org.goorm.core.debug.prototype = {
 				self.table_variable.render();
 				
 				//self.table_variable.subscribe("cellClickEvent", self.show_cell_editor);
-				self.table_variable.subscribe("cellClickEvent", self.table_variable.onEventShowCellEditor);
+				self.table_variable.subscribe("cellClickEvent",  function(e) {
+					$(core.module.debug.table_variable).trigger('click_row',{'target': $(e.target), 'index':self.table_variable.getRecordIndex(self.table_variable.getRecord(e.target))});
+					self.table_variable.onEventShowCellEditor(e);
+				});
 				self.table_variable.subscribe("cellMouseoutEvent", self.table_variable.onEventUnhighlightCell);
 				self.table_variable.subscribe("cellMouseoverEvent", highlight_editable_cell);
 				self.table_variable.subscribe("editorShowEvent", self.editor_show);
@@ -151,6 +154,7 @@ org.goorm.core.debug.prototype = {
 				$("#debug_center").css("height", layout_bottom_height);
 				
 				$("#" + self.target).height(layout_bottom_height);
+				$("#debug").css('height',layout_bottom_height);
 			});
 		});
 	},
@@ -160,7 +164,7 @@ org.goorm.core.debug.prototype = {
 	},
 	
 	variable_edit_complete: function(object){
-		var variable = $(object.editor.getTdEl()).parent().find(".yui-dt-col-variable").find(".yui-dt-liner").html();
+		var variable = $($(object.editor.getTdEl()).parent().find(".yui-dt-col-variable").find(".yui-dt-liner").html()).text() || $(object.editor.getTdEl()).parent().find(".yui-dt-col-variable").find(".yui-dt-liner").html();
 		var value = object.newData;
 
 		$(core.module.debug).trigger("value_changed", {

@@ -34,7 +34,7 @@
         a.yuimenuitemlabel(href="#", action='open_file', localization_key='file_open_file', style='background-image: url(configs/toolbars/org.goorm.core.file/image/open_file.png);')
          | Open File...
          em.helptext Ctrl + Shift + O
-       //li.yuimenuitem
+       li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='open_url', localization_key='file_open_url') Open URL...
       ul
        li.yuimenuitem
@@ -75,7 +75,7 @@
         a.yuimenuitemlabel(href="#", action='refresh_project_directory', localization_key='file_refresh')
          | Refresh
          em.helptext Ctrl + R
-      //ul
+      ul
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='print', localization_key='file_print', style='background-image: url(configs/toolbars/org.goorm.core.file/image/print.png);')
          | Print
@@ -86,7 +86,7 @@
          a.yuimenuitemlabel.yuimenuitemlabel-disabled(href="#", action='', localization_key='file_swich_workspace') 
           | Switch workspace
        li.yuimenuitem
-        a.yuimenuitemlabel(href="#", action='refresh_project_directory', localization_key='file_restart') 
+        a.yuimenuitemlabel(href="#", action='refresh_page', localization_key='file_restart') 
          | Restart
       ul
        li.yuimenuitem
@@ -160,15 +160,15 @@
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='auto_formatting', localization_key='edit_auto_formatting', style='background-image: url(configs/toolbars/org.goorm.core.edit/image/auto_formatting.png);')
          | Auto Formatting
-         em.helptext Alt + ?
+         em.helptext Ctrl + K
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='comment_selected', localization_key='edit_comment_selected', style='')
          | Comment Selected
-         em.helptext Alt + ?
+         em.helptext Ctrl + /
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='uncomment_selected', localization_key='edit_uncomment_selected', style='')
          | Uncomment Selected
-         em.helptext Alt + ?
+         em.helptext Ctrl + Shift+ /
       ul
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='do_share_cursor', localization_key='edit_share_cursor', style='background-image: url(configs/toolbars/org.goorm.core.edit/image/cursor.png);')
@@ -288,7 +288,7 @@
      .bd
       ul
        li.yuimenuitem
-        a.yuimenuitemlabel(href='#submenu_cloud_google_drive', action='', localization_key='google_drive') Google Drive
+        a.yuimenuitemlabel(href='#', action='', localization_key='google_drive') Google Drive
         #submenu_cloud_connection.yuimenu
          .bd
           h6.first-of-type(localization_key='login_logout') Login/Logout
@@ -409,11 +409,6 @@
         a.yuimenuitemlabel(href="#", action='tile_vertically', style='background-image: url(configs/toolbars/org.goorm.core.window/image/tile_vertical.png);', localization_key='window_tile_vertically') Tile Vertically
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='tile_horizontally', style='background-image: url(configs/toolbars/org.goorm.core.window/image/tile_horizontal.png);', localization_key='window_tile_horizontally') Tile Horizontally
-      ul
-       li.yuimenuitem
-        a.yuimenuitemlabel(href="#", action='slide_show_mode', style='background-image: url(configs/toolbars/org.goorm.core.window/image/slideshow.png)', localization_key='window_slide_show_mode')
-         | Slide Show Mode
-         em.helptext Shift + F5
    //-li.yuimenubaritem
     a.yuimenubaritemlabel(href='#menu_plugins', localization_key='plugins') Plugins 
     #menu_plugins.yuimenu
@@ -437,7 +432,7 @@
     a.yuimenubaritemlabel(href='#Help', localization_key='help') Help 
     #Help.yuimenu
      .bd
-      //-ul
+      ul
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='help_contents', style='background-image: url(configs/toolbars/org.goorm.core.help/image/help_contents.png);', localization_key='help_help_contents') Help Contents
       //-ul

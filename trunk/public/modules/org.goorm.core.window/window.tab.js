@@ -19,7 +19,7 @@ org.goorm.core.window.tab = function () {
 
 org.goorm.core.window.tab.prototype = {
 	
-	init: function(container, title, tabview, list_menu) {
+	init: function(container, title, tabview, list_menu, filepath, windowall) {
 		
 		
 		var self = this;
@@ -31,9 +31,38 @@ org.goorm.core.window.tab.prototype = {
 		
 		this.title = title;
 		
-		this.tab = new YAHOO.widget.Tab({ label: "<span class='tabtitle window_title' style='float:left'>" + this.title + "</span> <div class='window_buttons'><div class='close tab_close_button window_button'></div></div>", content: "" });
-
 		
+
+		//****************************************************************************************************************888
+		
+		var check=0;
+		var titletext;
+
+
+		for(var i=0; i<windowall.window.length-1; i++)
+		{
+			titletext = $( $('.tabtitle')[i] ).text();
+
+
+			if(this.title == windowall.window[i].filename)
+			{
+				if(titletext.search(windowall.window[i].filepath)<0)
+				{
+					titletext = titletext.replace(windowall.window[i].filename, windowall.window[i].filepath+windowall.window[i].filename);
+					$( $('.tabtitle')[i] ).text(titletext);
+					$($('#window_list_menu').find('a')[i]).text(windowall.window[i].filepath+windowall.window[i].filename);
+				}
+				check ++;
+			}
+		}
+
+		if(check!=0)
+		{
+			this.title = filepath + this.title;
+		}
+		//****************************************************************************************************************888
+
+		this.tab = new YAHOO.widget.Tab({ label: "<span class='tabtitle window_title' style='float:left'>" + this.title + "</span> <div class='window_buttons'><div class='close tab_close_button window_button'></div></div>", content: "" });
 		this.tabview.addTab(this.tab);
 		this.tabview.selectTab(this.tabview.getTabIndex(this.tab));
 		
@@ -54,7 +83,8 @@ org.goorm.core.window.tab.prototype = {
 		, function () {
 			self.set_event(); 
 		});
-		
+
+
 		$(core).on("on_project_open.tab", function () {
 			var project = self.window.filepath.split("/").shift();
 			var prefix = "";
@@ -62,10 +92,14 @@ org.goorm.core.window.tab.prototype = {
 			if(core.status.current_project_path != project && self.window.filename != "debug") {
 				prefix = "["+core.module.localization.msg["collaboration_stop_message"]+"] ";
 			}
-			
-			$(self.tab.getElementsByClassName("tabtitle")).text(prefix + self.title);
-			
-		});
+
+			if(prefix!='' && $( $('.tabtitle')[self.window.index] ).text().search(prefix)<0)
+				$( $('.tabtitle')[self.window.index] ).text(prefix + $( $('.tabtitle')[self.window.index] ).text())
+
+			if(prefix=='' && $( $('.tabtitle')[self.window.index] ).text().search("["+core.module.localization.msg["collaboration_stop_message"]+"] ")>=0)
+				$( $('.tabtitle')[self.window.index] ).text(  $( $('.tabtitle')[self.window.index] ).text().replace("["+core.module.localization.msg["collaboration_stop_message"]+"] ",'') )
+			//$(self.tab.getElementsByClassName("tabtitle")).text(prefix + self.title);
+		});		
 	},
 
 	set_event: function(){
@@ -167,13 +201,31 @@ org.goorm.core.window.tab.prototype = {
 		if(this.is_saved) {
 			var target_index = this.tabview.getTabIndex(this.tab);
 
+			var check =0,ii;
+			for(var i =0; i<window_manager.window.length; i++)
+			{
+				if(i==target_index)continue;
+
+				if(window_manager.window[i].filename == window_manager.window[target_index].filename)
+				{
+					ii=i;
+					check++;
+				}
+
+			}
+
+			if(check==1)
+			{
+				$( $('.tabtitle')[ii] ).text( $($('.tabtitle')[ii]).text().replace(window_manager.window[ii].filepath,''))
+				$($('#window_list_menu').find('a')[ii]).text(window_manager.window[ii].filename)
+			}
+
 			window_manager.decrement_index_in_window(target_index);
 			window_manager.delete_window_in_tab(target_index);
-			
+
 			this.tabview.removeTab(this.tab);
 			this.list_menu.removeItem(this.menuitem);
 			this.context_menu.remove();
-			
 			if(this.window) {
 				this.window.tab = null;
 				this.window.close();
@@ -209,6 +261,19 @@ org.goorm.core.window.tab.prototype = {
 	
 	activate: function() {
 		this.tabview.selectTab(this.tabview.getTabIndex(this.tab));
+
+		$(this.tab.get("labelEl")).parent().dblclick(function(e) {
+			if(self.window.status != "unmaximized"&&core.module.layout.workspace.window_manager.maximized){
+				core.module.layout.workspace.window_manager.unmaximize_all();
+				
+				e.preventDefault();
+				e.stopPropagation();
+				
+				core.module.layout.workspace.window_manager.maximized = false;
+			}
+			
+			return false;
+		});
 		
 		$("#window_list_menu").find(".yuimenuitem-checked").each(function(i) {
 			$(this).removeClass("yuimenuitem-checked");

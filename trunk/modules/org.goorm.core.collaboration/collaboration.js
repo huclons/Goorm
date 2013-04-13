@@ -14,6 +14,7 @@ var composing = require('./collaboration.composing.js');
 var drawing = require('./collaboration.drawing.js');
 var slideshare = require('./collaboration.slideshare.js');
 var history = require('./collaboration.history.js');
+var terminal = require('./collaboration.terminal.js');
 
 module.exports = {
 	start: function (io) {
@@ -34,6 +35,10 @@ module.exports = {
 				else if(channel == "filepath") {
 					history.join(socket, msg_obj);
 					editing.send_cursors(socket, msg_obj);
+					history.send_playinfo(socket, msg_obj);
+				}
+				else if(channel == "terminal") {
+					terminal.join(io, socket, msg_obj);
 				}
 			});
 			
@@ -53,6 +58,7 @@ module.exports = {
 					history.msg(io, socket, msg_obj);
 				}
 				else if (channel == "history") {
+					console.log('history socket ::: ', msg_obj);
 					history.command_msg(io, socket, msg_obj);	// merge&delete, delay msgs..
 				}
 				else if (channel == "composing") {
@@ -63,6 +69,9 @@ module.exports = {
 				}
 				else if (channel == "slideshare") {
 					slideshare.msg(io, socket, msg_obj);
+				}
+				else if (channel == "slideshare_msg") {
+					slideshare.alert_msg(io, socket, msg_obj);
 				}
 				else if (channel == "workspace") {
 					workspace.msg(io, socket, msg_obj);
@@ -103,38 +112,40 @@ module.exports = {
 						workspace.invitation_answer(io, socket, msg_obj);
 				}
 			});
+			socket.on('info', function(raw_msg){
+				var msg_obj = JSON.parse(raw_msg);
+				var channel = "";
+				var action = "";
+				if(msg_obj["channel"] != undefined) {
+					channel = msg_obj["channel"];
+				}
+				if(msg_obj["action"] != undefined) {
+					action = msg_obj["action"];
+				}
+				if(channel == "push"){
+					//push message
+					if(action == "public"){
+						io.sockets.emit('push_message',"push message");
+					} else if(action == 'group'){
+						io.sockets.in(msg_obj.group).emit('push_message', msg_obj["message"]);
+					} else if(action == "private"){
+						socket.emit('push_message',"push message");
+					}
+				}
+			});//socket.emit('info','{"channel":"push","action":"group"}');
+
 
 			socket.on('slideshare',function(raw_msg){
 				var msg_obj = JSON.parse(raw_msg);
-				var channel = "";
-				if(msg_obj["channel"]!=undefined){
-					channel = msg_obj["channel"];
-				}
+				
 				//socket.broadcast.to(msg_obj.workspace).emit('slideshare_get',JSON.stringify(msg_obj));
 				
-				io.sockets.in(msg_obj.workspace).emit('slideshare_get',JSON.stringify(msg_obj));
+				io.sockets.in(msg_obj.workspace).emit('slideshare_get', raw_msg);
 				
 				/*switch(channel){
 					
 				}*/
 			});
-			
-			// Quiz
-			//
-			socket.on('quiz', function(raw_msg){
-				var msg_obj = JSON.parse(raw_msg);
-				var channel = "";
-				if(msg_obj["channel"] != undefined) {
-					channel = msg_obj["channel"];
-				}
-
-				if (channel == "start") {
-					io.sockets.emit('quiz_start', JSON.stringify(msg_obj));
-				}
-				else if(channel == 'stop') {
-					io.sockets.emit('quiz_stop', JSON.stringify(msg_obj));
-				}
-			})
 		}); 
 		
 		io.sockets.on('close', function (socket) {
@@ -144,9 +155,5 @@ module.exports = {
 
 	get_io : function(){
 		return this.soc;
-	},
-
-	lecture : function(path, file_name, file_type){
-		this.soc.sockets.emit('open_source_code',{path: path, file_name: file_name, file_type: file_type});
 	}
 };

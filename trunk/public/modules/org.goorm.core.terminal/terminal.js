@@ -68,6 +68,8 @@ org.goorm.core.terminal = function () {
 	
 	this.arrowed = false;
 	this.arrowed_string = "";
+	this.MAX_TERMINAL_LINES = 10000;
+//	this.invite = null;
 };
 
 org.goorm.core.terminal.prototype = {
@@ -80,22 +82,31 @@ org.goorm.core.terminal.prototype = {
 		this.in_panel = in_panel;
 		this.terminal_name = terminal_name;
 		this.timestamp = new Date();
+//		this.invite = org.goorm.core.terminal.invite;
 		this.command_queue = [];
 		
 		$(target).addClass('terminal');
-		$(target).append("<div id='welcome'>welcome to goorm terminal :)</div>");
-		$(target).append("<div id='results' style='word-wrap:break-word'></div>");
-		$(target).append("<span id='prompt'><input id='prompt_input' class='prompt_input' /></div></span>");
+		$(target).append("<pre id='results' style='word-wrap:break-word'>welcome to goorm terminal :)</br></pre>");
+		$(target).find("#results").append("<span id='prompt' class='prompt' contenteditable='true'></span>");
 		
 		self.timestamp = (new Date()).getTime();
 		//$(target).find("#results").append("<div id='result_" + self.timestamp + "'>");
 		//$(target).find("#result_" + self.timestamp).append("<span id='prompt_user'>" + self.user+ "</span>@<span id='prompt_server'>" + self.server + "</span>:<span id='prompt_path'>" + self.path + "</span>$ <input id='prompt_input' />");
 		
 		//$(target).find("#prompt").html("<span id='prompt_user'>" + this.user+ "</span>@<span id='prompt_server'>" + this.server + "</span>:<span id='prompt_path'>" + this.path + "</span>$ <input id='prompt_input' />");
-		
+
 		//self.socket.emit("pty_execute_command", "");
+		var _results = $(target).find("#results"); 
+		var _input = $(target).find(".prompt");
 		
-		$(target).find("#prompt_input").keydown(function (event) {
+		// user-select를 활성화시켜야 프롬프트에 입력이 가능해짐.
+		// 차후 jquery 버전업그레이드시 prefix붙이는부분은 없애도 작동할것임.
+		_input.css("user-select", "text");
+		_input.css("-moz-user-select", "text");
+		_input.css("-khtml-user-select", "text");
+		_input.css("-webkit-user-select", "text");
+		
+		_input.keydown(function (event) {
 			if (event.keyCode == '13') {
 				event.preventDefault();
 
@@ -115,7 +126,7 @@ org.goorm.core.terminal.prototype = {
 				};
 				
 				if (self.arrowed_string != "") {
-					$(self.target).find("#results").find("pre:last").append(self.arrowed_string);
+					_input.text(self.arrowed_string);
 					self.arrowed_string = "";
 				}
 				
@@ -165,11 +176,12 @@ org.goorm.core.terminal.prototype = {
 				self.arrowed = true;
 				
 				self.socket.emit("pty_execute_command", JSON.stringify(msg));
+				event.preventDefault();
 			}
 			else if (event.keyCode == '9') { //Tab
 				event.preventDefault();
 				
-				$(self.target).find("#prompt_input").val("");
+//				_input.text("");
 				
 				var msg = {
 					index: self.index,
@@ -227,6 +239,46 @@ org.goorm.core.terminal.prototype = {
 				
 				self.socket.emit("pty_execute_command", JSON.stringify(msg));
 			}
+			else if((event.keyCode == 187 || event.keyCode == 107 || event.keyCode == 61) && (event.ctrlKey || event.metaKey)) { // Ctrl + =
+				event.stopPropagation();
+				event.preventDefault();
+				
+				var font_size = _results.css("font-size").replace("px",'');
+				font_size++;
+				_results.css("font-size", font_size);
+				_results.css("line-height", font_size+2+"px");
+				_input.css("font-size", font_size);
+				
+				var from = (self.in_panel ? "panel" : "layout");
+				self.resize_all(from);
+				
+				if(self.in_panel){
+					$(self.target).scrollTop(parseInt(_results.height()));
+				}
+				else {
+					$(self.target).parent().parent().scrollTop(parseInt($(self.target).height()));
+				}
+			}
+			else if((event.keyCode == 189 || event.keyCode == 109 || event.keyCode == 31) && (event.ctrlKey || event.metaKey)) { // Ctrl + -
+				event.stopPropagation();
+				event.preventDefault();
+				
+				var font_size = _results.css("font-size").replace("px",'');
+				font_size--;
+				_results.css("font-size", font_size);
+				_results.css("line-height", font_size+2+"px");
+				_input.css("font-size", font_size);
+				
+				var from = (self.in_panel ? "panel" : "layout");
+				self.resize_all(from);
+				
+				if(self.in_panel){
+					$(self.target).scrollTop(parseInt(_results.height()));
+				}
+				else {
+					$(self.target).parent().parent().scrollTop(parseInt($(self.target).height()));
+				}
+			}
 		});
 		
 		$(target).keydown(function (event) {
@@ -243,7 +295,7 @@ org.goorm.core.terminal.prototype = {
 			}
 		});
 		
-		$(target).find("#prompt_input").keypress(function (event) {
+		_input.keypress(function (event) {
 			if (event.keyCode == '13') {
 			}
 			else if (event.keyCode == '9') { //Tab
@@ -256,6 +308,10 @@ org.goorm.core.terminal.prototype = {
 			}
 			else if ((event.keyCode == '122' || event.keyCode == '90') && event.ctrlKey) { //Ctrl + Z
 			}
+			else if((event.keyCode == 187 || event.keyCode == 107 || event.keyCode == 61) && (event.ctrlKey || event.metaKey)) { // Ctrl + =
+			}
+			else if((event.keyCode == 189 || event.keyCode == 109 || event.keyCode == 31) && (event.ctrlKey || event.metaKey)) { // Ctrl + -
+			}
 			else {
 				var msg = {
 					index: self.index,
@@ -267,21 +323,32 @@ org.goorm.core.terminal.prototype = {
 			}
 		});
 		
+		
+		var focus_prompt = function() {
+			// contenteditable 속성을 가진요소는 포커스시 맨앞으로 커서가 가기때문에 맨 뒤로 가게하기 위해서는 요방법이 필요.
+			var el = _input.get(0);
+			_input.focus();
+		    if (typeof window.getSelection != "undefined"
+		            && typeof document.createRange != "undefined") {
+		        var range = document.createRange();
+		        range.selectNodeContents(el);
+		        range.collapse(false);
+		        var sel = window.getSelection();
+		        sel.removeAllRanges();
+		        sel.addRange(range);
+		    } else if (typeof document.body.createTextRange != "undefined") {
+		        var textRange = document.body.createTextRange();
+		        textRange.moveToElementText(el);
+		        textRange.collapse(false);
+		        textRange.select();
+		    }
+		}
+
+		
 		$(target).click(function () {
-			$(self.target).find("#prompt_input").focus();
+			focus_prompt();
 		});
 		
-		
-		
-		
-		$(this).bind("got_index", function () {
-			var msg = {
-				index: self.index,
-				project_path: core.status.current_project_path
-			};
-		
-			self.socket.emit("change_project_dir", JSON.stringify(msg));
-		});
 		
 		this.socket.on("on_change_project_dir", function (data) {
 			$(self).trigger("terminal_ready");
@@ -304,199 +371,14 @@ org.goorm.core.terminal.prototype = {
 			
 			if (self.index == -1 && self.timestamp == data.timestamp) {
 				self.index = parseInt(data.index);
-				
-				$(self).trigger("got_index");
+
+				var msg = {
+						index: self.index,
+						project_path: core.status.current_project_path
+					};
+				self.socket.emit("change_project_dir", JSON.stringify(msg));
 			}
 		});
-		
-		var timeout = null;
-				
-		var result = function (msg, mode) {
-
-			if (msg.terminal_name == self.terminal_name) {
-				var stdout = msg.stdout;
-
-				stdout = stdout.split("[00m").join("");
-				//stdout = stdout.split("[0m").join(" ");
-				stdout = stdout.split("[C").join("");
-
-				
-				//if (mode != 1) {
-					if (stdout.indexOf('[K') == -1) {
-						stdout = stdout.replace(/\^/g, "\^");
-						stdout = stdout.replace(/\:/g, "\:");
-						stdout = stdout.replace(/\</g, "&lt;");
-						stdout = stdout.replace(/\</g, "&gt;");
-						
-						self.temp_stdout += stdout;
-					}
-					
-					if (stdout.indexOf("\u001b") > -1) {
-						self.temp_stdout = self.temp_stdout.substring(0, self.temp_stdout.length-1);
-					}
-/*
-				}
-				else if (self.temp_stdout == "") {
-					self.temp_stdout += stdout;
-				}
-*/
-				
-				stdout = stdout.split("[K").join("");
-				
-				//console.log(stdout.charCodeAt(0).toString(16));
-				//if (mode == 1 || /\n/.test(stdout) || stdout.indexOf('$') > -1) {
-				self.work_queue(stdout);
-
-				if (/\n/.test(stdout) || stdout.indexOf('$') > -1) {
-					
-					if(msg.terminal_name == "debug") {
-						if(self.debug_endstr && self.debug_endstr.test(self.temp_stdout)) {
-							$(core.module.debug).trigger("debug_end");
-							self.command_queue = [];
-						}
-					}
-					
-					if (self.temp_stdout.indexOf('$') > -1) {
-						
-						var prev_command =  "";
-						
-						if (self.temp_stdout.indexOf('\n') > -1) {
-							self.temp_stdout = self.temp_stdout.split('\n');
-							
-							prev_command = self.temp_stdout.shift();
-							
-							self.temp_stdout = self.temp_stdout.join('\n');
-						}
-						
-						
-						self.temp_stdout = self.temp_stdout.replace('[H', '').replace('[2J', '');
-						
-						self.temp_stdout = self.temp_stdout.replace(/\[\d[A-Z]/g, '');
-					
-						var prevalue = self.temp_stdout.split('$')[1];
-						
-
-						if (self.temp_stdout.split('$')[0] != "") {
-							self.temp_stdout = self.temp_stdout.split('$')[0] + "$";
-							self.temp_stdout = self.transform_bash_to_html(self.temp_stdout + "");
-						}
-						
-						
-						
-						
-						$(self.target).find("#results").find("pre:last").append(prev_command);
-						
-						$(self.target).find("#results").append(self.temp_stdout);
-						
-						var from = (self.in_panel ? "panel" : "layout");
-						
-						self.resize_all(from);
-						
-						
-						if (typeof prevalue == "string" && prevalue.length > 0) {
-							self.temp_stdout = prevalue;
-						}
-						else {
-							self.temp_stdout = "";
-						}
-						
-						if (!(stdout.indexOf('[K') > -1)) {
-//							if(self.platform == "darwin") {
-								$(self.target).find("#prompt_input").appendTo($(self.target).find("#results pre:last"));
-//							}
-//							else if(self.platform == "linux") {
-//								$(self.target).find("#prompt_input").appendTo($(self.target).find("#results"));
-//							}
-						}
-						
-						//console.log("prevalue: '" + prevalue + "'");
-						$(self.target).find("#prompt_input").val(prevalue);
-							
-						
-						$(self.target).find("#prompt_input").focus();
-						
-						$(self.target).parent().parent().scrollTop(parseInt($(self.target).height()));
-						
-						if (stdout.indexOf('[2J') > -1) {
-							var pre_count = $(self.target).find("#results pre").length;
-							
-							$(self.target).find("#results pre").each(function (i) {
-								if (pre_count - 1 > i) {
-									$(this).remove();
-								}
-							});
-						}
-					}
-					else if ((self.temp_stdout.charCodeAt(self.temp_stdout.length-1).toString(16) == "20" || self.temp_stdout[self.temp_stdout.length-1] == "\n") && self.temp_stdout.length > 1 && self.temp_stdout.indexOf("\n") > 0) {
-						self.temp_stdout = self.transform_bash_to_html(self.temp_stdout + "");
-						
-						//console.log(self.temp_stdout);
-						
-						var array_temp_stdout = self.temp_stdout.split("</pre>");
-						var temp_stdout1 = array_temp_stdout.shift().split("<pre>").join("");
-						var temp_stdout2 = array_temp_stdout.join("</pre>");
-						
-						//console.log(temp_stdout1);
-						//console.log(temp_stdout2);
-						
-						$(self.target).find("#results pre:last").append(temp_stdout1);
-						$(self.target).find("#results").append(temp_stdout2);
-						//$(self.target).find("#results").height($(self.target).find("#results").height() + $(self.target).find("#results pre:last").height());
-						
-						self.temp_stdout = "";
-						
-						//$(self.target).find("#results pre:last").remove();
-						//$(self.target).find("#results pre:last").append("&nbsp;");
-						$(self.target).find("#prompt_input").appendTo($(self.target).find("#results pre:last"));
-						
-						$(self.target).find("#prompt_input").val("");
-						$(self.target).find("#prompt_input").focus();
-						
-						var from = (self.in_panel ? "panel" : "layout");
-						
-						self.resize_all(from);
-					
-						$(self.target).parent().parent().scrollTop(parseInt($(self.target).height()));
-					}
-					
-				}
-				else {
-					if (self.arrowed == true && self.temp_stdout != " ") {
-						if (self.temp_stdout.charCodeAt(0).toString(16) == "8") {
-							self.temp_stdout = self.remove_backspaces(self.temp_stdout);
-						}
-						
-						if (self.temp_stdout[0] != " " && self.platform != 'linux') {
-							self.temp_stdout = " " + self.temp_stdout;
-						}
-						
-						//console.log("'" + self.temp_stdout + "'");
-						
-						$(self.target).find("#prompt_input").val(self.temp_stdout);
-						$(self.target).find("#prompt_input").focus();
-						
-						
-						self.arrowed = false;
-						self.arrowed_string = self.temp_stdout;
-						
-						console.log("self.arrowed_string = " + self.arrowed_string);
-						
-						self.temp_stdout = "";
-					}
-					else if (self.temp_stdout != "\u0007") {
-						
-						self.temp_stdout = self.temp_stdout.split('\u0007').join("");
-
-						self.temp_stdout = unescape(escape(self.temp_stdout).split("%1B").join(""));
-
-						$(self.target).find("#prompt_input").val(self.temp_stdout);
-
-						var str = "l";
-					}
-
-				}
-			}
-		}
 		
 		var pop_command = function(target_stdout){
 			var temp_stdout = target_stdout;
@@ -510,14 +392,228 @@ org.goorm.core.terminal.prototype = {
 			}
 			
 			return temp_stdout;
-		}
+		};
 		
-		this.socket.on("pty_command_result", function(msg) {
-			if(self.platform == 'linux' && msg.stdout.indexOf(']0;') > -1) {
-				msg.stdout = msg.stdout.substring(0, msg.stdout.indexOf(']0;')) + msg.stdout.substring(msg.stdout.indexOf('['), msg.stdout.length);
-			}
+		this.result = function (msg, mode) {
+			if (msg.terminal_name == self.terminal_name) {
+				
+				var stdout = msg.stdout;
+				stdout = stdout.split("[00m").join("");
+				//stdout = stdout.split("[0m").join(" ");
+				stdout = stdout.split("[C").join("");
 
-			result(msg);
+				
+				if (stdout.indexOf('[K') == -1) {
+					stdout = stdout.replace(/\^/g, "\^");
+					stdout = stdout.replace(/\:/g, "\:");
+					stdout = stdout.replace(/\</g, "&lt;");
+					stdout = stdout.replace(/\</g, "&gt;");
+					
+					self.temp_stdout += stdout;
+				}
+				
+//				console.log(escape(stdout));
+				if (stdout.indexOf("\u001b") > -1) {
+//					console.log("start");
+					self.temp_stdout = self.temp_stdout.substring(0, self.temp_stdout.length-1);
+				}
+				
+				stdout = stdout.split("[K").join("");
+				
+				//console.log(stdout.charCodeAt(0).toString(16));
+				//if (mode == 1 || /\n/.test(stdout) || stdout.indexOf('$') > -1) {
+				self.work_queue(stdout);
+				
+				
+				
+				if (/\n/.test(stdout) || stdout.indexOf('$') > -1) {
+					
+					if(msg.terminal_name == "debug") {
+						if(self.debug_endstr && self.debug_endstr.test(self.temp_stdout)) {
+							$(core.module.debug).trigger("debug_end");
+							self.command_queue = [];
+						}
+					}
+					if (self.temp_stdout.indexOf('$') > -1) {
+						
+						var prev_command =  "";
+						
+//						if (self.temp_stdout.indexOf('\n') > -1) {
+//							self.temp_stdout = self.temp_stdout.split('\n');
+//							
+//							prev_command = self.temp_stdout.shift();
+//							
+//							self.temp_stdout = self.temp_stdout.join('\n');
+//						}
+						
+						
+						self.temp_stdout = self.temp_stdout.replace('[H', '').replace('[2J', '');
+						
+						self.temp_stdout = self.temp_stdout.replace(/\[\d[A-Z]/g, '');
+					
+//						console.log(escape(self.temp_stdout));
+						var out = self.temp_stdout.split('$');
+						var prevalue = null;
+						if(out.length > 1) {
+							prevalue = out.pop();
+						}
+
+						if (out != "") {
+							self.temp_stdout = out + "$";
+							self.temp_stdout = self.transform_bash_to_html(self.temp_stdout + "");
+						}
+						
+//						_input.before(prev_command);
+						
+						_input.before(self.temp_stdout);
+						
+						if (typeof prevalue == "string" && prevalue.length > 0) {
+							self.temp_stdout = prevalue;
+						}
+						else {
+							self.temp_stdout = "";
+						}
+						
+//						if (!(stdout.indexOf('[K') > -1)) {
+//							if(self.platform == "darwin") {
+//								_input.appendTo(_pre_last);
+//							}
+//							else if(self.platform == "linux") {
+//								$(self.target).find("#prompt_input").appendTo($(self.target).find("#results"));
+//							}
+//						}
+						
+//						console.log("prevalue: '" + prevalue + "'");
+						_input.text(prevalue);
+						
+//						if (stdout.indexOf('[2J') > -1) {
+//							var pre_count = _results.children("pre").length;
+//							
+//							_results.children("pre").each(function (i) {
+//								if (pre_count - 1 > i) {
+//									$(this).remove();
+//								}
+//							});
+//						}
+					}
+					else if (self.temp_stdout.length > 1 && self.temp_stdout.indexOf("\n") > 0) {
+						
+						self.temp_stdout = self.transform_bash_to_html(self.temp_stdout + "");
+						
+//						var array_temp_stdout = self.temp_stdout.split("</pre>");
+//						var temp_stdout1 = array_temp_stdout.shift().split("<pre>").join("");
+//						var temp_stdout2 = array_temp_stdout.join("</pre>");
+						
+//						_results.append(self.temp_stdout);
+//						console.log(temp_stdout1);
+						_input.before(self.temp_stdout);
+//						_results.children("pre:last").append(temp_stdout1);
+//						_results.append(temp_stdout2);
+						
+//						_results.append(self.temp_stdout);
+						//$(self.target).find("#results").height($(self.target).find("#results").height() + $(self.target).find("#results pre:last").height());
+						
+						self.temp_stdout = "";
+						
+						//$(self.target).find("#results pre:last").remove();
+						//$(self.target).find("#results pre:last").append("&nbsp;");
+//						_input.appendTo(_results.children("pre:last"));
+						
+						_input.text("");
+						
+						// 브라우저 성능향상을 위해 64kb까지 데이터 출력.
+						var text = _results.text();
+						if(text.length > 64000) {
+							text = text.substring(text.length - 16000);
+							_input.appendTo($(core));
+							_results.empty();
+							_input.appendTo(_results);
+							_input.before(text);
+							focus_prompt();
+						}
+					}
+					
+					var from = (self.in_panel ? "panel" : "layout");
+					self.resize_all(from);
+					
+					if(self.in_panel){
+						$(self.target).scrollTop(parseInt(_results.height()));
+					}
+					else {
+						$(self.target).parent().parent().scrollTop(parseInt($(self.target).height()));
+					}
+					
+					focus_prompt();
+				}
+				else {
+					if (self.arrowed == true && self.temp_stdout != " ") {
+						if (self.temp_stdout.charCodeAt(0).toString(16) == "8") {
+							self.temp_stdout = self.remove_backspaces(self.temp_stdout);
+						}
+						
+						if (self.temp_stdout[0] != " " && self.platform != 'linux') {
+							self.temp_stdout = " " + self.temp_stdout;
+						}
+						
+						//console.log("'" + self.temp_stdout + "'");
+						
+						_input.text(self.temp_stdout);
+						
+						self.arrowed = false;
+						self.arrowed_string = self.temp_stdout;
+						
+						console.log("self.arrowed_string = " + self.arrowed_string);
+						
+						self.temp_stdout = "";
+					}
+					else if (self.temp_stdout.indexOf("\u0007") == -1) {
+						
+//						self.temp_stdout = self.temp_stdout.split('\u0007').join("");
+
+						self.temp_stdout = unescape(escape(self.temp_stdout).split("%1B").join(""));
+						_input.text(self.temp_stdout);
+					}
+					else {
+						self.temp_stdout = "";
+						_input.text("");
+					}
+					
+					
+					var from = (self.in_panel ? "panel" : "layout");
+					self.resize_all(from);
+					
+					if(self.in_panel){
+						$(self.target).scrollTop(parseInt(_results.height()));
+					}
+					else {
+						$(self.target).parent().parent().scrollTop(parseInt($(self.target).height()));
+					}
+					focus_prompt();
+				}
+			}
+		};
+		
+		this._message_queue = {};
+		this.socket.on("pty_command_result", function(msg) {
+			if(self.terminal_name == msg.terminal_name) {
+				if(self.platform == 'linux' && msg.stdout.indexOf(']0;') > -1) {
+					msg.stdout = msg.stdout.substring(0, msg.stdout.indexOf(']0;')) + msg.stdout.substring(msg.stdout.indexOf('['), msg.stdout.length);
+				}
+				
+				if(!self._message_queue[msg.user]) self._message_queue[msg.user] = {};
+				
+				if(!self._message_queue[msg.user].data) self._message_queue[msg.user].data = msg;
+				if(self._message_queue[msg.user].timeout) {
+					self._message_queue[msg.user].data.stdout += msg.stdout;
+				}
+				
+				self._message_queue[msg.user].timeout = setTimeout(function(){
+					if(self._message_queue[msg.user].data.stdout != "") {
+						self.result(self._message_queue[msg.user].data);
+						self._message_queue[msg.user].data.stdout = "";
+					}
+				},100);
+			}
 			
 /*
 			if (timeout) {
@@ -532,11 +628,11 @@ org.goorm.core.terminal.prototype = {
 */
 		});
 		
-		$(core).bind("layout_resized", function () {
+		$(core).on("layout_resized", function () {
 			self.resize_all("layout");
 		});
 		
-		$(document).bind(this.terminal_name + "_resized", function () {
+		$(document).on(this.terminal_name + "_resized", function () {
 			self.resize_all("panel");
 			
 			if (self.index > 0) {
@@ -544,17 +640,18 @@ org.goorm.core.terminal.prototype = {
 			}
 		});
 
-		$(document).bind(this.terminal_name + "_closed",  function () {
+		$(document).on(this.terminal_name + "_closed",  function () {
 			var msg = {
 				index: self.index,
 				workspace: core.status.current_project_path,
-				terminal_name: self.terminal_name
+				terminal_name: self.terminal_name,
+				user: core.user.id
 			};
-			
+
 			self.socket.emit("terminal_leave", JSON.stringify(msg));
 		});
 		
-		$(window).bind("unload", function () {
+		$(window).on("unload", function () {
 			var msg = {
 				index: self.index,
 				workspace: core.status.current_project_path,
@@ -562,6 +659,7 @@ org.goorm.core.terminal.prototype = {
 			};
 			
 			self.socket.emit("terminal_leave", JSON.stringify(msg));
+			self.socket.disconnect();
 		});
 		
 		this.resize_all();
@@ -575,7 +673,13 @@ org.goorm.core.terminal.prototype = {
 			cols = parseInt(parseInt($(this.target).parent().parent().width() - 10) / 6);
 		}
 		
-		this.socket.emit("terminal_join", '{"timestamp": "' + this.timestamp + '", "cols": "' + cols + '", "workspace": "'+ core.status.current_project_path +'", "terminal_name":"' + this.terminal_name + '", "uid":'+core.user.uid+', "gid":'+core.user.gid+'}');
+		var msg = {	"timestamp": this.timestamp,
+					"cols": cols, 
+					"workspace": core.status.current_project_path,
+					"terminal_name": this.terminal_name,
+					"user": core.user.id
+				};
+		this.socket.emit("terminal_init", JSON.stringify(msg));
 		
 		
 		// context menu
@@ -594,32 +698,41 @@ org.goorm.core.terminal.prototype = {
                     item_clear.removeClass("yuimenuitem-selected");
                 });
                 
-                $(self.context_menu.menu.element).find("a[action=do_terminal_clear]").unbind("click");
+                $(self.context_menu.menu.element).find("a[action=do_terminal_clear]").off("click");
                 $(self.context_menu.menu.element).find("a[action=do_terminal_clear]").click( function (e) {
-					$(self.target).find("#welcome").remove();
-					var els = $(self.target).find("#results > pre");
-					for(var i = 0; i < els.length-1; i++){
-						$(els[i]).remove();
-					}
+					_input.appendTo($(core));
+					var results = $(self.target).find("#results").text();
+					var last_line = results.split("\n").pop();
+					_results.text(last_line);
+					_input.appendTo(_results);
 					
-					// only prompt (some cases, result texts are mixed with prompt)
-					els = $(self.target).find("#results > pre > span").children();
-					var prompt = "";
-                    if(els.length == 0){
-                       prompt = $(self.target).find("#results > pre > span").html();
-                    }else{
-                       for(var i = els.length-2; i < els.length; i++){
-                          prompt += ((els[i]!=undefined) ? els[i].outerHTML : "") + "&nbsp;";
-					   }
-                    }
-					$(self.target).find("#results > pre > span").empty().html(prompt);
+//					// only prompt (some cases, result texts are mixed with prompt)
+//					els = $(self.target).find("#results > pre > span").children();
+//					var prompt = "";
+//                    if(els.length == 0){
+//                       prompt = $(self.target).find("#results > pre > span").html();
+//                    }else{
+//                       for(var i = els.length-2; i < els.length; i++){
+//                          prompt += ((els[i]!=undefined) ? els[i].outerHTML : "") + "&nbsp;";
+//					   }
+//                    }
+//					$(self.target).find("#results > pre > span").empty().html(prompt);
 					
-                    $(self.target).find("#prompt_input").focus();
+					focus_prompt();
                     $(self.context_menu.menu.element).css("visibility", "hidden");
                     $(self.context_menu.menu.element).css("top", "");
                     $(self.context_menu.menu.element).css("left", "");
-                                                                                            
-				});    
+				});
+                
+//                $(self.context_menu.menu.element).find("a[action=do_terminal_invite]").off("click");
+//                $(self.context_menu.menu.element).find("a[action=do_terminal_invite]").click( function (e) {
+//                	self.invite.show();
+//                	
+//					focus_prompt();
+//                    $(self.context_menu.menu.element).css("visibility", "hidden");
+//                    $(self.context_menu.menu.element).css("top", "");
+//                    $(self.context_menu.menu.element).css("left", "");
+//				});
                                
                 var from = (self.in_panel ? "panel" : "layout");
                 self.resize_all(from);
@@ -680,7 +793,7 @@ org.goorm.core.terminal.prototype = {
 				index: self.index,
 				project_path: core.status.current_project_path
 			};
-		
+
 			self.socket.emit("change_project_dir", JSON.stringify(msg));
 		}
 	},
@@ -784,7 +897,11 @@ org.goorm.core.terminal.prototype = {
 
 		for (var i=0; i<data.length; i++) {
 
-
+			if(data.length > this.MAX_TERMINAL_LINES - 100 && i < data.length - this.MAX_TERMINAL_LINES - 100){
+				data[i] = "";
+				continue;
+			}
+			
 			if (data[i].indexOf(']0;') > -1) {
 				data[i] = this.set_prompt(data[i]);
 			}
@@ -800,7 +917,6 @@ org.goorm.core.terminal.prototype = {
 				*/
 
 				for (var j=0; j<words.length; j++) {
-
 					if (words[j] != "" && words[j] != " ") {
 						var spaces = "";
 
@@ -812,7 +928,8 @@ org.goorm.core.terminal.prototype = {
 						}
 
 						if (length > 0) {
-							var ansi_color_code = words[j].match(this.ansi_color_code_regexp);
+//							var ansi_color_code = words[j].match(this.ansi_color_code_regexp);
+							var ansi_color_code = temp;
 							var word = [];
 								
 
@@ -891,30 +1008,35 @@ org.goorm.core.terminal.prototype = {
 				data[i] = new_words.replace(this.ansi_color_code_regexp, '');
 
 				
-				if (data[i].replace(/ */g, "") != "\r") {
+//				if (data[i].replace(/ */g, "") != "\r") {
 				//	if (data[i].indexOf("&#9;") > -1) {
-						data[i] = "<pre><span>" + data[i] + "</span></pre>";
+//						data[i] = "<span>" + data[i] + "</span>";
 				//	}
-				}
+//				}
 			}
 
 
 		}
-
+		data.splice(0, data.length - this.MAX_TERMINAL_LINES - 100);
 
 		//this.prompt_length = data[data.length - 1].replace(/(<([^>]+)>)/ig, "").split('&nbsp;').join('').length;
 	
-		data = data.join("");
-		
+		data = data.join("\n");
+		//data = "\n"+data;
 		return data;
 	},
 	
 	resize_all: function (from) {	
+
 		if (this.in_panel && from == "panel") {
 			var panel_width = $(this.target).parent().width() - 10;
 			var panel_height = $(this.target).parent().height() - 10;
 			var target_height = $(this.target).find("#results").height() + 20;
-			var prompt_width = $(this.target).find("#results").find("pre:last").find("span").width();
+//			var prompt_width = $(this.target).find("#results").find("pre:last").find("span").width();
+			//console.log(panel_width)
+			//console.log("panelheight",panel_height)
+			//console.log("targetheight",target_height)
+			//console.log(prompt_width)
 
 /*
 			if(this.platform == "linux") {
@@ -926,21 +1048,20 @@ org.goorm.core.terminal.prototype = {
 			}
 */
 
-			if (panel_width - prompt_width < 80) {
-				prompt_width = 0;
-			}
+//			if (panel_width - prompt_width < 80) {
+//				prompt_width = 0;
+//			}
 
-			$(this.target).find("#prompt_input").width(panel_width - prompt_width - 40);
-		
-			/*
+			
 
 			if (target_height > panel_height) {
 				$(this.target).height(panel_height);
 			}
 			else {
-				$(this.target).height(target_height);
+				if($(this.target).attr('class')!="window_container terminal")
+					$(this.target).height(target_height);
 			}
-*/
+
 		}
 		else if (from == "layout" && this.terminal_name != "debug") {
 			var layout_bottom_width = $(".yui-layout-unit-bottom").find(".yui-layout-wrap").width() - 20;
@@ -964,14 +1085,14 @@ org.goorm.core.terminal.prototype = {
 			}
 
 			
-			
-			$(this.target).find("#prompt_input").width(layout_bottom_width - prompt_width - 40);
-			
 			if (target_height < layout_bottom_height) {
+				//console.log("layout_height",layout_bottom_height)
+				//console.log($(this.target))
 				$(this.target).height(layout_bottom_height);
 			}
 			else {
-				$(this.target).height(target_height);
+				if($(this.target).attr('class')!="window_container terminal")
+					$(this.target).height(target_height);
 			}
 		}
 	},
@@ -1001,7 +1122,7 @@ org.goorm.core.terminal.prototype = {
 				}
 			}
 			
-			$(self.target).find("#prompt_input").val('');
+			$(self.target).find("#prompt").val('');
 			
 			return false;
 		}

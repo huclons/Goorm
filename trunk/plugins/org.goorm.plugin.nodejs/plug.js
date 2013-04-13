@@ -103,9 +103,12 @@ org.goorm.plugin.nodejs.prototype = {
 		var source_path = property['plugin.nodejs.source_path'];
 		var main = property['plugin.nodejs.main'];
 
-		var cmd1 = "node "+source_path+main;
-		core.module.layout.terminal.send_command(cmd1+'\r');
+		var workspace = core.preference.workspace_path;
+		var project_path = core.status.current_project_path;
+		var run_path = workspace + project_path + '/' + source_path + main + '.js';
 
+		var cmd1 = "node " + run_path;
+		core.module.layout.terminal.send_command(cmd1+'\r');
 	},
 	
 	debug: function (path) {

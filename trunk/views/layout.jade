@@ -40,7 +40,7 @@ html
 		link(rel='stylesheet', type='text/css', href='/lib/net.codemirror.code/mode/stex/stex.css')
 		link(rel='stylesheet', type='text/css', href='/lib/net.codemirror.code/mode/xml/xml.css')
 		link(rel='stylesheet', type='text/css', href='/lib/net.codemirror.code/lib/util/dialog.css')
-		
+
 		//CSS : goorm 
 		link(rel='stylesheet', type='text/css', href='/css/datatable.css')
 		link(rel='stylesheet', type='text/css', href='/css/toolbox.css')
@@ -54,6 +54,7 @@ html
 		link(rel='stylesheet', type='text/css', href='/css/file.css')
 		link(rel='stylesheet', type='text/css', href='/css/object.explorer.css')
 		link(rel='stylesheet', type='text/css', href='/css/project.css')
+		link(rel='stylesheet', type='text/css', href='/css/project.list.css')
 		link(rel='stylesheet', type='text/css', href='/css/project.treeview.css')
 		link(rel='stylesheet', type='text/css', href='/css/project.property.css')
 		link(rel='stylesheet', type='text/css', href='/css/preference.css')
@@ -64,6 +65,7 @@ html
 		link(rel='stylesheet', type='text/css', href='/css/default.css')
 		link(rel='stylesheet', type='text/css', href='/css/user_management.css')
 		link(rel='stylesheet', type='text/css', href='/css/cloud.css')
+
 	
 		//JS : jquery 
 		script(type='text/javascript', src='/lib/com.jquery.code/jquery-1.7.2.min.js')
@@ -72,6 +74,7 @@ html
 		script(type='text/javascript', src='/lib/com.jquery.code/jquery.timers.js')
 		script(type='text/javascript', src='/lib/com.jquery.code/jquery.form.js')
 		script(type='text/javascript', src='/lib/com.jquery.code/jquery.ajaxq.js')
+		script(type='text/javascript', src='/lib/com.jquery.code/jquery.mousewheel.js')
 	
 		//JS : yui 
 		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/yahoo/yahoo.js')
@@ -135,7 +138,7 @@ html
 		script(type='text/javascript', src='/lib/net.codemirror.code/mode/xml/xml.js')
 		script(type='text/javascript', src='/lib/net.codemirror.code/mode/yaml/yaml.js')
 		script(type='text/javascript', src='/lib/net.codemirror.code/keymap/vim.js')
-		
+
 		//JS : ZeroClipboard
 		script(type='text/javascript', src='/lib/com.zeroclipboard/ZeroClipboard.js')
 	
@@ -193,6 +196,7 @@ html
 		script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.wizard.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.explorer.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.cloud_explorer.js')
+		script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.survey.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.dialog.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.manager.js')
@@ -277,12 +281,14 @@ html
 		script(type='text/javascript', src='/modules/org.goorm.core.edit/edit.clipboard.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.edit/edit.find_and_replace.dialog.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.js')
+		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.push.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.communication.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.workspace.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.slideshare.js')
+		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.slideshare.dialog.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.history.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.editing.js')
-		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.composing.js')
+		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.composing.js')z
 		//-script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.join.js')
 		//-script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.join.dialog.js')
 		//-script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.settings.js')
@@ -290,8 +296,8 @@ html
 		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.notification.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.notification.dialog.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.message.js')
+		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.message.dialog.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.invite.js')
-		script(type='text/javascript', src='/modules/org.goorm.core.collaboration/collaboration.invite.dialog.js')
 		//-script(type='text/javascript', src='/modules/org.goorm.core.code_generator/code_generator.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.help/help.js')
 		script(type='text/javascript', src='/modules/org.goorm.core.help/help.contents.js')
@@ -355,6 +361,7 @@ html
 			var confirmation_save = new org.goorm.core.dialog.confirmation.save();
 			var alert = new org.goorm.core.dialog.alert();
 			var notice = new org.goorm.core.dialog.notice();
+			var survey = new org.goorm.core.dialog.survey();
 			
 			$(document).ready(function () {
 				statusbar.init();

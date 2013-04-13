@@ -36,14 +36,14 @@ org.goorm.core.collaboration.editing.prototype = {
 	init: function(parent) {
 		var self = this;
 		this.parent = parent;
-		this.target = parent.target;
-		
+		this.target = parent.target;				
+
 		this.socket = io.connect();
-		
-  		this.task_queue = [];
-  		this.removed_lines_uuids = [];
+
+  		self.task_queue = [];
+  		self.removed_lines_uuids = [];
  		
- 		this.user = core.user.id;
+ 		self.user = core.user.id;
 
 		var check_for_updates = function() {
 			while(self.task_queue.length > 0 && self.updating_process_running == false) {
@@ -55,19 +55,18 @@ org.goorm.core.collaboration.editing.prototype = {
 			}
 		};
  		
- 		this.timer = window.setInterval(check_for_updates, 500);
- 		this.set_collaboration_data("!refresh");
+ 		self.timer = window.setInterval(check_for_updates, 500);
+ 		self.set_collaboration_data("!refresh");
  		
 		// initialize other's cursors
-		this.socket.on("editing_get_cursors", function (cursors) {
+		self.socket.on("editing_get_cursors", function (cursors) {
 			if (cursors == undefined || cursors == null) return;
 			for (var i = 0; i < cursors.length; i++) {
 				self.task_queue.push(cursors[i]);
 			}
 		});
 		
-		this.socket.on("editing_message", function (data) {
-			
+		self.socket.on("editing_message", function (data) {
  			if(!data) {
  				return false;
  			}
@@ -90,7 +89,7 @@ org.goorm.core.collaboration.editing.prototype = {
 			}
 		});
 		
-		this.socket.on("editing_someone_leaved", function (name) {
+		self.socket.on("editing_someone_leaved", function (name) {
 			//console.log("someone leaved in editing", name);
 			$(self.target).find(".CodeMirror-scroll").find(".user_name_" + name).remove();
 			$(self.target).find(".CodeMirror-scroll").find(".user_cursor_" + name).remove();
@@ -131,7 +130,7 @@ org.goorm.core.collaboration.editing.prototype = {
 	},
 	
 	update_change: function(data){
-		if(core.module.layout.history.mode == "history") return;
+		//if(core.module.layout.history.mode == "history") return;
 		var self = this;
 
 		if(this.socket != null){
@@ -142,7 +141,7 @@ org.goorm.core.collaboration.editing.prototype = {
 				
 				clearTimeout(this.auto_save_timer);
 				var action = function(){
-					if(core.module.layout.history.mode=="history") {
+					if(core.module.layout.history&&core.module.layout.history.mode=="history") {
 						clearTimeout(self.auto_save_timer);
 						self.auto_save_timer = setTimeout(action, 5000);
 					}else{
@@ -180,7 +179,8 @@ org.goorm.core.collaboration.editing.prototype = {
 	apply_update: function(action, update){
 		switch(action) {
 			case "change":
-				if(core.module.layout.history.mode != "history") this.change(update);
+				//if(core.module.layout.history.mode != "history") 
+					this.change(update);
 				break;
 			case "cursor":
 				this.set_cursor(update);
@@ -191,34 +191,39 @@ org.goorm.core.collaboration.editing.prototype = {
 	},
 	
 	set_cursor: function(message) {
-		if(message.user != core.user.id && core.sharing_cursor){
-			var coords = this.editor.charCoords({line:message.line, ch:message.ch});
-			var scroll = this.editor.getScrollInfo();
-			
-			var top = parseInt(coords.y) - parseInt($(this.target).find(".CodeMirror-scroll").offset().top) + scroll.y;
-			var left = parseInt(coords.x) - parseInt($(this.target).find(".CodeMirror-scroll").offset().left)  + scroll.x;
+		if(core.user.level=="Assistant"){
+			//cursors of student will be ignored
+		}else{
+			//or cursors of other collaborator display
+			if(message.user != core.user.id && core.sharing_cursor){
+				var coords = this.editor.charCoords({line:message.line, ch:message.ch});
+				var scroll = this.editor.getScrollInfo();
+				
+				var top = parseInt(coords.y) - parseInt($(this.target).find(".CodeMirror-scroll").offset().top) + scroll.y;
+				var left = parseInt(coords.x) - parseInt($(this.target).find(".CodeMirror-scroll").offset().left)  + scroll.x;
 
-			var user_name = message.nick;
-			
-			if ($(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).length > 0) {
-				$(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).css("top", top - 8);
-				$(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).css("left", left + 5);
+				var user_name = message.nick;
 				
-				$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + user_name).css("top", top);
-				$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + user_name).css("left", left);
-			}
-			else {
-				$(this.target).find(".CodeMirror-scroll").prepend("<span class='user_name_" + user_name + " user_name' style='top:" + (top - 8) + "px; left:" + (left + 5) + "px;'>" + user_name + "</span>");
-				$(this.target).find(".CodeMirror-scroll").prepend("<span class='user_cursor_" + user_name + " user_cursor' style='top:" + top + "px; left:" + left + "px;'></span>");
-				
-				var light_color = $("#communication .communication_user_item[user_nick='" + user_name +  "'] .communication_user_item_color_box").css("background-color");
-				var color = $("#communication .communication_user_item[user_nick='" + user_name +  "'] .communication_user_item_color_box").css("border-color");
-				
-				$(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).css("background-color", light_color);
-				$(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).css("border-color", color);
-				$(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).css("color", color);
-				
-				$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + user_name).css("border-color", color);
+				if ($(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).length > 0) {
+					$(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).css("top", top - 8);
+					$(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).css("left", left + 5);
+					
+					$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + user_name).css("top", top);
+					$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + user_name).css("left", left);
+				}
+				else {
+					$(this.target).find(".CodeMirror-scroll").prepend("<span class='user_name_" + user_name + " user_name' style='top:" + (top - 8) + "px; left:" + (left + 5) + "px;'>" + user_name + "</span>");
+					$(this.target).find(".CodeMirror-scroll").prepend("<span class='user_cursor_" + user_name + " user_cursor' style='top:" + top + "px; left:" + left + "px;'></span>");
+					
+					var light_color = $("#communication .communication_user_item[user_nick='" + user_name +  "'] .communication_user_item_color_box").css("background-color");
+					var color = $("#communication .communication_user_item[user_nick='" + user_name +  "'] .communication_user_item_color_box").css("border-color");
+					
+					$(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).css("background-color", light_color);
+					$(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).css("border-color", color);
+					$(this.target).find(".CodeMirror-scroll").find(".user_name_" + user_name).css("color", color);
+					
+					$(this.target).find(".CodeMirror-scroll").find(".user_cursor_" + user_name).css("border-color", color);
+				}
 			}
 		}
 

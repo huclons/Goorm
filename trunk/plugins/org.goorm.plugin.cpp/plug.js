@@ -91,8 +91,6 @@ org.goorm.plugin.cpp.prototype = {
 		}
 		var send_data = {
 				"plugin" : "org.goorm.plugin.cpp",
-				"uid" : core.user.uid,
-				"gid" : core.user.gid,
 				"data" : data
 		};
 		
@@ -106,31 +104,55 @@ org.goorm.plugin.cpp.prototype = {
 	},
 
 	run: function(path) {
+		if(core.property.is_running_end==false){
+			//console.log('you cannot run while excuting');
+			alert.show(core.module.localization.msg['alert_plugin_not_while_running']);
+			return false;
+		}
 		var self=this;
 		var property = core.property.plugins['org.goorm.plugin.cpp'];
 		
 		var classpath = property['plugin.cpp.build_path'];
 		var classname = property['plugin.cpp.main'];
 
-		var cmd1 = "./"+classpath+classname;
-		core.module.layout.terminal.send_command(cmd1+'\r', null, function(result){
+		//var cmd1 = "./"+classpath+classname;
+		var workspace = core.preference.workspace_path;
+		//console.log('workspace',workspace);
+		//console.log('core.status.current_project_path;',core.status.current_project_path);
 
+		var absolute_path=workspace+core.status.current_project_path+"/"+classpath+classname;
+		
+		//console.log('absolute_path',absolute_path)
+		var is_run_success=true;
+		core.property.is_running_end=false;
+		core.module.layout.terminal.send_command('\n\r', null);
+		core.module.layout.terminal.send_command(absolute_path+'\r', null, function(result){
+			core.property.is_running_end=true;
 			var reg = /(.*)\w(.*)/g;
-			var message = result.replace(cmd1, "").match(reg);
+			var message = result.replace(absolute_path, "").match(reg);
 			message.pop();
 			if(/No such file or directory/g.test(message)||/그런 파일이나 디렉터리가 없습니다/g.test(message)) {
 				// 실행 실패
+
 				//alert.show(core.module.localization.msg['alert_plugin_run_error']);
-			
+				console.log(' build fail')
+				is_run_success=false;
 				core.module.project.build.project.handle_build_for_run('run');
-
-
 			}
 			else {
 				// 아무 메시지도 안떴으면 성공.
-				notice.show(core.module.localization.msg['alert_plugin_run_success']);
+				console.log('run success');
+				//notice.show(core.module.localization.msg['alert_plugin_run_success']);
 			}
+
+	
 		});
+		setTimeout(function(){
+			if(is_run_success){
+				notice.show(core.module.localization.msg['alert_plugin_run_success']);
+			}else{
+			}
+		},1000);
 	},
 	
 	debug: function (path) {
@@ -328,135 +350,253 @@ org.goorm.plugin.cpp.prototype = {
 	},
 
 	set_debug_variable: function(terminal_data){
+		var self = this;
 		var lines = terminal_data.split('\n');
-		var locals = {};
+		$.each(lines, function(i,o){
+			var word = o.slice(o.indexOf(" = ")+1, o.length);
+			
+			if(/^=/.test(word) || /gdb/.test(word)){}
+			else{
+				lines[parseInt(i)-1] += o;
+				delete lines[parseInt(i)];
+			}
+		});
+		self.locals = {};
 		var table_variable = core.module.debug.table_variable;
 		
-		// var analysis = {
-		// 	get_type : function(line){
-		// 		if(/=/.test(line)){
-		// 			var variable = line.slice(0, line.indexOf(" = "));
-		// 			var word = line.slice(line.indexOf(" = ")+3, line.length);
-		// 			if(word){
-		// 				if(/^{/.test(word)){
-		// 					return {
-		// 						'type' : 'array',
-		// 						'variable' : variable,
-		// 						'data' : word
-		// 					}
-		// 				}
-		// 				else if(/^0x/.test(word)){
-		// 					return {
-		// 						'type' : 'pointer',
-		// 						'variable' : variable,
-		// 						'data' : line
-		// 					}
-		// 				}
-		// 				else{
-		// 					return {
-		// 						'type' : 'number',
-		// 						'variable' : variable,
-		// 						'data' : line
-		// 					}
-		// 				}
-		// 			}
-		// 		}
-		// 		else{
-		// 			if(/^0x/.test(line)){
-		// 				return {
-		// 					'type' : 'pointer',
-		// 					'value' : line
-		// 				}
-		// 			}
-		// 			else{
-		// 				return {
-		// 					'type' : 'number',
-		// 					'value' : line
-		// 				}
-		// 			}
-		// 		}
-		// 	},
+		var data;
+		$(core.module.debug.table_variable).on('click_row',function(event, data){
+			//console.log(data.target.find('.expand_row').attr('type'));
 
-		// 	get_value : function(word){
-		// 		var variable = word.split(' = ');
-		// 		console.log(variable);
-		// 		return {
-		// 			'variable' : variable[0].trim(),
-		// 			'value' : variable[1].trim()
-		// 		}
-		// 	},
+			var self_this = data.target.find('.expand_row')
+			switch($(self_this).attr('type')){
+				case 'array' :
+					if($(self_this).attr('show')=='false'){
 
-		// 	array_process : function(word){
-		// 		var self = this;
+						var lines = self.locals[$(self_this).attr('key')];
+						var target = $(self_this).parent().parent().next();
+						$.each(lines, function(i, line){
+							table_variable.addRow({								
+								"variable" : "<div class='expand_row' type='"+line.type+"' num = '"+(parseInt($(self_this).attr('num'))+1)+"' style='margin-left:"+10*$(self_this).attr('num')+"px !important;' show='"+false+"'>"+i+"</div>",
+								"value" : line.value,
+								"summary" : line.type
+							},data.index+parseInt(i)+1);
 
-		// 		word = word.replace("{", "");
-		// 		word = word.replace("}", "");
+						});
+						$(self_this).attr('show', 'true');
 
-		// 		var array = {};
-		// 		var words = word.split(',').map(function(o){ return o.trim(); });
+					}else{
+						var lines = self.locals[$(self_this).attr('key')];
+						table_variable.deleteRows(data.index+1, Object.keys(lines).length);
+						/*var target = $(self_this).parent().parent().next();
+						target.find('pre').remove();
+						target.find('br').remove();*/
+						$(self_this).attr('show', 'false');
+						//table_variable.refreshView();
+					}
+				break;
+				case 'pointer' : 
+					if($(self_this).attr('show')=='false'){
+						var val = self.locals[$(self_this).attr('key')].value.split(' ');
 
-		// 		$.each(words, function(i, __word){
-		// 			var __word_type = self.get_type(__word);
-		// 			array[i] = __word_type;
-		// 		});
+						self.terminal.send_command("p *"+$(self_this).attr('key')+"\r", self.prompt, function(local_terminal_data){
 
-		// 		return array;
-		// 	},
+							var lines = local_terminal_data.split('\n');
+							var inner_data = self.get_type(lines[1]);
+							//self.locals[inner_data.variable] = inner_data.data;
+							switch(inner_data.type){
+								case 'array' :
+									self.array_process(inner_data.data, function(array){
+										self.locals[inner_data.variable] =  array;
+									});
+									table_variable.addRow({
+										"variable" :"<div class='expand_row' type='"+inner_data.type+"' num = '"+(parseInt($(self_this).attr('num'))+1)+"' style='margin-left:"+10*$(self_this).attr('num')+"px !important;' show='"+false+"' key='"+inner_data.variable+"'>"+"*"+"</div>",//key='"+variable[0]+"
+										"value" : inner_data.data,
+										"summary" : inner_data.type
+									},data.index+1);
+								break;
+								case 'struct' :
+									self.struct_process(inner_data.data, function(array){
+										self.locals[inner_data.variable] =  array;
+									});
+									table_variable.addRow({
+										"variable" :"<div class='expand_row' type='"+inner_data.type+"' num = '"+(parseInt($(self_this).attr('num'))+1)+"' style='margin-left:"+10*$(self_this).attr('num')+"px !important;' show='"+false+"' key='"+inner_data.variable+"'>"+"*"+"</div>",//key='"+variable[0]+"
+										"value" : inner_data.data,
+										"summary" : inner_data.type
+									},data.index+1);
+								break;
+								case 'pointer' :
+									self.pointer_process(inner_data.data, function(data){
+										self.locals[inner_data.variable] = data;
+										
+									});
+									//var variable = inner_data.split(' = ');
+									table_variable.addRow({
+										"variable" :"<div class='expand_row' type='"+inner_data.type+"' num = '"+(parseInt($(self_this).attr('num'))+1)+"' style='margin-left:"+10*$(self_this).attr('num')+"px !important;' show='"+false+"' key='"+inner_data.variable+"'>"+"*"+"</div>",//key='"+variable[0]+"
+										"value" : inner_data.data,
+										"summary" : inner_data.type
+									},data.index+1);
+								break;
+								default:
+									
+									table_variable.addRow({
+										"variable" :"<div class='expand_row' type='"+inner_data.type+"' num = '"+(parseInt($(self_this).attr('num'))+1)+"' style='margin-left:"+10*$(self_this).attr('num')+"px !important;' show='"+false+"'>"+"*"+"</div>",//key='"+variable[0]+"
+										"value" : inner_data.data,
+										"summary" : inner_data.type
+									},data.index+1);
 
-		// 	pointer_process : function(word){
-		// 		var self = this;
-		// 		var data = self.get_value(word);
+								break;
+							}
+							
+							/*variable[0] = variable[0].replace('$','');
+							var target = $(self_this).parent().parent().next();
+							table_variable.addRow({
+								"variable" :"<div class='expand_row' type='"+inner_data.type+"' num = '"+(parseInt($(self_this).attr('num'))+1)+"' style='margin-left:"+10*$(self_this).attr('num')+"px !important;' show='"+false+"' key='"+inner_data.variable+"'>"+"*"+"</div>",//key='"+variable[0]+"
+								"value" : inner_data.data,
+								"summary" : inner_data.type
+							},data.index+1);*/
+							//var contents = '<span><pre class="expand_row">|__    variable:'+variable[0]+' value: '+variable[1]+' </pre></span>';
+						});
+						$(self_this).attr('show', 'true');
+					}else{
+						table_variable.deleteRows(data.index+1, 1);
+						$(self_this).attr('show', 'false');
+					}
+				break;
+				case 'struct' :
+					if($(self_this).attr('show')=='false'){
 
-		// 		return {
-		// 			'type' : 'pointer',
-		// 			'value' : data.value
-		// 		}
-		// 	},
+						var lines = self.locals[$(self_this).attr('key')];
+						console.log(lines);
+						/*$.each(lines, function(i, line){
+							table_variable.addRow({
+								"value" : line.value,
+								"summary" : line.type
+							});
+						});*/
+						var target = $(self_this).parent().parent().next();
+						$.each(lines, function(i, line){
+							table_variable.addRow({
+								"variable" : "<div class='expand_row' type='"+line.type+"' num = '"+(parseInt($(self_this).attr('num'))+1)+"' style='margin-left:"+10*$(self_this).attr('num')+"px !important;' show='"+false+"' key='"+line.variable+"'>"+line.variable+"</div>",
+								"value" : line.data,
+								"summary" : line.type
+							},data.index+parseInt(i)+1);
+							switch(line.type){
+								case 'array' :
+									self.array_process(line.data, function(array){
+										self.locals[line.variable] =  array;
+									});
+								break;
+								case 'struct' :
+									self.struct_process(line.data, function(array){
+										self.locals[line.variable] =  array;
+									});
+								break;
+								case 'pointer' :
+									self.pointer_process(line.data, function(data){
+										self.locals[inner_data.variable] = data;
+										
+									});
+								break;
+							}
+						});
+						$(self_this).attr('show', 'true');
 
-		// 	number_process : function(word){
-		// 		var self = this;
-		// 		var data = self.get_value(word);
+					}else{
+						var lines = self.locals[$(self_this).attr('key')];
+						table_variable.deleteRows(data.index+1, Object.keys(lines).length);
+						$(self_this).attr('show', 'false');
+						//table_variable.refreshView();
+					}
+				break;
+			};
+		});
+		self.start(lines);
+		console.log(lines);
+		/*$(".expand_row").click(function(){
+			var self_this = this;
+			switch($(self_this).attr('type')){
+				case 'array' :
+					if($(self_this).attr('show')=='false'){
 
-		// 		return {
-		// 			'type' : 'number',
-		// 			'value' : data.value
-		// 		}
-		// 	},
+						var lines = self.locals[$(self_this).attr('key')];
+						/*$.each(lines, function(i, line){
+							table_variable.addRow({
+								"value" : line.value,
+								"summary" : line.type
+							});
+						});
+						var target = $(self_this).parent().parent().next();
+						var contents = '';
+						$.each(lines, function(i, line){
+							/*contents += '| <br />'
+							contents += '| <br />'
+							contents += '<span><pre class="expand_row">|__ value: '+line.value+'   type: '+line.type+' </pre></span>';
 
-		// 	start : function(lines){
-		// 		var self = this;
+						});
+						target.append(contents);
+						$(self_this).attr('show', 'true');
 
-		// 		$.each(lines, function(i, line){
-		// 			if(line == '' || /info locals/.test(line) || /gdb/.test(line)) return;
+					}else{
+						var target = $(self_this).parent().parent().next();
+						target.find('pre').remove();
+						target.find('br').remove();
+						$(self_this).attr('show', 'false');
+						//table_variable.refreshView();
+					}
+				break;
+				case 'pointer' : 
+					if($(self_this).attr('show')=='false'){
+						var val = self.locals[$(self_this).attr('key')].value.split(' ');
+						self.terminal.send_command("p *"+val[0]+"\r", self.prompt, function(local_terminal_data){
+							//+$(this).attr('key')+"="
+							var lines = local_terminal_data.split('\n');
+							var variable = lines[1].split(' = ');
+							variable[0] = variable[0].replace('$','');
+							var target = $(self_this).parent().parent().next();
+							var contents = '<span><pre class="expand_row">|__    variable:'+variable[0]+' value: '+variable[1]+' </pre></span>';
+							target.append(contents);
+						});
+						$(self_this).attr('show', 'true');
+					}else{
+						var target = $(self_this).parent().parent().next();
+						target.find('pre').remove();
+						target.find('br').remove();
+						$(self_this).attr('show', 'false');
+					}
+				break;
+				case 'struct' :
+					if($(self_this).attr('show')=='false'){
 
-		// 			var word = self.get_type(line);
-		// 			switch(word.type){
-		// 				case 'array':
-		// 					locals[word.variable] = self.array_process(word.data);
-		// 					break;
+						var lines = self.locals[$(self_this).attr('key')];
+						/*$.each(lines, function(i, line){
+							table_variable.addRow({
+								"value" : line.value,
+								"summary" : line.type
+							});
+						});
+						var target = $(self_this).parent().parent().next();
+						var contents = '';
+						$.each(lines, function(i, line){
+							/*contents += '| <br />'
+							contents += '| <br />'
+							contents += '<span><pre class="expand_row">|__    variable:'+line.variable +'  value: '+line.data+'   type: '+line.type+' </pre></span>';
 
-		// 				case 'pointer':
-		// 					locals[word.variable] = self.pointer_process(word.data);
-		// 					break;
+						});
+						target.append(contents);
+						$(self_this).attr('show', 'true');
 
-		// 				case 'number':
-		// 					locals[word.variable] = self.number_process(word.data);
-		// 					break;
-
-		// 				default:
-		// 					break;
-		// 			}
-		// 		});
-		// 	},
-
-		// 	push : function(table_variable){
-
-		// 	}
-		// }
-
-
-		table_variable.initializeTable();
-
+					}else{
+						var target = $(self_this).parent().parent().next();
+						target.find('pre').remove();
+						target.find('br').remove();
+						$(self_this).attr('show', 'false');
+						//table_variable.refreshView();
+					}
+				break;
+			};
+		});*/
+		/*table_variable.initializeTable();
 		$.each(lines, function(i, line){
 			if(line == '') return;
 
@@ -469,7 +609,7 @@ org.goorm.plugin.cpp.prototype = {
 				});
 			}
 		});
-		table_variable.refreshView();
+		table_variable.refreshView();*/
 	},
 	
 	set_breakpoints: function(){
@@ -482,24 +622,26 @@ org.goorm.plugin.cpp.prototype = {
 				
 				if(!window.editor) continue;				
 				var breakpoints = window.editor.breakpoints;
-				if(breakpoints.length > 0){
-					self.terminal.send_command('clear\r', self.prompt);
-					
-					for(var i=0; i < breakpoints.length; i++) {
-						var breakpoint = breakpoints[i];
-						breakpoint += 1;
-						breakpoint = filename+":"+breakpoint;
-						self.terminal.send_command("break "+breakpoint+"\r", self.prompt);
-					}
-				}
-				else {
-					// no breakpoints
+				self.terminal.send_command('clear\r', self.prompt);
+				
+				for(var i=0; i < breakpoints.length; i++) {
+					var breakpoint = breakpoints[i];
+					breakpoint += 1;
+					breakpoint = filename+":"+breakpoint;
+					self.terminal.send_command("break "+breakpoint+"\r", self.prompt);
 				}
 			}
 		}
 	},
 	
 	build: function (projectName,callback) {
+
+		if(core.property.is_running_end==false){
+			//console.log('you cannot build while excuting');
+			alert.show(core.module.localization.msg['alert_plugin_not_while_running']);
+			return false;
+		}
+
 		var build_result=false;
 		var self=this;
 		var workspace = core.preference.workspace_path;
@@ -516,7 +658,7 @@ org.goorm.plugin.cpp.prototype = {
 		var buildPath = " "+workspace+projectName+"/"+plugin['plugin.cpp.build_path']+plugin['plugin.cpp.main'];
 		
 		var cmd = workspace+projectName+"/"+"make"+sourcePath+buildPath+buildOptions;
-		
+		core.module.layout.terminal.send_command('\n\r', null);
 		core.module.layout.terminal.send_command(cmd+'\r', null, function(result){
 			if(/Build Complete/g.test(result)){
 				notice.show(core.module.localization.msg['alert_plugin_build_success']);
@@ -546,8 +688,227 @@ org.goorm.plugin.cpp.prototype = {
 		}
 		var plugin = property.plugins['org.goorm.plugin.cpp'];
 		var buildPath = plugin['plugin.cpp.build_path'];
+		core.module.layout.terminal.send_command('\n\r', null);
 		core.module.layout.terminal.send_command("rm -rf "+workspace+project_name+"/"+buildPath+"* \r", null, function(){
 			core.module.layout.project_explorer.refresh();
 		});
+	},
+	get_type : function(line){
+		
+		if(/=/.test(line)){
+			var variable = line.slice(0, line.indexOf(" = "));
+			var word = line.slice(line.indexOf(" = ")+3, line.length);
+			if(word){
+				if(/^{/.test(word)){
+					var test = word.split(' = ');
+					if(test.length > 1){
+						return {							
+							'type' : 'struct',
+							'variable' : variable,
+							'data' : word
+						}
+					}else{
+						return {
+							'type' : 'array',
+							'variable' : variable,
+							'data' : word
+						}
+					}
+				}
+				else if(/^0x/.test(word)){
+					return {
+						'type' : 'pointer',
+						'variable' : variable,
+						'data' : line
+					}
+				}
+				else if(/^"/.test(word)){
+					return {
+						'type' : 'string',
+						'variable' : variable,
+						'data' : line
+					}
+				}
+				else{
+					return {
+						'type' : 'number',
+						'variable' : variable,
+						'data' : word
+					}
+				}
+			}
+		}
+		else{
+			if(/^0x/.test(line)){
+				return {
+					'type' : 'pointer',
+					'value' : line
+				}
+			}
+			else{
+				return {
+					'type' : 'number',
+					'value' : line
+				}
+			}
+		}
+	},
+	get_value : function(word){
+		var variable = word.split(' = ');
+		return {
+			'variable' : variable[0].trim(),
+			'value' : variable[1].trim()
+		}
+	},
+	struct_process : function(word, callback){
+		var self = this;
+		word = word.replace("{", "");
+		word = word.replace("}", "");
+		var array = {};
+		var temp = [];
+		var words = word.split(',').map(function(o){
+			return o.trim(); 
+		});
+		
+		$.each(words, function(i, __word){
+			var __word_type = self.get_type(__word);
+			if(/^{/.test(__word_type.data)){
+				array[i] = __word_type;
+				temp.push(i);
+			}else if(/$}/.test(__word_type.data)){
+				array[temp[0]].data += "," + __word;
+				temp.pop();
+			}else{
+			
+				if(temp.length>0){
+					array[temp[0]].data += "," + __word;
+				}else{
+					array[i] = __word_type;
+					
+				}
+			}
+			//array[i] = __word_type;
+		});
+		callback(array);
+	},
+	array_process : function(word, callback){
+		var self = this;
+
+		word = word.replace("{", "");
+		word = word.replace("}", "");
+		var array = {};
+		var words = word.split(',').map(function(o){ return o.trim(); });
+		$.each(words, function(i, __word){
+			var __word_type = self.get_type(__word);
+			array[i] = __word_type;
+		});
+		callback(array);
+	},
+
+	pointer_process : function(word, callback){
+		var self = this;
+		var data = self.get_value(word);
+		
+		callback({
+			'type' : 'pointer',
+			'value' : data.value
+		});
+	},
+
+	number_process : function(word, callback){
+		var self = this;
+		//var data = self.get_value(word);
+		callback({
+			'type' : 'number',
+			'value' : word
+		});
+	},
+	string_process : function(word, callback){
+		var self = this;
+		var data = self.get_value(word);
+		callback({
+			'type' : 'string',
+			'value' : data.value
+		});
+	},
+
+	start : function(lines){
+		var self = this;
+		var table_variable = core.module.debug.table_variable;
+		table_variable.initializeTable();
+		$.each(lines, function(i, line){
+			if(!line || line == '' || /info locals/.test(line) || /gdb/.test(line)) return;
+			var word = self.get_type(line);
+			switch(word.type){
+				case 'struct':
+				self.struct_process(word.data, function(array){
+						self.locals[word.variable] =  array;
+						var variable = line.slice(line.indexOf(" = ")+3,line.length);
+						var data = {};
+						data.value = variable.trim();
+						data.type = "struct";
+						//console.log(variable,data,word.variable,line); line.indexOf(" = ")
+						self.add_row(data, word.variable);
+					});
+				break;
+				case 'array':
+					self.array_process(word.data, function(array){
+						self.locals[word.variable] =  array;
+
+						var variable = line.slice(line.indexOf(" = ")+3,line.length);
+						var data = {};
+						data.value = variable.trim();
+						data.type = "array";
+						//console.log(variable,data,word.variable,line); line.indexOf(" = ")
+						self.add_row(data, word.variable);
+					});
+					break;
+				case 'pointer':
+					self.pointer_process(word.data, function(data){
+						self.locals[word.variable] = data;
+						self.add_row(data, word.variable);
+					});
+					break;
+				case 'number':
+					self.number_process(word.data, function(data){
+						self.locals[word.variable] = data;
+						self.add_row(data, word.variable);
+					});
+					break;
+				case 'string':
+					self.string_process(word.data, function(data){
+						self.locals[word.variable] = data;
+						self.add_row(data, word.variable);
+					});
+					break;
+
+				default:
+					break;
+			}
+		});
+		table_variable.refreshView();
+	},
+
+	push : function(table_variable){
+		var self = this;
+		console.log(self.locals['x']);
+		self.terminal.send_command("p "+"x"+"="+self.locals['x'].value+"\r", self.prompt);
+		/*var table_variable = core.module.debug.table_variable;
+		table_variable.addRow({
+					"variable": variable[0].trim(),
+					"value": variable[1].trim()
+				});
+			}
+		});
+		table_variable.refreshView();*/
+	},
+	add_row : function(variable, key){
+		if(variable && variable.value && variable.type){
+			core.module.debug.table_variable.addRow({
+				"variable": "<div class='expand_row' type='"+variable.type+"' num = '1' key='"+key+"' show='"+false+"'>"+key+"</div>",
+				"value": variable.value,
+				"summary": variable.type
+			});
+		}
 	}
 };

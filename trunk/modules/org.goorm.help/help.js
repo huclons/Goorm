@@ -1,4 +1,5 @@
 var http = require('http');
+var fs = require("fs");
 var querystring = require('querystring');
 
 module.exports = {
@@ -60,14 +61,22 @@ module.exports = {
 		post_req.end();
 	},
 	
-	get_readme_markdown: function (language) {
+	get_readme_markdown: function (language, filename, filepath) {
 		var input;
+		var markdownpath = (filepath == undefined) ? __path : __path+filepath;
 		
+		/* file name
+			README
+			NODEJS_MANUAL
+			EXAMPLE_TUTORIAL
+		*/
+		if(!filename) filename = 'README';
+
 		if (language == "kor") {
-			input = require("fs").readFileSync(__path + '/README_KO.md', 'utf8');
+			input = fs.readFileSync(markdownpath + filename+'_KO.md', 'utf8');
 		}
 		else {
-			input = require("fs").readFileSync(__path + '/README.md', 'utf8');
+			input = fs.readFileSync(markdownpath + filename+'.md', 'utf8');
 		} 
 		var output = require("markdown").markdown.toHTML(input);
 		

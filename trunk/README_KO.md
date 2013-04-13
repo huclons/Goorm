@@ -41,10 +41,9 @@ project.goorm
 
   node.js 설치하기 :
 
-          $ git clone http://github.com/joyent/node.git
-          $ cd node
-          $ tar -xvzf node-v0.8..tar.gz
-          $ cd node-v0.8.2
+          $ wget http://nodejs.org/dist/v0.10.4/node-v0.10.4.tar.gz
+          $ tar -xvzf node-v0.10.4.tar.gz
+          $ cd node-v0.10.4
           $ ./configure
           $ make
           $ sudo make install
@@ -55,13 +54,13 @@ project.goorm
           
   노드가 정상적으로 설치되었다면 아래와 같이 버전이 뜹니다. :
   
-          $ v0.8.2
+          $ v0.10.4
 
   npm 설치 (최신 버전의 node.js는 자동으로 npm을 설치하므로 이 과정은 무시하셔도 됩니다.) :
         
           $ sudo chown -R $USER /usr/local
           $ apt-get install curl
-          $ curl http://npmjs.org/install.sh > install.sh
+          $ curl https://npmjs.org/install.sh > install.sh
           $ sudo sh install.sh
   
 * **다운로드**
@@ -124,6 +123,9 @@ project.goorm
 
           $ node goorm.js set -h appId, appSecret
           $ goorm set --api-key-github appId, appSecret
+
+          $ node goorm.js set -x plugin_exclude_list
+          $ goorm set --plugin_exclude_list [plugin_exclude_list]
           
   구름 종료 : 
   
