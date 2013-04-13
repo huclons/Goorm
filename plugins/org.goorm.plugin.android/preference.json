@@ -1,6 +1,0 @@
-{
-	"plugin.android.version" : 		"1.0.0",
-	"plugin.android.buildOptions" : 	"-o",
-	"plugin.android.buildSource" : 	"main.c",
-	"plugin.android.buildTarget" : 	"main.o"
-}
