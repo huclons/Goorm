@@ -28,6 +28,7 @@ org.goorm.core.layout = {
 	project_explorer: null,
 	tab_cloud: null,
 	cloud_explorer: null,
+	object_explorer :null,
 
 	init: function(container) {
 		
@@ -70,7 +71,7 @@ org.goorm.core.layout = {
 				parent: self.layout,
 				units:
 				[
-					{ position: 'right', width: right_width, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, gutter: '0px 0px 0px 0px', collapse: true },
+					{ position: 'right', width: right_width, resize: true, scroll: false, body: container+'_inner_layout_right', animate: false, gutter: '0px 0px 0px 0px', collapse: true, minWidth : 300 },
 					{ position: 'bottom', height: bottom_height, body: container+'_inner_layout_bottom', animate: false, scroll: false, resize: true, gutter: '0px 0px 0px 0px', collapse: true },
 					{ position: 'center', body: container+'_inner_layout_center', scroll: false }
 				]
@@ -190,7 +191,7 @@ org.goorm.core.layout = {
 		this.attach_slide(this.inner_right_tabview);
 		
 		//History Tab
-		this.attach_history(this.inner_right_tabview);
+		//this.attach_history(this.inner_right_tabview);
 		
 		//Properties Tab
 		this.attach_properties(this.inner_right_tabview);
@@ -338,17 +339,34 @@ org.goorm.core.layout = {
 	},
 	
 	attach_object_explorer: function(target) {
+		var self=this;
 		//attaching tab element
-		target.addTab(new YAHOO.widget.Tab({ label: "<span localization_key='object'>Object</span>", content: "<div id='object_explorer'><div id='object_tree'></div></div>", disabled: true }));
+		target.addTab(
+			new YAHOO.widget.Tab({
+			 label: "<span localization_key='outline'>Outline</span>"
+			 , content: "<div id='object_explorer'><div id='current_object_explorer'></div><div id='object_tree'></div></div>"
+			 //, disabled: true 
+			})
+		);
+		$("#current_object_explorer").css("text-align","left");
+		$("#current_object_explorer").css("font-size","11px");
+		self.object_explorer = new org.goorm.core.object.explorer();
+		self.object_explorer.init('object_tree');
 	},
 	
 	attach_properties: function(target) {
 		//attaching tab element
-		target.addTab(new YAHOO.widget.Tab({ label: "<span localization_key='properties'>Properties</span>", content: "<div id='properties'></div>", disabled: true }));
+		target.addTab(
+			new YAHOO.widget.Tab({ 
+				label: "<span localization_key='properties'>Properties</span>"
+				, content: "<div id='properties'></div>"
+				, disabled: true 
+			})
+		);
 		
-		var properties = org.goorm.core.object.properties;
+	//	var properties = new org.goorm.core.object.properties();
 		
-		this.table_properties = properties.init("properties");
+	//	this.table_properties = properties.init("properties");
 	},
 	
 	attach_message: function(target) {
@@ -365,8 +383,8 @@ org.goorm.core.layout = {
 		this.toolbar.add("../../configs/toolbars/org.goorm.core.design/design.toolbar.html", "design.toolbar", target);
 		*/
 		
-		var context_menu = new org.goorm.core.menu.context();
-		context_menu.init("configs/menu/org.goorm.core.toolbar/toolbar.html", "menu.context.toolbar", target);
+		// var context_menu = new org.goorm.core.menu.context();
+		// context_menu.init("configs/menu/org.goorm.core.toolbar/toolbar.html", "menu.context.toolbar", target);
 		
 		$(core).trigger("context_menu_complete");
 	},
@@ -387,11 +405,11 @@ org.goorm.core.layout = {
 		//attaching tab element
 		target.addTab(new YAHOO.widget.Tab({ label: "<span localization_key='communication' class='tab_area' >Communication</span>", content: "<div id='communication' class='layout_right_communication_tab'></div>" }));
 
-/*
-		$("#communication").append("<div class='communication_user_container' style='height:100px; border-bottom:1px #CCC solid; padding:5px;'></div>");		
-		$("#communication").append("<div class='communication_message_container' style='height:200px; border-bottom:1px #CCC solid; padding:5px;'></div>");
-		$("#communication").append("<div class='communication_message_input_container' style='height:50px; border-bottom:1px #CCC solid; padding:5px; background-color:#EFEFEF; text-align:center;'><input value='Chatting Message' style='width:90%;' /></div>");
-*/
+		/*
+				$("#communication").append("<div class='communication_user_container' style='height:100px; border-bottom:1px #CCC solid; padding:5px;'></div>");		
+				$("#communication").append("<div class='communication_message_container' style='height:200px; border-bottom:1px #CCC solid; padding:5px;'></div>");
+				$("#communication").append("<div class='communication_message_input_container' style='height:50px; border-bottom:1px #CCC solid; padding:5px; background-color:#EFEFEF; text-align:center;'><input value='Chatting Message' style='width:90%;' /></div>");
+		*/
 		//$("#communication").append("<iframe src='http://localhost:8001/?room=11' width=99% height=300>");
 		this.communication = org.goorm.core.collaboration.communication;
 		this.communication.init("communication");
@@ -412,14 +430,14 @@ org.goorm.core.layout = {
 		
 	},
 	
-	attach_history: function(target) {
+	/*attach_history: function(target) {
 		target.addTab(new YAHOO.widget.Tab({
 			label: "<span localization_key='history'>History</span>",
 			content: "<div id='history'></div>"
 		}));
 		this.history = new org.goorm.core.collaboration.history();
 		this.history.init();
-	},
+	},*/
 	
 	attach_terminal: function(target) {
 		var self = this;
@@ -431,8 +449,8 @@ org.goorm.core.layout = {
 		
 		this.terminal = new org.goorm.core.terminal();
 		
-		$(core).bind("goorm_login_complete", function () {
-			self.terminal.init($("#terminal"), "default_terminal", false);
+		$(core).one("goorm_login_complete", function () {
+			self.terminal.init($("#goorm_inner_layout_bottom #terminal"), "default_terminal", false);
 		});
 	},
 	
@@ -442,10 +460,10 @@ org.goorm.core.layout = {
 	},
 	
 	refresh_terminal: function() {
-/*
-		this.inner_bottom_tabview.removeTab(this.inner_bottom_tabview.getTab(2));
-		//attaching tab element
-*/
+			/*
+					this.inner_bottom_tabview.removeTab(this.inner_bottom_tabview.getTab(2));
+					//attaching tab element
+			*/
 	},
 	
 	resize_all: function() {

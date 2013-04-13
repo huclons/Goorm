@@ -40,10 +40,9 @@ Getting Started
 
   install node.js :
 
-          $ git clone http://github.com/joyent/node.git
-          $ cd node
-          $ tar -xvzf node-v0.8..tar.gz
-          $ cd node-v0.8.2
+          $ wget http://nodejs.org/dist/v0.10.4/node-v0.10.4.tar.gz
+          $ tar -xvzf node-v0.10.4.tar.gz
+          $ cd node-v0.10.4
           $ ./configure
           $ make
           $ sudo make install
@@ -54,7 +53,7 @@ Getting Started
           
   if node.js installed successfully, it prints node.js version as below:
   
-          $ v0.8.2
+          $ v0.10.4
 
   install npm (optional- latest version of node.js automatically install npm, so you may not install npm) :
   
@@ -65,7 +64,7 @@ Getting Started
   
   then, install npm :
   
-          $ curl http://npmjs.org/install.sh > install.sh
+          $ curl https://npmjs.org/install.sh > install.sh
           $ sudo sh install.sh
   
 * **Download**
@@ -128,6 +127,9 @@ Getting Started
 
           $ node goorm.js set -h appId, appSecret
           $ goorm set --api-key-github appId, appSecret
+
+          $ node goorm.js set -x plugin_exclude_list
+          $ goorm set --plugin_exclude_list [plugin_exclude_list]
 
   stop goorm daemon : 
 

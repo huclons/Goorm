@@ -31,8 +31,6 @@ module.exports = {
 		var self = this;
 		var workspace = __workspace + "/" + req.data.project_author + "_" + req.data.project_name;
 		var template = common.path + "template";
-		var uid = parseInt(req.uid);
-		var gid = parseInt(req.gid);
 		
 		if(req.data.project_detailed_type) {
 			template += "/"+req.data.project_detailed_type;
@@ -43,9 +41,6 @@ module.exports = {
 		emittor.on('file', function (path, stat, next){
 			var abs_path = (path+"/"+stat.name).replace(template,"");
 			self.copyFileSync(path + "/" + stat.name, workspace + abs_path);
-			if(uid && gid) {
-				fs.chownSync(workspace+abs_path, uid, gid);
-			}
 			next();
 		});
 		
@@ -57,9 +52,6 @@ module.exports = {
 			var abs_path = (path+"/"+stat.name).replace(template,"");
 			fs.exists(workspace+abs_path, function(exists) {
 				fs.mkdirSync(workspace+abs_path);
-				if(uid && gid) {
-					fs.chownSync(workspace+abs_path, uid, gid);
-				}
 				next();
 			});
 			
@@ -71,7 +63,23 @@ module.exports = {
 			fs.readFile(workspace+"/project.json", 'utf-8', function (err, file_data) {
 				var contents = JSON.parse(file_data);
 				contents.plugins = req.data.plugins;
-				contents.detailedtype = req.data.project_detailed_type;
+
+				var detailedtype = "";
+				switch(req.data.project_detailed_type){
+					case "c":
+						detailedtype = "C Console Project"
+						break;
+
+					case "cpp":
+						detailedtype = "C++ Console Project"
+						break;
+
+					default:
+						detailedtype = "C Console Project"
+						break;
+				}
+
+				contents.detailedtype = detailedtype;
 				fs.writeFile(workspace+"/project.json", JSON.stringify(contents), 'utf-8', function (err) {
 					if (err==null) {
 						evt.emit("do_new_complete", {

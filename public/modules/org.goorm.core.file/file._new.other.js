@@ -38,6 +38,10 @@ org.goorm.core.file._new.other = {
 					core.module.layout.project_explorer.refresh();
 					self.dialog.panel.hide();
 				}
+				else if(data.err_code == 20) {
+					alert.show(core.module.localization.msg[data.message]);
+
+				}
 				else {
 					alert.show(data.message);
 				}

@@ -159,6 +159,7 @@ org.goorm.core.window.panel.prototype = {
 			this.title = "Terminal";
 			
 			this.terminal = new org.goorm.core.terminal();
+			
 			this.terminal.init($("#"+container).find(".window_container")[0], this.filename, true);
 			
 			$("#"+container).find(".window_container").css("overflow", "auto");
@@ -543,7 +544,10 @@ org.goorm.core.window.panel.prototype = {
 			window_manager.index--;
 			window_manager.active_filename = "";
 			
-			core.module.layout.history.deactivated();
+			//core.module.layout.history.deactivated();
+			
+			
+
 			
 			var new_window = window_manager.window.length-1;
 			if (new_window != -1) {
@@ -554,6 +558,28 @@ org.goorm.core.window.panel.prototype = {
 			}
 			window_manager.active_window = new_window;
 			$(core).off("on_project_open.penel");
+
+			/////
+			////1222
+			////empty object explorer tab refresh when close file
+
+			//console.log('aaa',jQuery.extend(true,{},self.filepath));
+			//console.log('aaa',jQuery.extend(true,{},self.filename));
+			//console.log('bbb',jQuery.extend(true,{},core.module.layout.workspace.window_manager.active_filename));
+			$.get("edit/get_object_explorer"
+			,{
+				selected_file_path :  core.module.layout.workspace.window_manager.active_filename
+			}
+			,function(data){
+				core.module.layout.object_explorer.refresh('object_tree',data);
+
+			}
+			);
+			
+
+
+
+			///
 			delete this;
 		}
 		else {
@@ -600,7 +626,6 @@ org.goorm.core.window.panel.prototype = {
 		if(self.editor && self.editor.filename){
 			if(core.module.layout.workspace.window_manager.active_filename
 				!=(self.editor.filepath + self.editor.filename)){
-				
 				self.editor.on_activated();
 				core.module.layout.workspace.window_manager.active_filename = self.editor.filepath + self.editor.filename;
 			}
@@ -650,7 +675,8 @@ org.goorm.core.window.panel.prototype = {
 	
 	set_footer: function(contents) {
 		if(this.type == "Editor") {
-			this.panel.setFooter("<div class='editor_message'>Line: 0 | Col: 0</div>");
+			this.panel.setFooter("<span class='editor_message' style='width:80%;'>Line: 0 | Col: 0</span> <span class='zoom_percent' style='float:right;'>100%</span>");
+
 		}
 		else if(this.type == "Designer") {
 			this.panel.setFooter("<div class='designer_message'></div><div class='mouse_position_view'>(0, 0)</div>");
@@ -684,6 +710,7 @@ org.goorm.core.window.panel.prototype = {
 	
 	resize_all: function() {
 		var height = $("#"+this.container).find(".bd").height();
+
 		$("#"+this.container).find(".window_container").height(height);
 			
 		if(this.type == "Editor") {

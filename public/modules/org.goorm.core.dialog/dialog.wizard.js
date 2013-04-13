@@ -69,7 +69,6 @@ org.goorm.core.dialog.wizard.prototype = {
 				self.show_previous_button(true);
 			
 				$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").hide();
-			
 				if ($("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']")) {
 					self.step++;
 					$("#goorm_dialog_container").find("#panelContainer_" + self.title).find(".bd").find(".wizard_step[step='" + self.step + "']").show();
@@ -198,18 +197,18 @@ org.goorm.core.dialog.wizard.prototype = {
 	
 	show_previous_button: function(show) {
 		var self = this;
-
 		if (show) {
 			self.panel._aButtons[0].set("disabled", false);
+			self.panel._aButtons[2].set("disabled", false);
 		}
 		else {
 			self.panel._aButtons[0].set("disabled", true);
+			self.panel._aButtons[2].set("disabled", true);
 		}
 	},
 	
 	show_next_button: function(show) {
 		var self = this;
-
 		if (show) {
 			self.panel._aButtons[1].set("disabled", false);
 		}

@@ -19,7 +19,12 @@ org.goorm.core.auth.manage.collaboration = {
 		this.refresh_button = new YAHOO.widget.Button("project_refresh", { onclick: { fn: function() { self.list_refresh(); } }, label:'<span localization_key="refresh">Refresh</span>' })
 
 		this.refresh();
-		this.socket = io.connect();
+
+		$(core).bind('goorm_login_complete', function(){
+			self.socket =    (org.goorm.core.collaboration.communication.socket == null) ? 
+							(org.goorm.core.collaboration.communication.socket = io.connect()) :
+			 				org.goorm.core.collaboration.communication.socket;
+		})
 	},
 
 	refresh : function(){

@@ -13,47 +13,55 @@ module.exports = {
 	
 	msg: function (io, socket, msg) {
 		if(msg.action == 'send_whisper_message'){
-			var sessionid = msg.sessionid;
-			
-			var target_user = JSON.parse(msg.target_user);
-			var target_id_type = JSON.stringify({ 'id' : target_user.user, 'type' : target_user.type })
+			if(msg.message&&msg.message!=""){
+				var sessionid = msg.sessionid;
+				
+				var target_user = JSON.parse(msg.target_user);
 
-			var from_chatting_message = "From > " + msg.nick + "["+msg.user+"] : " + msg.message;
-			var to_chatting_message = "To > " + target_user.nick + "["+target_user.user+"] : " + msg.message;
-			
-			var clients = io.sockets.clients();
-			clients.forEach(function(client){
-				client.get('id_type', function(err, data){
-					if(data == target_id_type){
-						var message_data = {
-							'message' : from_chatting_message,
-							'workspace' : msg.workspace
+				var from_chatting_message = "From > " + msg.nick + "["+msg.user+"] : " + msg.message;
+				var to_chatting_message = "To > " + target_user.nick + "["+target_user.user+"] : " + msg.message;
+				
+				var clients = io.sockets.clients();
+				clients.forEach(function(client){
+					client.get('id_type', function(err, data){
+						var client_data = JSON.parse(data);
+
+						if(client_data){
+							if(client_data.id == target_user.user && client_data.type == target_user.type){
+								var message_data = {
+									'message' : from_chatting_message,
+									'workspace' : msg.workspace
+								}
+								//if(msg.message&&msg.message!="")
+								io.sockets.sockets[client.id].emit('communication_whisper_message', message_data);
+							}
+						} else {
 						}
-
-						io.sockets.sockets[client.id].emit('communication_whisper_message', message_data);
-					};
-				})
-			});
-			
-			var message_data = {
-				'message' : to_chatting_message,
-				'workspace' : msg.workspace
+					})
+				});
+				
+				var message_data = {
+					'message' : to_chatting_message,
+					'workspace' : msg.workspace
+				}
+				//if(msg.message&&msg.message!="")
+				io.sockets.sockets[sessionid].emit('communication_whisper_message', message_data);
 			}
-
-			io.sockets.sockets[sessionid].emit('communication_whisper_message', message_data);
 		}
 		else{ // or msg.action = send_message
-			var chatting_message = msg.nick + " : " + msg.message;
-			
-			var message_data = {
-				'message' : chatting_message,
-				'workspace' : msg.workspace
-			}
+			if(msg.message&&msg.message!=""){
+				var chatting_message = msg.nick + " : " + msg.message;
+				
+				var message_data = {
+					'message' : chatting_message,
+					'workspace' : msg.workspace
+				}
 
-			//socket.broadcast.to(msg.workspace).emit("communication_message", chatting_message);
-			//socket.emit("communication_message", chatting_message);
-			
-			io.sockets.in(msg.workspace).emit("communication_message", message_data);
+				//socket.broadcast.to(msg.workspace).emit("communication_message", chatting_message);
+				//socket.emit("communication_message", chatting_message);
+				
+				io.sockets.in(msg.workspace).emit("communication_message", message_data);
+			}
 		}
 	},
 
@@ -71,11 +79,17 @@ module.exports = {
 						var client = clients[i];
 
 						client.get('id_type', function(err, id_type){
-							if(JSON.stringify({'id':user.id, 'type':user.type}) == id_type){
-								if(is_connected)
-									is_connected.call(this, { 'status' : true, 'client' : client, 'user' : user });
+							if(id_type){
+								var target_id_type = JSON.parse(id_type);
+								if(user.id == target_id_type.id && user.type == target_id_type.type){
+									if(is_connected)
+										is_connected.call(this, { 'status' : true, 'client' : client, 'user' : user });
 
-								evt_user.emit('get_user', evt_user, ++user_index);
+									evt_user.emit('get_user', evt_user, ++user_index);
+								}
+								else{
+									evt_client.emit('is_connected', evt_client, ++i);
+								}
 							}
 							else{
 								evt_client.emit('is_connected', evt_client, ++i);

@@ -41,6 +41,10 @@ org.goorm.core.collaboration.message = {
 		if(/invite/.test(type)){
 			return self.invite;
 		}
+		else{
+			console.log('Route Error : ', type);
+			return null;
+		}
 	},
 
 	load_message : function(){
@@ -51,7 +55,9 @@ org.goorm.core.collaboration.message = {
 		$.get('/message/get_list/receive', function(data){
 			for(var i=0; i<data.length; i++){
 				var message = data[i];
-				var message_html = self.route(message.type).get_html(message);
+				if(self.route(message.type)){
+					var message_html = self.route(message.type).get_html(message);
+				}
 
 				$("#message_list").append("<div class='message_list_item' type='"+message.type+"'>"+message_html+"</div>")
 			}
@@ -72,7 +78,7 @@ org.goorm.core.collaboration.message = {
 		var _id = $(message_html).find('.message_head').attr('_id');
 
 		$.get('/message/get', {'_id':_id}, function(message){
-			if(message){
+			if(message && self.route($(message_html).attr('type'))){
 				self.route($(message_html).attr('type')).action(message);
 				self.check(_id);
 			}

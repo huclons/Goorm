@@ -90,8 +90,19 @@ org.goorm.core.dialog.notice.prototype = {
 	
 	show: function (message) {
 		this.message = message;
-		
+		//this.title="Notice";
 		$("#panelContainer_" + this.title).find(".bd").empty();
+		$("#panelContainer_" + this.title).find(".bd").append(this.message);
+		$("#panelContainer_" + this.title).find(".bd").prepend("<div class='notice_image_div'><img src='"+this.image_url+"'/></div>");
+		$("#panelContainer_" + this.title).find(".bd").css("text-align", "left");
+		
+		this.panel.show();
+	},
+	msg_assistant: function (message) {
+		this.message = message;
+		//this.title="Message from Assistant";
+		$("#panelContainer_" + this.title).find(".bd").empty();
+		$("#panelContainer_" + this.title).find('.hd').html(core.module.localization.msg['alert_assistant_msg']);
 		$("#panelContainer_" + this.title).find(".bd").append(this.message);
 		$("#panelContainer_" + this.title).find(".bd").prepend("<div class='notice_image_div'><img src='"+this.image_url+"'/></div>");
 		$("#panelContainer_" + this.title).find(".bd").css("text-align", "left");

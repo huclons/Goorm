@@ -370,7 +370,7 @@
                         "value": "터미널 보기"
                     },
                     "window_bottom_layout_search": {
-                        "value": "찾기 보기"
+                        "value": "검색 보기"
                     }
                 }
             },
@@ -673,8 +673,8 @@
     "terminal_delete_edit_terminal": {
         "value": "비우기"
     },
-    "history_save": {
-    	"value": "히스토리 재생중 해당 스냅샷에서 지정된 시간만큼 멈춥니다."
+    "history_rollback": {
+    	"value": "선택된 스냅샷 상태로 파일을 복원시킵니다."
 	},
     "history_delete": {
     	"value": "현재 스냅샷을 이전 스냅샷과 병합 후 삭제합니다."

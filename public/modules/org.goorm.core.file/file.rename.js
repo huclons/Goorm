@@ -64,8 +64,10 @@ org.goorm.core.file.rename = {
 					}
 					
 					core.module.layout.project_explorer.refresh();
-				}
-				else {
+				} else if(received_data.err_code == 20) {
+					alert.show(core.module.localization.msg[received_data.message]);
+					// received_data.message = alert_file_permission || alert_deny_rename_folder_in_workspace_root
+				} else {
 					//alert.show(core.module.localization.msg["alert_error"] + received_data.message);
 					alert.show(received_data.message);
 				}
@@ -106,10 +108,10 @@ org.goorm.core.file.rename = {
 		self.is_alive_window = false;	
 
 		if (context) {
-			if("/"+core.status.current_project_path == core.status.selected_file) {
-				alert.show("Cannot Rename!");
-				return ;
-			}
+			// if("/"+core.status.current_project_path == core.status.selected_file) {
+			// 	alert.show("Cannot Rename!");
+			// 	return ;
+			// }
 			var filename = (core.status.selected_file.split("/")).pop();
 			var filepath = 	core.status.selected_file.replace(filename, "");
 			filepath = filepath.replace("//", "/");

@@ -59,12 +59,15 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 				console.log('');
 				console.log('      -d, --daemon           run the goorm server as a daemon using the forever module...');
 				console.log('      -p, --port [PORT NUM]  run the goorm server with port which you want...');
+				console.log('      --service  run the goorm service mode');
 				console.log('      --redis-mode  run the goorm server with redis-server');
 				console.log('');
 				console.log('      $ node goorm.js start -d');
 				console.log('      $ goorm start --daemon');
 				console.log('      $ node goorm.js start -p 9999');
 				console.log('      $ goorm start --port 9999');
+				console.log('      $ sudo node goorm.js start --service');
+				console.log('      $ sudo goorm start --service');
 				console.log('      $ node goorm.js start --redis-mode');
 				console.log('      $ goorm start --redis-mode');
 				console.log('');
@@ -114,8 +117,8 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 				console.log('      $ node goorm.js set -h appId,appSecret');
 				console.log('      $ goorm set --api-key-github appId,appSecret');
 				console.log('');
-				console.log('      $ node goorm.js set -d clientId');
-				console.log('      $ goorm set --api-key-google_drive clientId');
+				console.log('      $ node goorm.js set -x plugin_exclude_list');
+				console.log('      $ goorm set --plugin_exclude_list [plugin_exclude_list]');
 				console.log('');
 				console.log('  Command: Clean Configs');
 				console.log('');
@@ -147,6 +150,7 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 			.option('-p, --port [PORT NUM]', 'run the goorm server with port which you want...')
 			.option('-s, --send-info [Y/N],', 'send server information to developer...')
 			.option('-h, --home [HOME Directory]', 'set HOME directory in server')
+			.option('--service', 'run the goorm server as a service mode...')
 			.option('--redis-mode', 'run the goorm with redis-server')
 			.action(function (env, options) {
 				var process_options = [];
@@ -237,7 +241,9 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 			.option('-d, --api-key-google_drive [client_id]', 'Set the google drive app key')
 			.option('--set-uid [uid]', 'Set uid')
 			.option('--set-gid [gid]', 'Set gid')
+			.option('-x, --plugin_exclude_list [plugin_exclude_list]','Set the plugin list you want to exclude plugin loading (ex)[\"org.goorm.plugin.c\",\"org.goorm.plugin.cpp\",\"org.goorm.plugin.java\"]')
 			.action(function (env, options) {	
+				
 				if (!fs.existsSync(process.env.HOME + '/.goorm/')) {
 					fs.mkdirSync(process.env.HOME + '/.goorm/');
 					fs.writeFileSync(process.env.HOME + '/.goorm/config.json', "", 'utf8');
@@ -245,6 +251,7 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 				else if(!fs.existsSync(process.env.HOME + '/.goorm/config.json')){
 					fs.writeFileSync(process.env.HOME + '/.goorm/config.json', "", 'utf8');
 				}
+				////prepare config.json
 				
 				if (fs.existsSync(process.env.HOME + '/.goorm/')) {
 					var config_data = {};
@@ -256,6 +263,7 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 					var social_key = config_data.social_key || {};
 					var uid = config_data.uid || null;
 					var gid = config_data.gid || null;
+					var plugin_exclude_list = config_data.plugin_exclude_list || null;
 					
 					if (options.workspace)	 {	
 						workspace = options.workspace || process.env.PWD + '/' + "workspace/";
@@ -284,6 +292,11 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 					}
 					if (options['setGid'])	 {	
 						gid = options['setGid'] || null;
+					}
+					////exclude plugin
+					if(options['plugin_exclude_list']){
+						plugin_exclude_list = options['plugin_exclude_list'] || null;
+						//console.log(plugin_exclude_list);
 					}
 					
 					if(options['apiKeyFacebook'])	{
@@ -344,7 +357,8 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 						temp_dir: temp_dir,
 						social_key : social_key,
 						uid : uid,
-						gid : gid
+						gid : gid,
+						plugin_exclude_list : plugin_exclude_list
 					};
 			
 					fs.writeFileSync(process.env.HOME +  '/.goorm/config.json', JSON.stringify(config_data), 'utf8');

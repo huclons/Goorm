@@ -16,9 +16,11 @@ module.exports = {
 	
 	join: function (io, socket, msg) {
 		socket.join(msg.workspace);
+		socket.join(msg.group);
 		socket.set('workspace', msg.workspace);
 		socket.set('id_type', JSON.stringify({
 			'id' : msg.user,
+			'group' :msg.group,
 			'type' : msg.type
 		}));
 		

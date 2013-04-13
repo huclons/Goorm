@@ -36,6 +36,10 @@ org.goorm.core.file._new.folder = {
 					if (data.err_code==0) {
 						core.module.layout.project_explorer.refresh();
 					}
+					else if(data.err_code == 20) {
+						alert.show(core.module.localization.msg[data.message]);
+
+					}
 					else {
 						alert.show(data.message);
 					}

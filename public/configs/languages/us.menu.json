@@ -677,8 +677,8 @@
     "terminal_delete_edit_terminal": {
         "value": "Clear"
     },
-    "history_save": {
-    	"value": "Pause history playback with this snapshot."
+    "history_rollback": {
+    	"value": "Restore the selected snapshot."
 	},
     "history_delete": {
     	"value": "Merge this snapshot with previous one, and delete."

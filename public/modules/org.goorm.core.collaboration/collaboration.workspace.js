@@ -12,20 +12,23 @@ org.goorm.core.collaboration.workspace = {
 	init: function() {
 		var self = this;
 		
-		this.socket = io.connect();
-		
-		this.socket.on("workspace_message", function (data) {
- 			data = JSON.parse(data);
+		$(core).bind('goorm_login_complete', function(){
+			self.socket =    (org.goorm.core.collaboration.communication.socket == null) ? 
+							(org.goorm.core.collaboration.communication.socket = io.connect()) :
+			 				org.goorm.core.collaboration.communication.socket;
+			
+			self.socket.on("workspace_message", function (data) {
+	 			data = JSON.parse(data);
 
- 			if(data.workspace == ''){
- 				return;
- 			}
+	 			if(data.workspace == ''){
+	 				return;
+	 			}
 
- 			if (data.workspace == core.status.current_project_path && data.user != core.user.id) {
-	 			core.module.layout.project_explorer.refresh(false);
- 			}
-		});
-		
+	 			if (data.workspace == core.status.current_project_path && data.user != core.user.id) {
+		 			core.module.layout.project_explorer.refresh(false);
+	 			}
+			});
+		})
 		
 		$(core).bind("project_explorer_refreshed", function () {
 			self.socket.emit("message", '{"channel": "workspace", "action":"project_explorer_refresh", "user":"' + core.user.id + '", "nick":"'+core.user.nick+'", "type":"'+core.user.type+'", "workspace": "'+ core.status.current_project_path + '"}');

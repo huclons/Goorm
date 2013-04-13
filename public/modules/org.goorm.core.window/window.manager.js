@@ -15,6 +15,7 @@ org.goorm.core.window.manager = {
 	workspace_container: null,
 	window_list_container: null,
 	index: 0,
+	terminal_count: 0,
 	window_tabview: null,
 	active_window: -1,
 	active_filename: "",
@@ -33,7 +34,7 @@ org.goorm.core.window.manager = {
 		this.context_menu = [];
 		this.window_list_menu = [];
 		this.workspace_container = container;
-		
+
 		this.window_list = [];
 
 		$("#" + container).append("<div id='" + container + "_window_list'><div class='tab_max_buttons' style='float:right;'><div class='unmaximize_all window_button'></div> <div class='maximized_close window_button'></div></div><div class='tab_scroll' style='float:right;'><div class='tab_list_left window_button'></div><div class='window_list window_button'></div><div class='tab_list_right window_button'></div></div></div>");
@@ -99,7 +100,7 @@ org.goorm.core.window.manager = {
 			}
 			
 		});
-				
+		
 		$("#" + container + "_window_list").find(".window_list").click(function () {
 			self.list_menu.show();
 			
@@ -199,10 +200,11 @@ org.goorm.core.window.manager = {
 				})
 
 			}
-			core.module.layout.history.wait_for_loading = false;
+			//core.module.layout.history.wait_for_loading = false;
 		});
 		
 		$(core).bind("layout_resized", function () {
+			org.goorm.core.layout.workspace.window_manager.cascade();
 			if (self.maximized) {
 				self.maximize_all();
 			}
@@ -251,7 +253,7 @@ org.goorm.core.window.manager = {
 		else {
 			if(filepath!="/" && filepath!=""){
 				// console.log("last_init_load = ["+filepath+"]["+filename+"]");
-				core.module.layout.history.last_init_load = filepath + filename;
+				//core.module.layout.history.last_init_load = filepath + filename;
 			}
 			
 			var i = this.is_opened(filepath, filename);
@@ -265,6 +267,9 @@ org.goorm.core.window.manager = {
 				
 				// $(core).trigger('edit_file_open', {'workspace':workspace});
 				
+
+
+
 				return this.window[i];
 			}
 			else {
@@ -326,22 +331,24 @@ org.goorm.core.window.manager = {
 	},	
 
 	add: function(filepath, filename, filetype, editor) {
+		var self = this;	
+
 		if(this.check_already_opened()) {
 			m.s("warning", "This file is already opened!!", "window_manager");
 		}
 		else {
-			var self = this;
 			this.active_window = this.index;
 
 			var title = filename;
 
+			
 			$("#"+this.workspace_container).append("<div id='filewindow"+this.index+"'></div>");
 			
 			this.window[this.index] = new org.goorm.core.window.panel();
 			this.window[this.index].init("filewindow"+this.index, title, this.workspace_container, filepath, filename, filetype, editor);	
 			
 			this.tab[this.index] = new org.goorm.core.window.tab();
-			this.tab[this.index].init("filewindow"+this.index, title, this.window_tabview, this.list_menu);			
+			this.tab[this.index].init("filewindow"+this.index, title, this.window_tabview, this.list_menu, filepath, this);			
 			
 			this.window[this.index].connect(this.tab[this.index]);
 			this.tab[this.index].connect(this.window[this.index]);

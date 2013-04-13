@@ -57,11 +57,11 @@ org.goorm.core.shortcut.manager = {
 		});
 		
 		
-		$(document).bind('keydown', 'Ctrl+W', function (e) {
-			e.stopPropagation();
-			e.preventDefault();
-			return false;
-		});
+		// $(document).bind('keydown', 'Ctrl+W', function (e) {
+		// 	e.stopPropagation();
+		// 	e.preventDefault();
+		// 	return false;
+		// });
 
 		//////////////////////////////////////////////////
 		//Main Menu Selection
@@ -358,7 +358,7 @@ org.goorm.core.shortcut.manager = {
 			var window_manager = core.module.layout.workspace.window_manager;
 			
 			if (window_manager.window[window_manager.active_window].editor) {
-				core.dialog.find_and_replace.show();
+				$("a[action=do_find]").click();
 			}
 			
 			e.stopPropagation();
@@ -407,6 +407,59 @@ org.goorm.core.shortcut.manager = {
 			e.preventDefault();
 			return false;
 		});
+
+		//Auto Formatting
+		$(document).bind('keydown', 'Ctrl+K', function (e) {
+
+			var window_manager = core.module.layout.workspace.window_manager;
+
+			if(window_manager.window[window_manager.active_window].designer) {
+				//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.auto_formatting();
+				core.status.keydown = true;
+			}
+			
+			e.stopPropagation();
+			e.preventDefault();
+			return false;
+		});
+	
+		//Comment Selected
+		var key_event_lock = false;
+		$(document).bind('keydown', 'Ctrl+/', function (e) {
+			if(key_event_lock == false){
+				key_event_lock = true;
+				var window_manager = core.module.layout.workspace.window_manager;
+
+				if(window_manager.window[window_manager.active_window].designer) {
+					//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+				} else if(window_manager.window[window_manager.active_window].editor) {
+					window_manager.window[window_manager.active_window].editor.comment_selection();
+					core.status.keydown=true;
+				}			
+				e.stopPropagation();
+				e.preventDefault();
+				setTimeout(function(){key_event_lock = false}, 500);
+			}
+			return false;
+		});
+	
+		//Uncomment Selected
+		$(document).bind('keydown', 'Ctrl+Shift+/', function (e) {
+
+			var window_manager = core.module.layout.workspace.window_manager;
+
+			if(window_manager.window[window_manager.active_window].designer) {
+				//window_manager.window[window_manager.active_window].designer.canvas.do_delete();
+			} else if(window_manager.window[window_manager.active_window].editor) {
+				window_manager.window[window_manager.active_window].editor.uncomment_selection();
+				core.status.keydown=true;
+			}
+			e.stopPropagation();
+			e.preventDefault();
+			return false;
+		});
 	
 		//Open Preference
 		$(document).bind('keydown', 'Alt+P', function (e) {
@@ -424,16 +477,17 @@ org.goorm.core.shortcut.manager = {
 		//Main Menu : Edit
 		//////////////////////////////////////////////////
 		
+		//-> implemented to Native JS Event : document.onkeydown
 		//Run
-		$(document).bind('keydown', 'Ctrl+F5', function (e) {
-			if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type]!=undefined) {
-				core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type].run(core.status.current_project_path);
-			}
+		// $(document).bind('keydown', 'Ctrl+F5', function (e) {
+		// 	if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type]!=undefined) {
+		// 		core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type].run(core.status.current_project_path);
+		// 	}
 
-			e.stopPropagation();
-			e.preventDefault();
-			return false;
-		});
+		// 	e.stopPropagation();
+		// 	e.preventDefault();
+		// 	return false;
+		// });
 		
 		//Debug
 		$(document).bind('keydown', 'F7', function (e) {
@@ -441,23 +495,51 @@ org.goorm.core.shortcut.manager = {
 				core.module.layout.inner_bottom_tabview.selectTab(1);
 				core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type].debug(core.status.current_project_path);
 			}
+			console.log('F7')
+			e.stopPropagation();
+			e.preventDefault();
+			return false;
+		});
+		
+		document.onkeydown = function (e){
+			//Build Project - F5
+			if(e.keyCode == 116 && e.ctrlKey == false && e.shiftKey == false) {
+				if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type]!=undefined) {
+					core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type].build(core.status.current_project_path);
+				}
 
-			e.stopPropagation();
-			e.preventDefault();
-			return false;
-		});
-		
-		
-		//Build Project
-		$(document).bind('keydown', 'F5', function (e) {
-			if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type]!=undefined) {
-				core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type].build(core.status.current_project_path);
+				e.stopPropagation();
+				e.preventDefault();
+				return false;
+
+			} //Run - Ctrl + F5
+			else if (e.keyCode == 116 && e.ctrlKey == true && e.shiftKey == false) {
+				if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type]!=undefined) {
+					core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type].run(core.status.current_project_path);
+				}
+
+				e.stopPropagation();
+				e.preventDefault();
+				return false;
 			}
+		}
+		
+		//-> implemented to Native JS Event : document.onkeydown
+		//Build Project
+		// $(document).bind('keydown', 'F5', function (e) {
+		// 				console.log(e)
+		// 	if(e.keyCode == 116) {
+		// 		if(core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type]!=undefined) {
+		// 			core.module.plugin_manager.plugins["org.goorm.plugin."+core.status.current_project_type].build(core.status.current_project_path);
+		// 		}
+		// 		console.log('F5')
+
+		// 	}
 			
-			e.stopPropagation();
-			e.preventDefault();
-			return false;
-		});
+		// 		e.stopPropagation();
+		// 		e.preventDefault();
+		// 		return false;
+		// });
 		
 		
 		//Clean
@@ -723,18 +805,19 @@ org.goorm.core.shortcut.manager = {
 			return false;
 		});
 
-		$(document).bind('keydown', 'Shift+F5', function (e) {
-			if (!core.status.keydown) {
-				$($("a[action=slide_show_mode]").get(0)).trigger("click");
-				core.status.keydown = true;
-			}
+		//-> implemented to Native JS Event : document.onkeydown
+		// $(document).bind('keydown', 'Shift+F5', function (e) {
+		// 	if (!core.status.keydown) {
+		// 		$($("a[action=slide_show_mode]").get(0)).trigger("click");
+		// 		core.status.keydown = true;
+		// 	}
 			
-			core.module.layout.mainmenu.blur();
+		// 	core.module.layout.mainmenu.blur();
 			
-			e.stopPropagation();
-			e.preventDefault();
-			return false;
-		});
+		// 	e.stopPropagation();
+		// 	e.preventDefault();
+		// 	return false;
+		// });
 				
 		//Hide All window
 		$(document).bind('keydown', 'Alt+Shift+H', function (e) {

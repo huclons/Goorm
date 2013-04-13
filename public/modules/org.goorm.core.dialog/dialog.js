@@ -143,11 +143,11 @@ org.goorm.core.dialog.prototype = {
 
 		
 		var url = "file/get_contents";	
-		
+		var ajax_data = (self.path.search("plugins") >= 0 ) ? "path="+self.path : "path=public/" + self.path;
 		$.ajax({
 			url: url,			
 			type: "GET",
-			data: "path=public/" + self.path,
+			data: ajax_data,
 			success: function(data) {
 
 				self.panel.setBody(data);

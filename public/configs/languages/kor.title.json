@@ -23,6 +23,9 @@
     "title_register": {
 	    "value": "회원가입"
     },
+    "title_msg_send": {
+        "value": "메세지 보내기"
+    },
      "title_forgot": {
         "value": "아이디/비밀번호 분실"
     },

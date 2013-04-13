@@ -83,6 +83,9 @@
 	"object": {
 		"value": "Object"	
 	},
+	"outline":{
+		"value" : "Outline"
+	},
 	"properties": {
 		"value": "Properties"	
 	},
@@ -138,7 +141,7 @@
 		"value" : "Logout"
 	},
 	"account_modify" : {
-		"value" : "Account Modify"
+		"value" : "Modify Account"
 	},
 	"signup" : {
 		"value" : "Sign-up"

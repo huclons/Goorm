@@ -86,7 +86,7 @@ org.goorm.core.cloud.google.prototype ={
 	auth : function(){
 		var self = this;
 
-		var clientId = '555016447711.apps.googleusercontent.com';
+		var clientId = '823158061976.apps.googleusercontent.com'; ////this is google_drive_app_for_skima_dev
    		var scopes = 'https://www.googleapis.com/auth/drive';	
 		
 		function check_auth() {

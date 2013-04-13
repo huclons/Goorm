@@ -32,32 +32,6 @@ var check_form = {
 
 var exec = require('child_process').exec;
 
-var os = {
-	add : function(option){
-		var id = option.id;
-
-		return 'useradd ' + id;
-	},
-
-	del : function(option){
-		var id = option.id;
-
-		return 'userdel -f -r ' + id;
-	},
-
-	get_uid : function(option){
-		var id = option.id;
-
-		return 'id -u ' + id;
-	},
-
-	get_gid : function(option){
-		var id = option.id;
-
-		return 'id -g ' + id;
-	}
-}
-
 module.exports = {
 	admin_registeration : function(req, callback){
 		var self = this;
@@ -87,7 +61,7 @@ module.exports = {
 					if(!err){
 						g_admin.init_config(function(config_result){
 							if(config_result.result){
-								self.update_session(req.session, doc);
+								self.update_session(req, doc);
 								callback({
 									result : true
 								});
@@ -123,7 +97,7 @@ module.exports = {
 						self.add(req.body, function(add_result){
 							if(add_result){
 
-								self.update_session(req.session, req.body)
+								self.update_session(req, req.body)
 								callback({
 									result : true
 								});
@@ -240,6 +214,13 @@ module.exports = {
 			callback(user_list);
 		});
 	},
+	get_match_list_group : function(option, callback){
+		var query = option['query'];
+		//console.log("get_match_list_group")
+		User.find( { 'group' : option['group']  ,$or: [{'id' : {$regex:query, $options: 'g'} }, {'name' : {$regex:query, $options: 'g'} }, {'nick' : {$regex:query, $options: 'g'}}] }, function(err, user_list){
+			callback(user_list);
+		});
+	},
 
 	avail_blind : function(users, callback){
 		var self = this;
@@ -309,7 +290,6 @@ module.exports = {
 
 		User.update({'id':user.id, 'type':user.type}, {$set:member}, null, function(err){
 			if ( !err ) {
-				// self.update_session(req.session, member);
 				callback({
 					result : true,
 					data : member
@@ -336,7 +316,7 @@ module.exports = {
 		self.set(user, req, function(set_result){
 			if(set_result.result){
 				self.get(user, function(user_data){
-					self.update_session(req.session, user_data);
+					self.update_session(req, user_data);
 					callback(true);
 				})
 			}
@@ -361,7 +341,7 @@ module.exports = {
 
 							// Update Session
 							//
-							self.update_session(req.session, user_data);
+							self.update_session(req, user_data);
 
 							//	Access User
 							//
@@ -668,7 +648,7 @@ module.exports = {
 	},
 	
 	check_admin : function(callback){
-		User.findOne([{'level':'Admin'},{'level':'Owner'}], function(err, result){
+		User.findOne({$or:[{'level':'Admin'},{'level':'Owner'}]}, function(err, result){
 			if(result) callback(true);
 			else callback(false);
 		})
@@ -685,8 +665,9 @@ module.exports = {
 		return user_data;
 	},
 	
-	update_session : function(session, user){
+	update_session : function(req, user){
 		var user_data = {};
+		var session = req.session
 
 		for(var attr in user_schema){
 			if(attr == 'pw' || attr == 'deleted' || attr == 'last_access_time')
@@ -702,7 +683,7 @@ module.exports = {
 		// Redis Store
 		//
 		if(__redis_mode)
-			store.client.set(user_data.id, JSON.stringify(session));
+			store.client.set(req.sessionID, JSON.stringify(user_data));
 	},
 	
 	get_user_schema : function(){
@@ -738,22 +719,6 @@ module.exports = {
 
 		var is_connect = function(data){
 
-			// store.destroy : RedisStore
-			//
-
-			// console.log(Store);
-
-			// store.client.get(user.id, function(null_obj, session){
-				// var util = require('util'); console.log(util.inspect(JSON.parse(session), false, null));
-
-				// if(session.auth[user.type.toLowerCase()].user.id == user.id){
-					// store.destroy(user.id, function(){
-						// console.log(session.auth)
-						// console.log(express_store);
-					// })
-				// }
-			// })
-
 			if(!__redis_mode){
 				// store.sessions : express MemoryStore
 				
@@ -773,9 +738,53 @@ module.exports = {
 					}
 				}
 			}
+			else{
+				// Redis Mode
+				//
+				exec('redis-cli KEYS "*"', function(err, stdout, stderr){
+					if(stdout){
+						var sessions = stdout.split("\n");
+						var evt = new EventEmitter();
 
-			io.sockets.sockets[data.client.id].emit("force_disconnect");
-			io.sockets.sockets[data.client.id].disconnect();
+						evt.on('get_sessionID', function(evt, i){
+							if(sessions[i]){
+								
+								// sess:[sessionID]
+								//
+								var sessionID = sessions[i].substring(5);
+
+								store.client.get(sessionID, function(null_obj, session){
+									if(session){
+										session = JSON.parse(session);
+
+										if(session.id == user.id){
+											io.sockets.sockets[data.client.id].emit("force_disconnect");
+											io.sockets.sockets[data.client.id].disconnect();
+
+											store.destroy(sessionID, function(){
+												callback(true)
+											})
+										}
+										else{
+											evt.emit('get_sessionID', evt, ++i)
+										}
+									}
+									else{
+										evt.emit('get_sessionID', evt, ++i)
+									}
+								})
+							}
+							else{
+								callback(true)
+							}
+						})
+						evt.emit('get_sessionID', evt, 0)
+					}
+					else{
+						callback(true);
+					}
+				});
+			}
 		}
 
 		var is_not_connect = function(data){

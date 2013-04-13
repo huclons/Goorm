@@ -490,6 +490,21 @@
              }
         }
     },
+          "dialog_assistant_msg_every": {
+                "value": "Every Student"
+             },
+             "dialog_assistant_msg_specific": {
+                "value": "Specific Student"
+             },
+             "dialog_assistant_msg_content": {
+                "value": "Message : "
+             },
+             "dialog_assistant_msg_recipient": {
+                "value": "Recipient ID : "
+             },
+             "dialog_assistant_msg_student": {
+                "value": "Send to : "
+             },
     "dialog_preferences_preference" : {
         "value": "",
         "children": {

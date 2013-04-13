@@ -44,6 +44,10 @@ org.goorm.core.file.move = {
 					
 					core.module.layout.project_explorer.refresh();
 				}
+				else if(data.err_code == 20) {
+					alert.show(core.module.localization.msg[data.message]);
+
+				}
 				else {
 					//alert.show(core.module.localization.msg["alert_error"] + received_data.message);
 					alert.show(data.message);

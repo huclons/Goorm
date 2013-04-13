@@ -48,11 +48,20 @@ module.exports = {
 		
 		emitter.on('file', function (path, stat, next){
 			var abs_path = (path + "/"+stat.name).replace(workspace,"");
-			var result = self.copy_file_sync(path + "/" + stat.name, target_path + abs_path);
-			if(result) {
-				next();
-			}
-			else {
+
+			if(fs.existsSync(abs_path)){
+				var result = self.copy_file_sync(path + "/" + stat.name, target_path + abs_path);
+				if(result) {
+					next();
+				}
+				else {
+					evt.emit("do_run_complete", {
+						code : 500,
+						message : "failure"
+					});
+					return ;
+				}
+			} else {
 				evt.emit("do_run_complete", {
 					code : 500,
 					message : "failure"

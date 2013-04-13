@@ -136,14 +136,16 @@
 }
 
 .communication_user_item_context_button_first {
-	width: auto !important;
-}
+/*	width: auto !important;
+*/}
 
 .communication_user_item_context_button {
 	float : right;
-	/*width: 0px;
-*/}
+}
 
+.communication_user_item_context_button .context_menu_button {
+
+}
 
 
 #slide_url {
@@ -167,8 +169,7 @@
 }
 
 #slide_control {
-	float: left;
-	margin-left: 15px;
+	text-align: center;
 }
 
 #drawing_control {

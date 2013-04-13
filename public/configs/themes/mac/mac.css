@@ -38,6 +38,9 @@
 [localization_key=file_open_project] {
 	background-image:url(images/open_project.png) !important;
 }
+[localization_key=file_new_project] {
+	background-image:url(images/new_project.png) !important;
+}
 [localization_key=file_open_file] {
 	background-image:url(images/open_file.png) !important;
 }
@@ -176,6 +179,9 @@
 }
 #goorm_top .main_toolbar .toolbar_button.open_project {
 	background:url('images/open_project.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.new_project {
+	background:url('images/new_project.png') no-repeat center !important;
 }
 #goorm_top .main_toolbar .toolbar_button.open_file {
 	background:url('images/open_file.png') no-repeat center !important;

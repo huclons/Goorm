@@ -86,6 +86,9 @@
 	"message": {
 		"value": "메시지"	
 	},
+	"outline" : {
+		"value" : "아웃라인"
+	},
 	"object": {
 		"value": "객체"	
 	},

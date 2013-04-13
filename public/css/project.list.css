@@ -1,0 +1,21 @@
+/*
+Copyright Sung-tae Ryu. All rights reserved.
+Code licensed under the GPL v2 License:
+http://www.goorm.org/License
+version: 3.0.0
+*/
+
+/**************************************************************************
+PROJECT TREE STYLE CUSTOMIZATION
+**************************************************************************/
+
+.table_list_title {
+	height: 19px;   
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px; 
+	background-color: #EEE; 
+	border-bottom: 1px solid #DDD;
+	font-size : 11px;
+	text-align: center;
+}

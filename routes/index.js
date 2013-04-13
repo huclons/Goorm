@@ -30,6 +30,7 @@ var g_message = require("../modules/org.goorm.core.collaboration/collaboration.m
 var g_collaboration = require("../modules/org.goorm.core.collaboration/collaboration");
 //by sim
 var g_edit = require("../modules/org.goorm.core.edit/edit");
+var g_function =require("../modules/org.goorm.core.function/function");
 //by sim
 
 var EventEmitter = require("events").EventEmitter;
@@ -39,8 +40,9 @@ var EventEmitter = require("events").EventEmitter;
  */
 
 exports.index = function(req, res){
-	res.render('index', { title: 'goormIDE' });
-	g_file.init();
+	g_file.init(function(){
+		res.render('index', { title: 'goormIDE' });
+	});
 };
 
 
@@ -60,31 +62,23 @@ exports.project.do_new = function(req, res){
 	});
 
 	evt.on("project_change_permission", function(data){
-		g_auth.get_user_data(req.session, function(user_data){
-			var uid = parseInt(user_data.uid);
-			var gid = parseInt(user_data.gid[0]); // default
+		console.log('permission', data);
 
-			// change own, grp
-			//
-			fs.chown(data.project_path, uid, gid, function(err){
-				if(err){
-					console.log(err);
-				}
-
-				fs.chmod(data.project_path, 0750, function(err){
-					if(err){
-						console.log(err);
-					}
-				})
-			})
-		});
+		fs.chmod(data.project_path, 0770, function(err){
+			if(err){
+				console.log(err);
+			}
+		})
 	});
 
-	evt.on("project_add_db", function (data) {
+	evt.on("project_add_db", function (data, result_data) {
 		g_auth.get_user_data(req.session, function(user_data){
 			data.author_id = user_data.id;
 			data.author_type = user_data.type;
-			g_auth_project.add(data);
+
+			g_auth_project.add(data, function(){
+				evt.emit("project_do_new", result_data);
+			});
 		})
 	});
 	
@@ -109,6 +103,8 @@ exports.project.do_delete = function(req, res){
 	g_project.do_delete(req.query, evt);
 	g_auth_project.remove(req.query);
 	g_history.empty_project_history(req.query.project_path);
+
+
 };
 
 exports.project.get_list = function(req, res){
@@ -176,6 +172,10 @@ exports.project.set_property = function(req, res){
 	g_project.set_property(req.query, evt);
 };
 
+exports.project.move_file = function(req, res){
+	g_project.move_file(req.query, res);
+};
+
 /*
  * API : SCM
  */
@@ -202,7 +202,11 @@ exports.plugin.get_list = function(req, res){
 };
 
 exports.plugin.do_new = function(req, res){
-	g_plugin.do_new(req.query, res);
+
+	g_auth.get_user_data(req.session, function(user_data){
+		req.query.user = user_data;
+		g_plugin.do_new(req.query, res);
+	})
 };
 
 exports.plugin.generate = function(req, res){
@@ -221,20 +225,33 @@ exports.plugin.run = function(req, res){
 	g_plugin.run(req.query, res);
 };
 
-exports.plugin.extend_function = function(req, res) {
-	g_plugin.extend_function(req.query, res);	
+exports.plugin.stop = function(req, res){
+	g_plugin.stop(req.query, res);
 };
+
+exports.plugin.stop_function = function(req, res){
+	g_plugin.stop_function(req, res);
+};
+
+exports.plugin.extend_function = function(req, res) {
+	g_plugin.extend_function(req, res);	
+};
+
 exports.plugin.extend_function_sign = function(req, res) {
 var evt = new EventEmitter();
 	
 	evt.on("auth_check_user_data_final", function (data) {
-console.log("asdfasdfa1");
 		res.json(data);
 	});
 
 	
 	g_plugin.extend_function_sign_check(req, evt);
 };
+
+exports.plugin.terminate = function(req, res) {
+	g_plugin.terminate(req, res)
+};
+
 /*
  * API : File System
  */
@@ -250,7 +267,41 @@ exports.file.do_new = function(req, res){
 		res.json(data);
 	});
 
-	g_file.do_new(req.query, evt);
+	g_auth.get_user_data(req.session, function(user_data){
+		g_auth_manager.get(user_data, function(data){
+			if(data != null) {
+				user_level = data.level;
+			}
+		});
+		
+		var project_path = req.query.path.split("/")[0];
+		if(req.query.path.split("/")[0] == "")
+			project_path = req.query.path.split("/")[1];
+		g_auth_project.get({'project_path': project_path}, function(data){
+			if(data != null){
+				g_auth_manager.get({'id' : data.author_id, 'type' : data.author_type}, function(data){
+					author_level = data.level;
+					if(user_level == 'Member' && author_level == 'Assistant') {
+						var res_data = {
+							err_code : 20,
+							message : 'alert_file_permission',
+							path: req.query.ori_name
+						};
+						res.json(res_data);
+					} else {
+						g_file.do_new(req.query, evt);
+					}
+				});
+			} else {
+				var res_data = {
+					err_code : 20,
+					message : 'alert_file_permission',
+					path: req.query.ori_name
+				};
+				res.json(res_data);
+			}
+		});
+	});
 };
 
 exports.file.do_new_folder = function(req, res){
@@ -260,7 +311,41 @@ exports.file.do_new_folder = function(req, res){
 		res.json(data);
 	});
 
-	g_file.do_new_folder(req.query, evt);
+	g_auth.get_user_data(req.session, function(user_data){
+		g_auth_manager.get(user_data, function(data){
+			if(data != null) {
+				user_level = data.level;
+			}
+		});
+		
+		var project_path = req.query.current_path.split("/")[0];
+		if(req.query.current_path.split("/")[0] == "")
+			project_path = req.query.current_path.split("/")[1];
+		g_auth_project.get({'project_path': project_path}, function(data){
+			if(data != null){
+				g_auth_manager.get({'id' : data.author_id, 'type' : data.author_type}, function(data){
+					author_level = data.level;
+					if(user_level == 'Member' && author_level == 'Assistant') {
+						var res_data = {
+							err_code : 20,
+							message : 'alert_file_permission',
+							path: req.query.ori_name
+						};
+						res.json(res_data);
+					} else {
+						g_file.do_new_folder(req.query, evt);
+					}
+				});
+			} else {
+				var res_data = {
+					err_code : 20,
+					message : 'alert_file_permission',
+					path: req.query.ori_name
+				};
+				res.json(res_data);
+			}
+		});
+	});
 };
 
 exports.file.do_new_other = function(req, res){
@@ -270,7 +355,41 @@ exports.file.do_new_other = function(req, res){
 		res.json(data);
 	});
 
-	g_file.do_new_other(req.query, evt);
+	g_auth.get_user_data(req.session, function(user_data){
+		g_auth_manager.get(user_data, function(data){
+			if(data != null) {
+				user_level = data.level;
+			}
+		});
+		
+		var project_path = req.query.current_path.split("/")[0];
+		if(req.query.current_path.split("/")[0] == "")
+			project_path = req.query.current_path.split("/")[1];
+		g_auth_project.get({'project_path': project_path}, function(data){
+			if(data != null){
+				g_auth_manager.get({'id' : data.author_id, 'type' : data.author_type}, function(data){
+					author_level = data.level;
+					if(user_level == 'Member' && author_level == 'Assistant') {
+						var res_data = {
+							err_code : 20,
+							message : 'alert_file_permission',
+							path: req.query.ori_name
+						};
+						res.json(res_data);
+					} else {
+						g_file.do_new_other(req.query, evt);
+					}
+				});
+			} else {
+				var res_data = {
+					err_code : 20,
+					message : 'alert_file_permission',
+					path: req.query.ori_name
+				};
+				res.json(res_data);
+			}
+		});
+	});
 };
 
 
@@ -281,7 +400,41 @@ exports.file.do_new_untitled_text_file = function(req, res){
 		res.json(data);
 	});
 
-	g_file.do_new_untitled_text_file(req.query, evt);
+	g_auth.get_user_data(req.session, function(user_data){
+		g_auth_manager.get(user_data, function(data){
+			if(data != null) {
+				user_level = data.level;
+			}
+		});
+		
+		var project_path = req.query.current_path.split("/")[0];
+		if(req.query.current_path.split("/")[0] == "")
+			project_path = req.query.current_path.split("/")[1];
+		g_auth_project.get({'project_path': project_path}, function(data){
+			if(data != null){
+				g_auth_manager.get({'id' : data.author_id, 'type' : data.author_type}, function(data){
+					author_level = data.level;
+					if(user_level == 'Member' && author_level == 'Assistant') {
+						var res_data = {
+							err_code : 20,
+							message : 'alert_file_permission',
+							path: req.query.ori_name
+						};
+						res.json(res_data);
+					} else {
+						g_file.do_new_untitled_text_file(req.query, evt);
+					}
+				});
+			} else {
+				var res_data = {
+					err_code : 20,
+					message : 'alert_file_permission',
+					path: req.query.ori_name
+				};
+				res.json(res_data);
+			}
+		});
+	});
 };
 
 exports.file.do_load = function(req, res){
@@ -300,13 +453,51 @@ exports.file.do_save_as = function(req, res){
 
 exports.file.do_delete = function(req, res){
 	var evt = new EventEmitter();
+	var user_level = null;
+	var author_level = null;
 
 	evt.on("file_do_delete", function (data) {
 		res.json(data);
 	});
 
-	g_file.do_delete(req.query, evt);
-	g_history.empty_file_history(req.query.filename);
+	g_auth.get_user_data(req.session, function(user_data){
+		g_auth_manager.get(user_data, function(data){
+			if(data != null) {
+				user_level = data.level;
+			}
+		});
+
+		var project_path = req.query.filename.split("/")[0];
+		if(req.query.filename.split("/")[0] == "")
+			project_path = req.query.filename.split("/")[1];
+		g_auth_project.get({'project_path': project_path}, function(data){
+			if(data != null){
+				g_auth_manager.get({'id' : data.author_id, 'type' : data.author_type}, function(data){
+					author_level = data.level;
+					if(user_level == 'Member' && author_level == 'Assistant') {
+						var res_data = {
+							err_code : 20,
+							message : 'alert_file_permission',
+							path: req.query.ori_name
+						};
+						res.json(res_data);
+					} else {
+						g_file.do_delete(req.query, evt);
+						g_history.empty_file_history(req.query.filename);
+					}
+				});
+			} else {
+				var res_data = {
+					err_code : 20,
+					message : 'alert_file_permission',
+					path: req.query.ori_name
+				};
+				res.json(res_data);
+			}
+		});
+
+	});
+
 };
 
 
@@ -430,22 +621,119 @@ exports.file.get_file = function(req, res){
 
 exports.file.do_move = function(req, res){
 	var evt = new EventEmitter();
+	var user_level = null;
+	var author_level = null;
 
+	var move_fail = function (msg) {
+		var res_data = {
+			err_code : 20,
+			message : msg,
+			path: req.query
+		};
+		res.json(res_data);
+	};
 	evt.on("file_do_move", function (data) {
 		res.json(data);
 	});
 
-	g_file.do_move(req.query, evt);
+
+	g_auth.get_user_data(req.session, function(user_data){
+		g_auth_manager.get(user_data, function(data){
+			if(data != null) {
+				user_level = data.level;
+			}
+		});
+
+		//should make user shouldn't move assistant_proj to other
+		var __ori_path = (req.query.ori_path == "/") ? req.query.ori_path + req.query.ori_file : req.query.ori_path;
+		__ori_path = (req.query.ori_path.split("/")[0] == "") ? req.query.ori_path.split("/")[1] : req.query.ori_path.split("/")[0];
+		var __dst_path = (req.query.dst_path == "/") ? req.query.dst_path + req.query.ori_file : req.query.dst_path;
+		__dst_path = (req.query.dst_path.split("/")[0] == "") ? req.query.dst_path.split("/")[1] : req.query.dst_path.split("/")[0];
+
+		g_auth_project.get({'project_path': __ori_path}, function (data) {
+			if(data != null) {
+				g_auth_manager.get({'id' : data.author_id, 'type' : data.author_type}, function (data){
+					author_level = data.level;
+					if(user_level == 'Member' && author_level == 'Assistant') {
+						move_fail('alert_file_permission');
+					} else {
+						g_auth_project.get({'project_path': __dst_path}, function (data){
+							if(data != null){
+								g_auth_manager.get({'id' : data.author_id, 'type' : data.author_type}, function (data){
+									author_level = data.level;
+									if(user_level == 'Member' && author_level == 'Assistant') {
+										move_fail('alert_file_permission');
+									} else {
+										g_file.do_move(req.query, evt);
+									}
+								});
+							} else {
+								move_fail('alert_file_permission');
+							}
+						});
+					}
+				});
+			} else {
+				move_fail('alert_file_permission');
+			}
+		});
+	});
+
 };
 
 exports.file.do_rename = function(req, res){
 	var evt = new EventEmitter();
+	var user_level = null;
+	var author_level = null;
 
 	evt.on("file_do_rename", function (data) {
 		res.json(data);
 	});
 
-	g_file.do_rename(req.query, evt);
+	if(req.query.ori_path == '/') {
+		var res_data = {
+			err_code : 20,
+			message : 'alert_deny_rename_folder_in_workspace_root',
+			path: req.query.ori_name
+		};
+		res.json(res_data);
+	} else {
+		g_auth.get_user_data(req.session, function(user_data){
+			g_auth_manager.get(user_data, function(data){
+				if(data != null) {
+					user_level = data.level;
+				}
+			});
+		var __ori_path = (req.query.ori_path == "/") ? req.query.ori_path + req.query.ori_file : req.query.ori_path;
+		__ori_path = (req.query.ori_path.split("/")[0] == "") ? req.query.ori_path.split("/")[1] : req.query.ori_path.split("/")[0];
+			
+		g_auth_project.get({'project_path': __ori_path}, function(data){
+			if(data != null){
+				g_auth_manager.get({'id' : data.author_id, 'type' : data.author_type}, function(data){
+					author_level = data.level;
+					if(user_level == 'Member' && author_level == 'Assistant') {
+						var res_data = {
+							err_code : 20,
+							message : 'alert_file_permission',
+							path: req.query.ori_name
+						};
+						res.json(res_data);
+					} else {
+						g_file.do_rename(req.query, evt);
+					}
+				});
+			} else {
+				var res_data = {
+					err_code : 20,
+					message : 'alert_file_permission',
+					path: req.query.ori_name
+				};
+				res.json(res_data);
+			}
+		});
+
+		});
+	}
 };
 
 exports.file.get_property = function(req, res){
@@ -500,8 +788,6 @@ exports.terminal = function(req, res){
 exports.terminal.exec = function(req, res){
 	var evt = new EventEmitter();
 	var command = req.query.command;
-	
-	console.log(command);
 		
 	evt.on("executed_command", function (data) {
 		try {
@@ -609,7 +895,7 @@ exports.help = function(req, res){
 };
 
 exports.help.get_readme_markdown = function(req, res){
-	var data = g_help.get_readme_markdown(req.query.language);
+	var data = g_help.get_readme_markdown(req.query.language, req.query.filename, req.query.filepath);
 	
 	res.json(data);
 };
@@ -654,6 +940,40 @@ exports.auth.logout = function(req, res){
 		res.json(result);
 	});
 }
+exports.auth.find_id = function(req, res){
+	
+	var evt = new EventEmitter();
+	
+	evt.on("auth_find_user_id", function (data) {
+	
+			res.json({
+				'type' : 'find_id',
+				'data' : data
+			});
+			});
+	
+	g_auth_manager.find_id(req, evt);
+};
+exports.auth.find_pw = function(req, res){
+	var evt = new EventEmitter();
+	
+	evt.on("auth_find_user_pw", function (data) {
+		if(data.result){
+			res.json({
+				'type' : 'find_pw',
+				'data' : data
+			});
+		}
+		else{
+			res.json({
+				'type' : 'find_pw',
+				'data' : data
+			});
+		}
+	});
+	
+	g_auth_manager.find_pw(req, evt);
+};
 
 exports.auth.signup = function(req, res){
 	var evt = new EventEmitter();
@@ -878,12 +1198,25 @@ exports.user.project.list = function(req, res){
 }
 
 exports.user.project.list.no_co_developers = function(req, res){
+	//console.log("Adadada");
 	g_auth_manager.get_match_list(req.query, function(user_list){
 		req.query.user_list = user_list;
-
+		
+		
 		g_auth_project.get_no_co_developers_list(req.query, function(data){
 			res.json(data);
 		})
+	})
+}
+
+exports.user.list.group_user_list = function(req, res){
+//console.log("get_match_list_group")
+	g_auth_manager.get_match_list_group(req.query, function(user_list){
+
+		req.query.user_list = user_list;
+
+			res.json(req.query['user_list']);
+	
 	})
 }
 
@@ -1051,18 +1384,6 @@ exports.social.possible_list = function(req, res){
 	res.json(list);
 };
 
-exports.social.twitter = function(req, res){
-	var method = req.route.method;
-	var api_root = req.body.api_root;
-	var data = req.body.data;
-
-	var g_social_m = new g_social('twitter');
-	g_social_m.load(req.session.auth['twitter'], method, api_root, data, function(result){
-		res.json(result);
-	});
-};
-
-
 /*
 * Cloud
 */
@@ -1074,6 +1395,17 @@ exports.cloud = function(req, res){
 exports.cloud.google_drive = function(req, res){
 	res.json(global.__social_key.google_drive)
 }
+
+exports.service = function(req, res){
+	res.json(null);
+}
+
+exports.service.sync_uid = function(req, res){
+        var data = JSON.parse(req.body.data);
+
+        g_auth_manager.sync_uid(data);
+}
+
 
 /*
  * API : History
@@ -1099,6 +1431,30 @@ exports.edit.get_dictionary = function(req, res){
 
 	g_edit.get_dictionary(req.query, evt);
 };
+exports.edit.get_object_explorer = function(req,res){
+	var evt =  new EventEmitter();
+
+	evt.on("got_object_explorer",function(data){
+		res.json(data);
+	});
+	g_edit.get_object_explorer(req.query,evt);
+}
+
+exports.function = function (req,res){
+	res.json(null);
+}
+
+exports.function.get_function_explorer =function(req,res){
+	var evt = new EventEmitter();
+
+	evt.on("got_function_explrorer",function(data){
+		res.json(data);
+	});
+	console.log(req.query);
+	g_function.get_function_explorer(req.query, evt);
+
+}
+
 exports.open_source = function(req,res){
 	g_collaboration.lecture(req.path, req.name, req.type);
 }

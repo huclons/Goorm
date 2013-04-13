@@ -85,7 +85,7 @@ org.goorm.plugin.python.prototype = {
 		var classname = property['plugin.python.main'];
 
 		var cmd1 = "python ./"+classname;
-		core.module.layout.terminal.send_command(cmd1);
+		core.module.layout.terminal.send_command(cmd1 + '\r');
 
 	}	
 };

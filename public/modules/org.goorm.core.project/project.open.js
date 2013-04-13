@@ -86,7 +86,7 @@ org.goorm.core.project.open = {
 
 		core.dialog.project_property.refresh_toolbox();
 		core.module.layout.project_explorer.refresh();
-		
+
 		core.module.layout.communication.join();
 		core.module.layout.terminal.change_project_dir();
 		$(core).trigger("on_project_open");

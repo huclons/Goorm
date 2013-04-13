@@ -26,6 +26,9 @@
      "title_forgot": {
         "value": "Forgot ID/PW"
     },
+    "title_msg_send": {
+        "value": "Send Message"
+    },
     "title_join_online_project": {
 	    "value": "Join Online Project"
     },

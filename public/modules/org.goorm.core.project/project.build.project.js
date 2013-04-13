@@ -17,6 +17,7 @@ org.goorm.core.project.build.project = {
 	flag : false,
 
 	init: function () {
+
 		
 		var self = this;
 
@@ -62,29 +63,35 @@ org.goorm.core.project.build.project = {
 				var target_window = -1;
 				var temp_filename = "";
 
+				/*
 				if ( !self.is_repeat ) {
 					$(window_manager.window).each(function (i) {
 						// if( ("../../project/"+$(list).attr("project_path")) ==  this.filepath && !this.isSaved ) {
 							// temp_filename = this.filename;
 							// did_save = true;
 							// target_window = i;
-						
-						if( $(list).attr("project_path") ==  this.project && !this.is_saved ) {
+
+						if( $(list).attr("name") ==  this.project && !this.is_saved ) {
 							temp_filename = this.filename;
 							did_save = false;
 							target_window = i;
 						}
 					});
 				}
+				console.log('did_save',did_save);
+				console.log('self.is_repeat',self.is_repeat);
 
 				if ( !did_save && !self.is_repeat ) {
+					console.log('confirmation_save');
+					//console.log(core.module.localization.msg);
+					//console.log(core.module.localization.msg["confirmation_build_message"]);
 					confirmation_save.init({
 						// title: core.module.localization.msg["confirmation_build"].value,
 						title: 'Build...',
-						message: "\""+temp_filename+"\" "+core.module.localization.msg["confirmation_build_message"].value,
-						yes_text: core.module.localization.msg["confirmation_yes"].value,
-						cancel_text: core.module.localization.msg["confirmation_cancel"].value,
-						no_text: core.module.localization.msg["confirmation_no"].value,
+						message: "\""+temp_filename+"\" "+core.module.localization.msg["confirmation_build_message"],
+						yes_text: core.module.localization.msg["confirmation_yes"],
+						cancel_text: core.module.localization.msg["confirmation_cancel"],
+						no_text: core.module.localization.msg["confirmation_no"],
 						yes: function () {
 							self.is_repeat = true;							
 							window_manager.window[target_window].editor.save();
@@ -132,13 +139,46 @@ org.goorm.core.project.build.project = {
 					else{
 						self.is_onclick = false;
 					}
+				}*/
+
+
+				if (self.is_repeat) {
+					confirmation_save.panel.hide();
+				}
+				//////before build save all file open in window manager
+				core.module.layout.workspace.window_manager.save_all();
+				
+				////and build start
+
+
+				if(!self.is_onclick){
+					if(!$.isEmptyObject(core.module.plugin_manager.plugins["org.goorm.plugin."+$(list).attr("projectType")])) {
+						core.module.plugin_manager.plugins["org.goorm.plugin."+$(list).attr("projectType")].build($(list).val(), function(data){
+							//console.log('build result',data);
+							self.flag=data;
+							if(flag=='run'  && self.flag){
+								core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].run(core.status.current_project_path);
+							}
+						});
+
+						// self.is_onclick = true;
+						//self.flag=true;
+						self.dialog.panel.hide();
+					}
+					else{
+						self.flag=false;
+						alert.show("Could not find a plugin to build this project");
+					}
+				}
+				else{
+					self.is_onclick = false;
 				}
 
 			
 			});
 
 			
-
+			self.is_repeat = false;	////by sim
 			if(self.flag==true){
 				return true;
 			}else if(self.flag==false){
@@ -183,6 +223,12 @@ org.goorm.core.project.build.project = {
 
 	show: function () {
 		var self = this;
+
+		if(core.property.is_running_end==false){
+			//console.log('you cannot build while excuting');
+			alert.show(core.module.localization.msg['alert_plugin_not_while_running']);
+			return false;
+		}
 		
 		this.project_list();
 		self.is_onclick = false;

@@ -1,4 +1,7 @@
 {
+    "alert_refresh":{
+        "value":"Would you like to restart?"
+    },
 	"alert_file_name_illegal": {
         "value": "File name is wrong"
     },
@@ -8,6 +11,9 @@
     "alert_filename_empty": {
         "value": "File name is empty"
     },
+    "alert_file_permission": {
+        "value": "You do not have permission to modify the file"
+    },
     "alert_file_not_select": {
         "value": "Please, select the file"
     },
@@ -16,6 +22,9 @@
     },
     "alert_find_id_notexist": {
         "value": "No ID found, Please check name, email again"
+    },
+    "alert_title_msg_send": {
+        "value": "Send Message"
     },
     "alert_find_id_exist": {
         "value": "Your ID is"
@@ -56,10 +65,13 @@
     },"alert_plugin_build_success": {
         "value": "Build success"
     },
+    "alert_plugin_not_while_running": {
+        "value": "Your program is running<br>Try it after end of your program."
+    },
     "alert_plugin_run_error": {
         "value": "There's no binary file.<br>Please build project or check the build path.<br>Check below terminal on screen"
     },"alert_plugin_run_success": {
-        "value": "Successfully excute"
+        "value": "Successfully excute.<br>Check terminal on screen"
     },
     "alert_filetype_same_name": {
         "value": "There exists same file extension"
@@ -67,11 +79,31 @@
     "alert_error": {
         "value": "Error : "
     },
+    "alert_assistant_msg": {
+        "value": "Message from Assistant"
+    },
+    "alert_assistant_msg_recipient_blank": {
+        "value": "Please checked Recipient ID"
+    },
+    "alert_assistant_msg_send_to_blank": {
+        "value": "Please choose Send to"
+    },
+
+    "notice_refresh_goorm": {
+        "value": "Refresh will be excute after modifying profile data"
+    },
+
+    "notice_assistant_msg_success": {
+        "value": "Successfully Send the message!"
+    },
     "alert_deny_make_file_in_workspace_root" : {
         "value" : "You cannot make a file in workspace root"
     },
      "alert_deny_make_folder_in_workspace_root" : {
         "value" : "You cannot make a folder in workspace root"
+    },
+     "alert_deny_rename_folder_in_workspace_root" : {
+        "value" : "You cannot rename a folder in workspace root."
     },
     "confirmation_yes": {
         "value": "Yes"
@@ -198,6 +230,12 @@
     },
     "alert_collaboration_select": {
         "value": "Select the project to join"
+    },
+    "alert_collaboration_communication_join": {
+        "value": "joined this workspace!"
+    },
+    "alert_collaboration_communication_leave": {
+        "value": "leaved this workspace!"
     },
     "alert_collaboration_save": {
         "value": "Cannot be able to synchronize a file with other users. Do you want to save anyway?"
@@ -405,5 +443,38 @@
     },
     "alert_login_not_service_account" : {
         "value" : "It's not account of the service mode. Please register a new one."
+    },
+	"survey_title" : {
+		"value" : "User Survey"
+	},
+    "survey_message" : {
+    	"value" : "If you have suggestions in using goorm, Please let us to know! Thank you~"
+    },
+    "survey_send" : {
+    	"value" : "Send"
+	},
+    "survey_not_send" : {
+        "value" : "No,Thanks"
+    },
+    "alert_run_fail" : {
+        "value" : "You failed to run. Please try again soon."
+    },
+    "dictionary_project_list" : {
+        "value" : "Project List"
+    },
+    "dictionary_my_project" : {
+        "value" : "My Project"
+    },
+    "dictionary_collaboration_project" : {
+        "value" : "Collaboration Project"
+    },
+    "dictionary_type" : {
+        "value" : "Type"
+    },
+    "dictionary_name" : {
+        "value" : "Name"
+    },
+    "dictionary_author" : {
+        "value" : "Author"
     }
 }

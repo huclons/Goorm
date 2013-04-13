@@ -15,6 +15,8 @@ org.goorm.core.project._new = {
 		var self = this;
 		
 		var handle_ok = function() {
+			var this_panel = this;
+
 			// project create
 			if ($("#input_project_type").attr("value")=="") {
 				//alert.show(core.module.localization.msg["alert_project_type"]);
@@ -148,7 +150,9 @@ org.goorm.core.project._new = {
 						alert.show(data.message);
 						return false;
 					}
-				});				
+
+					self.dialog.panel.hide();
+				});
 			}
 			
 			this.hide(); 

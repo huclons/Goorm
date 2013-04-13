@@ -175,11 +175,7 @@ org.goorm.core.prototype = {
 			this.module.plugin_manager.get();
 		});	
 		
-		$(this).bind("preference_loading_complete", function () {
-			//theme
-			self.module.theme = org.goorm.core.theme;
-			self.module.theme.init();
-
+		$(this).bind("preference_load_complete", function () {
 			console.log("preference load complete");
 		});
 		
@@ -283,7 +279,11 @@ org.goorm.core.prototype = {
 			m.s("------------------------------------------------------------", "org.goorm.core");
 			m.s("Loading Time : " + (goorm_loading_end_time - goorm_loading_start_time) / 1000 + " sec.", "org.goorm.core");			
 			m.s("------------------------------------------------------------", "org.goorm.core");
-						
+			
+			//theme
+			self.module.theme = org.goorm.core.theme;
+			self.module.theme.init();
+			
 /*
 			self.module.theme_details = new org.goorm.core.theme.details();
 			self.modile.theme_details.init();
@@ -309,7 +309,7 @@ org.goorm.core.prototype = {
 
 		$(this).bind('goorm_login_complete', function(){
 			core.module.toast.show(core.module.localization.msg['notice_welcome_goorm'])
-			if(core.module.layout.history.last_init_load) core.module.layout.history.join();
+			//if(core.module.layout.history.last_init_load) core.module.layout.history.join();
 		});
 		
 		$(window).unload(function () {
@@ -503,6 +503,10 @@ org.goorm.core.prototype = {
 		
 		this.module.toast = org.goorm.core.utility.toast;
 		this.module.toast.init();
+
+		// push message settings
+		this.module.push_message = org.goorm.core.collaboration.push;
+		this.module.push_message.init();
 		
 		this.module.social_plugin = org.goorm.core.social_plugin;
 		this.module.social_plugin.init();
@@ -543,7 +547,12 @@ org.goorm.core.prototype = {
 		$("#loading_panel_container").append("<div id='login_box_bg'></div>");
 		$("#loading_panel_container").append("<div id='login_box'></div>");
 		$("#loading_panel_container").append("<div id='local_login_box'></div>");
-		
+
+		// attach link for 1.1 release
+		//
+		$('#main_loading_image').append('<div id="release_link" style="width:300px; height:100px; cursor:pointer;"></div>')
+		$('#release_link').click(function(){ window.open('http://www.youtube.com/watch?v=ASO_zypdnsQ', "_blank")});
+
 		$("#login_box").append("<input id='goorm_id' name='goorm_id' placeholder='ID' />");
 		$("#login_box").append("<input type='password' id='goorm_pw' name='goorm_pw' placeholder='PASSWORD' />");
 		$("#login_box").append("<input type='button' id='goorm_login_button' value='Login' />");

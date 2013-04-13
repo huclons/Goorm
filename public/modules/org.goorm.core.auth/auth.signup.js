@@ -9,13 +9,12 @@
 org.goorm.core.auth.signup = {
 	dialog: null,
 	buttons: null,
-	
+	loading_complete: false,
 	mode: null,
 	
 	init: function () {
 		
 		var self = this;
-				
 		var handle_signup = function() { 
 			var postdata = {
 				id : $('[name="signup_id_input"]').val(),
@@ -46,12 +45,13 @@ org.goorm.core.auth.signup = {
 			title:"Register", 
 			path:"configs/dialogs/org.goorm.core.auth/auth.signup.html",
 			width:380,
-			height:350,
+			height:300,
 			zindex:1001,
 			modal:true,
 			buttons:this.buttons,
 			success: function () {
-
+				$(core).trigger('signup_dialog_loading_complete');
+				self.loading_complete=true;
 			}
 		});
 		this.dialog = this.dialog.dialog;

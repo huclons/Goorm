@@ -265,7 +265,7 @@ label:hover {
 	
 }
 
-#goorm_signup_container .goorm_signup_input ,#goorm_find_id_container .goorm_find_id_input,#goorm_find_pw_container .goorm_find_pw_input {
+#goorm_signup_container .goorm_signup_input {
 	float: left;
 	margin : 5px;
 	padding : 3px;
@@ -277,7 +277,7 @@ label:hover {
 	margin : 5px;
 	width: 178px;
 }
-#goorm_signup_container .goorm_signup_span,#goorm_find_id_container .goorm_find_id_span,#goorm_find_pw_container .goorm_find_pw_span  {
+#goorm_signup_container .goorm_signup_span {
 	float: left;
 	text-align: right;
 	width: 120px;
@@ -410,6 +410,9 @@ label:hover {
 	transition: 500ms linear 0s;
 }
 */
+#goorm_inner_layout_right .yui-content {
+	overflow-y:hidden;
+}
 
 
 #goorm_inner_layout_center {
@@ -568,7 +571,7 @@ label:hover {
 	padding:5px;
 }
 
-#terminal #prompt_input, .terminal .prompt_input {
+#terminal #prompt, .terminal .prompt {
 	font-family: Consolas, Monaco, monospace, Monotype;
 	font-size:11px;
 	background-color: black;
@@ -580,7 +583,7 @@ label:hover {
 	border-radius: 0px;
 }
 
-#terminal #prompt_input:focus, .terminal .prompt_input:focus {
+#terminal #prompt:focus, .terminal .prompt:focus {
 	outline: none;
 }
 
@@ -621,7 +624,32 @@ label:hover {
 	border-bottom:1px solid #ddd;
 	text-align:center;
 }
+.collaboration_slideshare_msg_dialog{
+	float: left;
+	
+	text-align: left;
+	margin: 5px;
 
+}
+.collaboration_slideshare_msg_dialog .collaboration_slideshare_msg_span  {
+	text-align: right;
+	float: left;
+	width: 100px;
+	margin-right: 15px;
+}
+
+
+.collaboration_slideshare_msg_dialog .collaboration_slideshare_msg_input  {
+	float: left;
+	width: 176px;
+}
+
+.collaboration_slideshare_msg_dialog .collaboration_slideshare_msg_input_radio  {
+	
+	float: left;
+	width: 120px;
+	margin: 0px;
+}
 #startpage_container {
 	position:absolute;
 	left:0px;
@@ -1180,6 +1208,22 @@ YUI PANEL STYLE CUSTOMIZATION
 }
 
 #toast .bd {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;
+	
+	font-size: 11px;
+	
+	background-image: -o-linear-gradient(bottom, rgb(255,255,255) 10%, rgb(230,230,230) 90%);
+	background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 10%, rgb(230,230,230) 90%);
+	background-image: -webkit-gradient(linear, left bottom, left bottom, color-stop(0.1, rgb(255,255,255)), color-stop(0.9, rgb(230,230,230)));
+	background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 10%, rgb(230,230,230) 90%);
+	background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 10%, rgb(230,230,230) 90%);
+	background-image: linear-gradient(bottom, rgb(255,255,255) 10%, rgb(230,230,230) 90%);
+}
+
+#push_Message .bd {
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	-khtml-border-radius: 6px;

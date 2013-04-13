@@ -20,15 +20,28 @@ module.exports = {
 		};
 				
 		walker = walk.walk(__path + "plugins", options);
-		
+		//console.log('exclude plugin list')
+		//console.log(global.__plugin_exclude_list);
+
 		walker.on("directories", function (root, dirStatsArray, next) {
 			if (root == __path + "plugins" ) {
 				for (var i=0; i<dirStatsArray.length; i++) {
-					if (dirStatsArray[i].name != '.svn') {
-						plugins.push({name:dirStatsArray[i].name});
+
+					if( Array.isArray(global.__plugin_exclude_list) ){
+						if(global.__plugin_exclude_list.indexOf(dirStatsArray[i].name)==-1){
+							////only include plugins except plugin_exclude_list in ~/.goorm/config.json 
+							if (dirStatsArray[i].name != '.svn') {
+								plugins.push({name:dirStatsArray[i].name});
+							}
+						}
+					}else{
+						//// there are not exclude plugin list
+						if (dirStatsArray[i].name != '.svn') {
+								plugins.push({name:dirStatsArray[i].name});
+							}
 					}
 				}
-				
+
 				evt.emit("plugin_get_list", plugins);
 			}
 			
@@ -55,7 +68,6 @@ module.exports = {
 			console.log("debug server connected");
 			
 			evt.on("response", function (data) {
-				console.log(data);
 				socket.emit("debug_response", data);
 			});
 			
