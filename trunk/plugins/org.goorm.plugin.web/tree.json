@@ -1,0 +1,21 @@
+{
+	"preference" :
+	{
+		"label" : "Web",
+		"tab" :	[
+			{	"label" : "Web",
+				"html"	: "/org.goorm.plugin.web/web.preference.html"
+			}
+		]
+	},
+	
+	"property" : 
+	{
+		"label" : "Web",
+		"tab" :	[
+			{	"label" : "Web",
+				"html"	: "/org.goorm.plugin.web/web.preference.html"
+			}
+		]
+	}
+}

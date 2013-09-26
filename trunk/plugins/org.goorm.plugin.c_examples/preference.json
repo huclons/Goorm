@@ -1,0 +1,7 @@
+{
+	"plugin.c_examples.main" : 		"main",
+	"plugin.c_examples.source_path" : 	"src/",
+	"plugin.c_examples.makefile_path" : 	"make",
+	"plugin.c_examples.build_path" : 	"bin/",
+	"plugin.c_examples.build_option" : "-g"
+}

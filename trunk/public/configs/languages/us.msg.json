@@ -1,0 +1,586 @@
+{
+    "alert_refresh":{
+        "value":"Would you like to restart?"
+    },
+	"alert_file_name_illegal": {
+        "value": "File name is wrong"
+    },
+    "alert_folder_name_empty": {
+        "value": "Folder name is empty"
+    },
+    "alert_filename_empty": {
+        "value": "File name is empty"
+    },   
+    "alert_file_permission": {
+        "value": "You do not have permission to modify the file"
+    },
+    "alert_file_not_select": {
+        "value": "Please, select the file"
+    },
+    "alert_file_not_opened": {
+        "value": "Cannot find opened file"
+    },
+    "alert_cannot_find_word":{
+        "value": "Cannot find a word."
+    },
+    "alert_find_id_notexist": {
+        "value": "No ID found, Please check name, email again"
+    },
+    "alert_title_msg_send": {
+        "value": "Send Message"
+    },
+    "alert_find_id_exist": {
+        "value": "Your ID is"
+    },
+    "alert_find_pw_notexist": {
+        "value": "No information found, Please check Id, name, email again"
+    },
+    "alert_find_pw_exist": {
+        "value": "Temporary password sent to your email account"
+    },
+
+    "alert_forgot_id": {
+        "value": "Find ID"
+    },
+    "alert_forgot_pw": {
+        "value": "Find Password"
+    },
+    "alert_forgot_info": {
+        "value": "Find ID/PW"
+    },
+    "alert_sign_up": {
+        "value": "Register"
+    },
+    "alert_project_not_selected": {
+        "value": "Please select the project"
+    },
+    "alert_only_zip_allowed": {
+        "value": "Only zip file is allowed"
+    },
+    "alert_project_not_opened": {
+        "value": "Cannot find opened project"
+    },
+    "alert_print_file_error": {
+        "value": "No file opened."
+    },
+    "alert_plugin_build_error": {
+        "value": "Fail to build project.<br>Check terminal on screen"
+    },
+    "alert_cannot_find_plugin_to_build": {
+        "value": "Could not find a plugin to build this project"
+    },
+    "alert_plugin_build_success": {
+        "value": "Build success"
+    },
+    "alert_plugin_check_terminal": {
+        "value": "Check terminal on screen."
+    },
+    "alert_plugin_not_while_running": {
+        "value": "Your program is running<br>Try it after end of your program."
+    },
+    "alert_plugin_run_error": {
+        "value": "There's no binary file.<br>Please build project or check the build path.<br>Check below terminal on screen"
+    },
+    "alert_plugin_no_class_file" : {
+        "value" : "A Class file does not exist, or the run path is not correct.<br>Please build project or check the build path."
+    },
+    "alert_plugin_run_success": {
+        "value": "Successfully excute.<br>Check terminal on screen"
+    },
+    "alert_plugin_no_selected" : {
+        "value" : "No plugin selected."
+    },
+    "alert_filetype_same_name": {
+        "value": "There exists same file extension"
+    },
+    "alert_error": {
+        "value": "Error : "
+    },
+    "alert_assistant_msg": {
+        "value": "Message from Assistant"
+    },
+    "alert_assistant_msg_recipient_blank": {
+        "value": "Please checked Recipient ID"
+    },
+    "alert_assistant_msg_send_to_blank": {
+        "value": "Please choose Send to"
+    },
+
+    "notice_refresh_goorm": {
+        "value": "Refresh will be excute after modifying profile data"
+    },
+
+    "notice_assistant_msg_success": {
+        "value": "Successfully Send the message!"
+    },
+    "alert_deny_make_file_in_workspace_root" : {
+        "value" : "You cannot make a file in workspace root"
+    },
+     "alert_deny_make_folder_in_workspace_root" : {
+        "value" : "You cannot make a folder in workspace root"
+    },
+     "alert_deny_rename_folder_in_workspace_root" : {
+        "value" : "You cannot rename a folder in workspace root."
+    },
+    "confirmation_yes": {
+        "value": "Yes"
+    },
+    "confirmation_cancel": {
+        "value": "Cancel"
+    },
+    "confirmation_exit_title": {
+        "value": "Exit"
+    },
+    "confirmation_delete_title": {
+        "value": "Delete"
+    },
+    "confirmation_title": {
+        "value": "Confimation"
+    },
+    "confirmation_no": {
+        "value": "No"
+    },
+    "confirmation_save": {
+        "value": "Close..."
+    },
+    "confirmation_build": {
+        "value": "Build..."
+    },
+    "confirmation_save_message": {
+        "value": " has been modified. Save changes?"
+    },
+    "confirmation_build_message": {
+        "value": " has been modified. Save and build?"
+    },
+    "confirmation_language_title": {
+        "value": "언어 자동 변환"
+    },
+    "confirmation_language_message": {
+        "value": "언어설정을 한국어로 변경하시겠습니까?"
+    },
+    "alert_page_over_required": {
+        "value": "too large"
+    },
+    "alertValidateRequired": {
+        "value": "required"
+    },
+    "alert_validate_alpha": {
+        "value": "only alphabets allowed"
+    },
+    "alert_validate_alpha_num": {
+        "value": "only alphabet + numbers allowed"
+    },
+    "alert_validate_digit": {
+        "value": " : only digit numbers allowed"
+    },
+    "alert_validate_no_digit": {
+        "value": "digit numbers are not allowed"
+    },
+    "alert_validate_num": {
+        "value": "only numbers needed"
+    },
+    "alert_validate_email": {
+        "value": "invalid email"
+    },
+    "alert_validate_url": {
+        "value": "invalid url"
+    },
+    "alert_dialog_missing": {
+        "value": "Select project type or insert values"
+    },
+    "alert_project_type": {
+        "value": "Select the project type"
+    },
+    "alert_project_source": {
+        "value": "Select the project source"
+    },
+    "alert_project_detailed_type": {
+        "value": "Select the project detailed type"
+    },
+    "alert_project_author": {
+        "value": "Insert the project author"
+    },
+    "alert_project_name": {
+        "value": "Insert the project name"
+    },
+    "alert_project_desc": {
+        "value": "Insert project description"
+    },
+    "alert_allow_character": {
+        "value": "Only alphabets, numbers and _, - are allowed"
+    },
+    "alert_project_cannot_open": {
+        "value": "Cannot open the project"
+    },
+    "alert_project_cannot_delete": {
+        "value": "Cannot delete the project folder. Please use a 'Project Delete' menu."
+    },
+    "notice_project_import_done": {
+        "value": "Project import done"
+    },
+    "notice_file_import_done": {
+        "value": "File import done"
+    },
+    "notice_file_upload_done":{
+        "value" : "File upload done"
+    },
+    "confirmation_new_title": {
+        "value": "New ..."
+    },
+    "confirmation_exit": {
+        "value": "Do you want exit?"
+    },
+    "confirmation_theme": {
+        "value": "Do you want apply this theme?"
+    },
+    "confirmation_delete_file": {
+        "value": "Do you want to delete this file?"
+    },
+    "confirmation_delete_all": {
+        "value": "Do you want to delete all files and directorys?"
+    },
+    "confirmation_new_message": {
+        "value": "Same file name already exists. Do you want to create anyway?"
+    },
+    "confirmation_new_other_title": {
+        "value": "New Other ..."
+    },
+    "confirmation_new_other_message": {
+        "value": "Same file name already exists. Do you want to create anyway?"
+    },
+    "confirmation_save_as_title": {
+        "value": "saveAs ..."
+    },
+    "confirmation_save_as_message": {
+        "value": "Same file name already exists. Do you want to save anyway?"
+    },
+    "alert_collaboration_select": {
+        "value": "Select the project to join"
+    },
+    "alert_collaboration_communication_join": {
+        "value": "joined this workspace!"
+    },
+    "alert_collaboration_communication_leave": {
+        "value": "leaved this workspace!"
+    },
+    "alert_collaboration_save": {
+        "value": "Cannot be able to synchronize a file with other users. Do you want to save anyway?"
+    },
+    "alert_collaboration_sync": {
+        "value": "Synchronization error. Load a file again."
+    },
+    "alert_title_empty": {
+        "value": "Insert the title"
+    },
+    "alert_author_empty": {
+        "value": "Insert the author"
+    },
+    "alert_email_empty": {
+        "value": "Insert the e-mail"
+    },
+    "alert_version_empty": {
+        "value": "Insert the version"
+    },
+    "alert_module_empty": {
+        "value": "Insert the module"
+    },
+    "alert_contents_empty": {
+        "value": "Insert the content"
+    },
+    "alert_cannot_write": {
+        "value": "cannot write"
+    },
+    "alert_cannot_project_delete": {
+        "value": "Can not delete project"
+    },
+    "alert_cannot_file_delete": {
+        "value": "Can not delete file"
+    },
+    "notice_write_done": {
+        "value": "Bug report successfully sent. Thank you"
+    },
+    "notice_file_import_done": {
+        "value": "File is imported."
+    },
+    "notice_project_delete_done": {
+        "value": "Project is deleted."
+    },
+    "alert_naming": {
+        "value": "Same area name already exists"
+    },
+    "alertValue": {
+        "value": "Area name cannot contain blank"
+    },
+    "alert_collaboration_server_notconnected": {
+        "value": "Could not connect to collaboration server"
+    },
+    "alert_select_project_item": {
+        "value": "You must select at least one project"
+    },
+    "alert_no_have_data": {
+        "value": "No data to display"
+    },
+    "alert_user_undefined_id": {
+        "value": "Please enter an ID."
+    },
+    "alert_user_undefined_student_id": {
+        "value": "Please enter an Student ID."
+    },
+    "alert_user_unfit_student_id": {
+        "value": "The format of the Student ID is not valid. (10 digits Number)."
+    },
+    "alert_user_unfit_reg_id": {
+        "value": "The format of the id is not valid. (4~15 digits, Alphabet+Number)."
+    },
+    "alert_user_duplicate_id": {
+        "value": "The ID is duplicated"
+    },
+    "alert_user_duplicate_student_id": {
+        "value": "The Student ID is duplicated"
+    },
+    "alert_user_not_fount_id": {
+        "value": "The ID is not found."
+    },
+    "alert_user_unmatched_id": {
+        "value": "Cannot access the user."
+    },
+    "alert_user_undefined_password": {
+        "value": "Please enter a Password."
+    },
+    "alert_user_undefined_re_password": {
+        "value": "Please enter a Repassword"
+    },
+    "alert_user_undefined_password_not_match": {
+        "value": "Please recheck your password. They are not a match."
+    },
+    "alert_user_unfit_req_password": {
+        "value": "The format of the password is not valid. (8~15 digits, Alphabet+Number)."
+    },
+    "alert_user_undefined_email": {
+        "value": "Please enter an Email."
+    },
+    "alert_user_unfit_email": {
+        "value": "The format of the email is not valid. (ex: goorm@goorm.io)"
+    },
+    "alert_user_undefined_name": {
+        "value": "Please enter a Name."
+    },
+    "alert_user_unfit_name": {
+        "value": "The format of the name is not valid. (3~15 digits, Hangul/Alphabet/Number/Special characters(-/_/./ /))."
+    },
+    "alert_user_undefined_nick": {
+        "value": "Please enter a Nickname."
+    },
+    "alert_user_unfit_nick": {
+        "value": "The format of the nickname is not valid. (3~20 digits, Hangul/Alphabet/Number/Special characters(-/_/./ /))."
+    },
+    "alert_confirm_logout": {
+        "value": "Are you sure you want to logout?"
+    },
+    "alert_login_not_match_password": {
+        "value": "Password is incorrect."
+    },
+    "alert_login_no_id": {
+        "value": "There is no such a member."
+    },
+    "alert_login_undefined_id_or_password": {
+        "value": "ID or Password is not typed."
+    },
+    "notice_no_matched_fild": {
+	    "value": "No matching files found."
+    },
+    "notice_welcome_goorm": {
+	    "value": "Welcome to goormIDE."
+    },
+    "alert_cannot_connect_db": {
+	    "value": "Fail to connect with database."
+    },
+    "confirmation_delete_item": {
+	    "value": "Are you sure you want to delete a user?"
+    },
+    "confirmation_modify_profile": {
+	    "value": "Are you sure you want to modify an information?"
+    },
+    "notice_help_goorm_ide_current_version" : {
+    	"value" : "goorm IDE Current Version"
+    },
+    "notice_help_goorm_ide_official_version" : {
+    	"value" : "Official Version"
+    },
+    "notice_help_goorm_ide_update" : {
+    	"value" : "Update"
+    },
+    "notice_search_select_project" : {
+    	"value" : "Select Project"
+    },
+    "confirmation_delete_filetype": {
+        "value": "Do you really want to delete this filetype?"
+    },
+    "toast_filetype_save_complete": {
+        "value": "Filetype save complete!"
+    },
+    "alert_cannot_project_run": {
+        "value": "Cannot run the project. Please select a proper project."
+    },
+    "alert_cannot_project_remote_run": {
+        "value": "Cannot remote run the project. Please select a proper project."
+    },
+    "alert_cannot_project_generate": {
+        "value": "Cannot generate the project. Please select a proper project."
+    },
+    "alert_cannot_project_build": {
+        "value": "Cannot build the project. Please select a proper project."
+    },
+    "alert_cannot_project_debug": {
+        "value": "Debug is not started or not support the debug mode for this project."
+    },
+    "confirmation_file_upload" : {
+        "value": "Do you really want to upload the file?"
+    },
+    "alert_file_not_defined" : {
+        "value": "Choose the file you want to upload."
+    },
+    "alert_google_drive_not_auth" : {
+        "value": "Please login and authentication."
+    },
+    "alert_google_drive_not_selected" : {
+        "value": "Please select a proper file."
+    },
+    "alert_confirm_duplicate_login" : {
+        "value" : "This account already has login.<br>Do you really want to login?"
+    },
+    "alert_force_logout" : {
+        "value" : "From another device attempts to login into your accout. Current connection will be terminated."
+    },
+    "alert_confirm_delete_co_developer" : {
+        "value" : "Do you really want to fire the co-developer?"
+    },
+    "alert_confirm_invite_co_developer" : {
+        "value" : "Do you really want to invite the co-developer?"
+    },
+    "alert_no_display_to_data" : {
+        "value" : "No developers share this project."
+    },
+    "alert_select_project" : {
+        "value" : "Please select your project."
+    },
+    "collaboration_stop_message": {
+    	"value": "Collaboration Stopped"
+    },
+    "alert_quiz_is_ended" : {
+        "value" : "Quiz is ended or not started."
+    },
+    "alert_login_not_service_account" : {
+        "value" : "It's not account of the service mode. Please register a new one."
+    },
+	"survey_title" : {
+		"value" : "User Survey"
+	},
+    "survey_message" : {
+    	"value" : "If you have suggestions in using goorm, Please let us to know! Thank you~"
+    },
+    "survey_send" : {
+    	"value" : "Send"
+	},
+    "survey_not_send" : {
+        "value" : "No,Thanks"
+    },
+    "alert_run_fail" : {
+        "value" : "You failed to run. Please try again soon."
+    },
+    "alert_open_file_fail" : {
+        "value" : "Fail to open file"
+    },
+    "alert_save_file_fail" : {
+        "value" : "Fail to save file"
+    },
+    "dictionary_project_list" : {
+        "value" : "Project List"
+    },
+    "dictionary_my_project" : {
+        "value" : "My Project"
+    },
+    "dictionary_collaboration_project" : {
+        "value" : "Collaboration Project"
+    },
+    "dictionary_type" : {
+        "value" : "Type"
+    },
+    "dictionary_name" : {
+        "value" : "Name"
+    },
+    "dictionary_author" : {
+        "value" : "Author"
+    },
+    "dictionary_executant" : {
+        "value" : "Executant"
+    },
+    "dictionary_visitors" : {
+        "value" : "Current Users"
+    },
+    "dictionary_co_server_access" : {
+        "value" : "Access"
+    },
+    "dictionary_co_server" : {
+        "value" : "Running-Server"
+    },
+    "notice_nodejs_app_running" : {
+        "value" : "Your App is running at "
+    },
+    "notice_nodejs_db_access" : {
+        "value" : "It's your DB information in goorm.io."
+    },
+    "notice_nodejs_tutorial" : {
+        "value" : "Do you want to read node.js running tutorial?"
+    },
+    "mongo_error_auth" : {
+        "value" : "please check [password] to your db."
+    },
+    "notice_user_profile_change" : {
+        "value" : "User information is changed<br> Goorm is refresh."
+    },
+    "do_not_show_again" : {
+        "value" : "Don't show again"
+    },    "alert_cannot_template_folder" : {
+        "value" : "Please create folder in src folder."
+    },
+    "alert_type_is_empty" : {
+        "value" : "Type name is empty."
+    },
+    "alert_check_package_name" : {
+        "value" : "Please check package name again."
+    },
+    "alert_same_file_at_created_package" : {
+        "value" : "Same name of file already exist at created package."
+    },
+    "alert_check_package" : {
+        "value" : "Package folder does not exist.<br>Please make package first."
+    },
+    "alert_cannot_paste_in_darwin" : {
+        "value" : "Paste operation is impossible in 'Edit' menu, but It's possible using ⌘V key."
+    },
+    "alert_cannot_paste_in_not_darwin" : {
+        "value" : "Paste operation is impossible in 'Edit' menu, but It's possible using Ctrl+V key."
+    },
+    "alert_cannot_exist_editor" : {
+        "value": "There are no available editor."
+    },
+    "notice_update_message" : {
+        "value": "Hello, goorm dev.team continues to fix bugs and add features.<br>(Latest Update: "
+    },
+    "confirmation_replace_all_none" : {
+        "value" : "No matched text."
+    },
+    "confirmation_replace_all_front" : {
+        "value" : "Do you want replace "        
+    },
+    "confirmation_replace_all_end" : {
+        "value" : " occurrence(s)?"        
+    },
+    "title_replace_all" : {
+        "value" : "Replace all"
+    },
+    "confirmation_history_merge" : {
+        "value" : "Merge this snapshot with previous one, and delete.<br>Are you sure?"
+    }
+}

@@ -1,0 +1,313 @@
+!!! 5
+html
+	head
+		meta(http-equiv='Content-Type',	content='text/html;	charset=UTF-8')
+		title goormIDE
+
+		//appcache
+		script(type='text/javascript', src='/appcache.js')
+
+		//Favicon - Retina Display
+		link(rel="apple-touch-icon-precomposed", sizes="32x32", href="icon_32x32.ico")
+		link(rel="apple-touch-icon-precomposed", sizes="64x64", href="icon_64x64.ico")
+		link(rel="icon", sizes="32x32", href="icon_32x32.ico")
+		link(rel="icon", sizes="64x64", href="icon_64x64.ico")
+
+		//CSS : goorm
+		link(rel='stylesheet', type='text/css', href='/css/goorm.css')
+		link(rel='stylesheet', type='text/css', href='/configs/themes/default/default.css')
+
+		//CSS : CodeMirror
+		link(rel='stylesheet', type='text/css', href='/lib/net.codemirror.code/theme/elegant.css')
+		link(rel='stylesheet', type='text/css', href='/lib/net.codemirror.code/addon/hint/show-hint.css')
+
+		//CSS : PDF VIEWER
+		link(rel='stylesheet', type='text/css', href='/lib/com.pdf.viewer/css/style.css')
+
+		//JS : jquery
+		script(type='text/javascript', src='/lib/com.jquery.code/jquery-2.0.3.js')
+		script(type='text/javascript', src='/lib/com.jqueryui.code/jquery-ui-1.10.3.custom.js')
+		script(type='text/javascript', src='/lib/com.jquery.code/jquery.hotkeys.js')
+		script(type='text/javascript', src='/lib/com.jquery.code/jquery.form.js')
+		script(type='text/javascript', src='/lib/com.jquery.code/jquery.mousewheel.js')
+		script(type='text/javascript', src='/lib/com.jquery.code/jquery.fixheadertable.js')
+
+
+
+
+		//JS : yui
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/yahoo/yahoo.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/event/event.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/dom/dom.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/datasource/datasource-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/yahoo-dom-event/yahoo-dom-event.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/connection/connection-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/dragdrop/dragdrop-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/animation/animation-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/container/container-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/slider/slider-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/element/element-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/colorpicker/colorpicker-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/get/get-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/json/json-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/resize/resize-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/layout/layout-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/button/button-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/tabview/tabview-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/menu/menu.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/autocomplete/autocomplete-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/datatable/datatable-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/editor/editor-min.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/treeview/treeview.js')
+		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/stylesheet/stylesheet-min.js')
+
+		//JS : codemirror
+		script(type='text/javascript', src='/lib/net.codemirror.code/lib/codemirror.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/dialog/dialog.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/edit/closebrackets.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/edit/closetag.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/edit/matchbrackets.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/fold/foldcode.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/fold/brace-fold.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/fold/xml-fold.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/hint/html-hint.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/hint/javascript-hint.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/hint/pig-hint.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/hint/python-hint.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/hint/show-hint.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/hint/xml-hint.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/runmode/runmode.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/search/match-highlighter.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/search/search.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/search/searchcursor.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/selection/active-line.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/comment/comment.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/addon/formatting/formatting.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/clike/clike.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/css/css.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/diff/diff.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/haskell/haskell.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/htmlmixed/htmlmixed.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/javascript/javascript.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/lua/lua.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/php/php.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/python/python.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/rst/rst.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/scheme/scheme.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/smalltalk/smalltalk.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/sparql/sparql.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/stex/stex.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/xml/xml.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/mode/yaml/yaml.js')
+		script(type='text/javascript', src='/lib/net.codemirror.code/keymap/vim.js')
+
+		//JS : tty.js
+		script(type='text/javascript', src='/lib/js.tty.code/term.js')
+
+		
+
+		- if( mode == 'optimization' ) {
+			//JS : goorm
+			script(type='text/javascript', src='/goorm.compressed.js')
+		- } else {
+			//JS : goorm
+			script(type='text/javascript', src='/modules/org.goorm.core/core.js')
+
+			script(type='text/javascript', src='/modules/org.goorm.core/core.browser.js')
+			script(type='text/javascript', src='/modules/org.goorm.core/core.device.js')
+			script(type='text/javascript', src='/modules/org.goorm.core/core.fn.js')
+			script(type='text/javascript', src='/modules/org.goorm.core/core.user.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.layout/layout.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.layout/layout.workspace.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.utility/utility.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.utility/utility.message.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.utility/utility.loading_bar.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.utility/utility.toast.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.utility/utility.sorting.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.debug/debug.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.debug/debug.message.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.terminal/terminal.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.terminal/terminal.message.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.search/search.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.search/search.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.search/search.message.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.window/window.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.window/window.panel.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.window/window.tab.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.window/window.tab.move.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.window/window.manager.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.window/window.manager.transition.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.menu/menu.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.menu/menu.action.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.menu/menu.context.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.toolbar/toolbar.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.edit/edit.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.object/object.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.object/object.manager.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.object/object.explorer.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.object/object.properties.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.object/object.ui.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.object/object.ui.line.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.object/object.ui.square.js')
+
+			
+
+			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.confirmation.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.confirmation.save.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.alert.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.notice.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.wizard.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.explorer.js')
+
+			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.manager.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.language.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.filetype.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.system.info.js')
+			
+			script(type='text/javascript', src='/modules/org.goorm.core.printer/printer.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.printer/printer.edit.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.printer/printer.design.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.printer/printer.design.preview.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.printer/printer.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.explorer.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project._new.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project._new.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.open.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.open.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.property.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.property.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.property.manager.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project._export.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project._export.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project._import.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project._import.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project._delete.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project._delete.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.manager.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.all.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.all.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.project.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.project.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.clean.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.clean.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.configuration.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.configuration.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.project/project.list.js')
+
+			
+
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._new.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._new.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._new.other.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._new.other.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._new.folder.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._new.folder.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._new.untitled_textfile.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._new.untitled_textfile.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.open.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.open.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.upload.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.upload.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.save_as.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.save_as.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.rename.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.rename.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.move.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.move.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.switch_workspace.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.switch_workspace.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._import.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._import.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._export.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file._export.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.property.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.property.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.open_url.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/file.open_url.dialog.js')
+
+			script(type='text/javascript', src='/modules/org.goorm.core.file/folder.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/folder.upload.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.file/folder.upload.dialog.js')
+
+
+			script(type='text/javascript', src='/modules/org.goorm.core.edit/edit.font_manager.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.edit/edit.go_to_line.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.edit/edit.find_and_replace.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.edit/edit.dictionary.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.edit/edit.jump_to_definition.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.edit/edit.find_and_replace.dialog.js')
+
+			
+
+			script(type='text/javascript', src='/modules/org.goorm.core.help/help.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.help/help.contents.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.shortcut/shortcut.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.shortcut/shortcut.manager.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.help/help.contents.dialog.js')
+
+			
+
+			script(type='text/javascript', src='/modules/org.goorm.core.help/help.about.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.help/help.about.dialog.js')
+
+			script(type='text/javascript', src='/modules/org.goorm.core.localization/localization.js')
+
+			
+
+			script(type='text/javascript', src='/modules/org.goorm.plugin/plugin.js')
+			script(type='text/javascript', src='/modules/org.goorm.plugin/plugin.manager.js')
+			script(type='text/javascript', src='/modules/org.goorm.plugin/plugin.loader.js')
+		- }
+
+		script(type='text/javascript', src='/socket.io/socket.io.js')
+
+		title goorm
+
+		script(type='text/javascript')
+			$(function() {
+				if($( document ).tooltip){
+					$( document ).tooltip({
+						'open' : function( evt, ui ){
+							$(ui.tooltip).css('white-space', 'nowrap');
+						}
+					});
+				}
+			});
+			var goorm_loading_start_time = new Date().getTime();
+			var core = new org.goorm.core();
+			var m = new org.goorm.core.utility.message();
+			var d = new org.goorm.core.debug.message();
+			var s = new org.goorm.core.utility.sorting();
+			var confirmation = new org.goorm.core.dialog.confirmation();
+			var confirmation_save = new org.goorm.core.dialog.confirmation.save();
+			var __alert = new org.goorm.core.dialog.alert();
+			var notice = new org.goorm.core.dialog.notice();
+
+			
+
+			$(document).ready(function () {
+				//goorm initialize
+				$.get('/get_option', function(server_option){
+					core.is_optimization = server_option.is_optimization;
+
+					
+
+					core.init("goorm");
+
+					//console.log("initialized!");
+					$(core).bind("goorm_load_complete", function () {
+						console.log("goormIDE load complete");
+					});
+				})
+			});
+
+			
+			
+		body
+			block content
