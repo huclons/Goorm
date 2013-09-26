@@ -1,0 +1,85 @@
+<div class="content_header">Import Project</div>
+
+<div id="project_import" style="text-align:left; font-size:11px;">
+
+	<form id="project_import_form" action="project/import" method="post" enctype="multipart/form-data">
+      
+    	<div>
+    	    <div class="content_guide_message" >Input Information for Import Project</div>
+            <div style="float:left; width:770px; height:340px; overflow:auto; padding:5px;">
+                <div style="float:left; width:770px; height:200px;">
+                    <fieldset style="padding:10px; padding-top:30px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;">
+                        <legend> <b>Project Information</b> </legend>
+                        
+                        <div class="project_author" style="height:25px;">
+                            <div style="width:120px; float:left; height:25px;" >Author ID</div>
+                            <div style="width:615px; float:right; height:25px;">
+                                <input type="text" id="input_import_project_author" name="input_project_author" style="width:603px;">
+                            </div>
+                        </div>
+
+                         <div class="project_author_name" style="height:25px;">
+                            <div style="width:120px; float:left; height:25px;" >Author Name</div>
+                            <div style="width:615px; float:right; height:25px;">
+                                <input type="text" id="input_import_project_author_name" name="input_project_author_name" style="width:603px;">
+                            </div>
+                        </div>
+
+
+                        <div class="project_type" style="height:25px;">
+                            <div style="width:120px; float:left; height:25px;" >Project Type</div>
+                            <div style="width:615px; float:right; height:25px;">
+                                <select id="select_import_project_type" name="select_import_project_type" style="width:100%" project_type="cpp" project_detailed_type="c" plugin_name="org.goorm.plugin.cpp" >
+                                    <!-- <option value='c'>C Project</option>
+                                    <option value='cpp'>C++ Project</option>
+                                    <option value='java'>Java Project</option> -->
+                                </select>   
+                            </div>
+                            <input type="hidden" id="input_import_project_type" checkField="yes">
+                            <input type="hidden" id="input_import_project_plugin" checkField="yes">
+                            <input type="hidden" id="input_import_project_detailed_type" checkField="yes">
+                        </div>
+
+
+                        <div class="project_name" style="height:25px;">
+                            <div style="width:120px; float:left; height:25px;" >Project Name</div>
+                            <div style="width:615px; float:right; height:25px;">
+                                <input type="text" id="input_import_project_name" name="input_project_name" style="width:603px;">
+                            </div>
+                        </div>
+
+
+
+                        <div class="project_desc" style="height:45px;">
+                            <div style="width:120px; float:left; height:45px;">Project Description</div>
+                            <div style="width:615px; float:right; height:45px;">
+                                <textarea id='input_import_project_desc' style='width:603px; height:40px;' draggable='false'></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset id='import_project_field' style="border:3px dashed #aaa;padding:10px; padding-top:30px; background-color:#FBFBFB;">
+                        <legend> <b>Project Import</b> </legend>
+                        
+                        <div id="project_import_div" style="padding:4px;  margin-top:3px; ">
+                            <div style="width:220px; float:left; padding:2px; font-size:11px;">Drag a zip file in this box to import</div>
+                            <div style=" float:right; font-size:11px; text-align:right;">
+                                <div style="float:left;">
+                                    <span class="directory_icon file filetype-etc filetype-zip"></span>
+                                    <div id="project_import_upload_output"></div>
+
+                                    <!-- <input type="file" name="file" id="project_import_file"> -->
+                    	            <input type="hidden" id="project_import_location" name="project_import_location" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <input type="hidden" id="import_project_using_plugin" value="no" />
+                <div id="import_project_expansion_container" style="width:770px;">
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

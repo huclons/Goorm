@@ -1,0 +1,423 @@
+#goorm_mainmenu.yuimenubar
+ .bd(style='margin-left: 10px;')
+  ul.first-of-type
+   li.yuimenubaritem.first-of-type
+    a.yuimenubaritemlabel(href='#File', localization_key='file') File
+    #File.yuimenu
+     .bd
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href='#New', localization_key='file_new', class='menu-new-file')
+         | New...
+        #New.yuimenu
+         .bd
+          ul.first-of-type
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='new_project', localization_key='file_new_project', class='menu-new-project')
+             | Project
+             em.helptext Alt + N
+          ul#plugin_new_project
+          ul
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='new_file_file', localization_key='file_new_file') File
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='new_file_folder', localization_key='file_new_folder') Folder
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='new_file_textfile', localization_key='file_new_untitled_text_file') Untitled Text File
+          ul
+          ul
+          ul.first-of-type
+           h6.first-of-type SCM
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='') GIT Project
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='') SVN Project
+          ul
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='new_file_other', localization_key='file_new_other') Other...
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='open_project', localization_key='file_open_project', class='menu-open-project')
+         | Open Project...
+         em.helptext Ctrl + Shift + O
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='open_file', localization_key='file_open_file', class='menu-open-file')
+         | Open File...
+         em.helptext Ctrl + O
+       li.yuimenuitem
+        a.yuimenuitemlabel(href='#', localization_key='open_recent_projects', class='menu-open-recent-project')
+         | Open Recent Projects...
+        #open_recent_project_menu.yuimenu
+         .bd
+          ul.first-of-type(id="open_recent_project_ul")
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='no_recent_project', localization_key='none') None
+          ul(id="clear_recent_project_ul")  
+       li.yuimenuitem
+        a.yuimenuitemlabel(href='#', localization_key='open_recent_files', class='menu-open-recent-file')
+         | Open Recent Files...
+        #open_recent_file_menu.yuimenu
+         .bd
+          ul.first-of-type(id="open_recent_file_ul")
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='no_recent_file', localization_key='none') None
+          ul(id="clear_recent_file_ul")
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='open_url', localization_key='file_open_url') Open URL...
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='close_file', localization_key='file_close')
+         | Close
+         em.helptext Alt + X
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='close_all', localization_key='file_close_all')
+         | Close All
+         em.helptext Alt + Shift + X
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='save_file', localization_key='file_save', class='menu-save')
+         | Save...
+         em.helptext Ctrl + S
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='save_as_file', localization_key='file_save_as', class='menu-save-as')
+         | Save As...
+         em.helptext Ctrl + Shift + S
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='save_all_file', localization_key='file_save_all')
+         | Save All
+         em.helptext Ctrl + Alt + S
+      ul
+       //-li.yuimenuitem
+        //-a.yuimenuitemlabel(href="#", action='move_file', localization_key='file_move')
+         //-| Move
+         //-em.helptext Ctrl + Shift + M
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='rename_file', localization_key='file_rename')
+         | Rename
+         em.helptext Ctrl + Shift + R
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='delete_file', localization_key='file_delete')
+         | Delete
+         em.helptext Ctrl + Shift + D
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='refresh_project_directory', localization_key='file_refresh')
+         | Refresh
+         em.helptext Ctrl + R
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='property', localization_key='file_properties')
+         | Properties
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='print', localization_key='file_print', class='menu-print')
+         | Print
+         em.helptext Ctrl + P
+      ul
+       //
+        li.yuimenuitem.yuimenuitem-disabled
+         a.yuimenuitemlabel.yuimenuitemlabel-disabled(href="#", action='', localization_key='file_swich_workspace')
+          | Switch workspace
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='refresh_page', localization_key='file_restart')
+         | Restart
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='import_file', localization_key='file_import', class='menu-import')
+         | Import File
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='upload_folder', class='menu-import')
+         | Upload Folder
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='export_file', localization_key='file_export', class='menu-export')
+         | Export File
+   li.yuimenubaritem
+    a.yuimenubaritemlabel(href='#Edit', localization_key='edit') Edit
+    #Edit.yuimenu
+     .bd
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='do_undo', localization_key='edit_undo', class='menu-undo')
+         | Undo
+         em.helptext Ctrl + Z
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='do_redo', localization_key='edit_redo', class='menu-redo')
+         | Redo
+         em.helptext Ctrl + Y
+      ul
+       li.yuimenuitem#menu_cut
+        a.yuimenuitemlabel(href="#", action='do_cut', localization_key='edit_cut', class='menu-cut')
+         | Cut
+         em.helptext Ctrl + X
+       li.yuimenuitem#menu_copy
+        a.yuimenuitemlabel(href="#", action='do_copy', localization_key='edit_copy', class='menu-copy')
+         | Copy
+         em.helptext Ctrl + C
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='do_paste', localization_key='edit_paste', class='menu-paste')
+         | Paste
+         em.helptext Ctrl + V
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='do_delete', localization_key='edit_delete', class='menu-delete')
+         | Delete
+         em.helptext Delete
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='select_all', localization_key='edit_select_all', class='menu-select-all')
+         | Select All
+         em.helptext Ctrl + A
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='do_go_to_line', localization_key='edit_go_to_line')
+         | Go to Line
+         em.helptext Ctrl + Shift + L
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='do_find', localization_key='edit_find_and_replace', class='menu-find-replace')
+         | Find/Replace
+         em.helptext Ctrl + F
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='do_find_next', localization_key='edit_find_next', class='menu-find-next')
+         | Find Next
+         em.helptext Ctrl + G
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='do_find_previous', localization_key='edit_find_previous', class='menu-find-previous')
+         | Find Previous
+         em.helptext Ctrl + Shift + G
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='search', localization_key='edit_search')
+         | Search
+         em.helptext Alt + H
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='auto_formatting', localization_key='edit_auto_formatting', class='menu-auto-formatting')
+         | Auto Formatting
+         em.helptext Ctrl + K
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='comment_selected', localization_key='edit_comment_selected', style='')
+         | Comment Selected
+         em.helptext Ctrl + /
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='uncomment_selected', localization_key='edit_uncomment_selected', style='')
+         | Uncomment Selected
+         em.helptext Ctrl + Shift+ /
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='preference', localization_key='edit_preference', class="menu-preference")
+         | Preference
+         em.helptext Alt + P
+   //-li.yuimenubaritem
+    a.yuimenubaritemlabel(href='#Design', localization_key='design') Design
+    #Design.yuimenu
+     .bd
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href='#Alignment', localization_key='design_alignment') Alignment
+        #Alignment.yuimenu
+         .bd
+          ul.first-of-type
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='align_left', style='background-image: url(configs/toolbars/org.goorm.core.design/image/align_left.png);', localization_key='design_align_left') Align Left
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='align_right', style='background-image: url(configs/toolbars/org.goorm.core.design/image/align_right.png);', localization_key='design_align_right') Align Right
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='align_top', style='background-image: url(configs/toolbars/org.goorm.core.design/image/align_top.png);', localization_key='design_align_top') Align Top
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='align_bottom', style='background-image: url(configs/toolbars/org.goorm.core.design/image/align_bottom.png);', localization_key='design_align_bottom') Align Bottom
+          ul
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='align_horizontally_center', style='background-image: url(configs/toolbars/org.goorm.core.design/image/align_horizontally_center.png);', localization_key='design_align_horizontally_center') Align Horizontally Center
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='align_vertically_center', style='background-image: url(configs/toolbars/org.goorm.core.design/image/align_vertically_center.png);', localization_key='design_align_vertically_center') Align Vertically Center
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='bring_to_front', localization_key='design_bring_to_front', style='background-image: url(configs/toolbars/org.goorm.core.design/image/bring_to_front.png);') Bring to Front
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='send_to_back', localization_key='design_send_to_back', style='background-image: url(configs/toolbars/org.goorm.core.design/image/send_to_back.png);') Send to Back
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='bring_forward', localization_key='design_bring_forward', style='background-image: url(configs/toolbars/org.goorm.core.design/image/bring_forward.png);') Bring Forward
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='send_backward', localization_key='design_send_backward', style='background-image: url(configs/toolbars/org.goorm.core.design/image/send_backward.png);') Send Backward
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='canvas_setting', localization_key='design_canvas_setting') Canvas Setting
+   li.yuimenubaritem
+    a.yuimenubaritemlabel(href='#Project', localization_key='project') Project
+    #Project.yuimenu
+     .bd
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='run', localization_key='project_run', class='menu-run')
+         | Run
+         em.helptext Ctrl + F5
+       //-li.yuimenuitem
+        //-a.yuimenuitemlabel(href="#", action='remote_run', localization_key='project_remote_run') Remote Run
+      //-ul
+       //-li.yuimenuitem
+        //-a.yuimenuitemlabel(href="#", action='generate', localization_key='project_generate', style='background-image: url(configs/toolbars/org.goorm.core.project/image/generate.png);') Generate
+       //-li.yuimenuitem
+        //-a.yuimenuitemlabel(href="#", action='generate_all', localization_key='project_generate_all', style='background-image: url(configs/toolbars/org.goorm.core.project/image/generate_all.png);') Generate All
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='build_project', localization_key='project_build_project', class='menu-build')
+         | Build Project
+         em.helptext F5
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='build_all', localization_key='project_build_all') Build All
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='build_clean', localization_key='project_clean', class='menu-clean')
+         | Clean
+         em.helptext Ctrl + Del
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='build_configuration', localization_key='project_build_configuration') Build Configuration
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='import_project', localization_key='project_import', class='menu-import-project') Import Project
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='export_project', localization_key='project_export', class='menu-export-project') Export Project
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='delete_project', localization_key='project_delete', class='menu-delete-project') Delete Project
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='share_project', localization_key='project_share') Share This Project
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(id="project_property_open", href="#", action='show_properties', localization_key='project_properties') Properties
+   li.yuimenubaritem
+    a.yuimenubaritemlabel(href='#Debug', localization_key='debug') Debug
+    #Debug.yuimenu
+     .bd
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='debug', localization_key='debug_start', class='menu-debug-start')
+         | Debug Start
+         em.helptext F7
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='debug_continue', localization_key='debug_continue', , class='menu-debug-continue debug_not_active')
+         | Continue
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='debug_terminate', localization_key='debug_terminate', class='menu-debug-terminate debug_not_active')
+         | Terminate
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='debug_step_over', localization_key='debug_step_over', class='menu-debug-step-over debug_not_active')
+         | Step over
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='debug_step_in', localization_key='debug_step_in', class='menu-debug-step-in debug_not_active')
+         | Step into
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='debug_step_out', localization_key='debug_step_out', class='menu-debug-step-out debug_not_active')
+         | Step out
+
+   li.yuimenubaritem
+    a.yuimenubaritemlabel(href='#window', localization_key='window') Window
+    #window.yuimenu
+     .bd
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='new_main_window', localization_key='window_new_main_window')
+         | New Main Window
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='previous_window', localization_key='window_previous_window')
+         | Previous Window
+         em.helptext Alt + Shift + Left
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='next_window', localization_key='window_next_window')
+         | Next Window
+         em.helptext Alt + Shift + Right
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href='#submenu_perspectives', action='', class='menu-perspectives', localization_key='perspectives') Perspectives
+        #submenu_perspectives.yuimenu
+         .bd
+          h6.first-of-type(localization_key='window_left_layout') Left Layout
+          ul.first-of-type
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='left_layout_toggle', class='menu-toggle-left', localization_key='window_left_layout_show_hide')
+             | Show/Hide
+             em.helptext Alt + Shift + L
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='left_project_explorer_show', localization_key='window_left_layout_toggle_project_explorer')
+             | Show Project Explorer
+             em.helptext Alt + Shift + 1
+          h6(localization_key='window_right_layout') Right Layout
+          ul
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='right_layout_toggle', class='menu-toggle-right', localization_key='window_right_layout_show_hide')
+             | Show/Hide
+             em.helptext Alt + Shift + R
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='right_outline_show', localization_key='window_right_layout_toggle_outline')
+             | Show Slide
+             em.helptext Alt + Shift + 6
+          h6(localization_key='window_bottom_layout') Bottom Layout
+          ul
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='bottom_layout_toggle', class='menu-toggle-bottom', localization_key='window_bottom_layout_show_hide')
+             | Show/Hide
+             em.helptext Alt + Shift + B
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='bottom_debug_show', localization_key='window_bottom_layout_debug')
+             | Show Debug
+             em.helptext Alt + Shift + 7
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='bottom_console_show', localization_key='window_bottom_layout_console')
+             | Show Terminal
+             em.helptext Alt + Shift + 8
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='bottom_search_show', localization_key='window_bottom_layout_search')
+             | Show Search
+             em.helptext Alt + Shift + 9
+          ul
+           li.yuimenuitem
+            a.yuimenuitemlabel(href="#", action='layout_default', localization_key='window_default_layout')
+             | Default Layout
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='toggle_full_workspace', localization_key='window_toggle_full_workspace')
+         | Full Workspace
+         em.helptext Alt + Shift + W
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='hide_all_windows', localization_key='window_hide_all_window')
+         | Hide All Window
+         em.helptext Alt + Shift + H
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='show_all_windows', localization_key='window_show_all_window')
+         | Show All Window
+         em.helptext Alt + Shift + S
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='tile_left', class='menu-tile-left', localization_key='window_tile_left') Tile Left
+         em.helptext Ctrl + Shift + Left
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='tile_right', class='menu-tile-right', localization_key='window_tile_right') Tile Right
+         em.helptext Ctrl + Shift + Right
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='cascade', class='menu-toggle-cascade', localization_key='window_cascade') Cascade
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='tile_vertically', class='menu-tile-vertically', localization_key='window_tile_vertically') Tile Vertically
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='tile_horizontally', class='menu-tile-horizontally', localization_key='window_tile_horizontally') Tile Horizontally
+   //-li.yuimenubaritem
+    a.yuimenubaritemlabel(href='#menu_plugins', localization_key='plugins') Plugins
+    #menu_plugins.yuimenu
+     #plugin_menu_adapter.bd
+      ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='help_install_new_plugin', style='background-image: url(configs/toolbars/org.goorm.core.help/image/plugin.png);', localization_key='plugin_install_new_plugin') Install New Plugin...
+   li.yuimenubaritem
+    a.yuimenubaritemlabel(href='#Help', localization_key='help') Help
+    #Help.yuimenu
+     .bd
+      ul#plugin_new_help
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='help_contents', class='menu-help-contents', localization_key='help_help_contents') Help Contents
+      //-ul
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='help_check_for_updates', style='background-image: url(configs/toolbars/org.goorm.core.help/image/check_for_update.png);', localization_key='help_check_for_updates') Check for Updates
+      ul
+       //-li.yuimenuitem.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='help_bug_report', style='background-image: url(configs/toolbars/org.goorm.core.help/image/bug_report.png);', localization_key='help_bug_report') Send Bug Report
+       li.yuimenuitem
+        a.yuimenuitemlabel(href="#", action='help_about', class='menu-about', localization_key='help_about_goorm') About goorm

@@ -1,0 +1,80 @@
+#goorm_top .yuimenubaritem .yuimenubaritemlabel {
+	color:#222;
+}
+#goorm_top .yuimenubaritem .yuimenubaritemlabel-selected {
+	color:#000000;
+	background: #B3D4FF;
+}
+#goorm_top .yuimenubar {
+	background:none;
+	background-color: #fff;
+}
+#goorm_top .main_toolbar .toolbar_button {
+	background:none;
+}
+#goorm_top .main_toolbar .toolbar_button:hover {
+	background:none;
+}
+#goorm_top .main_toolbar .toolbar_button:active {
+	background:none;
+}
+.yui-layout .yui-layout-unit-top div.yui-layout-bd {
+	background-image:none;
+	background-color: #fff;
+	border-bottom:1px solid #ddd;
+}
+.yui-navset .yui-nav {
+	background-image:none;
+	background-color: #eee;
+}
+.yui-navset .yui-nav a:hover, .yui-navset .yui-nav a:focus {
+	background:none;
+}
+.yui-navset .yui-nav .selected a, .yui-navset .yui-nav .selected a:focus, .yui-navset .yui-nav .selected a:hover,
+.yui-navset .yui-nav a:hover, .yui-navset .yui-nav a:focus {
+	background:none;
+	background-color: #B3D4FF;
+}
+
+.yui-navset .yui-nav .selected a, .yui-navset .yui-nav .selected a:focus, .yui-navset .yui-nav .selected a:hover {
+	background-image:none;
+	background-color: #fff;
+}
+.yui-navset .yui-nav .selected a {
+	color: #000;
+	background-image:none;
+	background-color: #fff;
+}
+#workspace_window_list {
+	background-image:none;
+	background-color: #eee;
+}
+.yui-panel .bd, .yui-panel .ft {
+	background-color: #fff;
+}
+
+#workspace .yui-panel .hd {
+	background-color: #ddd;
+}
+
+#workspace .yui-panel .activated {
+	background-color: #eee;
+}
+
+
+.yui-dt th {
+	background-image:none;
+	background-color: #f4f4f4;
+	border-top: 1px solid #ccc !important;
+}
+
+.yui-dt-odd, .yui-dt-even {
+	background-color: #fff;
+}
+.yui-dt-selected {
+	background-color:#B3D4FF;
+}
+
+.yui-dt tr.yui-dt-first td {
+	border-top: 1px solid #ccc !important;
+}

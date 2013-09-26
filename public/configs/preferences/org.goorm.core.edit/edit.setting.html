@@ -1,0 +1,121 @@
+<div style="font-size:11px; margin-top:10px;">
+    <fieldset>
+        <legend localization_key="dialog_preference_editor_config_guide">Editor Configuration</legend> 
+        <div style="width:100%; height:30px;">
+            <div style="float:left;">
+                <span localization_key="dialog_preference_editor_font_size">Font Size : </span> 
+                <!-- <input name="preference.editor.font_size" id="preference.editor.font_size" validate="required, number"/> -->
+                   <select name="preference.editor.font_size" id="preference.editor.font_size" style="width:145px;" >
+                        <option value=11 selected>11px</option>
+                        <option value=12 >12px</option>
+                        <option value=13 >13px</option>
+                        <option value=14 >14px</option>
+                        <option value=15 >15px</option>
+                        <option value=16 >16px</option>
+                        <option value=17 >17px</option>
+                        <option value=18 >18px</option>
+                        <option value=19 >19px</option>
+                        <option value=20 >20px</option>
+                        <option value=21 >21px</option>
+                        <option value=22 >22px</option>
+                        <option value=23 >23px</option>
+                        <option value=24 >24px</option>
+                        <option value=25 >25px</option>
+                        <option value=26 >26px</option>
+                        <option value=27 >27px</option>
+                        <option value=28 >28px</option>
+                        <option value=29 >29px</option>
+                        <option value=30 >30px</option>
+                        <option value=31 >31px</option>
+                        <option value=32 >32px</option>
+                        <option value=33 >33px</option>
+                        <option value=34 >34px</option>
+                        <option value=35 >35px</option>
+                        <option value=36 >36px</option>
+                        <option value=37 >37px</option>
+                        <option value=38 >38px</option>
+                        <option value=39 >39px</option>
+                        <option value=40 >40px</option>
+                    </select>
+            </div>
+        </div>
+        
+        <div style="width:100%; height:30px;">
+            <div style="float:left;">
+                <span localization_key="dialog_preference_editor_line_spacing">Line_Spacing : </span> 
+                <!-- <input name="preference.editor.indent_unit" id="preference.editor.indent_unit" validate="required, number"/> -->
+                <select name="preference.editor.line_spacing" id="preference.editor.line_spacing" style="width:145px;" >
+                    <option value=0 >1.0</option>
+                    <option value=1 >1.1</option>
+                    <option value=2 >1.2</option>
+                    <option value=3 selected >1.3</option>
+                    <option value=4 >1.4</option>
+                    <option value=5 >1.5</option>
+                    <option value=7 >1.7</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div style="width:100%; height:30px;">
+            <div style="float:left;">
+                <span localization_key="dialog_preference_editor_indent_unit">Indent Unit : </span> 
+                <input name="preference.editor.indent_unit" id="preference.editor.indent_unit" validate="required, number"/>
+            </div>
+        </div>
+        <div style="width:100%; height:30px;">
+            <div style="float:left;"><span localization_key="dialog_preference_editor_first_line_number">First Line Number : </span><input name="preference.editor.first_line_number" /></div>
+        </div>
+        <div style="width:100%; height:30px;">
+            <div style="float:left;"><span localization_key="dialog_preference_editor_first_undo_depth">Undo Depth : </span><input name="preference.editor.undo_depth" /></div>
+        </div>
+        <div style="width:100%; height:30px;">
+            <div style="float:left;" class="checkbox_div">
+                <span class="checkbox">
+                    <input name="preference.editor.indent_with_tabs" id="preference.editor.indent_with_tabs" type="checkbox" id="indent_with_tabs" class="checkbox_margin" />
+                    <label data-on="" data-off=""></label>
+                </span>
+                <label for="preference.editor.indent_with_tabs" localization_key="dialog_preference_editor_indent_with_tabs">Indent With Tabs</label>
+            </div>
+        </div>
+        <div style="width:100%; height:30px;">
+            <div style="float:left;" class="checkbox_div">
+                <span class="checkbox">
+                    <input name="preference.editor.show_line_numbers" id="preference.editor.show_line_numbers" type="checkbox" id="show_line_numbers" class="checkbox_margin" />
+                    <label data-on="" data-off=""></label>
+                </span>
+                <label for="preference.editor.show_line_numbers" localization_key="dialog_preference_editor_show_line_numbers">Show Line Numbers</label>
+            </div>
+        </div>
+        <div style="width:100%; height:30px;">
+            <div style="float:left;" class="checkbox_div">
+                <span class="checkbox">
+                    <input name="preference.editor.highlight_current_cursor_line" type="checkbox" id="preference.editor.highlight_current_cursor_line" class="checkbox_margin" />
+                    <label data-on="" data-off=""></label>
+                </span>
+                <label for="preference.editor.highlight_current_cursor_line" localization_key="dialog_preference_editor_highlight_current_cursor_line"> Highlight Current Cursor Line</label>
+            </div>            
+        </div>
+        <div style="width:100%; height:30px;">
+            <div style="float:left;">
+                <span class="checkbox">
+                    <input name="preference.editor.use_clipboard" type="checkbox" id="preference.editor.use_clipboard" class="checkbox_margin" />
+                    <label data-on="" data-off=""></label>
+                </span>
+                <label for="preference.editor.use_clipboard" localization_key="dialog_preference_editor_use_clipboard">Use Clipboard</label>
+            </div>
+        </div>
+        <!--
+        <div style="width:100%; height:30px;">
+            <div style="float:left;">Font : [SelectBox]</div>
+        </div>
+        <div style="width:100%; height:30px;">
+            <div style="float:left;">Size : [SelectBox]</div>            
+        </div>
+        -->
+    </fieldset>
+</div>
+<div style="position: absolute;bottom: 10px;right:10px;">
+    <input type="button" class="restore_default" value="Restore Default" />
+    <input type="button" class="apply" value="Apply" />
+</div>

@@ -1,0 +1,4 @@
+{
+	"plugin.python.main" : 	"index",
+	"plugin.python.source_path" : 	""
+}

@@ -1,0 +1,21 @@
+{
+	"preference" :
+	{
+		"label" : "JAVA_examples",
+		"tab" :	[
+			{	"label" : "JAVA_examples",
+				"html"	: "/org.goorm.plugin.java_examples/java_examples.preference.html"
+			}
+		]
+	},
+	
+	"property" : 
+	{
+		"label" : "JAVA_examples",
+		"tab" :	[
+			{	"label" : "JAVA_examples",
+				"html"	: "/org.goorm.plugin.java_examples/java_examples.property.html"
+			}
+		]
+	}
+}

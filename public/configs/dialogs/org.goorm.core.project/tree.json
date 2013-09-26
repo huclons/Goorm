@@ -1,0 +1,28 @@
+{
+	"core" : {
+		"label" : "<span localization_key='property'>Property</span>",
+		"expanded" : true,
+		"child" : [
+			{	"label" : "<span localization_key='information' tab_action='Information'>Information</span>",
+				"id" : "Information",
+				"tab" : [
+					{	"label" : "<span localization_key='information'>Information</span>",
+						"html"	: "configs/project/default/project.general.html"
+					}
+				]
+			},
+			{	"label" : "<span localization_key='setting' tab_action='Setting'>Setting</span>",
+				"id" : "Setting",
+				"tab" : [
+					{	"label" : "<span localization_key='project_setting'>Project setting</span>",
+						"html"	: "configs/project/default/project.setting.html"
+					}
+				]
+			}
+		]
+	},
+	"plugin" : {
+		"label" : "<span localization_key='plugin'>Plugin</span>",
+		"child" : []
+	}
+}

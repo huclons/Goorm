@@ -1,0 +1,58 @@
+{
+	"core" : {
+		"label" : "<span localization_key='preferences'>Preferences</span>",
+		"expanded" : true,
+		"child" : [
+			{	"label" : "<span localization_key='system' tab_action='System'>System</span>",
+				"id" : "System",
+				"tab" : [
+					{	"label" : "<span localization_key='information'>Info</span>",
+						"html"	: "configs/preferences/org.goorm.core/system.info.html",
+						"classname" : "org.goorm.core.preferences.info"
+					},
+					{
+						"label" : "<span localization_key='libraries'>Libraries</span>",
+						"html"	: "configs/preferences/org.goorm.core/system.libraries.html"
+					},
+					{
+						"label" : "<span>API</span>",
+						"html"	: "configs/preferences/org.goorm.core/system.api.html"
+					}
+				]
+			},
+			{	"label" : "<span localization_key='editor' tab_action='Editor'>Editor</span>",
+				"id" : "Editor",
+				"tab" : [
+					{	"label" : "<span localization_key='setting'>Setting</span>",
+						"html"	: "configs/preferences/org.goorm.core.edit/edit.setting.html"
+					},
+					{	"label" : "<span localization_key='theme'>Theme</span>",
+						"html"	: "configs/preferences/org.goorm.core.edit/edit.theme.html"
+					}
+				]
+			},
+			{	"label" : "<span localization_key='filetype' tab_action='FileType'>File Type</span>",
+				"id" : "FileType",
+				"tab" : [
+					{	"label" : "<span localization_key='filetype'>File Type</span>",
+						"html"	: "configs/preferences/org.goorm.core/filetype.html",
+						"classname" : "org.goorm.core.preferences.filetype"
+					}
+				]
+			},
+			{	"label" : "<span localization_key='language' tab_action='Language'>Language</span>",
+				"id" : "Language",
+				"tab" : [
+					{	"label" : "<span localization_key='language'>Language</span>",
+						"html"	: "configs/preferences/org.goorm.core.localization/language.html",
+						"classname" : "org.goorm.core.preferences.language"
+					}
+				]
+			}
+		]
+	},
+	"plugin" : {
+		"label" : "<span localization_key='plugin'>Plugin</span>",
+		"child" : []
+	}
+}
