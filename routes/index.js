@@ -19,6 +19,7 @@ var g_file = require("../modules/org.goorm.core.file/file");
 var g_preference = require("../modules/org.goorm.core.preference/preference");
 var g_project = require("../modules/org.goorm.core.project/project");
 var g_terminal = require("../modules/org.goorm.core.terminal/terminal");
+var g_theme = require("../modules/org.goorm.core.theme/theme");
 var g_plugin = require("../modules/org.goorm.plugin/plugin");
 var g_help = require("../modules/org.goorm.help/help");
 var g_search = require("../modules/org.goorm.core.search/search");
@@ -59,14 +60,38 @@ var check_valid_path = function(str){
 exports.index = function(req, res){
 	var mode = "all";
 
+	
+
+	
 	if( __optimization_mode ) {
 		res.render('main.html');
 	}
 	else {
 		res.render('index', { 'title': 'goormIDE', 'mode': mode });
 	}
+	
 };
 
+exports.vm = function(req,res){
+	res.json(null);
+}
+
+exports.vm.connect = function(req, res){
+	var id = req.body.id;
+
+	g_auth.connect_vm(id, function(data){
+		res.json(data);
+	});
+}
+
+exports.vm.get_user_vm = function(req, res){
+	var id = req.body.id;
+
+	g_auth.get_user_vm(id, function(data){
+		console.log('user_vm', data);
+		res.json(data);
+	})
+}
 
 /*
  * API : Project
@@ -84,7 +109,10 @@ exports.project.do_new = function(req, res){
 	});
 
 	
+
 	
+
+
 	g_project.do_new(req.query, evt);
 };
 
@@ -117,9 +145,9 @@ exports.project.get_list = function(req, res){
 
 	
 
-	//useonly(mode=basic)
+	
 	g_project.get_list(req.query, evt);
-	//useonlyend
+	
 };
 
 exports.project.do_import = function(req, res){
@@ -178,6 +206,9 @@ exports.project.move_file = function(req, res){
 
 
 
+
+
+
 /*
  * API : Plugin
  */
@@ -200,17 +231,18 @@ exports.plugin.do_new = function(req, res){
 
 	
 
-	//useonly(mode=basic)
+	
 	g_plugin.do_new(req.query, res);
-	//useonlyend
+	
+
 };
 exports.plugin.make_template = function(req, res){
 
 	
 
-	//useonly(mode=basic)
+	
 	g_plugin.make_template(req.query, res);
-	//useonlyend
+	
 };
 
 exports.plugin.build = function(req, res){
@@ -246,11 +278,11 @@ exports.file.do_new = function(req, res){
 		res.json(data);
 	});
 
-			
+	
 
-	//useonly(mode=basic)
+	
 	g_file.do_new(req.query, evt);
-	//useonlyend
+	
 };
 
 exports.file.do_new_folder = function(req, res){
@@ -262,9 +294,9 @@ exports.file.do_new_folder = function(req, res){
 
 	
 
-	//useonly(mode=basic)
+	
 	g_file.do_new_folder(req.query, evt);
-	//useonlyend
+	
 };
 
 exports.file.do_new_other = function(req, res){
@@ -276,9 +308,9 @@ exports.file.do_new_other = function(req, res){
 
 	
 
-	//useonly(mode=basic)
+	
 	g_file.do_new_other(req.query, evt);
-	//useonlyend
+	
 };
 
 
@@ -291,9 +323,9 @@ exports.file.do_new_untitled_text_file = function(req, res){
 
 	
 
-	//useonly(mode=basic)
+	
 	g_file.do_new_untitled_text_file(req.query, evt);
-	//useonlyend
+	
 };
 
 exports.file.do_load = function(req, res){
@@ -335,11 +367,9 @@ exports.file.do_delete = function(req, res){
 
 	
 
-	//useonly(mode=basic)
+	
 	g_file.do_delete(req.query, evt);
-	//useonlyend
-
-
+	
 };
 
 
@@ -370,16 +400,15 @@ exports.file.get_contents = function(req, res){
 	abs_path = __workspace + path;	
 	//local -> do not check any thing
 
-	//useonly(mode=basic)
-		fs.readFile(abs_path, "utf8", function(err, data) {
-			if(err){
-				res.json(false);
-			}else{
-				res.json(data);
-			}
-		});
-		return true;
-	//useonlyend
+	
+	fs.readFile(abs_path, "utf8", function(err, data) {
+		if(err){
+			res.json(false);
+		}else{
+			res.json(data);
+		}
+	});
+	
 
 	
 };
@@ -429,13 +458,13 @@ exports.file.get_nodes = function(req, res){
 
 	
 
-	//useonly(mode=basic)
+	
 	var nodes_data = {
 		path : __workspace+'/' + path
 	};
 
 	g_file.get_nodes(nodes_data, evt, type);
-	//useonlyend
+	
 };
 
 exports.file.get_dir_nodes = function(req, res){
@@ -461,10 +490,10 @@ exports.file.get_dir_nodes = function(req, res){
 	
 	
 
-	//useonly(mode=basic)
+	
 	req.query.path = __workspace+'/' + path;
 	g_file.get_dir_nodes(req.query, evt);
-	//useonlyend
+	
 };
 
 exports.file.get_result_ls = function(req, res){
@@ -478,9 +507,9 @@ exports.file.get_result_ls = function(req, res){
 
 	
 
-	//useonly(mode=basic)
+	
 	g_file.get_result_ls(req.query, evt);
-	//useonlyend
+	
 };
 
 
@@ -543,7 +572,9 @@ exports.file.check_valid_edit = function(req, res){
 				case 2:
 					console.log('Error: check_valid_edit, project path cannot read.', __workspace + project_path);
 
-				
+				case 10:
+					
+					break;
 
 				default:
 					break;
@@ -575,12 +606,11 @@ exports.file.do_move = function(req, res){
 		res.json(data);
 	});
 
-
 	
 
-	//useonly(mode=basic)
+	
 	g_file.do_move(req.query, evt);
-	//useonlyend	
+	
 };
 
 exports.file.do_rename = function(req, res){
@@ -602,9 +632,9 @@ exports.file.do_rename = function(req, res){
 	} else {
 		
 
-		//useonly(mode=basic)
+		
 		g_file.do_rename(req.query, evt);
-		//useonlyend
+		
 	}
 };
 
@@ -631,7 +661,6 @@ exports.file.do_import = function(req, res){
 	var evt = new EventEmitter();
 
 	evt.on("file_do_import", function (data) {
-
 		
 
 		res.json(data);
@@ -652,9 +681,9 @@ exports.file.do_search_on_project = function(req, res){
 	
 	
 
-	//useonly(mode=basic)
+	
 	g_search.do_search(req.query, evt);
-	//useonlyend
+	
 };
 
 
@@ -732,6 +761,41 @@ exports.preference.put_filetypes = function(req, res){
 };
 
 
+/*
+ * API : Theme
+ */
+exports.theme = function(req, res){
+	res.send(null);
+};
+
+exports.theme.get_list = function(req, res){
+	var evt = new EventEmitter();
+	
+	evt.on("theme_get_list", function (data) {
+/* 		res.json(data[1].contents.title); */
+		res.json(data);
+	});
+	
+	g_theme.get_list(evt);
+
+};
+exports.theme.get_contents = function(req, res){
+	var path = req.body.path;
+
+	fs.readFile(__path + path, "utf8", function(err, data) {
+		res.json(data);
+	});
+};
+exports.theme.put_contents = function(req, res){
+	var evt = new EventEmitter();
+
+	evt.on("theme_put_contents", function (data) {
+		res.json(data);
+	});
+
+	g_theme.put_contents(req.body, evt);
+	/* 	res.send(null); */
+};
 
 /*
  * API : Help
@@ -923,7 +987,6 @@ exports.upload_dir_skeleton = function(req,res){
 
 
 
-
 exports.edit = function(req,res){
 	res.send(null);
 }
@@ -975,16 +1038,24 @@ exports.edit.get_object_explorer = function(req,res){
 exports.edit.save_tags = function(req, res){
 	var option = req.body;
 
+	
+
+	
 	g_edit.save_tags_data(option);
 	res.json(true);
+	
 }
 
 exports.edit.load_tags = function(req, res){
 	var option = req.query;
 
+	
+
+	
 	g_edit.load_tags_data(option, function(response){
 		res.json(response);
 	});
+	
 }
 
 
@@ -1002,5 +1073,4 @@ exports.function.get_function_explorer =function(req,res){
 	g_function.get_function_explorer(req.query, evt);
 
 }
-
 

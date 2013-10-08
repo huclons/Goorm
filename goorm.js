@@ -1,3 +1,4 @@
+#!/usr/local/bin/node
 /**
  * Copyright Sung-tae Ryu. All rights reserved.
  * Code licensed under the AGPL v3 License:
@@ -59,11 +60,14 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 				console.log('    $ goorm start [options]');
 				console.log('');
 
-				//useonly(mode=basic)
+				
+
+								
 				console.log('    + Option:');
 				console.log('');
 				console.log('      -d, --daemon           run the goorm server as a daemon using the forever module...');
 				console.log('      -p, --port [PORT NUM]  run the goorm server with port which you want...');
+				console.log('      --redis-mode  run the goorm server with redis-server');
 				console.log('');
 				console.log('      $ node goorm.js start -d');
 				console.log('      $ goorm start --daemon');
@@ -72,8 +76,6 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 				console.log('      $ node goorm.js start --redis-mode');
 				console.log('      $ goorm start --redis-mode');
 				console.log('');
-				//useonlyend
-
 				
 
 				console.log('   - Restart goormIDE server:');
@@ -148,6 +150,7 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 			.option('-h, --home [HOME Directory]', 'set HOME directory in server')
 			.option('-w, --workspace [WORKSPACE Directory]', 'set WORKSPACE directory in server')
 			.option('--redis-mode', 'run the goorm with redis-server')
+			.option('--optimization-mode', 'run the goorm by optimization mode')
 
 			
 
@@ -156,8 +159,10 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 				process_options.push(options.port);
 				process_options.push(options.home);
 				process_options.push(options.workspace);
-				var redis_mode = false;
 				var optimization_mode = false;
+				var redis_mode = false;
+
+				
 
 				
 
@@ -333,10 +338,11 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 					
 					var workspace = config_data.workspace || process.env.PWD + '/' + "workspace/";
 					var temp_dir = config_data.temp_dir || process.env.PWD + '/' + "temp_files/";
-					var plugin_exclude_list = config_data.plugin_exclude_list || null;
 
 					
 
+					var plugin_exclude_list = config_data.plugin_exclude_list || null;
+					
 					if (options.workspace)	 {	
 						workspace = options.workspace || process.env.PWD + '/' + "workspace/";
 						
@@ -358,6 +364,8 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 							console.log("That directory already exists!");
 						}
 					}
+					
+					
 
 					////exclude plugin
 					if(options['plugin_exclude_list']){
@@ -369,16 +377,15 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 					
 					if(workspace && workspace[workspace.length - 1] != '/') workspace = workspace + '/';
 					if(temp_dir && temp_dir[temp_dir.length - 1] != '/') temp_dir = temp_dir + '/';
-					
 
-					//useonly(mode=basic)
+					
 					var config_data = {
 						workspace: workspace,
 						temp_dir: temp_dir,
 						plugin_exclude_list : plugin_exclude_list
 					};
-					//useonlyend
-
+					
+					
 					
 			
 					fs.writeFileSync(process.env.HOME +  '/.goorm/config.json', JSON.stringify(config_data), 'utf8');
@@ -476,15 +483,14 @@ function command_update() {
 	var server_data = {};
 	server_data.os_version = os.type()+" "+os.release();
 	server_data.node_version = process.version;
-	server_data.mongodb_version = "";
 	server_data.theme = "default";
 	server_data.language = "client";
+
 	
-	//useonly(mode=basic)
 	fs.writeFileSync(__dirname +  '/info_server.json', JSON.stringify(server_data));
 	console.log("Server info is updated...");
 	process.stdin.destroy();
-	//useonlyend
-
+	
+	
 	
 }

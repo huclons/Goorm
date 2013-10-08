@@ -25,6 +25,7 @@ var target_dir = ""; // target root
 
 
 
+
 var check_valid_path = function(str){
 	if(!str)return false;
 	return !(/\.\.|~|;|&|\|/.test(str));
@@ -90,7 +91,7 @@ module.exports = {
 
 							evt.emit("file_do_new", data);
 						} else {
-							authority_setting(path.split('/')[0],  path );
+							
 							evt.emit("file_do_new", data);
 						}
 					});
@@ -126,7 +127,7 @@ module.exports = {
 
 							evt.emit("file_do_new_folder", data);
 						} else {
-							authority_setting(query.current_path.split('/')[0],  query.current_path + '/' + query.folder_name);
+							
 							evt.emit("file_do_new_folder", data);
 						}
 					});
@@ -171,8 +172,7 @@ module.exports = {
 
 							evt.emit("file_do_new_untitled_text_file", data);
 						} else {
-							//data.
-							authority_setting(query.current_path.split('/')[0],query.current_path + '/' + temp_file_name + i + '.txt' );
+							
 							evt.emit("file_do_new_untitled_text_file", data);
 						}
 					});
@@ -207,7 +207,7 @@ module.exports = {
 
 							evt.emit("file_do_new_other", data);
 						} else {
-							authority_setting(query.current_path.split('/')[0], query.current_path + '/' + query.file_name );
+							
 							evt.emit("file_do_new_other", data);
 						}
 					});
@@ -743,7 +743,7 @@ module.exports = {
 
 
 		if( file_arr.length == 0  ){
-			console.log('1-1');
+			//console.log('1-1');
 			//res.json({'err_code':10, 'message':'No file to upload'});
 			evt.emit('upload_dir_file', false);
 			return false;
@@ -760,7 +760,7 @@ module.exports = {
 		var target_path=req.body.target_path;
 		target_path=global.__workspace+target_path;
 		target_path=check_special_characters(target_path);
-		console.log('target_path', target_path);
+		//console.log('target_path', target_path);
 
 
 		//2.validate start
@@ -790,20 +790,20 @@ module.exports = {
 				if(current_cnt===file_arr.length){
 					//res.json(total_result);
 					evt.emit('upload_dir_file', total_result);
-					authority_setting(req.body.target_path.split('/')[0], req.body.target_path.split('/')[0]);
+					
 				}
 
 			});
 
 			var mv_exec=function(iterator){
-				console.log('mv  '+file_arr[iterator].path+'  '+target_path+file_arr[iterator].name  );
+				//console.log('mv  '+file_arr[iterator].path+'  '+target_path+file_arr[iterator].name  );
 				if( !check_valid_path(target_path+file_arr[iterator]) ){
 						evt.emit('end',false);
 						return false;
 				}
 				exec('mv  '+file_arr[iterator].path+'  '+target_path+file_arr[iterator].name   ,  {cwd : target_path}, function(err,stdout, stderr){
 					if(err){
-						console.log('err', err);
+						console.log('mv err', err);
 					}
 					evt_mv.emit('end',!err);
 				});
@@ -816,7 +816,6 @@ module.exports = {
 
 			for(var i=0;i<file_arr.length;i++){
 				file_arr[i].name=check_special_characters(file_arr[i].name);
-				console.log(file_arr[i].name);
 				mv_exec(i);
 			}
 
@@ -849,16 +848,6 @@ module.exports = {
 		var dir_arr=req.body.dir_arr;
 
 
-		//var owner_id='';
-		//owner_id=get_id(req);
-		// if(!owner_id){
-		// 	res.json(false);
-		// 	return false;
-		// }
-
-
-		console.log(target_path);
-		console.log(dir_arr);
 
 
 		//2.validate start
@@ -894,7 +883,7 @@ module.exports = {
 			});
 
 			var mkdir_p_exec=function(iterator){
-				console.log('mkdir -p '+target_path+dir_arr[iterator]);
+				//console.log('mkdir -p '+target_path+dir_arr[iterator]);
 				//always check
 				if( !check_valid_path(target_path+dir_arr[iterator]) ){
 					evt_mkdir.emit('end',false);
@@ -904,7 +893,7 @@ module.exports = {
 				exec('mkdir -p '+target_path+dir_arr[iterator], {cwd : target_path}, function(err,stdout,stderr){
 
 					if(err){
-						console.log('err', err);
+						console.log('mkdir err', err);
 					}
 					evt_mkdir.emit('end',!err);
 				});
@@ -939,8 +928,8 @@ module.exports = {
 		}
 
 		
-
-		//useonly(mode=basic)
+	
+		
 		fs.readdir(query_path, function (err, files) {
 			if (!err && files.length !== 0 && files !== undefined) {
 
@@ -1134,6 +1123,6 @@ module.exports = {
 				evt.emit('got_result_ls', null);
 			}
 		});
-		//useonlyend
+		
 	}
 };

@@ -66,13 +66,17 @@ org.goorm.core.terminal.prototype = {
 				if (!init) {
 					window.setTimeout(function () {
 						
+
+						
 						$(self.target).find('div:first').prepend('Welcome to goorm terminal :)</br>');
+						
 					}, 100);
 					init = true;
 				}
 			});
 
 			var terminal_open_complete = function () {
+
 				
 
 				$(self.target).parent().css('outline', 'none').css('background-color', 'rgb(70,70,70)').css('overflow', 'hidden');

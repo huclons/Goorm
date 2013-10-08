@@ -852,8 +852,15 @@ module.exports = {
 	save_tags_data: function (option) {
 		var workspace = option.workspace;
 		var project_type = option.project_type;
+
+		
+		var base_dir = __workspace;
+		
+
+				
+
 		var create_tags = function (workspace, project_type, callback) {
-			var absolute_workspace_path = __workspace + workspace;
+			var absolute_workspace_path = base_dir + workspace;
 			var ctags_command = "";
 
 			if (project_type === 'cpp' || project_type === 'c') {
@@ -875,8 +882,8 @@ module.exports = {
 		};
 
 		var make_called_data = function (workspace, project_type, callback) {
-			var absolute_workspace_path = __workspace + workspace;
-			var ctags_command = 'cat ' + absolute_workspace_path + '/.tags | grep -v "\!_TAG"';
+			var absolute_workspace_path = base_dir + workspace;
+			var ctags_command = 'cat ' + absolute_workspace_path + '/.tags | grep -v \'\!_TAG\'';
 
 			var init = function (workspace, project_type) {
 				if (called_data[project_type]) {
@@ -1033,7 +1040,13 @@ module.exports = {
 		var token = option.token; // name
 		token = '_' + token;
 
-		var absolute_workspace_path = __workspace + workspace;
+		
+		var base_dir = __workspace;
+		
+
+				
+
+		var absolute_workspace_path = base_dir + workspace;
 		var ctags_command = 'cat ' + absolute_workspace_path + '/.tags_result';
 
 		exec(ctags_command, function (err, called_data, stderr) {

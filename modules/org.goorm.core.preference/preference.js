@@ -29,19 +29,37 @@ module.exports = {
 		var data = {};
 		data.err_code = 0;
 		data.message = "process done";
-		data.info = __path;
 
-		fs.readFile(__path + "info_server.json", "utf8", function (err, contents) {
-			if (err !== null) {
-				data.err_code = 40;
-				data.message = "Cannot find target file";
+		var get_os_version = function (callback) {
+			exec('uname -sr', function(err, version, stderr){
+				callback(version);
+			});
+		}
 
-				evt.emit("preference_get_server_info", data);
-			} else {
-				data.info = JSON.parse(contents);
-				evt.emit("preference_get_server_info", data);
+		var get_node_version = function (callback) {
+			exec('node --version', function(err, version, stderr){
+				callback(version);
+			});
+		}
+
+		
+
+		
+
+		
+		get_os_version(function(os_version){
+		get_node_version(function(node_version){
+			data.info = {
+				'os_version' : os_version,
+				'node_version' : node_version,
+				'theme' : 'default',
+				'language' : 'client'
 			}
+
+			evt.emit("preference_get_server_info", data);
 		});
+		});
+		
 	},
 
 	get_goorm_info: function (query, evt) {

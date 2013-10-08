@@ -28,7 +28,7 @@ org.goorm.plugin.manager = {
 	get: function () {
 		var self = this;
 
-		//useonly(mode=basic)
+		
 		var url = "plugin/get_list";
 
 		$.ajax({
@@ -37,12 +37,19 @@ org.goorm.plugin.manager = {
 			async: false,
 			success: function (data) {
 				self.list = eval(data);
+				self.list = self.list.filter(function (o) {
+					if (o.name == 'org.goorm.plugin.nodejs_examples' || o.name == 'org.goorm.plugin.lecture') {
+						return false;
+					} else {
+						return true;
+					}
+				});
 
 				$(core).trigger("plugin_loaded");
 			}
 		});
-		//useonlyend
-
+		
+		
 		
 	},
 

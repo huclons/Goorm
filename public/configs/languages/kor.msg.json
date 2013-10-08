@@ -167,6 +167,15 @@
     "confirmation_language_message_no": {
         "value": "No"
     },
+    "confirmation_auto_logout": {
+        "value": "자동 로그아웃"
+    },
+    "confirmation_auto_logout_keep_using": {
+        "value": "계속 사용하겠습니다."
+    },
+    "confirmation_auto_logout_warning": {
+        "value": "초 후에 자동 로그아웃됩니다."
+    },
     "alert_page_over_required": {
         "value": " 너무 큽니다."
     },
@@ -457,7 +466,7 @@
         "value": "중복 로그인이 발생하였습니다. 로그인 하시겠습니까?"
     },
     "alert_force_logout": {
-        "value": "중복 로그인이 발생하였습니다. 로그아웃 됩니다."
+        "value": "로그아웃 됩니다."
     },
     "alert_confirm_delete_co_developer": {
         "value": "정말 프로젝트 공유를 취소하시겠습니까?"

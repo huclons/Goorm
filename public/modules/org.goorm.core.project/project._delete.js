@@ -55,6 +55,7 @@ org.goorm.core.project._delete = {
 
 					notice.show(core.module.localization.msg.notice_project_delete_done);
 					if (postdata.project_path == core.status.current_project_path) {
+
 						
 
 						core.status.current_project_path = "";

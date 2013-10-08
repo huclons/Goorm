@@ -18,10 +18,20 @@ port = 9998; //default
 var home = process.env.HOME;
 var workspace =  null;
 
-//useonly(mode=basic)
+
+port = 9999; //default
+
+
+
+
+
+
+
 global.__redis_mode = false;
 global.__optimization_mode = false;
-//useonlyend
+
+
+
 
 
 
@@ -39,8 +49,7 @@ goorm.init = function() {
 		workspace = process.argv[4];
 	}
 
-
-	//useonly(mode=basic)
+	
 	if (process.argv[5] && process.argv[5] == 'true') {
 		global.__redis_mode = true;
 	}
@@ -48,8 +57,9 @@ goorm.init = function() {
 	if (process.argv[6] && process.argv[6] == 'true') {
 		global.__optimization_mode = true;
 	}
-	//useonlyend
+	
 
+	
 
 	
 
@@ -60,11 +70,13 @@ goorm.init = function() {
 
 	
 
-	//useonly(mode=basic)
+	
+
 	var routes = require('./routes')
 	  , socketio = require('socket.io')
 	  , http = require('http')
 	  , colors = require('colors')
+	
 	  , redis = require('socket.io/node_modules/redis');
 
 	var g_terminal = require("./modules/org.goorm.core.terminal/terminal");
@@ -72,10 +84,8 @@ goorm.init = function() {
 	
 	var g_utility = require("./modules/org.goorm.core.utility/utility");
 	var g_port_manager = require("./modules/org.goorm.core.utility/utility.port_manager");
-	//useonlyend
 
 	
-
 
 	global.__path = __dirname+"/";
 
@@ -106,7 +116,23 @@ goorm.init = function() {
 		global.__workspace = workspace;
 	}
 	else {
-		global.__workspace = __path + "workspace/";
+		
+		var base = process.env.HOME + "/goorm_workspace/";
+
+		if(!fs.existsSync(base)){
+			fs.mkdir(base, 0755, function(err){
+				if (err) {
+					console.log('Cannot make goorm_workspace : '+base+' ... ', err);
+				}
+			});
+		}
+
+		global.__workspace = process.env.HOME + "/goorm_workspace/";
+		
+
+		
+
+		
 	}
 
 	if (config_data.temp_dir != undefined) {
@@ -127,7 +153,6 @@ goorm.init = function() {
 		}
 	}
 	else global.__plugin_exclude_list = null;
-
 	// Session Store
 	//
 	global.store = null;
@@ -147,15 +172,15 @@ goorm.init = function() {
 	console.log("temp_dir_path: " + __temp_dir);
 
 	console.log();
+	console.log('If you want to change a workspace, use -w option.');
+	console.log('node goorm.js start -w [workspace]')
+	console.log();
 	console.log("goormIDE:: starting...".yellow);
 	console.log("--------------------------------------------------------".grey);
-
 
 	
 
 	// Configuration
-
-	//useonly(mode=basic)
 	goorm.configure(function(){
 		goorm.set('views', __dirname + '/views');
 		if ( !__optimization_mode ) {
@@ -165,15 +190,18 @@ goorm.init = function() {
 			goorm.engine('html', require('ejs').renderFile);
 		}
 		goorm.use(express.bodyParser({ keepExtensions: true, uploadDir: __temp_dir, limit : 10000000 }));
+
+		
+
 		goorm.use(express.methodOverride());
 		goorm.use(goorm.router);
 		goorm.use(express.static(__dirname + '/public'));
 		goorm.use(express.static(__dirname + '/plugins'));
+
+		
+
 		goorm.use(express.static(__temp_dir));
 	});
-	//useonlyend
-
-	
 
 	goorm.configure('development', function(){
 	  goorm.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
@@ -197,15 +225,19 @@ goorm.init = function() {
 	});
 
 	var check_session = function(req, res, next) {
-		//useonly(mode=basic)
-			next();
-		//useonlyend
+		
+		next();
+		
+
+		
 
 		
 	}
 
 	// Routes
 	goorm.get('/',  routes.index);
+
+	
 
 	//for project
 	goorm.get('/project/new', check_session, routes.project.do_new);
@@ -219,11 +251,19 @@ goorm.init = function() {
 	goorm.get('/project/get_contents', routes.project.get_contents);
 	goorm.get('/project/move_file', check_session, routes.project.move_file);
 
+	
+
+	
+
 	//for plugin
 	goorm.get('/plugin/get_list', routes.plugin.get_list);
+	//goorm.get('/plugin/install',  routes.plugin.install);
 	goorm.get('/plugin/new',  routes.plugin.do_new);
 	goorm.get('/plugin/make_template',  routes.plugin.make_template);
+	//goorm.get('/plugin/debug',  routes.plugin.debug);
 	goorm.get('/plugin/run',  routes.plugin.run);
+
+	
 
 	//for filesystem
 	goorm.get('/file/new', check_session, routes.file.do_new);
@@ -255,8 +295,17 @@ goorm.init = function() {
 	goorm.get('/preference/get_goorm_info',  routes.preference.get_goorm_info);
 	goorm.get('/preference/put_filetypes',  routes.preference.put_filetypes);
 
+	//for theme
+	goorm.get('/theme/get_list',  routes.theme.get_list);
+	goorm.post('/theme/get_contents',  routes.theme.get_contents);
+	goorm.post('/theme/put_contents',  routes.theme.put_contents);
+
 	//for help
 	goorm.get('/help/get_readme_markdown',  routes.help.get_readme_markdown);
+
+	
+
+	
 
 	//for download and upload
 	goorm.get('/download', check_session,  routes.download);
@@ -267,33 +316,36 @@ goorm.init = function() {
 	goorm.post('/upload/dir_file', check_session, routes.upload_dir_file);
 	goorm.post('/upload/dir_skeleton', check_session, routes.upload_dir_skeleton);
 
+	
+
 	goorm.get('/alloc_port',  function(req, res) {
 		// req : port, process_name
 		res.json(g_port_manager.alloc_port(req.query));
 	});
+
+	
+
 	goorm.get('/remove_port',  function(req, res) {
 		// req : port
 		res.json(g_port_manager.remove_port(req.query));
 	});
 
-
-
 	
 
-
 	goorm.get('/get_option', function(req, res){
+
+		
 		var is_optimization = __optimization_mode;
 
-		//useonly(mode=basic)
 		var option = {
-			'is_optimization' : is_optimization,
+			'is_optimization' : is_optimization
 		}
-		//useonlyend
+		
 
 		
 
 		res.json(option);
-	});
+	})
 
 	goorm.get('/edit/get_dictionary',  routes.edit.get_dictionary);
 	goorm.get('/edit/get_object_explorer',routes.edit.get_object_explorer);
@@ -302,6 +354,8 @@ goorm.init = function() {
 	goorm.post('/edit/save_tags', routes.edit.save_tags);
 	goorm.get('/edit/load_tags', routes.edit.load_tags);
 	
+	
+
 	// clustering
 	//
 	if(global.__redis_mode) {
@@ -310,21 +364,22 @@ goorm.init = function() {
 		global.__redis.sub = redis.createClient();
 		global.__redis.store = redis.createClient();
 
-		//useonly(mode=basic)
+		
+
 		g_terminal.bind(global.__redis.sub, global.__redis.pub);
 
 		__redis.sub.on('message', function(channel, message) {
 			switch(channel) {
+				
+
 				case 'demo_terminal':
 					g_terminal.store(channel, message);
 					break;
+
 				default:
 					break;
 			}
-		});
-		//useonlyend
-
-		
+		})
 
 		if (cluster.isMaster) {
 			for (var i = 0; i < numCPUs; i++) {
@@ -389,7 +444,7 @@ goorm.init = function() {
 		});
 
 		g_terminal.start(io);
-		
+
 		
 
 		g_port_manager.alloc_port({ "port": port,

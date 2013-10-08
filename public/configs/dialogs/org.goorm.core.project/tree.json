@@ -11,6 +11,7 @@
 					}
 				]
 			},
+			
 			{	"label" : "<span localization_key='setting' tab_action='Setting'>Setting</span>",
 				"id" : "Setting",
 				"tab" : [

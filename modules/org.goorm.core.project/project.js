@@ -20,6 +20,8 @@ var exec = require('child_process').exec;
 
 
 
+
+
 module.exports = {
 	do_new: function (query, evt) {
 		var self = this;
@@ -42,7 +44,7 @@ module.exports = {
 
 						evt.emit("project_do_new", data);
 					} else {
-						//useonly(mode=basic)
+						
 						fs.mkdir(__workspace + '/' + project_dir, '0777', function (err) {
 							if (err ) {
 								data.err_code = 30;
@@ -81,7 +83,9 @@ module.exports = {
 								});
 							}
 						});
-						//useonlyend
+						
+
+						
 
 						
 					}
@@ -100,6 +104,9 @@ module.exports = {
 		data.err_code = 0;
 		data.message = "process done";
 
+		
+
+		
 		if (query.project_path ) {
 			rimraf(__workspace + '/' + query.project_path, function (err) {
 				if (err ) {
@@ -118,12 +125,7 @@ module.exports = {
 
 			evt.emit("project_do_delete", data);
 		}
-		/*
-		rimraf(__path+query.path, function(err) {
-		evt.emit("project_do_delete", err);			
-		});
-*/
-
+		
 	},
 
 	do_import: function (query, file, evt) {
@@ -288,8 +290,6 @@ module.exports = {
 		var is_empty = true;
 
 		
-
-		//useonly(mode=basic)
 		var __path = __workspace + '/';
 		fs.readdir(__path, function (err, files) {
 			if (!err) {
@@ -329,8 +329,12 @@ module.exports = {
 				evt.emit("project_get_list", projects);
 			}
 		});
-		//useonlyend
+		
+
+		
 	},
+
+	
 
 	set_property: function (query, evt) {
 		var data = {};

@@ -151,13 +151,12 @@ org.goorm.core.project.build.project = {
 		// 	return false;
 		// }
 
-		//useonly(mode=basic)
+		
 		self.project_list();
 		self.is_onclick = false;
 		self.dialog.panel.show();
-		//useonlyend
-
 		
+
 		
 	},
 

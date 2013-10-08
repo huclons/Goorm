@@ -13,11 +13,8 @@
 					{
 						"label" : "<span localization_key='libraries'>Libraries</span>",
 						"html"	: "configs/preferences/org.goorm.core/system.libraries.html"
-					},
-					{
-						"label" : "<span>API</span>",
-						"html"	: "configs/preferences/org.goorm.core/system.api.html"
 					}
+					
 				]
 			},
 			{	"label" : "<span localization_key='editor' tab_action='Editor'>Editor</span>",
@@ -31,6 +28,7 @@
 					}
 				]
 			},
+			
 			{	"label" : "<span localization_key='filetype' tab_action='FileType'>File Type</span>",
 				"id" : "FileType",
 				"tab" : [

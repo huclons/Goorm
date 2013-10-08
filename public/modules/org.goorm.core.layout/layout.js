@@ -328,6 +328,8 @@ org.goorm.core.layout = {
 		delete this;
 	},
 
+	
+
 	attach_object_explorer: function (target) {
 		var self = this;
 		//attaching tab element
@@ -340,6 +342,16 @@ org.goorm.core.layout = {
 		$("#current_object_explorer").css("text-align", "left").css("font-size", "11px");
 		self.object_explorer = new org.goorm.core.object.explorer();
 		self.object_explorer.init('object_tree');
+	},
+
+	
+
+	attach_properties: function () {
+
+	},
+
+	attach_message: function () {
+
 	},
 
 	attach_toolbar: function (target) {
@@ -357,6 +369,8 @@ org.goorm.core.layout = {
 		this.debug.init();
 		core.module.debug = this.debug;
 	},
+
+	
 
 	attach_terminal: function (target) {
 		var self = this;
@@ -445,7 +459,5 @@ org.goorm.core.layout = {
 		self.layout.getUnitByPosition("top").set("height", $("#goorm_mainmenu").height() + $("#goorm_main_toolbar").height() + 7);
 
 		$(core).trigger("layout_resized");
-	},
-
-	
+	}
 };

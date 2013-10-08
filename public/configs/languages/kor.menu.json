@@ -106,6 +106,9 @@
             "file_import": {
                 "value": "파일 가져오기/업로드"
             },
+            "folder_upload": {
+                "value": "폴더 업로드"
+            },
             "file_export": {
                 "value": "파일 내보내기"
             },
@@ -366,7 +369,7 @@
                     "window_right_layout_toggle_communication": {
                         "value": "커뮤니케이션 보기"
                     },
-                    "window_right_layout_toggle_histroy": {
+                    "window_right_layout_toggle_history": {
                         "value": "히스토리 보기"
                     },
                     "window_right_layout_toggle_outline": {

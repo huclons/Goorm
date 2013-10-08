@@ -1,5 +1,9 @@
 !!! 5
+
 html
+
+
+
 	head
 		meta(http-equiv='Content-Type',	content='text/html;	charset=UTF-8')
 		title goormIDE
@@ -15,7 +19,6 @@ html
 
 		//CSS : goorm
 		link(rel='stylesheet', type='text/css', href='/css/goorm.css')
-		link(rel='stylesheet', type='text/css', href='/configs/themes/default/default.css')
 
 		//CSS : CodeMirror
 		link(rel='stylesheet', type='text/css', href='/lib/net.codemirror.code/theme/elegant.css')
@@ -24,6 +27,7 @@ html
 		//CSS : PDF VIEWER
 		link(rel='stylesheet', type='text/css', href='/lib/com.pdf.viewer/css/style.css')
 
+		
 		//JS : jquery
 		script(type='text/javascript', src='/lib/com.jquery.code/jquery-2.0.3.js')
 		script(type='text/javascript', src='/lib/com.jqueryui.code/jquery-ui-1.10.3.custom.js')
@@ -31,9 +35,6 @@ html
 		script(type='text/javascript', src='/lib/com.jquery.code/jquery.form.js')
 		script(type='text/javascript', src='/lib/com.jquery.code/jquery.mousewheel.js')
 		script(type='text/javascript', src='/lib/com.jquery.code/jquery.fixheadertable.js')
-
-
-
 
 		//JS : yui
 		script(type='text/javascript', src='lib/com.yahoo.developer.yui/build/yahoo/yahoo.js')
@@ -105,7 +106,11 @@ html
 		script(type='text/javascript', src='/lib/js.tty.code/term.js')
 
 		
+		
 
+		
+
+		
 		- if( mode == 'optimization' ) {
 			//JS : goorm
 			script(type='text/javascript', src='/goorm.compressed.js')
@@ -118,6 +123,7 @@ html
 			script(type='text/javascript', src='/modules/org.goorm.core/core.fn.js')
 			script(type='text/javascript', src='/modules/org.goorm.core/core.user.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.layout/layout.js')
+						
 			script(type='text/javascript', src='/modules/org.goorm.core.layout/layout.workspace.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.utility/utility.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.utility/utility.message.js')
@@ -149,9 +155,7 @@ html
 			script(type='text/javascript', src='/modules/org.goorm.core.object/object.ui.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.object/object.ui.line.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.object/object.ui.square.js')
-
 			
-
 			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.confirmation.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.confirmation.save.js')
@@ -159,14 +163,23 @@ html
 			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.notice.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.wizard.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.dialog/dialog.explorer.js')
-
+			
 			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.dialog.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.manager.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.language.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.filetype.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.preference/preference.system.info.js')
-			
+			script(type='text/javascript', src='/modules/org.goorm.core.theme/theme.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.theme/theme.manager.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.theme/theme.details.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.theme/theme.details.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.theme/theme._new.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.theme/theme._new.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.theme/theme._css.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.theme/theme._css.dialog.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.theme/theme.area.js')
+			script(type='text/javascript', src='/modules/org.goorm.core.theme/theme.area.dialog.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.printer/printer.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.printer/printer.edit.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.printer/printer.design.js')
@@ -198,9 +211,7 @@ html
 			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.configuration.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.project/project.build.configuration.dialog.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.project/project.list.js')
-
 			
-
 			script(type='text/javascript', src='/modules/org.goorm.core.file/file.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.file/file._new.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.file/file._new.dialog.js')
@@ -245,6 +256,7 @@ html
 
 			
 
+			//-script(type='text/javascript', src='/modules/org.goorm.core.code_generator/code_generator.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.help/help.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.help/help.contents.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.shortcut/shortcut.js')
@@ -256,6 +268,8 @@ html
 			script(type='text/javascript', src='/modules/org.goorm.core.help/help.about.js')
 			script(type='text/javascript', src='/modules/org.goorm.core.help/help.about.dialog.js')
 
+			
+
 			script(type='text/javascript', src='/modules/org.goorm.core.localization/localization.js')
 
 			
@@ -263,7 +277,12 @@ html
 			script(type='text/javascript', src='/modules/org.goorm.plugin/plugin.js')
 			script(type='text/javascript', src='/modules/org.goorm.plugin/plugin.manager.js')
 			script(type='text/javascript', src='/modules/org.goorm.plugin/plugin.loader.js')
+
+			
+
+			
 		- }
+		
 
 		script(type='text/javascript', src='/socket.io/socket.io.js')
 
@@ -308,6 +327,6 @@ html
 			});
 
 			
-			
-		body
-			block content
+
+	body
+		block content

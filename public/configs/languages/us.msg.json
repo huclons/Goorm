@@ -158,6 +158,15 @@
     "confirmation_language_message": {
         "value": "언어설정을 한국어로 변경하시겠습니까?"
     },
+    "confirmation_auto_logout": {
+        "value": "Auto Logout"
+    },
+    "confirmation_auto_logout_keep_using": {
+        "value": "Keep Using."
+    },
+    "confirmation_auto_logout_warning": {
+        "value": "second later auto logout"
+    },
     "alert_page_over_required": {
         "value": "too large"
     },
@@ -450,7 +459,7 @@
         "value" : "This account already has login.<br>Do you really want to login?"
     },
     "alert_force_logout" : {
-        "value" : "From another device attempts to login into your accout. Current connection will be terminated."
+        "value" : "Current connection will be terminated."
     },
     "alert_confirm_delete_co_developer" : {
         "value" : "Do you really want to fire the co-developer?"
