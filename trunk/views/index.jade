@@ -81,17 +81,6 @@ block content
 															label(for='collaboration_check')
 																		input(id='collaboration_check')(type='checkbox', name='COLLABORATION', validate='')
 																		| Use Collaboration
-			div(id='head_project.toolbar')
-						div(id='project.toolbar').toolbar_part
-									a(action='run', tooltip='project_run')
-												.toolbar_button.run
-															.toolbar-run
-									a(action='build_project', tooltip='project_build_project')
-												.toolbar_button.build_project
-															.toolbar-build
-									a(action='build_clean', tooltip='project_clean')
-												.toolbar_button.build_clean
-															.toolbar-clean
 			div(id='head_system.libraries')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -116,6 +105,17 @@ block content
 															div(id='java_version')(style='float:left;') Java : 
 												div(style='width:100%; height:22px;display:none')
 															div(id='python_version')(style='float:left;') Python : 
+			div(id='head_project.toolbar')
+						div(id='project.toolbar').toolbar_part
+									a(action='run', tooltip='project_run')
+												.toolbar_button.run
+															.toolbar-run
+									a(action='build_project', tooltip='project_build_project')
+												.toolbar_button.build_project
+															.toolbar-build
+									a(action='build_clean', tooltip='project_clean')
+												.toolbar_button.build_clean
+															.toolbar-clean
 			div(id='head_project._new')
 						.content_header(localization_key='dialog_new_project') New Project
 						div(id='project_new')(style='text-align:left; font-size:11px;')
@@ -173,10 +173,6 @@ block content
 																																	input(id='project_new_location')(type='hidden', name='project_import_location', readonly='readonly')
 																		input(id='new_project_using_plugin')(type='hidden', value='no')
 																		div(id='new_project_expansion_container')(style='width:770px;')
-			div(id='head_tutorial_intro')
-						div(id='tutorial-intro').tutorial-dialog(title='튜토리얼')
-									img(id='tutorial-intro-img')(src='modules/org.goorm.core.tutorial/book.jpg', align='left')
-									| 본 시스템은 "HTML5+jQuery" 서적의 다양한 예제를 직접 개발하고 테스트 할 수 있는 클라우드 기반의 통합 개발환경입니다. "튜토리얼 시작"을 누르면, 간단한 시스템 사용방법을 안내 받으실 수 있습니다.
 			div(id='head_project._import')
 						.content_header Import Project
 						div(id='project_import')(style='text-align:left; font-size:11px;')
@@ -297,11 +293,6 @@ block content
 												ul
 															li.yuimenuitem
 																		a.yuimenuitemlabel(action='property', localization_key='file_property_context') Properties
-			div(id='head_tutorial_step1')
-						div(id='tutorial-step1').tutorial-dialog(title='새 프로젝트 만들기')
-									| 책의 예제를 테스트하기 위해 새 프로젝트를 만들어 봅시다.
-									br
-									| 상단 좌측에 "새 프로젝트" 버튼을 클릭하여 새 프로젝트 창을 띄웁니다.
 			div(id='head_design.setting')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -392,31 +383,6 @@ block content
 												div(style='float:right;')
 															button(type='button', style='width:70px; height:20px;') Browse...
 						div
-			div(id='head_file._import')
-						.content_header(localization_key='dialog_file_import') File Import/Upload
-						.content_guide_message(localization_key='dialog_file_import_guide') Select the file to import
-						div(id='file_import')(style='text-align:left; font-size:11px;')
-									form(id='myForm')(action='file/import', method='post', enctype='multipart/form-data')
-												.wizard_step(step='1')
-															div(style='width:100%; height:21px; overflow:auto; font-size:11px;')
-																		div(style='float:left;')
-																					span(localization_key='common_location') Location : 
-																					input(id='file_import_location_path')(type='text', name='file_import_location_path', style='width:560px; height:15px;', readonly='readonly')
-																		div(style='float:right;')
-																					span(localization_key='common_target') Target : 
-																					select(name='selectbox')
-																								option(value='2') Remote
-															div(id='import_dialog_middle')(style='width:780px; height:275px; margin-top:8px; font-size:11px;')
-																		div(id='import_dialog_left').dialogs_left
-																					div(id='file_import_dir_tree').directory_treeview.dialogs_left_inner
-																		div(id='file_import_files').dialog_center
-															div(style='margin-top:10px; border:1px solid #CCC; float:left; width:768px; padding:5px;')
-																		div(style='overflow:auto; font-size:11px; float:left;')
-																					span(localization_key='dialog_file_import_file') Upload the file to import
-																		div(style='overflow:auto; font-size:11px; float:right;')
-																					div(style='float:left;')
-																								input(id='file_import_file')(type='file', name='file')
-																								div(id='upload_output')
 			div(id='head_help.bug_report')
 						div(style='font-size:11px; text-align:left;')
 									fieldset
@@ -480,23 +446,31 @@ block content
 			div(id='head_project.build.configuration')
 						div(id='build_configuration')(style='text-align:left;')
 									div
-			div(id='head_auth.signup')
-						div(id='goorm_signup_container').signup_container
-									.content_header
-												b Sign Up
-									div(id='goorm_signup_container_child').signup_content_container
-												.goorm_signup_span(localization_key='dialog_goorm_profile_id')			ID : 
-												input.goorm_signup_input(type='text', name='signup_id_input')
-												.goorm_signup_span(localization_key='dialog_goorm_profile_password')			PW : 
-												input.goorm_signup_input(type='password', name='signup_password_input')
-												.goorm_signup_span(localization_key='dialog_goorm_profile_password_confirm')			Confirm PW : 
-												input.goorm_signup_input(type='password', name='signup_repassword_input')
-												.goorm_signup_span(localization_key='dialog_goorm_profile_name')			Name : 
-												input.goorm_signup_input(type='text', name='signup_name_input')
-												.goorm_signup_span(localization_key='dialog_goorm_profile_nick')			Nickname : 
-												input.goorm_signup_input(type='text', name='signup_nick_input')
-												.goorm_signup_span(localization_key='dialog_goorm_profile_email')			E-mail : 
-												input.goorm_signup_input(type='text', name='signup_email_input')
+			div(id='head_file._import')
+						.content_header(localization_key='dialog_file_import') File Import/Upload
+						.content_guide_message(localization_key='dialog_file_import_guide') Select the file to import
+						div(id='file_import')(style='text-align:left; font-size:11px;')
+									form(id='myForm')(action='file/import', method='post', enctype='multipart/form-data')
+												.wizard_step(step='1')
+															div(style='width:100%; height:21px; overflow:auto; font-size:11px;')
+																		div(style='float:left;')
+																					span(localization_key='common_location') Location : 
+																					input(id='file_import_location_path')(type='text', name='file_import_location_path', style='width:560px; height:15px;', readonly='readonly')
+																		div(style='float:right;')
+																					span(localization_key='common_target') Target : 
+																					select(name='selectbox')
+																								option(value='2') Remote
+															div(id='import_dialog_middle')(style='width:780px; height:275px; margin-top:8px; font-size:11px;')
+																		div(id='import_dialog_left').dialogs_left
+																					div(id='file_import_dir_tree').directory_treeview.dialogs_left_inner
+																		div(id='file_import_files').dialog_center
+															div(style='margin-top:10px; border:1px solid #CCC; float:left; width:768px; padding:5px;')
+																		div(style='overflow:auto; font-size:11px; float:left;')
+																					span(localization_key='dialog_file_import_file') Upload the file to import
+																		div(style='overflow:auto; font-size:11px; float:right;')
+																					div(style='float:left;')
+																								input(id='file_import_file')(type='file', name='file')
+																								div(id='upload_output')
 			div(id='head_theme.details.center.tab_menu')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -677,11 +651,6 @@ block content
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
-			div(id='head_auth.coverage')
-						div(id='coverage_content_container')
-									div(id='file_area')
-									div(id='code_area')
-												textarea.code_editor Loading Data...
 			div(id='head_preference')
 						div
 									div(style='float:left; width:200px; height:400px; padding:5px; border:1px solid #ccc; background-color:#fff; overflow:auto; font-size:11px;')
@@ -756,16 +725,12 @@ block content
 												div(id='div_check_for_update')(style='float:left; width:100%; height:50px; text-align:left;')
 															font(style='font-size:14px;')
 																		span(localization_key='dialog_help_check_for_updates_searching') Searching for updates..
-			div(id='head_auth.find_info')
-						div(id='goorm_find_info_container').find_info_container
-									.find_info_content_container
-												input(id='find_info_id_bt').goorm_find_info_id_bt(type='button', name='find_info_id_bt')
-												input(id='find_info_pw_bt').goorm_find_info_pw_bt(type='button', name='find_info_pw_bt')
-			div(id='head_tutorial_step4')
-						div(id='tutorial-step4').tutorial-dialog(title='프로젝트 생성 완료')
-									| 프로젝트가 성공적으로 생성되었습니다! 생성된 프로젝트 파일은 좌측 탐색창을 통해 확인 할 수 있습니다.
-									br
-									| 이번엔 해당 프로젝트를 실행시키도록 하겠습니다. 상단 "실행" 버튼을 누릅니다.
+			div(id='head_terminal.context')
+						div(id='terminal.context_[{@FINGERPRINT}]')
+									.bd
+												ul.first-of-type
+															li(id='context_clear').yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='do_terminal_clear', localization_key='terminal_delete_edit_terminal') Clear
 			div(id='head_system.info')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -774,12 +739,6 @@ block content
 															div(id='server_os')(style='float:left;') OS : 
 												div(style='width:100%; height:22px;')
 															div(id='node_version')(style='float:left;') Node.js : 
-			div(id='head_terminal.context')
-						div(id='terminal.context_[{@FINGERPRINT}]')
-									.bd
-												ul.first-of-type
-															li(id='context_clear').yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='do_terminal_clear', localization_key='terminal_delete_edit_terminal') Clear
 			div(id='head_edit.theme')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -823,26 +782,6 @@ block content
 																		li
 																					a(href='javascript: ', classname='license') license
 									div(id='help_contents_middle')
-			div(id='head_auth.profile')
-						div(id='goorm_profile_container').profile_container
-									.content_header
-												b(localization_key='dialog_goorm_profile_header') User Profile
-									div(id='profile_content_container').profile_content_container
-												.profile_area
-															label.goorm_profile_span(for='profile_id_input', localization_key='dialog_goorm_profile_id')			ID : 
-															input(id='profile_id_input').goorm_profile_input(type='text', name='profile_id_input', readonly='readonly')
-												.profile_area
-															label.goorm_profile_span(for='profile_name_input', localization_key='dialog_goorm_profile_name')			Name : 
-															input(id='profile_name_input').goorm_profile_input(type='text', name='profile_name_input', readonly='readonly')
-												.profile_area
-															label.goorm_profile_span(for='profile_nickname_input', localization_key='dialog_goorm_profile_nick')			Nickname : 
-															input(id='profile_nickname_input').goorm_profile_input(type='text', name='profile_nickname_input', readonly='readonly')
-												.profile_area
-															label.goorm_profile_span(for='profile_email_input', localization_key='dialog_goorm_profile_email')			E-mail : 
-															input(id='profile_email_input').goorm_profile_input(type='text', name='profile_email_input', readonly='readonly')
-			div(id='head_tutorial_step3')
-						div(id='tutorial-step3').tutorial-dialog(title='새 프로젝트 생성')
-									| 원하는 프로젝트 이름과 내용을 입력한 후, "확인" 버튼을 눌러 프로젝트를 생성합니다.
 			div(id='head_edit.go_to_line')
 						div
 									div(style='width:145px; font-size:11px; text-align:left;')
@@ -920,14 +859,6 @@ block content
 												div(style='float:right')
 															a(href='#', action='scm_property_checkout')
 																		button.scm_checkout_bt(type='button', localization_key='dialog_project_property_checkout', style='padding:6px 10px;') Checkout
-			div(id='head_tutorial_step5')
-						div(id='tutorial-step5').tutorial-dialog(title='프로젝트 실행 완료')
-									| 실행된 프로젝트는 새 창을 통해 확인할 수 있습니다. "실행" 버튼을 누를때마다 해당 창이 새로고침되며, 파일을 편집하고 저장할 때마다(단축키 Ctrl+S) 자동으로 화면을 갱신합니다.
-									br
-									br
-									| 지금까지 프로젝트를 생성하고 실행하는 과정을 간단하게 살펴보았습니다. 더 자세한 사용방법은 도움말이나 구름 홈페이지(
-									a(href='http://goorm.io', target='_blank') http://goorm.io
-									| )를 참고하시기 바랍니다.
 			div(id='head_file._new.other')
 						.content_header(localization_key='dialog_file_new_other_file') New Other File
 						.content_guide_message(localization_key='dialog_file_new_other_file_guide') Select file type to create
@@ -1123,13 +1054,6 @@ block content
 																								span(localization_key='common_filetype') File Type
 																					td(style='padding-top:5px; text-align:right;')
 																								select(id='file_move_file_type')(style='width:706px; height:20px;')
-			div(id='head_auth.find_id')
-						div(id='goorm_find_id_container').find_id_container
-									.find_id_content_container
-												.goorm_find_id_span(localization_key='dialog_goorm_profile_name')			Name : 
-												input.goorm_find_id_input(type='text', name='find_id_name_input')
-												.goorm_find_id_span(localization_key='dialog_goorm_profile_email')			E-mail : 
-												input.goorm_find_id_input(type='text', name='find_id_email_input')
 			div(id='head_edit.setting')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -1309,16 +1233,6 @@ block content
 															| Tips and Tricks step 4
 												.wizard_step(step='20', style='display:none;')
 															| Tips and Tricks step 5
-			div(id='head_project.setting')
-						div(style='float:left; font-size:11px; width : 100%;')
-									fieldset(style='height : 100%;')
-												legend(localization_key='project_setting') Project setting
-												div(style='width:100%; ')
-															.checkbox_div(style='float:left; width:200px; ')
-																		span.checkbox
-																					input(id='show_line_numbers').checkbox_margin(type='checkbox', name='building_after_save_option')
-																					label(data-on='', data-off='')
-																		label(for='building_after_save_option', localization_key='auto_build_after_save') Save and build
 			div(id='head_plugin.java_examples.interface')
 						div
 									.content_header
@@ -1344,6 +1258,16 @@ block content
 																		| public
 																		input(type='radio', name='java_interface_modifier', value='default', style='margin-left:10px;vertical-align: middle')
 																		| default
+			div(id='head_project.setting')
+						div(style='float:left; font-size:11px; width : 100%;')
+									fieldset(style='height : 100%;')
+												legend(localization_key='project_setting') Project setting
+												div(style='width:100%; ')
+															.checkbox_div(style='float:left; width:200px; ')
+																		span.checkbox
+																					input(id='show_line_numbers').checkbox_margin(type='checkbox', name='building_after_save_option')
+																					label(data-on='', data-off='')
+																		label(for='building_after_save_option', localization_key='auto_build_after_save') Save and build
 			div(id='head_plugin.java.interface')
 						div
 									.content_header
@@ -1567,43 +1491,6 @@ block content
 						div(id='buttons_for_theme')(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
-			div(id='head_system.animations')
-						div(style='font-size:11px; margin-top:10px;')
-									fieldset
-												legend(localization_key='dialog_preference_animations_configuration_guide') Animation Configuration
-												div(style='width:100%; height:22px;')
-															.checkbox_div(style='float:left;')
-																		span.checkbox
-																					input(id='menu_animations').checkbox_margin(type='checkbox', name='preference.core.animation.menu')
-																					label(data-on='', data-off='')
-																		label(for='preference.core.animation.menu', localization_key='dialog_preference_animations_config') Menu Animations
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
-			div(id='head_intro')
-						link(rel='stylesheet', href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')
-						div(id='tutorial-intro').tutorial-dialog(title='튜토리얼')
-									img(src='modules/org.goorm.core.tutorial/book.jpg', align='left')
-									| 본 시스템은 "HTML5+jQuery" 서적의 다양한 예제를 직접 개발하고 테스트 할 수 있는 클라우드 기반의 통합 개발환경입니다. "튜토리얼 시작"을 누르면, 간단한 시스템 사용방법을 안내 받으실 수 있습니다.
-						div(id='tutorial-step1').tutorial-dialog(title='새 프로젝트 만들기')
-									| 책의 예제를 테스트하기 위해 새 프로젝트를 만들어 봅시다.
-									br
-									| 상단 좌측에 "새 프로젝트" 버튼을 클릭하여 새 프로젝트 창을 띄웁니다.
-						div(id='tutorial-step2').tutorial-dialog(title='새 프로젝트 예제 선택')
-									| 새 프로젝트 창이 열리면, 원하는 예제 프로젝트를 선택하고 "다음" 버튼을 누릅니다.
-						div(id='tutorial-step3').tutorial-dialog(title='새 프로젝트 생성')
-									| 원하는 프로젝트 이름과 내용을 입력한 후, "확인" 버튼을 눌러 프로젝트를 생성합니다.
-						div(id='tutorial-step4').tutorial-dialog(title='프로젝트 생성 완료')
-									| 프로젝트가 성공적으로 생성되었습니다! 생성된 프로젝트 파일은 좌측 탐색창을 통해 확인 할 수 있습니다.
-									br
-									| 이번엔 해당 프로젝트를 실행시키도록 하겠습니다. 상단 "실행" 버튼을 누릅니다.
-						div(id='tutorial-step5').tutorial-dialog(title='프로젝트 실행 완료')
-									| 실행된 프로젝트는 새 창을 통해 확인할 수 있습니다. "실행" 버튼을 누를때마다 해당 창이 새로고침되며, 파일을 편집하고 저장할 때마다(단축키 Ctrl+S) 자동으로 화면을 갱신합니다.
-									br
-									br
-									| 지금까지 프로젝트를 생성하고 실행하는 과정을 간단하게 살펴보았습니다. 더 자세한 사용방법은 도움말이나 구름 홈페이지(
-									a(href='http://goorm.io', target='_blank') http://goorm.io
-									| )를 참고하시기 바랍니다.
 			div(id='head_project.build.project')
 						.content_header(localization_key='dialog_project_build') Build Project
 						.content_guide_message(localization_key='dialog_project_build_guide') Select project to build
@@ -1704,26 +1591,24 @@ block content
 						div(style='margin-top:5px; width:95px; height:18px; float:left; padding-top:2px; padding-right:5px; text-align:right; font-size:11px') Property : 
 						input(id='new_property').example_property(type='text', style='margin-top:5px; width:96px; height:18px; border: 1px solid #ccc; float:right; font-size:11px', value='margin-top')
 						br
+			div(id='head_system.animations')
+						div(style='font-size:11px; margin-top:10px;')
+									fieldset
+												legend(localization_key='dialog_preference_animations_configuration_guide') Animation Configuration
+												div(style='width:100%; height:22px;')
+															.checkbox_div(style='float:left;')
+																		span.checkbox
+																					input(id='menu_animations').checkbox_margin(type='checkbox', name='preference.core.animation.menu')
+																					label(data-on='', data-off='')
+																		label(for='preference.core.animation.menu', localization_key='dialog_preference_animations_config') Menu Animations
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
 			div(id='head_theme.area')
 						div(style='width:31px; height:18px; float:left; padding-top:2px; padding-left:9px; text-align:left; font-size:11px; margin-top:2px;') Area
 						input(id='newArea').exampleArea(type='text', style='width:150px; height:18px; border: 1px solid #ccc; float:left; font-size:11px; margin-top:2px;', value='workspace')
 						div(style='width:40px; font-size:11px; margin-top:15px; float:left') Note 
 						div(style='width:160px; font-size:11px; margin-top:15px; text-align:left; line-height:1; float:left') Area name should not include white-space
-			div(id='head_auth.find_pw')
-						div(id='goorm_find_pw_container').find_pw_container
-									.find_pw_content_container
-												.goorm_find_pw_span(localization_key='dialog_goorm_profile_id')			ID : 
-												input.goorm_find_pw_input(type='text', name='find_pw_id_input')
-												.goorm_find_pw_span(localization_key='dialog_goorm_profile_name')			Name : 
-												input.goorm_find_pw_input(type='text', name='find_pw_name_input')
-												.goorm_find_pw_span(localization_key='dialog_goorm_profile_email')			E-mail : 
-												input.goorm_find_pw_input(type='text', name='find_pw_email_input')
-			div(id='head_file.open_url')
-						div
-									div(style='font-size:11px; margin-bottom:8px; text-align:left;')
-												span(localization_key='dialog_file_open_url_guide') Type an URL to open
-									div(style='width:400px; height:50px; margin-top:8px; text-align:center;')
-												input(id='open_url_address')(type='text', value='http://', style='width:390px; height:20px; font-size:11px;')
 			div(id='head_filetype')
 						.content_guide_message(localization_key='dialog_preference_filetype_guide') Change file types
 						.filetype_contents(style='height:300px; padding-top:5px;')
@@ -1734,6 +1619,12 @@ block content
 									input(id='filetype_add')(type='button', value='Add')
 						div(style='float:right; margin-top:10px;')
 									input(id='filetype_save')(type='button', value='Save')
+			div(id='head_file.open_url')
+						div
+									div(style='font-size:11px; margin-bottom:8px; text-align:left;')
+												span(localization_key='dialog_file_open_url_guide') Type an URL to open
+									div(style='width:400px; height:50px; margin-top:8px; text-align:center;')
+												input(id='open_url_address')(type='text', value='http://', style='width:390px; height:20px; font-size:11px;')
 			div(id='head_project.open')
 						.content_header(localization_key='dialog_project_open') Open Project
 						.content_guide_message(localization_key='dialog_project_open_guide') Select project type
@@ -1763,17 +1654,39 @@ block content
 									a(action='do_redo', tooltip='edit_redo')
 												.toolbar_button.redo
 															.toolbar-redo
-			div(id='head_auth.manage')
-						div
-									div(style='float:left; width:200px; height:400px; padding:5px; border:1px solid #ccc; background-color:#fff; overflow:auto; font-size:11px;')
-												div(id='auth_manage_treeview').dialog_treeview
-									div(style='float:right; width:460px; height:410px; text-align:left;')
-												div(id='auth_manage_tabview').yui-navset
 			div(id='head_theme.details.top.text_menu')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
 												legend Top Text Menu
 												div(id='top-textmenu')(style='margin-left:11px')
+			div(id='head_project.explorer')
+						div(id='project.explorer_context')
+									.bd
+												ul.first-of-type
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='new_project', localization_key='file_new_project_context') New Project
+															li.yuimenuitem
+																		a.yuimenuitemlabel(action='open_project', localization_key='file_open_project_context') Open Project
+												ul
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='new_file_file', localization_key='file_new_file_context') New File
+															li.yuimenuitem
+																		a.yuimenuitemlabel(action='new_file_folder', localization_key='file_new_folder_context') New Folder
+															li.yuimenuitem
+																		a.yuimenuitemlabel(action='new_file_textfile', localization_key='file_new_untitled_text_file_context') New Untitled Text File
+												ul
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='import_file', localization_key='file_import_context') Import/Upload File
+															li.yuimenuitem
+																		a.yuimenuitemlabel(action='export_file', localization_key='file_export_context') Export File
+												ul
+															li.yuimenuitem
+																		a.yuimenuitemlabel(action='save_all_file', localization_key='file_save_all_context') Save All
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(href='#', action='refresh_project_directory', localization_key='file_refresh_context') Refresh
+												ul
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(href='#', action='show_properties', localization_key='project_properties_context') Project Properties
 			div(id='head_file._export')
 						.content_header(localization_key='dialog_file_export') File Export
 						.content_guide_message(localization_key='dialog_file_export_guide') Select the file to export
@@ -1805,48 +1718,6 @@ block content
 																								span(localization_key='dialog_file_export_exporttype') File Type
 																					td(style='padding-top:5px; text-align:right;')
 																								select(id='file_export_file_type')(style='width:680px; height:20px;')
-			div(id='head_project.explorer')
-						div(id='project.explorer_context')
-									.bd
-												ul.first-of-type
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='new_project', localization_key='file_new_project_context') New Project
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='open_project', localization_key='file_open_project_context') Open Project
-												ul
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='new_file_file', localization_key='file_new_file_context') New File
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='new_file_folder', localization_key='file_new_folder_context') New Folder
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='new_file_textfile', localization_key='file_new_untitled_text_file_context') New Untitled Text File
-												ul
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='import_file', localization_key='file_import_context') Import/Upload File
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='export_file', localization_key='file_export_context') Export File
-												ul
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='save_all_file', localization_key='file_save_all_context') Save All
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(href='#', action='refresh_project_directory', localization_key='file_refresh_context') Refresh
-												ul
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(href='#', action='show_properties', localization_key='project_properties_context') Project Properties
-			div(id='head_system.api')
-						div(id='preference.system.api.container')(style='font-size:11px; margin-top:10px;')
-									fieldset
-												legend(localization_key='dialog_preference_system_api_key_guide') API Key Setting
-												div(style='width:100%; height:30px;')
-															div(style='float:left; width:100%;')
-																		div(style='margin-bottom:8px;') Google Drive API Key : 
-																		input(id='preference.system.api.google_drive_key')(type='text', name='preference.system.api.google_drive_key', style='width:400px; margin-left:-2px;')
-									div(id='preference.system.api.button_container')(style='position: absolute;bottom: 10px;right:10px;')
-												input.restore_default(type='button', value='Restore Default')
-												input.apply(type='button', value='Apply')
-			div(id='head_tutorial_step2')
-						div(id='tutorial-step2').tutorial-dialog(title='새 프로젝트 예제 선택')
-									| 새 프로젝트 창이 열리면, 원하는 예제 프로젝트를 선택하고 "다음" 버튼을 누릅니다.
 			div(id='head_debug.toolbar')
 						div(id='debug.toolbar').toolbar_part
 									a(action='debug', tooltip='debug_start')
@@ -1867,6 +1738,17 @@ block content
 									a(action='debug_step_out', tooltip='debug_step_out')
 												.toolbar_button.debug_step_out.debug_not_active
 															.toolbar-debug-step-out
+			div(id='head_system.api')
+						div(id='preference.system.api.container')(style='font-size:11px; margin-top:10px;')
+									fieldset
+												legend(localization_key='dialog_preference_system_api_key_guide') API Key Setting
+												div(style='width:100%; height:30px;')
+															div(style='float:left; width:100%;')
+																		div(style='margin-bottom:8px;') Google Drive API Key : 
+																		input(id='preference.system.api.google_drive_key')(type='text', name='preference.system.api.google_drive_key', style='width:400px; margin-left:-2px;')
+									div(id='preference.system.api.button_container')(style='position: absolute;bottom: 10px;right:10px;')
+												input.restore_default(type='button', value='Restore Default')
+												input.apply(type='button', value='Apply')
 			div(id='head_file.upload')
 						.content_header(localization_key='dialog_file_cloud_upload') File Cloud Upload
 						.content_guide_message(localization_key='dialog_file_cloud_upload_guide') Select file to upload
@@ -2018,6 +1900,27 @@ block content
 																					input(id='search_use_regexp')(type='checkbox')
 																					label(data-on='', data-off='')
 																		label(for='use_regexp', localization_key='dialog_project_use_regular_expression_guide') Use regular expression
+			div(id='head_project._delete')
+						.content_header(localization_key='dialog_project_delete') Delete Project
+						.content_guide_message(localization_key='dialog_project_delete_guide') Select the project to delete
+						div(id='project.delete')(style='text-align:left;')
+									div(style='width:100%; height:20px; overflow:auto; font-size:11px;')
+												div(style='float:left;')
+															span(localization_key='common_location') Location : 
+															input(id='project_delete_location')(type='text', style='width:500px;', readonly='readonly')
+												div(style='float:right;')
+															span(localization_key='common_type') Type : 
+															select(id='project_delete_types').project_dialog_type(style='width:130px')
+																		option(value='All', selected='selected') All Project
+									div(id='project_delete_dialog_middle')(style='width:780px; height:320px; margin-top:8px; font-size:11px;')
+												div(id='project_delete_dialog_left').dialogs_left(style='width:250px;')
+															div(id='project_delete_list').dialogs_left_inner(style='height:318px;padding:0px;')
+												div(id='project_delete_dialog_center').dialog_center(style='height:318px;width:521px;')
+															div(id='project_delete_information')(style='padding:10px; line-height:18px;')
+									input(id='project_delete_path')(type='hidden')
+									input(id='project_delete_name')(type='hidden')
+									input(id='project_delete_type')(type='hidden')
+						div
 			div(id='head_project.build.all')
 						.content_header(localization_key='dialog_project_build_all') Build All
 						.content_guide_message(localization_key='dialog_project_build_all_guide') Build all projects below
