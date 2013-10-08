@@ -1,0 +1,2762 @@
+#goorm_top .yuimenubaritem .yuimenubaritemlabel {
+	font-family:Verdana, Arial, 굴림체, 굴림;
+	color:white;
+	outline:none;
+	border-top:1px solid transparent;
+	border-left:1px solid transparent;
+	border-right:1px solid transparent;
+}
+#goorm_top .yuimenubaritem .yuimenubaritemlabel-selected {
+	color:white !important;
+	background:#1b1b1c;
+	border-color:#333337;
+	background-image:none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	text-shadow:none;
+}
+#goorm_top .yuimenubar {
+	background:#2d2d30;
+	border-bottom:1px solid #2d2d30;
+}
+#goorm_top .yuimenuitem .yuimenuitemlabel {
+	color:white;
+}
+#goorm_top .yuimenuitem-selected {
+	background:#3e3e40;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#goorm_top .yuimenu ul {
+	border-color:#333337;
+}
+#goorm_top .yuimenu .bd {
+	background:#1b1b1c;
+	border-color:#333337;
+}
+#goorm_top .yuimenuitem-selected .yuimenuitemlabel {
+}
+#goorm_top .yuimenuitem-selected .helptext {
+}
+[localization_key=file_new] {
+/*	background-image:url(images/new.png) !important;
+*/}
+#goorm_mainmenu .menu-new-file {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-new-file:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 0px 0px !important; 
+}
+
+
+[localization_key=file_open_project] {
+/*	background-image:url(images/open_project.png) !important;
+*/}
+#goorm_mainmenu .menu-open-project {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-open-project:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -32px -0px !important; 
+}
+
+
+[localization_key=file_open_file] {
+/*	background-image:url(images/open_file.png) !important;
+*/}
+#goorm_mainmenu .menu-open-file {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-open-file:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -48px 0px !important; 
+}
+
+[localization_key=file_save] {
+/*	background-image:url(images/save.png) !important;
+*/}
+#goorm_mainmenu .menu-save {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-save:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -64px 0px !important; 
+}
+
+[localization_key=file_save_as] {
+/*	background-image:url(images/save_as.png) !important;
+*/}
+#goorm_mainmenu .menu-save-as {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-save-as:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -80px 0px !important; 
+}
+
+[localization_key=file_print] {
+/*	background-image:url(images/print.png) !important;
+*/}
+#goorm_mainmenu .menu-print {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-print:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -96px 0px !important; 
+}
+
+[localization_key=file_import] {
+/*	background-image:url(images/import.png) !important;
+*/}
+#goorm_mainmenu .menu-import {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-import:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -112px 0px !important; 
+}
+
+[localization_key=file_export] {
+/*	background-image:url(images/export.png) !important;
+*/}
+#goorm_mainmenu .menu-export {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-export:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -128px 0px !important; 
+}
+
+[localization_key=file_exit] {
+/*	background-image:url(images/exit.png) !important;
+*/}
+
+[localization_key=edit_undo] {
+/*	background-image:url(images/undo.png) !important;
+*/}
+#goorm_mainmenu .menu-undo {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-undo:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -144px 0px !important; 
+}
+
+[localization_key=edit_redo] {
+/*	background-image:url(images/redo.png) !important;
+*/}
+#goorm_mainmenu .menu-redo {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-redo:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -160px 0px !important; 
+}
+
+[localization_key=edit_cut] {
+/*	background-image:url(images/cut.png) !important;
+*/}
+#goorm_mainmenu .menu-cut {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-cut:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -192px 0px !important; 
+}
+
+[localization_key=edit_copy] {
+/*	background-image:url(images/copy.png) !important;
+*/}
+#goorm_mainmenu .menu-copy {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-copy:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -176px 0px !important; 
+}
+
+[localization_key=edit_paste] {
+/*	background-image:url(images/paste.png) !important;
+*/}
+#goorm_mainmenu .menu-paste {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-paste:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -208px 0px !important; 
+}
+
+[localization_key=edit_delete] {
+/*	background-image:url(images/delete.png) !important;
+*/}
+#goorm_mainmenu .menu-delete {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-delete:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -224px 0px !important; 
+}
+
+[localization_key=edit_select_all] {
+/*	background-image:url(images/select_all.png) !important;
+*/}
+#goorm_mainmenu .menu-select-all {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-select-all:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -240px 0px !important; 
+}
+
+[localization_key=edit_find_and_replace] {
+/*	background-image:url(images/find_replace.png) !important;
+*/}
+#goorm_mainmenu .menu-find-replace {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-find-replace:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -256px 0px !important; 
+}
+
+[localization_key=edit_find_next] {
+/*	background-image:url(images/find_next.png) !important;
+*/}
+#goorm_mainmenu .menu-find-next {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-find-next:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -272px 0px !important; 
+}
+
+[localization_key=edit_find_previous] {
+/*	background-image:url(images/find_previous.png) !important;
+*/}
+#goorm_mainmenu .menu-find-previous {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-find-previous:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -288px 0px !important; 
+}
+
+[localization_key=edit_auto_formatting] {
+}
+[localization_key=edit_preference] {
+/*	background-image:url(images/preference.png) !important;
+*/}
+#goorm_mainmenu .menu-preference {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-preference:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -336px 0px !important; 
+}
+
+[localization_key=project_run] {
+/*	background-image:url(images/run.png) !important;
+*/}
+#goorm_mainmenu .menu-run {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-run:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -352px 0px !important; 
+}
+
+[localization_key=project_generate] {
+	background-image:url(images/generate.png) !important;
+}
+[localization_key=project_generate_all] {
+}
+[localization_key=project_build_project] {
+/*	background-image:url(images/build.png) !important;
+*/}
+#goorm_mainmenu .menu-build {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-build:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -368px 0px !important; 
+}
+
+[localization_key=project_clean] {
+/*	background-image:url(images/clean.png) !important;
+*/}
+#goorm_mainmenu .menu-clean {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-clean:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -384px 0px !important; 
+}
+
+[localization_key=project_import] {
+/*	background-image:url(images/project_import.png) !important;
+*/}
+#goorm_mainmenu .menu-import-project {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-import-project:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -400px 0px !important; 
+}
+
+[localization_key=project_export] {
+/*	background-image:url(images/project_export.png) !important;
+*/}
+#goorm_mainmenu .menu-export-project {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-export-project:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -417px 0px !important; 
+}
+
+[localization_key=project_delete] {
+/*	background-image:url(images/project_delete.png) !important;
+*/}
+#goorm_mainmenu .menu-delete-project {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-delete-project:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -434px 0px !important; 
+}
+
+
+[localization_key=debug_start] {
+/*	background-image:url(images/debug.png) !important;
+*/
+}
+#goorm_mainmenu .menu-debug-start:before {
+	content: '';
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	margin-top: -2px;
+	margin-left: -20px;
+	background: transparent !important;
+	background-image: url(images/sprite.png) !important;
+	background-repeat: no-repeat !important;
+	background-position: -450px 2px !important;
+}
+
+#goorm_mainmenu .menu-debug-start {
+    position: relative;
+}
+
+[localization_key=debug_continue] {
+/*	background-image:url(images/debug_continue.png) !important;
+*/}
+#goorm_mainmenu .menu-debug-continue {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-debug-continue:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -464px 0px !important; 
+}
+
+[localization_key=debug_terminate] {
+/*	background-image:url(images/terminate.png) !important;
+*/}
+#goorm_mainmenu .menu-debug-terminate {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-debug-terminate:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -480px 0px !important; 
+}
+
+[localization_key=debug_step_over] {
+/*	background-image:url(images/step_over.png) !important;
+*/}
+#goorm_mainmenu .menu-debug-step-over {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-debug-step-over:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -496px 0px !important; 
+}
+
+[localization_key=debug_step_in] {
+/*	background-image:url(images/step_in.png) !important;
+*/}
+#goorm_mainmenu .menu-debug-step-in {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-debug-step-in:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -512px 0px !important; 
+}
+
+[localization_key=debug_step_out] {
+/*	background-image:url(images/step_out.png) !important;
+*/}
+#goorm_mainmenu .menu-debug-step-out {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-debug-step-out:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -528px 0px !important; 
+}
+
+[localization_key=window_new_terminal_window] {
+/*	background-image:url(images/terminal.png) !important;
+*/}
+#goorm_mainmenu .menu-new-terminal {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-new-terminal:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -544px 0px !important; 
+}
+
+[localization_key=perspectives] {
+/*	background-image:url(images/perspective.png) !important;
+*/}
+#goorm_mainmenu .menu-perspectives {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-perspectives:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 0px -16px !important; 
+}
+
+[localization_key=window_left_layout_show_hide] {
+}
+[localization_key=window_right_layout_show_hide] {
+}
+[localization_key=window_bottom_layout_show_hide] {
+}
+[localization_key=window_cascade] {
+/*	background-image:url(images/cascade.png) !important;
+*/}
+#goorm_mainmenu .menu-toggle-cascade {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-toggle-cascade:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -64px -16px !important; 
+}
+
+[localization_key=window_tile_vertically] {
+/*	background-image:url(images/tile_vertical.png) !important;
+*/}
+#goorm_mainmenu .menu-tile-vertically {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-tile-vertically:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -80px -16px !important; 
+}
+
+
+[localization_key=window_tile_horizontally] {
+/*	background-image:url(images/tile_horizontal.png) !important;
+*/}
+#goorm_mainmenu .menu-tile-horizontally {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-tile-horizontally:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -96px -16px !important; 
+}
+
+
+[localization_key=plugin_install_new_plugin] {
+	background-image:url(images/plugin.png) !important;
+}
+[localization_key=help_help_contents] {
+/*	background-image:url(images/help.png) !important;
+*/}
+#goorm_mainmenu .menu-help-contents {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-help-contents:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -112px -17px !important; 
+}
+
+
+[localization_key=help_check_for_updates] {
+	background-image:url(images/check_for_update.png) !important;
+}
+[localization_key=help_bug_report] {
+	background-image:url(images/bug_report.png) !important;
+}
+[localization_key=help_about_goorm] {
+/*	background-image:url(images/about.png) !important;
+*/}
+#goorm_mainmenu .menu-about {
+    position: relative;
+}
+
+#goorm_mainmenu .menu-about:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -128px -17px !important; 
+}
+
+/*#goorm_top .main_toolbar .toolbar_button.new {
+	background:url('images/new.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.open_project {
+	background:url('images/open_project.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.open_file {
+	background:url('images/open_file.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.save {
+	background:url('images/save.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.save_as {
+	background:url('images/save_as.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.import {
+	background:url('images/import.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.export {
+	background:url('images/export.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.print {
+	background:url('images/print.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.undo {
+	background:url('images/undo.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.redo {
+	background:url('images/redo.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.cut {
+	background:url('images/cut.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.copy {
+	background:url('images/copy.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.paste {
+	background:url('images/paste.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.delete {
+	background:url('images/delete.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.run {
+	background:url('images/run.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.debug {
+	background:url('images/debug.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.debug_continue {
+	background:url('images/debug_continue.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.debug_terminate {
+	background:url('images/terminate.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.debug_step_over {
+	background:url('images/step_over.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.debug_step_in {
+	background:url('images/step_in.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.debug_step_out {
+	background:url('images/step_out.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.generate {
+	background:url('images/generate.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.build_project {
+	background:url('images/build.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.build_clean {
+	background:url('images/clean.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.cascade {
+	background:url('images/cascade.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.tile_vertical {
+	background:url('images/tile_vertical.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.tile_horizontal {
+	background:url('images/tile_horizontal.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_left {
+	background:url('images/align_left.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_right {
+	background:url('images/align_right.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_top {
+	background:url('images/align_top.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_bottom {
+	background:url('images/align_bottom.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_horizontally_center {
+	background:url('images/align_horizontally_center.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.align_vertically_center {
+	background:url('images/align_vertically_center.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.bring_to_front {
+	background:url('images/bring_to_front.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.send_to_back {
+	background:url('images/send_to_back.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.bring_forward {
+	background:url('images/bring_forward.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.send_backward {
+	background:url('images/send_backward.png') no-repeat center !important;
+}
+#goorm_top .main_toolbar .toolbar_button.design_canvas_setting {
+	background:url('images/setting.png') no-repeat center !important;
+}*/
+
+#goorm_top .main_toolbar .menu-new-file {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-new-file:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 0px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-new-file {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 0px 0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-new-project {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-new-project:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -16px -0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-new-project {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -16px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-open-project {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-open-project:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -32px -0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-open-project {
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -32px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-open-file {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-open-file:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -48px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-open-file {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -48px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-save {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-save:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -64px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-save {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -64px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-save-as {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-save-as:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -80px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-save-as {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -80px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-print {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-print:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -96px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-print {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -96px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-import {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-import:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -112px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-import {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -112px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-export {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-export:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -128px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-export {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -128px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-undo {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-undo:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -144px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-undo {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -144px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-redo {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-redo:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -160px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-redo {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -160px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-copy {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-copy:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -176px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-copy {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -176px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-cut {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-cut:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -192px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-cut {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -192px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-paste {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-paste:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -208px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-paste {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -208px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-delete {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-delete:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -224px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-delete {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -224px -0px !important;
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-select-all {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-select-all:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -240px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-select-all {
+   	background: transparent;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -240px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-find-replace {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-find-replace:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -256px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-find-replace {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -256px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-find-next {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-find-next:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -272px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-find-next {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -272px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-find-previous {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-find-previous:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -288px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-find-previous {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -288px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-auto-formatting {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-auto-formatting:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -304px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-auto-formatting {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -304px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-toggle-cursor-sharing {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-toggle-cursor-sharing:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -320px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-toggle-cursor-sharing {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -320px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-preference {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-preference:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -336px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-preference {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -336px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-run {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-run:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -352px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-run {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -352px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-build {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-build:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -368px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-build {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -368px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-clean {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-clean:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -384px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-clean {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -384px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-import-project {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-import-project:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -400px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-import-project {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -400px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-export-project {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-export-project:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -416px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-export-project {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -416px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-delete-project {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-delete-project:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -432px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-delete-project {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -432px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-debug-start {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-debug-start:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -450px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-debug-start {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -450px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-debug-continue {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-debug-continue:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -465px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-debug-continue {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -465px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-debug-terminate {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-debug-terminate:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -480px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-debug-terminate {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -480px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-debug-step-over {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-debug-step-over:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -496px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-debug-step-over {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -496px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-debug-step-in {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-debug-step-in:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -512px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-debug-step-in {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -512px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-debug-step-out {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-debug-step-out:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -528px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-debug-step-out {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -528px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-new-terminal {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-new-terminal:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -544px 0px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-new-terminal {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -544px -0px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-perspectives {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-perspectives:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 0px -16px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-perspectives {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 0px -16px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-toggle-left {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-toggle-left:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -16px -16px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-toggle-left {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -16px -16px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-toggle-right {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-toggle-right:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -32px -16px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-toggle-right {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -32px -16px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-toggle-bottom {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-toggle-bottom:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -48px -16px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-toggle-bottom {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -48px -16px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-toggle-cascade {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-toggle-cascade:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -64px -16px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-cascade {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -64px -16px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-tile-vertically {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-tile-vertically:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -80px -16px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-tile-vertically {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -80px -16px !important; 
+    width:16px;
+    height:16px;
+}
+
+#goorm_top .main_toolbar .menu-tile-horizontally {
+    position: relative;
+}
+
+#goorm_top .main_toolbar .menu-tile-horizontally:before {
+    content: '';
+    
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin-top:0px;
+    margin-left:-22px;
+    
+    background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -96px -16px !important; 
+}
+
+#goorm_top .main_toolbar .toolbar-tile-horizontally {
+   	background: transparent !important;
+    background-image: url(images/sprite.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: -96px -16px !important; 
+    width:16px;
+    height:16px;
+}
+
+
+#goorm_top .main_toolbar .toolbar_button {
+	background:none;
+}
+.main_toolbar .toolbar_button:hover {
+	background:#f6f6f6;
+	border-color:#c6c6c6;
+	border::1px solid #c6c6c6;
+	 -moz-box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+	-webkit-box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+	box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+.main_toolbar .toolbar_handle {
+	border-left:1px solid #1d1d1d;
+}
+.yui-skin-sam .yui-layout .yui-layout-unit-top div.yui-layout-bd {
+	background:#2d2d30;
+	border-color:#2d2d30;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#goorm_left.yui-navset .yui-nav a {
+	border-color:#e5e5e5;
+	background:transparent;
+}
+#goorm_left.yui-navset .yui-nav li {
+	border:none;
+	margin-right:0px;
+	border-color:transparent;
+}
+#goorm_left.yui-navset .yui-nav a:hover, #goorm_left.yui-navset .yui-nav a:focus {
+	background:#1c97ea;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+}
+#goorm_left.yui-navset .yui-nav .selected a, #goorm_left.yui-navset .yui-nav .selected a:focus, #goorm_left.yui-navset .yui-nav .selected a:hover {
+	background:#007ACC;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+	border:none;
+}
+#goorm_left.yui-navset .yui-nav a em {
+	text-shadow:none;
+	color:white;
+}
+#goorm_left.yui-navset .yui-nav .selected a em {
+	text-shadow:none;
+	color:white;
+}
+#goorm_left.yui-navset .yui-nav {
+	background:#2d2d30;
+	border-color:#007ACC;
+	border-width:2px;
+}
+.yui-skin-sam .yui-layout .yui-layout-clip-left {
+	background:#2D2D30;
+	border-color:#1D1D1D;
+}
+#project_selector, #toolbox_selector, #cloud_selector {
+	background-color:#252526 !important;
+	border-color:#1d1d1d;
+}
+#project_explorer .node, #cloud_explorer .node {
+	color:white;
+}
+#project_treeview, #cloud_treeview {
+	background-color:#2d2d30 !important;
+}
+.directory_treeview .ygtvfocus, #search_treeview .ygtvfocus {
+	background-color:#007ACC;
+}
+.yui-skin-sam .yui-layout .yui-layout-unit-left div.yui-layout-hd .collapse {
+/*	background:transparent url(images/collapse_left.png) no-repeat 3px 3px;
+*/
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -400px -16px;
+	border: 0px;
+}
+.yui-skin-sam .yui-layout .yui-layout-clip-left .collapse {
+/*	background:transparent url(images/uncollapse_right.png) no-repeat 3px 3px;
+*/
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -446px -16px;
+	border: 0px;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav a {
+	border-color:#e5e5e5;
+	background:transparent;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav li {
+	border:none;
+	margin-right:0px;
+	border-color:transparent;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav a:hover, #goorm_inner_layout_right.yui-navset .yui-nav a:focus {
+	background:#1c97ea;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav .selected a, #goorm_inner_layout_right.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_right.yui-navset .yui-nav .selected a:hover {
+	background:#007ACC;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+	border:none;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav a em {
+	text-shadow:none;
+	color:white;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav .selected a em {
+	text-shadow:none;
+	color:white;
+}
+#goorm_inner_layout_right.yui-navset .yui-nav {
+	background:#2d2d30;
+	border-color:#007ACC;
+	border-width:2px;
+}
+.yui-skin-sam .yui-layout .yui-layout-clip-right {
+	background:#2D2D30;
+	border-color:#1D1D1D;
+}
+.yui-skin-sam .yui-layout .yui-layout-unit-right div.yui-layout-hd .collapse {
+/*	background:transparent url(images/collapse_right.png) no-repeat 3px 3px;
+*/
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -416px -16px;
+	border: 0px;
+}
+.yui-skin-sam .yui-layout .yui-layout-clip-right .collapse {
+/*	background:transparent url(images/uncollapse_left.png) no-repeat 3px 3px;
+*/
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -461px -16px;
+	border: 0px;
+    margin-top: 2px;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav a {
+	border-color:#e5e5e5;
+	background:transparent;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav li {
+	border:none;
+	margin-right:0px;
+	border-color:transparent;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav a:hover, #goorm_inner_layout_bottom.yui-navset .yui-nav a:focus {
+	background:#1c97ea;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav .selected a, #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a:focus, #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a:hover {
+	background:#007ACC;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+	border:none;
+}
+#layout-doc #goorm_inner_layout_bottom.yui-navset .yui-nav a em {
+	text-shadow:none;
+	color:white;
+}
+#layout-doc #goorm_inner_layout_bottom.yui-navset .yui-nav .selected a em {
+	text-shadow:none;
+	color:white;
+}
+#goorm_inner_layout_bottom.yui-navset .yui-nav {
+	background:#2d2d30;
+	border-color:#007ACC;
+	border-width:2px;
+}
+#goorm_inner_layout_bottom .yui-content {
+	background:#252526;
+}
+#goorm_inner_layout_bottom #search_treeview .node {
+	color:white;
+}
+.yui-skin-sam .yui-layout .yui-layout-clip-bottom {
+	background:#2D2D30;
+	border-color:#1D1D1D;
+}
+.yui-skin-sam .yui-layout .yui-layout-unit-bottom div.yui-layout-hd .collapse {
+/*	background:transparent url(images/collapse_down.png) no-repeat 3px 3px;
+*/
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -432px -16px;
+	border: 0px;
+}
+.yui-skin-sam .yui-layout .yui-layout-clip-bottom .collapse {
+/*	background:transparent url(images/uncollapse_up.png) no-repeat 3px 3px;
+*/
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -478px -16px;
+	border: 0px;
+}
+.yui-skin-sam .yui-dt th {
+	background:#f3f3f3;
+}
+#debug_left, .yui-skin-sam .yui-dt tr.yui-dt-first td, #debug_left table, #debug_right table {
+	border-color:#cbcbcb;
+}
+#debug_tab div.yui-layout-bd {
+	background:white;
+}
+#layout-doc #workspace_window_list .yui-nav a {
+	border-color:#e5e5e5;
+	background:transparent;
+	color:white;
+}
+#layout-doc #workspace_window_list .yui-nav li {
+	border:none;
+	margin-right:0px;
+	border-color:transparent;
+}
+#layout-doc #workspace_window_list .yui-nav a:hover, #layout-doc #workspace_window_list .yui-nav a:focus {
+	background:#1c97ea;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+}
+#layout-doc #workspace_window_list .selected a, #layout-doc #workspace_window_list .selected a:focus, #layout-doc #workspace_window_list .selected a:hover {
+	background:#007ACC;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+	border:none;
+}
+#layout-doc #workspace_window_list a em {
+	margin-left:10px;
+}
+#layout-doc #workspace_window_list .selected a em {
+	text-shadow:none;
+	color:white;
+}
+#workspace .tab_close_button.window_button {
+/*	background:url('images/close.png') no-repeat 4px 2px !important;
+*/	width:10px;
+	height:10px;
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -130px -34px;
+}
+#workspace_window_list .window_buttons, #workspace_window_list .selected .window_buttons {
+	background:none;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	border:none;
+}
+#goorm_inner_layout_center.yui-navset .yui-nav, #workspace_window_list {
+	background:#2d2d30;
+	border-color:#007ACC;
+	border-width:2px;
+}
+.tab_max_buttons, #workspace .tab_scroll {
+	border:none;
+	background:none;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	padding-top:3px;
+}
+#workspace .tab_list_left.window_button {
+/*	background:url(images/leftarr.png) no-repeat center;
+*/	padding:2px 3px;
+	width: 8px;
+	height: 8px;
+	float: left;
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -50px -33px;
+}
+#workspace .window_list.window_button {
+/*	background:url(images/window_list.png) no-repeat center;
+*/	padding:2px 3px;
+	width: 8px;
+	height: 8px;
+	float: left;
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -64px -33px;
+}
+#workspace .tab_list_right.window_button {
+/*	background:url(images/rightarr.png) no-repeat center;
+*/	padding:2px 3px;
+	width: 8px;
+	height: 8px;
+	float: left;
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -80px -33px;
+}
+#workspace .unmaximize_all.window_button {
+/*	background:url(images/tabmenu_unmaximize.png) no-repeat center;
+*/	padding:2px 3px;
+	width: 8px;
+	height: 8px;
+	float: left;
+	margin-right: 3px;
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -256px -34px;
+}
+#workspace .maximized_close.window_button {
+/*	background:url(images/tabmenu_close.png) no-repeat center;
+*/	padding:2px 3px;
+	width: 8px;
+	height: 8px;
+	float: right;
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -272px -34px;
+}
+#goorm_inner_layout_center #workspace {
+	background-color:#1e1e1e;
+	 -moz-box-shadow:inset 0px 27px 10px 0px rgba(0, 0, 0, 0.05);
+	-webkit-box-shadow:inset 0px 27px 10px 0px rgba(0, 0, 0, 0.05);
+	box-shadow:inset 0px 27px 10px 0px rgba(0, 0, 0, 0.05);
+}
+#goorm_left,#goorm_inner_layout_right,#goorm_inner_layout_bottom {
+	border-color:#1d1d1d;
+}
+.yui-skin-sam .yui-button {
+	background:url('images/button_normal_background.png');
+	 -moz-box-shadow:inset 0 0 3px white;
+	-webkit-box-shadow:inset 0 0 3px white;
+	box-shadow:inset 0 0 3px white;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+	border-radius:3px;
+	border:1px solid #707070 !important;
+}
+.yui-skin-sam .default {
+	 -moz-box-shadow:inset 0 0 4px #46D8FB;
+	-webkit-box-shadow:inset 0 0 4px #46D8FB;
+	box-shadow:inset 0 0 4px #46D8FB;
+	border:1px solid #3c7fb1 !important;
+}
+.yui-skin-sam .default button {
+	color:black !important;
+}
+.yui-skin-sam .yui-button:hover {
+	 -moz-box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+	-webkit-box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+	box-shadow:0px 1px 3px rgba(198, 198, 198, 0.6);
+}
+.yui-skin-sam .yui-navset .yui-nav .selected a, .yui-skin-sam .yui-navset .yui-nav .selected a em {
+	background:none;
+	text-shadow:none;
+	color:black;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#goorm_dialog_container .yui-navset .yui-nav li,#goorm_dialog_container .yui-navset .yui-navset-top .yui-nav li, #goorm_dialog_container .yui-navset .yui-nav a em, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em, #goorm_dialog_container .yui-navset .yui-nav {
+	border:none;
+	margin-right:0px;
+	border-color:transparent;
+}
+#goorm_dialog_container .yui-navset .yui-nav a,#goorm_dialog_container .yui-navset .yui-navset-top .yui-nav a {
+	color:#999999;
+	background:transparent;
+}
+#goorm_dialog_container .yui-navset .yui-nav a:hover,#goorm_dialog_container .yui-navset .yui-navset-top .yui-nav a:hover {
+	color:#55aaff;
+	background:transparent;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+}
+#goorm_dialog_container .yui-navset .yui-nav .selected a, #goorm_dialog_container .yui-navset .yui-nav .selected a:focus, #goorm_dialog_container .yui-navset .yui-nav .selected a:hover {
+	color:blue;
+	background:transparent;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+	border:none;
+}
+#goorm_dialog_container .selected a em {
+	padding:3px 6px 1px !important;
+}
+.yui-skin-sam .yui-panel {
+	border-color:#323232;
+	border-top:none;
+	 -moz-box-shadow:0px 1px 7px 0px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow:0px 1px 7px 0px rgba(0, 0, 0, 0.2);
+	box-shadow:0px 1px 7px 0px rgba(0, 0, 0, 0.2);
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+}
+#goorm_dialog_container .hd {
+	background:#007ACC;
+	-webkit-border-top-left-radius:3px;
+	-webkit-border-top-right-radius:3px;
+	-moz-border-radius-topleft:3px;
+	-moz-border-radius-topright:3px;
+	border-top-left-radius:3px;
+	border-top-right-radius:3px;
+	border:1px solid black;
+	color:white;
+	text-shadow:none;
+}
+#goorm_dialog_container .ft {
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+}
+.yui-skin-sam .container-close {
+	border:none;
+/*	background:url(images/dialog_close.png) no-repeat 2px 2px;
+*/	padding:0;
+	width:16px;
+	height:16px;
+	background: url(images/sprite.png);
+	background-position: -127px -32px;
+}
+.yui-skin-sam .container-close:hover {
+	border:none;
+/*	background:url(images/dialog_close.png) no-repeat 2px 2px;
+*/}
+.yui-skin-sam .yui-panel .bd, .yui-skin-sam .yui-panel .ft {
+	border-color:black;
+	border-top:none;
+}
+.dialog_treeview .ygtvfocus, .dialog_treeview .ygtvfocus .ygtvlabel {
+	background-color:#007ACC;
+	color:white;
+}
+#workspace .yui-panel .hd {
+	background:#007ACC;
+	opacity:1;
+	color:white;
+	border:1px solid black;
+	-webkit-border-top-left-radius:3px;
+	-webkit-border-top-right-radius:3px;
+	-moz-border-radius-topleft:3px;
+	-moz-border-radius-topright:3px;
+	border-top-left-radius:3px;
+	border-top-right-radius:3px;
+}
+#workspace .yui-panel .activated {
+	opacity:1;
+	border:1px solid black;
+	color:white;
+	text-shadow:none;
+}
+#workspace .window_buttons, #workspace .activated .window_buttons {
+	border:none;
+	background:none;
+	 -moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+#workspace .minimize.window_button {
+/*	background:url(images/workspace_minimize.png) no-repeat 2px 2px;
+*/
+	width: 8px;
+	height: 8px;
+	float: left;
+	margin-right: 3px;
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -98px -34px;
+}
+#workspace .maximize.window_button {
+/*	background:url(images/workspace_maximize.png) no-repeat 2px 2px;
+*/
+	width: 8px;
+	height: 8px;
+	float: left;
+	margin-right: 3px;
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -114px -34px;
+}
+#workspace .close.window_button {
+/*	background:url(images/dialog_close.png) no-repeat 2px 2px;
+*/
+	width: 8px;
+	height: 8px;
+	float: left;
+	background: transparent;
+	background-image: url(images/sprite.png);
+	background-repeat: no-repeat;
+	background-position: -130px -34px;
+}
+.CodeMirror, #workspace .yui-panel .bd {
+	border-color:black;
+	border-top:none;
+}
+#workspace .yui-panel .ft {
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	border-radius:0px;
+	background:#3f3f46;
+	border-color:black;
+}

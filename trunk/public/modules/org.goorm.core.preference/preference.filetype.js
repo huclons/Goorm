@@ -287,7 +287,13 @@ org.goorm.core.preference.filetype = {
 		if (core.is_optimization) {
 			var data = JSON.parse(external_json['public']['configs']['filetype']['filetype.json']);
 
+			// data is error ... ( html => undefiend !)
+			//
 			core.filetypes = eval(data);
+
+			setTimeout(function(){
+				core.filetypes[0] = {file_extension: "html", editor: "Editor", description: "Hyper Text Markup Language", type: "Code", mode: "text/html"};
+			}, 3000);
 
 			var filetypes = core.filetypes;
 

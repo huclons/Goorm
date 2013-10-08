@@ -106,6 +106,9 @@
             "file_import": {
                 "value": "Import/Upload File"
             },
+            "folder_upload": {
+                "value": "Folder Upload"
+            },
             "file_export": {
                 "value": "Export File"
             },
@@ -360,7 +363,7 @@
                     "window_right_layout_toggle_slide": {
                         "value": "Show Slide"
                     },
-                    "window_right_layout_toggle_histroy": {
+                    "window_right_layout_toggle_history": {
                         "value": "Show Histroy"
                     },
                     "window_right_layout_toggle_outline": {

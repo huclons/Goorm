@@ -39,6 +39,8 @@ org.goorm.core.object.explorer.prototype = {
 			$('#object_explorer').css('height', container_height);
 			$('#object_tree').css('height', tree_height);
 		});
+
+		
 	},
 
 	clear : function(){

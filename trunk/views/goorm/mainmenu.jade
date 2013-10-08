@@ -25,14 +25,6 @@
            li.yuimenuitem
             a.yuimenuitemlabel(href="#", action='new_file_textfile', localization_key='file_new_untitled_text_file') Untitled Text File
           ul
-          ul
-          ul.first-of-type
-           h6.first-of-type SCM
-           li.yuimenuitem
-            a.yuimenuitemlabel(href="#", action='') GIT Project
-           li.yuimenuitem
-            a.yuimenuitemlabel(href="#", action='') SVN Project
-          ul
            li.yuimenuitem
             a.yuimenuitemlabel(href="#", action='new_file_other', localization_key='file_new_other') Other...
        li.yuimenuitem
@@ -123,7 +115,7 @@
         a.yuimenuitemlabel(href="#", action='import_file', localization_key='file_import', class='menu-import')
          | Import File
        li.yuimenuitem
-        a.yuimenuitemlabel(href="#", action='upload_folder', class='menu-import')
+        a.yuimenuitemlabel(href="#", action='upload_folder', localization_key='folder_upload', class='menu-import')
          | Upload Folder
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='export_file', localization_key='file_export', class='menu-export')
@@ -198,6 +190,7 @@
         a.yuimenuitemlabel(href="#", action='uncomment_selected', localization_key='edit_uncomment_selected', style='')
          | Uncomment Selected
          em.helptext Ctrl + Shift+ /
+      
       ul
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='preference', localization_key='edit_preference', class="menu-preference")
@@ -248,13 +241,7 @@
         a.yuimenuitemlabel(href="#", action='run', localization_key='project_run', class='menu-run')
          | Run
          em.helptext Ctrl + F5
-       //-li.yuimenuitem
-        //-a.yuimenuitemlabel(href="#", action='remote_run', localization_key='project_remote_run') Remote Run
-      //-ul
-       //-li.yuimenuitem
-        //-a.yuimenuitemlabel(href="#", action='generate', localization_key='project_generate', style='background-image: url(configs/toolbars/org.goorm.core.project/image/generate.png);') Generate
-       //-li.yuimenuitem
-        //-a.yuimenuitemlabel(href="#", action='generate_all', localization_key='project_generate_all', style='background-image: url(configs/toolbars/org.goorm.core.project/image/generate_all.png);') Generate All
+      
       ul
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='build_project', localization_key='project_build_project', class='menu-build')
@@ -268,6 +255,7 @@
          em.helptext Ctrl + Del
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='build_configuration', localization_key='project_build_configuration') Build Configuration
+      
       ul
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='import_project', localization_key='project_import', class='menu-import-project') Import Project
@@ -276,12 +264,11 @@
       ul
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='delete_project', localization_key='project_delete', class='menu-delete-project') Delete Project
-      ul
-       li.yuimenuitem
-        a.yuimenuitemlabel(href="#", action='share_project', localization_key='project_share') Share This Project
+      
       ul
        li.yuimenuitem
         a.yuimenuitemlabel(id="project_property_open", href="#", action='show_properties', localization_key='project_properties') Properties
+   
    li.yuimenubaritem
     a.yuimenubaritemlabel(href='#Debug', localization_key='debug') Debug
     #Debug.yuimenu
@@ -307,7 +294,8 @@
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='debug_step_out', localization_key='debug_step_out', class='menu-debug-step-out debug_not_active')
          | Step out
-
+   
+   
    li.yuimenubaritem
     a.yuimenubaritemlabel(href='#window', localization_key='window') Window
     #window.yuimenu
@@ -316,6 +304,7 @@
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='new_main_window', localization_key='window_new_main_window')
          | New Main Window
+       
       ul
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='previous_window', localization_key='window_previous_window')
@@ -340,12 +329,14 @@
             a.yuimenuitemlabel(href="#", action='left_project_explorer_show', localization_key='window_left_layout_toggle_project_explorer')
              | Show Project Explorer
              em.helptext Alt + Shift + 1
+          
           h6(localization_key='window_right_layout') Right Layout
           ul
            li.yuimenuitem
             a.yuimenuitemlabel(href="#", action='right_layout_toggle', class='menu-toggle-right', localization_key='window_right_layout_show_hide')
              | Show/Hide
              em.helptext Alt + Shift + R
+          
            li.yuimenuitem
             a.yuimenuitemlabel(href="#", action='right_outline_show', localization_key='window_right_layout_toggle_outline')
              | Show Slide
@@ -399,6 +390,7 @@
         a.yuimenuitemlabel(href="#", action='tile_vertically', class='menu-tile-vertically', localization_key='window_tile_vertically') Tile Vertically
        li.yuimenuitem
         a.yuimenuitemlabel(href="#", action='tile_horizontally', class='menu-tile-horizontally', localization_key='window_tile_horizontally') Tile Horizontally
+   
    //-li.yuimenubaritem
     a.yuimenubaritemlabel(href='#menu_plugins', localization_key='plugins') Plugins
     #menu_plugins.yuimenu

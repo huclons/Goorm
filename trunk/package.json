@@ -2,16 +2,18 @@
   "name": "goorm",
   "author": "xenoz0718 <xenoz0718@gmail.com> (http://www.goorm.org/)",
   "description": "Cloud based Integrated Development Enviroment.",
-  "version": "1.4.0",
+  "version": "1.4.0-r226",
   "dependencies": {
     "colors": ">= 0.6.0-1",
-    "commander": ">= 1.0.5",
+    "css-parse": ">= 1.5.2",
+    "htmlparser": ">= 1.7.6",
+    "commander": "1.1.1",
     "connect": ">= 2.3.6",
-    "connect-redis": ">= 1.4.5",
+    "connect-mongodb": ">= 1.1.5",
     "express": ">= 3.0.0rc5",
     "forever": "0.10.0",
     "gift": ">= 0.0.5",
-    "jade": ">= 0.25.0",
+    "jade": "0.28.2",
     "markdown": ">= 0.4.0",
     "mongoose": ">= 3.3.0",
     "rimraf": ">= 2.0.2",
@@ -22,17 +24,22 @@
   "main": "goorm.js",
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [
     "goorm",
     "ide",
     "goormIDE"
   ],
-  "license": "GPLv3",
+  "license": "AGPLv3",
   "directories": {
     "test": "test"
   },
   "preferGlobal": "true",
-  "bin": "./goorm.js"
+  "bin": {
+    "goorm": "./goorm.js"
+  },
+  "readmeFilename": "README.md",
+  "repository": ""
 }

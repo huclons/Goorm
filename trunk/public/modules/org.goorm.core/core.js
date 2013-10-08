@@ -81,11 +81,9 @@ org.goorm.core = function () {
 		new_folder: null,
 		new_untitled_textfile: null,
 		open_file: null,
-		//by sim
 		upload_file: null,
 		go_to_line: null,
 		folder_upload : null,
-		//by sim
 		open_url: null,
 		save_as_file: null,
 		rename_file: null,
@@ -108,6 +106,7 @@ org.goorm.core = function () {
 		project_property: null,
 		help_contents: null,
 		help_about: null,
+		
 		loaded_count: 0
 	};
 
@@ -145,9 +144,6 @@ org.goorm.core = function () {
 	this.preference = null;
 	this.property = null;
 	this.workspace = null;
-
-	// start flag
-	this.is_optimization = false;
 
 	
 };
@@ -200,9 +196,9 @@ org.goorm.core.prototype = {
 					$(self).trigger("goorm_load_complete");
 					self.load_complete_flag = true;
 
-					//useonly(mode=basic)
+					
 					self.show_local_login_box();
-					//useonlyend
+					
 
 					
 				}
@@ -233,7 +229,9 @@ org.goorm.core.prototype = {
 
 			var goorm_loading_end_time = new Date().getTime();
 
-			
+			//theme
+			self.module.theme = org.goorm.core.theme;
+			self.module.theme.init();
 		});
 
 		$(this).on('goorm_login_complete', function () {
@@ -391,8 +389,12 @@ org.goorm.core.prototype = {
 			this.dialog.move_file.init();
 		}
 
-		
-
+		if (!core.is_mobile) {
+			if (org.goorm.core.printer) {
+				this.dialog.print = org.goorm.core.printer;
+				this.dialog.print.init();
+			}
+		}
 
 		
 
@@ -548,7 +550,11 @@ org.goorm.core.prototype = {
 		loading_panel_container_child += "<div id='local_login_box'></div>";
 		loading_panel_container.append(loading_panel_container_child);
 
+		
+
 		$('#local_login_box').append("<input type='button' id='goorm_local_mode_button' value='Local Mode' />");
+
+		
 
 		this.local_mode_button = new YAHOO.widget.Button("goorm_local_mode_button", {
 			onclick: {
@@ -558,8 +564,6 @@ org.goorm.core.prototype = {
 			},
 			label: '<span localization_key="local_mode">Local Mode</span>'
 		});
-
-		
 
 		var loading_background = $("#loading_background");
 		loading_background.css('position', "absolute").width($(window).width()).height($(window).height());
@@ -576,6 +580,22 @@ org.goorm.core.prototype = {
 
 	show_local_login_box: function () {
 		$("#local_login_box").delay(1500).fadeIn(2000);
+	},
+
+	local_complete: function () {
+		$("#goorm").show();
+		$('.goorm_user_menu').show();
+		$('div.goorm_layout').show();
+
+		$("#loading_background").delay(1000).fadeOut(1000);
+		$("#loading_panel_container").delay(1500).fadeOut(1000);
+
+		this.dialog.project_property.refresh_toolbox();
+
+		$('.admin_menu_item').addClass('yuimenuitem-disabled');
+		$('.admin_menu_label').addClass('yuimenuitemlabel-disabled').hide();
+
+		$(core).trigger('goorm_login_complete');
 	},
 
 	access_local_mode: function () {
@@ -605,26 +625,12 @@ org.goorm.core.prototype = {
 		this.local_complete();
 	},
 
-	local_complete: function () {
-		$("#goorm").show();
-		$('.goorm_user_menu').show();
-		$('div.goorm_layout').show();
-
-		$("#loading_background").delay(1000).fadeOut(1000);
-		$("#loading_panel_container").delay(1500).fadeOut(1000);
-
-		this.dialog.project_property.refresh_toolbox();
-
-		$('.admin_menu_item').addClass('yuimenuitem-disabled');
-		$('.admin_menu_label').addClass('yuimenuitemlabel-disabled').hide();
-
-		$(core).trigger('goorm_login_complete');
-	},
-
-	
-
 	new_main_window: function () {
+		
 		window.open("./");
+		
+
+		
 	},
 
 	is_touchable_device: function () {
@@ -656,5 +662,44 @@ org.goorm.core.prototype = {
 		while (curDate - date < millis);
 	},
 
-	
+	cookie_manager: {
+		set: function (name, data, exdays) {
+			var exdate = new Date();
+			exdate.setDate(exdate.getDate() + exdays);
+
+			var value = escape(data) + ((exdays === null) ? "" : "; expires=" + exdate.toGMTString() + ";domain=.goorm.io;path=/");
+
+			document.cookie = name + "=" + value;
+		},
+
+		del: function (name) {
+			var expire_date = new Date();
+
+			expire_date.setDate(expire_date.getDate() - 10);
+			document.cookie = name + "=path=/;domain=.goorm.io" + "; expires=" + expire_date.toGMTString();
+		},
+
+		get: function (c_name) {
+			var c_value = document.cookie;
+			var c_start = c_value.indexOf(" " + c_name + "=");
+
+			if (c_start == -1) {
+				c_start = c_value.indexOf(c_name + "=");
+			}
+			if (c_start == -1) {
+				c_value = null;
+			} else {
+				c_start = c_value.indexOf("=", c_start) + 1;
+				var c_end = c_value.indexOf(";", c_start);
+
+				if (c_end == -1) {
+					c_end = c_value.length;
+				}
+
+				c_value = unescape(c_value.substring(c_start, c_end));
+			}
+
+			return c_value;
+		}
+	}
 };

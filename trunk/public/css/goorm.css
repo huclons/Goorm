@@ -2940,7 +2940,14 @@ Optimized:Start
 
 /* loading */
 #main_loading_image {
+	
 	background-image: url(../images/loading.png);
+	
+
+	
+
+	
+
 	width: 640px;
 	height: 480px;
 	position: fixed;
@@ -6442,7 +6449,14 @@ Retina CSS
 */
 @mediaonly screen and (-webkit-min-device-pixel-ratio:2),only screen and ( min--moz-device-pixel-ratio:2),only screen and ( -o-min-device-pixel-ratio:2/1),only screen and ( min-device-pixel-ratio:2),only screen and ( min-resolution:192dpi),only screen and ( min-resolution:2dppx) {
 	#main_loading_image {
+			
 			background-image:url(../images/loading_retina.png);
+			
+
+			
+
+			
+
 			width:640px;
 			height:480px;
 			background-size:640px 480px;
@@ -6457,12 +6471,12 @@ Retina CSS
 	}
 		.menu-new-file:before {
 			content:'';
-					position:absolute;
-				width:16px;
+			position:absolute;
+			width:16px;
 			height:16px;
 			margin-top:0px;
 			margin-left:-22px;
-					background:transparent !important;
+			background:transparent !important;
 			background-image:url(../images/sprite_hq.png) !important;
 			background-size:560px 96px !important;
 			background-repeat:no-repeat !important;
@@ -7984,3 +7998,25 @@ body .ui-tooltip {
 	width: 100% !important;
 }
 /*jquery ui tooltip end*/
+
+
+/* Tutorial */
+.tutorial-square {
+	position: absolute;
+	background-color: red;
+	z-index: 10010;
+}
+.tutorial-dialog {
+	text-align: left;
+}
+#tutorial-intro img {
+	margin-right: 10px;
+}
+#tutorial-intro #tutorial-intro-img {
+	width: 144px;
+	height: 215px;
+}
+.ui-front {
+	z-index: 10011 !important;
+}
+/* Tutorial end */

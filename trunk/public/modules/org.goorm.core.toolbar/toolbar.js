@@ -52,7 +52,11 @@ org.goorm.core.toolbar = {
 				this.add("public/configs/toolbars/org.goorm.core.file/file.toolbar.html", "org.goorm.core.file", "goorm_main_toolbar");
 				this.add("public/configs/toolbars/org.goorm.core.edit/edit.toolbar.html", "org.goorm.core.edit", "goorm_main_toolbar");
 				this.add("public/configs/toolbars/org.goorm.core.project/project.toolbar.html", "org.goorm.core.project", "goorm_main_toolbar");
+
+				
 				this.add("public/configs/toolbars/org.goorm.core.debug/debug.toolbar.html", "org.goorm.core.debug", "goorm_main_toolbar");
+				
+
 				this.add("public/configs/toolbars/org.goorm.core.window/window.toolbar.html", "org.goorm.core.window", "goorm_main_toolbar");
 			}
 		}

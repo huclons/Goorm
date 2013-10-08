@@ -165,7 +165,9 @@ org.goorm.core.project.open = {
 			$($("#open_recent_project_ul").children()[0]).css('display', 'none');
 		}
 		//recent project end
+
 		
+
 		core.status.current_project_path = current_project_path;
 		core.status.current_project_name = current_project_name;
 		core.status.current_project_type = current_project_type;
@@ -179,7 +181,9 @@ org.goorm.core.project.open = {
 
 		core.dialog.project_property.refresh_toolbox();
 		core.module.layout.project_explorer.refresh();
+
 		
+
 		core.module.layout.terminal.change_project_dir();
 		core.module.layout.workspace.window_manager.refresh_all_title();
 		

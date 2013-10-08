@@ -81,7 +81,7 @@ module.exports = {
 
 		
 
-		//useonly(node=basic)
+		
 		self.get_data_from_project({
 			'find_query' : find_query,
 			'project_path' : project_path,
@@ -90,7 +90,7 @@ module.exports = {
 			nodes = parser(matched_files_list);
 			evt.emit('file_do_search_on_project', nodes);
 		});
-		//useonlyend
+		
 	},
 
 	get_data_from_project: function (option, callback) {

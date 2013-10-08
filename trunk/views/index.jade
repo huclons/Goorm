@@ -4,6 +4,13 @@ block content
 	body.yui-skin-sam
 		#goorm(style='display:none;')
 
+		#goorm_user_box(style='display:none;')
+			#goorm_user_image
+			#goorm_user_info
+				| User Name
+				br
+				| (email)
+
 		#goorm_top.yui-navset.goorm_layout(style='display:none')
 			include goorm/mainmenu
 			#goorm_main_toolbar.main_toolbar(style='float:left;')
@@ -67,33 +74,13 @@ block content
 																		a.yuimenuitemlabel(action='previous_window', localization_key='window_previous_window_context') Previous Window
 															li.yuimenuitem
 																		a.yuimenuitemlabel(action='next_window', localization_key='window_next_window_context') Next Window
-			div(id='head_config.signup')
-						div(style='font-size:11px; margin-top:10px;')
-									fieldset
-												legend(localization_key='dialog_config_signup_guide') Sign-up Configuration
-												div(style='width:100%; height:22px;')
-															.checkbox_div(style='float:left; width:100%; height:30px;')
-																		span.checkbox
-																					input(id='user_management_config_general_signup').checkbox_margin.signup_config(type='checkbox', name='user_management_general_signup_config')
-																					label(data-on='', data-off='')
-																		label(for='user_management_config_general_signup', localization_key='dialog_config_signup_general_config') Turn On/Off General Sign-up
-															.checkbox_div(style='float:left; width:100%; height:30px;')
-																		span.checkbox
-																					input(id='user_management_config_general_social_login').checkbox_margin.signup_config(type='checkbox', name='user_management_social_login_config')
-																					label(data-on='', data-off='')
-																		label(for='user_management_social_login_config', localization_key='dialog_config_social_login_general_config') Turn On/Off Social Login 
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input(id='user_management_signup_apply')(type='button', value='Apply')
 			div(id='head_project.collaboration')
-						.content_guide_message(localization_key='') Select Project
-						.project_contents(style='height:300px; padding-top:5px;')
-									.project_list(style='width:130px; height:290px; float:left; overflow-y:scroll; border:1px solid #CCC; font-size:11px; background-color:#FFF;')
-									.project_detail(style='width:290px; height:290px; float:right; font-size:11px; background-color:#FFF:')
-						div(style='float:left; margin-top:10px;')
-									input(id='project_delete')(type='button', value='Delete')
-						div(style='float:right; margin-top:10px;')
-									input(id='project_refresh')(type='button', value='Refresh')
-									input(id='project_share')(type='button', value='Share')
+						div(style='font-size:11px;')
+									div(style='margin-bottom:5px; height:25px;')
+												div
+															label(for='collaboration_check')
+																		input(id='collaboration_check')(type='checkbox', name='COLLABORATION', validate='')
+																		| Use Collaboration
 			div(id='head_project.toolbar')
 						div(id='project.toolbar').toolbar_part
 									a(action='run', tooltip='project_run')
@@ -186,21 +173,10 @@ block content
 																																	input(id='project_new_location')(type='hidden', name='project_import_location', readonly='readonly')
 																		input(id='new_project_using_plugin')(type='hidden', value='no')
 																		div(id='new_project_expansion_container')(style='width:770px;')
-			div(id='head_scm.commit')
-						div(style='font-size:11px;')
-									.content_header
-												b Comment
-									div(style='width:100%; text-align:left;')
-												textarea(id='scm_commit_comment')(style='width:368px; margin-bottom:5px;', rows='4')
-									div(id='scm_commit_files')(style='width:100%; height:233px; text-align:left; overflow-x: hidden;')
-									div(style='padding-top:15px; float:left')
-												input(id='scm_push_auto')(type='checkbox', checked='checked', disabled='disabled', style='vertical-align: middle;')
-												label(for='scm_push_auto') Push automatically
-									div(style='padding-top:12px; text-align:right;')
-												button(id='scm_commit_selectall')(style='padding: 5px;margin-top:5px;')
-															span(localization_key='common_select_all') Select All
-												button(id='scm_commit_deselectall')(style='padding: 5px;margin-top:5px;margin-left: 5px;')
-															span(localization_key='common_deselect_all') Deselect All
+			div(id='head_tutorial_intro')
+						div(id='tutorial-intro').tutorial-dialog(title='튜토리얼')
+									img(id='tutorial-intro-img')(src='modules/org.goorm.core.tutorial/book.jpg', align='left')
+									| 본 시스템은 "HTML5+jQuery" 서적의 다양한 예제를 직접 개발하고 테스트 할 수 있는 클라우드 기반의 통합 개발환경입니다. "튜토리얼 시작"을 누르면, 간단한 시스템 사용방법을 안내 받으실 수 있습니다.
 			div(id='head_project._import')
 						.content_header Import Project
 						div(id='project_import')(style='text-align:left; font-size:11px;')
@@ -247,22 +223,6 @@ block content
 																																	input(id='project_import_location')(type='hidden', name='project_import_location', readonly='readonly')
 																		input(id='import_project_using_plugin')(type='hidden', value='no')
 																		div(id='import_project_expansion_container')(style='width:770px;')
-			div(id='head_nodejs.property')
-						div(id='selectedPreferenceTitle') node.js Plugin
-						div(style='font-size:11px;')
-									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
-												div(style='margin-bottom: 5px;')
-															| main :
-															input(type='text', name='plugin.nodejs.main')
-												div(style='margin-bottom: 5px;')
-															| source path :
-															input(type='text', name='plugin.nodejs.source_path')
-												div(style='margin-bottom: 5px;')
-															| debug option :
-															input(type='text', name='plugin.nodejs.debug_option')
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
 			div(id='head_nodejs.preference')
 						div(id='selectedPreferenceTitle') node.js Plugin
 						div(style='font-size:11px;')
@@ -279,27 +239,22 @@ block content
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
-			div(id='head_collaboration.history')
-						div(id='history_player_control')
-									select(id='history_selectbox')
-												option(value='200', selected='', localization_key='history_speed_veryfast') Very Fast
-												option(value='600', localization_key='history_speed_fast') Fast
-												option(value='1000', selected='', localization_key='history_speed_normal') Normal
-												option(value='1400', localization_key='history_speed_slow') Slow
-												option(value='1800', localization_key='history_speed_veryslow') Very Slow
-									button(id='btn_history_play')
-												.history-toolbar-play
-									button(id='btn_history_pause')
-												.history-toolbar-pause
-									button(id='btn_history_stop')
-												.history-toolbar-stop
-						.history_item.history_header.history_selected(localization_key='now') Now
-						div(id='history_container')
-						div(id='history_bottom').main_toolbar
-									a.toolbar_button.history_toolbar_not_activated(tooltip='history_rollback', title='rollback')
-												div(id='btn_history_rollback').rollback.history-toolbar-rollback
-									a.toolbar_button.history_toolbar_not_activated(tooltip='history_delete', title='delete')
-												div(id='btn_history_delete').delete.history-toolbar-merge
+			div(id='head_nodejs.property')
+						div(id='selectedPreferenceTitle') node.js Plugin
+						div(style='font-size:11px;')
+									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
+												div(style='margin-bottom: 5px;')
+															| main :
+															input(type='text', name='plugin.nodejs.main')
+												div(style='margin-bottom: 5px;')
+															| source path :
+															input(type='text', name='plugin.nodejs.source_path')
+												div(style='margin-bottom: 5px;')
+															| debug option :
+															input(type='text', name='plugin.nodejs.debug_option')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
 			div(id='head_project.explorer.folder')
 						div(id='project.explorer.folder_context')
 									.bd
@@ -341,67 +296,12 @@ block content
 																		a.yuimenuitemlabel(action='export_file', localization_key='file_export', style='background-repeat: no-repeat') Export File
 												ul
 															li.yuimenuitem
-																		a.yuimenuitemlabel(action='scm_parent') SCM 
-																		.yuimenu.scm_context_menu
-																					.bd
-																								ul.first-of-type
-																											li.yuimenuitem
-																														a(id='scm_git_folder_container').yuimenuitemlabel GIT
-																														div(id='scm_git_ul_folder').yuimenu
-																																	.bd
-																																				ul.first-of-type
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_add', localization_key='') Add folder
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_add_files', localization_key='') Add specific files 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_push', localization_key='') Push 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_commit', localization_key='') Commit 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_update', localization_key='') Update 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_revert', localization_key='') Revert 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_show_log', localization_key='') Show log
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_remove', localization_key='') Remove
-																											li.yuimenuitem
-																														a(id='scm_svn_folder_container').yuimenuitemlabel SVN
-																														div(id='scm_svn_ul_folder').yuimenu
-																																	.bd
-																																				ul.first-of-type
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_add', localization_key='') Add folder
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_add_files', localization_key='') Add specific files 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_commit', localization_key='') Commit 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_update', localization_key='') Update 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_revert', localization_key='') Revert 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_cleanup', localization_key='') Cleanup 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_resolve', localization_key='') Resolve conflict
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_show_log', localization_key='') Show log
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_remove', localization_key='') Remove
-												ul
-															li.yuimenuitem
 																		a.yuimenuitemlabel(action='property', localization_key='file_property_context') Properties
-			div(id='head_scm.add')
-						div(style='font-size:11px;')
-									.content_header
-												b SCM Add
-									div(id='scm_add_files')(style='width:100%; height:303px; text-align:left; overflow-x:hidden;')
-									div(style='padding-top:11px; text-align:right;')
-												button(id='scm_add_selectall')(style='padding: 5px;margin-top:5px;')
-															span(localization_key='common_select_all') Select All
-												button(id='scm_add_deselectall')(style='padding: 5px;margin-top:5px;margin-left: 5px;')
-															span(localization_key='common_deselect_all') Deselect All
+			div(id='head_tutorial_step1')
+						div(id='tutorial-step1').tutorial-dialog(title='새 프로젝트 만들기')
+									| 책의 예제를 테스트하기 위해 새 프로젝트를 만들어 봅시다.
+									br
+									| 상단 좌측에 "새 프로젝트" 버튼을 클릭하여 새 프로젝트 창을 띄웁니다.
 			div(id='head_design.setting')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -459,12 +359,21 @@ block content
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
-			div(id='head_survey')
-						div(style='font-size:11px;')
-									div(id='survey_dialog_message')
-									br
-									div
-												textarea(id='survey_inputbox')(type='text', style='height: 116px; width: 367px;')
+			div(id='head_edit.context')
+						div(id='edit.context_[{@FINGERPRINT}]')
+									.bd
+												ul.first-of-type
+															li.yuimenuitem
+																		a.yuimenuitemlabel(action='do_autocomplete', localization_key='edit_autocomplete_edit_context') AutoComplete
+															li.yuimenuitem
+																		a.yuimenuitemlabel(action='do_jump_to_definition', localization_key='edit_definition_edit_context') Jump to Definition
+												ul
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='do_go_to_line', localization_key='edit_go_to_line') Go to Line
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='search', localization_key='edit_search_edit_context') Search
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='do_find', localization_key='edit_find_replace_edit_context') Find/Replace
 			div(id='head_file.switch_workspace')
 						div(style='text-align:left;')
 									div(style='width:100%; height:90px; border:1px solid #999; background-color:#fff;			overflow:auto;')
@@ -483,21 +392,6 @@ block content
 												div(style='float:right;')
 															button(type='button', style='width:70px; height:20px;') Browse...
 						div
-			div(id='head_edit.context')
-						div(id='edit.context_[{@FINGERPRINT}]')
-									.bd
-												ul.first-of-type
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='do_autocomplete', localization_key='edit_autocomplete_edit_context') AutoComplete
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='do_jump_to_definition', localization_key='edit_definition_edit_context') Jump to Definition
-												ul
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='do_go_to_line', localization_key='edit_go_to_line') Go to Line
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='search', localization_key='edit_search_edit_context') Search
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='do_find', localization_key='edit_find_replace_edit_context') Find/Replace
 			div(id='head_file._import')
 						.content_header(localization_key='dialog_file_import') File Import/Upload
 						.content_guide_message(localization_key='dialog_file_import_guide') Select the file to import
@@ -523,17 +417,6 @@ block content
 																					div(style='float:left;')
 																								input(id='file_import_file')(type='file', name='file')
 																								div(id='upload_output')
-			div(id='head_design.ruler')
-						div(id='design.ruler_[{@FINGERPRINT}]')
-									.bd
-												ul.first-of-type
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(href='#File', localization_key='design_show_ruler') Show Ruler
-															li.yuimenuitem
-																		a.yuimenuitemlabel(href='#Edit', localization_key='design_hide_ruler') Hide Ruler
-												ul
-															li.yuimenuitem
-																		a.yuimenuitemlabel(href='#Edit', localization_key='design_setting') Setting
 			div(id='head_help.bug_report')
 						div(style='font-size:11px; text-align:left;')
 									fieldset
@@ -594,17 +477,6 @@ block content
 									a(action='export_file', tooltip='file_export')
 												.toolbar_button.export
 															.toolbar-export
-			div(id='head_scm.blame')
-						div(style='font-size:11px;')
-									.content_header(style='padding-bottom:40px;')
-												b Blame specific revision
-												.content_guide_message(style='margin-top:10px;')
-															label(for='scm_blame_revision_select', style='float: left; margin-top: 2px;') Revision : 
-															input(id='scm_blame_revision_select')(type='text', style='width:80px; float: left;')
-															input(id='scm_blame_revision_button')(type='button', value='apply')
-									fieldset(style='border:1px solid #ccc;background: white;margin-top:0px;width:97%;padding-top:15px;')
-												div(id='blame_container')(style='float: left; text-align:left; width:100%;')
-															textarea.code_editor
 			div(id='head_project.build.configuration')
 						div(id='build_configuration')(style='text-align:left;')
 									div
@@ -630,7 +502,6 @@ block content
 									fieldset
 												legend Center Tab Menu
 												div(id='center-tabmenu')(style='margin-left:11px')
-
 			div(id='head_file._new')
 						.content_header(localization_key='dialog_file_new_file') New File
 						.content_guide_message(localization_key='dialog_file_new_file_guide') Make a new file
@@ -759,45 +630,6 @@ block content
 												div(id='property_treeview').dialog_treeview
 									div(style='float:right; width:460px; height:410px; text-align:left;')
 												div(id='property_tabview').yui-navset
-			div(id='head_cpp.preference')
-						div(id='selectedPreferenceTitle') C/C++ Plugin
-						div(style='font-size:11px;')
-									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
-												div(style='margin-bottom: 5px;')
-															| Default Main Class Name :
-															input(type='text', name='plugin.cpp.main')
-												div(style='margin-bottom: 5px;')
-															| Default Source Path :
-															input(type='text', name='plugin.cpp.source_path')
-												div(style='margin-bottom: 5px;')
-															| Default Makefile Path :
-															input(type='text', name='plugin.cpp.makefile_path')
-												div(style='margin-bottom: 5px;')
-															| Default Build Path :
-															input(type='text', name='plugin.cpp.build_path')
-												div(style='margin-bottom: 5px;')
-															| Default Build Option :
-															input(type='text', name='plugin.cpp.build_option')
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
-			div(id='head_list.available_blind')
-						.content_guide_message(localization_key='dialog_userlist_all_select_user') Select User
-						.user_management_available_blind_contents(style='height:300px; padding-top:5px;')
-									div(style='float:left; width:160px; text-align:center')
-												span(style='font-size:11px; color:#666', localization_key='dialog_userlist_available') Available
-									div(style='float:left; width:111px; height:1px')
-									div(style='float:left; width:160px; text-align: center;')
-												span(style='font-size:11px; color:#666', localization_key='dialog_userlist_blind') Blind
-									.user_management_available_list(style='width:130px; height:250px; float:left; overflow-y:scroll; border:1px solid #CCC; font-size:11px; background-color:#FFF; margin-left:20px;')
-									div(style='float:left; width:120px; text-align: center; margin-top: 90px; padding:6px')
-												div(style='padding: 5px;')
-															input(id='user_management_blind')(type='button', value='>>')
-												div(style='padding: 5px;')
-															input(id='user_management_available')(type='button', value='<<')
-									.user_management_blind_list(style='width:130px; height:250px; float:right; overflow-y:scroll; border:1px solid #CCC; font-size:11px; background-color:#FFF; margin-right:20px;')
-									div(style='float:right; margin-top:25px; margin-right:15px; clear:both')
-												input(id='user_management_available_blind_apply')(type='button', style='display:none;', value='Apply')
 			div(id='head_cpp.property')
 						div(id='selectedPreferenceTitle') C/C++ Plugin
 						div(style='font-size:11px;')
@@ -820,6 +652,28 @@ block content
 															div(style='margin-bottom: 5px;')
 																		| build option :
 																		input(type='text', name='plugin.cpp.build_option')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
+			div(id='head_cpp.preference')
+						div(id='selectedPreferenceTitle') C/C++ Plugin
+						div(style='font-size:11px;')
+									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
+												div(style='margin-bottom: 5px;')
+															| Default Main Class Name :
+															input(type='text', name='plugin.cpp.main')
+												div(style='margin-bottom: 5px;')
+															| Default Source Path :
+															input(type='text', name='plugin.cpp.source_path')
+												div(style='margin-bottom: 5px;')
+															| Default Makefile Path :
+															input(type='text', name='plugin.cpp.makefile_path')
+												div(style='margin-bottom: 5px;')
+															| Default Build Path :
+															input(type='text', name='plugin.cpp.build_path')
+												div(style='margin-bottom: 5px;')
+															| Default Build Option :
+															input(type='text', name='plugin.cpp.build_option')
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
@@ -858,15 +712,6 @@ block content
 																		a.yuimenuitemlabel(action='tile_vertically', localization_key='window_tile_vertically_context') Tile Vertically
 															li.yuimenuitem
 																		a.yuimenuitemlabel(action='tile_horizontally', localization_key='window_tile_horizontally_context') Tile Horizontally
-			div(id='head_collaboration.communication.user')
-						div(id='user.context_[{@FINGERPRINT}]')
-									.bd
-												ul.first-of-type
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='account_profile_context', localization_key='communication_user_info_context') User Info
-												ul
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='account_user_whisper', localization_key='communication_user_whisper_context') Whisper
 			div(id='head_file._new.untitled_textfile')
 						.content_header(localization_key='dialog_file_new_untitled_textfile') New Untitled Text File
 						.content_guide_message(localization_key='dialog_file_new_untitled_textfile_guide') Make a new untitled text file
@@ -888,54 +733,6 @@ block content
 												div(id='theme_details_treeview').dialog_treeview
 									div(style='float:right; width:760px; height:510px; text-align:left;')
 												div(id='theme_details_tabview').yui-navset
-			div(id='head_collaboration.pdf')
-						div(id='viewer_bt_container')(style='z-index:4;position:absolute;')
-									div(id='pdf_control_bt_container')(style='float:left')
-												.pdf_sub_control_bt_container(style='float:left;width:65px;')
-															div(id='pdf_prev').pdf_buttons.pdf_toolbar-buttons(tooltip='pdf_prev')
-																		.pdf_viewer-toolbar-prev
-															div(id='pdf_next').pdf_buttons.pdf_toolbar-buttons(tooltip='pdf_next')
-																		.pdf_viewer-toolbar-next
-												.pdf_sub_control_bt_container(style='float:left')
-															.pdf_bt_divider
-															input(id='goto_page')(type='text', style='margin-left: 10px;width:20px; padding:4px;')
-															| /
-															span(id='page_count') 0
-									.pdf_sub_control_bt_container(style='float:left; width:70px;')
-												.pdf_bt_divider
-												div(id='magnify_pdf').pdf_buttons.pdf_toolbar-buttons(tooltip='magnify')
-															.pdf_viewer-toolbar-plus
-												div(id='reduce_pdf').pdf_buttons.pdf_toolbar-buttons(tooltip='minify')
-															.pdf_viewer-toolbar-minus
-									div(id='draw_control_bt_container').pdf_sub_control_bt_container(style='float:left; width:225px;')
-												.pdf_bt_divider
-												div(id='pdf_draw_bt').pdf_buttons.pdf_toolbar-buttons(tooltip='palette')
-															.pdf_viewer-toolbar-palette
-												div(id='pdf_pen_bt').pdf_buttons.pdf_toolbar-buttons.not_active(tooltip='pencil')
-															.pdf_viewer-toolbar-pencil
-												div(id='pdf_erase_bt').pdf_buttons.pdf_toolbar-buttons.not_active(tooltip='erase')
-															.pdf_viewer-toolbar-draw_eraser
-												div(id='pdf_palette_bt').pdf_buttons.pdf_toolbar-buttons.not_active(tooltip='color_wheel')
-															.pdf_viewer-toolbar-color_wheel
-												div(id='pdf_brush_size_bt').pdf_buttons.pdf_toolbar-buttons.not_active(tooltip='size_slider')
-															.pdf_viewer-toolbar-hslider
-												div(id='pdf_erase_all_bt').pdf_buttons.pdf_toolbar-buttons.not_active(tooltip='erase_all')
-															.pdf_viewer-toolbar-broom
-												div(id='pdf_connect_bt').pdf_buttons.pdf_toolbar-buttons(tooltip='disconnect')
-															.pdf_viewer-toolbar-disconnect
-									div(id='pdf_brush_container')(style='width:260px;position:absolute;display:none;border: 1px solid #ccc;vertical-align: middle;font-size: 11px;')
-												div(id='pdf_brush_slider')
-															div(id='pdf_sliderbg')(style='margin-left: auto;margin-right: auto;')
-																		div(id='pdf_sliderthumb')
-																					img(src='images/org.goorm.core.collaboration/thumb-s.gif', style='cursor:pointer')
-												input(id='pdf_brush_thickness')(type='text')
-									div(id='pdf_palette_container')(style='position:absolute; display:none;')
-												div(id='pdf_palette')(style='width: 335px; height: 250px; background-color: #fff; border: 1px solid #333; border-radius: 3px;')
-															button(id='close_pdf_palette')(style=' margin-top:232px; margin-left:300px;') close
-						div(id='pdf_canvas_container')(style='background-color: #f8f8f8;text-align: center;vertical-align: middle;font-size: 11px;')
-									canvas(id='the-canvas')(tabindex='1')
-									canvas(id='the_draw_canvas')(tabindex='1', style='z-index:1; position:absolute;')
-						div(id='pdf_real_eraser')(style='z-index:3;display: none; position: absolute; width: 20px; height: 20px; border: 1px solid #000;background-color: #fff;')
 			div(id='head_project.share')
 						div(id='project_share_container')
 									div(id='shared_project_list_container')
@@ -964,21 +761,11 @@ block content
 									.find_info_content_container
 												input(id='find_info_id_bt').goorm_find_info_id_bt(type='button', name='find_info_id_bt')
 												input(id='find_info_pw_bt').goorm_find_info_pw_bt(type='button', name='find_info_pw_bt')
-			div(id='head_terminal.context')
-						div(id='terminal.context_[{@FINGERPRINT}]')
-									.bd
-												ul.first-of-type
-															li(id='context_clear').yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='do_terminal_clear', localization_key='terminal_delete_edit_terminal') Clear
-			div(id='head_collaboration.notification')
-						div
-									.communication_notification_container
-												.notification_partner_area(style='border: 1px solid #CCC; float: left; width: 100%; padding: 2px; border-radius: 8px; background: white;')
-															div(localization_key='dialog_notification_partner_guide', style='float:left; width:130px;') Message : 
-															.partner_name(style='float:left; width:100px; font-weight: bold')
-															.notification_content_show_button(style='float:left; width:50px; cursor: pointer;')			▼ 
-															.notification_content_hide_button(style='float:left; width:50px; display:none; cursor: pointer;')			▲ 
-												.notification_content_area(style='overflow:auto; clear:both; text-align:left; background:#FFF; padding:3px; height:150px; display:none;')
+			div(id='head_tutorial_step4')
+						div(id='tutorial-step4').tutorial-dialog(title='프로젝트 생성 완료')
+									| 프로젝트가 성공적으로 생성되었습니다! 생성된 프로젝트 파일은 좌측 탐색창을 통해 확인 할 수 있습니다.
+									br
+									| 이번엔 해당 프로젝트를 실행시키도록 하겠습니다. 상단 "실행" 버튼을 누릅니다.
 			div(id='head_system.info')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -987,8 +774,12 @@ block content
 															div(id='server_os')(style='float:left;') OS : 
 												div(style='width:100%; height:22px;')
 															div(id='node_version')(style='float:left;') Node.js : 
-												div(style='width:100%; height:22px;')
-															div(id='mongodb_version')(style='float:left;') mongoDB : 
+			div(id='head_terminal.context')
+						div(id='terminal.context_[{@FINGERPRINT}]')
+									.bd
+												ul.first-of-type
+															li(id='context_clear').yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='do_terminal_clear', localization_key='terminal_delete_edit_terminal') Clear
 			div(id='head_edit.theme')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -1049,6 +840,9 @@ block content
 												.profile_area
 															label.goorm_profile_span(for='profile_email_input', localization_key='dialog_goorm_profile_email')			E-mail : 
 															input(id='profile_email_input').goorm_profile_input(type='text', name='profile_email_input', readonly='readonly')
+			div(id='head_tutorial_step3')
+						div(id='tutorial-step3').tutorial-dialog(title='새 프로젝트 생성')
+									| 원하는 프로젝트 이름과 내용을 입력한 후, "확인" 버튼을 눌러 프로젝트를 생성합니다.
 			div(id='head_edit.go_to_line')
 						div
 									div(style='width:145px; font-size:11px; text-align:left;')
@@ -1096,19 +890,6 @@ block content
 												ul
 															li.yuimenuitem
 																		a.yuimenuitemlabel(action='properties_object', localization_key='object_properties') Properties
-			div(id='head_user_management')
-						div
-									div(style='float:left; width:200px; height:400px; padding:5px; border:1px solid #ccc; background-color:#fff; overflow:auto; font-size:11px;')
-												div(id='user_manager_treeview').dialog_treeview
-									div(style='float:right; width:460px; height:410px; text-align:left;')
-												div(id='user_manager_tabview').yui-navset
-			div(id='head_all')
-						.content_guide_message(localization_key='dialog_projectlist_all_select_project') null
-						.user_management_projectlist_contents(style='height:300px; padding-top:5px;')
-									.user_management_project_list(style='width:130px; height:330px; float:left; overflow-y:scroll; border:1px solid #CCC; font-size:11px; background-color:#FFF;')
-									.user_management_project_detail(style='width:290px; height:290px; float:right; font-size:11px; background-color:#FFF:')
-						div(style='float:left; margin-top:10px;')
-						div(style='float:right; margin-top:10px;')
 			div(id='head_scm.property')
 						div(style='font-size:11px;')
 									div(style='margin-bottom:0px; height:25px;clear:both')
@@ -1139,16 +920,14 @@ block content
 												div(style='float:right')
 															a(href='#', action='scm_property_checkout')
 																		button.scm_checkout_bt(type='button', localization_key='dialog_project_property_checkout', style='padding:6px 10px;') Checkout
-			div(id='head_list.all')
-						.content_guide_message(localization_key='dialog_userlist_all_select_user') Select User
-						.user_management_list_contents(style='height:300px; padding-top:5px;')
-									.user_management_list(style='width:130px; height:290px; float:left; overflow-y:scroll; border:1px solid #CCC; font-size:11px; background-color:#FFF;')
-									.user_management_detail(style='width:290px; height:290px; float:right; font-size:11px; background-color:#FFF:')
-						div(style='float:left; margin-top:10px;')
-									input(id='user_management_delete')(type='button', value='Delete')
-									input(id='user_management_add')(type='button', value='Add')
-						div(style='float:right; margin-top:10px;')
-									input(id='user_management_register')(type='button', style='display:none;', value='Register')
+			div(id='head_tutorial_step5')
+						div(id='tutorial-step5').tutorial-dialog(title='프로젝트 실행 완료')
+									| 실행된 프로젝트는 새 창을 통해 확인할 수 있습니다. "실행" 버튼을 누를때마다 해당 창이 새로고침되며, 파일을 편집하고 저장할 때마다(단축키 Ctrl+S) 자동으로 화면을 갱신합니다.
+									br
+									br
+									| 지금까지 프로젝트를 생성하고 실행하는 과정을 간단하게 살펴보았습니다. 더 자세한 사용방법은 도움말이나 구름 홈페이지(
+									a(href='http://goorm.io', target='_blank') http://goorm.io
+									| )를 참고하시기 바랍니다.
 			div(id='head_file._new.other')
 						.content_header(localization_key='dialog_file_new_other_file') New Other File
 						.content_guide_message(localization_key='dialog_file_new_other_file_guide') Select file type to create
@@ -1251,17 +1030,6 @@ block content
 																								span(localization_key='common_filetype') File Type
 																					td(style='padding-top:5px; text-align:right;')
 																								select(id='file_save_as_file_type')(style='width:706px; height:20px;')
-			div(id='head_google_drive.explorer.file')
-						div(id='google_drive.explorer.file_context')
-									.bd
-												ul.first-of-type
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='open_google_drive_file', localization_key='file_open_context') Open
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='download_google_drive_file', localization_key='file_download_context') Download
-												ul
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='delete_google_drive_context', localization_key='file_delete_context') Delete
 			div(id='head_project.explorer.file')
 						div(id='project.explorer.file_context')
 									.bd
@@ -1279,13 +1047,7 @@ block content
 																											li.yuimenuitem
 																														a.yuimenuitemlabel(action='open_text_editor', localization_key='file_open_as_text_editor_context') Text Editor
 																											li.yuimenuitem
-																														a.yuimenuitemlabel(action='open_code_editor', localization_key='file_open_as_code_editor_context') Code Editor
-																											li.yuimenuitem
 																														a.yuimenuitemlabel(action='open_vim_editor', localization_key='file_open_as_vim_editor_context') Vim Editor
-																											li.yuimenuitem
-																														a.yuimenuitemlabel(action='open_ui_designer', localization_key='file_open_as_ui_designer_context') UI Designer
-																											li.yuimenuitem
-																														a.yuimenuitemlabel(action='open_uml_designer', localization_key='file_open_as_uml_designer_context') UML Designer
 												ul
 															li.yuimenuitem
 																		a.yuimenuitemlabel(action='Copy_context', localization_key='Copy_context') Copy
@@ -1305,65 +1067,11 @@ block content
 																		a.yuimenuitemlabel(action='export_file', localization_key='file_export', style='background-repeat: no-repeat') Export File
 												ul
 															li.yuimenuitem
-																		a.yuimenuitemlabel(localization_key='', action='scm_parent') SCM
-																		.yuimenu.scm_context_menu
-																					.bd
-																								ul.first-of-type
-																											li.yuimenuitem
-																														a(id='scm_git_file_container').yuimenuitemlabel GIT
-																														div(id='scm_git_ul_file').yuimenu
-																																	.bd
-																																				ul.first-of-type
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_add', localization_key='') Add 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_push', localization_key='') Push 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_commitfile', localization_key='') Commit 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_update', localization_key='') Update 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_revert', localization_key='') Revert 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_diff', localization_key='') Diff
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_show_logfile', localization_key='') Show log
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_remove', localization_key='') Remove
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_remove', localization_key='') Remove Cashed
-																											li.yuimenuitem
-																														a(id='scm_svn_file_container').yuimenuitemlabel SVN
-																														div(id='scm_svn_ul_file').yuimenu
-																																	.bd
-																																				ul.first-of-type
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_add', localization_key='') Add 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_commit', localization_key='') Commit 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_update', localization_key='') Update 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_revert', localization_key='') Revert 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_lock', localization_key='') Lock 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_unlock', localization_key='') Unlock 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_update_revision', localization_key='') Update to revision 
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_resolve', localization_key='') Resolve conflict
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_blame', localization_key='') Blame
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_diff', localization_key='') Diff
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_show_log', localization_key='') Show log
-																																							li.yuimenuitem
-																																										a.yuimenuitemlabel(href='#', action='scm_remove', localization_key='') Remove
-												ul
-															li.yuimenuitem
 																		a.yuimenuitemlabel(action='property', localization_key='file_property_context') Properties
+			div(id='head_printer')
+						.content_header(localization_key='dialog_file_print') Print
+						div
+									.content_guide_message(localization_key='dialog_file_print_guide') You can print current file
 			div(id='head_language')
 						div(id='language_body')(style='font-size:11px;')
 									fieldset
@@ -1373,10 +1081,6 @@ block content
 															select(id='language_select')(name='language_select')
 																		option(value='kor') 한국어
 																		option(value='us') English
-			div(id='head_printer')
-						.content_header(localization_key='dialog_file_print') Print
-						div
-									.content_guide_message(localization_key='dialog_file_print_guide') You can print current file
 			div(id='head_window.panel.titlebar')
 						div(id='window.panel.titlebar_[{@FINGERPRINT}]')
 									.bd
@@ -1419,17 +1123,6 @@ block content
 																								span(localization_key='common_filetype') File Type
 																					td(style='padding-top:5px; text-align:right;')
 																								select(id='file_move_file_type')(style='width:706px; height:20px;')
-			div(id='head_design.ruler_y')
-						div(id='design.ruler_y_[{@FINGERPRINT}]')
-									.bd
-												ul.first-of-type
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(href='#File', localization_key='design_show_ruler') Show Ruler
-															li.yuimenuitem
-																		a.yuimenuitemlabel(href='#Edit', localization_key='design_hide_ruler') Hide Ruler
-												ul
-															li.yuimenuitem
-																		a.yuimenuitemlabel(href='#Edit', localization_key='design_setting') Setting
 			div(id='head_auth.find_id')
 						div(id='goorm_find_id_container').find_id_container
 									.find_id_content_container
@@ -1525,73 +1218,12 @@ block content
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
-			div(id='head_scm.resolve')
-						div(style='font-size:11px;')
-									.content_header
-												b SCM Resolve
-									br
-									.content_guide_message
-												b Resolve conflicts by accept option
-									fieldset(style='padding:10px; border:1px solid #ccc;background: white;margin-top:0px;')
-												div(style='width:100%;text-align:left; font-size:11px;')
-															input(type='radio', name='resolve_accpet', style='vertical-align: middle;', value='1', checked='checked')
-															| Base
-												div(style='width:100%; text-align:left;font-size:11px; margin-top:5px;')
-															input(type='radio', name='resolve_accpet', style='vertical-align: middle;', value='2')
-															| Working
-												div(style='width:100%; text-align:left; margin-top:5px;font-size:11px; ')
-															input(type='radio', name='resolve_accpet', style='vertical-align: middle;', value='3')
-															| Mine conflict
-												div(style='width:100%; text-align:left; margin-top:5px;font-size:11px; ')
-															input(type='radio', name='resolve_accpet', style='vertical-align: middle;', value='4')
-															| Theirs conflict
-												div(style='width:100%; text-align:left; margin-top:5px;font-size:11px; ')
-															input(type='radio', name='resolve_accpet', style='vertical-align: middle;', value='5')
-															| Mine full
-												div(style='width:100%; text-align:left; margin-top:5px;font-size:11px; ')
-															input(type='radio', name='resolve_accpet', style='vertical-align: middle;', value='6')
-															| Theirs full
-			div(id='head_scm.diff')
-						div(style='font-size:11px;')
-									.content_header(style='padding-bottom: 40px;')
-												b			Show differents between specific revision 
-												.content_guide_message(style='margin-top:10px;')
-															label(for='scm_diff_revision_button', style='float: left; margin-top: 2px;') Revision : 
-															input(id='scm_diff_revision_select')(type='text', style='width:80px; float: left;')
-															input(id='scm_diff_revision_button')(type='button', value='apply')
-									fieldset(style='border:1px solid #ccc;background: white;margin-top:0px;width:97%;padding-top:15px;')
-												div(id='diff_container')(style='float: left; text-align:left;width:100%;')
-															textarea.code_editor
 			div(id='head_project.run_debug_setting')
 						div(style='font-size:11px;')
 									div(style='margin-bottom:5px; height:25px;')
 												div(style='float:left; width:120px;') Project Type
 												div(style='float:left; width:305px;')
 															input(type='text', name='TYPE', validate='', style='width:305px;', readonly='')
-			div(id='head_design.toolbar')
-						div(id='design.toolbar').toolbar_part
-									a(action='align_left')
-												.toolbar_button.align_left(style='background:url("configs/toolbars/org.goorm.core.design/image/align_left.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='align_right')
-												.toolbar_button.align_right(style='background:url("configs/toolbars/org.goorm.core.design/image/align_right.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='align_top')
-												.toolbar_button.align_top(style='background:url("configs/toolbars/org.goorm.core.design/image/align_top.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='align_bottom')
-												.toolbar_button.align_bottom(style='background:url("configs/toolbars/org.goorm.core.design/image/align_bottom.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='align_horizontally_center')
-												.toolbar_button.align_horizontally_center(style='background:url("configs/toolbars/org.goorm.core.design/image/align_horizontally_center.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='align_vertically_center')
-												.toolbar_button.align_vertically_center(style='background:url("configs/toolbars/org.goorm.core.design/image/align_vertically_center.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='bring_to_front')
-												.toolbar_button.bring_to_front(style='background:url("configs/toolbars/org.goorm.core.design/image/bring_to_front.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='send_to_back')
-												.toolbar_button.send_to_back(style='background:url("configs/toolbars/org.goorm.core.design/image/send_to_back.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='bring_forward')
-												.toolbar_button.bring_forward(style='background:url("configs/toolbars/org.goorm.core.design/image/bring_forward.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='send_backward')
-												.toolbar_button.send_backward(style='background:url("configs/toolbars/org.goorm.core.design/image/send_backward.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='design_canvas_setting')
-												.toolbar_button.design_canvas_setting(style='background:url("configs/toolbars/org.goorm.core.design/image/setting.png") no-repeat; width:16px; height: 16px; background-position: center')
 			div(id='head_help.search')
 						div
 									div(style='float:left; width:100%; height:20px; text-align:left;')
@@ -1687,72 +1319,6 @@ block content
 																					input(id='show_line_numbers').checkbox_margin(type='checkbox', name='building_after_save_option')
 																					label(data-on='', data-off='')
 																		label(for='building_after_save_option', localization_key='auto_build_after_save') Save and build
-			div(id='head_java_examples.property')
-						div(id='selectedPreferenceTitle') JAVA_examples Plugin
-						div(style='font-size:11px;')
-									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
-												div(style='margin-bottom: 5px;')
-															| main class name :
-															input(type='text', name='plugin.java_examples.main')
-												div(style='margin-bottom: 5px;')
-															| source path :
-															input(type='text', name='plugin.java_examples.source_path')
-												div(style='margin-bottom: 5px;')
-															| build path :
-															input(type='text', name='plugin.java_examples.build_path')
-												div(style='margin-bottom: 5px;')
-															| build option :
-															input(type='text', name='plugin.java_examples.build_option')
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
-			div(id='head_java_examples.preference')
-						div(id='selectedPreferenceTitle') JAVA_examples Plugin
-						div(style='font-size:11px;')
-									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
-												div(style='margin-bottom: 5px;')
-															| Default Main Class Name :
-															input(type='text', name='plugin.java_examples.main')
-												div(style='margin-bottom: 5px;')
-															| Default Source Path :
-															input(type='text', name='plugin.java_examples.source_path')
-												div(style='margin-bottom: 5px;')
-															| Default Build Path :
-															input(type='text', name='plugin.java_examples.build_path')
-												div(style='margin-bottom: 5px;')
-															| Default Build Option :
-															input(type='text', name='plugin.java_examples.build_option')
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
-			div(id='head_scm.show_log')
-						div(style='font-size:11px;')
-									.content_header(style='padding-bottom: 40px;')
-												b			Show logs for specific revision 
-												.content_guide_message(style='margin-top: 30px; float: left;')
-															| Revision :
-															input(id='scm_log_revision_select')(type='text', style='width:60px')
-												input(id='scm_log_revision_button')(type='button', value='apply')
-									div(id='scm_log_content')(style='width:100%; height:300px; text-align:left; overflow-x:hidden; border:1px solid #ccc;')
-			div(id='head_scm.update_revision')
-						div(style='font-size:11px;')
-									.content_header
-												b SCM Update to revision
-									br
-									.content_guide_message
-												b Update to specific revision or specific date
-									fieldset(style='padding:10px; border:1px solid #ccc;background: white;margin-top:0px;')
-												div(style='width:100%;text-align:left; font-size:11px;')
-															input(id='scm_head_revision')(type='radio', name='update_revision', value='1', checked='checked', style='vertical-align: middle;')
-															label(for='scm_head_revision', style='vertical-align: middle;') HEAD Revision
-												div(style='width:100%; text-align:left;font-size:11px; margin-top:10px;')
-															input(id='scm_date')(type='radio', style='vertical-align: middle;', name='update_revision', value='2')
-															label(for='scm_date') Date
-															input(id='update_revision_date')(type='date', style='vertical-align: middle;', disabled='disabled')
-												div(style='width:100%; text-align:left; margin-top:10px;font-size:11px; ')
-															input(id='scm_revision')(type='radio', style='vertical-align: middle;', name='update_revision', value='3')
-															label(for='scm_revision') Revision
-															input(id='update_revision_revision')(type='text', style='vertical-align: middle;', disabled='disabled')
 			div(id='head_plugin.java_examples.interface')
 						div
 									.content_header
@@ -1803,41 +1369,6 @@ block content
 																		| public
 																		input(type='radio', name='java_interface_modifier', value='default', style='margin-left:10px;vertical-align: middle')
 																		| default
-			div(id='head_plugin.java.class')
-						div
-									.content_header
-												div(localization_key='make_java_class') Make Java Class
-									.content_guide_message
-												div(localization_key='create_java_class') Create a new Java Class.
-									.dialog_template_body_div
-												.dialog_template_body_span(style='float:left', localization_key='template_source_folder') Source folder : 
-												input(id='java_class_source_folder').dialog_template_text(type='text')
-									.dialog_template_body_div
-												.dialog_template_body_span(style='float:left', localization_key='template_package') Package : 
-												input(id='java_class_package')(type='text', style='margin-left:10px; width:215px;')
-									hr
-									.dialog_template_body_div
-												.dialog_template_body_span(style='float:left', localization_key='template_name') Name : 
-												input(id='java_class_name').dialog_template_text(type='text')
-									.dialog_template_body_div
-												span.dialog_template_body_span(localization_key='template_modifiers') Modifiers
-												fieldset(style='padding:10px; border:1px solid #ccc;background: white;margin-top:10px;margin-left:5px;display:inline; width:345px;')
-															legend(style='font-size:10px;', localization_key='select_modifiers') Select Modifier
-															div
-																		input(type='radio', name='java_class_modifier', value='public', checked='checked', style='vertical-align: middle')
-																		| public
-																		input(type='radio', name='java_class_modifier', value='default', style='margin-left:10px;vertical-align: middle')
-																		| default
-																		input(type='radio', name='java_class_modifier', value='abstract', style='margin-left:10px;vertical-align: middle')
-																		| abstract
-																		input(type='radio', name='java_class_modifier', value='final', style='margin-left:10px;vertical-align: middle')
-																		| final
-									.dialog_template_body_div
-												span(style='width:100%;	margin-right:10px; margin-left:10px; font-weight:bold;', localization_key='template_create_option') What method stubs would you like to create?
-									.dialog_template_body_div
-												div(style='text-align:center;')
-															input(type='checkbox', name='java_class_option', style='vertical-align: middle', value='constructor')
-															span(style='margin-left:5px;', localization_key='template_create_option_check') Constructors from superclass
 			div(id='head_plugin.java_examples.class')
 						div
 									.content_header
@@ -1873,6 +1404,41 @@ block content
 												div(style='text-align:center;')
 															input(type='checkbox', name='java_class_option', style='vertical-align: middle', value='constructor')
 															span(style='margin-left:5px;', localization_key='template_create_option_check') Constructors from superclass
+			div(id='head_plugin.java.class')
+						div
+									.content_header
+												div(localization_key='make_java_class') Make Java Class
+									.content_guide_message
+												div(localization_key='create_java_class') Create a new Java Class.
+									.dialog_template_body_div
+												.dialog_template_body_span(style='float:left', localization_key='template_source_folder') Source folder : 
+												input(id='java_class_source_folder').dialog_template_text(type='text')
+									.dialog_template_body_div
+												.dialog_template_body_span(style='float:left', localization_key='template_package') Package : 
+												input(id='java_class_package')(type='text', style='margin-left:10px; width:215px;')
+									hr
+									.dialog_template_body_div
+												.dialog_template_body_span(style='float:left', localization_key='template_name') Name : 
+												input(id='java_class_name').dialog_template_text(type='text')
+									.dialog_template_body_div
+												span.dialog_template_body_span(localization_key='template_modifiers') Modifiers
+												fieldset(style='padding:10px; border:1px solid #ccc;background: white;margin-top:10px;margin-left:5px;display:inline; width:345px;')
+															legend(style='font-size:10px;', localization_key='select_modifiers') Select Modifier
+															div
+																		input(type='radio', name='java_class_modifier', value='public', checked='checked', style='vertical-align: middle')
+																		| public
+																		input(type='radio', name='java_class_modifier', value='default', style='margin-left:10px;vertical-align: middle')
+																		| default
+																		input(type='radio', name='java_class_modifier', value='abstract', style='margin-left:10px;vertical-align: middle')
+																		| abstract
+																		input(type='radio', name='java_class_modifier', value='final', style='margin-left:10px;vertical-align: middle')
+																		| final
+									.dialog_template_body_div
+												span(style='width:100%;	margin-right:10px; margin-left:10px; font-weight:bold;', localization_key='template_create_option') What method stubs would you like to create?
+									.dialog_template_body_div
+												div(style='text-align:center;')
+															input(type='checkbox', name='java_class_option', style='vertical-align: middle', value='constructor')
+															span(style='margin-left:5px;', localization_key='template_create_option_check') Constructors from superclass
 			div(id='head_plugin.java_examples.package')
 						div
 									.content_header
@@ -1885,6 +1451,11 @@ block content
 									.dialog_template_body_div
 												.dialog_template_body_span(style='float:left', localization_key='template_name') Name : 
 												input(id='java_examples_package_name').dialog_template_text(type='text')
+			div(id='head_plugin.nodejs.info')
+						.nodejs_information_container
+									.nodejs_information_form
+												.nodejs_information_guide
+												.nodejs_information_span
 			div(id='head_plugin.java.package')
 						div
 									.content_header
@@ -1897,11 +1468,6 @@ block content
 									.dialog_template_body_div
 												.dialog_template_body_span(style='float:left', localization_key='template_name') Name : 
 												input(id='java_package_name').dialog_template_text(type='text')
-			div(id='head_plugin.nodejs.info')
-						.nodejs_information_container
-									.nodejs_information_form
-												.nodejs_information_guide
-												.nodejs_information_span
 			div(id='head_python.preference')
 						div(id='selectedPreferenceTitle') Python Plugin
 						div(style='font-size:11px;')
@@ -2001,18 +1567,6 @@ block content
 						div(id='buttons_for_theme')(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
-			div(id='head_project.build.project')
-						.content_header(localization_key='dialog_project_build') Build Project
-						.content_guide_message(localization_key='dialog_project_build_guide') Select project to build
-						div(id='build_project')(style='text-align:left;')
-									div(style='width:373px; height:210px; margin-top:8px; overflow:auto; font-size:11px; border:1px solid #bbb; background:white; padding:2px; line-height:1.5em;')
-												div(id='build_project_list')
-									div(style='padding-top:10px; text-align:right;')
-												button(id='build_project_select_all')(style='padding: 5px;margin-top:5px;')
-															span(localization_key='common_select_all') Select All
-												button(id='build_project_deselect_all')(style='padding: 5px;margin-top:5px;margin-left: 5px;')
-															span(localization_key='common_deselect_all') Deselect All
-									div
 			div(id='head_system.animations')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -2026,6 +1580,42 @@ block content
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
+			div(id='head_intro')
+						link(rel='stylesheet', href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')
+						div(id='tutorial-intro').tutorial-dialog(title='튜토리얼')
+									img(src='modules/org.goorm.core.tutorial/book.jpg', align='left')
+									| 본 시스템은 "HTML5+jQuery" 서적의 다양한 예제를 직접 개발하고 테스트 할 수 있는 클라우드 기반의 통합 개발환경입니다. "튜토리얼 시작"을 누르면, 간단한 시스템 사용방법을 안내 받으실 수 있습니다.
+						div(id='tutorial-step1').tutorial-dialog(title='새 프로젝트 만들기')
+									| 책의 예제를 테스트하기 위해 새 프로젝트를 만들어 봅시다.
+									br
+									| 상단 좌측에 "새 프로젝트" 버튼을 클릭하여 새 프로젝트 창을 띄웁니다.
+						div(id='tutorial-step2').tutorial-dialog(title='새 프로젝트 예제 선택')
+									| 새 프로젝트 창이 열리면, 원하는 예제 프로젝트를 선택하고 "다음" 버튼을 누릅니다.
+						div(id='tutorial-step3').tutorial-dialog(title='새 프로젝트 생성')
+									| 원하는 프로젝트 이름과 내용을 입력한 후, "확인" 버튼을 눌러 프로젝트를 생성합니다.
+						div(id='tutorial-step4').tutorial-dialog(title='프로젝트 생성 완료')
+									| 프로젝트가 성공적으로 생성되었습니다! 생성된 프로젝트 파일은 좌측 탐색창을 통해 확인 할 수 있습니다.
+									br
+									| 이번엔 해당 프로젝트를 실행시키도록 하겠습니다. 상단 "실행" 버튼을 누릅니다.
+						div(id='tutorial-step5').tutorial-dialog(title='프로젝트 실행 완료')
+									| 실행된 프로젝트는 새 창을 통해 확인할 수 있습니다. "실행" 버튼을 누를때마다 해당 창이 새로고침되며, 파일을 편집하고 저장할 때마다(단축키 Ctrl+S) 자동으로 화면을 갱신합니다.
+									br
+									br
+									| 지금까지 프로젝트를 생성하고 실행하는 과정을 간단하게 살펴보았습니다. 더 자세한 사용방법은 도움말이나 구름 홈페이지(
+									a(href='http://goorm.io', target='_blank') http://goorm.io
+									| )를 참고하시기 바랍니다.
+			div(id='head_project.build.project')
+						.content_header(localization_key='dialog_project_build') Build Project
+						.content_guide_message(localization_key='dialog_project_build_guide') Select project to build
+						div(id='build_project')(style='text-align:left;')
+									div(style='width:373px; height:210px; margin-top:8px; overflow:auto; font-size:11px; border:1px solid #bbb; background:white; padding:2px; line-height:1.5em;')
+												div(id='build_project_list')
+									div(style='padding-top:10px; text-align:right;')
+												button(id='build_project_select_all')(style='padding: 5px;margin-top:5px;')
+															span(localization_key='common_select_all') Select All
+												button(id='build_project_deselect_all')(style='padding: 5px;margin-top:5px;margin-left: 5px;')
+															span(localization_key='common_deselect_all') Deselect All
+									div
 			div(id='head_java.preference')
 						div(id='selectedPreferenceTitle') JAVA Plugin
 						div(style='font-size:11px;')
@@ -2064,48 +1654,6 @@ block content
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
-			div(id='head_scm.merge_url')
-						div(style='font-size:11px;')
-									div(style='text-align:center;padding-left:10px; font-size:15px;')
-												b SCM Merge
-									br
-									div(style='text-align:left;padding-left:10px; font-size:15px;')
-												b Merge with select URL's and revisions of the resources
-									fieldset(style='padding:10px; border:1px solid #ccc;background: white;margin-top:0px;')
-												div(style='width:100%;text-align:left; font-size:15px;')
-															div
-																		| URL :
-																		input(id='merge_resource_url')(type='text', style='width:394px;')
-												div(style='width:100%; text-align:left;font-size:15px; margin-top:15px;')
-															fieldset(style='padding:10px; border:1px solid #ccc;background: white;margin-top:0px;display:inline; width:200px;')
-																		legend Start Revision
-																		div
-																					input(type='radio', name='scm_merge_start', value='head', checked='checked')
-																					| HEAD
-																		div
-																					input(type='radio', name='scm_merge_start', value='revision')
-																					| Revision :
-																					input(id='merge_start_revision')(type='text', style='margin-left:10px;width: 90px;', disabled='disabled')
-															fieldset(style='padding:10px; border:1px solid #ccc;background: white;margin-top:0px;display:inline; width:200px;')
-																		legend Stop Revision
-																		div
-																					input(type='radio', name='scm_merge_stop', value='head', checked='checked')
-																					| HEAD
-																		div
-																					input(type='radio', name='scm_merge_stop', value='revision')
-																					| Revision :
-																					input(id='merge_stop_revision')(type='text', style='margin-left:10px;width: 90px;', disabled='disabled')
-												div(style='width:100%; text-align:left; margin-top:15px;font-size:15px; ')
-															input(type='checkbox', name='resolve_accpet', value='3')
-															| Ignore Ancestry
-												div(style='width:100%; text-align:left; margin-top:15px;font-size:15px; ')
-															| Depth :
-															select.goorm_signup_select(name='signup_lecture_input')
-																		option(value='practice_com_engineering_1', localization_key='dialog_goorm_profile_lect_1') Practice2 Mon
-																		option(value='practice_com_engineering_2', localization_key='dialog_goorm_profile_lect_2') Practice2 Tue
-																		option(value='practice_com_engineering_3', localization_key='dialog_goorm_profile_lect_3') Practice2 Wed
-																		option(value='practice_com_engineering_4', localization_key='dialog_goorm_profile_lect_4') Practice2 Thd
-																		option(value='practice_com_engineering_5', localization_key='dialog_goorm_profile_lect_5') Practice2 Fri
 			div(id='head_help.about')
 						div(id='help_about_container')(style='height:480px; text-align:left; background-color:#FFF; background-image:url(images/org.goorm.core.help/about.png); background-repeat:no-repeat; position:relative; border:2px solid #aab')
 									div(style='width:620px; top:370px; left:10px; position:absolute; text-shadow: 0px 1px 4px #000000;')
@@ -2127,29 +1675,17 @@ block content
 												font(style='font-size:11px; color:#FFF;')
 															| goormIDE Dev Team : Sung-tae Ryu, Noori Kim, Byeong-ung Ahn, You-seok Nam, Dong-jin Sim
 									div(style='top:50px; width:400px; left:200px; line-height:13px; position:absolute;')
-			div(id='head_slideshare.toolbar')
-						div(id='slideshare.toolbar').toolbar_part.slideshare_toolbar
-									a(id='undraw')(action='slideshare_draw', value='draw', title='open canvas')
-												.toolbar_button(style='background:url("configs/toolbars/org.goorm.core.slideshare/image/palette.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='slideshare_paint', title='drawing')
-												.toolbar_button(style='background:url("configs/toolbars/org.goorm.core.slideshare/image/pencil.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='slideshare_erase', title='erase')
-												.toolbar_button(style='background:url("configs/toolbars/org.goorm.core.slideshare/image/draw_eraser.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='slideshare_palette', title='palette')
-												.toolbar_button(style='background:url("configs/toolbars/org.goorm.core.slideshare/image/color_wheel.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='slideshare_brush', title='thickness')
-												.toolbar_button(style='background:url("configs/toolbars/org.goorm.core.slideshare/image/border_color.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='slideshare_erase_all', title='erase all')
-												.toolbar_button(style='background:url("configs/toolbars/org.goorm.core.slideshare/image/broom.png") no-repeat; width:16px; height: 16px; background-position: center')
-									a(action='slideshare_alert_msg', title='alert message', style='display: none;')
-												.toolbar_button(style='background:url("configs/toolbars/org.goorm.core.slideshare/image/spread.png") no-repeat; width:16px; height: 16px; background-position: center;')
-									a(action='slideshare_connect', title='connecting')
-												.toolbar_button(state='disconnected', style='background:url("configs/toolbars/org.goorm.core.slideshare/image/disconnect.png") no-repeat; width:16px; height: 16px; background-position: center')
 			div(id='head_theme.details.bottom.tab_menu')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
 												legend Bottom Tab Menu
 												div(id='bottom-tabmenu')(style='margin-left:11px')
+			div(id='head_edit.function_box')
+						div(id='function_box').function_box
+									.function_box_header
+									.function_box_list
+												table.function_box_table.cm-s-default
+									.function_box_guide
 			div(id='head_design.theme')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset(style='padding:10px;border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;')
@@ -2162,65 +1698,12 @@ block content
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
-			div(id='head_edit.function_box')
-						div(id='function_box').function_box
-									.function_box_header
-									.function_box_list
-												table.function_box_table.cm-s-default
-									.function_box_guide
 			div(id='head_theme._css')
 						div(style='width:95px; height:18px; float:left; padding-top:2px; padding-right:5px; text-align:right; font-size:11px') Element Selector :
 						input(id='new_selector').example_selector(type='text', style='width:96px; height:18px; border: 1px solid #ccc; float:right; font-size:11px', value='.yui-skin-sam')
 						div(style='margin-top:5px; width:95px; height:18px; float:left; padding-top:2px; padding-right:5px; text-align:right; font-size:11px') Property : 
 						input(id='new_property').example_property(type='text', style='margin-top:5px; width:96px; height:18px; border: 1px solid #ccc; float:right; font-size:11px', value='margin-top')
 						br
-			div(id='head_c_examples.preference')
-						div(id='selectedPreferenceTitle') C_Examples Plugin
-						div(style='font-size:11px;')
-									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
-												div(style='margin-bottom: 5px;')
-															| Default Main Class Name :
-															input(type='text', name='plugin.c_examples.main')
-												div(style='margin-bottom: 5px;')
-															| Default Source Path :
-															input(type='text', name='plugin.c_examples.source_path')
-												div(style='margin-bottom: 5px;')
-															| Default Makefile Path :
-															input(type='text', name='plugin.c_examples.makefile_path')
-												div(style='margin-bottom: 5px;')
-															| Default Build Path :
-															input(type='text', name='plugin.c_examples.build_path')
-												div(style='margin-bottom: 5px;')
-															| Default Build Option :
-															input(type='text', name='plugin.c_examples.build_option')
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
-			div(id='head_c_examples.property')
-						div(id='selectedPreferenceTitle') C_Examples Plugin
-						div(style='font-size:11px;')
-									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
-												legend
-															b C/C++ preference
-												div(style='float:left;')
-															div(style='margin-bottom: 5px;')
-																		| main class name :
-																		input(type='text', name='plugin.c_examples.main')
-															div(style='margin-bottom: 5px;')
-																		| source path :
-																		input(type='text', name='plugin.c_examples.source_path')
-															div(style='margin-bottom: 5px;')
-																		| makefile path :
-																		input(type='text', name='plugin.c_examples.makefile_path')
-															div(style='margin-bottom: 5px;')
-																		| build path :
-																		input(type='text', name='plugin.c_examples.build_path')
-															div(style='margin-bottom: 5px;')
-																		| build option :
-																		input(type='text', name='plugin.c_examples.build_option')
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
 			div(id='head_theme.area')
 						div(style='width:31px; height:18px; float:left; padding-top:2px; padding-left:9px; text-align:left; font-size:11px; margin-top:2px;') Area
 						input(id='newArea').exampleArea(type='text', style='width:150px; height:18px; border: 1px solid #ccc; float:left; font-size:11px; margin-top:2px;', value='workspace')
@@ -2235,6 +1718,12 @@ block content
 												input.goorm_find_pw_input(type='text', name='find_pw_name_input')
 												.goorm_find_pw_span(localization_key='dialog_goorm_profile_email')			E-mail : 
 												input.goorm_find_pw_input(type='text', name='find_pw_email_input')
+			div(id='head_file.open_url')
+						div
+									div(style='font-size:11px; margin-bottom:8px; text-align:left;')
+												span(localization_key='dialog_file_open_url_guide') Type an URL to open
+									div(style='width:400px; height:50px; margin-top:8px; text-align:center;')
+												input(id='open_url_address')(type='text', value='http://', style='width:390px; height:20px; font-size:11px;')
 			div(id='head_filetype')
 						.content_guide_message(localization_key='dialog_preference_filetype_guide') Change file types
 						.filetype_contents(style='height:300px; padding-top:5px;')
@@ -2245,12 +1734,6 @@ block content
 									input(id='filetype_add')(type='button', value='Add')
 						div(style='float:right; margin-top:10px;')
 									input(id='filetype_save')(type='button', value='Save')
-			div(id='head_file.open_url')
-						div
-									div(style='font-size:11px; margin-bottom:8px; text-align:left;')
-												span(localization_key='dialog_file_open_url_guide') Type an URL to open
-									div(style='width:400px; height:50px; margin-top:8px; text-align:center;')
-												input(id='open_url_address')(type='text', value='http://', style='width:390px; height:20px; font-size:11px;')
 			div(id='head_project.open')
 						.content_header(localization_key='dialog_project_open') Open Project
 						.content_guide_message(localization_key='dialog_project_open_guide') Select project type
@@ -2280,62 +1763,17 @@ block content
 									a(action='do_redo', tooltip='edit_redo')
 												.toolbar_button.redo
 															.toolbar-redo
-									a(action='do_share_cursor', tooltip='edit_share_cursor')
-												.toolbar_button.toolbar_button_pressed.share_cursor
-															.toolbar-toggle-cursor-sharing
-			div(id='head_project.collaboration.detail')
-						.project_detail_view
-									div(style='padding:3px')
-												div(style='width:100%;') Project Name
-												div(style='width:100%; margin-top:4px;')
-															input(type='text', name='project_detail_name', style='width:270px;', readonly='readonly')
-									div(style='padding:3px')
-												div(style='width:100%;') Project Type
-												div(style='width:100%; margin-top:4px;')
-															input(type='text', name='project_detail_type', style='width:270px;', readonly='readonly')
-									div(style='padding:3px')
-												div(style='width:100%;') Project Path
-												div(style='width:100%; margin-top:4px;')
-															input(type='text', name='project_detail_path', style='width:270px;', readonly='readonly')
-									div(style='padding:3px')
-												div(style='width:100%;') Co-Developers
-												.collaboration_user_list(style='width:280px; height:100px; overflow-y:scroll; border:1px solid #CCC; font-size:11px; background-color:#FFF;')
-												span Add People : 
-												input(id='project_invitation_input')(type='text', name='project_invitation_input', style='width:205px; margin-top:12px;')
-												div(id='invitation_user_container')(style='width:212px; z-index:10001')
+			div(id='head_auth.manage')
+						div
+									div(style='float:left; width:200px; height:400px; padding:5px; border:1px solid #ccc; background-color:#fff; overflow:auto; font-size:11px;')
+												div(id='auth_manage_treeview').dialog_treeview
+									div(style='float:right; width:460px; height:410px; text-align:left;')
+												div(id='auth_manage_tabview').yui-navset
 			div(id='head_theme.details.top.text_menu')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
 												legend Top Text Menu
 												div(id='top-textmenu')(style='margin-left:11px')
-			div(id='head_google_drive.explorer.folder')
-						div(id='google_drive.explorer.folder_context')
-									.bd
-												ul.first-of-type
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='google_folder_open_context', localization_key='folder_open_context') Open
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='google_folder_close_context', localization_key='folder_close_context') Close
-												ul
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='upload_google_drive_context', localization_key='cloud_upload_context') Upload
-												ul
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='delete_google_drive_context', localization_key='file_delete_context') Delete
-			div(id='head_collaboration.invite')
-						.project_invite_confirmation
-									.project_invite_form
-												span.project_invite_span Project Author : 
-												input.project_invite_input(type='text', name='invite_project_author', readonly='readonly')
-									.project_invite_form
-												span.project_invite_span Project Name : 
-												input.project_invite_input(type='text', name='invite_project_name', readonly='readonly')
-									.project_invite_form
-												span.project_invite_span Project Type : 
-												input.project_invite_input(type='text', name='invite_project_type', readonly='readonly')
-									.project_invite_form
-												span.project_invite_span Project Path : 
-												input.project_invite_input(type='text', name='invite_project_path', readonly='readonly')
 			div(id='head_file._export')
 						.content_header(localization_key='dialog_file_export') File Export
 						.content_guide_message(localization_key='dialog_file_export_guide') Select the file to export
@@ -2367,12 +1805,6 @@ block content
 																								span(localization_key='dialog_file_export_exporttype') File Type
 																					td(style='padding-top:5px; text-align:right;')
 																								select(id='file_export_file_type')(style='width:680px; height:20px;')
-			div(id='head_auth.manage')
-						div
-									div(style='float:left; width:200px; height:400px; padding:5px; border:1px solid #ccc; background-color:#fff; overflow:auto; font-size:11px;')
-												div(id='auth_manage_treeview').dialog_treeview
-									div(style='float:right; width:460px; height:410px; text-align:left;')
-												div(id='auth_manage_tabview').yui-navset
 			div(id='head_project.explorer')
 						div(id='project.explorer_context')
 									.bd
@@ -2412,6 +1844,29 @@ block content
 									div(id='preference.system.api.button_container')(style='position: absolute;bottom: 10px;right:10px;')
 												input.restore_default(type='button', value='Restore Default')
 												input.apply(type='button', value='Apply')
+			div(id='head_tutorial_step2')
+						div(id='tutorial-step2').tutorial-dialog(title='새 프로젝트 예제 선택')
+									| 새 프로젝트 창이 열리면, 원하는 예제 프로젝트를 선택하고 "다음" 버튼을 누릅니다.
+			div(id='head_debug.toolbar')
+						div(id='debug.toolbar').toolbar_part
+									a(action='debug', tooltip='debug_start')
+												.toolbar_button.debug
+															.toolbar-debug-start
+									a(action='debug_continue', tooltip='debug_continue')
+												.toolbar_button.debug_continue.debug_not_active
+															.toolbar-debug-continue
+									a(action='debug_terminate', tooltip='debug_terminate')
+												.toolbar_button.debug_terminate.debug_not_active
+															.toolbar-debug-terminate
+									a(action='debug_step_over', tooltip='debug_step_over')
+												.toolbar_button.debug_step_over.debug_not_active
+															.toolbar-debug-step-over
+									a(action='debug_step_in', tooltip='debug_step_in')
+												.toolbar_button.debug_step_in.debug_not_active
+															.toolbar-debug-step-in
+									a(action='debug_step_out', tooltip='debug_step_out')
+												.toolbar_button.debug_step_out.debug_not_active
+															.toolbar-debug-step-out
 			div(id='head_file.upload')
 						.content_header(localization_key='dialog_file_cloud_upload') File Cloud Upload
 						.content_guide_message(localization_key='dialog_file_cloud_upload_guide') Select file to upload
@@ -2442,26 +1897,6 @@ block content
 																								span(localization_key='dialog_file_cloud_upload_cloud_uploadtype') File Type
 																					td(style='padding-top:5px; text-align:right;')
 																								select(id='file_cloud_upload_file_type')(style='width:680px; height:20px;')
-			div(id='head_debug.toolbar')
-						div(id='debug.toolbar').toolbar_part
-									a(action='debug', tooltip='debug_start')
-												.toolbar_button.debug
-															.toolbar-debug-start
-									a(action='debug_continue', tooltip='debug_continue')
-												.toolbar_button.debug_continue.debug_not_active
-															.toolbar-debug-continue
-									a(action='debug_terminate', tooltip='debug_terminate')
-												.toolbar_button.debug_terminate.debug_not_active
-															.toolbar-debug-terminate
-									a(action='debug_step_over', tooltip='debug_step_over')
-												.toolbar_button.debug_step_over.debug_not_active
-															.toolbar-debug-step-over
-									a(action='debug_step_in', tooltip='debug_step_in')
-												.toolbar_button.debug_step_in.debug_not_active
-															.toolbar-debug-step-in
-									a(action='debug_step_out', tooltip='debug_step_out')
-												.toolbar_button.debug_step_out.debug_not_active
-															.toolbar-debug-step-out
 			div(id='head_folder.upload')
 						.content_header(localization_key='dialog_file_import') File Import/Upload
 						.content_guide_message(localization_key='dialog_file_import_guide') Select the file to import
@@ -2513,41 +1948,6 @@ block content
 																		option(value='2') tar
 												div(style='float:right; margin-right:20px;')
 															span(localization_key='dialog_project_export_msg') Export Project Type
-			div(id='head_design.canvas')
-						div
-									div(style='height:310px; text-align:left;')
-												.yui-navset.design_canvas_setting
-															ul.yui-nav
-																		li.selected
-																					a(href='#tab1')
-																								em Canvas
-															.yui-content(style='height:260px;')
-																		div(id='tab1')
-																					div(id='canvas_size_div')(style='font-size:11px;')
-																								fieldset
-																											legend
-																														b Canvas Size
-																											div(style='width:100%; height:22px;')
-																														div(style='width:80px; float:left;') Width
-																														div(style='width:300px; float:left;')
-																																	input.canvas_width(type='text', style='width:100px;')
-																																	| px
-																											div(style='width:100%; height:22px;')
-																														div(style='width:80px; float:left;') Height
-																														div(style='width:300px; float:left;')
-																																	input.canvas_height(type='text', style='width:100px;')
-																																	| px
-			div(id='head_design.ruler_x')
-						div(id='design.ruler_x_[{@FINGERPRINT}]')
-									.bd
-												ul.first-of-type
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(href='#File', localization_key='design_show_ruler') Show Ruler
-															li.yuimenuitem
-																		a.yuimenuitemlabel(href='#Edit', localization_key='design_hide_ruler') Hide Ruler
-												ul
-															li.yuimenuitem
-																		a.yuimenuitemlabel(href='#Edit', localization_key='design_setting') Setting
 			div(id='head_edit.find_and_replace')
 						div
 									div(style='width:530px; height:70px; font-size:11px; text-align:left;')
@@ -2581,27 +1981,6 @@ block content
 																					input(id='find_on_workspace')(type='checkbox')
 																					label(data-on='', data-off='')
 																		label(for='find_on_workspace', localization_key='dialog_project_find_on_workspace_guide') Find on Workspace
-			div(id='head_collaboration.slideshare')
-						div(id='get_list')(style='position:absolute;margin-left=10px;text-align: center;z-index:4;padding: 5px;font-size: 11px;background-color: #fff;')
-									span(localization_key='select') Select 
-									select(id='pdf_list')(style='width:200px;')
-												option(value='slide_share') Slideshare.net Viewer
-												option(value='pdf_viewer', selected:='', selected='') PDF Viewer
-						div(id='slide_body')(style='position:absolute; margin-top: 53px')
-									div(id='slide_url').layout_right_slide_tab
-												div(id='slide_url_input')
-															| URL
-															input(id='slideshare_url')(type='text', value='http://www.slideshare.net/nrkim87/ss')
-									div(id='slide_menu')
-												div(id='slide_control')
-															button(id='slide_prev')
-																		.slideshare-toolbar-prev(style='margin-top:3px;')
-															button(id='slideshare_presentation')
-																		.slideshare-toolbar-play(style='margin-top:3px;')
-															button(id='slide_next')
-																		.slideshare-toolbar-next(style='margin-top:3px;')
-									div(id='slide_iframe')
-												iframe(id='iframe_slideshare')(src='', width='100%', height='100%', frameborder='0', marginwidth='0', marginheight='0', scrolling='no')			
 			div(id='head_toolbar')
 						div(id='menu.context.toolbar')
 									.bd
@@ -2613,20 +1992,6 @@ block content
 												ul
 															li.yuimenuitem.first-of-type
 																		a.yuimenuitemlabel(href='#Edit', localization_key='edit_toolbar') null
-			div(id='head_collaboration.invitation.answer')
-						.project_invitation_answer
-									.project_invite_form
-												span.project_invite_span Project Answerer : 
-												input.project_invite_input(type='text', name='invite_project_answerer', readonly='readonly')
-									.project_invite_form
-												span.project_invite_span Project Name : 
-												input.project_invite_input(type='text', name='invite_project_name', readonly='readonly')
-									.project_invite_form
-												span.project_invite_span Project Type : 
-												input.project_invite_input(type='text', name='invite_project_type', readonly='readonly')
-									.project_invite_form
-												span.project_invite_span Project Path : 
-												input.project_invite_input(type='text', name='invite_project_path', readonly='readonly')
 			div(id='head_search')
 						div
 									div(id='search_project_explorer')(style='width:530px; height:30px; font-size:11px; text-align:left;')
@@ -2653,27 +2018,6 @@ block content
 																					input(id='search_use_regexp')(type='checkbox')
 																					label(data-on='', data-off='')
 																		label(for='use_regexp', localization_key='dialog_project_use_regular_expression_guide') Use regular expression
-			div(id='head_project._delete')
-						.content_header(localization_key='dialog_project_delete') Delete Project
-						.content_guide_message(localization_key='dialog_project_delete_guide') Select the project to delete
-						div(id='project.delete')(style='text-align:left;')
-									div(style='width:100%; height:20px; overflow:auto; font-size:11px;')
-												div(style='float:left;')
-															span(localization_key='common_location') Location : 
-															input(id='project_delete_location')(type='text', style='width:500px;', readonly='readonly')
-												div(style='float:right;')
-															span(localization_key='common_type') Type : 
-															select(id='project_delete_types').project_dialog_type(style='width:130px')
-																		option(value='All', selected='selected') All Project
-									div(id='project_delete_dialog_middle')(style='width:780px; height:320px; margin-top:8px; font-size:11px;')
-												div(id='project_delete_dialog_left').dialogs_left(style='width:250px;')
-															div(id='project_delete_list').dialogs_left_inner(style='height:318px;padding:0px;')
-												div(id='project_delete_dialog_center').dialog_center(style='height:318px;width:521px;')
-															div(id='project_delete_information')(style='padding:10px; line-height:18px;')
-									input(id='project_delete_path')(type='hidden')
-									input(id='project_delete_name')(type='hidden')
-									input(id='project_delete_type')(type='hidden')
-						div
 			div(id='head_project.build.all')
 						.content_header(localization_key='dialog_project_build_all') Build All
 						.content_guide_message(localization_key='dialog_project_build_all_guide') Build all projects below

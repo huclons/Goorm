@@ -17,7 +17,6 @@ org.goorm.core.preference.info = {
 	version: 1.0,
 	is_ipad: false,
 	os: null,
-
 	
 
 	init: function () {
@@ -116,6 +115,6 @@ org.goorm.core.preference.info = {
 			$("#device").append("PC");
 		}
 
-		
+				
 	}
 };

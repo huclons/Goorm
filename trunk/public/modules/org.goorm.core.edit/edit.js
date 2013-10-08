@@ -290,9 +290,9 @@ org.goorm.core.edit.prototype = {
         this.set_dictionary();
         this.set_selected_variable();
 
-        //useonly(mode=basic)
+        
         this.codemirror_events();
-        //useonlyend
+        
 
         
 
@@ -329,11 +329,12 @@ org.goorm.core.edit.prototype = {
     codemirror_events: function () {
         var self = this;
         var cm_editor = this.editor;
-        var dont_update_first = false;
 
         var __target = $(self.target);
         var dictionary_box = $('div.dictionary_box', self.target);
         var function_box = $('div.function_box', self.target);
+
+        
 
         cm_editor.on("scroll", function (i, e) {
             if (dictionary_box.css("display") == "block") {
@@ -374,6 +375,7 @@ org.goorm.core.edit.prototype = {
             if (self.pressed_key == "backspace" || self.pressed_key == "{") {
                 self.set_foldable(self.editor.getCursor().line);
             }
+
             
 
             var window_manager = core.module.layout.workspace.window_manager;
@@ -850,7 +852,9 @@ org.goorm.core.edit.prototype = {
                     self.editor.setValue("");  
                 }
             } 
+
             
+
             self.editor.clearHistory();
 
             self.set_foldable();
@@ -890,7 +894,7 @@ org.goorm.core.edit.prototype = {
 
         if (core.status.current_project_path !== "") //project should be chosen in select box
         {
-            if ($('#building_after_save_option:checked').length !== 0) {
+            if ($('[name="building_after_save_option"]:checked').length !== 0) {
                 core.property.building_after_save_option = true;
                 send_data.build = true;
 
@@ -913,7 +917,9 @@ org.goorm.core.edit.prototype = {
             }
 
             $.post(url, send_data, function (data) {
+
                 
+
                 if(data.err_code!==0){
                     //fail
                     console.log('fail');
@@ -1250,6 +1256,7 @@ org.goorm.core.edit.prototype = {
             "filename": self.filename
         });
         $(window_manager).trigger('editor_is_on_activated', self);
+
         
     },
 

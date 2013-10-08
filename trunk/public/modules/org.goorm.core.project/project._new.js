@@ -106,7 +106,9 @@ org.goorm.core.project._new = {
 
 				$.get("project/new", senddata, function (data) {
 					if (data.err_code === 0) {
+
 						
+
 						/*
 						 * for plugin, moyara 12.8.6
 						 */

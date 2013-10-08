@@ -64,6 +64,7 @@ org.goorm.core.menu.action = {
 				no_text: core.module.localization.msg.confirmation_no,
 				yes: function () {
 					survey.init(function () {
+
 						
 
 						window.open('', '_self');
@@ -506,12 +507,11 @@ org.goorm.core.menu.action = {
 				core.module.layout.inner_bottom_tabview.selectTab(1);
 				core.module.layout.inner_layout.getUnitByPosition("bottom").expand();
 
-				//useonly(mode=basic)
+				
 				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].run(core.status.current_project_path);
-				//useonlyend
-
 				
 
+				
 			} else {
 				var result = {
 					result: false,
@@ -774,7 +774,7 @@ org.goorm.core.menu.action = {
 				core.module.project.display_error_message(result, 'alert');
 			}
 		});
-		
+
 		//Main Menu : window
 		$("a[action=new_main_window]").off("click");
 		$("a[action=new_main_window]").click(function () {
@@ -839,7 +839,12 @@ org.goorm.core.menu.action = {
 			if (core.module.layout.inner_layout.getUnitByPosition("right")._collapsed) {
 				core.module.layout.inner_layout.getUnitByPosition("right").expand();
 			}
+
+			
 			core.module.layout.inner_right_tabview.selectTab(0);
+			
+
+			
 		});
 
 		$("a[action=bottom_layout_toggle]").off("click");
@@ -942,11 +947,36 @@ org.goorm.core.menu.action = {
 			core.dialog.help_contents.show();
 		});
 
+		$("a[action=helpSearch]").off("click");
+		$("a[action=helpSearch]").click(function () {
+			core.dialog.help_search.show();
+		});
+
+		$("a[action=helpTipsAndTricks]").off("click");
+		$("a[action=helpTipsAndTricks]").click(function () {
+			core.dialog.help_tips_and_tricks.show();
+		});
+
+		$("a[action=help_check_for_updates]").off("click");
+		$("a[action=help_check_for_updates]").click(function () {
+			core.dialog.help_check_for_updates.show();
+		});
+
+		$("a[action=help_install_new_plugin]").off("click");
+		$("a[action=help_install_new_plugin]").click(function () {
+			core.dialog.help_install_new_plugin.show();
+		});
+
 		$("a[action=help_about]").off("click");
 		$("a[action=help_about]").click(function () {
 			core.dialog.help_about.show();
 		});
 
+		$("a[action=help_bug_report]").off("click");
+		$("a[action=help_bug_report]").click(function () {
+			core.dialog.help_bug_report.show();
+		});
+		
 		//Context Menu : File
 		$("a[action=new_file_file_context]").off("click");
 		$("a[action=new_file_file_context]").click(function () {
@@ -977,6 +1007,17 @@ org.goorm.core.menu.action = {
 			if (filename.indexOf(".") != -1)
 				filetype = (filename.split(".")).pop();
 
+			var filepath = core.status.selected_file.replace(filename, "");
+
+			core.module.layout.workspace.window_manager.open(filepath, filename, filetype);
+		});
+
+		$("a[action=open_default_editor]").off("click");
+		$("a[action=open_default_editor]").click(function () {
+			var filename = (core.status.selected_file.split("/")).pop();
+			var filetype = null;
+			if (filename.indexOf(".") != -1)
+				filetype = (filename.split(".")).pop();
 			var filepath = core.status.selected_file.replace(filename, "");
 
 			core.module.layout.workspace.window_manager.open(filepath, filename, filetype);

@@ -66,6 +66,7 @@ org.goorm.core.project.explorer.prototype = {
 					core.status.current_project_type = "";
 
 					localStorage.current_project = "";
+
 					
 				}
 			} else {
@@ -76,6 +77,7 @@ org.goorm.core.project.explorer.prototype = {
 				core.status.current_project_type = "";
 
 				localStorage.current_project = "";
+
 				
 			}
 
@@ -545,13 +547,10 @@ org.goorm.core.project.explorer.prototype = {
 		var project_list_table = $("#project_list_table");
 		project_list_table.empty();
 
-		//useonly(mode=basic)
 		project_list_table.append("<div id='my_project_list'></div>");
-
 		var my_project_list_title_html = "<div class='table_list_title' localization_key='dictionary_my_project'>" + core.module.localization.msg.dictionary_my_project + "</div>";
 		$("#my_project_list").append(my_project_list_title_html);
 		$("#my_project_list").append("<div id='my_project_list_table'></div>");
-		//useonlyend
 
 		
 
@@ -583,10 +582,12 @@ org.goorm.core.project.explorer.prototype = {
 			fields: ["type", "name", "author"]
 		};
 
-		
 		var my_table = new YAHOO.widget.DataTable("my_project_list_table", table_column_definition, data_properties);
 		my_table.render();
 
+		var my_project_list_arr = [];
+
+		
 		for (var p in core.workspace) {
 			var project = core.workspace[p];
 
@@ -596,6 +597,9 @@ org.goorm.core.project.explorer.prototype = {
 				author: project.author
 			});
 		}
+		
+
+		
 
 		var row_click_my = function (data) {
 			var record = my_table.getRecord(data.target);
@@ -623,7 +627,7 @@ org.goorm.core.project.explorer.prototype = {
 			$(this).css('background-color', '');
 		});
 
-
+		
 
 		//show!!!!
 		$("#project_loading_div").css('display', 'none');
@@ -952,7 +956,6 @@ org.goorm.core.project.explorer.prototype = {
 			if (!core.is_mobile) {
 				self.treeview.unsubscribe("dblClickEvent");
 				self.treeview.subscribe("dblClickEvent", function (nodedata) {
-
 					
 
 					if (nodedata.node.data.cls == "file") {
@@ -981,7 +984,6 @@ org.goorm.core.project.explorer.prototype = {
 			} else {
 				self.treeview.unsubscribe("clickEvent");
 				self.treeview.subscribe("clickEvent", function (nodedata) {
-
 					
 
 					if (nodedata.node.data.cls == "file") {

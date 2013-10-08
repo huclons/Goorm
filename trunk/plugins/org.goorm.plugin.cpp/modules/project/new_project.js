@@ -14,6 +14,8 @@ var fs = require('fs'),
 	emitter,
 	common = require(__path + "plugins/org.goorm.plugin.cpp/modules/common.js");
 
+var exec = require('child_process').exec;
+
 module.exports = {
 	copyFileSync : function(srcFile, destFile) {
 	  BUF_LENGTH = 64*1024;
@@ -41,37 +43,9 @@ module.exports = {
 			template += "/"+req.data.project_detailed_type;
 		}
 		
-		emittor = walk.walk(template);
-		
-		emittor.on('file', function (path, stat, next){
-			var abs_path = (path+"/"+stat.name).replace(template,"");
-			self.copyFileSync(path + "/" + stat.name, workspace + abs_path);
+		exec('cp -r '+template+'/* '+workspace, function(__err){
+			if(__err) console.log(__err);
 
-			
-
-			next();
-		});
-		
-		emittor.on("directory", function (path, stat, next) {
-		  // dirStatsArray is an array of `stat` objects with the additional attributes
-		  // * type
-		  // * error
-		  // * name
-			var abs_path = (path+"/"+stat.name).replace(template,"");
-			fs.exists(workspace+abs_path, function(exists) {
-				if(!exists){
-					fs.mkdirSync(workspace+abs_path);
-				}
-
-				
-
-				next();
-			});
-			
-			next();
-		});
-		
-		emittor.on("end", function () {
 			fs.chmodSync(workspace+"/make", 0770);
 			fs.readFile(workspace+"/project.json", 'utf-8', function (err, file_data) {
 				var contents = JSON.parse(file_data);
@@ -100,6 +74,8 @@ module.exports = {
 							message : "success"
 						});
 					}
+
+					
 				});
 			});
 		});

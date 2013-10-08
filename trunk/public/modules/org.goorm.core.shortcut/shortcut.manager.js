@@ -595,23 +595,11 @@ org.goorm.core.shortcut.manager = {
 			if (e.keyCode == 116 && (e.ctrlKey === false && e.metaKey === false) && e.shiftKey === false) {
 				if (core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] !== undefined) {
 
-					$.get("project/check_running_project", {
-						},
-						function (data) {
+					
+					core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].build(core.status.current_project_path);
+					
 
-							if (data && data.result === 0) {
-								//build
-								core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].build(core.status.current_project_path);
-							} else {
-								var result = {
-									result: false,
-									code: 7
-								};
-								core.module.project.display_error_message(result, 'alert');
-							}
-						}
-					);
-
+					
 				}
 
 				e.stopPropagation();
@@ -625,9 +613,9 @@ org.goorm.core.shortcut.manager = {
 					core.status.current_project_absolute_path = core.preference.workspace_path + core.status.current_project_path + "/";
 					core.module.layout.inner_bottom_tabview.selectTab(1);
 
-					//useonly(mode=basic)					
+					
 					core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].run(core.status.current_project_path);
-					//useonlyend
+					
 
 					
 
