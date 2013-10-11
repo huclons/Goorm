@@ -552,7 +552,7 @@ org.goorm.core.prototype = {
 
 		
 
-		$('#local_login_box').append("<input type='button' id='goorm_local_mode_button' value='Local Mode' />");
+		$('#local_login_box').append("<input type='button' id='goorm_local_mode_button' localization_key='private_mode' value='Private Mode' />");
 
 		
 
@@ -562,7 +562,7 @@ org.goorm.core.prototype = {
 					self.access_local_mode();
 				}
 			},
-			label: '<span localization_key="local_mode">Local Mode</span>'
+			label: '<span localization_key="private_mode">Private Mode</span>'
 		});
 
 		var loading_background = $("#loading_background");

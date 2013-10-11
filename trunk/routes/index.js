@@ -72,26 +72,7 @@ exports.index = function(req, res){
 	
 };
 
-exports.vm = function(req,res){
-	res.json(null);
-}
 
-exports.vm.connect = function(req, res){
-	var id = req.body.id;
-
-	g_auth.connect_vm(id, function(data){
-		res.json(data);
-	});
-}
-
-exports.vm.get_user_vm = function(req, res){
-	var id = req.body.id;
-
-	g_auth.get_user_vm(id, function(data){
-		console.log('user_vm', data);
-		res.json(data);
-	})
-}
 
 /*
  * API : Project
