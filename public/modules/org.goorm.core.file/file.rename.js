@@ -64,7 +64,18 @@ org.goorm.core.file.rename = {
 						if ((window_list[i].title).indexOf(ori_path + ori_name) > -1) {
 							window_list[i].is_saved = true;
 							window_list[i].tab.is_saved = true;
+
+							var old_path=window_list[i].title;
+
+							var new_path=old_path.replace(ori_path+ori_name, ori_path+dst_name);
+
+							var filename = new_path.split('/').pop();
+							var filepath = new_path.substring(0,new_path.length-filename.length);
+							var filetype = window_list[i].filetype;
+		
 							window_list[i].close();
+
+							core.module.layout.workspace.window_manager.open(filepath, filename,filetype);
 						}
 					}
 

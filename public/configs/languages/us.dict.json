@@ -325,5 +325,8 @@
 	},
 	"select" : {
 		"value" : "Select "
+	},
+	"private_mode" : {
+		"value" : "Private Mode"
 	}
 }

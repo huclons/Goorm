@@ -124,23 +124,6 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 				console.log('    $ goorm clean');
 				console.log('');
 			});
-
-		commander
-			.command('update')
-			.action(function (env, options) {
-				
-				var print_message = 'Do you want to send server information to developer?(yes/no) ';
-				commander.confirm(print_message, function(arg){
-					process.stdin.pause();
-					
-					if(arg) {
-						send_log("server update", command_update);
-					}
-					else {
-						command_update();
-					}
-				});
-			});
 			
 		commander
 			.command('start [option]')
@@ -167,23 +150,17 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 				
 
 				function start_process(){
-					fs.exists(__dirname+'/info_server.json', function(exists){
-						if(!exists) {
-							command_update();
-						}
-
-						if (options.daemon) {							
-							forever.startDaemon(__dirname+'/server.js', {
-								'env': { 'NODE_ENV': 'production' },
-								'spawnWith': { env: process.env },
-								'options': process_options
-							});
-							console.log("goormIDE server is started...");
-						}
-						else {
-							forever.start(__dirname+'/server.js', {'options': process_options});
-						}
-					});
+					if (options.daemon) {							
+						forever.startDaemon(__dirname+'/server.js', {
+							'env': { 'NODE_ENV': 'production' },
+							'spawnWith': { env: process.env },
+							'options': process_options
+						});
+						console.log("goormIDE server is started...");
+					}
+					else {
+						forever.start(__dirname+'/server.js', {'options': process_options});
+					}
 				}
 				
 				
@@ -477,20 +454,4 @@ function send_log(title, callback) {
 	
 	post_req.write(post_data);
 	post_req.end();
-}
-
-function command_update() {
-	var server_data = {};
-	server_data.os_version = os.type()+" "+os.release();
-	server_data.node_version = process.version;
-	server_data.theme = "default";
-	server_data.language = "client";
-
-	
-	fs.writeFileSync(__dirname +  '/info_server.json', JSON.stringify(server_data));
-	console.log("Server info is updated...");
-	process.stdin.destroy();
-	
-	
-	
 }

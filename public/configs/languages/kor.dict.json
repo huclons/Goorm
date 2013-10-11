@@ -325,5 +325,8 @@
 	},
 	"select" : {
 		"value" : "선택 "
+	},
+	"private_mode" : {
+		"value" : "개인 사용자용"
 	}
 }
