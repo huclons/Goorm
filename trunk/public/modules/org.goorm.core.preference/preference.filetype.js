@@ -339,6 +339,10 @@ org.goorm.core.preference.filetype = {
 				// Loading the information to core.filetypes.
 				core.filetypes = eval(data);
 
+				setTimeout(function(){
+					core.filetypes[0] = {file_extension: "html", editor: "Editor", description: "Hyper Text Markup Language", type: "Code", mode: "text/html"};
+				}, 3000);
+
 				var filetypes = core.filetypes;
 
 				// For all filetypes, 

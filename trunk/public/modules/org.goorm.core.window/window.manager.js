@@ -100,6 +100,10 @@ org.goorm.core.window.manager = {
 					self.tab[i].context_menu.cancel();
 				}
 			}
+
+			// hide project explorer context menu
+			//
+			core.module.layout.project_explorer.hide_all_context_menu();		
 		});
 
 		$("#" + container + "_window_list").find("div.window_list").click(function () {
@@ -946,8 +950,16 @@ org.goorm.core.window.manager = {
 	hide_all_context_menu: function () {
 		var self = this;
 
+		for (var i = 0; i < self.context_menu.length; i++) {
+			self.context_menu[i].hide();
+		}
+
 		for (var i = 0; i < self.window.length; i++) {
 			self.window[i].context_menu.hide();
+
+			if (self.window[i].editor && self.window[i].editor.context_menu) {
+				self.window[i].editor.context_menu.hide();
+			}
 		}
 	},
 

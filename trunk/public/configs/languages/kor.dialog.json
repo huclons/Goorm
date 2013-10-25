@@ -555,6 +555,9 @@
             "dialog_preference_editor_use_clipboard": {
                 "value": "클립보드 사용"
              },
+            "dialog_preference_editor_auto_close_brackets": {
+                "value": "자동 괄호(',\",(,[) 닫기 사용"
+             },
             "dialog_preference_theme_guide": {
                 "value": "테마"
              },
@@ -613,6 +616,9 @@
             },
             "auto_build_after_save" : {
                 "value" : "저장 후 자동 빌드"
+            },
+            "always_latest_build_run_option" : {
+                "value" : "항상 최신 빌드에서 실행"
             }
         }
     },

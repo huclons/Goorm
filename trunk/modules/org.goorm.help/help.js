@@ -24,25 +24,31 @@ module.exports = {
 		return_data.message = "process done";
 
 		var ori_data = {};
-		ori_data.board_id = 'ide_bugreport';
+		ori_data.id = query.id;
 		ori_data.subject = query.title;
-		ori_data.content = '';
-		ori_data.language = 'ko';
-		ori_data.member_id = query.id;
-		ori_data.member_nick = query.author;
+		ori_data.email = query.email;
+		ori_data.version = query.version;
+		ori_data.content = query.explanation;
 
-		var temp_data = {};
-		temp_data.email = query.email;
-		temp_data.version = query.version;
-		temp_data.module = query.module;
-		temp_data.explanation = query.explanation;
-		ori_data.content = JSON.stringify(temp_data);
+		// ori_data.board_id = 'ide_bugreport';
+		// ori_data.subject = query.title;
+		// ori_data.content = '';
+		// ori_data.language = 'ko';
+		// ori_data.member_id = query.id;
+		// ori_data.member_nick = query.author;
+
+		// var temp_data = {};
+		// temp_data.email = query.email;
+		// temp_data.version = query.version;
+		// temp_data.module = query.module;
+		// temp_data.explanation = query.explanation;
+		// ori_data.content = JSON.stringify(temp_data);
 
 		var post_data = querystring.stringify(ori_data);
 		var post_options = {
-			host: 'www.goorm.org',
-			port: '80',
-			path: '/api/article/write',
+			host: 'goorm.io',
+			port: '3000',
+			path: '/user_comments/add',
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',

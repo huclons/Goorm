@@ -172,6 +172,11 @@ org.goorm.core.project.explorer.prototype = {
 				};
 				self.fill_tree_data(postdata.path);
 			}
+			if(core.status.current_project_path){
+				$("#communication_location").text('Room : '+core.status.current_project_path);
+			}else{
+				$("#communication_location").text("Room : Lobby");
+			}
 
 			var windows = core.module.layout.workspace.window_manager.window;
 			var window_index = -1;
@@ -311,15 +316,22 @@ org.goorm.core.project.explorer.prototype = {
 		self.refresh_context_menu();
 	},
 
+	hide_all_context_menu: function () {
+		this.context_menu_file.hide();
+		this.context_menu_project.hide();
+		this.context_menu_folder.hide();
+	},
+
 	refresh_context_menu: function () {
 		var self = this;
 
 		$("#project_treeview").off("mousedown");
 		$("#project_treeview").mousedown(function (e) {
+			self.hide_all_context_menu();
 
-			self.context_menu_file.hide();
-			self.context_menu_project.hide();
-			self.context_menu_folder.hide();
+			// hide project explorer context menu
+			//
+			core.module.layout.workspace.window_manager.hide_all_context_menu();
 
 			$("#project_treeview").find(".ygtvfocus").removeClass("ygtvfocus");
 
@@ -351,9 +363,12 @@ org.goorm.core.project.explorer.prototype = {
 		$("#project_treeview").find(".ygtvcell").off("click");
 		$("#project_treeview").find(".ygtvcell").click(function (e) {
 
-			self.context_menu_project.hide();
-			self.context_menu_file.hide();
-			self.context_menu_folder.hide();
+			self.hide_all_context_menu();
+
+			// hide project explorer context menu
+			//
+			core.module.layout.workspace.window_manager.hide_all_context_menu();
+
 			if ($(this).hasClass("ygtvfocus") === false) {
 				if (!self.multi_select) {
 					$("#project_treeview").find(".ygtvfocus").removeClass("ygtvfocus");
@@ -379,10 +394,11 @@ org.goorm.core.project.explorer.prototype = {
 
 		$("#project_treeview").find(".ygtvcell").off("mousedown");
 		$("#project_treeview").find(".ygtvcell").mousedown(function (e) {
+			self.hide_all_context_menu();
 
-			self.context_menu_project.hide();
-			self.context_menu_file.hide();
-			self.context_menu_folder.hide();
+			// hide project explorer context menu
+			//
+			core.module.layout.workspace.window_manager.hide_all_context_menu();
 
 			core.status.selected_file = $(this).find(".fullpath").html();
 			if ($(this).find(".folder").length > 0) {

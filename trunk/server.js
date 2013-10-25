@@ -235,7 +235,9 @@ goorm.init = function() {
 	}
 
 	// Routes
+	
 	goorm.get('/',  routes.index);
+	
 
 	
 

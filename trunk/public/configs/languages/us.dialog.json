@@ -564,6 +564,9 @@
             "dialog_preference_editor_use_clipboard": {
                 "value": "Use Clipboard"
              },
+            "dialog_preference_editor_auto_close_brackets": {
+                "value": "Use autoCloseBrackets(',\",(,[)"
+             },
             "dialog_preference_theme_guide": {
                 "value": "Theme"
              },
@@ -622,6 +625,9 @@
             },
             "auto_build_after_save" : {
                 "value" : "Save and build"
+            },
+            "always_latest_build_run_option" : {
+                "value" : "Always latest build version run"
             }
         }
     },

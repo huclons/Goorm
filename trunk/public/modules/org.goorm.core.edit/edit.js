@@ -36,6 +36,7 @@ org.goorm.core.edit = function () {
     this.scroll_top = 0;
     this.highlight_current_cursor_line = true;
     this.current_cursor_line = null; // for cursor line
+    this.auto_close_brackets = true;
 
     //pcs
     this.str_selection = "";
@@ -89,6 +90,7 @@ org.goorm.core.edit.prototype = {
         this.jump_to_definition = new org.goorm.core.edit.jump_to_definition();
         this.font_manager = new org.goorm.core.edit.font_manager();
         this.timestamp = new Date().getTime();
+        this.auto_close_brackets = (options.auto_close_brackets) ? options.auto_close_brackets : ((this.preference["preference.editor.auto_close_brackets"] !== undefined ) ? this.preference["preference.editor.auto_close_brackets"] : true);
 
         var __target = $(target);
 
@@ -102,7 +104,7 @@ org.goorm.core.edit.prototype = {
             gutters: ["exception_error", "breakpoint", "CodeMirror-linenumbers", "fold"],
             highlightSelectionMatches: true,
             styleActiveLine: true,
-            autoCloseBrackets: true,
+            autoCloseBrackets: self.auto_close_brackets,
             autoCloseTags: true,
             /* CODEMIRROR 3.x IMPLEMENTEND */
             lineNumbers: true,
@@ -749,6 +751,7 @@ org.goorm.core.edit.prototype = {
             $("<link>").attr("rel", "stylesheet").attr("type", "text/css").attr("href", "/lib/net.codemirror.code/lib/codemirror.css").appendTo("head");
             this.editor.setOption("theme", this.theme);
         }
+
         setTimeout(function(){
             self.font_manager.refresh(self.font_size);
 
@@ -946,6 +949,8 @@ org.goorm.core.edit.prototype = {
                 if (core.status.current_project_path !== "") //project should be chosen in select box
                 {
                     if (isBuilt && (core.property.building_after_save_option === true && core.status.current_project_path == target_project_name || (core.property.type == 'java' || core.property.type == 'java_examples'))) {
+                        core.module.layout.terminal.status="build";
+
                         if (core.property.type == 'java') {
                             core.module.plugin_manager.plugins["org.goorm.plugin.java"].build(target_project_name, null, true, self.filename, self.target);
 
@@ -1258,6 +1263,17 @@ org.goorm.core.edit.prototype = {
         $(window_manager).trigger('editor_is_on_activated', self);
 
         
+    },
+
+    find_unsaved_file : function(){
+        var docu=core.module.layout.workspace.window_manager.window;
+        for(var i=0;i<docu.length;i++){
+            if(!docu[i].is_saved){
+                return docu[i].filepath+docu[i].filename;
+            }
+        }
+        return "";
+
     },
 
     error_manager: {

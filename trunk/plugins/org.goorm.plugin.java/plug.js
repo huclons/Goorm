@@ -718,7 +718,6 @@ org.goorm.plugin.java.prototype = {
 		var cmd = workspace+projectName+"/"+"make"+sourcePath+buildPath+buildOptions;
 
 		if(is_auto_build) {
-			core.module.layout.terminal.send_command(buildPath_guarantee_cmd, null);
 			core.module.layout.terminal.send_command(cmd+'\r', {'prompt':null, 'no_write':true}, function(result){
 				setTimeout(function(){
 					core.module.layout.terminal.no_write = false;
@@ -836,8 +835,14 @@ org.goorm.plugin.java.prototype = {
 		},
 
 		parse : function(raw){
-			var result = raw.split(': error: ');
-			return result;
+			if( raw.indexOf(': error: ') > -1 ) {
+				var result = raw.split(': error: ');
+				return result;
+			}
+			else{
+				var result = raw.split(': ');
+				return result;
+			}
 		},
 
 		attach : function(tabview, container) {

@@ -158,6 +158,15 @@
     "confirmation_language_message": {
         "value": "언어설정을 한국어로 변경하시겠습니까?"
     },
+    "confirmation_logout": {
+        "value": "Logout"
+    },
+    "confirmation_not_saved": {
+        "value": " file is not saved."
+    },
+    "confirmation_stay": {
+        "value": "Stay in Page"
+    },
     "confirmation_auto_logout": {
         "value": "Auto Logout"
     },
@@ -591,5 +600,14 @@
     },
     "confirmation_history_merge" : {
         "value" : "Merge this snapshot with previous one, and delete.<br>Are you sure?"
+    },
+    "confirmation_not_latest_build" : {
+        "value" : "It is not the latest build"
+    },
+    "confirmation_build_and_run" : {
+        "value" : "Build and Run"
+    },
+    "confirmation_run" : {
+        "value" : "run"
     }
 }

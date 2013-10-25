@@ -57,10 +57,8 @@ org.goorm.core.window.panel.prototype = {
 		} else if (filetype == "url") {
 			this.type = "codemirror_editor";
 			filename = filepath;
-		} else if (filetype == "py") {
-			filetype = "python";
 		}
-
+		
 		this.filepath = filepath;
 		this.filename = filename;
 		this.filetype = filetype;
@@ -669,6 +667,10 @@ org.goorm.core.window.panel.prototype = {
 		this.activated = true;
 		if (this.tab !== null) this.tab.activate();
 		if (this.context_menu !== null) this.context_menu.hide();
+
+		// hide all context menu in project.explorer
+		//
+		core.module.layout.project_explorer.hide_all_context_menu();
 	},
 
 	set_title: function () {

@@ -22,6 +22,12 @@ var exec = require('child_process').exec;
 
 
 
+
+var check_valid_path = function(str){
+	if(!str)return false;
+	return !(/\.\.|~|;|&|\|/.test(str));
+};
+
 module.exports = {
 	do_new: function (query, evt) {
 		var self = this;
@@ -492,6 +498,24 @@ module.exports = {
 
 
 	},
+
+
+	check_latest_build : function(query,evt){
+		if(!query || !query.project_path || !check_valid_path(query.project_path)){
+			evt.emit('check_latest_build',false);
+			return false;
+		}
+		var exec_option={};
+		exec_option.cwd=global.__workspace+query.project_path;
+		exec(" find . -type f -not -name '.*' -printf '%T@      %p\n' | sort -nr | head -n 1 | awk '{print $2}'", exec_option,function(err,stdout,stderr){
+			if(err){
+				evt.emit('check_latest_build',false);
+			}else{
+				evt.emit('check_latest_build',stdout);
+			}
+		});
+	},
+	
 
 	count_project_by_id: function (id, evt) {
 		evt.emit("count_project_by_id", 1);

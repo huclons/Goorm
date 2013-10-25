@@ -103,7 +103,7 @@ org.goorm.core.project.build.clean = {
 
 		var data = core.workspace;
 		for (var name in data) {
-			if (core.module.plugin_manager.plugins["org.goorm.plugin." + data[name].type].build) {
+			if (core.module.plugin_manager.plugins["org.goorm.plugin." + data[name].type] && core.module.plugin_manager.plugins["org.goorm.plugin." + data[name].type].build) {
 				var icon_str = "";
 				icon_str += "<div style='height:18px;padding:2px;'>";
 				icon_str += "<span class='checkbox'><input type='checkbox' name='" + name + "' value='" + name + "' projectType='" + data[name].type + "' ";

@@ -19,7 +19,7 @@ body {
 	margin:0;
 	padding:0;
 	text-align:center;
-	font-family:Verdana,Arial,굴림체,굴림 !important;
+	font-family:Verdana,Arial,나눔고딕 !important;
 	width:100%;
 
 	-moz-user-select:none;
@@ -82,7 +82,6 @@ h1,h2,h3,h4,h5,h6 {
 pre,code,kbd,samp,tt {
 	font-family:monospace;
 	line-height:120%;
-	padding: 10px;
 	background-color:#f6f6f6;
 	border-radius: 5px;
 }
@@ -526,6 +525,7 @@ th.yui-dt-hidden .yui-dt-liner,td.yui-dt-hidden .yui-dt-liner {
 
 .yui-dt th .yui-dt-liner {
 	white-space: nowrap;
+	font-family: Verdana,Arial,나눔고딕 !important;
 }
 
 .yui-dt-liner {
@@ -1355,7 +1355,7 @@ div.yui-layout-ft {
 .yui-navset .yui-nav .selected a,.yui-navset .yui-nav .selected a:focus,.yui-navset .yui-nav .selected a:hover {
 	margin: 0;
 	background: none;
-	font-family: Verdana,Arial,굴림체,굴림;
+	font-family: Verdana,Arial,나눔고딕;
 	color: #333;
 }
 
@@ -1518,7 +1518,7 @@ div.yui-layout-ft {
 	background-color: transparent;
 	*overflow: visible;
 	cursor: pointer;
-	font-family: Verdana,Arial,굴림체,굴림;
+	font-family: Verdana,Arial,나눔고딕;
 }
 
 .yui-button a {
@@ -1897,7 +1897,7 @@ a.ygtvspacer {
 .yuimenu {
 	top: -999em;
 	left: -999em;
-	font-family: Verdana,Arial,굴림체,굴림;
+	font-family: Verdana,Arial,나눔고딕;
 	outline: none;
 }
 
@@ -1930,7 +1930,7 @@ a.ygtvspacer {
 }
 
 .yuimenuitem .yuimenuitemlabel {
-	font-family: Verdana,Arial,굴림체,굴림;
+	font-family: Verdana,Arial,나눔고딕;
 	outline: none;
 	height: 18px;
 	padding-left: 26px;
@@ -3967,6 +3967,7 @@ Optimized:Start
 	border: 1px solid #ccc;
 	margin-bottom: 10px;
 	word-wrap: break-word;
+	padding: 1em;
 }
 
 #help_example_tutorial_middle,#help_contents_middle {
@@ -4164,7 +4165,7 @@ Optimized:Start
 }
 
 .function_box_table {
-	font-family: Verdana,Arial,굴림체,굴림!important;
+	font-family: Verdana,Arial,나눔고딕!important;
 	width: 100%;
 }
 
@@ -4946,7 +4947,7 @@ Filetype CSS
 	background-repeat:no-repeat;
 	background-position:-352px -48px;
 }
-.filetype-ruby {
+.filetype-rb {
 		background:transparent;
 	background-image:url(../images/sprite.png);
 	background-repeat:no-repeat;
@@ -7907,7 +7908,7 @@ Retina CSS
 
 #goorm_user_box {
 	color: #666;
-	z-index: 100;
+	z-index: 2;
 	width: 200px;
 	height: 58px;
 	right: 5px;
@@ -8020,3 +8021,128 @@ body .ui-tooltip {
 	z-index: 10011 !important;
 }
 /* Tutorial end */
+
+
+
+
+
+.communication_message_content{
+	margin: 5px 0px;
+	width : 100%;
+}
+.my_message{
+	float: right;
+}
+
+.other_message{
+	float: left;
+}
+
+.join_leave_message{
+
+
+	padding: 3px;
+
+	margin: 5px 0px;
+	border-radius: 4px;
+	border: 1px solid #ff7;
+	background-color: #FFd;
+	font-weight: normal;
+	text-align: center;
+
+	width: 100%;
+	box-sizing: border-box;
+
+	clear: both;
+
+}
+
+
+.triangle-border {
+	position: relative;
+	padding: 4px 10px;
+	border: 1px solid #ccc;
+	color: #333;
+	background: #fff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	display: inline-block;
+}
+
+
+.triangle-border:before {
+	content: "";
+	position: absolute;
+	bottom: -20px;
+	left: 40px;
+	border-width: 20px 20px 0;
+	border-style: solid;
+	border-color: #5a8f00 transparent;
+	display: block;
+	width: 0;
+}
+
+
+.triangle-border:after {
+	content: "";
+	position: absolute;
+	bottom: -13px;
+	left: 47px;
+	border-width: 13px 13px 0;
+	border-style: solid;
+	border-color: #fff transparent;
+	display: block;
+	width: 0;
+}
+
+
+
+.triangle-border.left {
+	margin-left: 12px;
+	float: left;
+}
+
+.triangle-border.left:before {
+	top: 6px;
+	bottom: auto;
+	left: -12px;
+	border-width: 3px 12px 8px 0;
+	border-color: transparent #ccc;
+}
+
+
+.triangle-border.left:after {
+	top: 7px;
+	bottom: auto;
+	left: -10px;
+	border-width: 2px 10px 7px 0;
+	border-color: transparent #fff;
+}
+
+
+.triangle-border.right {
+	margin-right: 12px;
+	float : right;
+	border-color: lightblue;
+}
+
+.triangle-border.right:before {
+	top: 6px;
+	bottom: auto;
+	left: auto;
+	right: -12px;
+	border-width: 3px 0px 8px 12px;
+	border-color: transparent lightblue;
+}
+
+
+.triangle-border.right:after {
+	top: 7px;
+	bottom: auto;
+	left: auto;
+	right: -10px;
+	border-width: 2px 0px 7px 10px;
+	border-color: transparent #fff;
+}
+
