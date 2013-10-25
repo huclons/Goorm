@@ -37,6 +37,12 @@ org.goorm.core.preference = {
 		this.load_default();
 		
 		
+
+		// Contect Menu - prevent super-menu click (==has submenu) 
+		//
+		$(document).on('click', '.yuimenuitemlabel-hassubmenu', function (){
+			return false;
+		});	
 	},
 
 	load_default: function () {

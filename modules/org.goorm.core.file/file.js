@@ -1013,7 +1013,7 @@ module.exports = {
 									case 'pptx':
 									case 'psd':
 									case 'py':
-									case 'ruby':
+									case 'rb':
 									case 'rule':
 									case 'tar':
 									case 'template':

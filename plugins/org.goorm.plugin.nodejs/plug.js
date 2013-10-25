@@ -133,7 +133,7 @@ org.goorm.plugin.nodejs.prototype = {
 				core.module.layout.workspace.window_manager.open(filepath, filename, filetype, null, {});
 				core.module.layout.project_explorer.refresh();
 				$(core).trigger("on_project_open");
-			}, 1000);
+			}, 500);
 
 		});
 	},
@@ -147,12 +147,65 @@ org.goorm.plugin.nodejs.prototype = {
 
 		var project_path = core.status.current_project_path;
 
-		var workspace = core.preference.workspace_path;
-		var run_path = workspace + project_path + '/' + source_path + main + '.js';
+		if(core.service_mode) {
+			var postdata = {
+				'data' : {
+					'project_path' : project_path,
+					'source_path' : source_path,
+					'main' : main
+				},
+				'plugin' : self.full_name,
+				'extend_function' : 'replace_app_port'
+			};
 
-		var cmd1 = "node " + run_path;
+			$.get('/plugin/extend_function', postdata, function(replace_app_port){
+				if(replace_app_port.result){
+					var cmd1 = "node " + replace_app_port.run_path;
+					core.module.layout.terminal.send_command('clear;\r', null);
+					core.module.layout.terminal.send_command(cmd1+'\r');
 
-		core.module.layout.terminal.send_command(cmd1+'\r');
+					if(replace_app_port.use_port){
+						var run_data = {
+							'plugin' : 'org.goorm.plugin.nodejs_examples',
+							'channel' : "run",
+							'data' : {
+								'user' : core.user.id,
+								'port' : replace_app_port.port,
+								'project_path' : project_path
+							}
+						}
+
+						if(!self.socket) {
+							self.socket = io.connect();
+						}
+
+						self.socket.emit('plugin', JSON.stringify(run_data));
+
+						$("a[action=run]").hide();
+						$("a[action=stop]").show();
+					}
+				}
+				else{
+					// fail to run a app.
+					// 
+					switch(replace_app_port.code){
+						case 0:
+						case 2:
+						case 10:
+						case 11:
+							core.module.toast.show(core.module.localization.msg['alert_run_fail'])
+							break;
+					}
+				}
+			});
+		} else {
+			var workspace = core.preference.workspace_path;
+			var run_path = workspace + project_path + '/' + source_path + main + '.js';
+
+			var cmd1 = "node " + run_path;
+
+			core.module.layout.terminal.send_command(cmd1+'\r');
+		}
 	},
 	
 	stop: function(__option){
@@ -168,10 +221,55 @@ org.goorm.plugin.nodejs.prototype = {
 
 		var project_path = core.status.current_project_path;
 
+		if(core.service_mode) {
+			var postdata = {
+				'data' : {
+					'project_path' : project_path,
+					'source_path' : source_path,
+					'main' : main
+				},
+				'plugin' : self.full_name,
+				'extend_function' : 'stop'
+			};
 
-		if(terminal) {
-			var cmd = "\x03"
-			core.module.layout.terminal.send_command(cmd+'\r');
+			$.get('/plugin/extend_function', postdata, function(response){
+				if(response.result){
+					if(terminal) {
+						var msg = {
+							user : core.user.id,
+							index: core.module.layout.terminal.index,
+							command: response.command,
+							special_key: response.special_key
+						};
+
+						if(!self.socket) {
+							self.socket = io.connect();
+						}
+
+						self.socket.emit("pty_execute_command", JSON.stringify(msg));
+					}
+
+					$("a[action=run]").show();
+					$("a[action=stop]").hide();
+				}
+				else{
+					// fail to run a app.
+					// 
+					switch(response.code){
+						case 0:
+						case 2:
+						case 10:
+						case 11:
+							core.module.toast.show(core.module.localization.msg['alert_stop_fail'])
+							break;
+					}
+				}
+			});
+		} else {
+			if(terminal) {
+				var cmd = "\x03"
+				core.module.layout.terminal.send_command(cmd+'\r');
+			}
 		}
 	},
 

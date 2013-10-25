@@ -61,8 +61,11 @@ module.exports = {
 				var data;
 
 				
+				var bashrc = __path + 'configs/bash.bashrc'
+				var command = '--rcfile ' + bashrc;
+
 				self.term.push({
-					pty: pty.spawn('bash', [], {
+					pty: pty.spawn('bash', command.split(' '), {
 						name: 'xterm-color',
 						cols: parseInt(msg.cols, 10),
 						rows: 30,
@@ -146,52 +149,6 @@ module.exports = {
 
 				
 
-				//useronly(mode=pvm)
-				//
-				if (self.term[msg.user] && self.term[msg.user][msg.index] && self.term[msg.user][msg.index].pty) {
-					target_terminal = self.term[msg.user][msg.index];
-
-					self.term[msg.user][msg.index].pty.destroy();
-					self.term[msg.user][msg.index].pty.kill('SIGKILL');
-
-					var command = "-p "+ssh_pass+" ssh "+target_terminal.host+" -l "+msg.user+" -o StrictHostKeyChecking=no";
-
-					self.term[msg.user][msg.index] = {
-						pty: pty.spawn('sshpass', command.split(' '), {
-							name: 'xterm-color',
-							cols: parseInt(msg.cols, 10),
-							rows: 30,
-							cwd: process.env.HOME,
-							env: process.env,
-							uid: target_terminal.uid,
-							gid: target_terminal.gid,
-							user_id: target_terminal.user_id
-						}),
-						workspace: msg.workspace,
-						terminal_name: msg.terminal_name,
-						uid: target_terminal.uid,
-						gid: target_terminal.gid,
-						user_id: target_terminal.user_id,
-						id_rsa_path: target_terminal.id_rsa_path,
-						host: target_terminal.host
-					};
-
-					self.term[msg.user][msg.index].pty.on('data', function (data) {
-						var result = {};
-						result.stdout = data;
-						result.terminal_name = msg.terminal_name;
-						result.user = msg.user;
-
-						io.sockets. in (msg.workspace + '/' + msg.terminal_name + '/' + msg.index).emit("pty_command_result", result);
-					});
-
-					socket.join(msg.workspace + '/' + msg.terminal_name + '/' + msg.index);
-					socket.to().emit('terminal_refresh_complete');
-				}
-
-				if (__redis_mode) {
-					self.load('refresh', msg);
-				}
 				
 
 				

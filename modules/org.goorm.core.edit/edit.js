@@ -883,7 +883,7 @@ module.exports = {
 
 		var make_called_data = function (workspace, project_type, callback) {
 			var absolute_workspace_path = base_dir + workspace;
-			var ctags_command = 'cat ' + absolute_workspace_path + '/.tags | grep -v \'\!_TAG\'';
+			var ctags_command = 'cat ' + absolute_workspace_path + '/.tags';
 
 			var init = function (workspace, project_type) {
 				if (called_data[project_type]) {
@@ -950,7 +950,11 @@ module.exports = {
 				if (!err) {
 					init(workspace, project_type);
 
-					var tags = stdout.split('\n');
+					var tags = stdout.split('\n').filter(function(o){
+						if (o.indexOf('!_TAG') >= 0) return false;
+						else return true;
+					});
+					
 					for (var i = 0; i < tags.length; i++) {
 						var items = tags[i].split('\t');
 

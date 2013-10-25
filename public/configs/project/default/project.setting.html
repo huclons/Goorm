@@ -10,13 +10,24 @@
 <div style="float:left; font-size:11px; width : 100%;">
 	<fieldset style="height : 100%;">
 		<legend localization_key="project_setting">Project Setting</legend> 
-		 <div style="width:100%; ">
-            <div style="float:left; width:200px; " class="checkbox_div">
+		 <div style="width:100%; clear:both;">
+            <div style="float:left; width:300px; margin-bottom:8px" class="checkbox_div">
 			   	<span class="checkbox">
-			       	<input name="building_after_save_option" id="building_after_save_option" type="checkbox" id="show_line_numbers" class="checkbox_margin" />
+			       	<input name="building_after_save_option" id="building_after_save_option" type="checkbox" class="checkbox_margin" />
 			       	<label data-on="" data-off=""></label>
 				</span>
 			    <label for="building_after_save_option" localization_key="auto_build_after_save">auto build after save</label>
+			</div>
+		</div>
+
+
+		<div style="width:100%; clear:both;">
+            <div style="float:left; width:300px; margin-bottom:8px" class="checkbox_div">
+			   	<span class="checkbox">
+			       	<input name="always_latest_build_run" id="always_latest_build_run_option" type="checkbox"class="checkbox_margin" />
+			       	<label data-on="" data-off=""></label>
+				</span>
+			    <label for="always_latest_build_run_option" localization_key="always_latest_build_run_option">always latest build version run</label>
 			</div>
 		</div>
 

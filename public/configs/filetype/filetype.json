@@ -126,10 +126,17 @@
 		"mode": "application/xml"
 	},
 	{
-		"file_extension": "python",
+		"file_extension": "py",
 		"editor": "Editor",
 		"description": "python",
 		"type": "Code",
 		"mode": "text/x-python"
+	},
+	{
+		"file_extension": "rb",
+		"editor": "Editor",
+		"description": "ruby",
+		"type": "Code",
+		"mode": "text/x-ruby"
 	}
 ]

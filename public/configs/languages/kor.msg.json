@@ -167,6 +167,15 @@
     "confirmation_language_message_no": {
         "value": "No"
     },
+    "confirmation_logout": {
+        "value": "로그아웃"
+    },
+    "confirmation_not_saved": {
+        "value": " 파일이 저장되지 않았습니다."
+    },
+    "confirmation_stay": {
+        "value": "페이지에 머무르기"
+    },
     "confirmation_auto_logout": {
         "value": "자동 로그아웃"
     },
@@ -599,5 +608,14 @@
     },
     "confirmation_history_merge" : {
         "value" : "앞의 스냅샷과 합쳐지며, 해당 스냅샷은 삭제됩니다.<br>괜찮으시겠습니까?"
+    },
+    "confirmation_not_latest_build" : {
+        "value" : "최신 빌드상태가 아닙니다."
+    },
+    "confirmation_build_and_run" : {
+        "value" : "빌드 후 실행"
+    },
+    "confirmation_run" : {
+        "value" : "실행"
     }
 }

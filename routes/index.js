@@ -34,7 +34,7 @@ var EventEmitter = require("events").EventEmitter;
 
 var check_special_characters = function(str) {
 	var regex = ['~', '!', '#', '$', '^', '&', '*', '=', '+', '|', ':', ';', '?', '"', '<', '.', '>', ' '];
-	var modify_regex = ['\~', '\!', '\#', '\$', '\^', '\&', '\*', '\=', '\+', '\|', '\:', '\;', '\?', '\"', '\<', '\.', '\>', '\ '];
+	var modify_regex = ['\~', '\!', '\#', '\$', '\^', '\&', '\*', '\=', '\+', '\|', '\:', '\;', '\?', '\"', '\<', '\.', '\>', '\\ '];
 
  	if (str) {
 		var index = 0;
@@ -1054,4 +1054,9 @@ exports.function.get_function_explorer =function(req,res){
 	g_function.get_function_explorer(req.query, evt);
 
 }
+
+
+
+
+
 

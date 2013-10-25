@@ -160,11 +160,13 @@ org.goorm.core.terminal.prototype = {
 
 			self.socket.on("platform", function (data) {
 				data = JSON.parse(data);
-				if (data.platform == "darwin") {
-					self.default_prompt = /bash-\d\.\d(\#|\$)/;
-				} else if (data.platform == "linux") {
-					self.default_prompt = /.*@.*:.*(\#|\$)/;
-				}
+
+				
+
+				
+				self.default_prompt = /.*@.*:.*(\#|\$)/;
+				
+
 				self.platform = data.platform;
 				core.env.os = data.platform;
 			});

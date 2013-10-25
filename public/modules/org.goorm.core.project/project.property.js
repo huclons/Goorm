@@ -54,6 +54,7 @@ org.goorm.core.project.property = {
 					case 'web':
 					case 'nodejs':
 					case 'php':
+					case 'ruby':
 						$('.build_project').css('display', 'none');
 						$('.build_clean').css('display', 'none');
 						break;
