@@ -94,12 +94,14 @@ org.goorm.plugin.python.prototype = {
 		var self=this;
 		var property = core.property.plugins['org.goorm.plugin.python'];
 		
+		var classpath = property['plugin.python.source_path'];
 		var classname = property['plugin.python.main']+'.py';
 
-		var cmd1 = "python ./"+classname;
-		core.module.layout.terminal.send_command("clear;"+ '\r');
-		core.module.layout.terminal.send_command(cmd1 + '\r');
+		var workspace = core.preference.workspace_path;
+		var absolute_path=workspace+core.status.current_project_path+"/"+classpath+classname;
 
+		core.module.layout.terminal.send_command("clear;"+'\r');
+		core.module.layout.terminal.send_command("python "+absolute_path +'\r');
 	},
 
 	debug: function (path) {
@@ -136,7 +138,7 @@ org.goorm.plugin.python.prototype = {
 		
 		$(debug_module).off("value_changed");
 		$(debug_module).on("value_changed",function(e, data){
-			self.terminal.send_command("p "+data.variable+"="+data.value+"\r", self.prompt);
+			self.terminal.send_command(data.variable+"="+data.value+"\r", self.prompt);
 		});
 		
 		$(debug_module).off("debug_end");
@@ -172,7 +174,7 @@ org.goorm.plugin.python.prototype = {
 		
 		var workspace = core.preference.workspace_path;
 		var projectName = core.status.current_project_path+"/";
-		var mainPath = property['plugin.python.main'];
+		var mainPath = property['plugin.python.main'] + '.py';
 		var source_path = property['plugin.python.source_path'];
 		
 //		if(this.terminal === null) {
@@ -182,6 +184,8 @@ org.goorm.plugin.python.prototype = {
 //			return ;
 //		}
 		
+		if(!this.terminal) this.terminal = core.module.layout.workspace.window_manager.open("/", "debug", "terminal", "Terminal").terminal;
+
 		switch (cmd.mode) {
 		case 'init':
 			self.terminal.flush_command_queue();
@@ -215,6 +219,11 @@ org.goorm.plugin.python.prototype = {
 					window.editor && window.editor.clear_highlight();
 				}
 			}
+			
+			$("#goorm_main_toolbar .debug_continue, #goorm_main_toolbar .debug_terminate, #goorm_main_toolbar .debug_step_over, #goorm_main_toolbar .debug_step_in, #goorm_main_toolbar .debug_step_out").addClass('debug_not_active');
+			$("#goorm_main_toolbar .debug").removeClass("debug_not_active");
+			$("#Debug .menu-debug-continue, #Debug .menu-debug-terminate, #Debug .menu-debug-step-over, #Debug .menu-debug-step-in, #Debug .menu-debug-step-out").addClass('debug_not_active');
+			$("#Debug .menu-debug-start").removeClass('debug_not_active');
 			
 			break;
 		case 'step_over':

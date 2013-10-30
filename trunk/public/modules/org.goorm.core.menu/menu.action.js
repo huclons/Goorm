@@ -1164,6 +1164,11 @@ org.goorm.core.menu.action = {
 			confirmation.panel.show();
 		});
 
+		$("a[action=find_in_folder_context]").off("click");
+		$("a[action=find_in_folder_context]").click(function () {
+			core.dialog.search.show('/'+core.status.selected_file);
+		});
+
 		$("a[action=new_file_folder_context]").off("click");
 		$("a[action=new_file_folder_context]").click(function (e) {
 			var target = $("#project_treeview").find(".ygtvfocus")[0];

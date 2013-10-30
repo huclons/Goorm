@@ -373,7 +373,7 @@
         "value": "Password를 다시 한번 확인해 주세요."
     },
     "alert_user_unfit_req_password": {
-        "value": "Password의 형식이 올바르지 않은 양식입니다(8~15자리, 알파벳과 숫자의 조합)."
+        "value": "Password의 형식이 올바르지 않은 양식입니다(8~15자리, 알파벳과 특수문자, 숫자의 조합)."
     },
     "alert_user_undefined_email": {
         "value": "E-mail을 입력해주세요."
@@ -617,5 +617,8 @@
     },
     "confirmation_run" : {
         "value" : "실행"
+    },
+    "server_is_end" : {
+        "value" : "서버가 종료되었습니다. 다시 연결해주시기 바랍니다."
     }
 }

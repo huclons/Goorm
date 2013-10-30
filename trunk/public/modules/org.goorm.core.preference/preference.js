@@ -234,6 +234,8 @@ org.goorm.core.preference = {
 				
 				if ($(this).attr("type") == "checkbox") {
 					value = $(this).prop("checked");
+				} else if ($(this).attr("type") == "radio" && $(this).prop("checked") == true) {
+					value = $(this).val();
 				} else {
 					value = $(this).val();
 				}
@@ -268,11 +270,13 @@ org.goorm.core.preference = {
 			$(targets[index]).find("input").each(function () {
 				if (key[$(this).attr("name")]) {
 					if ($(this).attr("type") == "checkbox") {
-
 						if (key[$(this).attr("name")] == "true" || key[$(this).attr("name")] === true) {
 							$(this).prop("checked", true);
 						}
-						//						else $(this).attr("checked",);
+					} else if ($(this).attr("type") == "radio") {
+						if(key[$(this).attr("name")] == $(this).val()) {
+							$(this).prop("checked", true);
+						} 
 					} else {
 						$(this).val(key[$(this).attr("name")]);
 					}

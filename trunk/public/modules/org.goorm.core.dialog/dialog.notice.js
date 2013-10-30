@@ -118,16 +118,25 @@ org.goorm.core.dialog.notice.prototype = {
 		container.find('.yui-button button').attr('id', 'g_n_btn_ok');
 	},
 
-	show: function (message, option_image_url) {
+	show: function (message, option_image_url, no_image) {
 		this.message = message;
 		//this.title="Notice";
 		var panelContainer_bd = $("#panelContainer_" + this.title).find(".bd");
 
 		panelContainer_bd.empty();
-		if (!option_image_url) {
-			panelContainer_bd.append(this.message).prepend("<div class='notice_image_div'><img src='" + this.image_url + "'/></div>").css("text-align", "left");
-		} else {
-			panelContainer_bd.append(this.message).prepend("<div class='notice_image_div'><img style='width:80%; height:80%' src='" + option_image_url + "'/></div>").css("text-align", "left");
+		panelContainer_bd.append(this.message);
+
+		if(!no_image) {
+			panelContainer_bd.css('text-align', 'left');
+
+			if (!option_image_url) {
+				panelContainer_bd.prepend("<div class='notice_image_div'><img src='" + this.image_url + "'/></div>").css("text-align", "left");
+			} else {
+				panelContainer_bd.prepend("<div class='notice_image_div'><img style='width:80%; height:80%' src='" + option_image_url + "'/></div>").css("text-align", "left");
+			}
+		}
+		else {
+			panelContainer_bd.css('text-align', 'center');
 		}
 
 		this.panel.show();

@@ -567,6 +567,9 @@
     "file_move_context": {
         "value": "이동"
     },
+    "find_in_folder_context":{
+        "value" : "폴더에서 찾기"
+    },
     "file_delete_context": {
         "value": "삭제"
     },
@@ -679,6 +682,9 @@
     },
     "minimize": {
         "value": "최소화"
+    },
+    "show_and_hide" :{
+        "value" : "보이기 / 숨기기"
     },
     "open_recent_file": {
         "value": "최근 파일 열기"

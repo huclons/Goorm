@@ -372,7 +372,7 @@
         "value": "Please recheck your password. They are not a match."
     },
     "alert_user_unfit_req_password": {
-        "value": "The format of the password is not valid. (8~15 digits, Alphabet+Number)."
+        "value": "The format of the password is not valid. (8~15 digits, Alphabet+Number+Special characters)."
     },
     "alert_user_undefined_email": {
         "value": "Please enter an Email."
@@ -609,5 +609,8 @@
     },
     "confirmation_run" : {
         "value" : "run"
+    },
+    "server_is_end" : {
+        "value" : "Server is closed. Please reconnect a server."
     }
 }

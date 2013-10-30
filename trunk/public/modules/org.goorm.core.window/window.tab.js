@@ -137,8 +137,9 @@ org.goorm.core.window.tab.prototype = {
 
 	set_event: function () {
 		var self = this;
-				// window tab events
-				var str = self.context_menu.name.replace(/[/.]/g, "\\.");
+		// window tab events
+		var str = self.context_menu.name.replace(/[/.]/g, "\\.");
+		var id = self.context_menu.name;
 
 		//tab right click event assign
 		$(this.tab.get("labelEl")).mousedown(function (e) {
@@ -181,7 +182,7 @@ org.goorm.core.window.tab.prototype = {
 			}
 		});
 
-		$("#" + str).find(".close").click(function (e) {
+		$("[id='"+id+"']").find(".close").click(function (e) {
 			if (e.which == 1) {
 				self.context_menu.hide();
 				self.close();
@@ -189,33 +190,27 @@ org.goorm.core.window.tab.prototype = {
 			}
 		});
 
-		$("#" + str).find(".minimize").click(function (e) {
+		$("[id='"+id+"']").find(".show_and_hide").click(function (e) {
 			if (e.which == 1) {
 				self.context_menu.hide();
-				self.window.minimize();
-				return false;
-			}
-		});
-		$("#" + str).find(".history").click(function (e) {
-			if (e.which == 1) {
-				self.context_menu.hide();
-				self.history_window = core.module.layout.workspace.window_manager.history_window;
-				if (self.history_window) {
-					core.module.layout.workspace.window_manager.open(self.history_window.filepath, self.history_window.filename, self.history_window.filetype);
-				}
+				// self.window.minimize();
+
+				var __window = $("#" + self.window.container + "_c");
+				__window.toggle();
+
 				return false;
 			}
 		});
 
-		$("#" + str).find(".unminimize").click(function (e) {
-			if (e.which == 1) {
-				if (!$(this).hasClass('yuimenuitemlabel-disabled')) {
-					self.context_menu.hide();
-					self.activate();
-				}
-				return false;
-			}
-		});
+		// $("[id='"+id+"']").find(".unminimize").click(function (e) {
+		// 	if (e.which == 1) {
+		// 		if (!$(this).hasClass('yuimenuitemlabel-disabled')) {
+		// 			self.context_menu.hide();
+		// 			self.activate();
+		// 		}
+		// 		return false;
+		// 	}
+		// });
 	},
 
 	set_modified: function () {

@@ -864,9 +864,9 @@ module.exports = {
 			var ctags_command = "";
 
 			if (project_type === 'cpp' || project_type === 'c') {
-				ctags_command = "find " + absolute_workspace_path + " -regex '.*\.c' -o -regex '.*\.cpp' | xargs ctags  --c-types=+l --java-types=+l  -f " + absolute_workspace_path + "/.tags";
+				ctags_command = "rm "+absolute_workspace_path+"/.tags; find " + absolute_workspace_path + " -regex '.*\.c' -o -regex '.*\.cpp' | xargs ctags  --c-types=+l --java-types=+l  -f " + absolute_workspace_path + "/.tags";
 			} else {
-				ctags_command = "find " + absolute_workspace_path + " -name '*." + project_type + "' | xargs ctags --c-types=+l --java-types=+l -f  " + absolute_workspace_path + "/.tags";
+				ctags_command = "rm "+absolute_workspace_path+"/.tags; find " + absolute_workspace_path + " -name '*." + project_type + "' | xargs ctags --c-types=+l --java-types=+l -f  " + absolute_workspace_path + "/.tags";
 			}
 
 			exec(ctags_command, function (err, stdout, stderr) {

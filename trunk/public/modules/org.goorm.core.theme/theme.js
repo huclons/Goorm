@@ -211,34 +211,34 @@ org.goorm.core.theme = {
 			filedata += "}\n";
 		}
 
-		$.ajax({
-			url: url,
-			type: "POST",
-			data: {
-				path: path,
-				data: filedata
-			},
-			success: function (data) {
-				//apply theme
-				self.load_css();
-			}
-		});
+		// $.ajax({
+		// 	url: url,
+		// 	type: "POST",
+		// 	data: {
+		// 		path: path,
+		// 		data: filedata
+		// 	},
+		// 	success: function (data) {
+		// 		//apply theme
+		// 		self.load_css();
+		// 	}
+		// });
 
 		path = self.current_theme.name + "/" + self.current_theme.name + ".json";
 		filedata = JSON.stringify(self.current_theme_data, null, '\t');
 
-		$.ajax({
-			url: url,
-			type: "POST",
-			data: {
-				path: path,
-				data: filedata
-			},
-			success: function (data) {
-				//apply theme
-				//m.s("Save complete! (" + self.filename + ")", "org.goorm.core.theme");
-			}
-		});
+		// $.ajax({
+		// 	url: url,
+		// 	type: "POST",
+		// 	data: {
+		// 		path: path,
+		// 		data: filedata
+		// 	},
+		// 	success: function (data) {
+		// 		//apply theme
+		// 		//m.s("Save complete! (" + self.filename + ")", "org.goorm.core.theme");
+		// 	}
+		// });
 
 		confirmation.init({
 			title: core.module.localization.msg.confirmation_theme,

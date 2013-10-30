@@ -567,6 +567,9 @@
     "file_move_context": {
         "value": "Move"
     },
+    "find_in_folder_context":{
+        "value" : "Find in Folder"
+    },
     "file_delete_context": {
         "value": "Delete"
     },
@@ -679,7 +682,7 @@
         "value": "Maximize"
     },
     "minimize": {
-        "value": "Minimize"
+        "value": "Show / Hide"
     },
     "open_recent_file": {
         "value": "Open Recent File"

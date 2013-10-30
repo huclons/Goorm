@@ -554,18 +554,23 @@ org.goorm.core.prototype = {
 
 		
 
-		$('#local_login_box').append("<input type='button' id='goorm_local_mode_button' localization_key='private_mode' value='Private Mode' />");
+		
+		$('#local_login_box').append("<div id='local_login_user_box'><div id='local_user_area'><label id='local_user_label' for='local_user_input'>ID : </label><input id='local_user_input' /></div><div id='local_user_pw_area'><label id='local_user_pw_label' for='local_user_pw_input'>PW : </label><input id='local_user_pw_input' type='password' /></div></div>");
+		$('#local_login_box').append("<input type='button' id='goorm_local_mode_button' localization_key='private_mode' value='Access Private Mode' />");
+		
 
 		
 
+		
 		this.local_mode_button = new YAHOO.widget.Button("goorm_local_mode_button", {
 			onclick: {
 				fn: function () {
 					self.access_local_mode();
 				}
 			},
-			label: '<span localization_key="private_mode">Private Mode</span>'
+			label: '<span localization_key="private_mode">Access Private Mode</span>'
 		});
+		
 
 		var loading_background = $("#loading_background");
 		loading_background.css('position', "absolute").width($(window).width()).height($(window).height());
@@ -581,7 +586,20 @@ org.goorm.core.prototype = {
 	
 
 	show_local_login_box: function () {
+		if (localStorage.user && localStorage.user != "undefined") {
+			var user = JSON.parse(localStorage.user)
+			$('#local_user_input').val(user.id);
+		}
+		
 		$("#local_login_box").delay(1500).fadeIn(2000);
+
+		setTimeout(function(){
+			$('#local_user_input').focus();
+
+			if ($('#local_user_input').val() != "") {
+				$('#local_user_pw_input').focus();
+			}
+		}, 2000);
 	},
 
 	local_complete: function () {
@@ -601,38 +619,34 @@ org.goorm.core.prototype = {
 	},
 
 	access_local_mode: function () {
-		this.user.id = "";
-		this.user.email = "";
-		this.user.name = "";
-		this.user.nick = "";
-		this.user.level = "Member";
-		this.user.type = "password";
+		var self = this;
 
-		for (var i = 0; i < Math.random() * 4 + 2; i++) {
-			this.user.id += String.fromCharCode(97 + Math.round(Math.random() * 25));
-		}
-		this.user.id = this.user.id + '_guest';
+		var id = $('#local_user_input').val();
+		var pw = $('#local_user_pw_input').val();
 
-		for (var j = 0; j < Math.random() * 4 + 2; j++) {
-			this.user.name += String.fromCharCode(97 + Math.round(Math.random() * 25));
-		}
-		this.user.name = this.user.name + '_guest';
+		$.post('/local_login', {
+			'id' : id,
+			'pw' : pw
+		}, function (data) {
+			if (data.result) {
+				self.user.id = id;
+				self.user.email = "";
+				self.user.name = id;
+				self.user.nick = id;
+				self.user.level = "Member";
+				self.user.type = "password";
 
-		for (var j = 0; j < Math.random() * 4 + 2; j++) {
-			this.user.nick += String.fromCharCode(97 + Math.round(Math.random() * 25));
-		}
-		this.user.nick = this.user.nick + '_guest';
-
-		localStorage.user = JSON.stringify(this.user);
-		this.local_complete();
+				localStorage.user = JSON.stringify(self.user);
+				self.local_complete();
+			}
+			else {
+				alert.show('NOT VALID');
+			}
+		});
 	},
 
 	new_main_window: function () {
-		
 		window.open("./");
-		
-
-		
 	},
 
 	is_touchable_device: function () {

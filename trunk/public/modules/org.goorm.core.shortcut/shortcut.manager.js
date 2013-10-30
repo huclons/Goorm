@@ -87,7 +87,7 @@ org.goorm.core.shortcut.manager = {
 			if ($(this).parent("[action]")) {
 				var action = $(this).parent("[action]").attr("action");
 
-				if (os == "mac")
+				if (os == "mac" && (action != 'tile_left' && action != 'tile_right'))
 					self.hotkeys[action] = $(this).text().replace(/Ctrl/g, "meta").replace(/	/g, "").split(" ").join("").trim();
 				else
 					self.hotkeys[action] = $(this).text().replace(/	/g, "").split(" ").join("").trim();
@@ -128,6 +128,8 @@ org.goorm.core.shortcut.manager = {
 					core.module.auth.login();
 				} else if ($(e.currentTarget).attr('id') == 'user_search_input') {
 					core.dialog.share_project.user_add();
+				} else if ($(e.currentTarget).attr('id') == 'local_user_input' || $(e.currentTarget).attr('id') == 'local_user_pw_input') {
+					core.access_local_mode();
 				}
 
 				$(document).trigger(e);
@@ -190,22 +192,27 @@ org.goorm.core.shortcut.manager = {
 			});
 		}
 
+		
 		if (this.hotkeys.tile_left) {
-			$(document).bind('keydown', this.hotkeys.tile_left, function (e) {
-				core.module.layout.workspace.window_manager.tile_left();
-
-				e.stopPropagation();
-				e.preventDefault();
-				return false;
+			$(document).bind('keydown', function (e) {
+				if(e.keyCode===219 && e.shiftKey && (e.ctrlKey || e.metaKey)){
+					core.module.layout.workspace.window_manager.tile_left();
+					e.stopPropagation();
+					e.preventDefault();
+					return false;
+				}
+					
 			});
 		}
 
 		if (this.hotkeys.tile_right) {
-			$(document).bind('keydown', this.hotkeys.tile_right, function (e) {
-				core.module.layout.workspace.window_manager.tile_right();
-				e.stopPropagation();
-				e.preventDefault();
-				return false;
+			$(document).bind('keydown', function (e) {
+				if(e.keyCode===221 && e.shiftKey && (e.ctrlKey || e.metaKey)){
+					core.module.layout.workspace.window_manager.tile_right();
+					e.stopPropagation();
+					e.preventDefault();
+					return false;
+				}
 			});
 		}
 
@@ -712,35 +719,39 @@ org.goorm.core.shortcut.manager = {
 
 				//Main Menu : window
 		
-		//Previous window (Alt+Shift+Left)
+		//Previous window (Alt+Shift+[)
 		if (this.hotkeys.previous_window) {
-			$(document).bind('keydown', this.hotkeys.previous_window, function (e) {
-				if (!core.status.keydown) {
-					core.module.layout.workspace.window_manager.previous_window();
-					core.status.keydown = true;
+			$(document).bind('keydown', function (e) {
+				if(e.keyCode==219&&e.shiftKey && e.altKey){
+					if (!core.status.keydown) {
+						core.module.layout.workspace.window_manager.previous_window();
+						core.status.keydown = true;
+					}
+
+					core.module.layout.mainmenu.blur();
+
+					e.stopPropagation();
+					e.preventDefault();
+					return false;
 				}
-
-				core.module.layout.mainmenu.blur();
-
-				e.stopPropagation();
-				e.preventDefault();
-				return false;
 			});
 		}
 
-		//Next window (Alt+Shift+Right)
+		//Next window (Alt+Shift+])
 		if (this.hotkeys.next_window) {
-			$(document).bind('keydown', this.hotkeys.next_window, function (e) {
-				if (!core.status.keydown) {
-					core.module.layout.workspace.window_manager.next_window();
-					core.status.keydown = true;
+			$(document).bind('keydown',  function (e) {
+				if(e.keyCode==221&&e.shiftKey && e.altKey){
+					if (!core.status.keydown) {
+						core.module.layout.workspace.window_manager.next_window();
+						core.status.keydown = true;
+					}
+
+					core.module.layout.mainmenu.blur();
+
+					e.stopPropagation();
+					e.preventDefault();
+					return false;
 				}
-
-				core.module.layout.mainmenu.blur();
-
-				e.stopPropagation();
-				e.preventDefault();
-				return false;
 			});
 		}
 

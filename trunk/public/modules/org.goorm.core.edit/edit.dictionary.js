@@ -95,7 +95,10 @@ org.goorm.core.edit.dictionary.prototype = {
 				} else if (code == 37 || code == 39) {
 					self.hide();
 					self.editor.focus();
-				} else {
+				} else if (code == 8 || code == 46) {
+					self.editor.triggerOnKeyDown(e);
+				}
+				else {
 					self.editor.focus();
 				}
 			}
