@@ -180,6 +180,24 @@ org.goorm.core.window.panel.prototype = {
 			$("#" + container).find(".window_container").css("overflow", "auto");
 
 			this.panel.setFooter("");
+		} else if (editor == "WebView") {
+			this.type = "WebView";
+			var title = (options.title) ? options.title : this.title;
+			
+			var iframe = $("<iframe src='"+this.filepath+"/"+this.filename+"' style='width:100%;height:100%;border:0;background:white'>");
+			$(this.panel.element).find(".window_container").css("overflow", "hidden").html(iframe)
+				.end().find(".window_title").text("[Web view] "+title);
+
+			// iframe cannot bind onclick event
+			iframe.on("load", function(){
+				$(this).contents().find("body").on("click", function(){
+					$(self.panel.element).find(".window_container").mousedown();
+				}).on("keydown keypress keyup", function(e){
+					$(document).trigger(e);
+				});
+			});
+
+			this.panel.setFooter("Web view is running");
 		} else if (this.inArray(this.filetype) > -1) {
 			this.type = core.filetypes[this.inArray(this.filetype)].editor;
 
@@ -518,9 +536,7 @@ org.goorm.core.window.panel.prototype = {
 
 	minimize: function () {
 		var self = this;
-		console.log(this.status);
-		console.log(self.container);
-
+		
 		$("#" + self.container + "_c").hide("fast");
 
 		this.resize_all();

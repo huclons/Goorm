@@ -174,13 +174,8 @@ org.goorm.core.project.property = {
 					var value;
 					if ($(this).attr("type") == "checkbox") {
 						value = $(this).prop("checked");
-					} else if ($(this).attr("type") == "radio") {
-						var name = $(this).attr('name');
-						if ($(':radio[name="' + name + '"]:checked').length > 0) {
-							value = $(':radio[name="' + name + '"]:checked').val();
-						} else {
-							return;
-						}
+					} else if ($(this).attr("type") == "radio" && $(this).prop("checked") == true) {
+						value = $(this).val();
 					} else {
 						value = $(this).val();
 					}

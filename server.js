@@ -308,6 +308,34 @@ goorm.init = function() {
 	
 
 	
+	goorm.post('/local_login', function (req, res){
+		var response = {};
+		response.result = false;
+
+		var id = req.body.id;
+		var pw = req.body.pw;
+
+		var crypto = require('crypto');
+		var sha_pw = crypto.createHash('sha1');
+		sha_pw.update(pw);
+		pw = sha_pw.digest('hex');
+
+		var users = config_data.users;
+		if(users && users.length > 0) {
+			for(var i=0; i<users.length; i++) {
+				var user = users[i];
+
+				if (user.id == id && user.pw == pw) {
+					response.result = true;
+				}
+			}
+		}
+
+		res.json(response);
+	});
+	
+
+	
 
 	//for download and upload
 	goorm.get('/download', check_session,  routes.download);

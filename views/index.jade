@@ -48,6 +48,14 @@ block content
 		#goorm_menu_container
 		#goorm_dialog_container
 		#goorm_template_container(style='display:none;')
+			div(id='head_web.preference')
+						div(id='selectedPreferenceTitle') Web Plugin
+						div(style='font-size:11px;')
+									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
+												| Web plugin
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
 			div(id='head_window.manager.tabview')
 						div(id='window.manager.tabview_context')
 									.bd
@@ -66,14 +74,6 @@ block content
 																		a.yuimenuitemlabel(action='previous_window', localization_key='window_previous_window_context') Previous Window
 															li.yuimenuitem
 																		a.yuimenuitemlabel(action='next_window', localization_key='window_next_window_context') Next Window
-			div(id='head_web.preference')
-						div(id='selectedPreferenceTitle') Web Plugin
-						div(style='font-size:11px;')
-									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
-												| Web plugin
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
 			div(id='head_project.collaboration')
 						div(style='font-size:11px;')
 									div(style='margin-bottom:5px; height:25px;')
@@ -81,6 +81,17 @@ block content
 															label(for='collaboration_check')
 																		input(id='collaboration_check')(type='checkbox', name='COLLABORATION', validate='')
 																		| Use Collaboration
+			div(id='head_project.toolbar')
+						div(id='project.toolbar').toolbar_part
+									a(action='run', tooltip='project_run')
+												.toolbar_button.run
+															.toolbar-run
+									a(action='build_project', tooltip='project_build_project')
+												.toolbar_button.build_project
+															.toolbar-build
+									a(action='build_clean', tooltip='project_clean')
+												.toolbar_button.build_clean
+															.toolbar-clean
 			div(id='head_system.libraries')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -105,63 +116,6 @@ block content
 															div(id='java_version')(style='float:left;') Java &colon; 
 												div(style='width:100%; height:22px;display:none')
 															div(id='python_version')(style='float:left;') Python &colon; 
-			div(id='head_project.toolbar')
-						div(id='project.toolbar').toolbar_part
-									a(action='run', tooltip='project_run')
-												.toolbar_button.run
-															.toolbar-run
-									a(action='build_project', tooltip='project_build_project')
-												.toolbar_button.build_project
-															.toolbar-build
-									a(action='build_clean', tooltip='project_clean')
-												.toolbar_button.build_clean
-															.toolbar-clean
-			div(id='head_project._import')
-						.content_header Import Project
-						div(id='project_import')(style='text-align:left; font-size:11px;')
-									form(id='project_import_form')(action='project/import', method='post', enctype='multipart/form-data')
-												div
-															.content_guide_message Input Information for Import Project
-															div(style='float:left; width:770px; height:340px; overflow:auto; padding:5px;')
-																		div(style='float:left; width:770px; height:200px;')
-																					fieldset(style='padding:10px; padding-top:30px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;')
-																								legend
-																											b Project Information
-																								.project_author(style='height:25px;')
-																											div(style='width:120px; float:left; height:25px;') Author ID
-																											div(style='width:615px; float:right; height:25px;')
-																														input(id='input_import_project_author')(type='text', name='input_project_author', style='width:603px;')
-																								.project_author_name(style='height:25px;')
-																											div(style='width:120px; float:left; height:25px;') Author Name
-																											div(style='width:615px; float:right; height:25px;')
-																														input(id='input_import_project_author_name')(type='text', name='input_project_author_name', style='width:603px;')
-																								.project_type(style='height:25px;')
-																											div(style='width:120px; float:left; height:25px;') Project Type
-																											div(style='width:615px; float:right; height:25px;')
-																														select(id='select_import_project_type')(name='select_import_project_type', style='width:100%', project_type='cpp', project_detailed_type='c', plugin_name='org.goorm.plugin.cpp')
-																											input(id='input_import_project_type')(type='hidden', checkfield='yes')
-																											input(id='input_import_project_plugin')(type='hidden', checkfield='yes')
-																											input(id='input_import_project_detailed_type')(type='hidden', checkfield='yes')
-																								.project_name(style='height:25px;')
-																											div(style='width:120px; float:left; height:25px;') Project Name
-																											div(style='width:615px; float:right; height:25px;')
-																														input(id='input_import_project_name')(type='text', name='input_project_name', style='width:603px;')
-																								.project_desc(style='height:45px;')
-																											div(style='width:120px; float:left; height:45px;') Project Description
-																											div(style='width:615px; float:right; height:45px;')
-																														textarea(id='input_import_project_desc')(style='width:603px; height:40px;', draggable='false')
-																					fieldset(id='import_project_field')(style='border:3px dashed #aaa;padding:10px; padding-top:30px; background-color:#FBFBFB;')
-																								legend
-																											b Project Import
-																								div(id='project_import_div')(style='padding:4px;			margin-top:3px; ')
-																											div(style='width:220px; float:left; padding:2px; font-size:11px;') Drag a zip file in this box to import
-																											div(style=' float:right; font-size:11px; text-align:right;')
-																														div(style='float:left;')
-																																	span.directory_icon.file.filetype-etc.filetype-zip
-																																	div(id='project_import_upload_output')
-																																	input(id='project_import_location')(type='hidden', name='project_import_location', readonly='readonly')
-																		input(id='import_project_using_plugin')(type='hidden', value='no')
-																		div(id='import_project_expansion_container')(style='width:770px;')
 			div(id='head_project._new')
 						.content_header(localization_key='dialog_new_project') New Project
 						div(id='project_new')(style='text-align:left; font-size:11px;')
@@ -219,6 +173,52 @@ block content
 																																	input(id='project_new_location')(type='hidden', name='project_import_location', readonly='readonly')
 																		input(id='new_project_using_plugin')(type='hidden', value='no')
 																		div(id='new_project_expansion_container')(style='width:770px;')
+			div(id='head_project._import')
+						.content_header Import Project
+						div(id='project_import')(style='text-align:left; font-size:11px;')
+									form(id='project_import_form')(action='project/import', method='post', enctype='multipart/form-data')
+												div
+															.content_guide_message Input Information for Import Project
+															div(style='float:left; width:770px; height:340px; overflow:auto; padding:5px;')
+																		div(style='float:left; width:770px; height:200px;')
+																					fieldset(style='padding:10px; padding-top:30px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;')
+																								legend
+																											b Project Information
+																								.project_author(style='height:25px;')
+																											div(style='width:120px; float:left; height:25px;') Author ID
+																											div(style='width:615px; float:right; height:25px;')
+																														input(id='input_import_project_author')(type='text', name='input_project_author', style='width:603px;')
+																								.project_author_name(style='height:25px;')
+																											div(style='width:120px; float:left; height:25px;') Author Name
+																											div(style='width:615px; float:right; height:25px;')
+																														input(id='input_import_project_author_name')(type='text', name='input_project_author_name', style='width:603px;')
+																								.project_type(style='height:25px;')
+																											div(style='width:120px; float:left; height:25px;') Project Type
+																											div(style='width:615px; float:right; height:25px;')
+																														select(id='select_import_project_type')(name='select_import_project_type', style='width:100%', project_type='cpp', project_detailed_type='c', plugin_name='org.goorm.plugin.cpp')
+																											input(id='input_import_project_type')(type='hidden', checkfield='yes')
+																											input(id='input_import_project_plugin')(type='hidden', checkfield='yes')
+																											input(id='input_import_project_detailed_type')(type='hidden', checkfield='yes')
+																								.project_name(style='height:25px;')
+																											div(style='width:120px; float:left; height:25px;') Project Name
+																											div(style='width:615px; float:right; height:25px;')
+																														input(id='input_import_project_name')(type='text', name='input_project_name', style='width:603px;')
+																								.project_desc(style='height:45px;')
+																											div(style='width:120px; float:left; height:45px;') Project Description
+																											div(style='width:615px; float:right; height:45px;')
+																														textarea(id='input_import_project_desc')(style='width:603px; height:40px;', draggable='false')
+																					fieldset(id='import_project_field')(style='border:3px dashed #aaa;padding:10px; padding-top:30px; background-color:#FBFBFB;')
+																								legend
+																											b Project Import
+																								div(id='project_import_div')(style='padding:4px;			margin-top:3px; ')
+																											div(style='width:220px; float:left; padding:2px; font-size:11px;') Drag a zip file in this box to import
+																											div(style=' float:right; font-size:11px; text-align:right;')
+																														div(style='float:left;')
+																																	span.directory_icon.file.filetype-etc.filetype-zip
+																																	div(id='project_import_upload_output')
+																																	input(id='project_import_location')(type='hidden', name='project_import_location', readonly='readonly')
+																		input(id='import_project_using_plugin')(type='hidden', value='no')
+																		div(id='import_project_expansion_container')(style='width:770px;')
 			div(id='head_nodejs.preference')
 						div(id='selectedPreferenceTitle') node&period;js Plugin
 						div(style='font-size:11px;')
@@ -231,22 +231,6 @@ block content
 															input(type='text', name='plugin.nodejs.source_path')
 												div(style='margin-bottom: 5px;')
 															| Default Debug Option &colon;
-															input(type='text', name='plugin.nodejs.debug_option')
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
-			div(id='head_nodejs.property')
-						div(id='selectedPreferenceTitle') node&period;js Plugin
-						div(style='font-size:11px;')
-									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
-												div(style='margin-bottom: 5px;')
-															| main &colon;
-															input(type='text', name='plugin.nodejs.main')
-												div(style='margin-bottom: 5px;')
-															| source path &colon;
-															input(type='text', name='plugin.nodejs.source_path')
-												div(style='margin-bottom: 5px;')
-															| debug option &colon;
 															input(type='text', name='plugin.nodejs.debug_option')
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
@@ -287,12 +271,31 @@ block content
 																		a.yuimenuitemlabel(action='delete_all_context', localization_key='delete_all_context') Delete All
 												ul
 															li.yuimenuitem
+																		a.yuimenuitemlabel(action='find_in_folder_context', localization_key='find_in_folder_context', style='background-repeat: no-repeat') Find in Folder
+												ul
+															li.yuimenuitem
 																		a.yuimenuitemlabel(action='import_file', localization_key='file_import', style='background-repeat: no-repeat') Import&sol;Upload File
 															li.yuimenuitem
 																		a.yuimenuitemlabel(action='export_file', localization_key='file_export', style='background-repeat: no-repeat') Export File
 												ul
 															li.yuimenuitem
 																		a.yuimenuitemlabel(action='property', localization_key='file_property_context') Properties
+			div(id='head_nodejs.property')
+						div(id='selectedPreferenceTitle') node&period;js Plugin
+						div(style='font-size:11px;')
+									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
+												div(style='margin-bottom: 5px;')
+															| main &colon;
+															input(type='text', name='plugin.nodejs.main')
+												div(style='margin-bottom: 5px;')
+															| source path &colon;
+															input(type='text', name='plugin.nodejs.source_path')
+												div(style='margin-bottom: 5px;')
+															| debug option &colon;
+															input(type='text', name='plugin.nodejs.debug_option')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
 			div(id='head_design.setting')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -350,21 +353,6 @@ block content
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
-			div(id='head_edit.context')
-						div(id='edit.context_[{@FINGERPRINT}]')
-									.bd
-												ul.first-of-type
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='do_autocomplete', localization_key='edit_autocomplete_edit_context') AutoComplete
-															li.yuimenuitem
-																		a.yuimenuitemlabel(action='do_jump_to_definition', localization_key='edit_definition_edit_context') Jump to Definition
-												ul
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='do_go_to_line', localization_key='edit_go_to_line') Go to Line
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='search', localization_key='edit_search_edit_context') Search
-															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel(action='do_find', localization_key='edit_find_replace_edit_context') Find&sol;Replace
 			div(id='head_file.switch_workspace')
 						div(style='text-align:left;')
 									div(style='width:100%; height:90px; border:1px solid #999; background-color:#fff;			overflow:auto;')
@@ -383,6 +371,21 @@ block content
 												div(style='float:right;')
 															button(type='button', style='width:70px; height:20px;') Browse&period;&period;&period;
 						div
+			div(id='head_edit.context')
+						div(id='edit.context_[{@FINGERPRINT}]')
+									.bd
+												ul.first-of-type
+															li.yuimenuitem
+																		a.yuimenuitemlabel(action='do_autocomplete', localization_key='edit_autocomplete_edit_context') AutoComplete
+															li.yuimenuitem
+																		a.yuimenuitemlabel(action='do_jump_to_definition', localization_key='edit_definition_edit_context') Jump to Definition
+												ul
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='do_go_to_line', localization_key='edit_go_to_line') Go to Line
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='search', localization_key='edit_search_edit_context') Search
+															li.yuimenuitem.first-of-type
+																		a.yuimenuitemlabel(action='do_find', localization_key='edit_find_replace_edit_context') Find&sol;Replace
 			div(id='head_file._import')
 						.content_header(localization_key='dialog_file_import') File Import&sol;Upload
 						.content_guide_message(localization_key='dialog_file_import_guide') Select the file to import
@@ -408,32 +411,6 @@ block content
 																					div(style='float:left;')
 																								input(id='file_import_file')(type='file', name='file')
 																								div(id='upload_output')
-			div(id='head_file.toolbar')
-						div(id='file.toolbar').toolbar_part
-									a(action='new_project', tooltip='file_new_project')
-												.toolbar_button.new_project
-															.toolbar-new-project
-									a(action='open_project', tooltip='file_open_project')
-												.toolbar_button.open_project
-															.toolbar-open-project
-									a(action='new_file_file', tooltip='file_new_file')
-												.toolbar_button.new_file
-															.toolbar-new-file
-									a(action='open_file', tooltip='file_open_file')
-												.toolbar_button.open_file
-															.toolbar-open-file
-									a(action='save_file', tooltip='file_save')
-												.toolbar_button.save
-															.toolbar-save
-									a(action='save_as_file', tooltip='file_save_as')
-												.toolbar_button.save_as
-															.toolbar-save-as
-									a(action='import_file', tooltip='file_import')
-												.toolbar_button.import
-															.toolbar-import
-									a(action='export_file', tooltip='file_export')
-												.toolbar_button.export
-															.toolbar-export
 			div(id='head_help.bug_report')
 						div(style='font-size:11px; text-align:left;')
 									fieldset
@@ -468,6 +445,32 @@ block content
 															span(localization_key='dialog_help_bug_report_detailed') Detailed Explanation
 												div(style='height:230px;')
 															textarea(id='bug_reports_content')(name='bug_reports_content', style='width:570px;height:220px;')
+			div(id='head_file.toolbar')
+						div(id='file.toolbar').toolbar_part
+									a(action='new_project', tooltip='file_new_project')
+												.toolbar_button.new_project
+															.toolbar-new-project
+									a(action='open_project', tooltip='file_open_project')
+												.toolbar_button.open_project
+															.toolbar-open-project
+									a(action='new_file_file', tooltip='file_new_file')
+												.toolbar_button.new_file
+															.toolbar-new-file
+									a(action='open_file', tooltip='file_open_file')
+												.toolbar_button.open_file
+															.toolbar-open-file
+									a(action='save_file', tooltip='file_save')
+												.toolbar_button.save
+															.toolbar-save
+									a(action='save_as_file', tooltip='file_save_as')
+												.toolbar_button.save_as
+															.toolbar-save-as
+									a(action='import_file', tooltip='file_import')
+												.toolbar_button.import
+															.toolbar-import
+									a(action='export_file', tooltip='file_export')
+												.toolbar_button.export
+															.toolbar-export
 			div(id='head_project.build.configuration')
 						div(id='build_configuration')(style='text-align:left;')
 									div
@@ -560,6 +563,12 @@ block content
 												div(style='float:left; width:120px; margin-top:3px;', localization_key='dialog_project_property_project_description') Project Description
 												div(style='float:left; width:305px;')
 															textarea(id='description')(type='text', name='description', validate='alphanum', style='resize: none; width:308px; height:80px; overflow:auto;')
+			div(id='head_project.property')
+						div
+									div(style='float:left; width:200px; height:400px; padding:5px; border:1px solid #ccc; background-color:#fff; overflow:auto; font-size:11px;')
+												div(id='property_treeview').dialog_treeview
+									div(style='float:right; width:460px; height:410px; text-align:left;')
+												div(id='property_tabview').yui-navset
 			div(id='head_theme.details.top.toolbar')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -598,12 +607,6 @@ block content
 																														td(height='auto')
 																																	span(localization_key='dialog_file_properties_Last_modification_time', style='color:#666; padding-top:4px;') Last modification
 																														td(id='mTime')(style='padding-top:4px;') Time
-			div(id='head_project.property')
-						div
-									div(style='float:left; width:200px; height:400px; padding:5px; border:1px solid #ccc; background-color:#fff; overflow:auto; font-size:11px;')
-												div(id='property_treeview').dialog_treeview
-									div(style='float:right; width:460px; height:410px; text-align:left;')
-												div(id='property_tabview').yui-navset
 			div(id='head_cpp.property')
 						div(id='selectedPreferenceTitle') C&sol;C&plus;&plus; Plugin
 						div(style='font-size:11px;')
@@ -702,6 +705,11 @@ block content
 												div(id='theme_details_treeview').dialog_treeview
 									div(style='float:right; width:760px; height:510px; text-align:left;')
 												div(id='theme_details_tabview').yui-navset
+			div(id='head_theme.details.left.tab_menu')
+						div(style='font-size:11px; margin-top:10px;')
+									fieldset
+												legend Left Tab Menu
+												div(id='left-tabmenu')(style='margin-left:11px')
 			div(id='head_project.share')
 						div(id='project_share_container')
 									div(id='shared_project_list_container')
@@ -712,11 +720,6 @@ block content
 									div(id='user_search_container')
 												input(id='user_search_input')(type='text', placeholder='Search user by id or name or nickname ...')
 												div(id='user_search_result_container')
-			div(id='head_theme.details.left.tab_menu')
-						div(style='font-size:11px; margin-top:10px;')
-									fieldset
-												legend Left Tab Menu
-												div(id='left-tabmenu')(style='margin-left:11px')
 			div(id='head_help.check_for_updates')
 						div(style='font-size:11px;')
 									div(style='text-align:left')
@@ -829,6 +832,47 @@ block content
 												ul
 															li.yuimenuitem
 																		a.yuimenuitemlabel(action='properties_object', localization_key='object_properties') Properties
+			div(id='head_go.property')
+						div(id='selectedPreferenceTitle') GO Plugin
+						div(style='font-size:11px;')
+									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
+												legend
+															b GO preference
+												div(style='float:left;')
+															div(style='margin-bottom: 5px;')
+																		| main class name &colon;
+																		input(type='text', name='plugin.go.main')
+															div(style='margin-bottom: 5px;')
+																		| source path &colon;
+																		input(type='text', name='plugin.go.source_path')
+															div(style='margin-bottom: 5px;')
+																		| build path &colon;
+																		input(type='text', name='plugin.go.build_path')
+															div(style='margin-bottom: 5px;')
+																		| build option &colon;
+																		input(type='text', name='plugin.go.build_option')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
+			div(id='head_go.preference')
+						div(id='selectedPreferenceTitle') GO Plugin
+						div(style='font-size:11px;')
+									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
+												div(style='margin-bottom: 5px;')
+															| Default Main Class Name &colon;
+															input(type='text', name='plugin.go.main')
+												div(style='margin-bottom: 5px;')
+															| Default Source Path &colon;
+															input(type='text', name='plugin.go.source_path')
+												div(style='margin-bottom: 5px;')
+															| Default Build Path &colon;
+															input(type='text', name='plugin.go.build_path')
+												div(style='margin-bottom: 5px;')
+															| Default Build Option &colon;
+															input(type='text', name='plugin.go.build_option')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
 			div(id='head_scm.property')
 						div(style='font-size:11px;')
 									div(style='margin-bottom:0px; height:25px;clear:both')
@@ -859,35 +903,6 @@ block content
 												div(style='float:right')
 															a(href='#', action='scm_property_checkout')
 																		button.scm_checkout_bt(type='button', localization_key='dialog_project_property_checkout', style='padding:6px 10px;') Checkout
-			div(id='head_file.save_as')
-						.content_header(localization_key='dialog_file_save_as_file') Save As
-						.content_guide_message(localization_key='dialog_file_save_as_file_guide') Select the file to save
-						div(style='text-align:left;')
-									div(style='width:100%; height:21px; overflow:auto; font-size:11px;')
-												div(style='float:left;')
-															span(localization_key='common_location') Location &colon; 
-															input(id='file_save_as_location_path')(type='text', style='width:600px; height:15px;', readonly='readonly')
-												div(style='float:right;')
-															span(localization_key='common_target') Target &colon; 
-															select(name='selectbox')
-																		option(value='2') Remote
-									div(id='save_as_dialog_middle')(style='width:780px; height:275px; margin-top:8px; font-size:11px;')
-												div(id='save_as_dialog_left').dialogs_left
-															div(id='file_save_as_dir_tree').directory_treeview.dialogs_left_inner
-												div(id='file_save_as_files').dialog_center
-									div(style='width:100%; height:50px; margin-top:8px; font-size:11px;')
-												div(style='width:780px; height:70px; margin-left:4px; margin-top:2px;')
-															table
-																		tr(style='line-height:1.8em;')
-																					td(style='width:70px')
-																								span(localization_key='common_filename') File Name
-																					td(style='text-align:right;')
-																								input(id='file_save_as_target_name')(type='text', style='width:695px; height:15px')
-																		tr(style='line-height:1.8em;')
-																					td(style='width:70px; padding-top:5px;')
-																								span(localization_key='common_filetype') File Type
-																					td(style='padding-top:5px; text-align:right;')
-																								select(id='file_save_as_file_type')(style='width:706px; height:20px;')
 			div(id='head_file._new.other')
 						.content_header(localization_key='dialog_file_new_other_file') New Other File
 						.content_guide_message(localization_key='dialog_file_new_other_file_guide') Select file type to create
@@ -961,6 +976,32 @@ block content
 															div(id='new_other_file_current_path')(style='width:150px; height:14px; float:left; text-align:center;')
 															input(id='new_other_file_target')(type='text', style='width:120px; float:right;')
 									div
+			div(id='head_dart.preference')
+						div(id='selectedPreferenceTitle') Dart Plugin
+						div(style='font-size:11px;')
+									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
+												div(style='margin-bottom: 5px;')
+															| Default Main Name &colon;
+															input(type='text', name='plugin.dart.main')
+												div(style='margin-bottom: 5px;')
+															| Default Build Option &colon;
+															input(type='text', name='plugin.dart.build_option')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
+			div(id='head_dart.property')
+						div(id='selectedPreferenceTitle') Dart Plugin
+						div(style='font-size:11px;')
+									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
+												div(style='margin-bottom: 5px;')
+															| Main Name &colon;
+															input(type='text', name='plugin.dart.main')
+												div(style='margin-bottom: 5px;')
+															| Build Option &colon;
+															input(type='text', name='plugin.dart.build_option')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
 			div(id='head_project.explorer.file')
 						div(id='project.explorer.file_context')
 									.bd
@@ -999,6 +1040,39 @@ block content
 												ul
 															li.yuimenuitem
 																		a.yuimenuitemlabel(action='property', localization_key='file_property_context') Properties
+			div(id='head_file.save_as')
+						.content_header(localization_key='dialog_file_save_as_file') Save As
+						.content_guide_message(localization_key='dialog_file_save_as_file_guide') Select the file to save
+						div(style='text-align:left;')
+									div(style='width:100%; height:21px; overflow:auto; font-size:11px;')
+												div(style='float:left;')
+															span(localization_key='common_location') Location &colon; 
+															input(id='file_save_as_location_path')(type='text', style='width:600px; height:15px;', readonly='readonly')
+												div(style='float:right;')
+															span(localization_key='common_target') Target &colon; 
+															select(name='selectbox')
+																		option(value='2') Remote
+									div(id='save_as_dialog_middle')(style='width:780px; height:275px; margin-top:8px; font-size:11px;')
+												div(id='save_as_dialog_left').dialogs_left
+															div(id='file_save_as_dir_tree').directory_treeview.dialogs_left_inner
+												div(id='file_save_as_files').dialog_center
+									div(style='width:100%; height:50px; margin-top:8px; font-size:11px;')
+												div(style='width:780px; height:70px; margin-left:4px; margin-top:2px;')
+															table
+																		tr(style='line-height:1.8em;')
+																					td(style='width:70px')
+																								span(localization_key='common_filename') File Name
+																					td(style='text-align:right;')
+																								input(id='file_save_as_target_name')(type='text', style='width:695px; height:15px')
+																		tr(style='line-height:1.8em;')
+																					td(style='width:70px; padding-top:5px;')
+																								span(localization_key='common_filetype') File Type
+																					td(style='padding-top:5px; text-align:right;')
+																								select(id='file_save_as_file_type')(style='width:706px; height:20px;')
+			div(id='head_printer')
+						.content_header(localization_key='dialog_file_print') Print
+						div
+									.content_guide_message(localization_key='dialog_file_print_guide') You can print current file
 			div(id='head_language')
 						div(id='language_body')(style='font-size:11px;')
 									fieldset
@@ -1008,16 +1082,12 @@ block content
 															select(id='language_select')(name='language_select')
 																		option(value='kor') &#54620;&#44397;&#50612;
 																		option(value='us') English
-			div(id='head_printer')
-						.content_header(localization_key='dialog_file_print') Print
-						div
-									.content_guide_message(localization_key='dialog_file_print_guide') You can print current file
 			div(id='head_window.panel.titlebar')
 						div(id='window.panel.titlebar_[{@FINGERPRINT}]')
 									.bd
 												ul.first-of-type
 															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel.minimize(href='#', localization_key='minimize') Minimize
+																		a.yuimenuitemlabel.minimize(href='#', localization_key='minimize') Show &sol; Hide
 															li.yuimenuitem
 																		a.yuimenuitemlabel.maximize(href='#', localization_key='maximize') Maximize
 												ul
@@ -1148,6 +1218,13 @@ block content
 												div(style='float:left; width:120px;') Project Type
 												div(style='float:left; width:305px;')
 															input(type='text', name='TYPE', validate='', style='width:305px;', readonly='')
+			div(id='head_file.rename')
+						div(style='font-size:11px;')
+									span(localization_key='dialog_file_rename_new_name') New Name
+									| &colon;
+									input(id='input_rename_new_filename')(type='text', style='width:330px; height:20px')
+									input(id='input_rename_old_filepath')(type='hidden')
+									input(id='input_rename_old_filename')(type='hidden')
 			div(id='head_help.search')
 						div
 									div(style='float:left; width:100%; height:20px; text-align:left;')
@@ -1159,13 +1236,6 @@ block content
 									div(style='float:left; width:100%;')
 												div(style='float:left; width:99%; height:320px; text-align:left; border:1px solid #999; background-color:#fff;')
 															font(style='font-size:12px; padding:2px;') No results
-			div(id='head_file.rename')
-						div(style='font-size:11px;')
-									span(localization_key='dialog_file_rename_new_name') New Name
-									| &colon;
-									input(id='input_rename_new_filename')(type='text', style='width:330px; height:20px')
-									input(id='input_rename_old_filepath')(type='hidden')
-									input(id='input_rename_old_filename')(type='hidden')
 			div(id='head_theme.details.right.tab_menu')
 						div(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -1334,18 +1404,29 @@ block content
 												div(style='text-align:center;')
 															input(type='checkbox', name='java_class_option', style='vertical-align: middle', value='constructor')
 															span(style='margin-left:5px;', localization_key='template_create_option_check') Constructors from superclass
-			div(id='head_plugin.java_examples.package')
+			div(id='head_plugin.phonegap.build')
 						div
 									.content_header
-												b(localization_key='make_java_package') Make Java Package
-									.content_guide_message
-												div(localization_key='create_java_package') Create a new Java Package&period;
+												div(localization_key='phonegap_build') null
+									div(localization_key='') Enter your Adobe account to use cloud build system on the Adobe&period;
+									fieldset(style='padding:10px; border:1px solid #ccc;background: white;margin-top:10px;margin-left:5px;display:inline; width:345px;')
+												legend(style='font-size:11px;', localization_key='select_modifiers')
+															a(href='https://build.phonegap.com/apps', target='_blank', style='color:#999') &lpar;https&colon;&sol;&sol;build&period;phonegap&period;com&sol;apps&rpar;
+												.dialog_template_body_div(style='margin-top:15px;')
+															label.dialog_template_body_span(style='float:left;width:100px', localization_key='template_source_folder', for='phonegap_build_id') Source folder &colon; 
+															input(id='phonegap_build_id').dialog_template_text(type='text', name='plugin.phonegap.remote_id', placeholder='your@email.com', style='width:200px')
+												.dialog_template_body_div
+															label.dialog_template_body_span(style='float:left;width:100px', localization_key='password', for='phonegap_build_password') null
+															input(id='phonegap_build_password')(type='password', style='margin-left:10px; width:200px;', name='plugin.phonegap.remote_password', placeholder='password')
 									.dialog_template_body_div
-												.dialog_template_body_span(style='float:left', localization_key='template_source_folder') Source folder &colon; 
-												input(id='java_examples_package_source_folder').dialog_template_text(type='text')
-									.dialog_template_body_div
-												.dialog_template_body_span(style='float:left', localization_key='template_name') Name &colon; 
-												input(id='java_examples_package_name').dialog_template_text(type='text')
+												label.dialog_template_body_span(localization_key='build_target', for='phonegap_build_platform') null
+												select(id='phonegap_build_platform')(style='margin-left:10px; width:215px;', name='plugin.phonegap.build_platform')
+															option(value='android') Android
+															option(value='ios') iOS
+															option(value='blackberry') BlackBerry 6
+															option(value='symbian') Symbian
+															option(value='webos') WebOS
+															option(value='wp7') Windows Phone 7
 			div(id='head_plugin.java.class')
 						div
 									.content_header
@@ -1381,6 +1462,18 @@ block content
 												div(style='text-align:center;')
 															input(type='checkbox', name='java_class_option', style='vertical-align: middle', value='constructor')
 															span(style='margin-left:5px;', localization_key='template_create_option_check') Constructors from superclass
+			div(id='head_plugin.java_examples.package')
+						div
+									.content_header
+												b(localization_key='make_java_package') Make Java Package
+									.content_guide_message
+												div(localization_key='create_java_package') Create a new Java Package&period;
+									.dialog_template_body_div
+												.dialog_template_body_span(style='float:left', localization_key='template_source_folder') Source folder &colon; 
+												input(id='java_examples_package_source_folder').dialog_template_text(type='text')
+									.dialog_template_body_div
+												.dialog_template_body_span(style='float:left', localization_key='template_name') Name &colon; 
+												input(id='java_examples_package_name').dialog_template_text(type='text')
 			div(id='head_plugin.nodejs.info')
 						.nodejs_information_container
 									.nodejs_information_form
@@ -1408,9 +1501,6 @@ block content
 												div(style='margin-bottom: 5px;')
 															| Default Source Path &colon;
 															input(type='text', name='plugin.python.source_path')
-												div(style='margin-bottom: 5px;')
-															| Default Debug Option &colon;
-															input(type='text', name='plugin.python.debug_option')
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
@@ -1420,13 +1510,10 @@ block content
 									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
 												div(style='margin-bottom: 5px;')
 															| main &colon;
-															input(type='text', name='plugin.nodejs.main')
+															input(type='text', name='plugin.python.main')
 												div(style='margin-bottom: 5px;')
 															| source path &colon;
-															input(type='text', name='plugin.nodejs.source_path')
-												div(style='margin-bottom: 5px;')
-															| debug option &colon;
-															input(type='text', name='plugin.nodejs.debug_option')
+															input(type='text', name='plugin.python.source_path')
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
 									input.apply(type='button', value='Apply')
@@ -1456,14 +1543,78 @@ block content
 															button(id='install_new_plugin')(style='width:100px;')
 																		span(localization_key='dialog_help_install_new_plugins_install') Install
 												div(id='div_install_new_plugin_progress')
+			div(id='head_phonegap.property')
+						div(style='padding-left:30px;')
+									div(localization_key='') Enter your Adobe account to use cloud build system on the Adobe&period;
+									fieldset(style='padding:10px; border:1px solid #ccc;background: white;margin-top:10px;margin-left:5px;display:inline; width:345px;')
+												legend(style='font-size:11px;', localization_key='select_modifiers')
+															a(href='https://build.phonegap.com/apps', target='_blank', style='color:#999') &lpar;https&colon;&sol;&sol;build&period;phonegap&period;com&sol;apps&rpar;
+												.dialog_template_body_div(style='margin-top:15px;')
+															label.dialog_template_body_span(style='float:left;width:100px', localization_key='template_source_folder', for='phonegap_build_id') Source folder &colon; 
+															input(id='phonegap_build_id').dialog_template_text(type='text', name='plugin.phonegap.remote_id', placeholder='your@email.com', style='width:200px')
+												.dialog_template_body_div
+															label.dialog_template_body_span(style='float:left;width:100px', localization_key='password', for='phonegap_build_password') null
+															input(id='phonegap_build_password')(type='password', style='margin-left:10px; width:200px;', name='plugin.phonegap.remote_password', placeholder='password')
+									.dialog_template_body_div
+												label.dialog_template_body_span(localization_key='build_target', for='phonegap_build_platform') null
+												select(id='phonegap_build_platform')(style='margin-left:10px; width:215px;', name='plugin.phonegap.build_platform')
+															option(value='android') Android
+															option(value='ios') iOS
+															option(value='blackberry') BlackBerry 6
+															option(value='symbian') Symbian
+															option(value='webos') WebOS
+															option(value='wp7') Windows Phone 7
+									.dialog_template_body_div
+												label.dialog_template_body_span(localization_key='run_index', for='phonegap_run_index') null
+												input(id='phonegap_run_index')(type='text', style='margin-left:10px; width:205px;', name='plugin.phonegap.run_index')
+									.dialog_template_body_div
+												label.dialog_template_body_span(localization_key='webview_type') null
+												label(style='margin-left:10px;', for='phonegap_webview_type_tab') Tab
+												input(id='phonegap_webview_type_tab')(type='radio', name='plugin.phonegap.webview_type', value='tab')
+												label(style='margin-left:10px;', for='phonegap_webview_type_window') New window
+												input(id='phonegap_webview_type_window')(type='radio', name='plugin.phonegap.webview_type', value='window')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
+			div(id='head_phonegap.preference')
+						div(style='padding-left:30px;')
+									div(localization_key='') Enter your Adobe account to use cloud build system on the Adobe&period;
+									fieldset(style='padding:10px; border:1px solid #ccc;background: white;margin-top:10px;margin-left:5px;display:inline; width:345px;')
+												legend(style='font-size:11px;', localization_key='select_modifiers')
+															a(href='https://build.phonegap.com/apps', target='_blank', style='color:#999') &lpar;https&colon;&sol;&sol;build&period;phonegap&period;com&sol;apps&rpar;
+												.dialog_template_body_div(style='margin-top:15px;')
+															label.dialog_template_body_span(style='float:left;width:100px', localization_key='template_source_folder', for='pref_phonegap_build_id') Source folder &colon; 
+															input(id='pref_phonegap_build_id').dialog_template_text(type='text', name='plugin.phonegap.remote_id', placeholder='your@email.com', style='width:200px')
+												.dialog_template_body_div
+															label.dialog_template_body_span(style='float:left;width:100px', localization_key='password', for='pref_phonegap_build_password') null
+															input(id='pref_phonegap_build_password')(type='password', style='margin-left:10px; width:200px;', name='plugin.phonegap.remote_password', placeholder='password')
+									.dialog_template_body_div
+												label.dialog_template_body_span(localization_key='build_target', for='pref_phonegap_build_platform') null
+												select(id='pref_phonegap_build_platform')(style='margin-left:10px; width:215px;', name='plugin.phonegap.build_platform')
+															option(value='android') Android
+															option(value='ios') iOS
+															option(value='blackberry') BlackBerry 6
+															option(value='symbian') Symbian
+															option(value='webos') WebOS
+															option(value='wp7') Windows Phone 7
+									.dialog_template_body_div
+												label.dialog_template_body_span(localization_key='run_index', for='pref_phonegap_run_index') null
+												input(id='pref_phonegap_run_index')(type='text', style='margin-left:10px; width:205px;', name='plugin.phonegap.run_index')
+									.dialog_template_body_div
+												label.dialog_template_body_span(localization_key='webview_type') null
+												label(style='margin-left:10px;', for='pref_phonegap_webview_type_tab') Tab
+												input(id='pref_phonegap_webview_type_tab')(type='radio', name='plugin.phonegap.webview_type', value='tab')
+												label(style='margin-left:10px;', for='pref_phonegap_webview_type_window') New window
+												input(id='pref_phonegap_webview_type_window')(type='radio', name='plugin.phonegap.webview_type', value='window')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
 			div(id='head_window.tab')
 						div(id='window.tab_[{@FINGERPRINT}]')
 									.bd
 												ul.first-of-type
 															li.yuimenuitem.first-of-type
-																		a.yuimenuitemlabel.minimize(href='#File', localization_key='minimize') Minimize
-															li.yuimenuitem
-																		a.yuimenuitemlabel.unminimize(href='#Edit', localization_key='minimize') Minimize
+																		a.yuimenuitemlabel.show_and_hide(href='#', localization_key='show_and_hide') null
 												ul
 															li.yuimenuitem
 																		a.yuimenuitemlabel.close(href='#', localization_key='close') Close
@@ -1522,30 +1673,6 @@ block content
 												button(id='build_project_deselect_all')(style='padding: 5px;margin-top:5px;margin-left: 5px;')
 															span(localization_key='common_deselect_all') Deselect All
 									div
-			div(id='head_java.preference')
-						div(id='selectedPreferenceTitle') JAVA Plugin
-						div(style='font-size:11px;')
-									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
-												div(style='margin-bottom: 5px;')
-															| Default Main Class Name &colon;
-															input(type='text', name='plugin.java.main')
-												div(style='margin-bottom: 5px;')
-															| Default Source Path &colon;
-															input(type='text', name='plugin.java.source_path')
-												div(style='margin-bottom: 5px;')
-															| Default Build Path &colon;
-															input(type='text', name='plugin.java.build_path')
-												div(style='margin-bottom: 5px;')
-															| Default Build Option &colon;
-															input(type='text', name='plugin.java.build_option')
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
-			div(id='head_theme.details.bottom.tab_menu')
-						div(style='font-size:11px; margin-top:10px;')
-									fieldset
-												legend Bottom Tab Menu
-												div(id='bottom-tabmenu')(style='margin-left:11px')
 			div(id='head_java.property')
 						div(id='selectedPreferenceTitle') JAVA Plugin
 						div(style='font-size:11px;')
@@ -1561,6 +1688,25 @@ block content
 															input(type='text', name='plugin.java.build_path')
 												div(style='margin-bottom: 5px;')
 															| build option &colon;
+															input(type='text', name='plugin.java.build_option')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
+			div(id='head_java.preference')
+						div(id='selectedPreferenceTitle') JAVA Plugin
+						div(style='font-size:11px;')
+									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
+												div(style='margin-bottom: 5px;')
+															| Default Main Class Name &colon;
+															input(type='text', name='plugin.java.main')
+												div(style='margin-bottom: 5px;')
+															| Default Source Path &colon;
+															input(type='text', name='plugin.java.source_path')
+												div(style='margin-bottom: 5px;')
+															| Default Build Path &colon;
+															input(type='text', name='plugin.java.build_path')
+												div(style='margin-bottom: 5px;')
+															| Default Build Option &colon;
 															input(type='text', name='plugin.java.build_option')
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
@@ -1586,6 +1732,11 @@ block content
 												font(style='font-size:11px; color:#FFF;')
 															| goormIDE Dev Team &colon; Sung-tae Ryu&comma; Noori Kim&comma; Byeong-ung Ahn&comma; You-seok Nam&comma; Dong-jin Sim
 									div(style='top:50px; width:400px; left:200px; line-height:13px; position:absolute;')
+			div(id='head_theme.details.bottom.tab_menu')
+						div(style='font-size:11px; margin-top:10px;')
+									fieldset
+												legend Bottom Tab Menu
+												div(id='bottom-tabmenu')(style='margin-left:11px')
 			div(id='head_edit.function_box')
 						div(id='function_box').function_box
 									.function_box_header
@@ -1610,19 +1761,6 @@ block content
 						div(style='margin-top:5px; width:95px; height:18px; float:left; padding-top:2px; padding-right:5px; text-align:right; font-size:11px') Property &colon; 
 						input(id='new_property').example_property(type='text', style='margin-top:5px; width:96px; height:18px; border: 1px solid #ccc; float:right; font-size:11px', value='margin-top')
 						br
-			div(id='head_ruby.property')
-						div(id='selectedPreferenceTitle') Ruby Plugin
-						div(style='font-size:11px;')
-									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
-												div(style='margin-bottom: 5px;')
-															| main &colon;
-															input(type='text', name='plugin.ruby.main')
-												div(style='margin-bottom: 5px;')
-															| source path &colon;
-															input(type='text', name='plugin.ruby.source_path')
-						div(style='position: absolute;bottom: 10px;right:10px;')
-									input.restore_default(type='button', value='Restore Default')
-									input.apply(type='button', value='Apply')
 			div(id='head_theme.area')
 						div(style='width:31px; height:18px; float:left; padding-top:2px; padding-left:9px; text-align:left; font-size:11px; margin-top:2px;') Area
 						input(id='newArea').exampleArea(type='text', style='width:150px; height:18px; border: 1px solid #ccc; float:left; font-size:11px; margin-top:2px;', value='workspace')
@@ -1637,6 +1775,19 @@ block content
 															input(type='text', name='plugin.ruby.main')
 												div(style='margin-bottom: 5px;')
 															| Default Source Path &colon;
+															input(type='text', name='plugin.ruby.source_path')
+						div(style='position: absolute;bottom: 10px;right:10px;')
+									input.restore_default(type='button', value='Restore Default')
+									input.apply(type='button', value='Apply')
+			div(id='head_ruby.property')
+						div(id='selectedPreferenceTitle') Ruby Plugin
+						div(style='font-size:11px;')
+									fieldset(style='padding:10px; border:1px solid #ccc; margin-top:5px;background: white;')
+												div(style='margin-bottom: 5px;')
+															| main &colon;
+															input(type='text', name='plugin.ruby.main')
+												div(style='margin-bottom: 5px;')
+															| source path &colon;
 															input(type='text', name='plugin.ruby.source_path')
 						div(style='position: absolute;bottom: 10px;right:10px;')
 									input.restore_default(type='button', value='Restore Default')
@@ -1686,6 +1837,11 @@ block content
 									a(action='do_redo', tooltip='edit_redo')
 												.toolbar_button.redo
 															.toolbar-redo
+			div(id='head_theme.details.top.text_menu')
+						div(style='font-size:11px; margin-top:10px;')
+									fieldset
+												legend Top Text Menu
+												div(id='top-textmenu')(style='margin-left:11px')
 			div(id='head_file._export')
 						.content_header(localization_key='dialog_file_export') File Export
 						.content_guide_message(localization_key='dialog_file_export_guide') Select the file to export
@@ -1717,11 +1873,26 @@ block content
 																								span(localization_key='dialog_file_export_exporttype') File Type
 																					td(style='padding-top:5px; text-align:right;')
 																								select(id='file_export_file_type')(style='width:680px; height:20px;')
-			div(id='head_theme.details.top.text_menu')
-						div(style='font-size:11px; margin-top:10px;')
-									fieldset
-												legend Top Text Menu
-												div(id='top-textmenu')(style='margin-left:11px')
+			div(id='head_debug.toolbar')
+						div(id='debug.toolbar').toolbar_part
+									a(action='debug', tooltip='debug_start')
+												.toolbar_button.debug
+															.toolbar-debug-start
+									a(action='debug_continue', tooltip='debug_continue')
+												.toolbar_button.debug_continue.debug_not_active
+															.toolbar-debug-continue
+									a(action='debug_terminate', tooltip='debug_terminate')
+												.toolbar_button.debug_terminate.debug_not_active
+															.toolbar-debug-terminate
+									a(action='debug_step_over', tooltip='debug_step_over')
+												.toolbar_button.debug_step_over.debug_not_active
+															.toolbar-debug-step-over
+									a(action='debug_step_in', tooltip='debug_step_in')
+												.toolbar_button.debug_step_in.debug_not_active
+															.toolbar-debug-step-in
+									a(action='debug_step_out', tooltip='debug_step_out')
+												.toolbar_button.debug_step_out.debug_not_active
+															.toolbar-debug-step-out
 			div(id='head_project.explorer')
 						div(id='project.explorer_context')
 									.bd
@@ -1750,26 +1921,6 @@ block content
 												ul
 															li.yuimenuitem.first-of-type
 																		a.yuimenuitemlabel(href='#', action='show_properties', localization_key='project_properties_context') Project Properties
-			div(id='head_debug.toolbar')
-						div(id='debug.toolbar').toolbar_part
-									a(action='debug', tooltip='debug_start')
-												.toolbar_button.debug
-															.toolbar-debug-start
-									a(action='debug_continue', tooltip='debug_continue')
-												.toolbar_button.debug_continue.debug_not_active
-															.toolbar-debug-continue
-									a(action='debug_terminate', tooltip='debug_terminate')
-												.toolbar_button.debug_terminate.debug_not_active
-															.toolbar-debug-terminate
-									a(action='debug_step_over', tooltip='debug_step_over')
-												.toolbar_button.debug_step_over.debug_not_active
-															.toolbar-debug-step-over
-									a(action='debug_step_in', tooltip='debug_step_in')
-												.toolbar_button.debug_step_in.debug_not_active
-															.toolbar-debug-step-in
-									a(action='debug_step_out', tooltip='debug_step_out')
-												.toolbar_button.debug_step_out.debug_not_active
-															.toolbar-debug-step-out
 			div(id='head_system.api')
 						div(id='preference.system.api.container')(style='font-size:11px; margin-top:10px;')
 									fieldset
@@ -1781,57 +1932,6 @@ block content
 									div(id='preference.system.api.button_container')(style='position: absolute;bottom: 10px;right:10px;')
 												input.restore_default(type='button', value='Restore Default')
 												input.apply(type='button', value='Apply')
-			div(id='head_project._export')
-						.content_header(localization_key='dialog_project_export') Export Project
-						.content_guide_message(localization_key='dialog_project_export_guide') Select the project to export
-						div(id='project_export')(style='text-align:left;')
-									div(style='width:100%; height:20px; overflow:auto; font-size:11px;')
-												div(style='float:left;')
-															span(localization_key='common_location') Location &colon; 
-															input(id='project_export_location')(type='text', style='width:520px;', readonly='readonly')
-												div(style='float:right;')
-															span(localization_key='common_type') Type &colon; 
-															select(id='project_export_types').project_dialog_type(style='width:130px')
-																		option(value='All', selected='selected') All Project
-									div(id='project_export_dialog_middle')(style='width:780px; height:300px; margin-top:8px; font-size:11px;')
-												div(id='project_export_dialog_left').dialogs_left(style='width:250px;')
-															div(id='project_export_list').dialogs_left_inner(style='height:298px;padding:0px;')
-												div(id='project_export_dialog_center').dialog_center(style='height:298px;width:521px;')
-															div(id='project_export_information')(style='padding:10px; line-height:18px;')
-									input(id='project_export_path')(type='hidden')
-									input(id='project_export_name')(type='hidden')
-									input(id='project_export_type')(type='hidden')
-									div(style='width:100%; height:20px; overflow:auto; font-size:11px; margin-top:10px;')
-												div(style='float:right;')
-															select(id='project_export_datatype')
-																		option(value='1', selected='selected') zip
-																		option(value='2') tar
-												div(style='float:right; margin-right:20px;')
-															span(localization_key='dialog_project_export_msg') Export Project Type
-			div(id='head_folder.upload')
-						.content_header(localization_key='dialog_file_import') File Import&sol;Upload
-						.content_guide_message(localization_key='dialog_file_import_guide') Select the file to import
-						div(id='folder_upload')(style='text-align:left; font-size:11px;')
-									.wizard_step(step='1')
-												div(style='width:100%; height:21px; overflow:auto; font-size:11px;')
-															div(style='float:left;')
-																		span(localization_key='common_location') Location &colon; 
-																		input(id='folder_upload_location_path')(type='text', name='folder_upload_location_path', style='width:560px; height:15px;', readonly='readonly')
-															div(style='float:right;')
-																		span(localization_key='common_target') Target &colon; 
-																		select(name='selectbox')
-																					option(value='2') Remote
-												div(id='folder_upload_dialog_middle')(style='width:780px; height:275px; margin-top:8px; font-size:11px;')
-															div(id='folder_upload_dialog_left').dialogs_left
-																		div(id='folder_upload_dir_tree').directory_treeview.dialogs_left_inner
-															div(id='folder_upload_files').dialog_center
-												div(style='margin-top:10px; border:1px solid #CCC; float:left; width:768px; padding:5px;')
-															div(style='overflow:auto; font-size:11px; float:left;')
-																		span(localization_key='dialog_file_import_file') Upload the file to import
-															div(style='overflow:auto; font-size:11px; float:right;')
-																		div(style='float:left;')
-																					input(id='folder_upload_file')(type='file', webkitdirectory='', name='file')
-																					div(id='upload_output')
 			div(id='head_file.upload')
 						.content_header(localization_key='dialog_file_cloud_upload') File Cloud Upload
 						.content_guide_message(localization_key='dialog_file_cloud_upload_guide') Select file to upload
@@ -1862,39 +1962,57 @@ block content
 																								span(localization_key='dialog_file_cloud_upload_cloud_uploadtype') File Type
 																					td(style='padding-top:5px; text-align:right;')
 																								select(id='file_cloud_upload_file_type')(style='width:680px; height:20px;')
-			div(id='head_edit.find_and_replace')
-						div
-									div(style='width:530px; height:70px; font-size:11px; text-align:left;')
-												div(style='float:left; width:60px;', localization_key='dialog_project_find_guide') Find &colon; 
-												div(style='float:right; width:460px;')
-															textarea(id='find_query_inputbox')(type='text', style='width:450px; height:70px;')
-									div(style='width:530px; height:70px; font-size:11px; margin-top:10px; text-align:left;')
-												div(style='float:left; width:60px;', localization_key='dialog_project_replace_guide') Replace &colon; 
-												div(style='float:right; width:460px;')
-															textarea(id='replace_query_inputbox')(type='text', style='width:450px; height:70px;')
-									div(style='width:530px; height:40px; font-size:11px; margin-top:10px; text-align:left;')
-												div(style='float:left; width:60px;', localization_key='dialog_project_option_guide') Option &colon; 
-												div(style='float:right; width:460px; margin-top:3px;')
-															div(style='float:left; width:230px; height:20px;')
-																		span.checkbox
-																					input(id='match_case')(type='checkbox')
-																					label(data-on='', data-off='')
-																		label(for='match_case', localization_key='dialog_project_match_case_guide') Case sensitive
-															div(style='float:left; width:230px; height:20px;')
-																		span.checkbox
-																					input(id='ignore_whitespace')(type='checkbox')
-																					label(data-on='', data-off='')
-																		label(for='ignore_whitespace', localization_key='dialog_project_ignore_whitespace_guide') Igonre whitespace
-															div(style='float:left; width:230px; height:20px;')
-																		span.checkbox
-																					input(id='use_regexp')(type='checkbox')
-																					label(data-on='', data-off='')
-																		label(for='use_regexp', localization_key='dialog_project_use_regular_expression_guide') Use regular expression
-															div(style='float:left; width:230px; height:20px;')
-																		span.checkbox
-																					input(id='find_on_workspace')(type='checkbox')
-																					label(data-on='', data-off='')
-																		label(for='find_on_workspace', localization_key='dialog_project_find_on_workspace_guide') Find on Workspace
+			div(id='head_folder.upload')
+						.content_header(localization_key='dialog_file_import') File Import&sol;Upload
+						.content_guide_message(localization_key='dialog_file_import_guide') Select the file to import
+						div(id='folder_upload')(style='text-align:left; font-size:11px;')
+									.wizard_step(step='1')
+												div(style='width:100%; height:21px; overflow:auto; font-size:11px;')
+															div(style='float:left;')
+																		span(localization_key='common_location') Location &colon; 
+																		input(id='folder_upload_location_path')(type='text', name='folder_upload_location_path', style='width:560px; height:15px;', readonly='readonly')
+															div(style='float:right;')
+																		span(localization_key='common_target') Target &colon; 
+																		select(name='selectbox')
+																					option(value='2') Remote
+												div(id='folder_upload_dialog_middle')(style='width:780px; height:275px; margin-top:8px; font-size:11px;')
+															div(id='folder_upload_dialog_left').dialogs_left
+																		div(id='folder_upload_dir_tree').directory_treeview.dialogs_left_inner
+															div(id='folder_upload_files').dialog_center
+												div(style='margin-top:10px; border:1px solid #CCC; float:left; width:768px; padding:5px;')
+															div(style='overflow:auto; font-size:11px; float:left;')
+																		span(localization_key='dialog_file_import_file') Upload the file to import
+															div(style='overflow:auto; font-size:11px; float:right;')
+																		div(style='float:left;')
+																					input(id='folder_upload_file')(type='file', webkitdirectory='', name='file')
+																					div(id='upload_output')
+			div(id='head_project._export')
+						.content_header(localization_key='dialog_project_export') Export Project
+						.content_guide_message(localization_key='dialog_project_export_guide') Select the project to export
+						div(id='project_export')(style='text-align:left;')
+									div(style='width:100%; height:20px; overflow:auto; font-size:11px;')
+												div(style='float:left;')
+															span(localization_key='common_location') Location &colon; 
+															input(id='project_export_location')(type='text', style='width:520px;', readonly='readonly')
+												div(style='float:right;')
+															span(localization_key='common_type') Type &colon; 
+															select(id='project_export_types').project_dialog_type(style='width:130px')
+																		option(value='All', selected='selected') All Project
+									div(id='project_export_dialog_middle')(style='width:780px; height:300px; margin-top:8px; font-size:11px;')
+												div(id='project_export_dialog_left').dialogs_left(style='width:250px;')
+															div(id='project_export_list').dialogs_left_inner(style='height:298px;padding:0px;')
+												div(id='project_export_dialog_center').dialog_center(style='height:298px;width:521px;')
+															div(id='project_export_information')(style='padding:10px; line-height:18px;')
+									input(id='project_export_path')(type='hidden')
+									input(id='project_export_name')(type='hidden')
+									input(id='project_export_type')(type='hidden')
+									div(style='width:100%; height:20px; overflow:auto; font-size:11px; margin-top:10px;')
+												div(style='float:right;')
+															select(id='project_export_datatype')
+																		option(value='1', selected='selected') zip
+																		option(value='2') tar
+												div(style='float:right; margin-right:20px;')
+															span(localization_key='dialog_project_export_msg') Export Project Type
 			div(id='head_toolbar')
 						div(id='menu.context.toolbar')
 									.bd
@@ -1953,6 +2071,39 @@ block content
 									input(id='project_delete_name')(type='hidden')
 									input(id='project_delete_type')(type='hidden')
 						div
+			div(id='head_edit.find_and_replace')
+						div
+									div(style='width:530px; height:70px; font-size:11px; text-align:left;')
+												div(style='float:left; width:60px;', localization_key='dialog_project_find_guide') Find &colon; 
+												div(style='float:right; width:460px;')
+															textarea(id='find_query_inputbox')(type='text', style='width:450px; height:70px;')
+									div(style='width:530px; height:70px; font-size:11px; margin-top:10px; text-align:left;')
+												div(style='float:left; width:60px;', localization_key='dialog_project_replace_guide') Replace &colon; 
+												div(style='float:right; width:460px;')
+															textarea(id='replace_query_inputbox')(type='text', style='width:450px; height:70px;')
+									div(style='width:530px; height:40px; font-size:11px; margin-top:10px; text-align:left;')
+												div(style='float:left; width:60px;', localization_key='dialog_project_option_guide') Option &colon; 
+												div(style='float:right; width:460px; margin-top:3px;')
+															div(style='float:left; width:230px; height:20px;')
+																		span.checkbox
+																					input(id='match_case')(type='checkbox')
+																					label(data-on='', data-off='')
+																		label(for='match_case', localization_key='dialog_project_match_case_guide') Case sensitive
+															div(style='float:left; width:230px; height:20px;')
+																		span.checkbox
+																					input(id='ignore_whitespace')(type='checkbox')
+																					label(data-on='', data-off='')
+																		label(for='ignore_whitespace', localization_key='dialog_project_ignore_whitespace_guide') Igonre whitespace
+															div(style='float:left; width:230px; height:20px;')
+																		span.checkbox
+																					input(id='use_regexp')(type='checkbox')
+																					label(data-on='', data-off='')
+																		label(for='use_regexp', localization_key='dialog_project_use_regular_expression_guide') Use regular expression
+															div(style='float:left; width:230px; height:20px;')
+																		span.checkbox
+																					input(id='find_on_workspace')(type='checkbox')
+																					label(data-on='', data-off='')
+																		label(for='find_on_workspace', localization_key='dialog_project_find_on_workspace_guide') Find on Workspace
 			div(id='head_project.build.all')
 						.content_header(localization_key='dialog_project_build_all') Build All
 						.content_guide_message(localization_key='dialog_project_build_all_guide') Build all projects below

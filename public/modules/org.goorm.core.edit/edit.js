@@ -90,7 +90,22 @@ org.goorm.core.edit.prototype = {
         this.jump_to_definition = new org.goorm.core.edit.jump_to_definition();
         this.font_manager = new org.goorm.core.edit.font_manager();
         this.timestamp = new Date().getTime();
-        this.auto_close_brackets = (options.auto_close_brackets) ? options.auto_close_brackets : ((this.preference["preference.editor.auto_close_brackets"] !== undefined ) ? this.preference["preference.editor.auto_close_brackets"] : true);
+
+        var get_editor_style = function (type) {
+            var preference_type = "preference.editor." + type;
+            var style = options[type];
+
+            if (style == "true") style = true;
+            else if(style == "false") style = false;
+
+            if (self.preference[preference_type] == "true") self.preference[preference_type] = true;
+            else if (self.preference[preference_type] == "false") self.preference[preference_type] = false;
+
+            return (style) ? style : ((self.preference[preference_type] !== undefined) ? self.preference[preference_type] : true);
+        }
+
+        this.highlight_current_cursor_line = get_editor_style('highlight_current_cursor_line');
+        this.auto_close_brackets = get_editor_style('auto_close_brackets');
 
         var __target = $(target);
 
@@ -103,7 +118,7 @@ org.goorm.core.edit.prototype = {
             /* CODEMIRROR 3.x IMPLEMENT */
             gutters: ["exception_error", "breakpoint", "CodeMirror-linenumbers", "fold"],
             highlightSelectionMatches: true,
-            styleActiveLine: true,
+            styleActiveLine: self.highlight_current_cursor_line,
             autoCloseBrackets: self.auto_close_brackets,
             autoCloseTags: true,
             /* CODEMIRROR 3.x IMPLEMENTEND */
@@ -196,6 +211,9 @@ org.goorm.core.edit.prototype = {
                 "Shift-Ctrl-C": function (cm) {
                     var state = self.editor.options.autoCloseTags ? false : true;
                     self.editor.setOption("autoCloseTags", state);
+                },
+                "Shift-Tab": function (cm) {
+                    cm.indentSelection("subtract");
                 }
             },
             onKeyEvent: function (i, e) {
@@ -235,9 +253,19 @@ org.goorm.core.edit.prototype = {
                     var cursor = self.editor.getCursor();
                     var token = self.editor.getTokenAt(cursor);
 
-                    if (token && token.string !== "") {
-                        self.dictionary.search(token.string);
-                        self.dictionary.show(self.editor);
+                    if (token && token.string.trim() !== "") {
+                        token.string = token.string.slice(0, -1);
+
+                        if (token.string == "") {
+                            self.dictionary.hide();   
+                        }
+                        else {
+                            self.dictionary.search(token.string);
+                            self.dictionary.show(self.editor);
+                        }
+                    }
+                    else {
+                        self.dictionary.hide();   
                     }
                 }
 
@@ -328,6 +356,13 @@ org.goorm.core.edit.prototype = {
         });
 
     },
+     get_editor_idx : function(total_path){
+        var window_manager = core.module.layout.workspace.window_manager;
+        for(var i=0;i<window_manager.window.length;i++){
+            if(window_manager.window[i].filepath+window_manager.window[i].filename == total_path)return i;
+        }
+        return -1;
+    },
     codemirror_events: function () {
         var self = this;
         var cm_editor = this.editor;
@@ -381,8 +416,11 @@ org.goorm.core.edit.prototype = {
             
 
             var window_manager = core.module.layout.workspace.window_manager;
-            window_manager.window[window_manager.active_window].set_modified();
-            window_manager.tab[window_manager.active_window].set_modified();
+            var my_idx=self.get_editor_idx(self.filepath+self.filename);
+            if(my_idx!=-1){
+                window_manager.window[my_idx].set_modified();
+                window_manager.tab[my_idx].set_modified();    
+            }
         });
         cm_editor.on("cursorActivity", function () {
 
@@ -961,6 +999,8 @@ org.goorm.core.edit.prototype = {
 
                             // output
                             core.module.layout.inner_bottom_tabview.selectTab(3);
+                        } else if (core.property.type == 'phonegap') {
+                            core.module.plugin_manager.plugins["org.goorm.plugin.phonegap"].run(core.status.current_project_path);
                         } else
                             core.module.plugin_manager.plugins["org.goorm.plugin." + target_project_type].build(target_project_name);
 

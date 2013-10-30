@@ -321,7 +321,7 @@ org.goorm.core.window.manager = {
 		$(this.window).each(function (i) {
 			if (self.window[i].alive) {
 				var cursor;
-				if (this.editor.editor) {
+				if (this.editor && this.editor.editor) {
 					cursor = this.editor.editor.getCursor();
 				}
 				window_data.push({

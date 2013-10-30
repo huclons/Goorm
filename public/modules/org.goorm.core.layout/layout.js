@@ -226,9 +226,10 @@ org.goorm.core.layout = {
 		
 		//Right TabView
 		this.inner_right_tabview = new YAHOO.widget.TabView(container + '_inner_layout_right');
-		this.inner_right_tabview.addListener("activeTabChange", function () {
-			if ($('#' + container + '_inner_layout_right .selected span').attr('localization_key') == 'communication') {
-				$('#' + container + '_inner_layout_right').find('[localization_key="communication"]').removeClass("glowing");
+		this.inner_right_tabview.addListener("beforeActiveTabChange", function () {
+			if ($('#' + container + '_inner_layout_right .selected span:eq(1)').attr('localization_key') == 'communication') {
+				var communication_message_container = $("div.communication_message_container");
+				self.communication.current_scroll_top = communication_message_container.scrollTop();
 			}
 		});
 

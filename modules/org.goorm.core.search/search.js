@@ -26,6 +26,7 @@ module.exports = {
 		var author = query.author;
 		var find_query = query.find_query;
 		var project_path = query.project_path;
+		var folder_path = query.folder_path;
 		var grep_option = query.grep_option;
 
 		var nodes = {};
@@ -85,6 +86,7 @@ module.exports = {
 		self.get_data_from_project({
 			'find_query' : find_query,
 			'project_path' : project_path,
+			'folder_path' : folder_path,
 			'grep_option' : grep_option
 		}, function(matched_files_list){
 			nodes = parser(matched_files_list);
@@ -96,12 +98,13 @@ module.exports = {
 	get_data_from_project: function (option, callback) {
 		var find_query = option.find_query;
 		var project_path = option.project_path;
+		var folder_path = option.folder_path;
 		var grep_option = option.grep_option;
 		var invert_match = " | grep -v \"/.svn\" | grep -v \"Binary\" | grep -v \"file.list\" | grep -v \"project.json\" | grep -v \".classpath\"";
 
 		fs.exists(__workspace.slice(0, -1) + project_path, function(exists){
 			if(exists) {
-				var command = exec("grep " + find_query + " " + __workspace.slice(0, -1) + project_path + grep_option + invert_match, function (error, stdout, stderr) {
+				var command = exec("grep " + find_query + " " + __workspace.slice(0, -1) + project_path+'/'+folder_path + grep_option + invert_match, function (error, stdout, stderr) {
 					if (error === null) {
 						var matched_files_list = stdout.split(/\n/);
 						matched_files_list.pop();

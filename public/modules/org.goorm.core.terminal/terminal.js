@@ -215,6 +215,12 @@ org.goorm.core.terminal.prototype = {
 			self.socket.on("terminal_refresh_complete", function () {
 				self.resize_terminal();
 			});
+
+			
+			self.socket.on('disconnect', function(){
+				notice.show(core.module.layout.localization.msg.server_is_end);
+			});
+			
 		};
 
 		// initialize socket.io event
@@ -330,7 +336,7 @@ org.goorm.core.terminal.prototype = {
 		}
 	},
 
-	send_command: function (command, options, callback) {
+	send_command: function (command, options, callback, callback_prompt) {
 		var msg = {
 			index: this.index,
 			command: command
@@ -354,7 +360,7 @@ org.goorm.core.terminal.prototype = {
 
 		if (callback) {
 			this.command_queue.push({
-				"prompt": prompt,
+				"prompt": (callback_prompt)? callback_prompt : prompt,
 				"no_write": no_write,
 				"callback": callback
 			});
@@ -384,8 +390,8 @@ org.goorm.core.terminal.prototype = {
 		if (this.running_queue) return;
 		else this.running_queue = true;
 		
-		if (!this.prompt) this.prompt = this.default_prompt;
 		this.prompt = this.command_queue[0].prompt;
+		if (!this.prompt) this.prompt = this.default_prompt;
 
 		if (this.status == 'build')
 			this.stdout = this.stdout.replace(/\r\n/g, "").replace(/\n/g, "").replace(/\r/g, "");
@@ -393,12 +399,20 @@ org.goorm.core.terminal.prototype = {
 		if (this.prompt.test(this.stdout)) {
 			this.command_ready = true;
 		}
+		else if(this.terminal_name != 'debug' && this.stdout){
+			this.stdout = this.stdout.replace(/\r\n/g, "").replace(/\n/g, "").replace(/\r/g, "");
+			if (this.prompt.test(this.stdout)) {
+				this.command_ready = true;
+			}
+		}
+		// console.log(this.prompt, this.command_queue[0], this.stdout);
 
 		if(!this.command_ready) {
 			core.stdout = this.stdout;
 		}
 
 		if (this.command_ready) {
+
 			this.command_ready = false;
 			var item = this.command_queue.shift();
 

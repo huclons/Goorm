@@ -59,6 +59,7 @@ org.goorm.core.search = {
 			success: function () {
 				$("#search_project_explorer").append("<div id='search_project_selector' style='width: 460px; float: right'></div>");
 				$("#search_project_selector").append("<label class='selectbox'><select id='search_project_selectbox' style='width: 220px;'></select></label>");
+				$("#search_project_selector").append("<label id='search_path_input' style='display:none'>hi</label>");
 
 				$("#search_project_selectbox").change(function () {
 				});
@@ -195,7 +196,14 @@ org.goorm.core.search = {
 
 	search: function () {
 		var self = this;
-		if ($("#search_project_selectbox option:selected").attr("value") == "null") {
+		var search_path;
+		if($("#search_path_input").css('display')!='none'){
+			search_path=$("#search_path_input").text();
+		}else{
+			search_path=$("#search_project_selectbox option:selected").attr("value");
+		}
+		
+		if(!search_path){
 			return;
 		}
 		var keyword = $("#search_query_inputbox").val();
@@ -220,7 +228,10 @@ org.goorm.core.search = {
 		}
 		this.query = text;
 		text = "\"" + text + "\"";
-		self.get_matched_file(text, grep_option);
+
+		grep_option += " --exclude '.*'";
+		
+		self.get_matched_file(text, grep_option,search_path);
 
 	},
 	set_search_treeview: function (data) {
@@ -295,18 +306,24 @@ org.goorm.core.search = {
 		if (window_manager.window[firstActivate])
 			window_manager.window[firstActivate].activate();
 	},
-	get_matched_file: function (text, grep_option) {
+	get_matched_file: function (text, grep_option, search_path) {
 		var self = this;
+		var path_arr=search_path.split('/');
+		var folder_path=path_arr.slice(2).join('/');
+
 		var postdata = {
 			find_query: text,
-			project_path: $("#search_project_selectbox option:selected").attr("value"),
+			project_path:  '/'+path_arr[1],
+			folder_path : folder_path,
 			grep_option: grep_option
 		};
 
 		self.matched_file_list = [];
 
 		core.module.loading_bar.start("Loading......");
+		console.log('start',postdata);
 		$.get("file/search_on_project", postdata, function (data) {
+			console.log(data);
 			self.set_search_treeview(data);
 			core.module.loading_bar.stop();
 		});
@@ -318,7 +335,15 @@ org.goorm.core.search = {
 		this.marked.length = 0;
 	},
 
-	show: function () {
+	show: function (path) {
+		if(path){
+			$("#search_project_selectbox").parent().css('display','none');
+			$("#search_path_input").css('display','');
+			$("#search_path_input").text(path);
+		}else{
+			$("#search_project_selectbox").parent().css('display','');
+			$("#search_path_input").css('display','none');
+		}
 		this.make_search_project_selectbox();
 
 		// Get current active_window's editor
