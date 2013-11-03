@@ -64,7 +64,7 @@ goorm.init = function() {
 	
 
 	if(__redis_mode) {
-		var cluster = require('cluster');
+		cluster = require('cluster');
 		var numCPUs = require('os').cpus().length;
 	}
 

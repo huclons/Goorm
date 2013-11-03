@@ -160,6 +160,18 @@ org.goorm.core.edit.prototype = {
                         var cursor = cm.getCursor();
                         var token = cm.getTokenAt(cursor);
 
+                        
+                        if(token.string=="sysout"){
+                            var from={};
+                            var to={};
+                            from.line=to.line=cursor.line;
+                            from.ch=token.start;
+                            to.ch=token.end;
+                            cm.replaceRange("System.out.println();",from,to);
+                            cm.setCursor({'line':cursor.line, 'ch':from.ch+19});
+                            break;
+                        }
+
                         var query = cm.getLine(cursor.line).substring(0, cursor.ch);
 
                         self.dictionary.search(token.string, "java", query);

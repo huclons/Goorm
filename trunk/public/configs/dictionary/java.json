@@ -1,9 +1,5 @@
 [
-	{
-		"keyword": "System.out.println",
-		"type": "method",
-		"description": "<div><div style='padding:2px'><b>Type</b> : Method</div><div style='padding:2px'><b>Description</b> : Print output on console</div></div>"
-	},
+	
 	{
 		"keyword": "class",
 		"type": "key",

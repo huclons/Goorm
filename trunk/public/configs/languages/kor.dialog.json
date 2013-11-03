@@ -528,12 +528,16 @@
             "dialog_preference_editor_config_guide": {
                 "value": "에디터 설정"
              },
+            "dialog_preference_editor_font_family": {
+                "value": "폰트 : "
+             },
              "dialog_preference_editor_font_size": {
                 "value": "폰트 크기 : "
              },
              "dialog_preference_editor_line_spacing" :{
                 "value" : "줄 간격 : "
             },
+
             "dialog_preference_editor_indent_unit": {
                 "value": "인덴트 단위 : "
              },

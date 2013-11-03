@@ -1,6 +1,31 @@
 <div style="font-size:11px; margin-top:10px;">
     <fieldset>
         <legend localization_key="dialog_preference_editor_config_guide">Editor Configuration</legend> 
+        
+         <div style="width:100%; height:30px;">
+            <div style="float:left;">
+                <span localization_key="dialog_preference_editor_font_family">Font : </span> 
+                
+                <select name="preference.editor.font_family" id="preference.editor.font_familiy" style="width:145px;" >
+                    <option value="inherit" selected>default</option>
+                    <option value="Georgia" >Georgia</option>
+                    <option value="Palatino" >Palatino</option>
+                    <option value="Times New Roman" >Times New Roman</option>
+                    <option value="Arial" >Arial</option>
+                    <option value="Comic Sans MS" >Comic Sans MS</option>
+                    <option value="Impact" >Impact</option>
+                    <option value="Lucida Sans Unicode" >Lucida Sans Unicode</option>
+                    <option value="Tahoma" >Tahoma</option>
+                    <option value="Trebuchet MS" >Trebuchet MS</option>
+                    <option value="Verdana" >Verdana</option>
+                    <option value="Courier New" >Courier New</option>
+                    <option value="Lucida Console" >Lucida Console</option>
+
+                </select>
+            </div>
+        </div>
+
+
         <div style="width:100%; height:30px;">
             <div style="float:left;">
                 <span localization_key="dialog_preference_editor_font_size">Font Size : </span> 
@@ -69,7 +94,7 @@
         <div style="width:100%; height:30px;">
             <div style="float:left;"><span localization_key="dialog_preference_editor_first_undo_depth">Undo Depth : </span><input name="preference.editor.undo_depth" /></div>
         </div>
-        <div style="width:100%; height:30px;">
+        <div style="width:50%; height:30px;float:left;">
             <div style="float:left;" class="checkbox_div">
                 <span class="checkbox">
                     <input name="preference.editor.indent_with_tabs" id="preference.editor.indent_with_tabs" type="checkbox" id="indent_with_tabs" class="checkbox_margin" />
@@ -78,7 +103,7 @@
                 <label for="preference.editor.indent_with_tabs" localization_key="dialog_preference_editor_indent_with_tabs">Indent With Tabs</label>
             </div>
         </div>
-        <div style="width:100%; height:30px;">
+        <div style="width:50%; height:30px;float:left;">
             <div style="float:left;" class="checkbox_div">
                 <span class="checkbox">
                     <input name="preference.editor.show_line_numbers" id="preference.editor.show_line_numbers" type="checkbox" id="show_line_numbers" class="checkbox_margin" />
@@ -87,7 +112,7 @@
                 <label for="preference.editor.show_line_numbers" localization_key="dialog_preference_editor_show_line_numbers">Show Line Numbers</label>
             </div>
         </div>
-        <div style="width:100%; height:30px;">
+        <div style="width:50%; height:30px;float:left;">
             <div style="float:left;" class="checkbox_div">
                 <span class="checkbox">
                     <input name="preference.editor.highlight_current_cursor_line" type="checkbox" id="preference.editor.highlight_current_cursor_line" class="checkbox_margin" />
@@ -96,7 +121,7 @@
                 <label for="preference.editor.highlight_current_cursor_line" localization_key="dialog_preference_editor_highlight_current_cursor_line"> Highlight Current Cursor Line</label>
             </div>            
         </div>
-        <div style="width:100%; height:30px;">
+        <div style="width:50%; height:30px;float:left;">
             <div style="float:left;">
                 <span class="checkbox">
                     <input name="preference.editor.auto_close_brackets" type="checkbox" id="preference.editor.auto_close_brackets" class="checkbox_margin" />

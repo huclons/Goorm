@@ -3496,9 +3496,22 @@ Optimized:Start
 
 #communication .communication_message_input_container {
 	background-color: #EFEFEF;
-	height: 30px;
+	height: 50px;
 	padding-top: 10px;
 	text-align: center;
+}
+
+#communication .communication_submessage_area {
+	text-align: left;
+	padding: 5px;
+	color: #555;
+}
+
+#communication .communication_user_item_chat_img {
+	float: left;
+	margin-right: 5px;
+	width: 16px;
+	height: 16px;
 }
 
 /* message_container */
@@ -8077,6 +8090,21 @@ body .ui-tooltip {
 	width: 100%;
 	box-sizing: border-box;
 
+	clear: both;
+
+}
+
+
+.chatting_log_message{
+	padding: 3px;
+	margin: 5px 0px;
+	border-radius: 4px;
+	border: 1px solid #4CD0DD;
+	background-color: #ECFDFF;
+	font-weight: normal;
+	text-align: center;
+	width: 100%;
+	box-sizing: border-box;
 	clear: both;
 
 }

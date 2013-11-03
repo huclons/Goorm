@@ -224,7 +224,11 @@ org.goorm.core.prototype = {
 			});
 
 			$(document).on("contextmenu", function (e) {
-				e.preventDefault();
+				// terminal - open browser context menu
+				//
+				if ( !($(e.target).parent().attr('id') == 'terminal' || $(e.target).parent().hasClass('terminal')) ) {
+					e.preventDefault();
+				}
 			});
 
 			self.module.action.init();
