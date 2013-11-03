@@ -4,6 +4,7 @@
 	
 	"preference.core.animation.menu" : 		true,
 
+	"preference.editor.font_family" : 		"inherit",
 	"preference.editor.font_size" : 		11,
 	"preference.editor.line_spacing" : 		3,
 	"preference.editor.indent_unit" : 		4,

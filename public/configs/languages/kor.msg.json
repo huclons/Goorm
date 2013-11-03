@@ -80,6 +80,9 @@
     "alert_project_not_opened": {
         "value": "해당 프로젝트는 오픈되어 있지 않습니다."
     },
+     "alert_collaboration_previous_chatting":{
+        "value" : "이전 메시지"
+    },
     "alert_collaboration_communication_join": {
         "value": "님이 현재 워크스페이스에 접속하셨습니다!"
     },
@@ -489,6 +492,9 @@
     "alert_select_project": {
         "value": "프로젝트를 선택하여 주십시오."
     },
+    "alert_select_file" : {
+        "value" : "왼편 프로젝트 익스플로러에서 파일을 선택하여 주십시오."
+    },
     "collaboration_stop_message": {
     	"value": "협업 중지됨"
     },
@@ -620,5 +626,8 @@
     },
     "server_is_end" : {
         "value" : "서버가 종료되었습니다. 다시 연결해주시기 바랍니다."
+    },
+    "someone_typing_message" : {
+        "value" : " 님이 입력 중입니다..."
     }
 }

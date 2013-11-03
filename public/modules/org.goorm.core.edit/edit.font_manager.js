@@ -30,7 +30,10 @@ org.goorm.core.edit.font_manager = function (){
 
 org.goorm.core.edit.font_manager.prototype = {
 
+    font_family : 'inherit',
+
     init : function(parent){
+        var self=this;
         this.parent = parent;
 
         this.target = this.parent.target;
@@ -40,6 +43,15 @@ org.goorm.core.edit.font_manager.prototype = {
         this.gutters_width = parseFloat($('.CodeMirror-gutter', this.__target).css('width'));
 
         this.init_key_event();
+
+         org.goorm.core.edit.font_manager.prototype.font_family = (core.preference["preference.editor.font_family"]) ? core.preference["preference.editor.font_family"] :"inherit" ;
+        $(".CodeMirror-lines").css('font-family', this.font_family);
+        $(core).on("on_preference_confirmed", function () {
+            org.goorm.core.edit.font_manager.prototype.font_family = (core.preference["preference.editor.font_family"]) ? core.preference["preference.editor.font_family"] :"inherit" ;
+            $(".CodeMirror-lines").css('font-family', self.font_family);
+
+        });
+
     },
 
     init_key_event: function() {

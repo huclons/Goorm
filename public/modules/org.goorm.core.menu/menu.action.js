@@ -148,7 +148,12 @@ org.goorm.core.menu.action = {
 
 		$("a[action=rename_file]").off("click");
 		$("a[action=rename_file]").click(function () {
-			core.dialog.rename_file.show();
+			if (core.status.selected_file) {
+				core.dialog.rename_file.show('context');
+			}
+			else {
+				alert.show(core.module.localization.msg.alert_select_file);
+			}
 		});
 
 		$("a[action=delete_file]").off("click");
@@ -191,7 +196,9 @@ org.goorm.core.menu.action = {
 
 				confirmation.panel.show();
 			}
-
+			else {
+				alert.show(core.module.localization.msg.alert_select_file);
+			}
 		});
 
 		$("a[action=refresh_project_directory]").off("click");

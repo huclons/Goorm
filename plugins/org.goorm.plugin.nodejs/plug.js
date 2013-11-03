@@ -88,7 +88,7 @@ org.goorm.plugin.nodejs.prototype = {
 		$(core).bind('terminal_key_hook-ctrl+c', function(){
 			if( core.status.current_project_type == 'nodejs' ) {
 				self.stop({
-					'terminal' : false
+					'terminal' : true
 				});
 			}
 		});
@@ -212,7 +212,7 @@ org.goorm.plugin.nodejs.prototype = {
 		var self=this;
 		
 		var option = (__option) ? __option : {};
-		var terminal = __option.terminal;
+		var terminal = option.terminal;
 
 		var property = core.property.plugins['org.goorm.plugin.nodejs'];
 		
@@ -234,7 +234,7 @@ org.goorm.plugin.nodejs.prototype = {
 
 			$.get('/plugin/extend_function', postdata, function(response){
 				if(response.result){
-					if(terminal) {
+					if(!terminal) {
 						var msg = {
 							user : core.user.id,
 							index: core.module.layout.terminal.index,

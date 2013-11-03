@@ -178,6 +178,18 @@ org.goorm.core.shortcut.manager = {
 			});
 		}
 
+		//Open Project (Ctrl+Shift+O)
+		if (this.hotkeys.open_project) {
+			$(document).bind('keydown', this.hotkeys.open_project, function (e) {
+
+				core.dialog.open_project.show();
+
+				e.stopPropagation();
+				e.preventDefault();
+				return false;
+			});
+		}
+
 		//Close (Alt+X)
 		if (this.hotkeys.close_file) {
 			$(document).bind('keydown', this.hotkeys.close_file, function (e) {
@@ -287,6 +299,9 @@ org.goorm.core.shortcut.manager = {
 				if (core.status.selected_file) {
 					core.dialog.move_file.show("context");
 				}
+				else {
+					alert.show(core.module.localization.msg.alert_select_file);
+				}
 
 				e.stopPropagation();
 				e.preventDefault();
@@ -295,11 +310,31 @@ org.goorm.core.shortcut.manager = {
 		}
 
 		//Rename (Ctrl+Shift+R)
-		if (this.hotkeys.move_file) {
-			$(document).bind('keydown', this.hotkeys.move_file, function (e) {
+		if (this.hotkeys.rename_file) {
+			$(document).bind('keydown', this.hotkeys.rename_file, function (e) {
 
 				if (core.status.selected_file) {
 					core.dialog.rename_file.show("context");
+				}
+				else {
+					alert.show(core.module.localization.msg.alert_select_file);
+				}
+
+				e.stopPropagation();
+				e.preventDefault();
+				return false;
+			});
+		}
+
+		//Delete (Ctrl+Shift+D)
+		if (this.hotkeys.delete_file) {
+			$(document).bind('keydown', this.hotkeys.delete_file, function (e) {
+				
+				if (core.status.selected_file) {
+					$('[action="delete_context"]').click();
+				}
+				else {
+					alert.show(core.module.localization.msg.alert_select_file);
 				}
 
 				e.stopPropagation();

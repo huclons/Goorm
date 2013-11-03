@@ -34,7 +34,7 @@ org.goorm.core.terminal.prototype = {
 		this.timestamp = (new Date()).getTime();
 
 		// attach context menu
-		self.attach_context_menu();
+		//self.attach_context_menu();
 
 		var init_terminal = function () {
 			$(self.target).addClass('terminal');
@@ -76,8 +76,7 @@ org.goorm.core.terminal.prototype = {
 			});
 
 			var terminal_open_complete = function () {
-
-				
+								
 
 				$(self.target).parent().css('outline', 'none').css('background-color', 'rgb(70,70,70)').css('overflow', 'hidden');
 

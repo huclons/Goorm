@@ -537,6 +537,9 @@
             "dialog_preference_editor_config_guide": {
                 "value": "Editor Configuration"
              },
+             "dialog_preference_editor_font_family": {
+                "value": "Font : "
+             },
             "dialog_preference_editor_font_size": {
                 "value": "Font Size : "
              },
@@ -559,13 +562,13 @@
                 "value": "Show Line Numbers"
              },
             "dialog_preference_editor_highlight_current_cursor_line": {
-                "value": " Highlight Current Cursor Line"
+                "value": " Highlight Cursor Line"
              },
             "dialog_preference_editor_use_clipboard": {
                 "value": "Use Clipboard"
              },
             "dialog_preference_editor_auto_close_brackets": {
-                "value": "Use autoCloseBrackets(',\",(,[)"
+                "value": "autoClose(',\",(,[)"
              },
             "dialog_preference_theme_guide": {
                 "value": "Theme"

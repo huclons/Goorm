@@ -272,6 +272,9 @@
     "confirmation_save_as_message": {
         "value": "Same file name already exists. Do you want to save anyway?"
     },
+     "alert_collaboration_previous_chatting":{
+        "value" : "Previous Chatting"
+    },
     "alert_collaboration_select": {
         "value": "Select the project to join"
     },
@@ -482,6 +485,9 @@
     "alert_select_project" : {
         "value" : "Please select your project."
     },
+    "alert_select_file" : {
+        "value" : "Please select your file at project explorer."
+    },
     "collaboration_stop_message": {
     	"value": "Collaboration Stopped"
     },
@@ -612,5 +618,8 @@
     },
     "server_is_end" : {
         "value" : "Server is closed. Please reconnect a server."
+    },
+    "someone_typing_message" : {
+        "value" : " is typing..."
     }
 }
