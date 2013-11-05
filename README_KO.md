@@ -41,9 +41,9 @@ project.goorm
 
   node.js 설치하기 :
 
-          $ wget http://nodejs.org/dist/v0.10.4/node-v0.10.4.tar.gz
-          $ tar -xvzf node-v0.10.4.tar.gz
-          $ cd node-v0.10.4
+          $ wget http://nodejs.org/dist/v0.10.21/node-v0.10.21.tar.gz
+          $ tar -xvzf node-v0.10.21.tar.gz
+          $ cd node-v0.10.21
           $ ./configure
           $ make
           $ sudo make install
@@ -54,7 +54,7 @@ project.goorm
           
   노드가 정상적으로 설치되었다면 아래와 같이 버전이 뜹니다. :
   
-          $ v0.10.4
+          $ v0.10.21
 
   npm 설치 (최신 버전의 node.js는 자동으로 npm을 설치하므로 이 과정은 무시하셔도 됩니다.) :
         
@@ -112,20 +112,11 @@ project.goorm
           $ node goorm.js set --temp-directory ~/temp_files/
           $ goorm set -t ~/temp_files/
           
-          $ node goorm.js set -f appId, appSecret
-          $ goorm set --api-key-facebook appId, appSecret
-
-          $ node goorm.js set -b consumerKey, consumerSecret
-          $ goorm set --api-key-twitter consumerKey, consumerSecret
-
-          $ node goorm.js set -g appId, appSecret
-          $ goorm set --api-key-google appId, appSecret
-
-          $ node goorm.js set -h appId, appSecret
-          $ goorm set --api-key-github appId, appSecret
-
           $ node goorm.js set -x plugin_exclude_list
           $ goorm set --plugin_exclude_list [plugin_exclude_list]
+
+          $ node goorm.js set -u [user_id]
+          $ goorm set --user [user_id]
           
   구름 종료 : 
   

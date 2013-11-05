@@ -147,65 +147,16 @@ org.goorm.plugin.nodejs.prototype = {
 
 		var project_path = core.status.current_project_path;
 
-		if(core.service_mode) {
-			var postdata = {
-				'data' : {
-					'project_path' : project_path,
-					'source_path' : source_path,
-					'main' : main
-				},
-				'plugin' : self.full_name,
-				'extend_function' : 'replace_app_port'
-			};
+		
 
-			$.get('/plugin/extend_function', postdata, function(replace_app_port){
-				if(replace_app_port.result){
-					var cmd1 = "node " + replace_app_port.run_path;
-					core.module.layout.terminal.send_command('clear;\r', null);
-					core.module.layout.terminal.send_command(cmd1+'\r');
+		
+		var workspace = core.preference.workspace_path;
+		var run_path = workspace + project_path + '/' + source_path + main + '.js';
 
-					if(replace_app_port.use_port){
-						var run_data = {
-							'plugin' : 'org.goorm.plugin.nodejs_examples',
-							'channel' : "run",
-							'data' : {
-								'user' : core.user.id,
-								'port' : replace_app_port.port,
-								'project_path' : project_path
-							}
-						}
+		var cmd1 = "node " + run_path;
 
-						if(!self.socket) {
-							self.socket = io.connect();
-						}
-
-						self.socket.emit('plugin', JSON.stringify(run_data));
-
-						$("a[action=run]").hide();
-						$("a[action=stop]").show();
-					}
-				}
-				else{
-					// fail to run a app.
-					// 
-					switch(replace_app_port.code){
-						case 0:
-						case 2:
-						case 10:
-						case 11:
-							core.module.toast.show(core.module.localization.msg['alert_run_fail'])
-							break;
-					}
-				}
-			});
-		} else {
-			var workspace = core.preference.workspace_path;
-			var run_path = workspace + project_path + '/' + source_path + main + '.js';
-
-			var cmd1 = "node " + run_path;
-
-			core.module.layout.terminal.send_command(cmd1+'\r');
-		}
+		core.module.layout.terminal.send_command(cmd1+'\r');
+		
 	},
 	
 	stop: function(__option){

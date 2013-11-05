@@ -35,7 +35,7 @@ module.exports = {
 		data.err_code = 0;
 		data.message = "process done";
 
-		if (query.project_type && query.project_detailed_type  && query.project_author  && query.project_name  && query.project_desc  && query.use_collaboration) {
+		if (query.project_type && query.project_detailed_type  && query.project_author  && query.project_name  && query.use_collaboration) {
 			fs.readdir(__workspace + '/', function (err, files) {
 				if (err ) {
 					data.err_code = 10;
