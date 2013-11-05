@@ -139,7 +139,21 @@ goorm.init = function() {
 		global.__temp_dir = config_data.temp_dir;
 	}
 	else {
-		global.__temp_dir = __path + "temp_files/";
+		
+		var temp = process.env.HOME + "/goorm_tempdir/";
+
+		if(!fs.existsSync(temp)){
+			fs.mkdir(temp, 0755, function(err){
+				if (err) {
+					console.log('Cannot make goorm_tempdir : '+temp+' ... ', err);
+				}
+			});
+		}
+
+		global.__temp_dir = process.env.HOME + "/goorm_tempdir/";
+		
+
+		
 	}
 
 	

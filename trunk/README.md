@@ -40,9 +40,9 @@ Getting Started
 
   install node.js :
 
-          $ wget http://nodejs.org/dist/v0.10.20/node-v0.10.20.tar.gz
-          $ tar -xvzf node-v0.10.20.tar.gz
-          $ cd node-v0.10.20
+          $ wget http://nodejs.org/dist/v0.10.21/node-v0.10.21.tar.gz
+          $ tar -xvzf node-v0.10.21.tar.gz
+          $ cd node-v0.10.21
           $ ./configure
           $ make
           $ sudo make install
@@ -53,7 +53,7 @@ Getting Started
           
   if node.js installed successfully, it prints node.js version as below:
   
-          $ v0.10.20
+          $ v0.10.21
 
   install npm (optional- latest version of node.js automatically install npm, so you may not install npm) :
   
@@ -118,6 +118,9 @@ Getting Started
 
           $ node goorm.js set -x plugin_exclude_list
           $ goorm set --plugin_exclude_list [plugin_exclude_list]
+
+          $ node goorm.js set -u [user_id]
+          $ goorm set --user [user_id]
 
   stop goorm daemon : 
 

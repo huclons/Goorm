@@ -111,7 +111,7 @@ module.exports = {
 
 						callback(matched_files_list);
 					} else {
-						console.log('Search Error : ', error);
+						// console.log('Search Error : ', error);
 						callback([]);
 					}
 				});

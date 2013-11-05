@@ -42,8 +42,8 @@ org.goorm.core.project._new = {
 				alert.show(core.module.localization.msg.alert_project_name);
 				return false;
 			} else if ($("#input_project_desc").val() === "") {
-				alert.show(core.module.localization.msg.alert_project_desc);
-				return false;
+				// alert.show(core.module.localization.msg.alert_project_desc);
+				// return false;
 			} else if ($("#check_project_new_import").is(":checked")) {
 				if ($("#project_new_import_file").val().substr($("#project_new_import_file").val().length - 3, 3).toLowerCase() != "zip") {
 					alert.show(core.module.localization.msg.alert_only_zip_allowed);

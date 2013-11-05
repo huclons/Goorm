@@ -70,6 +70,7 @@ org.goorm.core.edit = function () {
 
     // error manager
     this.error_marker = [];
+    this.init_change = false;
 };
 
 org.goorm.core.edit.prototype = {
@@ -429,9 +430,12 @@ org.goorm.core.edit.prototype = {
 
             var window_manager = core.module.layout.workspace.window_manager;
             var my_idx=self.get_editor_idx(self.filepath+self.filename);
-            if(my_idx!=-1){
+            if(self.init_change && my_idx!=-1){
                 window_manager.window[my_idx].set_modified();
                 window_manager.tab[my_idx].set_modified();    
+            }
+            else {
+                self.init_change = true;
             }
         });
         cm_editor.on("cursorActivity", function () {

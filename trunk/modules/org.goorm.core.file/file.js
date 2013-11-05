@@ -19,6 +19,7 @@ var EventEmitter = require("events").EventEmitter;
 var rimraf = require('rimraf');
 var http = require('http');
 var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 
 var root_dir = ""; // project root
 var target_dir = ""; // target root
@@ -84,6 +85,34 @@ module.exports = {
 					data.message = "exist file";
 					evt.emit("file_do_new", data);
 				} else {
+					// var write = spawn('touch', [__workspace + '/' + path], {
+					// 	'uid' : query.user.uid,
+					// 	'gid' : query.user.gid[0] || query.user.gid
+					// });
+
+					// write.stdout.on('data', function(data){
+					// 	console.log(data);
+					// });
+
+					// write.stderr.on('data', function(err){
+					// 	console.log('do_new stderr');
+					// 	process.stdout.write(err);
+
+					// 	data.err_code = 40;
+					// 	data.message = "Can not make a file";
+
+					// 	evt.emit("file_do_new", data);
+					// });
+
+					// write.on('close', function (code){
+					// 	if (code !== 0) {
+					// 		console.log('touch process exited with code '+code);
+					// 	}
+
+					// 	
+					// 	evt.emit("file_do_new", data);
+					// });
+
 					fs.writeFile(__workspace + '/' + path, "", function (err) {
 						if (err !== null) {
 							data.err_code = 40;
@@ -119,6 +148,34 @@ module.exports = {
 
 					evt.emit("file_do_new_folder", data);
 				} else {
+/*					var mkdir = spawn('mkdir', [__workspace + '/' + query.current_path + '/' + query.folder_name, '-m', 0777], {
+						'uid' : query.user.uid,
+						'gid' : query.user.gid[0] || query.user.gid
+					});
+
+					mkdir.stdout.on('data', function(data){
+						console.log(data);
+					});
+
+					mkdir.stderr.on('data', function(err){
+						console.log('mkdir stderr');
+						process.stdout.write(err);
+
+						data.err_code = 30;
+						data.message = "Cannot make directory";
+
+						evt.emit("file_do_new_folder", data);
+					});
+
+					mkdir.on('close', function (code){
+						if (code !== 0) {
+							console.log('mkdir process exited with code '+code);
+						}
+
+						
+						evt.emit("file_do_new_folder", data);
+					});
+*/
 					fs.mkdir(__workspace + '/' + query.current_path + '/' + query.folder_name, '0777', function (err) {
 
 						if (err !== null) {
@@ -165,6 +222,34 @@ module.exports = {
 						i++;
 					}
 
+					// var write = spawn('touch', [__workspace + '/' + query.current_path + '/' + temp_file_name + i + '.txt'], {
+					// 	'uid' : query.user.uid,
+					// 	'gid' : query.user.gid[0] || query.user.gid
+					// });
+
+					// write.stdout.on('data', function(data){
+					// 	console.log(data);
+					// });
+
+					// write.stderr.on('data', function(err){
+					// 	console.log('do_new_untitled_text_file stderr');
+					// 	process.stdout.write(err);
+
+					// 	data.err_code = 40;
+					// 	data.message = "Can not make project file";
+
+					// 	evt.emit("file_do_new_untitled_text_file", data);
+					// });
+
+					// write.on('close', function (code){
+					// 	if (code !== 0) {
+					// 		console.log('touch process exited with code '+code);
+					// 	}
+
+					// 	
+					// 	evt.emit("file_do_new_untitled_text_file", data);
+					// });
+
 					fs.writeFile(__workspace + '/' + query.current_path + '/' + temp_file_name + i + '.txt', "", function (err) {
 						if (err !== null) {
 							data.err_code = 40;
@@ -200,6 +285,35 @@ module.exports = {
 
 					evt.emit("file_do_new_other", data);
 				} else {
+
+					// var write = spawn('touch', [__workspace + '/' + query.current_path + '/' + query.file_name], {
+					// 	'uid' : query.user.uid,
+					// 	'gid' : query.user.gid[0] || query.user.gid
+					// });
+
+					// write.stdout.on('data', function(data){
+					// 	console.log(data);
+					// });
+
+					// write.stderr.on('data', function(err){
+					// 	console.log('do_new_other stderr');
+					// 	process.stdout.write(err);
+
+					// 	data.err_code = 40;
+					// 	data.message = "Can not make file";
+
+					// 	evt.emit("file_do_new_other", data);
+					// });
+
+					// write.on('close', function (code){
+					// 	if (code !== 0) {
+					// 		console.log('touch process exited with code '+code);
+					// 	}
+
+					// 	
+					// 	evt.emit("file_do_new_other", data);
+					// });
+
 					fs.writeFile(__workspace + '/' + query.current_path + '/' + query.file_name, "", function (err) {
 						if (err !== null) {
 							data.err_code = 40;
@@ -230,6 +344,36 @@ module.exports = {
 
 			evt.emit("file_put_contents", data);
 		}else{
+			// var echo = spawn('echo', [query.data, '>', abs_path], {
+			// 	'uid' : query.user.uid,
+			// 	'gid' : query.user.gid[0] || query.user.gid
+			// });
+
+			// echo.stdout.on('data', function(data){
+			// 	console.log(data);
+			// });
+
+			// echo.stderr.on('data', function(err){
+			// 	console.log('put_contents stderr');
+			// 	process.stdout.write(err);
+
+			// 	data.err_code = 10;
+			// 	data.message = "Can not save";
+
+			// 	evt.emit("file_put_contents", data);
+			// });
+
+			// echo.on('close', function (code){
+			// 	if (code !== 0) {
+			// 		console.log('echo process exited with code '+code);
+			// 	}
+
+			// 	data.err_code = 0;
+			// 	data.message = "saved";
+
+			// 	evt.emit("file_put_contents", data);
+			// });
+
 			fs.writeFile(abs_path, query.data, function (err) {
 				if (err !== null) {
 					data.err_code = 10;
@@ -243,7 +387,6 @@ module.exports = {
 					evt.emit("file_put_contents", data);
 				}
 			});
-
 		}
 	},
 
@@ -315,6 +458,35 @@ module.exports = {
 		data.message = "process done";
 
 		if (query.filename !== null) {
+
+			// var rm = spawn('rm', ['-rf', __workspace + '/' + query.filename], {
+			// 	'uid' : query.user.uid,
+			// 	'gid' : query.user.gid[0] || query.user.gid
+			// });
+
+			// rm.stdout.on('data', function(data){
+			// 	console.log(data);
+			// });
+
+			// rm.stderr.on('data', function(err){
+			// 	console.log('rm stderr');
+			// 	process.stdout.write(err);
+
+			// 	data.err_code = 20;
+			// 	data.message = "Can not delete file";
+
+			// 	evt.emit("file_do_delete", data);
+			// });
+
+			// rm.on('close', function (code){
+			// 	if (code !== 0) {
+			// 		console.log('rm process exited with code '+code);
+			// 	}
+
+			// 	//success
+			// 	evt.emit("file_do_delete", data);
+			// });
+
 			rimraf(__workspace + '/' + query.filename, function (err) {
 				if (err !== null) {
 					data.err_code = 20;
@@ -342,6 +514,36 @@ module.exports = {
 
 		if (query.ori_path !== null && query.ori_name !== null && query.dst_name !== null) {
 			var path = __workspace + '/' + query.ori_path;
+			// var rename = spawn('mv', [path + query.ori_name, path + query.dst_name], {
+			// 	'uid' : query.user.uid,
+			// 	'gid' : query.user.gid[0] || query.user.gid
+			// });
+
+			// rename.stdout.on('data', function(data){
+			// 	console.log(data);
+			// });
+
+			// rename.stderr.on('data', function(err){
+			// 	console.log('rename stderr');
+			// 	process.stdout.write(err);
+
+			// 	data.err_code = 11;
+			// 	data.message = "Fail to rename";
+
+			// 	evt.emit("file_do_rename", data);
+			// });
+
+			// rename.on('close', function (code){
+			// 	if (code !== 0) {
+			// 		console.log('mv process exited with code '+code);
+			// 	}
+
+			// 	data.path = query.ori_path;
+			// 	data.file = query.dst_name;
+
+			// 	evt.emit("file_do_rename", data);
+			// });
+
 			fs.rename(path + query.ori_name, path + query.dst_name, function (err) {
 				if (err) {
 					data.err_code = 11;
@@ -371,6 +573,37 @@ module.exports = {
 		if (query.ori_path && query.ori_file  && query.dst_path && query.dst_file) {
 			var ori_full = __workspace + '/' + query.ori_path + "/" + query.ori_file;
 			var dst_full = __workspace + '/' + query.dst_path + "/" + query.dst_file;
+
+			// var rename = spawn('mv', [ori_full, dst_full], {
+			// 	'uid' : query.user.uid,
+			// 	'gid' : query.user.gid[0] || query.user.gid
+			// });
+
+			// rename.stdout.on('data', function(data){
+			// 	console.log(data);
+			// });
+
+			// rename.stderr.on('data', function(err){
+			// 	console.log('rename stderr');
+			// 	process.stdout.write(err);
+
+			// 	data.err_code = 20;
+			// 	data.message = "Can not move file";
+
+			// 	evt.emit("file_do_move", data);
+			// });
+
+			// rename.on('close', function (code){
+			// 	if (code !== 0) {
+			// 		console.log('mv process exited with code '+code);
+			// 	}
+
+			// 	data.path = query.dst_path;
+			// 	data.file = query.dst_file;
+
+			// 	evt.emit("file_do_move", data);
+			// });
+
 			fs.rename(ori_full, dst_full, function (err) {
 
 				if (err !== null) {
@@ -434,6 +667,60 @@ module.exports = {
 		data.message = "process done";
 
 		if (query.user  && query.path  && query.file ) {
+
+			// var mkdir = spawn('mkdir', [__temp_dir + '/' + query.user.id, '-m', 0777], {
+			// 	'uid' : query.user.uid,
+			// 	'gid' : query.user.gid[0] || query.user.gid
+			// });
+
+			// mkdir.stdout.on('data', function(data){
+			// 	console.log(data);
+			// });
+
+			// mkdir.stderr.on('data', function(err){
+			// 	console.log('mkdir stderr');
+			// 	process.stdout.write(err);
+
+			// 	data.err_code = 30;
+			// 	data.message = "Cannot make directory";
+
+			// 	evt.emit("file_do_export", data);
+			// });
+
+			// mkdir.on('close', function (code){
+			// 	if (code !== 0) {
+			// 		console.log('mkdir process exited with code '+code);
+			// 	}
+
+			// 	var cp = spawn('cp', [__workspace + '/' + query.path + '/' + query.file, __temp_dir + '/' + query.user.id + '/' + query.file], {
+			// 		'uid' : query.user.uid,
+			// 		'gid' : query.user.gid[0] || query.user.gid
+			// 	});
+
+			// 	cp.stdout.on('data', function(data){
+			// 		console.log(data);
+			// 	});
+
+			// 	cp.stderr.on('data', function(err){
+			// 		console.log('cp stderr');
+			// 		process.stdout.write(err);
+
+			// 		data.err_code = 20;
+			// 		data.message = "Cannot export file";
+
+			// 		evt.emit("file_do_export", data);
+			// 	});
+
+			// 	cp.on('close', function (code){
+			// 		if (code !== 0) {
+			// 			console.log('cp process exited with code '+code);
+			// 		}
+
+			// 		data.path = query.user.id + '/' + query.file;
+			// 		evt.emit("file_do_export", data);
+			// 	});
+			// });
+
 			fs.mkdir(__temp_dir + '/' + query.user, '0777', function (err) {
 				if (!err  || err.errno == 47) { //errno 47 is exist folder error
 
@@ -539,6 +826,33 @@ module.exports = {
 					data.message = "exist file";
 					evt.emit("file_do_save_as", data);
 				} else {
+					// var echo = spawn('echo', [query.data, '>', __workspace + '/' + path], {
+					// 	'uid' : query.user.uid,
+					// 	'gid' : query.user.gid[0] || query.user.gid
+					// });
+
+					// echo.stdout.on('data', function(data){
+					// 	console.log(data);
+					// });
+
+					// echo.stderr.on('data', function(err){
+					// 	console.log('put_contents stderr');
+					// 	process.stdout.write(err);
+
+					// 	data.err_code = 40;
+					// 	data.message = "Can not save file";
+
+					// 	evt.emit("file_do_save_as", data);
+					// });
+
+					// echo.on('close', function (code){
+					// 	if (code !== 0) {
+					// 		console.log('echo process exited with code '+code);
+					// 	}
+
+					// 	evt.emit("file_do_save_as", data);
+					// });
+
 					fs.writeFile(__workspace + '/' + path, query.data, function (err) {
 						if (err !== null) {
 							data.err_code = 40;
@@ -602,6 +916,29 @@ module.exports = {
 					evt.emit("check_valid_edit",{result:true});
 				}else{
 					//not exist -> make
+
+					// var mkdir = spawn('mkdir', ['-p', base_path+'/'+filepath], {
+					// 	'uid' : query.user.uid,
+					// 	'gid' : query.user.gid[0] || query.user.gid
+					// });
+
+					// mkdir.stdout.on('data', function(data){
+					// 	console.log(data);
+					// });
+
+					// mkdir.stderr.on('data', function(err){
+					// 	console.log('mkdir -p stderr');
+					// 	process.stdout.write(err);
+					// });
+
+					// mkdir.on('close', function (code){
+					// 	if (code !== 0) {
+					// 		console.log('mkdir process exited with code '+code);
+					// 	}
+
+					// 	evt.emit("check_valid_edit",{result:true, code:10});
+					// });
+
 					exec('mkdir -p ' + base_path+'/'+filepath , function(err,stdout,stderr){
 						evt.emit("check_valid_edit",{result:true, code:10});
 					});
@@ -669,6 +1006,29 @@ module.exports = {
 		var data = {};
 		if (files) {
 			files.forEach(function (o) {
+				// var rm = spawn('rm', [__workspace + '/' + o], {
+				// 	'uid' : query.user.uid,
+				// 	'gid' : query.user.gid[0] || query.user.gid
+				// });
+
+				// rm.stdout.on('data', function(data){
+				// 	console.log(data);
+				// });
+
+				// rm.stderr.on('data', function(err){
+				// 	console.log('rm stderr');
+				// 	process.stdout.write(err);
+
+				// 	data.err_code = 20;
+				// 	data.message = "Can not delete file";
+				// });
+
+				// rm.on('close', function (code){
+				// 	if (code !== 0) {
+				// 		console.log('rm process exited with code '+code);
+				// 	}
+				// });
+
 				rimraf(__workspace + '/' + o, function (err) {
 					if (err !== null) {
 						data.err_code = 20;
@@ -679,6 +1039,29 @@ module.exports = {
 		}
 		if (directorys) {
 			directorys.forEach(function (o) {
+				// var rm = spawn('rm', ['-r', __workspace + '/' + o], {
+				// 	'uid' : query.user.uid,
+				// 	'gid' : query.user.gid[0] || query.user.gid
+				// });
+
+				// rm.stdout.on('data', function(data){
+				// 	console.log(data);
+				// });
+
+				// rm.stderr.on('data', function(err){
+				// 	console.log('rm -r stderr');
+				// 	process.stdout.write(err);
+
+				// 	data.err_code = 20;
+				// 	data.message = "Can not delete file";
+				// });
+
+				// rm.on('close', function (code){
+				// 	if (code !== 0) {
+				// 		console.log('rm -r process exited with code '+code);
+				// 	}
+				// });
+
 				rimraf(__workspace + '/' + o, function (err) {
 					if (err !== null) {
 						data.err_code = 20;
@@ -699,6 +1082,26 @@ module.exports = {
 			var target = query.target;
 			if (files) {
 				files.forEach(function (o) {
+					// var cp = spawn('cp', [__workspace + '/' + o, __workspace + target], {
+					// 	'uid' : query.user.uid,
+					// 	'gid' : query.user.gid[0] || query.user.gid
+					// });
+
+					// cp.stdout.on('data', function(data){
+					// 	console.log(data);
+					// });
+
+					// cp.stderr.on('data', function(err){
+					// 	console.log('cp stderr');
+					// 	process.stdout.write(err);
+					// });
+
+					// cp.on('close', function (code){
+					// 	if (code !== 0) {
+					// 		console.log('cp process exited with code '+code);
+					// 	}
+					// });
+
 					exec("cp " + __workspace + '/' + o + " " + __workspace + target, function (error, stdout, stderr) {
 						if (error !== null) {
 							console.log(error);
@@ -709,6 +1112,26 @@ module.exports = {
 			}
 			if (directorys) {
 				directorys.forEach(function (o) {
+					// var cp = spawn('cp', ['-r', __workspace + '/' + o, __workspace + target], {
+					// 	'uid' : query.user.uid,
+					// 	'gid' : query.user.gid[0] || query.user.gid
+					// });
+
+					// cp.stdout.on('data', function(data){
+					// 	console.log(data);
+					// });
+
+					// cp.stderr.on('data', function(err){
+					// 	console.log('cp stderr');
+					// 	process.stdout.write(err);
+					// });
+
+					// cp.on('close', function (code){
+					// 	if (code !== 0) {
+					// 		console.log('cp process exited with code '+code);
+					// 	}
+					// });
+
 					exec("cp -r " + __workspace + o + " " + __workspace + target, function (error, stdout, stderr) {
 						if (error !== null) {
 							console.log(error);
@@ -719,7 +1142,7 @@ module.exports = {
 			}
 		}
 		callback({
-			result: data
+			result: ""
 		});
 	},
 	upload_dir_file :function(req,evt){
@@ -801,6 +1224,38 @@ module.exports = {
 						evt.emit('end',false);
 						return false;
 				}
+
+				// var mv = spawn('mv', [file_arr[iterator].path, target_path+file_arr[iterator].name], {
+				// 	'uid' : query.user.uid,
+				// 	'gid' : query.user.gid[0] || query.user.gid,
+				// 	'cwd' : target_path
+				// });
+
+				// mv.stdout.on('data', function(data){
+				// 	console.log(data);
+				// });
+
+				// mv.stderr.on('data', function(err){
+				// 	console.log('rename stderr');
+				// 	process.stdout.write(err);
+
+				// 	data.err_code = 20;
+				// 	data.message = "Can not move file";
+
+				// 	evt.emit("file_do_move", data);
+				// });
+
+				// mv.on('close', function (code){
+				// 	if (code !== 0) {
+				// 		console.log('mv process exited with code '+code);
+				// 	}
+
+				// 	data.path = query.dst_path;
+				// 	data.file = query.dst_file;
+
+				// 	evt.emit("file_do_move", data);
+				// });
+
 				exec('mv  '+file_arr[iterator].path+'  '+target_path+file_arr[iterator].name   ,  {cwd : target_path}, function(err,stdout, stderr){
 					if(err){
 						console.log('mv err', err);
@@ -889,6 +1344,29 @@ module.exports = {
 					evt_mkdir.emit('end',false);
 					return false;
 				}
+
+				// var mkdir = spawn('mkdir', ['-p', target_path+dir_arr[iterator]], {
+				// 	'uid' : query.user.uid,
+				// 	'gid' : query.user.gid[0] || query.user.gid,
+				// 	'cwd' : target_path
+				// });
+
+				// mkdir.stdout.on('data', function(data){
+				// 	console.log(data);
+				// });
+
+				// mkdir.stderr.on('data', function(err){
+				// 	console.log('mkdir -p stderr');
+				// 	process.stdout.write(err);
+				// });
+
+				// mkdir.on('close', function (code){
+				// 	if (code !== 0) {
+				// 		console.log('mkdir process exited with code '+code);
+				// 	}
+
+				// 	evt_mkdir.emit('end',!err);
+				// });
 
 				exec('mkdir -p '+target_path+dir_arr[iterator], {cwd : target_path}, function(err,stdout,stderr){
 

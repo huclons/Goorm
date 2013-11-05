@@ -99,6 +99,11 @@ org.goorm.core.window.panel.prototype = {
 			height = 250;
 		}
 
+		if (new_x + width > $(".yui-layout-unit-center").position().left + $(".yui-layout-unit-center #workspace").width()) {
+			new_x = $(".yui-layout-unit-center").position().left + 5;
+			new_y = $(".yui-layout-unit-center").position().top + 30; 
+		}
+
 		this.panel = new YAHOO.widget.Panel(
 			container, {
 				x: new_x,

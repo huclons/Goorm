@@ -321,9 +321,17 @@ org.goorm.core.search = {
 		self.matched_file_list = [];
 
 		core.module.loading_bar.start("Loading......");
-		console.log('start',postdata);
+
 		$.get("file/search_on_project", postdata, function (data) {
-			console.log(data);
+			var length = 0;
+			if (data) {
+				for(var attr in data) {length++;}
+			}
+
+			if (length == 0) {
+				core.module.toast.show(core.module.localization.msg.alert_cannot_find_word);
+			}
+
 			self.set_search_treeview(data);
 			core.module.loading_bar.stop();
 		});

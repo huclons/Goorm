@@ -107,11 +107,11 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 				console.log('      $ node goorm.js set -t temp');
 				console.log('      $ goorm set --temp-directory temp_files');
 				console.log('');
+
+				
+
 				console.log('      $ node goorm.js set -x plugin_exclude_list');
 				console.log('      $ goorm set --plugin_exclude_list [plugin_exclude_list]');
-				console.log('');
-				console.log('      $ node goorm.js set -u [user_id]');
-				console.log('      $ goorm set --user [user_id]');
 				console.log('');
 				console.log('  Command: Clean Configs');
 				console.log('');
@@ -449,8 +449,7 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 			
 
 			.option('-x, --plugin_exclude_list [plugin_exclude_list]','Set the plugin list you want to exclude plugin loading (ex)[\"org.goorm.plugin.c\",\"org.goorm.plugin.cpp\",\"org.goorm.plugin.java\"]')
-			.option('-u, --user [user_id]', 'Set the user')
-			.action(function (env, options) {
+			.action(function (env, options) {	
 				
 				if (!fs.existsSync(process.env.HOME + '/.goorm/')) {
 					fs.mkdirSync(process.env.HOME + '/.goorm/');
@@ -469,9 +468,10 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 					var workspace = config_data.workspace || process.env.PWD + '/' + "workspace/";
 					var temp_dir = config_data.temp_dir || process.env.PWD + '/' + "temp_files/";
 
-					var plugin_exclude_list = config_data.plugin_exclude_list || null;
-					var users = config_data.users || [];
+					
 
+					var plugin_exclude_list = config_data.plugin_exclude_list || null;
+					
 					if (options.workspace)	 {	
 						workspace = options.workspace || process.env.PWD + '/' + "workspace/";
 						
@@ -507,6 +507,7 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 					if(workspace && workspace[workspace.length - 1] != '/') workspace = workspace + '/';
 					if(temp_dir && temp_dir[temp_dir.length - 1] != '/') temp_dir = temp_dir + '/';
 
+					
 					if(options['user']) {
 						if (options['user'] === true) {
 							console.log('Please input your id'.red);
@@ -577,13 +578,13 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 							plugin_exclude_list : plugin_exclude_list,
 							users: users
 						};
-						
-						
-						
-				
+
 						fs.writeFileSync(process.env.HOME +  '/.goorm/config.json', JSON.stringify(config_data), 'utf8');
 						console.log("goormIDE: your configs are successfully added!");
 					}
+					
+					
+					
 				}
 			})
 		
