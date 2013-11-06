@@ -142,4 +142,5 @@ project.goorm
         
 라이센스
 ------
-구름은 AGPLv3 라이센스를 따르고 있습니다. [GNU AFFERO General Public License Version 3.0(AGPLv3)](http://opensource.org/licenses/agpl-v3.html)
+
+구름은 기본적으로 듀얼 라이센스를 가지고 있습니다. 현재 오픈 소스로 공개중인 버전은 AGPLv3을 따르는 오픈 소스 프로젝트이며, 소스 코드를 수정하셔서 사용하는 경우에는 반드시 동일한 라이센스로 소스 코드를 공개하여야 합니다. 만약 구름 IDE를 상업적으로 이용하실 경우에는 라이센스를 구매하여 사용하셔야 합니다. (contact@goorm.io)
