@@ -151,4 +151,4 @@ Getting Started
 License
 -------
 
-goorm is provided under the [GNU AFFERO General Public License Version 3.0(AGPLv3)](http://opensource.org/licenses/agpl-v3.html)
+goormIDE fundamentally has a dual license. Currently being released as open source version is the AGPL v3 conforms to the open source project. Modifying the source code must be disclosed the source code using the same license. If you want to use goorm IDE commercially, you must purchase the license.(contact@goorm.io)
