@@ -26,6 +26,7 @@ org.goorm.core.edit = function () {
     this.keywords = null;
     this.collaboration = null;
     this.theme = "elegant"; //"default", "neat", "elegant", "night", "cobalt"
+    this.theme_cursor_highlight_color = "#e8f2ff !important;";
     this.mode = "htmlmixed";
     this.font_size = 11;
     this.indent_unit = 2;
@@ -92,7 +93,7 @@ org.goorm.core.edit.prototype = {
         this.font_manager = new org.goorm.core.edit.font_manager();
         this.timestamp = new Date().getTime();
 
-        var get_editor_style = function (type) {
+       this.get_editor_style = function (type) {
             var preference_type = "preference.editor." + type;
             var style = options[type];
 
@@ -105,8 +106,8 @@ org.goorm.core.edit.prototype = {
             return (style) ? style : ((self.preference[preference_type] !== undefined) ? self.preference[preference_type] : true);
         }
 
-        this.highlight_current_cursor_line = get_editor_style('highlight_current_cursor_line');
-        this.auto_close_brackets = get_editor_style('auto_close_brackets');
+        this.highlight_current_cursor_line = this.get_editor_style('highlight_current_cursor_line');
+        this.auto_close_brackets = this.get_editor_style('auto_close_brackets');
 
         var __target = $(target);
 
@@ -421,7 +422,7 @@ org.goorm.core.edit.prototype = {
         });
         cm_editor.on("change", function (i, e, a) {
             // i = CodeMirror object, e = change informations;
-            if (self.history && self.history.mode == "history") return;
+            if (self.editor.history_mode == "history") return;
             if (self.pressed_key == "backspace" || self.pressed_key == "{") {
                 self.set_foldable(self.editor.getCursor().line);
             }
@@ -439,6 +440,7 @@ org.goorm.core.edit.prototype = {
             }
         });
         cm_editor.on("cursorActivity", function () {
+            if (self.editor.history_mode == "history") return;
 
             //by sim
             if (!(self.editor.getCursor().line == self.history_line && self.editor.getCursor().ch == self.history_ch + 1)) {
@@ -531,6 +533,7 @@ org.goorm.core.edit.prototype = {
         }
 
         cm_editor.on('update', function () {
+            $('.CodeMirror-activeline-background').attr('style', self.theme_cursor_highlight_color);
             $(self).trigger('editor_update');
         });
     },
@@ -778,6 +781,12 @@ org.goorm.core.edit.prototype = {
         this.theme = (options.theme) ? options.theme : this.preference["preference.editor.theme"];
         this.vim_mode = (options.vim_mode) ? options.vim_mode : false;
 
+
+        this.auto_close_brackets = self.get_editor_style('auto_close_brackets');
+        this.highlight_current_cursor_line = self.get_editor_style('highlight_current_cursor_line');
+        this.editor.setOption("styleActiveLine", this.highlight_current_cursor_line);
+        this.editor.setOption('autoCloseBrackets', this.auto_close_brackets);
+
         if (this.vim_mode) {
             this.editor.setOption("keyMap", "vim");
         }
@@ -799,10 +808,25 @@ org.goorm.core.edit.prototype = {
         }
         if (this.theme !== undefined && this.theme != "default") {
             $("<link>").attr("rel", "stylesheet").attr("type", "text/css").attr("href", "/lib/net.codemirror.code/theme/" + this.theme + ".css").appendTo("head");
+
+            var dark_themes = ['ambiance', 'blackboard', 'cobalt', 'erlang-dark', 'monokai', 'rubyblue', 'vibrant-ink', 'xq-dart', 'night'];
+            if (dark_themes.indexOf(this.theme) > - 1) {
+                this.theme_cursor_highlight_color = 'background-color:#eee8aa !important; opacity:0.3';
+                $('.CodeMirror-activeline-background').attr('style', this.theme_cursor_highlight_color);
+            }
+            else {
+                this.theme_cursor_highlight_color = 'background-color:#e8f2ff !important;';
+                $('.CodeMirror-activeline-background').attr('style', this.theme_cursor_highlight_color);
+            }
+
             this.editor.setOption("theme", this.theme);
         }
         if (this.theme == "default") {
             $("<link>").attr("rel", "stylesheet").attr("type", "text/css").attr("href", "/lib/net.codemirror.code/lib/codemirror.css").appendTo("head");
+
+            this.theme_cursor_highlight_color = 'background-color:#e8f2ff !important;';
+            $('.CodeMirror-activeline-background').attr('style', this.theme_cursor_highlight_color);
+
             this.editor.setOption("theme", this.theme);
         }
 
@@ -827,11 +851,10 @@ org.goorm.core.edit.prototype = {
 
             var postdata = {
                 'token': token,
-                'workspace': workspace,
-                'project_type': project_type
+                'workspace': workspace
             };
 
-            $.get('/edit/load_tags', postdata, function (response) {
+            $.get('/edit/jump_to_definition', postdata, function (response) {
                 if (response.result) {
                     callback(response.data);
                 } else {
@@ -899,37 +922,62 @@ org.goorm.core.edit.prototype = {
             type: 'get_workspace_file'
         };
 
-        $.get(url, postdata, function (data) {
-            if (data) self.editor.setValue(data);
-            else{
-                if(data===false){
-                    alert.show(core.module.localization.msg.alert_open_file_fail);
-                }
+        var callback_wrapper= function(is_restore, restore_data){
+            return function(data){
+                if (data) self.editor.setValue(data);
                 else{
-                    self.editor.setValue("");  
+                    if(data===false){
+                        alert.show(core.module.localization.msg.alert_open_file_fail);
+                    }
+                    else{
+                        self.editor.setValue("");  
+                    }
+                } 
+
+                
+                
+                
+
+                self.editor.clearHistory();
+
+                self.set_foldable();
+
+                if (filetype != "url") {
+                    self.dictionary.init(self.target, self.editor, self.filetype);
+                    self.jump_to_definition.init(self.target, self.editor);
                 }
-            } 
+                if(!is_restore){
+                    var window_manager = core.module.layout.workspace.window_manager;
 
-            
+                    window_manager.window[window_manager.active_window].set_saved();
 
-            self.editor.clearHistory();
+                    window_manager.tab[window_manager.active_window].set_saved();
+                }else{
+                    try{
+                        setTimeout(function(){
+                            self.editor.setValue(restore_data);
+                        }, 1000);
+                    }catch(e){}
+                }
+                self.on_activated();
 
-            self.set_foldable();
-
-            if (filetype != "url") {
-                self.dictionary.init(self.target, self.editor, self.filetype);
-                self.jump_to_definition.init(self.target, self.editor);
+                $(core).trigger(filepath + '/' + filename + 'window_loaded');
             }
+        }
+       
+        if(!options.restore)
+            $.get(url, postdata, callback_wrapper(false,null) );
+        else{
+            var unsaved_data='';
+            for(var i=0;i<org.goorm.core.edit.prototype.unsaved_data.length;i++){
+                if(  org.goorm.core.edit.prototype.unsaved_data[i].filename==self.filename && org.goorm.core.edit.prototype.unsaved_data[i].filepath==self.filepath){
+                    unsaved_data=org.goorm.core.edit.prototype.unsaved_data[i].data;
+                    break;
+                }
+            }
+            $.get(url, postdata, callback_wrapper(true, unsaved_data) );
 
-            var window_manager = core.module.layout.workspace.window_manager;
-
-            window_manager.window[window_manager.active_window].set_saved();
-
-            window_manager.tab[window_manager.active_window].set_saved();
-            self.on_activated();
-
-            $(core).trigger(filepath + '/' + filename + 'window_loaded');
-        });
+        }
     },
 
     save: function (option, isBuilt) {
@@ -1032,12 +1080,38 @@ org.goorm.core.edit.prototype = {
         //project_type project_type
         var postdata={};
         postdata.workspace = self.filepath.split('/')[0];
-        postdata.project_type= core.workspace[postdata.workspace].type;
-
         switch(current_file_type){
             case 'c':
             case 'cpp':
-                $.post('/edit/save_tags', postdata);
+            case 'java':
+            case 'py':
+                $.post('/edit/save_tags', postdata, function (){
+                    var active_file = core.module.layout.workspace.window_manager.active_filename;
+                    var workspace = active_file.split('/')[0];
+                    var path = active_file.split('/')
+                    path.shift();
+                    path = path.join('/');
+
+                    $.get("edit/get_object_explorer", {
+                        'path' : path,
+                        'workspace' : workspace
+                    }, function (data) {
+                        console.log(data);
+
+                        if(!data)return false;
+                        if (data.err_code) {
+                            switch (data.err_code) {
+                                case 0:
+                                    console.log('Object explorer parsing error');
+                                    break;
+                            }
+                            return false;
+                        }
+
+                        core.module.layout.object_explorer.refresh('object_tree', data);
+                    });
+                });
+                break;
             case 'html':
             case 'css':
                 $.get("edit/get_object_explorer", {
@@ -1057,12 +1131,10 @@ org.goorm.core.edit.prototype = {
                     core.module.layout.object_explorer.refresh('object_tree', data);
                 });
                 break;
-            case 'java':
-                $.post('/edit/save_tags', postdata);
-                break;
             default:
                 break;
         }
+
     },
 
     get_contents: function () {
@@ -1296,6 +1368,32 @@ org.goorm.core.edit.prototype = {
         switch(self.filename.split('.').pop()){
             case 'c':
             case 'cpp':
+            case 'java':
+            case 'py':
+                var active_file = self.filepath + self.filename;
+                var workspace = active_file.split('/')[0];
+                var path = active_file.split('/')
+                path.shift();
+                path = path.join('/');
+
+                $.get("edit/get_object_explorer", {
+                    'path' : path,
+                    'workspace' : workspace
+                }, function (data) {
+                    if(!data)return false;
+                    if (data.err_code) {
+                        switch (data.err_code) {
+                            case 0:
+                                console.log('Object explorer parsing error');
+                                break;
+                        }
+                        return false;
+                    }
+
+                    core.module.layout.object_explorer.refresh('object_tree', data);
+                });
+                break;
+
             case 'html':
             case 'css':
                 $.get("edit/get_object_explorer", {
@@ -1331,6 +1429,67 @@ org.goorm.core.edit.prototype = {
         return "";
 
     },
+
+
+     save_unsaved_file_in_local : function(){
+        var docu=core.module.layout.workspace.window_manager.window;
+        var unsaved_data=[];
+        for(var i=0;i<docu.length;i++){
+            if(!docu[i].is_saved){
+                var path=docu[i].filepath+docu[i].filename;
+
+                unsaved_data.push({
+                    'path' : path,
+                    'filepath': docu[i].filepath,
+                    'filename': docu[i].filename,
+                    'filetype': docu[i].filetype,
+                    'data' :  docu[i].editor.get_contents()
+                });
+
+            }
+        }
+        if(unsaved_data.length>0)
+            localStorage.unsaved_data=JSON.stringify(unsaved_data)
+
+        
+    },
+
+    restore_unsaved_file_from_local : function(){
+
+        if(!localStorage.unsaved_data)return false;
+        var unsaved_data=JSON.parse(localStorage.unsaved_data);
+        if(!unsaved_data || unsaved_data.length==0)return false;
+
+        //1. already opened in workspace
+        var docu=core.module.layout.workspace.window_manager.window;
+        var delete_index=[];
+        for(var k=0;k<unsaved_data.length;k++){
+            for(var i=0;i<docu.length;i++){
+                if(unsaved_data[k].path==docu[i].filepath+docu[i].filename){
+                    docu[i].editor.editor.setValue(unsaved_data[k].data);
+                    delete_index.push(k);
+
+                }
+            }
+        }
+        delete_index.sort();
+        for(var i=delete_index.length-1;i>=0;i--){
+            unsaved_data.remove(delete_index[i]);
+        }
+
+
+        //2. should open new window
+        org.goorm.core.edit.prototype.unsaved_data=unsaved_data;
+
+        for(var i=0;i<unsaved_data.length;i++){
+            var filepath=unsaved_data[i].filepath;
+            var filename=unsaved_data[i].filename;
+            var filetype=unsaved_data[i].filetype;
+            core.module.layout.workspace.window_manager.open(filepath, filename, filetype, undefined, {restore:true});
+        }
+        localStorage.unsaved_data='';
+    },
+
 
     error_manager: {
         'parent': null,

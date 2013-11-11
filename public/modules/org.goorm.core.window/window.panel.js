@@ -165,7 +165,7 @@ org.goorm.core.window.panel.prototype = {
 
 			this.editor = new org.goorm.core.edit();
 			this.editor.init($("#" + container).find(".window_container"), null, this.filepath, options);
-			this.editor.load(this.filepath, this.filename, this.filetype);
+			this.editor.load(this.filepath, this.filename, this.filetype, options);
 			this.editor.set_mode(mode);
 
 		} else if (editor == "Designer") {
@@ -210,7 +210,7 @@ org.goorm.core.window.panel.prototype = {
 				var mode = core.filetypes[this.inArray(this.filetype)].mode;
 				this.editor = new org.goorm.core.edit();
 				this.editor.init($("#" + container).find(".window_container"), null, this.filepath);
-				this.editor.load(this.filepath, this.filename, this.filetype);
+				this.editor.load(this.filepath, this.filename, this.filetype, options);
 				this.editor.set_mode(mode);
 			} else if (this.type == "Designer") {
 				this.designer = new org.goorm.core.design();
@@ -226,7 +226,7 @@ org.goorm.core.window.panel.prototype = {
 
 			this.editor = new org.goorm.core.edit();
 			this.editor.init($("#" + container).find(".window_container"));
-			this.editor.load(this.filepath, this.filename, 'txt');
+			this.editor.load(this.filepath, this.filename, 'txt', options);
 			this.editor.set_mode(mode);
 		}
 

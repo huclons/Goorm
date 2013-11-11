@@ -335,6 +335,9 @@ Terminal.prototype.bindKeys = function(element) {
   var parent = $(element).parent();
 
   parent.keydown(function(ev){
+    if(core.module.layout.terminal.Terminal.ybase!=core.module.layout.terminal.Terminal.ydisp){
+      core.module.layout.terminal.Terminal.scrollDisp(10000);
+    }
     return Terminal.focus.keyDown(ev);
   })
 
@@ -380,7 +383,7 @@ Terminal.prototype.open = function(parent, target, extra, fn) {
     "terminal_name": extra.terminal_name,
     "uid" : core.user.uid,
     "gid" : core.user.gid,
-    "user": core.user.id
+    // "user": core.user.id
   };
 
   this.parent.socket.emit("terminal_init", JSON.stringify(msg));
@@ -2478,7 +2481,7 @@ Terminal.prototype.handler = function(data) {
   // this.emit('data', data);
   var msg = {
     index: this.parent.index,
-    user: core.user.id,
+    // user: core.user.id,
     command: data
   };
 

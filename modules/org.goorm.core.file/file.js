@@ -1331,7 +1331,7 @@ module.exports = {
 				current_cnt++;
 				if(current_cnt===dir_arr.length){
 					//res.json(total_result);
-					authority_setting(req.body.target_path.split('/')[0], req.body.target_path.split('/')[0]);
+					
 					evt.emit("upload_dir_skeleton", total_result);
 				}
 

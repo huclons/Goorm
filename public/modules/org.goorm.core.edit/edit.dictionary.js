@@ -97,6 +97,7 @@ org.goorm.core.edit.dictionary.prototype = {
 					self.editor.focus();
 				} else if (code == 8 || code == 46) {
 					self.editor.triggerOnKeyDown(e);
+					self.editor.focus();
 				}
 				else {
 					self.editor.focus();
@@ -261,6 +262,45 @@ org.goorm.core.edit.dictionary.prototype = {
 		dictionary_list_table.empty();
 		dictionary_desc.empty().css("display", "none");
 
+		var value = this.editor.getValue();
+		var all_words = this.get_words(value);
+		var words = [];
+
+		if (keyword !== "") {
+			all_words = all_words.filter(function (o){
+				if (o.indexOf(keyword) == 0) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			});
+		}
+
+		all_words.map(function (o){
+			var is_push = true;
+
+			for(var i=0; i<self.result.length; i++) {
+				var keyword = self.result[i].keyword;
+
+				if (o == keyword) {
+					is_push = false;
+					break;
+				}
+			}
+
+			if (is_push) {
+				words.push(o);
+			}
+		});
+
+		for (var i=0; i<words.length; i++) {
+			this.result.push({
+				'description' : "",
+				'keyword' : words[i],
+				'type' : 'key'
+			});
+		}
 
 		if (this.result.length === 0) {
 			var not_data = {
@@ -269,7 +309,6 @@ org.goorm.core.edit.dictionary.prototype = {
 			};
 			this.result.push(not_data);
 		}
-
 
 		$(this.result).each(function (i) {
 			var ele_id = "dict_" + i;
@@ -379,13 +418,21 @@ org.goorm.core.edit.dictionary.prototype = {
 						var desc_target = ele_target + "_desc";
 						if (__target.find('#' + desc_target).attr('is_not_data') != 'true')
 							__target.find('#' + desc_target).css("display", "");
+
+						if (__target.find('#' + desc_target + ' div').html() == "") {
+							dictionary_desc.hide();
+							__target.find('.dictionary_box .yui-resize-handle').hide();
+						}
+						else {
+							__target.find('.dictionary_box .yui-resize-handle').show();
+						}
 					}
 
 				};
 
 				display_desc(g_ele_target);
 
-				var guide_html = dictionary_desc.height();
+				var guide_html = (dictionary_desc.css('display') == 'none') ? 0 : dictionary_desc.height();
 				var list_height = dictionary_list.height();
 				var box_height = list_height + guide_html;
 
@@ -493,7 +540,15 @@ org.goorm.core.edit.dictionary.prototype = {
 						var desc_target = ele_target + "_desc";
 						$(self.target).find('#' + desc_target).css("display", "");
 
-						var guide_html = dictionary_desc.height();
+						if ($(self.target).find('#' + desc_target + ' div').html() == "") {
+							dictionary_desc.hide();
+							__target.find('.dictionary_box .yui-resize-handle').hide();
+						}
+						else {
+							__target.find('.dictionary_box .yui-resize-handle').show();
+						}
+
+						var guide_html = (dictionary_desc.css('display') == 'none') ? 0 : dictionary_desc.height();
 						var list_height = dictionary_list.height();
 						var box_height = list_height + guide_html;
 
@@ -506,6 +561,80 @@ org.goorm.core.edit.dictionary.prototype = {
 				display_desc(g_ele_target);
 			}
 		});
+	},
+
+	get_words: function (value) {
+		var words = [];
+
+		if (value) {
+
+			// delete comment /**/, //
+			//
+			value = value.replace(/(?:\/\*(?:[\s\S]*?)\*\/)|(?:([\s;])+\/\/(?:.*)$)/g, '')
+
+			// line split
+			//
+			var temp_words = value.split('\n').filter(function (o){
+				if (o) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			});
+
+			// Space Bar
+			//
+			temp_words.map(function (o){
+				words = words.concat(o.split(' '));
+			});
+
+			// Tab
+			//
+			temp_words = [];
+			words.map(function (o){
+				temp_words = temp_words.concat(o.split('	'));
+			});
+
+			temp_words.map(function (o){
+				o = o.trim();
+				return o;
+			});
+
+			words = temp_words.unique();
+
+			var special_characters = ['!', '@', "#", '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '`', '~', '{', '}', ':', ';', '"', "'", '<', '>', '/', '?', '|', '\\', ','];
+			words = words.filter(function (o){
+				if (special_characters.indexOf(o) > -1) {
+					return false;
+				}
+				else {
+					return true;
+				}
+			});
+
+			words = words.map(function (o){
+				var length = o.length;
+				for(var i=0; i<length; i++) {
+					var last_word = o[o.length-1];
+					if (special_characters.indexOf(last_word) > -1) o = o.slice(0, -1);
+				}
+
+				if (o.indexOf('(') > 0) o = o.slice(0, o.indexOf('('));
+				return o;
+			});
+
+			words = words.filter(function (o){
+				if (!/^[a-zA-Z0-9_]+$/.test(o)) {
+					return false;
+				}
+				else {
+					return true;
+				}
+			});
+		}
+
+		return words;
 	},
 
 	show: function (cm) {
@@ -590,6 +719,11 @@ org.goorm.core.edit.dictionary.prototype = {
 
 		var self = this;
 		self.result = [];
+
+		var special_characters = ['!', '@', "#", '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '`', '~', '{', '}', ':', ';', '"', "'", '<', '>', '/', '?', '|', '\\'];
+		if (special_characters.indexOf(keyword) > -1) {
+			keyword = '\\' + keyword;
+		}
 
 		var reg_exp = new RegExp('^' + keyword, '');
 		var keyword_object = {};
@@ -717,8 +851,6 @@ org.goorm.core.edit.dictionary.prototype = {
 			selected_file_path: core.module.layout.workspace.window_manager.active_filename,
 			line: query
 		}, function (data) {
-			console.log(query, ' proposal data ', data);
-
 			self.result = data;
 			self.set(query);
 			if (typeof callback === "function") {

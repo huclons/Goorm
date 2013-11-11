@@ -95,8 +95,45 @@ org.goorm.core.object.explorer.prototype = {
 					var active_window = core.module.layout.workspace.window_manager.active_window;
 					var editor = core.module.layout.workspace.window_manager.window[active_window].editor.editor;
 
-					editor.setCursor(line-1);
+					var linedata = editor.getLine(line-1);
+					var active_line = line - 1;
+					if (linedata.indexOf(extra_data.name) == -1) {
+						active_line = line; 
+					}
+
+					editor.setCursor(active_line);
 					break;
+
+				case 'java':
+					var line = extra_data.line;
+
+					var active_window = core.module.layout.workspace.window_manager.active_window;
+					var editor = core.module.layout.workspace.window_manager.window[active_window].editor.editor;
+
+					var linedata = editor.getLine(line-1);
+					var active_line = line - 1;
+					if (linedata.indexOf(extra_data.name) == -1) {
+						active_line = line; 
+					}
+
+					editor.setCursor(active_line);
+					break;
+
+				case 'py':
+					var line = extra_data.line;
+
+					var active_window = core.module.layout.workspace.window_manager.active_window;
+					var editor = core.module.layout.workspace.window_manager.window[active_window].editor.editor;
+
+					var active_line = (line - 2 < 0) ? line - 1 : line - 2;
+					var linedata = editor.getLine(active_line);
+					if (linedata.indexOf(extra_data.name) == -1) {
+						active_line = line - 1; 
+					}
+
+					editor.setCursor(active_line);
+					break;
+
 				case 'css':
 					var line = extra_data.line;
 

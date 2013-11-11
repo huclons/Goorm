@@ -244,7 +244,7 @@ org.goorm.core.edit.jump_to_definition.prototype = {
 			function_key = bind_syntax_highlighting(function_key);
 
 			var ele_html = "";
-			ele_html += "<tr class='function_box_tr function_item' filepath='" + item.filepath + "' _class='" + item.__class + "' query='" + print_key + "' item_index='" + item_index + "'>";
+			ele_html += "<tr class='function_box_tr function_item' filepath='" + item.filepath + "' _class='" + item.__class + "' query='" + print_key + "' item_index='" + item_index + "' line='"+item.line+"'>";
 			ele_html += "<td class='function_box_td column_type'>" + get_element_image(item.type) + "</td>";
 			ele_html += "<td class='function_box_td column_function'>" + function_key + "</td>";
 			ele_html += "</tr>";
@@ -279,19 +279,11 @@ org.goorm.core.edit.jump_to_definition.prototype = {
 			var guide_html = "";
 
 			if (active_window.filename == filename && active_window.filepath == filepath) {
-				var activated_window_editor = active_window.editor.editor;
-				var query = $(item).attr('query');
-				var line = 0;
-
-				for (var l = 0; l <= activated_window_editor.lastLine(); l++) {
-					if (activated_window_editor.getLine(l).indexOf(query) >= 0) {
-						line = l;
-					}
-				}
+				var line = parseInt($(item).attr("line"), 10);
 
 				guide_html += "<div class='function_box_guide_content'>";
 				guide_html += "<div class='guide_content column_class'><b>Class</b>:" + _class + "</div>";
-				guide_html += "<div class='guide_content column_filepath'><b>Line</b>:" + parseInt(line + 1, 10) + "</div>";
+				guide_html += "<div class='guide_content column_filepath'><b>Line</b>:" + parseInt(line - 1, 10) + "</div>";
 				guide_html += "</div>";
 			} else {
 				guide_html += "<div class='function_box_guide_content'>";
@@ -368,12 +360,25 @@ org.goorm.core.edit.jump_to_definition.prototype = {
 
 					var activated_window_editor = target_window.editor.editor;
 					var query = $(selected_item).attr('query');
+					var line = parseInt($(selected_item).attr('line'), 10) - 2;
 
-					for (var l = 0; l <= activated_window_editor.lastLine(); l++) {
-						if (activated_window_editor.getLine(l).indexOf(query) >= 0) {
-							activated_window_editor.setCursor(l);
-						}
+					if (line < 0) {
+						line = 0;
 					}
+
+					var linedata = activated_window_editor.getLine(line);
+					if (linedata.indexOf(query) == -1) {
+						line = parseInt($(selected_item).attr('line'), 10) - 1;
+					}
+
+					activated_window_editor.setCursor(line);
+					// var query = $(selected_item).attr('query');
+
+					// for (var l = 0; l <= activated_window_editor.lastLine(); l++) {
+					// 	if (activated_window_editor.getLine(l).indexOf(query) >= 0) {
+					// 		activated_window_editor.setCursor(l);
+					// 	}
+					// }
 
 					target_window.activate();
 				});
@@ -381,16 +386,30 @@ org.goorm.core.edit.jump_to_definition.prototype = {
 				if (is_loaded) {
 					var activated_window_editor = target_window.editor.editor;
 					var query = $(selected_item).attr('query');
+					var line = parseInt($(selected_item).attr('line'), 10) - 2;
 
-					var line_index = 0;
-					for (var l = 0; l <= activated_window_editor.lastLine(); l++) {
-						if (activated_window_editor.getLine(l).indexOf(query) >= 0) {
-							line_index = l;
-							window.setTimeout(function () {
-								activated_window_editor.setCursor(line_index);
-							}, 200);
-						}
+					if (line < 0) {
+						line = 0;
 					}
+
+					var linedata = activated_window_editor.getLine(line);
+					if (linedata.indexOf(query) == -1) {
+						line = parseInt($(selected_item).attr('line'), 10) - 1;
+					}
+
+					activated_window_editor.setCursor(line);
+
+					// var query = $(selected_item).attr('query');
+
+					// var line_index = 0;
+					// for (var l = 0; l <= activated_window_editor.lastLine(); l++) {
+					// 	if (activated_window_editor.getLine(l).indexOf(query) >= 0) {
+					// 		line_index = l;
+							// window.setTimeout(function () {
+							// 	activated_window_editor.setCursor(line_index);
+							// }, 200);
+					// 	}
+					// }
 
 					window.setTimeout(function () {
 						target_window.activate();
@@ -566,12 +585,25 @@ org.goorm.core.edit.jump_to_definition.prototype = {
 
 			var activated_window_editor = target_window.editor.editor;
 			var query = data.query.substring(2, data.query.length - 4);
+			var line = parseInt(data.line, 10) - 2;
 
-			for (var l = 0; l <= activated_window_editor.lastLine(); l++) {
-				if (activated_window_editor.getLine(l).indexOf(query) >= 0) {
-					activated_window_editor.setCursor(l);
-				}
+			if (line < 0) {
+				line = 0;
 			}
+
+			var linedata = activated_window_editor.getLine(line);
+			if (linedata.indexOf(query) == -1) {
+				line = parseInt(data.line, 10) - 1;
+			}
+
+			activated_window_editor.setCursor(line);
+			// var query = data.query.substring(2, data.query.length - 4);
+
+			// for (var l = 0; l <= activated_window_editor.lastLine(); l++) {
+			// 	if (activated_window_editor.getLine(l).indexOf(query) >= 0) {
+			// 		activated_window_editor.setCursor(l);
+			// 	}
+			// }
 
 			target_window.activate();
 		});
@@ -579,17 +611,29 @@ org.goorm.core.edit.jump_to_definition.prototype = {
 		if (is_loaded) {
 			var activated_window_editor = target_window.editor.editor;
 			var query = data.query.substring(2, data.query.length - 4);
+			var line = parseInt(data.line, 10) - 2;
 
-			var line_index = 0;
-			for (var l = 0; l <= activated_window_editor.lastLine(); l++) {
-				if (activated_window_editor.getLine(l).indexOf(query) >= 0) {
-					line_index = l;
-
-					window.setTimeout(function () {
-						activated_window_editor.setCursor(line_index);
-					}, 200);
-				}
+			if (line < 0) {
+				line = 0;
 			}
+
+			var linedata = activated_window_editor.getLine(line);
+			if (linedata.indexOf(query) == -1) {
+				line = parseInt(data.line, 10) - 1;
+			}
+
+			activated_window_editor.setCursor(line);
+
+			// var line_index = 0;
+			// for (var l = 0; l <= activated_window_editor.lastLine(); l++) {
+			// 	if (activated_window_editor.getLine(l).indexOf(query) >= 0) {
+			// 		line_index = l;
+
+					// window.setTimeout(function () {
+					// 	activated_window_editor.setCursor(line_index);
+					// }, 200);
+			// 	}
+			// }
 
 			target_window.activate();
 		}
@@ -603,11 +647,10 @@ org.goorm.core.edit.jump_to_definition.prototype = {
 
 		var postdata = {
 			'token': token,
-			'workspace': workspace,
-			'project_type': project_type
+			'workspace': workspace
 		};
 
-		$.get('/edit/load_tags', postdata, function (response) {
+		$.get('/edit/jump_to_definition', postdata, function (response) {
 			if (response.result) {
 				var data = response.data;
 

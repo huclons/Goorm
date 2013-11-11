@@ -3,7 +3,7 @@ BUILD_PATH=$2
 BUILD_OPTIONS=${*:3}
 LIST=`find $SOURCE_PATH -name "*.cpp" -o -name "*.c"`
 
-g++ $LIST -o $BUILD_PATH $BUILD_OPTIONS
+g++ -std=c++11 $LIST -o $BUILD_PATH $BUILD_OPTIONS
 
 if [ $? -ne 0 ]
 then

@@ -320,7 +320,7 @@ org.goorm.core.search = {
 
 		self.matched_file_list = [];
 
-		core.module.loading_bar.start("Loading......");
+		core.module.loading_bar.start("Searching......");
 
 		$.get("file/search_on_project", postdata, function (data) {
 			var length = 0;
@@ -329,11 +329,16 @@ org.goorm.core.search = {
 			}
 
 			if (length == 0) {
-				core.module.toast.show(core.module.localization.msg.alert_cannot_find_word);
+				core.module.loading_bar.stop();
+				
+				core.module.toast.show(core.module.localization.msg.alert_cannot_find_word, null, function (){
+					$('#search_query_inputbox').focus();
+				});
 			}
-
-			self.set_search_treeview(data);
-			core.module.loading_bar.stop();
+			else {
+				self.set_search_treeview(data);
+				core.module.loading_bar.stop();
+			}
 		});
 
 	},

@@ -75,8 +75,8 @@ org.goorm.core.menu.action = {
 
 						if (core !== undefined && core.user !== undefined) {
 							var postdata = {
-								'id': core.user.id,
-								'type': core.user.type,
+								// 'id': core.user.id,
+								// 'type': core.user.type,
 								'path': core.status.current_project_absolute_path
 							};
 
@@ -981,7 +981,9 @@ org.goorm.core.menu.action = {
 
 		$("a[action=help_bug_report]").off("click");
 		$("a[action=help_bug_report]").click(function () {
-			core.dialog.help_bug_report.show();
+			// core.dialog.help_bug_report.show();
+			survey.init(function () {});
+			survey.panel.show();
 		});
 		
 		//Context Menu : File

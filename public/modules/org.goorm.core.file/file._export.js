@@ -31,10 +31,10 @@ org.goorm.core.file._export = {
 				return false;
 			}
 
-			var name = core.user.id;
+			// var name = core.user.id;
 
 			var postdata = {
-				user: name,
+				// user: name,
 				path: data.path,
 				file: data.name
 			};

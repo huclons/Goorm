@@ -1,6 +1,0 @@
-{
-	"plugin.java_examples.main" : 		"project/main",
-	"plugin.java_examples.source_path" : 	"src/",
-	"plugin.java_examples.build_path" : 	"bin/",
-	"plugin.java_examples.build_option" : "-g"
-}

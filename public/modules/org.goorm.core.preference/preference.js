@@ -289,7 +289,7 @@ org.goorm.core.preference = {
 			});
 			$(targets[index]).find("select").each(function () {
 				if ($(this).attr("name") && $(this).attr("name") !== 'undefined' && key[$(this).attr("name")]) {
-					$(this).children("option[value = " + key[$(this).attr("name")] + "]").attr("selected", "true");
+					// $(this).children("option[value = " + key[$(this).attr("name")] + "]").attr("selected", "true");
 					$(this).val(key[$(this).attr("name")]);
 				}
 			});

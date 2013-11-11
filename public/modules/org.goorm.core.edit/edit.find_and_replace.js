@@ -222,7 +222,7 @@ org.goorm.core.edit.find_and_replace = {
 	},
 
 	find_all: function () {
-		core.module.loading_bar.start("Loading......");
+		core.module.loading_bar.start("Searching......");
 		var window_manager = core.module.layout.workspace.window_manager;
 		// Get current active_window's editor
 		if (window_manager.window[window_manager.active_window].editor) {
@@ -373,7 +373,9 @@ org.goorm.core.edit.find_and_replace = {
 				} else {
 					cursor = editor.getSearchCursor(text, null, caseFold);
 					if (!cursor.findNext()) {
-						core.module.toast.show(core.module.localization.msg.alert_cannot_find_word);
+						core.module.toast.show(core.module.localization.msg.alert_cannot_find_word, null, function (){
+							$("#find_query_inputbox").focus();
+						});
 						return;
 					}
 				}

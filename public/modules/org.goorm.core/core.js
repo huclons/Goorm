@@ -224,11 +224,30 @@ org.goorm.core.prototype = {
 			});
 
 			$(document).on("contextmenu", function (e) {
-				// terminal - open browser context menu
+				var target = $(e.target);
+
+				// terminal & communication & find/replace - open browser context menu
 				//
-				if ( !($(e.target).parent().attr('id') == 'terminal' || $(e.target).parent().hasClass('terminal')) ) {
+				if ( !(target.parent().attr('id') == 'terminal' 
+						|| target.parent().hasClass('terminal')
+						|| target.attr('id') == 'input_chat_message'
+						|| target.parent().hasClass('communication_message_container')
+						|| target.parent().hasClass('communication_message_content')
+						|| target.attr('id') == 'find_query_inputbox'
+						|| target.attr('id') == 'replace_query_inputbox'
+						|| target.attr('id') == 'search_query_inputbox'
+						) 
+					) {
 					e.preventDefault();
 				}
+			});
+
+			$(window).focus(function(){
+				$(self.focused).focus();
+			});
+
+			$(window).blur(function(){
+				self.focused = this;
 			});
 
 			self.module.action.init();

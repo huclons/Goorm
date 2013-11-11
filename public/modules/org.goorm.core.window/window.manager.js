@@ -290,6 +290,28 @@ org.goorm.core.window.manager = {
 				});
 
 			}
+
+
+			
+			if(localStorage.unsaved_data && JSON.parse(localStorage["language.confirmation.automatic_change"])==true){
+				confirmation.init({
+					message: core.module.localization.msg.confirmation_restore_unsaved_data,
+					yes_text: core.module.localization.msg.confirmation_yes,
+					no_text: core.module.localization.msg.confirmation_no,
+					title: "Confirmation",
+
+					yes: function () {
+						org.goorm.core.edit.prototype.restore_unsaved_file_from_local();
+					},
+					no: function () {
+						localStorage.unsaved_data='';
+					}
+				});
+
+				confirmation.panel.show();
+			}
+
+			
 			if (core.module.layout.history)
 				core.module.layout.history.wait_for_loading = false;
 		});
@@ -302,6 +324,7 @@ org.goorm.core.window.manager = {
 
 		$(window).unload(function () {
 			self.save_workspace();
+			org.goorm.core.edit.prototype.save_unsaved_file_in_local();
 		});
 
 		for (var i = 4; i >= 0; i--) {

@@ -33,10 +33,10 @@ org.goorm.core.project._export = {
 				return false;
 			}
 
-			var name = core.user.id;
+			// var name = core.user.id;
 
 			var postdata = {
-				user: name,
+				// user: name,
 				project_path: data.path,
 				project_name: data.name,
 				export_type: $("#project_export_datatype option:selected").text()
