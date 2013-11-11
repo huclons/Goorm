@@ -152,6 +152,9 @@
     "confirmation_build": {
         "value": "빌드"
     },
+    "confirmation_restore_unsaved_data" : {
+        "value" : "복구할 데이터들이 있습니다. 복구하시겠습니까?"
+    },
     "confirmation_save_message": {
         "value": " 는 수정되었습니다. 저장 하시겠습니까?"
     },
@@ -629,5 +632,11 @@
     },
     "someone_typing_message" : {
         "value" : " 님이 입력 중입니다..."
+    },
+    "confirmation_share_history_play" : {
+        "value" : "Play 이벤트를 다른 협업 개발자들과 공유하시겠습니까?"
+    },
+    "confirmation_history_play" : {
+        "value" : " 님이 Play 이벤트를 공유하고 싶어하십니다..<br>실행하시겠습니까?"
     }
 }

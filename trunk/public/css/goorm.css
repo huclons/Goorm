@@ -3492,6 +3492,11 @@ Optimized:Start
 	height: 200px;
 	overflow: auto;
 	padding: 9px;
+
+	-khtml-user-select: auto;
+	-moz-user-select: auto;
+	-webkit-user-select: auto;
+	user-select: auto;
 }
 
 #communication .communication_message_input_container {
@@ -3503,7 +3508,7 @@ Optimized:Start
 
 #communication .communication_submessage_area {
 	text-align: left;
-	padding: 5px;
+	
 	color: #555;
 }
 
@@ -3529,6 +3534,7 @@ Optimized:Start
 	text-align: left;
 	top: 58px;
 	width: 100%;
+	z-index: 1;
 }
 
 #message_container_close_button {
@@ -8091,6 +8097,7 @@ body .ui-tooltip {
 	box-sizing: border-box;
 
 	clear: both;
+	word-break: break-all;
 
 }
 
@@ -8106,6 +8113,7 @@ body .ui-tooltip {
 	width: 100%;
 	box-sizing: border-box;
 	clear: both;
+	word-break: break-all;
 
 }
 
@@ -8120,6 +8128,7 @@ body .ui-tooltip {
 	-moz-border-radius: 6px;
 	border-radius: 6px;
 	display: inline-block;
+	word-break: break-all;
 }
 
 

@@ -59,7 +59,7 @@ org.goorm.core.dialog.confirmation.save.prototype = {
 
 				if (typeof self.yes == "function")
 					self.yes();
-				this.hide();
+				self.panel.hide();
 
 				setTimeout(function() {
 					self.handler_flag = true;
@@ -73,7 +73,7 @@ org.goorm.core.dialog.confirmation.save.prototype = {
 
 				if (typeof self.cancel == "function")
 					self.cancel();
-				this.hide();
+				self.panel.hide();
 
 				setTimeout(function() {
 					self.handler_flag = true;

@@ -228,6 +228,24 @@ org.goorm.core.shortcut.manager = {
 			});
 		}
 
+
+		// new_terminal_window (Alt+Shift+T)
+		if (this.hotkeys.new_terminal_window) {
+			$(document).bind('keydown', this.hotkeys.new_terminal_window, function (e) {
+				if (!core.status.keydown) {
+					$($("a[action=new_terminal_window]").get(0)).trigger("click");
+					core.status.keydown = true;
+				}
+
+				core.module.layout.mainmenu.blur();
+
+				e.stopPropagation();
+				e.preventDefault();
+				return false;
+			});
+		}
+
+
 		//Close All (Alt+Shift+X)
 		if (this.hotkeys.close_all) {
 			$(document).bind('keydown', this.hotkeys.close_all, function (e) {

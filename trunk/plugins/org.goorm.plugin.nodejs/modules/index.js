@@ -16,6 +16,16 @@ var EventEmitter = require("events").EventEmitter
 var http = require('http');
 var exec = require('child_process').exec;
 
+//useronly(mode=service,demo,nodejs,class,jquery,pvm)
+var g_auth = require(__path+"modules/org.goorm.auth/auth.js")
+var message = require(__path+"modules/org.goorm.core.collaboration/collaboration.message.js")
+var g_collaboration = require(__path+"modules/org.goorm.core.collaboration/collaboration.js")
+var g_communication = require(__path+"modules/org.goorm.core.collaboration/collaboration.communication.js")
+var port_fingerprint = '__GOORM_RUN_PORT';
+var db_id_fingerprint = '__USER_DB_ID';
+var db_pw_fingerprint = '__USER_DB_PW';
+
+
 module.exports = {
 	do_new: function(req, res) {
 		var evt = new EventEmitter();
@@ -32,7 +42,12 @@ module.exports = {
 		*/
 		
 		evt.on("do_new_complete", function (data) {
+
+			
+
+			
 			res.json(data);
+			
 		});
 		
 		new_project.do_new(req, evt);

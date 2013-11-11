@@ -15,6 +15,7 @@
 
 org.goorm.core.utility.toast = {
 	panel: null,
+	default_duration: 0.5,
 
 	init: function () {
 		var self = this;
@@ -30,7 +31,7 @@ org.goorm.core.utility.toast = {
 			underlay: "none",
 			effect: {
 				effect: YAHOO.widget.ContainerEffect.FADE,
-				duration: 0.5
+				duration: self.default_duration
 			}
 		});
 
@@ -53,7 +54,7 @@ org.goorm.core.utility.toast = {
 				if (callback) {
 					window.setTimeout(function () {
 						callback();
-					}, 100);
+					}, self.default_duration*1000 + 100);
 				}
 
 			}, duration);
@@ -62,6 +63,12 @@ org.goorm.core.utility.toast = {
 			//default
 			window.setTimeout(function () {
 				self.panel.hide();
+
+				if (callback) {
+					window.setTimeout(function (){
+						callback();
+					}, self.default_duration*1000 + 100);
+				}
 			}, 1000);
 		}
 	}

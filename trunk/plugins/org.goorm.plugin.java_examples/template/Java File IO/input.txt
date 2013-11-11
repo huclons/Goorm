@@ -1,7 +1,0 @@
-Contents of input.txt
-
-Hello Goorm
-
-Test string
-
-You can change contents of input.txt

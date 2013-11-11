@@ -119,8 +119,7 @@ org.goorm.core.terminal.prototype = {
 				var msg = {
 					index: self.index,
 					workspace: core.status.current_project_path,
-					terminal_name: self.terminal_name,
-					user: core.user.id
+					terminal_name: self.terminal_name
 				};
 				self.socket.emit("terminal_leave", JSON.stringify(msg));
 			});
@@ -178,7 +177,6 @@ org.goorm.core.terminal.prototype = {
 
 					var msg = {
 						index: self.index,
-						user: core.user.id,
 						project_path: core.status.current_project_path
 					};
 
@@ -188,7 +186,11 @@ org.goorm.core.terminal.prototype = {
 
 			// result write
 			self.socket.on("pty_command_result", function (msg) {
-				if (self.terminal_name == msg.terminal_name && msg.user == core.user.id) {
+
+				
+
+				
+				if (self.terminal_name == msg.terminal_name) {
 					self.work_queue(msg.stdout);
 
 					if (!self.no_write) {
@@ -199,6 +201,7 @@ org.goorm.core.terminal.prototype = {
 						$(self.target).scrollTop($(self.target).parent().prop('scrollHeight'));
 					}
 				}
+				
 
 				if (self.terminal_name == 'debug') {
 					if (msg.stdout) {
@@ -256,10 +259,7 @@ org.goorm.core.terminal.prototype = {
 		var msg = {
 			"index": this.index,
 			"terminal_name": this.terminal_name,
-			"workspace": core.status.current_project_path,
-			"uid": core.user.uid,
-			"gid": core.user.gid,
-			"user": core.user.id
+			"workspace": core.status.current_project_path
 		};
 
 		this.socket.emit("terminal_refresh", JSON.stringify(msg));
@@ -327,7 +327,6 @@ org.goorm.core.terminal.prototype = {
 		if (this.index != -1) {
 			var msg = {
 				index: self.index,
-				user: core.user.id,
 				project_path: core.status.current_project_path
 			};
 

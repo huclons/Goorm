@@ -2,7 +2,7 @@
   "name": "goorm",
   "author": "xenoz0718 <xenoz0718@gmail.com> (http://www.goorm.org/)",
   "description": "Cloud based Integrated Development Enviroment.",
-  "version": "1.4.2-r236",
+  "version": "1.4.2-r239",
   "dependencies": {
     "colors": ">= 0.6.0-1",
     "css-parse": ">= 1.5.2",
@@ -19,12 +19,14 @@
     "rimraf": ">= 2.0.2",
     "socket.io": ">= 0.9.10",
     "walk": ">= 2.2.1",
-    "querystring": ">= 0.1.0"
+    "querystring": ">= 0.1.0",
+    "ejs": "0.8.4"
   },
   "main": "goorm.js",
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [
     "goorm",
@@ -36,5 +38,9 @@
     "test": "test"
   },
   "preferGlobal": "true",
-  "bin": "./goorm.js"
+  "bin": {
+    "goorm": "./goorm.js"
+  },
+  "readmeFilename": "README.md",
+  "repository": ""
 }

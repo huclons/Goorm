@@ -146,6 +146,9 @@
     "confirmation_build": {
         "value": "Build..."
     },
+    "confirmation_restore_unsaved_data" : {
+        "value" : "You have unsaved data. Do you want to recover?"
+    },
     "confirmation_save_message": {
         "value": " has been modified. Save changes?"
     },
@@ -621,5 +624,11 @@
     },
     "someone_typing_message" : {
         "value" : " is typing..."
+    },
+    "confirmation_share_history_play" : {
+        "value" : "Would you like to share Play event with another developers?"
+    },
+    "confirmation_history_play" : {
+        "value" : " wants to share Play event.<br>Are you sure?"
     }
 }

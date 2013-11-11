@@ -63,12 +63,7 @@ exports.index = function(req, res){
 	
 
 	
-	if( __optimization_mode ) {
-		res.render('main.html');
-	}
-	else {
-		res.render('index', { 'title': 'goormIDE', 'mode': mode });
-	}
+	res.render('main.html');
 	
 };
 
@@ -149,6 +144,8 @@ exports.project.do_export = function(req, res){
 	evt.on("project_do_export", function (data) {
 		res.json(data);
 	});
+
+	req.query.user = req.__user.id;
 	
 	g_project.do_export(req.query, evt);
 };
@@ -262,24 +259,9 @@ exports.file.do_new = function(req, res){
 	
 
 	
-	var project_path = req.query.path.split("/")[0];
-	if(req.query.path.split("/")[0] == "")
-		project_path = req.query.path.split("/")[1];
 
-	valid_project(project_path, req.__user.id, function(result){
-		if (result) {
-			g_file.do_new(req.query, evt);
-		}
-		else {
-			var res_data = {
-				err_code : 20,
-				message : 'alert_file_permission',
-				path: req.query.ori_name
-			}
-
-			res.json(res_data);
-		}
-	});
+	
+	g_file.do_new(req.query, evt);
 	
 };
 
@@ -293,24 +275,9 @@ exports.file.do_new_folder = function(req, res){
 	
 
 	
-	var project_path = req.query.current_path.split("/")[0];
-	if(req.query.current_path.split("/")[0] == "")
-		project_path = req.query.current_path.split("/")[1];
 
-	valid_project(project_path, req.__user.id, function(result){
-		if (result) {
-			g_file.do_new_folder(req.query, evt);
-		}
-		else {
-			var res_data = {
-				err_code: 20,
-				message : 'alert_file_permission',
-				path: req.query.ori_name
-			}
-
-			res.json(res_data);
-		}
-	});
+	
+	g_file.do_new_folder(req.query, evt);
 	
 };
 
@@ -324,24 +291,9 @@ exports.file.do_new_other = function(req, res){
 	
 
 	
-	var project_path = req.query.current_path.split("/")[0];
-	if(req.query.current_path.split("/")[0] == "")
-		project_path = req.query.current_path.split("/")[1];
 
-	valid_project(project_path, req.__user.id, function(result){
-		if (result) {
-			g_file.do_new_other(req.query, evt);
-		}
-		else {
-			var res_data = {
-				err_code: 20,
-				message : 'alert_file_permission',
-				path: req.query.ori_name
-			}
-
-			res.json(res_data);
-		}
-	});
+	
+	g_file.do_new_other(req.query, evt);
 	
 };
 
@@ -356,24 +308,9 @@ exports.file.do_new_untitled_text_file = function(req, res){
 	
 
 	
-	var project_path = req.query.current_path.split("/")[0];
-	if(req.query.current_path.split("/")[0] == "")
-		project_path = req.query.current_path.split("/")[1];
 
-	valid_project(project_path, req.__user.id, function(result){
-		if (result) {
-			g_file.do_new_untitled_text_file(req.query, evt);
-		}
-		else {
-			var res_data = {
-				err_code: 20,
-				message : 'alert_file_permission',
-				path: req.query.ori_name
-			}
-
-			res.json(res_data);
-		}
-	});
+	
+	g_file.do_new_untitled_text_file(req.query, evt);
 	
 };
 
@@ -382,30 +319,18 @@ exports.file.do_load = function(req, res){
 };
 
 exports.file.do_save_as = function(req, res){
+
 	var evt = new EventEmitter();
 	
 	evt.on("file_do_save_as", function (data) {
 		res.json(data);
 	});
 
-	var project_path = req.query.path.split("/")[0];
-	if(req.query.path.split("/")[0] == "")
-		project_path = req.query.path.split("/")[1];
+	
 
-	valid_project(project_path, req.__user.id, function(result){
-		if (result) {
-			g_file.do_save_as(req.query, evt);
-		}
-		else {
-			var res_data = {
-				err_code: 20,
-				message : 'alert_file_permission',
-				path: req.query.ori_name
-			}
-
-			res.json(res_data);
-		}
-	});
+	
+	g_file.do_save_as(req.query, evt);
+	
 };
 
 exports.file.do_delete_all = function(req, res){
@@ -413,81 +338,25 @@ exports.file.do_delete_all = function(req, res){
 	var files = req.query.files;
 	var directories = req.query.directorys;
 
-	var items = files.concat(directories);
+	
 
-	var evt = new EventEmitter();
-	evt.on('fail', function (){
-		var data = {};
-		data.err_code = 20;
-		data.message = "Can not delete file";
-
-		res.json({
-			result : data
-		});
-	});
-
-	evt.on('check_all', function (__evt, i){
-		if (items[i]) {
-			var path = items[i].split("/")[0];
-			if (path == "") path = items[i].split("/")[1];
-
-			valid_project(path, req.__user.id, function (result){
-				if(result) {
-					__evt.emit('check_all', __evt, ++i);
-				}
-				else {
-					__evt.emit('fail');
-				}
-			});
-		}
-		else {
-			g_file.do_delete_all(req.query, function(result){
-				res.json(result);
-			});
-		}
-	});
-
-	evt.emit('check_all', evt, 0);
+	
+	g_file.do_delete_all(req.query, function(result){
+		res.json(result);
+	});	
+	
 }
 exports.file.do_copy_file_paste = function(req, res){
 	var files = req.query.files || [];
 	var directories = req.query.directorys || [];
 
-	var items = files.concat(directories);
+	
 
-	var evt = new EventEmitter();
-	evt.on('fail', function (){
-		var data = {};
-		data.err_code = 20;
-		data.message = "Can not cp&paste file";
-
-		res.json({
-			result : data
-		});
+	
+	g_file.do_copy_file_paste(req.query, function(result){
+		res.json(result);
 	});
-
-	evt.on('check_all', function (__evt, i){
-		if (items[i]) {
-			var path = items[i].split("/")[0];
-			if (path == "") path = items[i].split("/")[1];
-
-			valid_project(path, req.__user.id, function (result){
-				if(result) {
-					__evt.emit('check_all', __evt, ++i);
-				}
-				else {
-					__evt.emit('fail');
-				}
-			});
-		}
-		else {
-			g_file.do_copy_file_paste(req.query, function(result){
-				res.json(result);
-			});
-		}
-	});
-
-	evt.emit('check_all', evt, 0);
+	
 }
 
 exports.file.do_delete = function(req, res){
@@ -790,6 +659,8 @@ exports.file.do_export = function(req, res){
 		res.json(data);
 	});
 
+	req.query.user = req.__user.id;
+
 	g_file.do_export(req.query, evt);
 };
 
@@ -945,6 +816,16 @@ exports.help.get_readme_markdown = function(req, res){
 	
 	res.json(data);
 };
+
+exports.help.send_to_bug_report = function(req, res) {
+	var evt = new EventEmitter();
+	
+	evt.on("help_send_to_bug_report", function (data) {
+		res.json(data);
+	});
+
+	g_help.send_to_bug_report(req.query, evt);
+}
 
 
 
@@ -1128,13 +1009,7 @@ exports.edit = function(req,res){
 }
 
 exports.edit.get_dictionary = function(req, res){
-	var evt = new EventEmitter();
-	
-	evt.on("edit_get_dictionary", function (data) {
-		res.json(data);
-	});
-
-	g_edit.get_dictionary(req.query, evt);
+	res.json({});
 };
 
 
@@ -1167,7 +1042,21 @@ exports.edit.get_object_explorer = function(req,res){
 	evt.on("got_object_explorer",function(data){
 		res.json(data);
 	});
+
+	
 	g_edit.get_object_explorer(req.query,evt);
+}
+
+
+exports.edit.jump_to_definition = function(req,res){
+	var evt =  new EventEmitter();
+
+	evt.on("jump_to_definition",function(data){
+		res.json(data);
+	});
+
+	
+	g_edit.get_jump_to_definition(req.query,evt);
 }
 
 

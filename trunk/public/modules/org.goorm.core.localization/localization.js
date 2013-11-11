@@ -190,13 +190,13 @@ org.goorm.core.localization = {
 		var self = this;
 		if (data) {
 			$.each(data, function (key, value) {
-				var helptext = $("[localization_key='" + key + "']").find(".helptext").html();
+				var localizations = $("[localization_key='" + key + "']");
+				var helptext = localizations.find(".helptext").html();
 
-				$("[localization_key='" + key + "']").html(this.value);
-				$("input[localization_key='" + key + "']").val(this.value);
+				localizations.html(this.value);
 
 				if (helptext) {
-					$("[localization_key='" + key + "']").append("<em class='helptext'>" + helptext + "</em>");
+					localizations.append("<em class='helptext'>" + helptext + "</em>");
 				}
 
 				// attach tooltip
@@ -216,13 +216,13 @@ org.goorm.core.localization = {
 		var replace_value = function (area, data) {
 			if (data) {
 				$.each(data, function (key, value) {
-					var helptext = $(area + " [localization_key='" + key + "']").find(".helptext").html();
+					var localizations = $(area + " [localization_key='" + key + "']");
+					var helptext = localizations.find(".helptext").html();
 
-					$(area + " [localization_key='" + key + "']").html(this.value);
-					$(area + " input[localization_key='" + key + "']").val(this.value);
+					localizations.html(this.value);
 
 					if (helptext) {
-						$(area + " [localization_key='" + key + "']").append("<em class='helptext'>" + helptext + "</em>");
+						localizations.append("<em class='helptext'>" + helptext + "</em>");
 					}
 
 					// attach tooltip

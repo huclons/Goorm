@@ -197,12 +197,7 @@ goorm.init = function() {
 	// Configuration
 	goorm.configure(function(){
 		goorm.set('views', __dirname + '/views');
-		if ( !__optimization_mode ) {
-			goorm.set('view engine', 'jade');
-		}
-		else {
-			goorm.engine('html', require('ejs').renderFile);
-		}
+		goorm.engine('html', require('ejs').renderFile);
 		goorm.use(express.bodyParser({ keepExtensions: true, uploadDir: __temp_dir, limit : 10000000 }));
 
 		
@@ -240,6 +235,13 @@ goorm.init = function() {
 
 	var check_session = function(req, res, next) {
 		
+		var user = config_data.users[0];
+
+		req.__user = user;
+		req.__user.name = user.id;
+		req.__user.nick = user.id;
+		req.__user.type = 'password';
+
 		next();
 		
 
@@ -318,8 +320,7 @@ goorm.init = function() {
 
 	//for help
 	goorm.get('/help/get_readme_markdown',  routes.help.get_readme_markdown);
-
-	
+	goorm.get('/help/send_to_bug_report',  routes.help.send_to_bug_report);
 
 	
 	goorm.post('/local_login', function (req, res){
@@ -392,11 +393,12 @@ goorm.init = function() {
 	})
 
 	goorm.get('/edit/get_dictionary',  routes.edit.get_dictionary);
-	goorm.get('/edit/get_object_explorer',routes.edit.get_object_explorer);
+	goorm.get('/edit/get_object_explorer', check_session, routes.edit.get_object_explorer);
+	goorm.get('/edit/jump_to_definition', check_session, routes.edit.jump_to_definition);
 	goorm.get('/function/get_function_explorer',routes.function.get_function_explorer);
 
-	goorm.post('/edit/save_tags', routes.edit.save_tags);
-	goorm.get('/edit/load_tags', routes.edit.load_tags);
+	goorm.post('/edit/save_tags', check_session, routes.edit.save_tags);
+	goorm.get('/edit/load_tags', check_session, routes.edit.load_tags);
 	
 	
 

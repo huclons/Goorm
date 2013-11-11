@@ -1,4 +1,4 @@
 {
 	"plugin.python.main" : 	"index",
-	"plugin.python.source_path" : 	"./"
+	"plugin.python.source_path" : 	""
 }

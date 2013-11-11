@@ -30,12 +30,12 @@ org.goorm.core.file.upload = {
 				return false;
 			}
 
-			var name = core.user.id;
+			// var name = core.user.id;
 
 			var postdata = {
-				user: name,
+				// user: name,
 				path: data.path,
-				file: data.name,
+				file: data.name
 			};
 
 			core.module.loading_bar.start("Export processing...");

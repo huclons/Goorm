@@ -37,11 +37,7 @@ module.exports = {
 	term: {},
 	io: null,
 
-	init: function (user_id) {
-		if (!this.term[user_id]) {
-			this.term[user_id] = [];
-		}
-	},
+	
 
 	start: function (io) {
 		var self = this;
@@ -185,10 +181,6 @@ module.exports = {
 			});
 
 			socket.on('terminal_leave', function (msg) {
-				msg = JSON.parse(msg);
-
-				socket.leave(msg.workspace + '/' + msg.terminal_name + '/' + msg.index);
-
 				
 
 				
@@ -200,19 +192,20 @@ module.exports = {
 			});
 
 			socket.on('pty_execute_command', function (msg) {
+
+				
+
+				
 				msg = JSON.parse(msg);
 				var do_exec = function (msg) {
 
-					
-
-					
 					if (self.term[msg.index] && self.term[msg.index].pty) {
 						self.exec(self.term[msg.index].pty, msg.command, msg.special_key);
 					}
-					
 				};
 
 				setTimeout(do_exec(msg), 100);
+				
 			});
 
 			socket.on('change_project_dir', function (msg) {
