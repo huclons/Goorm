@@ -445,6 +445,9 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 			.command('set [option]')
 			.option('-w, --workspace [dir_name]', 'Set the workspace directory')
 			.option('-t, --temp-directory [dir_name]', 'Set the temporary directory')
+			
+			.option('-u, --user [user_id]', 'Set the user')
+			
 
 			
 
@@ -508,6 +511,8 @@ fs.readFile(__dirname+"/info_goorm.json", "utf8", function(err, contents) {
 					if(temp_dir && temp_dir[temp_dir.length - 1] != '/') temp_dir = temp_dir + '/';
 
 					
+					var users = config_data.users || [];
+
 					if(options['user']) {
 						if (options['user'] === true) {
 							console.log('Please input your id'.red);
