@@ -1009,7 +1009,15 @@ exports.edit = function(req,res){
 }
 
 exports.edit.get_dictionary = function(req, res){
-	res.json({});
+	// var evt = new EventEmitter();
+	
+	// evt.on("edit_get_dictionary", function (data) {
+	// 	res.json(data);
+	// });
+
+	// g_edit.get_dictionary(req.query, evt);
+
+	res.json(data);
 };
 
 
