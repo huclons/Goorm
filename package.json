@@ -1,8 +1,8 @@
 {
   "name": "goorm",
-  "author": "xenoz0718 <xenoz0718@gmail.com> (http://www.goorm.org/)",
+  "author": "xenoz0718 <xenoz0718@gmail.com> (http://www.goorm.io/)",
   "description": "Cloud based Integrated Development Enviroment.",
-  "version": "1.4.3-r240",
+  "version": "1.4.3-r241",
   "dependencies": {
     "colors": ">= 0.6.0-1",
     "css-parse": ">= 1.5.2",

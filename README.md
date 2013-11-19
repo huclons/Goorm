@@ -17,7 +17,6 @@ Official Site
 -------------
 
 * http://goorm.io
-* http://goorm.org
 
 Features
 --------

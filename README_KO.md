@@ -17,7 +17,6 @@ project.goorm
 --------
 
 * http://goorm.io
-* http://goorm.org
 
 기능 소개
 -------
