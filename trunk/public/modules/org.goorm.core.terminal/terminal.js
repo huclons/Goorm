@@ -220,7 +220,22 @@ org.goorm.core.terminal.prototype = {
 
 			
 			self.socket.on('disconnect', function(){
-				notice.show(core.module.layout.localization.msg.server_is_end);
+				var lang_data = localStorage['language.data'];
+				var lang = localStorage['language'];
+
+				var msg = null;
+
+				if (lang_data) {
+					lang_data = JSON.parse(lang_data);
+
+					if (lang_data[lang]) {
+						msg = lang_data[lang]['msg']['server_is_end'].value;
+					}
+				}
+
+				if (msg) {
+					notice.show(msg, null, true);
+				}
 			});
 			
 		};

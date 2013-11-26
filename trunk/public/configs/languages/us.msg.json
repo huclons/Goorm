@@ -11,6 +11,9 @@
     "alert_filename_empty": {
         "value": "File name is empty"
     },   
+    "alert_filename_too_long" :{
+        "value" : "File name is too long (250 characters limit)"
+    },
     "alert_file_permission": {
         "value": "You do not have permission to modify the file"
     },
@@ -274,6 +277,9 @@
     },
     "confirmation_save_as_message": {
         "value": "Same file name already exists. Do you want to save anyway?"
+    },
+    "confirmation_copy_paste_message": {
+        "value": "Same file(folder) name already exists.<br/> Do you want to paste anyway?"
     },
      "alert_collaboration_previous_chatting":{
         "value" : "Previous Chatting"

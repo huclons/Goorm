@@ -256,10 +256,17 @@ org.goorm.core.search = {
 						caseFold = false;
 					}
 
+					var theme = cm.getOption('theme');
+					var search_class = 'searched';
+
+					if (__window.editor.dark_themes.indexOf(theme) > -1) {
+						search_class = 'searched-opacity';
+					}
+
 					for (var cursor = cm.getSearchCursor(self.query, null, caseFold); cursor.findNext();) {
 						self.marked.push(
 							cm.markText(cursor.from(), cursor.to(), {
-								'className' : 'searched'
+								'className' : search_class
 							})
 						);
 					}
@@ -301,6 +308,9 @@ org.goorm.core.search = {
 			$("#search_treeview").empty();
 			var html = "<div class='node' style='font-size: 11px; padding: 2px 5px;'>" + core.module.localization.msg.notice_no_matched_fild + "</div>";
 			$("#search_treeview").append(html);
+			core.module.toast.show(core.module.localization.msg.alert_cannot_find_word, null, function (){
+				$("#find_query_inputbox").focus();
+			});
 		}
 
 		if (window_manager.window[firstActivate])

@@ -1017,7 +1017,7 @@ exports.edit.get_dictionary = function(req, res){
 
 	// g_edit.get_dictionary(req.query, evt);
 
-	res.json(data);
+	res.json({});
 };
 
 

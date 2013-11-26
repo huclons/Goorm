@@ -162,7 +162,9 @@ org.goorm.core.file.save_as = {
 			alert.show(core.module.localization.msg.alert_file_not_opened);
 			// alert.show("Could not open this file");
 			return false;
-		} else {
+		} else if (window_manager.window[window_manager.active_window]) {
+			var filename = window_manager.window[window_manager.active_window].filename;
+
 			if (window_manager.window[window_manager.active_window].designer) {
 				self.contents_data = window_manager.window[window_manager.active_window].designer.get_contents();
 			} else if (window_manager.window[window_manager.active_window].editor) {
@@ -172,5 +174,7 @@ org.goorm.core.file.save_as = {
 
 		self.dialog_explorer.init("#file_save_as", false);
 		self.dialog.panel.show();
+
+		$('#file_save_as_target_name').val(filename);
 	}
 };

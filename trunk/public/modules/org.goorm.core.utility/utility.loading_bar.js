@@ -39,13 +39,14 @@ org.goorm.core.utility.loading_bar = {
 	start: function (str) {
 		this.loading_bar.setHeader(str);
 		this.loading_bar.show();
-		this.counter++;
+		//this.counter++;
 	},
 
 	stop: function () {
-		this.counter--;
-		if (this.counter === 0) {
-			this.loading_bar.hide();
-		}
+		// this.counter--;
+		// if (this.counter === 0) {
+		// }
+		this.loading_bar.hide();
+		
 	}
 };

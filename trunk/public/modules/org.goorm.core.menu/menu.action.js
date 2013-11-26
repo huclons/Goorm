@@ -509,24 +509,7 @@ org.goorm.core.menu.action = {
 			window.setTimeout(function(){
 				run_lock.data('disable',false);
 			},500);
-			if (core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] !== undefined && !$(this).hasClass('yuimenuitemlabel-disabled')) {
-				core.status.current_project_absolute_path = core.preference.workspace_path + core.status.current_project_path + "/";
-				core.module.layout.inner_bottom_tabview.selectTab(1);
-				core.module.layout.inner_layout.getUnitByPosition("bottom").expand();
-
-				
-				core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].run(core.status.current_project_path);
-				
-
-				
-			} else {
-				var result = {
-					result: false,
-					code: 0
-				};
-				core.module.project.display_error_message(result, 'alert');
-
-			}
+			core.module.project.run();
 		});
 
 		$("a[action=stop]").off("click");
@@ -550,7 +533,7 @@ org.goorm.core.menu.action = {
 		});
 
 		$("a[action=build_project]").off("click");
-		$("a[action=build_project]").click(function () {
+		$("a[action=build_project]").click(function (e) {
 
 			var build_lock=$(this);
 			if(build_lock.data('disable')===true){
@@ -563,15 +546,19 @@ org.goorm.core.menu.action = {
 
 			if (!$(this).hasClass('yuimenuitemlabel-disabled')) {
 				core.module.layout.inner_bottom_tabview.selectTab(1);
-				core.dialog.build_project.show();
-			}
-		});
 
-		$("a[action=build_all]").off("click");
-		$("a[action=build_all]").click(function () {
-			if (!$(this).hasClass('yuimenuitemlabel-disabled')) {
-				core.module.layout.inner_bottom_tabview.selectTab(1);
-				core.dialog.build_all.show();
+				if (core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] !== undefined) {
+
+					
+					core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].build(core.status.current_project_path);
+					
+
+					
+				}
+
+				e.stopPropagation();
+				e.preventDefault();
+				return false;
 			}
 		});
 
@@ -977,6 +964,11 @@ org.goorm.core.menu.action = {
 		$("a[action=help_about]").off("click");
 		$("a[action=help_about]").click(function () {
 			core.dialog.help_about.show();
+		});
+
+		$("a[action=help_about_private_url]").off("click");
+		$("a[action=help_about_private_url]").click(function () {
+			core.dialog.help_about_private_url.show();
 		});
 
 		$("a[action=help_bug_report]").off("click");

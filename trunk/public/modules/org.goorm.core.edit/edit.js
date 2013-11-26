@@ -27,6 +27,7 @@ org.goorm.core.edit = function () {
     this.collaboration = null;
     this.theme = "elegant"; //"default", "neat", "elegant", "night", "cobalt"
     this.theme_cursor_highlight_color = "#e8f2ff !important;";
+    this.dark_themes = ['ambiance', 'blackboard', 'cobalt', 'erlang-dark', 'monokai', 'rubyblue', 'vibrant-ink', 'xq-dark', 'night'];
     this.mode = "htmlmixed";
     this.font_size = 11;
     this.indent_unit = 2;
@@ -139,6 +140,7 @@ org.goorm.core.edit.prototype = {
                         CodeMirror.showHint(cm, CodeMirror.javascriptHint);
                         break;
                     case "text/html":
+                    case "application/x-httpd-php":
                         CodeMirror.showHint(cm, CodeMirror.htmlHint);
                         break;
                     case "text/x-python":
@@ -159,6 +161,7 @@ org.goorm.core.edit.prototype = {
                         self.dictionary.show(cm);
                         break;
                     case "text/x-java":
+                    case "application/x-ejs":
                         var cursor = cm.getCursor();
                         var token = cm.getTokenAt(cursor);
 
@@ -179,6 +182,11 @@ org.goorm.core.edit.prototype = {
                         self.dictionary.search(token.string, "java", query);
                         self.dictionary.show(cm);
                         break;
+                    default:
+                        var cursor = cm.getCursor();
+                        var token = cm.getTokenAt(cursor);
+                        self.dictionary.search(token.string, null, "");
+                        self.dictionary.show(cm);
                     }
                 },
                 "Shift-Ctrl-O": function (cm) {
@@ -228,6 +236,12 @@ org.goorm.core.edit.prototype = {
                 },
                 "Shift-Tab": function (cm) {
                     cm.indentSelection("subtract");
+                },
+                "F7" : function(cm){
+                    if (core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] !== undefined) {
+                        core.module.layout.inner_bottom_tabview.selectTab(1);
+                        core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].debug(core.status.current_project_path);
+                    }
                 }
             },
             onKeyEvent: function (i, e) {
@@ -433,7 +447,9 @@ org.goorm.core.edit.prototype = {
             var my_idx=self.get_editor_idx(self.filepath+self.filename);
             if(self.init_change && my_idx!=-1){
                 window_manager.window[my_idx].set_modified();
-                window_manager.tab[my_idx].set_modified();    
+                window_manager.tab[my_idx].set_modified();
+
+                self.set_do_undo();
             }
             else {
                 self.init_change = true;
@@ -638,6 +654,31 @@ org.goorm.core.edit.prototype = {
         }
     },
 
+    set_do_undo: function () {
+        // editor do/undo history
+        //
+        var do_history = this.editor.getHistory();
+
+        if (do_history.done && do_history.done.length > 0) {
+            $('div.toolbar-undo').removeClass('toolbar-unactivated');
+            $('a.menu-undo-unactivated').addClass('menu-undo').removeClass('menu-undo-unactivated');
+        }
+        else {
+            $('div.toolbar-undo').addClass('toolbar-unactivated');
+            $('a.menu-undo').addClass('menu-undo-unactivated').removeClass('menu-undo');
+        }
+
+
+        if (do_history.undone && do_history.undone.length > 0) {
+            $('div.toolbar-redo').removeClass('toolbar-unactivated');
+            $('a.menu-redo-unactivated').addClass('menu-redo').removeClass('menu-redo-unactivated');
+        }
+        else {
+            $('div.toolbar-redo').addClass('toolbar-unactivated');
+            $('a.menu-redo').addClass('menu-redo-unactivated').removeClass('menu-redo');
+        }
+    },
+
     //DEAD FUNC
     analyze: function () {
         var self = this;
@@ -809,9 +850,8 @@ org.goorm.core.edit.prototype = {
         if (this.theme !== undefined && this.theme != "default") {
             $("<link>").attr("rel", "stylesheet").attr("type", "text/css").attr("href", "/lib/net.codemirror.code/theme/" + this.theme + ".css").appendTo("head");
 
-            var dark_themes = ['ambiance', 'blackboard', 'cobalt', 'erlang-dark', 'monokai', 'rubyblue', 'vibrant-ink', 'xq-dart', 'night'];
-            if (dark_themes.indexOf(this.theme) > - 1) {
-                this.theme_cursor_highlight_color = 'background-color:#eee8aa !important; opacity:0.3';
+            if (this.dark_themes.indexOf(this.theme) > - 1) {
+                this.theme_cursor_highlight_color = 'background-color:#eee8aa !important; opacity:0.15';
                 $('.CodeMirror-activeline-background').attr('style', this.theme_cursor_highlight_color);
             }
             else {
@@ -1407,6 +1447,8 @@ org.goorm.core.edit.prototype = {
                 core.module.layout.object_explorer.clear();
                 break;
         }
+
+        this.set_do_undo();
 
         var window_manager = core.module.layout.workspace.window_manager;
 

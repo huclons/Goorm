@@ -24,6 +24,7 @@ org.goorm.core.edit.find_and_replace = {
 	ignore_whitespace: false,
 	use_regexp: false,
 	replace_cursor: null,
+	first_show: false,
 	matched_file_list: [],
 
 	init: function () {
@@ -295,8 +296,15 @@ org.goorm.core.edit.find_and_replace = {
 		var caseFold = true;
 		var firstActive;
 
-		if (this.use_regexp === true)
-			text = RegExp(keyword, "g");
+		if (this.use_regexp === true){
+			try{
+				text = RegExp(keyword, "g");
+			}catch(e){
+				alert.show(e)
+				core.module.loading_bar.stop();
+				return false;	
+			}
+		}
 		else {
 			if (this.match_case === true)
 				caseFold = false;
@@ -310,6 +318,7 @@ org.goorm.core.edit.find_and_replace = {
 			this.last_pos = null;
 
 		var cursor = editor.getSearchCursor(text, editor.getCursor(), caseFold);
+		console.log(cursor, text)
 		var window_manager = core.module.layout.workspace.window_manager;
 		firstActive = window_manager.active_window;
 
@@ -398,8 +407,15 @@ org.goorm.core.edit.find_and_replace = {
 		var text = keyword;
 		var caseFold = true;
 
-		if (this.use_regexp === true)
-			text = RegExp(keyword, "g");
+		if (this.use_regexp === true){
+			try{
+				text = RegExp(keyword, "g");
+			}catch(e){
+				alert.show(e)
+				core.module.loading_bar.stop();
+				return false;	
+			}
+		}
 		else {
 			if (this.match_case === true)
 				caseFold = false;
@@ -451,9 +467,16 @@ org.goorm.core.edit.find_and_replace = {
 					continue;
 				}
 				// search all matched words and set background of them yellow
+				var theme = editor.getOption('theme');
+				var search_class = 'searched';
+
+				if (window_manager.window[window_manager.active_window].editor.dark_themes.indexOf(theme) > -1) {
+					search_class = 'searched-opacity';
+				}
+
 				for (cursor = editor.getSearchCursor(text, null, caseFold); cursor.findNext();) {
 					this.marked.push(editor.markText(cursor.from(), cursor.to(), {
-						'className' : 'searched'
+						'className' : search_class
 					}));
 
 					var node = {};
@@ -496,9 +519,16 @@ org.goorm.core.edit.find_and_replace = {
 				return;
 			}
 			// search all matched words and set background of them yellow
+			var theme = editor.getOption('theme');
+			var search_class = 'searched';
+
+			if (window_manager.window[window_manager.active_window].editor.dark_themes.indexOf(theme) > -1) {
+				search_class = 'searched-opacity';
+			}
+
 			for (cursor = editor.getSearchCursor(text, null, caseFold); cursor.findNext();) {
 				this.marked.push(editor.markText(cursor.from(), cursor.to(), {
-					'className' : 'searched'
+					'className' : search_class
 				}));
 				var temp = {
 					fline: cursor.from().line,
@@ -567,8 +597,15 @@ org.goorm.core.edit.find_and_replace = {
 		var text = keyword1;
 		var caseFold = true;
 
-		if (this.use_regexp === true)
-			text = RegExp(keyword1, "g");
+		if (this.use_regexp === true){
+			try{
+				text = RegExp(keyword1, "g");
+			}catch(e){
+				alert.show(e)
+				core.module.loading_bar.stop();
+				return false;	
+			}
+		}
 		else {
 			if (this.match_case === true)
 				caseFold = false;
@@ -578,7 +615,7 @@ org.goorm.core.edit.find_and_replace = {
 
 		this.unmark();
 
-		for (var cursor = editor.getSearchCursor(text, null, caseFold); cursor.findNext();) {
+		for (var cursor = editor.getSearchCursor(text, null, caseFold); cursor.findNext();) {			
 			this.marked.push(editor.markText(cursor.from(), cursor.to(), {
 				'className' : 'searched'
 			}));
@@ -610,8 +647,16 @@ org.goorm.core.edit.find_and_replace = {
 			replace = keyword2;
 		var caseFold = true;
 
-		if (this.use_regexp === true)
-			text = RegExp(keyword1, "g");
+		if (this.use_regexp === true){
+			try{
+				text = RegExp(keyword1, "g");
+			}catch(e){
+				alert.show(e)
+				core.module.loading_bar.stop();
+				return false;	
+			}
+		}
+			
 		else {
 			if (this.match_case === true)
 				caseFold = false;
@@ -635,8 +680,16 @@ org.goorm.core.edit.find_and_replace = {
 			replace = keyword2;
 		var caseFold = true;
 		var n = 0;
-		if (this.use_regexp === true)
-			text = RegExp(keyword1, "g");
+		if (this.use_regexp === true){
+			try{
+				text = RegExp(keyword1, "g");
+			}catch(e){
+				alert.show(e)
+				core.module.loading_bar.stop();
+				return false;	
+			}
+		}
+			
 		else {
 			if (this.match_case === true)
 				caseFold = false;
@@ -706,6 +759,13 @@ org.goorm.core.edit.find_and_replace = {
 	},
 
 	show: function () {
+
+		if (!this.first_show) {
+			this.first_show = true;
+
+			var container_id = this.dialog.container_id;
+			core.module.localization.local_apply('#'+container_id, 'dialog');
+		}
 
 		var window_manager = core.module.layout.workspace.window_manager;
 

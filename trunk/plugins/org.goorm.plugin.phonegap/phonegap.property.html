@@ -1,0 +1,40 @@
+<div style="padding-left:30px;">
+	<div localization_key="plugin.phonegap.desc_1">Enter your Adobe account to use cloud build system on the Adobe.</div>
+		<fieldset style="padding:10px; border:1px solid #ccc;background: white;margin-top:10px;margin-left:5px;display:inline; width:345px;">
+			<a href="https://build.phonegap.com/apps" target="_blank" style="color:#999"><legend style="font-size:11px;" localization_key="plugin.phonegap.account_setting">(Account setup : https://build.phonegap.com/apps)</legend></a>
+		<div class="dialog_template_body_div" style="margin-top:15px;">
+			<label class="dialog_template_body_span" style="float:left;width:120px" localization_key="" for="phonegap_build_id">Email / Adobe ID : </label><input type="text" class="dialog_template_text" id="phonegap_build_id" name="plugin.phonegap.remote_id" placeholder="your@email.com" style="width:180px">
+		</div>
+		<div class="dialog_template_body_div">
+			<label class="dialog_template_body_span" style="float:left;width:100px" localization_key="password" for="phonegap_build_password">Password : </label><input type="password" style="margin-left:30px; width:180px;" id="phonegap_build_password" name="plugin.phonegap.remote_password" placeholder="password">
+		</div>
+	</fieldset>
+	
+	<div class="dialog_template_body_div">
+		<label class="dialog_template_body_span" localization_key="build_target" for="phonegap_build_platform">Build platform : </label>
+		<select style="margin-left:10px; width:215px;" name="plugin.phonegap.build_platform" id="phonegap_build_platform">
+			<option value="android">Android</option>
+			<option value="ios">iOS</option>
+			<option value="blackberry">BlackBerry 6</option>
+			<option value="symbian">Symbian</option>
+			<option value="webos">WebOS</option>
+			<option value="wp7">Windows Phone 7</option>
+		</select>
+	</div>
+	<div class="dialog_template_body_div">
+		<label class="dialog_template_body_span" localization_key="run_index" for="phonegap_run_index">Index file : </label>
+		<input type="text" style="margin-left:10px; width:205px;" name="plugin.phonegap.run_index" id="phonegap_run_index">
+	</div>
+	<div class="dialog_template_body_div">
+		<label class="dialog_template_body_span" localization_key="webview_type">Web view type : </label>
+		<label style="margin-left:10px;" for="phonegap_webview_type_tab">Tab</label>
+		<input type="radio" name="plugin.phonegap.webview_type" id="phonegap_webview_type_tab" value="tab">
+		<label style="margin-left:10px;" for="phonegap_webview_type_window">New window</label>
+		<input type="radio" name="plugin.phonegap.webview_type" id="phonegap_webview_type_window" value="window">
+	</div>
+</div>
+
+<div style="position: absolute;bottom: 10px;right:10px;">
+	<input type="button" class="restore_default" value="Restore Default" />
+	<input type="button" class="apply" value="Apply" />
+</div>

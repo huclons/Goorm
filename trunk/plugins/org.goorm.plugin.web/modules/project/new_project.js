@@ -20,12 +20,6 @@ module.exports = {
 				data = data.replace("{PROJECTNAME}", req.data.project_name);
 				fs.writeFile(workspace + abs_path, data, function(err) {
 					if (err) throw err;
-
-					if( __service_mode ) {
-						if(uid && gid) {
-							fs.chownSync(workspace+abs_path, uid, gid);
-						}
-					}
 				});
 			});
 			next();

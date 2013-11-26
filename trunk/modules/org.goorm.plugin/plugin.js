@@ -63,6 +63,15 @@ module.exports = {
 		var plugin = require("../../plugins/" + req.plugin + "/modules/");
 		plugin.do_new(req, res);
 	},
+
+	do_del: function (req) {
+		var plugin = require("../../plugins/" + req.plugin + "/modules/");
+
+		if (plugin.do_delete) {
+			plugin.do_delete(req);
+		}
+	},
+
 	make_template: function (req, res) {
 
 		var plugin = require("../../plugins/" + req.plugin + "/modules/");

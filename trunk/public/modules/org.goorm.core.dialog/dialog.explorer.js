@@ -54,11 +54,11 @@ org.goorm.core.dialog.explorer.prototype = {
 
 		self.target_name = context + "_target_name";
 		$(self.target_name).val("");
+		$(self.target_name).attr("maxlength", 250);
 
 		self.is_dir_only = is_dir_only;
 
 		self.file_type = context + "_file_type";
-		core.status.sim=self;
 		if (self.is_dir_only) {
 			self.add_directories();
 		} else {
@@ -242,7 +242,8 @@ org.goorm.core.dialog.explorer.prototype = {
 			});
 
 			self.treeview.subscribe("dblClickEvent", function (nodedata) {
-				if (nodedata.node.data.cls === 'dir') {
+				core.sim=nodedata;
+				if (nodedata.node.data.cls === 'dir' &&  !$("#"+nodedata.node.contentElId).children().hasClass("no_children") ) {
 					if (nodedata.node.expanded) {
 						nodedata.node.collapse();
 					} else {

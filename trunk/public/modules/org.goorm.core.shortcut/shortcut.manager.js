@@ -349,7 +349,7 @@ org.goorm.core.shortcut.manager = {
 			$(document).bind('keydown', this.hotkeys.delete_file, function (e) {
 				
 				if (core.status.selected_file) {
-					$('[action="delete_context"]').click();
+					$('[action="delete_context"]').first().click();
 				}
 				else {
 					alert.show(core.module.localization.msg.alert_select_file);
@@ -669,24 +669,7 @@ org.goorm.core.shortcut.manager = {
 			} //Run - Ctrl + F5
 			else if (e.keyCode == 116 && (e.ctrlKey === true || e.metaKey === true) && e.shiftKey === false) {
 
-				if (core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] !== undefined && !$(this).hasClass('yuimenuitemlabel-disabled')) {
-					core.status.current_project_absolute_path = core.preference.workspace_path + core.status.current_project_path + "/";
-					core.module.layout.inner_bottom_tabview.selectTab(1);
-
-					
-					core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].run(core.status.current_project_path);
-					
-
-					
-
-				} else {
-					var result = {
-						result: false,
-						code: 0
-					};
-					core.module.project.display_error_message(result, 'alert');
-
-				}
+				core.module.project.run();
 
 				e.stopPropagation();
 				e.preventDefault();

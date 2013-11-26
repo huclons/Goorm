@@ -11,6 +11,9 @@
     "alert_filename_empty": {
         "value": "파일 이름이 비어 있습니다."
     },
+    "alert_filename_too_long" :{
+        "value" : "파일이름이 너무 깁니다. (250자 제한)"
+    },
     "alert_cannot_find_word":{
         "value": "단어를 찾을 수 없습니다."
     },
@@ -290,6 +293,9 @@
     },
     "confirmation_save_as_message": {
         "value": "같은 파일의 이름이 이미 존재합니다. 그냥 진행하시겠습니까?"
+    },
+    "confirmation_copy_paste_message": {
+        "value": "같은 파일(폴더)의 이름이 이미 존재합니다. 그냥 진행하시겠습니까?"
     },
     "alert_collaboration_select": {
         "value": "협업할 프로젝트를 선택해주세요."

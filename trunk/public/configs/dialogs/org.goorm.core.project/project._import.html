@@ -1,25 +1,25 @@
-<div class="content_header">Import Project</div>
+<div class="content_header" localization_key="project_import">Import Project</div>
 
 <div id="project_import" style="text-align:left; font-size:11px;">
 
 	<form id="project_import_form" action="project/import" method="post" enctype="multipart/form-data">
       
     	<div>
-    	    <div class="content_guide_message" >Input Information for Import Project</div>
+    	    <div class="content_guide_message" localization_key='dialog_new_project_guide2'>Input Information for New Project</div>
             <div style="float:left; width:770px; height:340px; overflow:auto; padding:5px;">
                 <div style="float:left; width:770px; height:200px;">
                     <fieldset style="padding:10px; padding-top:30px; border:1px solid #ccc; margin-top:5px; background-color:#FBFBFB;">
-                        <legend> <b>Project Information</b> </legend>
+                        <legend> <b localization_key='dialog_new_project_information'>Project Information</b> </legend>
                         
                         <div class="project_author" style="height:25px;">
-                            <div style="width:120px; float:left; height:25px;" >Author ID</div>
+                            <div style="width:120px; float:left; height:25px;" localization_key='dialog_new_project_author'>Author ID</div>
                             <div style="width:615px; float:right; height:25px;">
                                 <input type="text" id="input_import_project_author" name="input_project_author" style="width:603px;">
                             </div>
                         </div>
 
                          <div class="project_author_name" style="height:25px;">
-                            <div style="width:120px; float:left; height:25px;" >Author Name</div>
+                            <div style="width:120px; float:left; height:25px;" localization_key='dialog_new_project_author_name'>Author Name</div>
                             <div style="width:615px; float:right; height:25px;">
                                 <input type="text" id="input_import_project_author_name" name="input_project_author_name" style="width:603px;">
                             </div>
@@ -27,7 +27,7 @@
 
 
                         <div class="project_type" style="height:25px;">
-                            <div style="width:120px; float:left; height:25px;" >Project Type</div>
+                            <div style="width:120px; float:left; height:25px;" localization_key='dialog_project_property_project_type'> Project Type</div>
                             <div style="width:615px; float:right; height:25px;">
                                 <select id="select_import_project_type" name="select_import_project_type" style="width:100%" project_type="cpp" project_detailed_type="c" plugin_name="org.goorm.plugin.cpp" >
                                     <!-- <option value='c'>C Project</option>
@@ -42,7 +42,7 @@
 
 
                         <div class="project_name" style="height:25px;">
-                            <div style="width:120px; float:left; height:25px;" >Project Name</div>
+                            <div style="width:120px; float:left; height:25px;" localization_key='dialog_new_project_name'>Project Name</div>
                             <div style="width:615px; float:right; height:25px;">
                                 <input type="text" id="input_import_project_name" name="input_project_name" style="width:603px;">
                             </div>
@@ -51,16 +51,18 @@
 
 
                         <div class="project_desc" style="height:45px;">
-                            <div style="width:120px; float:left; height:45px;">Project Description</div>
+                            <div style="width:120px; float:left; height:45px;" localization_key='dialog_new_project_desc'>Project Description</div>
                             <div style="width:615px; float:right; height:45px;">
                                 <textarea id='input_import_project_desc' style='width:603px; height:40px;' draggable='false'></textarea>
                             </div>
                         </div>
                     </fieldset>
 
-                    <fieldset id='import_project_field' style="border:3px dashed #aaa;padding:10px; padding-top:30px; background-color:#FBFBFB;">
-                        <legend> <b>Project Import</b> </legend>
+                    <fieldset id='import_project_field' style="padding:10px; padding-top:30px; background-color:#FBFBFB;">
+                        <legend> <b localization_key='dialog_new_project_import'>Project Import</b> </legend>
                         
+                        <!-- 
+                        drag n drop
                         <div id="project_import_div" style="padding:4px;  margin-top:3px; ">
                             <div style="width:220px; float:left; padding:2px; font-size:11px;">Drag a zip file in this box to import</div>
                             <div style=" float:right; font-size:11px; text-align:right;">
@@ -68,11 +70,30 @@
                                     <span class="directory_icon file filetype-etc filetype-zip"></span>
                                     <div id="project_import_upload_output"></div>
 
-                                    <!-- <input type="file" name="file" id="project_import_file"> -->
+                                    <!-- <input type="file" name="file" id="project_import_file"> 
                     	            <input type="hidden" id="project_import_location" name="project_import_location" readonly="readonly" />
                                 </div>
                             </div>
+                        </div> -->
+
+
+
+
+
+
+                        <div id="project_import_div" style=" padding:4px; background:#fff; width:500px; margin-top:-8px; float:right;">
+                            <div style="width:220px; float:left; padding:2px; font-size:11px;" localization_key='dialog_new_project_import_message'>Select a zip file to import</div>
+                            <div style="width:270px; float:left; font-size:11px; text-align:right;">
+                                <div style="float:left;">
+                                    <div id="project_import_upload_output"></div>
+                                    <input type="file" name="file" id="project_import_file">
+                                    <input type="hidden" id="project_import_location" name="project_import_location" readonly="readonly" />
+                                </div>
+                            </div>
                         </div>
+
+
+
                     </fieldset>
                 </div>
                 <input type="hidden" id="import_project_using_plugin" value="no" />

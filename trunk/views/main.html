@@ -20,6 +20,7 @@
     <!--CSS : PDF VIEWER-->
     <link rel="stylesheet" type="text/css" href="/lib/com.pdf.viewer/css/style.css">
     <!--JS : jquery-->
+    
     <script type="text/javascript" src="/lib/com.jquery.code/jquery-2.0.3.js"></script>
     <script type="text/javascript" src="/lib/com.jqueryui.code/jquery-ui-1.10.3.custom.js"></script>
     <script type="text/javascript" src="/lib/com.jquery.code/jquery.hotkeys.js"></script>
@@ -78,6 +79,7 @@
     <script type="text/javascript" src="/lib/net.codemirror.code/mode/diff/diff.js"></script>
     <script type="text/javascript" src="/lib/net.codemirror.code/mode/haskell/haskell.js"></script>
     <script type="text/javascript" src="/lib/net.codemirror.code/mode/htmlmixed/htmlmixed.js"></script>
+    <script type="text/javascript" src="/lib/net.codemirror.code/mode/htmlembedded/htmlembedded.js"></script>
     <script type="text/javascript" src="/lib/net.codemirror.code/mode/javascript/javascript.js"></script>
     <script type="text/javascript" src="/lib/net.codemirror.code/mode/lua/lua.js"></script>
     <script type="text/javascript" src="/lib/net.codemirror.code/mode/php/php.js"></script>
@@ -176,10 +178,6 @@
     <script type="text/javascript" src="/modules/org.goorm.core.project/project._delete.dialog.js"></script>
     <script type="text/javascript" src="/modules/org.goorm.core.project/project.build.js"></script>
     <script type="text/javascript" src="/modules/org.goorm.core.project/project.build.manager.js"></script>
-    <script type="text/javascript" src="/modules/org.goorm.core.project/project.build.all.js"></script>
-    <script type="text/javascript" src="/modules/org.goorm.core.project/project.build.all.dialog.js"></script>
-    <script type="text/javascript" src="/modules/org.goorm.core.project/project.build.project.js"></script>
-    <script type="text/javascript" src="/modules/org.goorm.core.project/project.build.project.dialog.js"></script>
     <script type="text/javascript" src="/modules/org.goorm.core.project/project.build.clean.js"></script>
     <script type="text/javascript" src="/modules/org.goorm.core.project/project.build.clean.dialog.js"></script>
     <script type="text/javascript" src="/modules/org.goorm.core.project/project.build.configuration.js"></script>
@@ -238,6 +236,9 @@
     <script type="text/javascript" src="/modules/org.goorm.plugin/plugin.js"></script>
     <script type="text/javascript" src="/modules/org.goorm.plugin/plugin.manager.js"></script>
     <script type="text/javascript" src="/modules/org.goorm.plugin/plugin.loader.js"></script>
+    
+
+    
 
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <title>goorm</title>
@@ -247,6 +248,9 @@
         $( document ).tooltip({
          'open' : function( evt, ui ){
           $(ui.tooltip).css('white-space', 'nowrap');
+         },
+         'content': function () {
+              return $(this).prop('title');
          }
         });
        }
@@ -413,11 +417,12 @@
                   <div class="bd">
                     <ul>
                       <li class="yuimenuitem"><a href="#" action="run" localization_key="project_run" class="yuimenuitemlabel menu-run">Run<em class="helptext">Ctrl + F5</em></a></li>
+                    
                     </ul>
                     
                     <ul>
                       <li class="yuimenuitem"><a href="#" action="build_project" localization_key="project_build_project" class="yuimenuitemlabel menu-build">Build Project<em class="helptext">F5</em></a></li>
-                      <li class="yuimenuitem"><a href="#" action="build_all" localization_key="project_build_all" class="yuimenuitemlabel">Build All</a></li>
+                      <!--<li class="yuimenuitem"><a href="#" action="build_all" localization_key="project_build_all" class="yuimenuitemlabel">Build All</a></li>-->
                       <li class="yuimenuitem"><a href="#" action="build_clean" localization_key="project_clean" class="yuimenuitemlabel menu-clean">Clean<em class="helptext">Ctrl + Del</em></a></li>
                       <li class="yuimenuitem"><a href="#" action="build_configuration" localization_key="project_build_configuration" class="yuimenuitemlabel">Build Configuration</a></li>
                     </ul>

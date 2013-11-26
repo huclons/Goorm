@@ -1,0 +1,8 @@
+{
+	"plugin.jsp.deploy_path" : 		"/var/lib/tomcat7/webapps/",
+	"plugin.jsp.run_path" : 		"http://jsp.goorm.io/",
+	"plugin.jsp.main" : 	"index.jsp",
+	"plugin.jsp.source_path" : 	"WEB-INF/src/",
+	"plugin.jsp.build_path" : 	"WEB-INF/classes/",
+	"plugin.jsp.build_option" : ""
+}

@@ -138,6 +138,7 @@ org.goorm.core.file.rename = {
 						if(e.keyCode===13)	$("#g_file_rename_btn_ok").click();
 					});
 				}
+				$("#input_rename_new_filename").attr("maxlength", 250);
 
 				
 			}

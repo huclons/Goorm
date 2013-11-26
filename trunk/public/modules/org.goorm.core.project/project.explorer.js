@@ -495,18 +495,59 @@ org.goorm.core.project.explorer.prototype = {
 		var self = this;
 		self.clipboard = self.get_tree_selected_path();
 	},
-	paste: function () {
+	paste: function (cp_anyway) {
 		var self = this;
+
+		if(!cp_anyway) cp_anyway = false;
 		if (self.clipboard && self.selected_type.hasClass('folder')) {
 			var postdata = {
 				source: self.clipboard,
-				target: core.status.selected_file
+				target: core.status.selected_file,
+				cp_anyway: cp_anyway
 			};
 			$.get("file/copy_file_paste", postdata, function (data) {
 				if (data.result) {
-					console.log(data.result);
+					if (data.result.err_code == 21) {
+						var new_clipboard = {
+							'files' : [],
+							'directorys' : []
+						};
+
+						var message = core.module.localization.msg.confirmation_copy_paste_message + '<br/>';
+						data.result.existed.map(function (o) {
+							var exist = false;
+							var target = null;
+							message += o + ', <br/>';
+
+							var index = self.clipboard.files.indexOf(o);
+							if (index > -1) {
+								new_clipboard.files.push(o);
+							}
+
+							index = self.clipboard.directorys.indexOf(o);
+							if (index > -1) {
+								new_clipboard.directorys.push(o);
+							}
+						});
+						message = message.slice(0, -7);
+
+						self.clipboard = new_clipboard;
+
+						confirmation.init({
+							message: message,
+							yes_text: core.module.localization.msg.confirmation_yes,
+							no_text: core.module.localization.msg.confirmation_no,
+							title: "Confirmation",
+
+							yes: function () {
+								self.paste(true);
+							},
+							no: function () {}
+						});
+
+						confirmation.panel.show();
+					}
 				}
-				//self.clipboard = false;
 				self.refresh();
 			});
 		}

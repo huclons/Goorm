@@ -203,6 +203,9 @@
 	"restore_default" : {
 		"value" : "기본 설정으로 되돌리기"
 	},
+	"restore_previous" : {
+		"value" : "이전 설정으로 되돌리기"
+	},
 	"language_pack_download" : {
 		"value" : "다른 언어 패키지 다운로드"
 	},

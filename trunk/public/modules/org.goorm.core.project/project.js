@@ -100,5 +100,70 @@ org.goorm.core.project = {
 		default:
 			break;
 		}
+	},
+	run : function(){
+		var self = this;
+
+		if (core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type] !== undefined && !$(this).hasClass('yuimenuitemlabel-disabled')) {
+			core.status.current_project_absolute_path = core.preference.workspace_path + core.status.current_project_path + "/";
+
+			core.module.layout.inner_bottom_tabview.selectTab(1);
+			core.module.layout.inner_layout.getUnitByPosition("bottom").expand();
+
+			
+			self.send_run_cmd();
+			
+
+			
+
+		} else {
+			var result = {
+				result: false,
+				code: 0
+			};
+			core.module.project.display_error_message(result, 'alert');
+
+		}
+	},
+	run_latest_bin : function(){
+		var self=this;
+		$.get("project/check_latest_build",{"project_path":core.status.current_project_path},function(data){
+
+			var p=core.property.plugins["org.goorm.plugin."+core.status.current_project_type];
+			var build_path=p["plugin."+core.status.current_project_type+".build_path"];
+			//var main=p["plugin."+core.status.current_project_type+".main"];
+
+			if(data && data.indexOf(build_path)>-1 ){
+				self.send_run_cmd();
+			}else{
+
+				if($("#always_latest_build_run_option").is(":checked")){
+					self.send_build_cmd();
+					self.send_run_cmd();
+				}else{
+					confirmation.init({
+						title: core.module.localization.msg.confirmation_not_latest_build,
+						message: core.module.localization.msg.confirmation_not_latest_build,
+						yes_text: core.module.localization.msg.confirmation_build_and_run,
+						no_text: core.module.localization.msg.confirmation_run,
+						yes: function () {
+							self.send_build_cmd();
+							self.send_run_cmd();
+						},
+						no: function () {
+							self.send_run_cmd();
+						}
+					});
+					confirmation.panel.show();
+				}
+			}
+		});
+	},
+
+	send_run_cmd : function(){
+		core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].run(core.status.current_project_path);
+	},
+	send_build_cmd : function(){
+		core.module.plugin_manager.plugins["org.goorm.plugin." + core.status.current_project_type].build(core.status.current_project_path);	
 	}
 };

@@ -31,6 +31,13 @@ org.goorm.core.project.build.configuration = {
 				}
 			});
 			dialog.panel.show();
+			$(".current_plugin_info_node").next().addClass("ygtvfocus")
+			setTimeout(function(){
+				//$(".current_plugin_info_node").click();
+				$("#property_treeview .current_plugin_info_node").filter(function(){
+					return ($(this).parent().css('display')!="none");
+				}).next().click();
+			},700);
 		} else {
 			var result = {
 				result: false,
