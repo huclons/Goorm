@@ -60,21 +60,21 @@
 		"editor": "Editor",
 		"description": "Active Server Page file",
 		"type": "Code",
-		"mode": "text/html"
+		"mode": "application/x-aspx"
 	},
 	{
 		"file_extension": "jsp",
 		"editor": "Editor",
 		"description": "Java Server Page file",
 		"type": "Code",
-		"mode": "text/html"
+		"mode": "application/x-ejs"
 	},
 	{
 		"file_extension": "php",
 		"editor": "Editor",
 		"description": "php",
 		"type": "Code",
-		"mode": "text/html"
+		"mode": "application/x-httpd-php"
 	},
 	{
 		"file_extension": "css",

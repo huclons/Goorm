@@ -41,7 +41,7 @@ org.goorm.core.project._new = {
 			} else if ($("#input_project_name").val() === "") {
 				alert.show(core.module.localization.msg.alert_project_name);
 				return false;
-			} else if ($("#input_project_desc").val() === "") {
+			//} else if ($("#input_project_desc").val() === "") {
 				// alert.show(core.module.localization.msg.alert_project_desc);
 				// return false;
 			} else if ($("#check_project_new_import").is(":checked")) {
@@ -338,7 +338,7 @@ org.goorm.core.project._new = {
 
 	add_project_item: function () {
 		// for step 1
-		$("div[id='project_new']").find(".project_types").append("<div class='project_wizard_first_button' project_type='all'><div class='project_type_icon'><img src='images/org.goorm.core.project/project.png' class='project_icon' /></div><div class='project_type_title'>All</div><div class='project_type_description'>View all available<br />project items</div></div>");
+		$("div[id='project_new']").find(".project_types").append("<div class='project_wizard_first_button selected_button' project_type='all'><div class='project_type_icon'><img src='images/org.goorm.core.project/project.png' class='project_icon' /></div><div class='project_type_title'>All</div><div class='project_type_description'>View all available<br />project items</div></div>");
 
 		/*
 		$("div[id='project_new']").find(".project_types").append("<div class='project_wizard_first_button' project_type='goormp'><div class='project_type_icon'><img src='images/org.goorm.core.project/goorm_project.png' class='project_icon' /></div><div class='project_type_title'>goorm Project</div><div class='project_type_description'>Customization/Plugin<br />/Theme</div></div>");

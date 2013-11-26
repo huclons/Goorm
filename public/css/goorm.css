@@ -3967,7 +3967,7 @@ Optimized:Start
 	margin-left: 10px;
 }
 
-#help_contents_middle h2 {
+#help_contents_middle h2, #help_about_private_url_middle h2 {
 	border-bottom: 1px solid #ccc;
 	font-size: 15px;
 	letter-spacing: normal;
@@ -3976,13 +3976,13 @@ Optimized:Start
 	padding-bottom: 5px;
 }
 
-#help_manual_middle h1,#help_example_tutorial_middle h1,#help_contents_middle h1 {
+#help_manual_middle h1,#help_example_tutorial_middle h1,#help_contents_middle h1, #help_about_private_url_middle h1 {
 	font-size: 25px;
 	letter-spacing: normal;
 	margin-bottom: 10px;
 }
 
-#help_manual_middle h2,#help_example_tutorial_middle h2 {
+#help_manual_middle h2,#help_example_tutorial_middle h2, #help_about_private_url_middle h2 {
 	border-bottom: 1px solid #ccc;
 	font-size: 18px;
 	letter-spacing: normal;
@@ -3991,26 +3991,48 @@ Optimized:Start
 	padding-bottom: 5px;
 }
 
-#help_manual_middle p,#help_example_tutorial_middle p,#help_contents_middle p {
+#help_manual_middle p,#help_example_tutorial_middle p,#help_contents_middle p, #help_about_private_url_middle p {
 	line-height: 150%;
 	margin-bottom: 10px;
 }
 
-#help_manual_middle li,#help_example_tutorial_middle li,#help_contents_middle li {
+#help_manual_middle li,#help_example_tutorial_middle li,#help_contents_middle li, #help_about_private_url_middle li {
 	font-size: 12px;
 	list-style: disc;
 	margin-left: 20px;
 }
 
-#help_manual_middle strong,#help_example_tutorial_middle strong,#help_contents_middle strong {
+#help_manual_middle strong,#help_example_tutorial_middle strong,#help_contents_middle strong, #help_about_private_url_middle strong {
 	font-weight: 700;
 }
 
-#help_manual_middle pre,#help_example_tutorial_middle pre,#help_contents_middle pre {
+#help_manual_middle pre,#help_example_tutorial_middle pre,#help_contents_middle pre, #help_about_private_url_middle pre {
 	border: 1px solid #ccc;
 	margin-bottom: 10px;
 	word-wrap: break-word;
 	padding: 1em;
+}
+
+#help_about_private_url_middle {
+	background-color: #fff;
+	border-color: #ccc;
+	border-style: solid;
+	border-width: 1px;
+	float: right;
+	font-family: Helvetica,arial,freesans,clean,sans-serif;
+	font-size: 11px;
+	height: 455px;
+	letter-spacing: normal;
+	overflow: auto;
+	padding: 10px;
+	position: relative;
+	text-align: left;
+	width: 640px;
+	word-wrap: break-word;
+}
+
+#help_about_private_url_treeview {
+	height: 450px;
 }
 
 #help_example_tutorial_middle,#help_contents_middle {
@@ -4040,6 +4062,11 @@ Optimized:Start
 	background: #FF0;
 }
 
+.window_container .searched-opacity {
+	background: #FF0;
+	color: black !important;
+}
+
 .window_container .dictionary_box {
 	-moz-border-bottom-left-radius: 3px;
 	-moz-border-bottom-right-radius: 5px;
@@ -4060,6 +4087,7 @@ Optimized:Start
 	position: absolute;
 	width: 280px;
 	z-index: 99;
+	color: black;
 }
 
 .window_container .dictionary_list {
@@ -5397,8 +5425,24 @@ Toolbar CSS
 	background-repeat:no-repeat !important;
 	background-position:-144px 0px !important;
 }
+.menu-undo-unactivated {
+	position:relative;
+}
+.menu-undo-unactivated:before {
+	content:'';
+	position:absolute;
+	width:16px;
+	height:16px;
+	margin-top:0px;
+	margin-left:-22px;
+	background:transparent !important;
+	background-image:url(../images/sprite.png) !important;
+	background-repeat:no-repeat !important;
+	background-position:-144px 0px !important;
+	-webkit-filter: grayscale(100%);
+}
 .toolbar-undo {
-		background:transparent !important;
+	background:transparent !important;
 	background-image:url(../images/sprite.png) !important;
 	background-repeat:no-repeat !important;
 	background-position:-144px -0px !important;
@@ -5420,8 +5464,25 @@ Toolbar CSS
 	background-repeat:no-repeat !important;
 	background-position:-160px 0px !important;
 }
+.menu-redo-unactivated {
+	position:relative;
+}
+.menu-redo-unactivated:before {
+	content:'';
+	position:absolute;
+	width:16px;
+	height:16px;
+	margin-top:0px;
+	margin-left:-22px;
+	background:transparent !important;
+	background-image:url(../images/sprite.png) !important;
+	background-repeat:no-repeat !important;
+	background-position:-160px 0px !important;
+	-webkit-filter: grayscale(100%);
+}
+
 .toolbar-redo {
-		background:transparent !important;
+	background:transparent !important;
 	background-image:url(../images/sprite.png) !important;
 	background-repeat:no-repeat !important;
 	background-position:-160px -0px !important;
@@ -8206,4 +8267,14 @@ body .ui-tooltip {
 	border-width: 2px 0px 7px 10px;
 	border-color: transparent #fff;
 }
+
+/* Main-menu & Toolbar */
+
+.toolbar-unactivated {
+	-webkit-filter: grayscale(100%);
+}
+
+
+
+
 

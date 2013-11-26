@@ -1,0 +1,21 @@
+{
+	"preference" :
+	{
+		"label" : "PHP",
+		"tab" :	[
+			{	"label" : "PHP",
+				"html"	: "/org.goorm.plugin.php/php.preference.html"
+			}
+		]
+	},
+	
+	"property" : 
+	{
+		"label" : "PHP",
+		"tab" :	[
+			{	"label" : "PHP",
+				"html"	: "/org.goorm.plugin.php/php.property.html"
+			}
+		]
+	}
+}

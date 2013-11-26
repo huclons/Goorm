@@ -310,7 +310,12 @@ module.exports = {
 									if (!err ) {
 										var project = {};
 										project.name = files[i];
-										project.contents = JSON.parse(data);
+
+										try {
+											project.contents = JSON.parse(data);
+										} catch (e) {
+											project.contents = {};
+										}
 
 										projects.push(project);
 									}

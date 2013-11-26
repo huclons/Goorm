@@ -147,16 +147,12 @@ org.goorm.plugin.nodejs.prototype = {
 
 		var project_path = core.status.current_project_path;
 
-		
-
-		
 		var workspace = core.preference.workspace_path;
 		var run_path = workspace + project_path + '/' + source_path + main + '.js';
 
 		var cmd1 = "node " + run_path;
 
 		core.module.layout.terminal.send_command(cmd1+'\r');
-		
 	},
 	
 	stop: function(__option){
@@ -172,55 +168,9 @@ org.goorm.plugin.nodejs.prototype = {
 
 		var project_path = core.status.current_project_path;
 
-		if(core.service_mode) {
-			var postdata = {
-				'data' : {
-					'project_path' : project_path,
-					'source_path' : source_path,
-					'main' : main
-				},
-				'plugin' : self.full_name,
-				'extend_function' : 'stop'
-			};
-
-			$.get('/plugin/extend_function', postdata, function(response){
-				if(response.result){
-					if(!terminal) {
-						var msg = {
-							user : core.user.id,
-							index: core.module.layout.terminal.index,
-							command: response.command,
-							special_key: response.special_key
-						};
-
-						if(!self.socket) {
-							self.socket = io.connect();
-						}
-
-						self.socket.emit("pty_execute_command", JSON.stringify(msg));
-					}
-
-					$("a[action=run]").show();
-					$("a[action=stop]").hide();
-				}
-				else{
-					// fail to run a app.
-					// 
-					switch(response.code){
-						case 0:
-						case 2:
-						case 10:
-						case 11:
-							core.module.toast.show(core.module.localization.msg['alert_stop_fail'])
-							break;
-					}
-				}
-			});
-		} else {
-			if(terminal) {
-				var cmd = "\x03"
-				core.module.layout.terminal.send_command(cmd+'\r');
-			}
+		if(terminal) {
+			var cmd = "\x03"
+			core.module.layout.terminal.send_command(cmd+'\r');
 		}
 	},
 
@@ -308,67 +258,19 @@ org.goorm.plugin.nodejs.prototype = {
 				
 		switch (cmd.mode) {
 			case 'init':
-				if(core.service_mode) {
-					var property = core.property.plugins['org.goorm.plugin.nodejs'];
-					
-					var source_path = property['plugin.nodejs.source_path'];
-					var main = property['plugin.nodejs.main'];
+				$.getJSON("/alloc_port", {
+					"process_name": "node debug"
+				}, function(result){
+					self.debug_port = result.port;
 
-					var project_path = core.status.current_project_path;
-
-					var postdata = {
-						'data' : {
-							'project_path' : project_path,
-							'source_path' : source_path,
-							'main' : main
-						},
-						'plugin' : self.full_name,
-						'extend_function' : 'replace_app_port'
-					};
-
-					$.get('/plugin/extend_function', postdata, function(replace_app_port){
-						if(replace_app_port.result){
-							self.debug_port = replace_app_port.port || 5858;
-							self.terminal.flush_command_queue();
-
-							var cmd1 = "node debug --port=" + self.debug_port + " " + replace_app_port.run_path;
-							self.terminal.send_command(cmd1+'\r');
-
-							setTimeout(function(){
-								self.terminal.send_command("\r", /connecting.*ok/);
-								self.set_breakpoints();
-								self.debug_get_status();
-							}, 1000);
-						}
-					});
-				} else {
-					$.getJSON("/alloc_port", {
-						"process_name": "node debug"
-					}, function(result){
-						self.debug_port = result.port;
-
-						self.terminal.flush_command_queue();
-						self.terminal.send_command("node debug --port=" + result.port+buildPath+main+"\r", null);
-						setTimeout(function(){
-							self.terminal.send_command("\r", /connecting.*ok/);
-							self.set_breakpoints();
-							self.debug_get_status();
-						}, 1000);
-					});
-				}
-				// $.getJSON("/alloc_port", {
-				// 	"process_name": "node debug"
-				// }, function(result){
-				// 	self.debug_port = result.port;
-				// 	self.terminal.flush_command_queue();
-				// 	self.terminal.send_command("node debug --port=" + result.port+buildPath+main+"\r", null);
-				// 	setTimeout(function(){
-				// 		self.terminal.send_command("\r", /connecting.*ok/);
-				// 		self.set_breakpoints();
-				// 		self.debug_get_status();
-				// 	}, 1000);
-					
-				// })
+					self.terminal.flush_command_queue();
+					self.terminal.send_command("node debug --port=" + result.port+buildPath+main+"\r", null);
+					setTimeout(function(){
+						self.terminal.send_command("\r", /connecting.*ok/);
+						self.set_breakpoints();
+						self.debug_get_status();
+					}, 1000);
+				});
 				break;
 			case 'continue':
 				self.set_breakpoints();

@@ -432,12 +432,24 @@
                 "value": "Case sensitive"
              },
             "dialog_project_ignore_whitespace_guide": {
-                "value": "Igonre whitespace"
+                "value": "Ignore whitespace"
              },
             "dialog_project_use_regular_expression_guide": {
                 "value": "Use regular expression"
              },
             "dialog_project_find_on_workspace_guide": {
+                "value": "Find on Workspace"
+             },
+             "dialog_project_match_case_guide_title" : {
+                "value": "If something is case-sensitive, there is a different meaning <br/>or interpretation based on upper- and lower-cased letters"
+             },
+             "dialog_project_ignore_whitespace_guide_title": {
+                "value": "Remove all whitespace in words."                
+             },
+             "dialog_project_use_regular_expression_guide_title" : {
+                "value": "Use regular expression."
+             },
+            "dialog_project_find_on_workspace_guide_title": {
                 "value": "Find on Workspace"
              }
         }
@@ -729,6 +741,14 @@
              "template_create_option_check" : {
                 "value" : "Constructors from superclass"
              }
+        }
+    },
+    "dialog_help_private_url" : {
+        "value": "",
+        "children": {
+            "help_about_private_url" : {
+                "value" : "About Private URL"
+            }
         }
     }
 }

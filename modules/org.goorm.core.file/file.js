@@ -1077,73 +1077,55 @@ module.exports = {
 	do_copy_file_paste: function (query, callback) {
 		var data = "";
 		if (query.source) {
-			var files = query.source.files;
-			var directorys = query.source.directorys;
+			var evt = new EventEmitter();
+
+			var files = query.source.files || [];
+			var directorys = query.source.directorys || [];
 			var target = query.target;
-			if (files) {
-				files.forEach(function (o) {
-					// var cp = spawn('cp', [__workspace + '/' + o, __workspace + target], {
-					// 	'uid' : query.user.uid,
-					// 	'gid' : query.user.gid[0] || query.user.gid
-					// });
+			var cp_anyway = (query.cp_anyway) ? ((query.cp_anyway == 'false') ? false : query.cp_anyway) : false;
 
-					// cp.stdout.on('data', function(data){
-					// 	console.log(data);
-					// });
+			var items = files.concat(directorys);
+			var existed = [];
 
-					// cp.stderr.on('data', function(err){
-					// 	console.log('cp stderr');
-					// 	process.stdout.write(err);
-					// });
+			evt.on('copy_paste', function(__evt, i){
+				if (items[i]) {
+					var item = items[i];
 
-					// cp.on('close', function (code){
-					// 	if (code !== 0) {
-					// 		console.log('cp process exited with code '+code);
-					// 	}
-					// });
+					fs.exists(__workspace + target + '/' + item.split('/').pop(), function (exists) {
+						if (exists && !cp_anyway) {
+							existed.push(item);
+							evt.emit('copy_paste', __evt, ++i);
+						}
+						else {
+							exec("cp -rf " + __workspace + '/' + item + " " + __workspace + target, function (error, stdout, stderr) {
+								if (error) {
+									console.log(error);
+								}
 
-					exec("cp " + __workspace + '/' + o + " " + __workspace + target, function (error, stdout, stderr) {
-						if (error !== null) {
-							console.log(error);
-							data += (" " + error.Error);
+								evt.emit('copy_paste', __evt, ++i);
+							});
 						}
 					});
-				});
-			}
-			if (directorys) {
-				directorys.forEach(function (o) {
-					// var cp = spawn('cp', ['-r', __workspace + '/' + o, __workspace + target], {
-					// 	'uid' : query.user.uid,
-					// 	'gid' : query.user.gid[0] || query.user.gid
-					// });
+				}
+				else {
+					if (existed.length == 0) {
+						callback({
+							'result' : ""
+						});
+					}
+					else {
+						callback({
+							'result' : {
+								'err_code' : 21,
+								'existed' : existed
+							}
+						});
+					}
+				}
+			});
 
-					// cp.stdout.on('data', function(data){
-					// 	console.log(data);
-					// });
-
-					// cp.stderr.on('data', function(err){
-					// 	console.log('cp stderr');
-					// 	process.stdout.write(err);
-					// });
-
-					// cp.on('close', function (code){
-					// 	if (code !== 0) {
-					// 		console.log('cp process exited with code '+code);
-					// 	}
-					// });
-
-					exec("cp -r " + __workspace + o + " " + __workspace + target, function (error, stdout, stderr) {
-						if (error !== null) {
-							console.log(error);
-							data += (" " + error.Error);
-						}
-					});
-				});
-			}
+			evt.emit('copy_paste', evt, 0);
 		}
-		callback({
-			result: ""
-		});
 	},
 	upload_dir_file :function(req,evt){
 		// [ files, target_path, id] needed
@@ -1486,6 +1468,7 @@ module.exports = {
 									case 'package':
 									case 'pdf':
 									case 'php':
+									case 'jsp':
 									case 'png':
 									case 'ppt':
 									case 'pptx':

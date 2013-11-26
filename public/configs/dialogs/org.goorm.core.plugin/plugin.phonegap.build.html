@@ -1,19 +1,19 @@
 <div >
-	<div class="content_header"><div localization_key="phonegap_build">Phonegap build</div></div>
-	<div localization_key="">Enter your Adobe account to use cloud build system on the Adobe.</div>
+	<div class="content_header"><div localization_key="">Phonegap build</div></div>
+	<div localization_key="plugin.phonegap.desc_1">Enter your Adobe account to use cloud build system on the Adobe.</div>
 		<fieldset style="padding:10px; border:1px solid #ccc;background: white;margin-top:10px;margin-left:5px;display:inline; width:345px;">
-			<legend style="font-size:11px;" localization_key="select_modifiers"><a href="https://build.phonegap.com/apps" target="_blank" style="color:#999">(https://build.phonegap.com/apps)</a></legend>
+			<a href="https://build.phonegap.com/apps" target="_blank" style="color:#999"><legend style="font-size:11px;" localization_key="plugin.phonegap.account_setting">(Account setup : https://build.phonegap.com/apps)</legend></a>
 		<div class="dialog_template_body_div" style="margin-top:15px;">
-			<label class="dialog_template_body_span" style="float:left;width:100px" localization_key="template_source_folder" for="phonegap_build_id">Email / Adobe ID : </label><input type="text" class="dialog_template_text" id="phonegap_build_id" name="plugin.phonegap.remote_id" placeholder="your@email.com" style="width:200px">
+			<label class="dialog_template_body_span" style="float:left;width:120px" localization_key="" for="build_phonegap_build_id">Email / Adobe ID : </label><input type="text" class="dialog_template_text" id="build_phonegap_build_id" name="plugin.phonegap.remote_id" placeholder="your@email.com" style="width:180px">
 		</div>
 		<div class="dialog_template_body_div">
-			<label class="dialog_template_body_span" style="float:left;width:100px" localization_key="password" for="phonegap_build_password">Password : </label><input type="password" style="margin-left:10px; width:200px;" id="phonegap_build_password" name="plugin.phonegap.remote_password" placeholder="password">
+			<label class="dialog_template_body_span" style="float:left;width:100px" localization_key="password" for="build_phonegap_build_password">Password : </label><input type="password" style="margin-left:30px; width:180px;" id="build_phonegap_build_password" name="plugin.phonegap.remote_password" placeholder="password">
 		</div>
 	</fieldset>
 	
 	<div class="dialog_template_body_div">
-		<label class="dialog_template_body_span" localization_key="build_target" for="phonegap_build_platform">Build platform : </label>
-		<select style="margin-left:10px; width:215px;" name="plugin.phonegap.build_platform" id="phonegap_build_platform">
+		<label class="dialog_template_body_span" localization_key="build_target" for="build_phonegap_build_platform">Build platform : </label>
+		<select style="margin-left:10px; width:215px;" name="plugin.phonegap.build_platform" id="build_phonegap_build_platform">
 			<option value="android">Android</option>
 			<option value="ios">iOS</option>
 			<option value="blackberry">BlackBerry 6</option>

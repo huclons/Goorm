@@ -34,7 +34,8 @@ org.goorm.core.project._delete = {
 			}
 
 			var postdata = {
-				project_path: data.path
+				project_path: data.path,
+				plugin: 'org.goorm.plugin.'+data.type
 			};
 
 			$.get("project/delete", postdata, function (data) {

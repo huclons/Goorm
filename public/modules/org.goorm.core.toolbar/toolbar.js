@@ -133,6 +133,12 @@ org.goorm.core.toolbar = {
 				$("a[action=use_clipboard]").find("img").removeClass("toolbar_button_pressed");
 			}
 		});
+
+		// toolbar unactivated event
+		//
+		$(document).on('click', '.toolbar-unactivated', function (){
+			return false;
+		});
 	},
 
 	add: function (path, name, container) {

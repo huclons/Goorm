@@ -561,7 +561,12 @@ module.exports = {
 
 		ctags.on('close', function (code){
 			if (ctags_result) {
-				ctags_result = JSON.parse(ctags_result);
+				try {
+					ctags_result = JSON.parse(ctags_result);
+				}
+				catch (e) {
+					ctags_result = {};	
+				}
 
 				if (ctags_result && ctags_result[workspace]) {
 					var parsed_data = "";

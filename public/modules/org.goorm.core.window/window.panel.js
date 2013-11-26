@@ -252,8 +252,8 @@ org.goorm.core.window.panel.prototype = {
 				var clientRegion = D.getClientRegion();
 				var elRegion = D.getRegion(this.element);
 
-				self.resize.set("maxWidth", clientRegion.right - elRegion.left - YAHOO.widget.Overlay.VIEWPORT_OFFSET);
-				self.resize.set("maxHeight", clientRegion.bottom - elRegion.top - YAHOO.widget.Overlay.VIEWPORT_OFFSET);
+				self.resize.set("maxWidth", clientRegion.right - elRegion.left - YAHOO.widget.Overlay.VIEWPORT_OFFSET - 25);
+				self.resize.set("maxHeight", clientRegion.bottom - elRegion.top - YAHOO.widget.Overlay.VIEWPORT_OFFSET - 50);
 			} else {
 				self.resize.set("maxWidth", null);
 				self.resize.set("maxHeight", null);

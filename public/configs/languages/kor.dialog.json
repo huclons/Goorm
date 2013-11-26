@@ -134,10 +134,10 @@
         }
     },
     "dialog_file_new_untitled_textfile": {
-        "value": "제목없는 새 텍스트 파일",
+        "value": "새 텍스트 파일",
         "children": {
             "dialog_file_new_untitled_textfile_guide": {
-                "value": "제목없는 새 텍스트 파일 만들기"
+                "value": "새 텍스트 파일 만들기"
             }
         }
     },
@@ -430,6 +430,18 @@
              },
             "dialog_project_find_on_workspace_guide": {
                 "value": "워크스페이스내에서 찾기"
+             },
+             "dialog_project_match_case_guide_title" : {
+                "value": "대/소문자를 구별하여 검색합니다."
+             },
+             "dialog_project_ignore_whitespace_guide_title": {
+                "value": "단어 앞, 뒤와 안에 있는 모든 공백을 지우고 검색합니다."                
+             },
+             "dialog_project_use_regular_expression_guide_title" : {
+                "value": "정규식 표현을 사용하여 검색합니다."
+             },
+            "dialog_project_find_on_workspace_guide_title": {
+                "value": "프로젝트 안에서 검색합니다."
              }
         }
     },
@@ -721,6 +733,14 @@
              "template_create_option_check" : {
                 "value" : "Class의 생성자를 생성"
              }
+        }
+    },
+    "dialog_help_private_url" : {
+        "value": "",
+        "children": {
+            "help_about_private_url" : {
+                "value" : "Private URL에 대하여"
+            }
         }
     }
 }

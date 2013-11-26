@@ -91,7 +91,10 @@ org.goorm.core.project.build.clean = {
 	},
 
 	select_all: function () {
-		$("#build_clean_list input[type=checkbox]").attr("checked", true);
+		var list=$("#build_clean_list input[type=checkbox]");
+		for(var i=0;i<list.length;i++){
+			if(!list[i].checked)$(list[i]).click();
+		}
 	},
 
 	unselect_all: function () {

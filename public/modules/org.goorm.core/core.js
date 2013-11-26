@@ -450,16 +450,6 @@ org.goorm.core.prototype = {
 
 		
 
-		if (org.goorm.core.project.build.all) {
-			this.dialog.build_all = org.goorm.core.project.build.all;
-			this.dialog.build_all.init();
-		}
-
-		if (org.goorm.core.project.build.project) {
-			this.dialog.build_project = org.goorm.core.project.build.project;
-			this.dialog.build_project.init();
-		}
-
 		if (org.goorm.core.project.build.clean) {
 			this.dialog.build_clean = org.goorm.core.project.build.clean;
 			this.dialog.build_clean.init();

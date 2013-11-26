@@ -203,6 +203,9 @@
 	"restore_default" : {
 		"value" : "Restore to Default"
 	},
+	"restore_previous" : {
+		"value" : "Restore to Previous"
+	},
 	"language_pack_download" : {
 		"value" : "Download others Language Pack"
 	},

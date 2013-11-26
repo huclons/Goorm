@@ -55,12 +55,19 @@ org.goorm.core.project.property = {
 					case 'nodejs':
 					case 'php':
 					case 'ruby':
-						$('.build_project').css('display', 'none');
-						$('.build_clean').css('display', 'none');
+						$('.build_project').hide();
+						$('.build_clean').hide();
+						$('.help_about_private_url').show();
+						break;
+					case 'jsp':
+						$('.build_project').show();
+						$('.build_clean').show();
+						$('.help_about_private_url').show();
 						break;
 					default:
-						$('.build_project').css('display', '');
-						$('.build_clean').css('display', '');
+						$('.build_project').show();
+						$('.build_clean').show();
+						$('.help_about_private_url').hide();
 					}
 				}
 
@@ -84,7 +91,7 @@ org.goorm.core.project.property = {
 							$("#" + plugin.contentElId).prev().removeClass("ygtvln").addClass("ygtvtn").parent().hide();
 						}
 					}
-					last_node && last_node.prev().removeClass("ygtvtn").addClass("ygtvln");
+					last_node && last_node.prev().removeClass("ygtvtn").addClass("ygtvln").addClass("current_plugin_info_node");
 
 					self.fill_dialog(self.property);
 					self.property_default = $.extend(true, {}, self.property);
@@ -100,6 +107,7 @@ org.goorm.core.project.property = {
 
 	show: function () {
 		if (core.status.current_project_path !== "") {
+			$("span[tab_action|='Information']").click();
 			this.dialog.panel.show();
 
 			if (this.firstShow) {
@@ -107,6 +115,11 @@ org.goorm.core.project.property = {
 				$("#property_tabview #property_Information").show();
 				this.firstShow = false;
 			}
+			
+			$("span[tab_action|='Information']").parent().addClass("ygtvfocus");
+			setTimeout(function(){
+				$("span[tab_action|='Information']").click();
+			},700)
 		} else {
 			var result = {
 				result: false,
@@ -326,7 +339,7 @@ org.goorm.core.project.property = {
 							self.restore_default($("#property_tabview #property_restore_defaultBt_" + i).parents(".yui-navset").attr("id"));
 						}
 					},
-					label: '<span localization_key="restore_default">Restore Default</span>'
+					label: '<span localization_key="restore_previous">Restore Previous</span>'
 				});
 			});
 		};

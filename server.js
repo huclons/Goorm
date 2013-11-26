@@ -198,7 +198,7 @@ goorm.init = function() {
 	goorm.configure(function(){
 		goorm.set('views', __dirname + '/views');
 		goorm.engine('html', require('ejs').renderFile);
-		goorm.use(express.bodyParser({ keepExtensions: true, uploadDir: __temp_dir, limit : 10000000 }));
+		goorm.use(express.bodyParser({ keepExtensions: true, uploadDir: __temp_dir, limit : 100000000 }));
 
 		
 

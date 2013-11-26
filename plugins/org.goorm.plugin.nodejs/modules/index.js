@@ -42,12 +42,7 @@ module.exports = {
 		*/
 		
 		evt.on("do_new_complete", function (data) {
-
-			
-
-			
 			res.json(data);
-			
 		});
 		
 		new_project.do_new(req, evt);

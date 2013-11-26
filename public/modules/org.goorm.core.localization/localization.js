@@ -22,7 +22,6 @@ org.goorm.core.localization = {
 	version: {},
 
 	init: function () {
-		var self = this;
 
 		this.get_version();
 	},
@@ -127,6 +126,40 @@ org.goorm.core.localization = {
 
 			self.store_json();
 		});
+
+
+		/*
+		*	get language files in plugin
+		*/
+		var get_plugin_language = function(){
+			for(var i=0; i < core.module.plugin_manager.list.length; i++) {
+				var plugin = core.module.plugin_manager.list[i].name;
+				
+				if (/phonegap/.test(plugin)) {
+					$.ajax({
+						url: plugin+"/languages/"+language+".json",
+						dataType: 'json',
+						beforeSend: function(){
+							this.pluginName = plugin;
+						},
+						success: function(res){
+							if (!self.language_data[language]) self.language_data[language] = {};
+						 	self.apply(res);
+						 	self.language_data[language][this.pluginName] = res;
+						 	self.store_json();
+						}
+					});
+				}
+			}
+		};
+		if(!core.module.plugin_manager.list.length) {
+			$(core).one("plugin_loaded", function(){
+				get_plugin_language();
+			});
+		}
+		else {
+			get_plugin_language();
+		}
 	},
 
 	load_json: function () {
@@ -200,7 +233,7 @@ org.goorm.core.localization = {
 				}
 
 				// attach tooltip
-				$("[tooltip=" + key + "]").attr("title", this.value);
+				$("[tooltip='" + key + "']").attr("title", this.value);
 
 				if (this.children) {
 					self.apply(this.children);
@@ -226,7 +259,7 @@ org.goorm.core.localization = {
 					}
 
 					// attach tooltip
-					$(area + " [tooltip=" + key + "]").attr("title", this.value);
+					$(area + " [tooltip='" + key + "']").attr("title", this.value);
 
 					if (this.children) {
 						replace_value(area, this.children);

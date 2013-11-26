@@ -44,16 +44,17 @@ org.goorm.core.project._import = {
 			}else if($("#input_import_project_name").val()===""){
 				alert.show(core.module.localization.msg.alert_project_name);
 				return false;
-			}else if($("#input_import_project_desc").val()===""){
-				alert.show(core.module.localization.msg.alert_project_desc);
+			} else if (!/^[\w-_]*$/.test($("#input_import_project_name").val())) {
+				alert.show(core.module.localization.msg.alert_allow_character);
 				return false;
-			}else if(!self.target_zip_file || (self.target_zip_file.type!=='application/x-zip-compressed'  && self.target_zip_file.type!=='application/zip') ){
+			
+			
+
+			//}else if(!self.target_zip_file || (self.target_zip_file.type!=='application/x-zip-compressed'  && self.target_zip_file.type!=='application/zip') ){
+			}else if($("#project_import_file").val().split('.').pop()!=="zip"){				
 				alert.show(core.module.localization.msg.alert_only_zip_allowed);
 				return false;
 			}else if (!/^[\w가-힣 0-9a-zA-Z._-]*$/.test($("#input_import_project_author").val())) {
-				alert.show(core.module.localization.msg.alert_allow_character);
-				return false;
-			} else if (!/^[\w-_]*$/.test($("#input_import_project_name").val())) {
 				alert.show(core.module.localization.msg.alert_allow_character);
 				return false;
 			}
@@ -122,51 +123,52 @@ org.goorm.core.project._import = {
 					//core.module.plugin_manager.new_project(senddata,false);
 					$("#project_import_location").val(core.status.current_project_path);
 					
-					//$('#project_import_form').submit();
-					{
+					$('#project_import_form').submit();
+					
+					// {
 
 
-						var formData = new FormData($("#project_import_form"));
+					// 	var formData = new FormData($("#project_import_form"));
 
-						//for (var i = 0; i < files.length; i++) {
-						if(!self.target_zip_file){
-							//empty zip
-							return false;
-						}
+					// 	//for (var i = 0; i < files.length; i++) {
+					// 	if(!self.target_zip_file){
+					// 		//empty zip
+					// 		return false;
+					// 	}
 
-						formData.append('file', self.target_zip_file);
-						formData.append('project_import_location', core.status.current_project_path);
-						// now post a new XHR request
-						var xhr = new XMLHttpRequest();
-						xhr.open('POST', '/project/import');
-						xhr.onloadstart = function(){
-							core.module.loading_bar.start("Import processing...");
-						};
-						xhr.onerror = function () {
-							core.module.loading_bar.stop();
-							alert.show('Import error');
-						};
+					// 	formData.append('file', self.target_zip_file);
+					// 	formData.append('project_import_location', core.status.current_project_path);
+					// 	// now post a new XHR request
+					// 	var xhr = new XMLHttpRequest();
+					// 	xhr.open('POST', '/project/import');
+					// 	xhr.onloadstart = function(){
+					// 		core.module.loading_bar.start("Import processing...");
+					// 	};
+					// 	xhr.onerror = function () {
+					// 		core.module.loading_bar.stop();
+					// 		alert.show('Import error');
+					// 	};
 
-						xhr.onloadend = function () {
-							core.module.loading_bar.stop();
-							console.log(xhr);
+					// 	xhr.onloadend = function () {
+					// 		core.module.loading_bar.stop();
+					// 		console.log(xhr);
 
-							if (xhr.status === 200) {
-								console.log('all done: ' + xhr.status);
-						  	} else {
-						  		alert.show('Import Fail');
-								console.log('Something went terribly wrong...');
-						  	}
+					// 		if (xhr.status === 200) {
+					// 			console.log('all done: ' + xhr.status);
+					// 	  	} else {
+					// 	  		alert.show('Import Fail');
+					// 			console.log('Something went terribly wrong...');
+					// 	  	}
 
-						  	setTimeout(function(){
-						  		core.module.layout.project_explorer.refresh();
-						  	},500);
+					// 	  	setTimeout(function(){
+					// 	  		core.module.layout.project_explorer.refresh();
+					// 	  	},500);
 
-						};
+					// 	};
 
-						xhr.send(formData);
+					// 	xhr.send(formData);
 
-					}
+					// }
 
 
 
@@ -224,92 +226,97 @@ org.goorm.core.project._import = {
 			success: function () {
 				
 
-				// var form_options = {
-				// 	target: "#project_import_upload_output",
+				var form_options = {
+					//target: "#project_import_upload_output",
 
-				// 	beforeSubmit : function(){
+					beforeSubmit : function(){
 
-				// 		core.module.loading_bar.start("Import processing...");
-				// 	},
+						core.module.loading_bar.start("Import processing...");
+					},
 
-				// 	success: function (data) {
-				// 		self.dialog.panel.hide();
-				// 		core.module.loading_bar.stop();
-				// 		if (data.err_code === 0) {
-				// 			notice.show(data.message);
-				// 			core.module.layout.project_explorer.refresh();
-				// 		} else {
-				// 			alert.show(data.message);
-				// 		}
-				// 	},
+					success: function (data) {
+						self.dialog.panel.hide();
+						core.module.loading_bar.stop();
+						if (data.err_code === 0) {
+							notice.show(data.message);
+							core.module.layout.project_explorer.refresh();
+						} else {
+							alert.show(data.message);
+						}
+					},
 
-				// 	error : function(){
-				// 		core.module.loading_bar.stop();
-				// 	}
-				// };
-
-				// $('#project_import_form').ajaxForm(form_options);
-				
-				var doc = document.getElementById('import_project_field');
-				doc.ondragover = function () { this.className = 'hover'; return false; };
-				doc.ondragend = function () { this.className = ''; return false; };
-				doc.ondrop = function (event) {
-					event.preventDefault && event.preventDefault();
-					this.className = '';
-
-					// now do something with:
-					var files = event.dataTransfer.files;
-					console.log(files);
-					//only one zip file
-					
-					if(files.length!==1){
-						alert.show('only one zip file');
-						return false;
-					}else if(files[0].type!=='application/x-zip-compressed' && files[0].type!=='application/zip'){
-						alert.show(core.module.localization.msg.alert_only_zip_allowed);
-						return false;
-					}else if(files[0].size >= 10000000){
-						alert.show('You can not upload files if total size is bigger than 10MB ');
-						return false;
+					error : function(){
+						core.module.loading_bar.stop();
 					}
-
-					self.target_zip_file=files[0];
-
-					$("#project_import_upload_output").text(files[0].name);
-					
-					// var formData = new FormData($("#project_import_form"));
-
-					// for (var i = 0; i < files.length; i++) {
-					//   formData.append('file', files[i]);
-					// }
-					// formData.append('project_import_location', upload_path);
-
-
-
-
-					// now post a new XHR request
-					// var xhr = new XMLHttpRequest();
-					// xhr.open('POST', '/upload');
-					// xhr.onload = function () {
-					// 	console.log(xhr);
-
-					// 	if (xhr.status === 200) {
-					// 		console.log('all done: ' + xhr.status);
-					//   	} else {
-					//   		alert.show('Upload Fail');
-					// 		console.log('Something went terribly wrong...');
-					//   	}
-					//   	setTimeout(function(){
-					// 	  	self.refresh();
-					//   	}, 500);
-
-					// };
-
-					// xhr.send(formData);
-				  
-				  
-				  return false;
 				};
+
+				$('#project_import_form').ajaxForm(form_options);
+				$('#project_import_form').submit(function(){
+					return false;
+				})
+				
+
+				//drag n drop
+				// var doc = document.getElementById('import_project_field');
+				// doc.ondragover = function () { this.className = 'hover'; return false; };
+				// doc.ondragend = function () { this.className = ''; return false; };
+				// doc.ondrop = function (event) {
+				// 	event.preventDefault && event.preventDefault();
+				// 	this.className = '';
+
+				// 	// now do something with:
+				// 	var files = event.dataTransfer.files;
+				// 	console.log(files);
+				// 	//only one zip file
+					
+				// 	if(files.length!==1){
+				// 		alert.show('only one zip file');
+				// 		return false;
+				// 	}else if(files[0].type!=='application/x-zip-compressed' && files[0].type!=='application/zip'){
+				// 		alert.show(core.module.localization.msg.alert_only_zip_allowed);
+				// 		return false;
+				// 	}else if(files[0].size >= 10000000){
+				// 		alert.show('You can not upload files if total size is bigger than 10MB ');
+				// 		return false;
+				// 	}
+
+				// 	self.target_zip_file=files[0];
+
+				// 	$("#project_import_upload_output").text(files[0].name);
+					
+				// 	// var formData = new FormData($("#project_import_form"));
+
+				// 	// for (var i = 0; i < files.length; i++) {
+				// 	//   formData.append('file', files[i]);
+				// 	// }
+				// 	// formData.append('project_import_location', upload_path);
+
+
+
+
+				// 	// now post a new XHR request
+				// 	// var xhr = new XMLHttpRequest();
+				// 	// xhr.open('POST', '/upload');
+				// 	// xhr.onload = function () {
+				// 	// 	console.log(xhr);
+
+				// 	// 	if (xhr.status === 200) {
+				// 	// 		console.log('all done: ' + xhr.status);
+				// 	//   	} else {
+				// 	//   		alert.show('Upload Fail');
+				// 	// 		console.log('Something went terribly wrong...');
+				// 	//   	}
+				// 	//   	setTimeout(function(){
+				// 	// 	  	self.refresh();
+				// 	//   	}, 500);
+
+				// 	// };
+
+				// 	// xhr.send(formData);
+				  
+				  
+				//   return false;
+				// };
 
 
 
