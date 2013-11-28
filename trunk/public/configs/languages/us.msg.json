@@ -626,7 +626,7 @@
         "value" : "run"
     },
     "server_is_end" : {
-        "value" : "Server is closed. Please reconnect a server."
+        "value" : "Server is closed. Please reconnect to the server."
     },
     "someone_typing_message" : {
         "value" : " is typing..."
