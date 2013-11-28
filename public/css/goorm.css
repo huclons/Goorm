@@ -127,6 +127,7 @@ textarea {
 }
 label {
 	cursor:pointer;
+	margin-right: 10px;
 }
 label:hover {
 	color:#666;
